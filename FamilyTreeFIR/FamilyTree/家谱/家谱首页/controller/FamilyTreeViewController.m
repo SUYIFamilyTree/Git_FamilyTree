@@ -9,8 +9,9 @@
 #import "FamilyTreeViewController.h"
 #import "TCJPHTTPRequestManager.h"
 #import "NSDictionary+FromNSString.h"
+#import "FamilyTreeTopView.h"
 
-@interface FamilyTreeViewController ()
+@interface FamilyTreeViewController ()<FamilyTreeTopViewDelegate>
 
 @end
 
@@ -18,6 +19,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //设置导航栏
+    self.navigationController.navigationBarHidden = YES;
+    [self initNavi];
     //设置背景图
     UIImageView *backImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 64, Screen_width , Screen_height-64-49)];
     backImageView.image = MImage(@"bg.png");
@@ -38,6 +42,15 @@
 }
 
 #pragma mark - 视图搭建
+//设置导航栏
+-(void)initNavi{
+#define StatusBar_Height [[UIApplication sharedApplication] statusBarFrame].size.height
+#define NavigationBar_Height self.navigationController.navigationBar.frame.size.height
+    FamilyTreeTopView *topView = [[FamilyTreeTopView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, StatusBar_Height+NavigationBar_Height)];
+    topView.delegate = self;
+    [self.view addSubview:topView];
+}
+
 //设置5个button
 -(void)initFiveButton{
     CGFloat widthSpace = 10;
@@ -205,8 +218,13 @@
 }
 
 
-
-
+#pragma mark - FamilyTreeTopViewDelegate
+-(void)TopSearchViewDidTapView:(FamilyTreeTopView *)topSearchView{
+    MYLog(@"点击搜索栏");
+}
+-(void)TopSearchView:(FamilyTreeTopView *)topSearchView didRespondsToMenusBtn:(UIButton *)sender{
+    MYLog(@"点击我的家谱");
+}
 
 
 - (void)didReceiveMemoryWarning {
