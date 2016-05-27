@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "RootTabBarViewController.h"
 #import "LoginViewController.h"
+#import "TCJPHTTPRequestManager.h"
 @interface AppDelegate ()
 
 @end
@@ -17,7 +18,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    //状态栏
+    
+    
+        //状态栏
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     //初始化window
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -34,6 +37,9 @@
     
     [_window makeKeyAndVisible];
    
+ 
+    
+    
     return YES;
 }
 

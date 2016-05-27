@@ -12,9 +12,7 @@
 @implementation TCJPHTTPRequestManager
 + (void)POSTWithParameters:(NSDictionary*)customParams requestID:(NSNumber *)requestID requestcode:(NSString *)requestcode success:(SuccessCallBack)success failure:(FailureCallBack)fail
 {
-    NSDictionary *theParams = @{@"requestuserid":requestID,@"requestcode":requestcode,@"requestdata":customParams};
 
-    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"text/plain", @"text/json", @"text/javascript", @"application/json", nil];
     //请求超时时间
@@ -25,19 +23,19 @@
     
     //加密
     //MD5(requestdata+SecretKey+requestuserid+requestcode+timestamp)，SecretKey由双方约定，为可配置参数，测试环境的SecretKey暂定为：abc123。
-    NSString *requestData = [NSString stringWithDic:theParams[@"requestdata"]];
+    NSString *requestData = [NSString stringWithDic:customParams];
     NSString *timeStamp = [NSString getCurrentTimeAddNumber];
-    NSString *requestUserId = [NSString stringWithFormat:@"%@",(NSNumber *) theParams[@"requestuserid"]];
-    NSString *md5checkStr = [[[[requestData stringByAppendingString:SecretKeySend]stringByAppendingString:requestUserId] stringByAppendingString:theParams[@"requestcode"]] stringByAppendingString:timeStamp];
+    NSString *requestUserId = [NSString stringWithFormat:@"%@",requestID];
+    NSString *md5checkStr = [[[[requestData stringByAppendingString:SecretKeySend]stringByAppendingString:requestUserId] stringByAppendingString:requestcode] stringByAppendingString:timeStamp];
     NSString *md5check = [NSString md5Str:md5checkStr];
     
-    NSDictionary *params = @{@"requestuserid":(NSNumber *) theParams[@"requestuserid"],@"timestamp":timeStamp,@"requestcode":theParams[@"requestcode"],@"requestdata":requestData,@"md5check":md5check,@"reserved":@""};
+    NSDictionary *params = @{@"requestuserid":requestID,@"timestamp":timeStamp,@"requestcode":requestcode,@"requestdata":customParams,@"md5check":md5check,@"reserved":@""};
     
     [manager POST:RootURL parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSError *error;
         NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSUTF8StringEncoding error:&error];
-        
+        NSLog(@"%@",jsonDic);
         NSString *jsonStr = [NSString stringWithFormat:@"%@",jsonDic];
         NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
@@ -49,9 +47,9 @@
             NSString *md5Receive = [[[[dic[@"data"] stringByAppendingString:SecretKeyReiceive] stringByAppendingString:dic[@"result"]?@"true":@"false"] stringByAppendingString:dic[@"resultcode"]] stringByAppendingString:dic[@"timestamp"]];
             NSString *md5ReceiveStr = [NSString md5Str:md5Receive];
             
-            //        NSLog(@"Data:%@,SecretKeyReceive:%@,result:%@,resultcode:%@,timestamp:%@",dic[@"data"],SecretKeyReiceive,dic[@"result"]?@"true":@"false",dic[@"resultcode"],dic[@"timestamp"]);
-            //        NSLog(@"我加密的%@",md5ReceiveStr);
-            //        NSLog(@"返回的%@",dic[@"md5check"]);
+//                    NSLog(@"Data:%@,SecretKeyReceive:%@,result:%@,resultcode:%@,timestamp:%@",dic[@"data"],SecretKeyReiceive,dic[@"result"]?@"true":@"false",dic[@"resultcode"],dic[@"timestamp"]);
+//                    NSLog(@"我加密的%@",md5ReceiveStr);
+//                    NSLog(@"返回的%@",dic[@"md5check"]);
             if ([dic[@"md5check"]isEqualToString:md5ReceiveStr]) {
                 succe = YES;
             }
