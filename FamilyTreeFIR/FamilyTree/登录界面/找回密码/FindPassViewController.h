@@ -1,5 +1,5 @@
 //
-//  LineView.h
+//  FindPassViewController.h
 //  FamilyTree
 //
 //  Created by 王子豪 on 16/5/27.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LineView : UIView
-- (instancetype)initWithFrame:(CGRect)frame lineWidth:(NSInteger)lineWidth;
+@interface FindPassViewController : UIViewController
+
 @end

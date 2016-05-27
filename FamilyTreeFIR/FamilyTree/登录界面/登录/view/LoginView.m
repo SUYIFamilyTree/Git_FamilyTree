@@ -102,7 +102,7 @@ typedef enum : NSUInteger {
 }
 -(AccountView *)accountView{
     if (!_accountView) {
-        _accountView = [[AccountView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) headImage:[UIImage imageNamed:@"user"] isSafe:NO hasArrows:NO];
+        _accountView = [[AccountView alloc] initWithFrame:CGRectMake(0, 0,  0.8*Screen_width, 50) headImage:[UIImage imageNamed:@"user"] isSafe:NO hasArrows:NO];
         _accountView.bounds = CGRectMake(0, 0, 0.8*Screen_width, 50);
         _accountView.center = CGPointMake(self.center.x, 0.4*Screen_height);
     

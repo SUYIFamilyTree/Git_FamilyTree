@@ -14,7 +14,7 @@
 @protocol TopSearchViewDelegate <NSObject>
 
 -(void)TopSearchViewDidTapView:(TopSearchView *)topSearchView;
-
+-(void)TopSearchView:(TopSearchView *)topSearchView didRespondsToMenusBtn:(UIButton *)sender;
 @end
 
 @interface TopSearchView : UIView

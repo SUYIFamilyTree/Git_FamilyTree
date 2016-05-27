@@ -67,7 +67,6 @@
 -(UITextField *)inputTextView{
     if (!_inputTextView) {
         _inputTextView = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.verticalLine.frame)+GapToView, 0, 0.65*Screen_width, HeadView_size)];
-
         
     }
     return _inputTextView;
@@ -83,7 +82,7 @@
 
 -(LineView *)lineView{
     if (!_lineView) {
-        _lineView = [[LineView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.headView.frame)+15, SelfView_width+10, 100)];
+        _lineView = [[LineView alloc] initWithFrame:CGRectMake(-5, CGRectGetMaxY(self.headView.frame)+5, SelfView_width, 100) lineWidth:SelfView_width-3];
         _lineView.backgroundColor = [UIColor clearColor];
         
     }

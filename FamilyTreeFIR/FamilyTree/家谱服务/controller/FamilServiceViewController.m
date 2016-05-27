@@ -63,6 +63,9 @@
 -(void)TopSearchViewDidTapView:(TopSearchView *)topSearchView{
     MYLog(@"点击搜索栏");
 }
+-(void)TopSearchView:(TopSearchView *)topSearchView didRespondsToMenusBtn:(UIButton *)sender{
+    MYLog(@"点击右上角菜单");
+}
 
 -(void)tableView:(TableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     MYLog(@"点击table-- %ld 行 ",indexPath.row);

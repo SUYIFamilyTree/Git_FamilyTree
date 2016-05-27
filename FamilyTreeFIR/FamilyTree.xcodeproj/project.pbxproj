@@ -23,6 +23,8 @@
 		AD024C701CF68655003380E5 /* sel.png in Resources */ = {isa = PBXBuildFile; fileRef = AD024C5E1CF68655003380E5 /* sel.png */; };
 		AD024C711CF68655003380E5 /* sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD024C5F1CF68655003380E5 /* sel@2x.png */; };
 		AD024C721CF68655003380E5 /* sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD024C601CF68655003380E5 /* sel@3x.png */; };
+		AD15B2751CF817EB00C0EEB7 /* FindPassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD15B2741CF817EB00C0EEB7 /* FindPassViewController.m */; };
+		AD15B2781CF8184A00C0EEB7 /* RegisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD15B2771CF8184A00C0EEB7 /* RegisViewController.m */; };
 		AD195B361CF5A8D5000E32C7 /* NSDictionary+FromNSString.m in Sources */ = {isa = PBXBuildFile; fileRef = AD195B301CF5A8D5000E32C7 /* NSDictionary+FromNSString.m */; };
 		AD195B371CF5A8D5000E32C7 /* NSString+md5.m in Sources */ = {isa = PBXBuildFile; fileRef = AD195B321CF5A8D5000E32C7 /* NSString+md5.m */; };
 		AD195B381CF5A8D5000E32C7 /* TCJPHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AD195B351CF5A8D5000E32C7 /* TCJPHTTPRequestManager.m */; };
@@ -208,6 +210,10 @@
 		AD024C5E1CF68655003380E5 /* sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sel.png; sourceTree = "<group>"; };
 		AD024C5F1CF68655003380E5 /* sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sel@2x.png"; sourceTree = "<group>"; };
 		AD024C601CF68655003380E5 /* sel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sel@3x.png"; sourceTree = "<group>"; };
+		AD15B2731CF817EB00C0EEB7 /* FindPassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindPassViewController.h; sourceTree = "<group>"; };
+		AD15B2741CF817EB00C0EEB7 /* FindPassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPassViewController.m; sourceTree = "<group>"; };
+		AD15B2761CF8184A00C0EEB7 /* RegisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisViewController.h; sourceTree = "<group>"; };
+		AD15B2771CF8184A00C0EEB7 /* RegisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisViewController.m; sourceTree = "<group>"; };
 		AD195B2C1CF5A81A000E32C7 /* Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Custom.h; sourceTree = "<group>"; };
 		AD195B2F1CF5A8D5000E32C7 /* NSDictionary+FromNSString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+FromNSString.h"; sourceTree = "<group>"; };
 		AD195B301CF5A8D5000E32C7 /* NSDictionary+FromNSString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+FromNSString.m"; sourceTree = "<group>"; };
@@ -681,6 +687,8 @@
 		ADB9261A1CF7DF1900AA8B6E /* 找回密码 */ = {
 			isa = PBXGroup;
 			children = (
+				AD15B2731CF817EB00C0EEB7 /* FindPassViewController.h */,
+				AD15B2741CF817EB00C0EEB7 /* FindPassViewController.m */,
 			);
 			path = "找回密码";
 			sourceTree = "<group>";
@@ -688,6 +696,8 @@
 		ADB9261B1CF7DF1900AA8B6E /* 注册 */ = {
 			isa = PBXGroup;
 			children = (
+				AD15B2761CF8184A00C0EEB7 /* RegisViewController.h */,
+				AD15B2771CF8184A00C0EEB7 /* RegisViewController.m */,
 			);
 			path = "注册";
 			sourceTree = "<group>";
@@ -1274,6 +1284,7 @@
 				AD2ACD7F1CF3FC9C009D4A24 /* RootTabBarViewController.m in Sources */,
 				AD195B381CF5A8D5000E32C7 /* TCJPHTTPRequestManager.m in Sources */,
 				AD7388171CF6C2050076B2AD /* TopSearchView.m in Sources */,
+				AD15B2751CF817EB00C0EEB7 /* FindPassViewController.m in Sources */,
 				AD195B361CF5A8D5000E32C7 /* NSDictionary+FromNSString.m in Sources */,
 				AD2ACD821CF3FD06009D4A24 /* HomeViewController.m in Sources */,
 				AD195B371CF5A8D5000E32C7 /* NSString+md5.m in Sources */,
@@ -1284,6 +1295,7 @@
 				ADE2D17B1CF6FBD3009D1ADF /* FamilyShopView.m in Sources */,
 				ADB9266A1CF7EBAC00AA8B6E /* FamilyTreeViewController.m in Sources */,
 				AD2ACD8B1CF3FD57009D4A24 /* PersonalCenterViewController.m in Sources */,
+				AD15B2781CF8184A00C0EEB7 /* RegisViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

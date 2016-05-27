@@ -51,6 +51,13 @@
     }
 }
 
+#pragma mark *** 点击菜单栏 ***
+-(void)respondsToMenuBtn:(UIButton *)sender{
+    if (_delegate && [_delegate respondsToSelector:@selector(TopSearchView:didRespondsToMenusBtn:)]) {
+        [_delegate TopSearchView:self didRespondsToMenusBtn:sender];
+    }
+}
+
 #pragma mark *** getters ***
 -(UIView *)backView{
     if (!_backView) {
@@ -95,6 +102,7 @@
     if (!_menuBtn) {
         _menuBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.frame)-0.07*Screen_width-MenusBtn_size/2, SearchToTop+(SearchView_Height-MenusBtn_size), MenusBtn_size, MenusBtn_size*0.8)];
         [_menuBtn setBackgroundImage:MImage(@"chec") forState:UIControlStateNormal];
+        [_menuBtn addTarget:self action:@selector(respondsToMenuBtn:) forControlEvents:UIControlEventTouchUpInside];
         
     }
     return _menuBtn;
