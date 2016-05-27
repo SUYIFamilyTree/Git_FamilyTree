@@ -1,0 +1,31 @@
+//
+//  PrefixHeader.pch
+//  FamilyTree
+//
+//  Created by 王子豪 on 16/5/25.
+//  Copyright © 2016年 王子豪. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+
+//viewControllers
+#import "HomeViewController.h"
+#import "FamilyTreeViewController.h"
+#import "ShoppingViewController.h"
+#import "PersonalCenterViewController.h"
+#import "LoginViewController.h"
+#import "FamilServiceViewController.h"
+
+//扩展方法
+#import <UIView+SDAutoLayout.h>
+#import "NSDictionary+FromNSString.h"
+#import "NSString+md5.h"
+
+//网络请求
+#import "TCJPHTTPRequestManager.h"
+//工具
+#import "Tools.h"
+#import "Custom.h"
+#endif /* PrefixHeader_pch */
