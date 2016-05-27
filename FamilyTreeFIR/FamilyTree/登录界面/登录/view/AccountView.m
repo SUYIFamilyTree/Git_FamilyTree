@@ -12,7 +12,7 @@
 #define GapToView 15
 @interface AccountView()
 
-@property (nonatomic,strong) UIImageView *headView; /*左边图*/
+
 
 @property (nonatomic,strong) UIView *verticalLine; /*竖线*/
 
