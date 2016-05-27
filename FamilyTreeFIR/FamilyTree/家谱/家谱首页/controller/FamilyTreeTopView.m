@@ -102,7 +102,7 @@
         _menuBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
         [_menuBtn setImage:MImage(@"sel") forState:UIControlStateNormal];
         _menuBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);
-        _menuBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 70, 0, 0);
+        _menuBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 65, 0, 0);
         [_menuBtn addTarget:self action:@selector(respondsToMenuBtn:) forControlEvents:UIControlEventTouchUpInside];
         
     }

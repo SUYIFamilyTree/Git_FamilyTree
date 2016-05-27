@@ -14,8 +14,7 @@
 #import "FamilyShopView.h"
 #import "TableView.h"
 
-#define StatusBar_Height [[UIApplication sharedApplication] statusBarFrame].size.height
-#define NavigationBar_Height self.navigationController.navigationBar.frame.size.height
+
 
 #define ScrollerView_Height 210
 @interface FamilServiceViewController ()<TopSearchViewDelegate,TableViewDelegate,FamilyShopViewDelegate,CollectionFamilyDelegate>

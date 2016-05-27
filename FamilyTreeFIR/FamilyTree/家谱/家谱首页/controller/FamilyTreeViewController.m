@@ -10,7 +10,7 @@
 #import "TCJPHTTPRequestManager.h"
 #import "NSDictionary+FromNSString.h"
 #import "FamilyTreeTopView.h"
-
+#import "SearchFamilyTreeViewController.h"
 @interface FamilyTreeViewController ()<FamilyTreeTopViewDelegate>
 
 @end
@@ -41,6 +41,9 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = YES;
+}
 #pragma mark - 视图搭建
 //设置导航栏
 -(void)initNavi{
@@ -221,6 +224,9 @@
 #pragma mark - FamilyTreeTopViewDelegate
 -(void)TopSearchViewDidTapView:(FamilyTreeTopView *)topSearchView{
     MYLog(@"点击搜索栏");
+    SearchFamilyTreeViewController *seachVc = [[SearchFamilyTreeViewController alloc]init];
+    [self.navigationController pushViewController:seachVc animated:YES];
+    
 }
 -(void)TopSearchView:(FamilyTreeTopView *)topSearchView didRespondsToMenusBtn:(UIButton *)sender{
     MYLog(@"点击我的家谱");
