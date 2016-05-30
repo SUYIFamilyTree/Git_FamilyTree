@@ -18,7 +18,7 @@
 @property (nonatomic,strong) UIView *searchView; /*搜索框*/
 @property (nonatomic,strong) UILabel *searchLabel; /*输入关键词*/
 @property (nonatomic,strong) UIImageView *searchImage; /*搜索图片*/
-@property (nonatomic,strong) UIButton *menuBtn; /*右边菜单栏*/
+@property (nonatomic,strong) UIView *menuBtn; /*右边菜单栏*/
 @end
 
 @implementation FamilyTreeTopView
@@ -65,7 +65,7 @@
 }
 -(UIView *)searchView{
     if (!_searchView) {
-        _searchView = [[UIView alloc] initWithFrame:CGRectMake(0.05*Screen_width, SearchToTop, 0.75*Screen_width, SearchView_Height)];
+        _searchView = [[UIView alloc] initWithFrame:CGRectMake(0.05*Screen_width, SearchToTop, 0.75*Screen_width-10, SearchView_Height)];
         _searchView.layer.cornerRadius = SearchView_Height/2.0f;
         _searchView.backgroundColor = [UIColor whiteColor];
         
@@ -94,16 +94,20 @@
     }
     return _searchImage;
 }
--(UIButton *)menuBtn{
+-(UIView *)menuBtn{
     if (!_menuBtn) {
-        _menuBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.frame)-0.07*Screen_width-MenusBtn_size/2-0.15*Screen_width, SearchToTop+(SearchView_Height-MenusBtn_size), MenusBtn_size+0.2*Screen_width, MenusBtn_size*0.8)];
-        [_menuBtn setTitle:@"我的家谱" forState:UIControlStateNormal];
-        _menuBtn.titleLabel.font = MFont(12);
-        _menuBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
-        [_menuBtn setImage:MImage(@"sel") forState:UIControlStateNormal];
-        _menuBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);
-        _menuBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 65, 0, 0);
-        [_menuBtn addTarget:self action:@selector(respondsToMenuBtn:) forControlEvents:UIControlEventTouchUpInside];
+        _menuBtn = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.frame)-0.07*Screen_width-MenusBtn_size/2-0.15*Screen_width+15, SearchToTop+(SearchView_Height-MenusBtn_size), MenusBtn_size+0.15*Screen_width, MenusBtn_size*0.8)];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(respondsToMenuBtn:)];
+        [_menuBtn addGestureRecognizer:tap];
+        UILabel *myFamilyLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_menuBtn), CGRectY(_menuBtn), CGRectW(_menuBtn)*0.7, CGRectH(_menuBtn))];
+        myFamilyLabel.text = @"我的家谱";
+        myFamilyLabel.font = MFont(12);
+        myFamilyLabel.textColor = [UIColor whiteColor];
+        myFamilyLabel.textAlignment = NSTextAlignmentLeft;
+        [self addSubview:myFamilyLabel];
+        UIImageView *jiantou = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(_menuBtn)+CGRectW(myFamilyLabel), CGRectY(_menuBtn)+7, 10, 6)];
+        jiantou.image = MImage(@"sel.png");
+        [self addSubview:jiantou];
         
     }
     return _menuBtn;
