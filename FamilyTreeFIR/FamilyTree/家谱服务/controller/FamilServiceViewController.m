@@ -13,6 +13,7 @@
 #import "CollectionFamilyView.h"
 #import "FamilyShopView.h"
 #import "TableView.h"
+#import "SearchFamilyTreeViewController.h"
 
 
 #define ScrollerView_Height 210
@@ -60,6 +61,8 @@
 #pragma mark *** 协议方法 ***
 -(void)TopSearchViewDidTapView:(TopSearchView *)topSearchView{
     MYLog(@"点击搜索栏");
+    SearchFamilyTreeViewController *searchFamilyTreeVC = [[SearchFamilyTreeViewController alloc]init];
+    [self.navigationController pushViewController:searchFamilyTreeVC animated:YES];
 }
 -(void)TopSearchView:(TopSearchView *)topSearchView didRespondsToMenusBtn:(UIButton *)sender{
     MYLog(@"点击右上角菜单");
