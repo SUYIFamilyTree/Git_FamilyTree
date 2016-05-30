@@ -22,12 +22,10 @@
         
         self.headView.frame = CGRectMake(5, 9, 22, 22);
         
-        self.placeholder.text = str;
-        self.placeholder.textColor = LH_RGBCOLOR(150, 150, 150);
-        self.placeholder.font = MFont(16);
-        
         self.inputTextView.center = CGPointMake(32+self.inputTextView.bounds.size.width/2, self.headView.center.y);
-        self.placeholder.center = CGPointMake(self.inputTextView.center.x-(0.65*Screen_width/2-75), self.inputTextView.center.y);
+
+        self.inputTextView.placeholder = str;
+        
     }
     return self;
 }

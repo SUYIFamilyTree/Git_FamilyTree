@@ -96,8 +96,8 @@
         _registView = [[LoginView alloc] initWithFrame:self.view.bounds];
         _registView.accountView.headView.image = [UIImage imageNamed:@"newUser_tel"];
         _registView.passwordView.headView.image = [UIImage imageNamed:@"newUser_yanzheng"];
-        _registView.accountView.placeholder.text  = @"手   机   号";
-        _registView.passwordView.placeholder.text = @"验   证   码";
+        _registView.accountView.inputTextView.placeholder  = @"手   机   号";
+        _registView.passwordView.inputTextView.placeholder = @"验   证   码";
         [_registView.passwordView.goArrows removeFromSuperview];
         
         [_registView.topView.regisBtn setTitle:@"登录" forState:0];

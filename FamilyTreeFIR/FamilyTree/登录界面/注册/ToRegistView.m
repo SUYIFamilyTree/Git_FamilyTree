@@ -49,10 +49,11 @@
 -(AccountView *)accountView{
     if (!_accountView) {
         _accountView = [[AccountView alloc] initWithFrame:CGRectMake(0, 0,  0.8*Screen_width, 50) headImage:[UIImage imageNamed:@"newUser_tel"] isSafe:NO hasArrows:NO];
+        
         _accountView.bounds = CGRectMake(0, 0, 0.8*Screen_width, 50);
         _accountView.center = CGPointMake(self.center.x, 30);
-        _accountView.placeholder.text = @"手   机   号";
-        
+        _accountView.inputTextView.placeholder = @"手   机   号";
+        [_accountView setAccPlaceholder];
         
     }
     return _accountView;
@@ -73,7 +74,8 @@
 -(AccountView *)passwordView{
     if (!_passwordView) {
         _passwordView = [[AccountView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.accountView.frame), CGRectGetMaxY(self.accountView.frame)+10, self.accountView.bounds.size.width, 50) headImage:[UIImage imageNamed:@"newUser_yanzheng"] isSafe:NO hasArrows:NO];
-        _passwordView.placeholder.text = @"验   证   码";
+        _passwordView.inputTextView.placeholder = @"验   证   码";
+        [_passwordView setAccPlaceholder];
         
     }
     return _passwordView;

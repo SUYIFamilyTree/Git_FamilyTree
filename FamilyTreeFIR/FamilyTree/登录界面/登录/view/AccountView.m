@@ -25,7 +25,6 @@
         [self addSubview:self.verticalLine];
         [self addSubview:self.inputTextView];
         [self addSubview:self.lineView];
-        [self addSubview:self.placeholder];
         
         if (hasArrows) {
             [self addSubview:self.goArrows];
@@ -37,26 +36,13 @@
     return self;
 }
 
+#pragma mark *** 登录图的placehoderholder设置 ***
 
-#pragma mark *** UITextFieldDelegate ***
-
--(void)textFieldDidBeginEditing:(UITextField *)textField{
-    if (_placeholder) {
-        _placeholder.hidden = YES;
-    }
+-(void)setAccPlaceholder{
+    [self.inputTextView setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [self.inputTextView setValue:[UIFont systemFontOfSize:18] forKeyPath:@"_placeholderLabel.font"];
 }
 
-
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    NSLog(@"%ld", textField.text.length);
-    if (textField.text.length >0) {
-        _placeholder.hidden = YES;
-    }else{
-        _placeholder.hidden = NO;
-    }
-    
-    return YES;
-}
 
 #pragma mark *** getters ***
 
@@ -103,17 +89,5 @@
     return _lineView;
 }
 
--(UILabel *)placeholder{
-    if (!_placeholder) {
-        _placeholder = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.inputTextView.frame), 1, 150, HeadView_size-2)];
-        _placeholder.text = @"手    机    号";
-        _placeholder.font = MFont(20);
-        _placeholder.textColor = [UIColor whiteColor];
-        _placeholder.alpha = 0.8;
-        _placeholder.textAlignment = 0;
-        
-    }
-    return _placeholder;
-}
 
 @end

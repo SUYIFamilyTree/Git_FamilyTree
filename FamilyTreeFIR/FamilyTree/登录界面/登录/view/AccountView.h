@@ -16,7 +16,6 @@
 
 @property (nonatomic,strong) UIImageView *headView; /*左边图*/
 
-@property (nonatomic,strong) UILabel *placeholder; /*自定义占位符*/
 
 @property (nonatomic,strong) LineView *lineView; /*底部线*/
 
@@ -26,4 +25,6 @@
 
 
 - (instancetype)initWithFrame:(CGRect)frame headImage:(UIImage *)image isSafe:(BOOL)Safe hasArrows:(BOOL)hasArrows;
+
+- (void)setAccPlaceholder;
 @end

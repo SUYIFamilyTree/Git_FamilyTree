@@ -189,13 +189,13 @@
         _loginView = [[LoginView alloc] initWithFrame:self.view.bounds];
         _loginView.delegate = self;
         
-        _loginView.accountView.placeholder.text = @"用   户   名";
-        _loginView.passwordView.placeholder.text = @"";
+        
+        _loginView.accountView.inputTextView.placeholder = @"用   户   名";
+        [_loginView.accountView setAccPlaceholder];
         
         if ([USERDEFAULT objectForKey:UserId]&&[USERDEFAULT objectForKey:Password]) {
             _loginView.accountView.inputTextView.text = [USERDEFAULT objectForKey:UserId];
             _loginView.passwordView.inputTextView.text = [USERDEFAULT objectForKey:Password];
-            _loginView.accountView.placeholder.hidden = YES;
         }
         
     }
