@@ -42,7 +42,7 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     if (_placeholder) {
-//        _placeholder.hidden = YES;
+        _placeholder.hidden = YES;
     }
 }
 

@@ -104,6 +104,7 @@
 		ADA380611CFC256100B596B7 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA380521CFC256100B596B7 /* search.png */; };
 		ADA380621CFC256100B596B7 /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA380531CFC256100B596B7 /* search@2x.png */; };
 		ADA380631CFC256100B596B7 /* search@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA380541CFC256100B596B7 /* search@3x.png */; };
+		ADA380661CFC299700B596B7 /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA380651CFC299700B596B7 /* LoginModel.m */; };
 		ADB9261C1CF7DF1900AA8B6E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB9260F1CF7DF1900AA8B6E /* LoginViewController.m */; };
 		ADB9261D1CF7DF1900AA8B6E /* AccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB926131CF7DF1900AA8B6E /* AccountView.m */; };
 		ADB9261E1CF7DF1900AA8B6E /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB926151CF7DF1900AA8B6E /* LoginView.m */; };
@@ -337,6 +338,8 @@
 		ADA380521CFC256100B596B7 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		ADA380531CFC256100B596B7 /* search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@2x.png"; sourceTree = "<group>"; };
 		ADA380541CFC256100B596B7 /* search@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@3x.png"; sourceTree = "<group>"; };
+		ADA380641CFC299700B596B7 /* LoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginModel.h; sourceTree = "<group>"; };
+		ADA380651CFC299700B596B7 /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModel.m; sourceTree = "<group>"; };
 		ADAB7E101CF4050B00C3C143 /* DefineHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefineHeader.h; sourceTree = "<group>"; };
 		ADB9260E1CF7DF1900AA8B6E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		ADB9260F1CF7DF1900AA8B6E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
@@ -757,6 +760,8 @@
 		ADB926101CF7DF1900AA8B6E /* model */ = {
 			isa = PBXGroup;
 			children = (
+				ADA380641CFC299700B596B7 /* LoginModel.h */,
+				ADA380651CFC299700B596B7 /* LoginModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1448,6 +1453,7 @@
 				AD73886A1CF6E0090076B2AD /* CollectionFamilyView.m in Sources */,
 				ADB926641CF7E28600AA8B6E /* LineView.m in Sources */,
 				AD2ACD8F1CF3FE5E009D4A24 /* Tools.m in Sources */,
+				ADA380661CFC299700B596B7 /* LoginModel.m in Sources */,
 				ADB9261E1CF7DF1900AA8B6E /* LoginView.m in Sources */,
 				AD2ACD7F1CF3FC9C009D4A24 /* RootTabBarViewController.m in Sources */,
 				AD195B381CF5A8D5000E32C7 /* TCJPHTTPRequestManager.m in Sources */,

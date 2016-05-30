@@ -56,10 +56,14 @@ __block __weak __typeof(&*self)weakSelf = self;
 
 #define CGRectXW(v)         (CGRectSize(v).width+CGRectOrigin(v).x)
 #define CGRectYH(v)         (CGRectSize(v).height+CGRectOrigin(v).y)
-
+#define USERDEFAULT [NSUserDefaults standardUserDefaults]
 
 //RootURL
 #define RootURL @"http://59.53.92.160:85/Api/Mobile/TestPost"
 #define SecretKeySend @"abc123"
 #define SecretKeyReiceive @"123abc"
+//登录信息
+#define LoginStates @"loginStatus"
+#define UserId @"userid"
+#define Password @"password"
 #endif /* Custom_h */

@@ -35,7 +35,7 @@
         
         NSError *error;
         NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSUTF8StringEncoding error:&error];
-        NSLog(@"%@",jsonDic);
+//        NSLog(@"%@",jsonDic);
         NSString *jsonStr = [NSString stringWithFormat:@"%@",jsonDic];
         NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];

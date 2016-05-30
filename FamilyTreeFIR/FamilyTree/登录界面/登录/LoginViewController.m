@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 
 #import "ToRegistView.h"
+#import "LoginModel.h"
 
 #define ReGistView_height 180
 #define AnimationsTime 0.4f
@@ -30,6 +31,10 @@
     self.navigationController.navigationBarHidden = YES;
     
     [self.view addSubview:self.loginView];
+    //如果登录
+    if ([[USERDEFAULT objectForKey:LoginStates] isEqual:@true]) {
+//        [self loginView:nil didSelectedTourBtn:nil];
+    }
     
     
 }
@@ -136,15 +141,46 @@
             break;
     }
 }
+
 //登录按钮
 -(void)loginView:(LoginView *)loginView didSelectedLoginBtn:(UIButton *)sender{
-    NSLog(@"登录！！");
+    MYLog(@"登录");
+    
+    NSDictionary *logDic = @{@"user":self.loginView.accountView.inputTextView.text,@"pass":self.loginView.passwordView.inputTextView.text};
+    
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:@"login" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            //登录成功
+            NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
+            NSLog(@"%@", dic);
+            
+            [LoginModel sharedLoginMode].MeAreacodeid = dic[@"MeAreacodeid"];
+            //存储用户信息
+            [USERDEFAULT setObject:@true forKey:LoginStates];
+            [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserId];
+            [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:Password];
+            
+            [self loginView:nil didSelectedTourBtn:nil];
+            
+        }
+        
+    } failure:^(NSError *error) {
+        MYLog(@"失败");
+    }];
+    
+    
 }
 //游客按钮
 -(void)loginView:(LoginView *)loginView didSelectedTourBtn:(UIButton *)sender{
     NSLog(@"游客请进！");
     RootTabBarViewController *tabBar = [[RootTabBarViewController alloc] init];
     [self.navigationController pushViewController:tabBar animated:YES];
+}
+
+#pragma mark *** touch ***
+//收起键盘
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
 }
 
 #pragma mark *** getters ***
@@ -155,6 +191,12 @@
         
         _loginView.accountView.placeholder.text = @"用   户   名";
         _loginView.passwordView.placeholder.text = @"";
+        
+        if ([USERDEFAULT objectForKey:UserId]&&[USERDEFAULT objectForKey:Password]) {
+            _loginView.accountView.inputTextView.text = [USERDEFAULT objectForKey:UserId];
+            _loginView.passwordView.inputTextView.text = [USERDEFAULT objectForKey:Password];
+            _loginView.accountView.placeholder.hidden = YES;
+        }
         
     }
     return _loginView;
