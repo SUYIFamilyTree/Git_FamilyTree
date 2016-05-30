@@ -16,6 +16,10 @@
 
 - (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title image:(UIImage *)imageName;
 //返回按钮
--(void)respondsToReturnBtn:(UIButton *)sender;
+-(void)respondsToReturnBtn;
+
+//右边按钮
+-(void)respondsToRightBtn:(UIButton *)sender;
+
 
 @end

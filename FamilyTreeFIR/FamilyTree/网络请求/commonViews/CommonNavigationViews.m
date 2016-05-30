@@ -68,6 +68,7 @@
         [returnBtn setImage:MImage(@"fanhui") forState:0];
         
         [returnBtn addTarget:self action:@selector(respondsToReturnBtn) forControlEvents:UIControlEventTouchUpInside];
+        returnBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
         
         [_backView addSubview:returnBtn];
     }
