@@ -12,12 +12,6 @@
 @interface AccountView()<UITextFieldDelegate>
 
 
-
-
-
-
-
-
 @end
 
 @implementation AccountView
