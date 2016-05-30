@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ToRegistView;
+@protocol ToRegisViewDelegate <NSObject>
 
+-(void)ToRegisViewDidSelectedVerfication:(ToRegistView *)registView;
+-(void)ToRegisViewDidSelectedRegistBtn:(ToRegistView *)registView;
+@end
 @interface ToRegistView : UIView
+@property (nonatomic,weak) id<ToRegisViewDelegate> delegate; /*代理人*/
 
 @end

@@ -7,10 +7,16 @@
 //
 
 #import "LoginViewController.h"
-#import "LoginView.h"
-#import "RootTabBarViewController.h"
-@interface LoginViewController ()<LoginViewDelegate>
 
+#import "ToRegistView.h"
+
+#define ReGistView_height 180
+#define AnimationsTime 0.4f
+@interface LoginViewController ()<LoginViewDelegate,ToRegisViewDelegate>
+
+@property (nonatomic,strong) LoginView *loginView; /*登录界面*/
+
+@property (nonatomic,strong) ToRegistView *regisView; /*注册view*/
 
 
 @end
@@ -21,11 +27,9 @@
     
     [super viewDidLoad];
     
-    LoginView *view = [[LoginView alloc] initWithFrame:self.view.bounds];
-    view.delegate = self;
     self.navigationController.navigationBarHidden = YES;
     
-    [self.view addSubview:view];
+    [self.view addSubview:self.loginView];
     
     
 }
@@ -35,19 +39,82 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark *** ToRegisterViewDelegate ***
+//点击获取验证码
+-(void)ToRegisViewDidSelectedVerfication:(ToRegistView *)registView{
+    MYLog(@"获取验证码");
+}
+
+//点击立即注册
+
+-(void)ToRegisViewDidSelectedRegistBtn:(ToRegistView *)registView{
+    MYLog(@"立即注册");
+}
 
 #pragma mark *** LoginViewDelegate ***
 //选中上端菜单
 -(void)loginView:(LoginView *)loginView didSelectedTopViewBtn:(UIButton *)sender{
     switch (sender.tag) {
         case 0:
+            //返回按钮
             NSLog(@"返回按钮");
             break;
         case 1:
-            NSLog(@"注册");
+        {
+            //注册（待用方法）
+//            RegisViewController *regisVc = [RegisViewController new];
+//            [self.navigationController pushViewController:regisVc animated:YES];
+            
+            [self.loginView.topView.regisBtn.titleLabel.text isEqualToString:@"注册"]?[self.loginView.topView.regisBtn setTitle:@"登录" forState:0]:[self.loginView.topView.regisBtn setTitle:@"注册" forState:0];
+           
+            
+            [self.view addSubview:self.regisView];
+            
+            
+            [UIView animateWithDuration:AnimationsTime animations:^{
+                
+                if (IsEquallString(self.loginView.topView.regisBtn.titleLabel.text, @"登录")) {
+                    //移到屏幕外
+                    self.loginView.accountView.center = CGPointMake(-250, self.loginView.accountView.center.y);
+                    self.loginView.passwordView.center = CGPointMake(-250, self.loginView.passwordView.center.y);
+                    self.loginView.accountView.alpha = 0;
+                    self.loginView.passwordView.alpha = 0;
+                    
+                    //移到屏幕内
+                    self.regisView.frame = CGRectMake(self.view.center.x-_regisView.bounds.size.width/2, CGRectGetMinY(self.loginView.accountView.frame), 0.8*Screen_width,ReGistView_height);
+                    self.regisView.alpha = 1.0;
+                    
+                }else{
+                    
+                //移到屏幕内
+                self.loginView.accountView.center = CGPointMake(self.view.center.x, self.loginView.accountView.center.y);
+                self.loginView.passwordView.center = CGPointMake(self.view.center.x, self.loginView.passwordView.center.y);
+                self.loginView.accountView.alpha = 1;
+                self.loginView.passwordView.alpha = 1;
+                //移到屏幕外
+                self.regisView.frame = CGRectMake(700, CGRectGetMinY(self.loginView.accountView.frame), 0.8*Screen_width, ReGistView_height);
+                self.regisView.alpha = 0;
+                    
+                }
+            } completion:^(BOOL finished) {
+                
+                //移除之前的按钮
+//                [self.loginView.accountView removeFromSuperview];
+//                [self.loginView.passwordView removeFromSuperview];
+                
+
+            }];
+            
+        }
+            
             break;
         case 2:
-            NSLog(@"找回密码");
+        {
+            //找回密码
+            FindPassViewController *finPassVc = [FindPassViewController new];
+            [self.navigationController pushViewController:finPassVc animated:YES];
+            
+        }
             break;
         default:
             break;
@@ -78,5 +145,29 @@
     NSLog(@"游客请进！");
     RootTabBarViewController *tabBar = [[RootTabBarViewController alloc] init];
     [self.navigationController pushViewController:tabBar animated:YES];
+}
+
+#pragma mark *** getters ***
+-(LoginView *)loginView{
+    if (!_loginView) {
+        _loginView = [[LoginView alloc] initWithFrame:self.view.bounds];
+        _loginView.delegate = self;
+        
+        _loginView.accountView.placeholder.text = @"用   户   名";
+        _loginView.passwordView.placeholder.text = @"";
+        
+    }
+    return _loginView;
+}
+-(ToRegistView *)regisView{
+    if (!_regisView) {
+        _regisView = [[ToRegistView  alloc] initWithFrame:CGRectMake(0, 0, 0.8*Screen_width, ReGistView_height)];
+//        _regisView.bounds = CGRectMake(0, 0, 0.8*Screen_width, 150);
+        _regisView.center = CGPointMake(700, CGRectGetMinY(self.loginView.accountView.frame)+ReGistView_height/2);
+        _regisView.alpha = 0;
+        _regisView.delegate = self;
+        
+    }
+    return _regisView;
 }
 @end

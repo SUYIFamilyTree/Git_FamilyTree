@@ -9,5 +9,5 @@
 #import "AccountView.h"
 
 @interface FindPassView : AccountView
-
+- (instancetype)initWithFrame:(CGRect)frame headImage:(UIImage *)image isSafe:(BOOL)Safe hasArrows:(BOOL)hasArrows withplaceholderStr:(NSString *)str;
 @end

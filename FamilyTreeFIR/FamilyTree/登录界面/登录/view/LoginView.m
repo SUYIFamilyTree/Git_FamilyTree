@@ -7,9 +7,7 @@
 //
 
 #import "LoginView.h"
-#import "TopView.h"
-#import "AccountView.h"
-#import "OtherLoginView.h"
+
 
 #define TopView_toTop  30
 #define TopView_height 30
@@ -23,9 +21,7 @@ typedef enum : NSUInteger {
 @interface LoginView()<OtherLoginViewDelegate>
 
 @property (nonatomic,strong) UIImageView *backImageView; /*背景图*/
-@property (nonatomic,strong)  TopView *topView; /*顶部控件*/
-@property (nonatomic,strong)  AccountView *accountView; /*账号*/
-@property (nonatomic,strong)  AccountView *passwordView; /*密码*/
+
 @property (nonatomic,strong) OtherLoginView *otherLoginView; /*三方登录*/
 @property (nonatomic,strong) UIButton *tourBtn; /*游客按钮*/
 
@@ -106,7 +102,6 @@ typedef enum : NSUInteger {
         _accountView.bounds = CGRectMake(0, 0, 0.8*Screen_width, 50);
         _accountView.center = CGPointMake(self.center.x, 0.4*Screen_height);
     
-        
     }
     return _accountView;
 }

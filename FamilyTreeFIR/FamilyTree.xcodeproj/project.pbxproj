@@ -25,6 +25,14 @@
 		AD024C721CF68655003380E5 /* sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD024C601CF68655003380E5 /* sel@3x.png */; };
 		AD15B2751CF817EB00C0EEB7 /* FindPassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD15B2741CF817EB00C0EEB7 /* FindPassViewController.m */; };
 		AD15B2781CF8184A00C0EEB7 /* RegisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD15B2771CF8184A00C0EEB7 /* RegisViewController.m */; };
+		AD15B2801CF8448600C0EEB7 /* newUser_tel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD15B27A1CF8448600C0EEB7 /* newUser_tel@2x.png */; };
+		AD15B2811CF8448600C0EEB7 /* newUser_tel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD15B27B1CF8448600C0EEB7 /* newUser_tel@3x.png */; };
+		AD15B2821CF8448600C0EEB7 /* newUser_yanzheng.png in Resources */ = {isa = PBXBuildFile; fileRef = AD15B27C1CF8448600C0EEB7 /* newUser_yanzheng.png */; };
+		AD15B2831CF8448600C0EEB7 /* newUser_yanzheng@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD15B27D1CF8448600C0EEB7 /* newUser_yanzheng@2x.png */; };
+		AD15B2841CF8448600C0EEB7 /* newUser_yanzheng@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD15B27E1CF8448600C0EEB7 /* newUser_yanzheng@3x.png */; };
+		AD15B2861CF8461300C0EEB7 /* newUser_tel.png in Resources */ = {isa = PBXBuildFile; fileRef = AD15B2851CF8461300C0EEB7 /* newUser_tel.png */; };
+		AD15B28A1CF84D2C00C0EEB7 /* CommonNavigationViews.m in Sources */ = {isa = PBXBuildFile; fileRef = AD15B2891CF84D2C00C0EEB7 /* CommonNavigationViews.m */; };
+		AD15B28D1CF8555600C0EEB7 /* ToRegistView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD15B28C1CF8555600C0EEB7 /* ToRegistView.m */; };
 		AD195B361CF5A8D5000E32C7 /* NSDictionary+FromNSString.m in Sources */ = {isa = PBXBuildFile; fileRef = AD195B301CF5A8D5000E32C7 /* NSDictionary+FromNSString.m */; };
 		AD195B371CF5A8D5000E32C7 /* NSString+md5.m in Sources */ = {isa = PBXBuildFile; fileRef = AD195B321CF5A8D5000E32C7 /* NSString+md5.m */; };
 		AD195B381CF5A8D5000E32C7 /* TCJPHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AD195B351CF5A8D5000E32C7 /* TCJPHTTPRequestManager.m */; };
@@ -80,6 +88,7 @@
 		AD7388661CF6C5AF0076B2AD /* search@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD73883F1CF6C5AF0076B2AD /* search@3x.png */; };
 		AD73886A1CF6E0090076B2AD /* CollectionFamilyView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7388691CF6E0090076B2AD /* CollectionFamilyView.m */; };
 		AD73886D1CF6E4860076B2AD /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD73886C1CF6E4860076B2AD /* CustomCollectionViewCell.m */; };
+		AD8E603D1CFC0BDA00355C06 /* FindPassView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8E603C1CFC0BDA00355C06 /* FindPassView.m */; };
 		ADB9261C1CF7DF1900AA8B6E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB9260F1CF7DF1900AA8B6E /* LoginViewController.m */; };
 		ADB9261D1CF7DF1900AA8B6E /* AccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB926131CF7DF1900AA8B6E /* AccountView.m */; };
 		ADB9261E1CF7DF1900AA8B6E /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB926151CF7DF1900AA8B6E /* LoginView.m */; };
@@ -214,6 +223,16 @@
 		AD15B2741CF817EB00C0EEB7 /* FindPassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPassViewController.m; sourceTree = "<group>"; };
 		AD15B2761CF8184A00C0EEB7 /* RegisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisViewController.h; sourceTree = "<group>"; };
 		AD15B2771CF8184A00C0EEB7 /* RegisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisViewController.m; sourceTree = "<group>"; };
+		AD15B27A1CF8448600C0EEB7 /* newUser_tel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newUser_tel@2x.png"; path = "增加成员/newUser_tel@2x.png"; sourceTree = "<group>"; };
+		AD15B27B1CF8448600C0EEB7 /* newUser_tel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newUser_tel@3x.png"; path = "增加成员/newUser_tel@3x.png"; sourceTree = "<group>"; };
+		AD15B27C1CF8448600C0EEB7 /* newUser_yanzheng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = newUser_yanzheng.png; path = "增加成员/newUser_yanzheng.png"; sourceTree = "<group>"; };
+		AD15B27D1CF8448600C0EEB7 /* newUser_yanzheng@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newUser_yanzheng@2x.png"; path = "增加成员/newUser_yanzheng@2x.png"; sourceTree = "<group>"; };
+		AD15B27E1CF8448600C0EEB7 /* newUser_yanzheng@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newUser_yanzheng@3x.png"; path = "增加成员/newUser_yanzheng@3x.png"; sourceTree = "<group>"; };
+		AD15B2851CF8461300C0EEB7 /* newUser_tel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newUser_tel.png; sourceTree = "<group>"; };
+		AD15B2881CF84D2C00C0EEB7 /* CommonNavigationViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonNavigationViews.h; sourceTree = "<group>"; };
+		AD15B2891CF84D2C00C0EEB7 /* CommonNavigationViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonNavigationViews.m; sourceTree = "<group>"; };
+		AD15B28B1CF8555600C0EEB7 /* ToRegistView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToRegistView.h; sourceTree = "<group>"; };
+		AD15B28C1CF8555600C0EEB7 /* ToRegistView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToRegistView.m; sourceTree = "<group>"; };
 		AD195B2C1CF5A81A000E32C7 /* Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Custom.h; sourceTree = "<group>"; };
 		AD195B2F1CF5A8D5000E32C7 /* NSDictionary+FromNSString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+FromNSString.h"; sourceTree = "<group>"; };
 		AD195B301CF5A8D5000E32C7 /* NSDictionary+FromNSString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+FromNSString.m"; sourceTree = "<group>"; };
@@ -283,6 +302,8 @@
 		AD7388691CF6E0090076B2AD /* CollectionFamilyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionFamilyView.m; sourceTree = "<group>"; };
 		AD73886B1CF6E4860076B2AD /* CustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewCell.h; sourceTree = "<group>"; };
 		AD73886C1CF6E4860076B2AD /* CustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewCell.m; sourceTree = "<group>"; };
+		AD8E603B1CFC0BDA00355C06 /* FindPassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindPassView.h; sourceTree = "<group>"; };
+		AD8E603C1CFC0BDA00355C06 /* FindPassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPassView.m; sourceTree = "<group>"; };
 		ADAB7E101CF4050B00C3C143 /* DefineHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefineHeader.h; sourceTree = "<group>"; };
 		ADB9260E1CF7DF1900AA8B6E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		ADB9260F1CF7DF1900AA8B6E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
@@ -487,6 +508,16 @@
 			path = "家谱";
 			sourceTree = "<group>";
 		};
+		AD15B2871CF84D0500C0EEB7 /* commonViews */ = {
+			isa = PBXGroup;
+			children = (
+				AD15B2881CF84D2C00C0EEB7 /* CommonNavigationViews.h */,
+				AD15B2891CF84D2C00C0EEB7 /* CommonNavigationViews.m */,
+			);
+			name = commonViews;
+			path = "网络请求/commonViews";
+			sourceTree = "<group>";
+		};
 		AD195B2E1CF5A8D5000E32C7 /* 扩展方法 */ = {
 			isa = PBXGroup;
 			children = (
@@ -689,6 +720,8 @@
 			children = (
 				AD15B2731CF817EB00C0EEB7 /* FindPassViewController.h */,
 				AD15B2741CF817EB00C0EEB7 /* FindPassViewController.m */,
+				AD8E603B1CFC0BDA00355C06 /* FindPassView.h */,
+				AD8E603C1CFC0BDA00355C06 /* FindPassView.m */,
 			);
 			path = "找回密码";
 			sourceTree = "<group>";
@@ -696,6 +729,8 @@
 		ADB9261B1CF7DF1900AA8B6E /* 注册 */ = {
 			isa = PBXGroup;
 			children = (
+				AD15B28B1CF8555600C0EEB7 /* ToRegistView.h */,
+				AD15B28C1CF8555600C0EEB7 /* ToRegistView.m */,
 				AD15B2761CF8184A00C0EEB7 /* RegisViewController.h */,
 				AD15B2771CF8184A00C0EEB7 /* RegisViewController.m */,
 			);
@@ -785,6 +820,7 @@
 				AD2ACD7E1CF3FC9C009D4A24 /* RootTabBarViewController.m */,
 				AD195B2E1CF5A8D5000E32C7 /* 扩展方法 */,
 				AD195B331CF5A8D5000E32C7 /* 网络请求 */,
+				AD15B2871CF84D0500C0EEB7 /* commonViews */,
 				ADF854BB1CF540DC00D222B7 /* 登录界面 */,
 				AD49FED11CF6A02C00DF9F7E /* 家谱服务 */,
 				AD2ACD8C1CF3FE3A009D4A24 /* 工具 */,
@@ -876,6 +912,12 @@
 				ADB926211CF7E10D00AA8B6E /* 创建家谱 */,
 				ADB926321CF7E10D00AA8B6E /* 忘记密码 */,
 				ADB9263C1CF7E10D00AA8B6E /* 增加成员 */,
+				AD15B2851CF8461300C0EEB7 /* newUser_tel.png */,
+				AD15B27A1CF8448600C0EEB7 /* newUser_tel@2x.png */,
+				AD15B27B1CF8448600C0EEB7 /* newUser_tel@3x.png */,
+				AD15B27C1CF8448600C0EEB7 /* newUser_yanzheng.png */,
+				AD15B27D1CF8448600C0EEB7 /* newUser_yanzheng@2x.png */,
+				AD15B27E1CF8448600C0EEB7 /* newUser_yanzheng@3x.png */,
 				ADF854B91CF53FF700D222B7 /* bg-1.png */,
 				ADC327491CF3FB8B00CEAE53 /* login.png */,
 				ADC3274A1CF3FB8B00CEAE53 /* login@2x.png */,
@@ -1066,6 +1108,7 @@
 				ADCD5C8B1CF451C000770356 /* geren_icon_a@3x.png in Resources */,
 				ADCD5C961CF451C000770356 /* jiaPu_icon_a@2x.png in Resources */,
 				AD49FECE1CF69E1900DF9F7E /* bg.png in Resources */,
+				AD15B2861CF8461300C0EEB7 /* newUser_tel.png in Resources */,
 				ADB9265E1CF7E10D00AA8B6E /* woman@3x.png in Resources */,
 				AD7388541CF6C5AF0076B2AD /* icon_6@3x.png in Resources */,
 				ADB9265B1CF7E10D00AA8B6E /* yanzheng@3x.png in Resources */,
@@ -1116,6 +1159,7 @@
 				ADB926541CF7E10D00AA8B6E /* suo@2x.png in Resources */,
 				AD7388451CF6C5AF0076B2AD /* icon_1@3x.png in Resources */,
 				ADCD5C981CF451C000770356 /* jiaPu_icon_b.png in Resources */,
+				AD15B2841CF8448600C0EEB7 /* newUser_yanzheng@3x.png in Resources */,
 				AD7388571CF6C5AF0076B2AD /* icon_7@3x.png in Resources */,
 				AD73884E1CF6C5AF0076B2AD /* icon_4@3x.png in Resources */,
 				ADB926431CF7E10D00AA8B6E /* cratebg.png in Resources */,
@@ -1160,9 +1204,11 @@
 				ADC3278A1CF3FB8B00CEAE53 /* weixin@3x.png in Resources */,
 				ADC3277C1CF3FB8B00CEAE53 /* QQ.png in Resources */,
 				ADC327881CF3FB8B00CEAE53 /* weixin.png in Resources */,
+				AD15B2821CF8448600C0EEB7 /* newUser_yanzheng.png in Resources */,
 				ADC327771CF3FB8B00CEAE53 /* login@2x.png in Resources */,
 				AD7388401CF6C5AF0076B2AD /* chec.png in Resources */,
 				AD7388661CF6C5AF0076B2AD /* search@3x.png in Resources */,
+				AD15B2801CF8448600C0EEB7 /* newUser_tel@2x.png in Resources */,
 				ADCD5C9F1CF451C000770356 /* shop_icon_b@2x.png in Resources */,
 				AD49FECF1CF69E1900DF9F7E /* bg@2x.png in Resources */,
 				ADCD5C8F1CF451C000770356 /* index_icon_a.png in Resources */,
@@ -1177,6 +1223,7 @@
 				ADC327891CF3FB8B00CEAE53 /* weixin@2x.png in Resources */,
 				ADCD5C991CF451C000770356 /* jiaPu_icon_b@2x.png in Resources */,
 				ADCD5C901CF451C000770356 /* index_icon_a@2x.png in Resources */,
+				AD15B2831CF8448600C0EEB7 /* newUser_yanzheng@2x.png in Resources */,
 				ADCD5C971CF451C000770356 /* jiaPu_icon_a@3x.png in Resources */,
 				AD7388531CF6C5AF0076B2AD /* icon_6@2x.png in Resources */,
 				ADB926521CF7E10D00AA8B6E /* sel@3x.png in Resources */,
@@ -1194,6 +1241,7 @@
 				ADB926551CF7E10D00AA8B6E /* suo@3x.png in Resources */,
 				AD024C721CF68655003380E5 /* sel@3x.png in Resources */,
 				ADC3277A1CF3FB8B00CEAE53 /* password@2x.png in Resources */,
+				AD15B2811CF8448600C0EEB7 /* newUser_tel@3x.png in Resources */,
 				ADB926561CF7E10D00AA8B6E /* tel.png in Resources */,
 				AD024C701CF68655003380E5 /* sel.png in Resources */,
 				ADCD5C8C1CF451C000770356 /* geren_icon_b.png in Resources */,
@@ -1270,13 +1318,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD15B28A1CF84D2C00C0EEB7 /* CommonNavigationViews.m in Sources */,
 				AD49FEE01CF6A0ED00DF9F7E /* FamilServiceViewController.m in Sources */,
 				ADE2D17E1CF7052C009D1ADF /* TableView.m in Sources */,
 				AD2ACD851CF3FD21009D4A24 /* ShoppingViewController.m in Sources */,
 				AD49FEE11CF6A0ED00DF9F7E /* ScrollerView.m in Sources */,
+				AD15B28D1CF8555600C0EEB7 /* ToRegistView.m in Sources */,
 				ADB9261D1CF7DF1900AA8B6E /* AccountView.m in Sources */,
 				ADC326FD1CF3E3DF00CEAE53 /* AppDelegate.m in Sources */,
 				ADC326FA1CF3E3DF00CEAE53 /* main.m in Sources */,
+				AD8E603D1CFC0BDA00355C06 /* FindPassView.m in Sources */,
 				AD73886A1CF6E0090076B2AD /* CollectionFamilyView.m in Sources */,
 				ADB926641CF7E28600AA8B6E /* LineView.m in Sources */,
 				AD2ACD8F1CF3FE5E009D4A24 /* Tools.m in Sources */,

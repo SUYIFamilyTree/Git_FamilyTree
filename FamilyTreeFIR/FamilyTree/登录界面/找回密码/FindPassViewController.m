@@ -7,8 +7,22 @@
 //
 
 #import "FindPassViewController.h"
-
+#import "FindPassView.h"
 @interface FindPassViewController ()
+
+@property (nonatomic,strong) CommonNavigationViews *naviView; /*头部导航栏*/
+
+@property (nonatomic,strong) FindPassView *phoneNum; /*手机号*/
+
+@property (nonatomic,strong) UIView *whiteBackView; /*白色半透明背景*/
+
+@property (nonatomic,strong) FindPassView *verificationCode; /*验证码*/
+
+@property (nonatomic,strong) FindPassView *nPass; /*新密码*/
+
+@property (nonatomic,strong) FindPassView *nSurePass; /*确认密码*/
+
+
 
 @end
 
@@ -16,12 +30,126 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationController.navigationBarHidden = YES;
+    
+    [self.view addSubview:self.naviView];
+    
+    [self initBackImage];
+    
+    [self initWiteBack];
+    
+    [self initInputTextView];
+    
+    //布局
+    self.whiteBackView.sd_layout.heightIs(0.45*Screen_height).topSpaceToView(self.naviView,15).leftSpaceToView(self.view,20).rightSpaceToView(self.view,20);
+        
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+#pragma mark *** 初始化方法 ***
 
+//背景图
+-(void)initBackImage{
+    UIImageView *backImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, StatusBar_Height+NavigationBar_Height, Screen_width, Screen_height-StatusBar_Height-NavigationBar_Height)];
+    backImage.image = [UIImage imageNamed:@"loginbg"];
+    [self.view addSubview:backImage];
+    
+}
+//白色半透明背景
+-(void)initWiteBack{
+    UIView *view = [[UIView alloc] init];
+    
+    view.backgroundColor = [UIColor colorWithWhite:1 alpha:0.8];
+    
+    [self.view addSubview:view];
+    self.whiteBackView = view;
+    
+    
+}
+//手机号到确认密码控件
+-(void)initInputTextView{
+    NSArray *titles = @[@"手机号",@"验证码",@"新密码",@"确认密码"];
+    NSArray *imageNames = @[@"tel",@"yanzheng",@"suo",@"suo"];
+//    NSArray *findViews = @[self.phoneNum,self.verificationCode,self.nPass,self.nSurePass];
+    NSArray *isSafe = @[@(true),@(true),@(false),@(false)];
+    for (int i = 0; i<titles.count; i++) {
+        FindPassView *theView = [[FindPassView alloc] initWithFrame:CGRectMake(15, 13+(40+13)*i, 0.8*Screen_width, 40) headImage:MImage(imageNames[i]) isSafe:isSafe[i] hasArrows:NO withplaceholderStr:titles[i]];
+        [self.whiteBackView addSubview:theView];
+        
+        theView.sd_layout.leftSpaceToView(self.whiteBackView,15).rightSpaceToView(self.whiteBackView,15);
+        
+        switch (i) {
+            case 0:
+                self.phoneNum = theView;
+                break;
+            case 1:
+            {
+                self.verificationCode = theView;
+                
+                //获取验证码按钮
+                UIButton *findVer = [[UIButton alloc] init];
+                [findVer setTitle:@"获取验证码"forState:0];
+                findVer.backgroundColor = LH_RGBCOLOR(74, 88, 91);
+                findVer.titleLabel.font = MFont(13);
+                [findVer addTarget:self action:@selector(respondsToFindVerBtn) forControlEvents:UIControlEventTouchUpInside];
+                
+                [self.verificationCode addSubview:findVer];
+                
+                findVer.sd_layout.widthIs(80).topSpaceToView(self.verificationCode,5).bottomSpaceToView(self.verificationCode,5).rightSpaceToView(self.verificationCode,5);
+            }
+                break;
+            case 2:
+                self.nPass = theView;
+                break;
+            case 3:
+                self.nSurePass = theView;
+                break;
+            default:
+                break;
+        }
+    }
+    
+    //确认修改按钮
+    UIButton *sureBtn = [[UIButton alloc] init];
+    [sureBtn setTitle:@"确认修改" forState:0];
+    sureBtn.backgroundColor = LH_RGBCOLOR(74, 88, 91);
+    sureBtn.titleLabel.font = MFont(17);
+    [sureBtn addTarget:self action:@selector(respondsToSureBtn) forControlEvents:UIControlEventTouchUpInside];
+    [self.whiteBackView addSubview:sureBtn];
+    
+    sureBtn.sd_layout.leftSpaceToView(self.whiteBackView,15).rightSpaceToView(self.whiteBackView,15).bottomSpaceToView(self.whiteBackView,0.067*Screen_width).heightIs(40);
+    
+}
 
+#pragma mark *** Events ***
+
+-(void)respondsToFindVerBtn{
+    MYLog(@"验证码");
+}
+
+-(void)respondsToSureBtn{
+    MYLog(@"确认修改");
+}
+
+#pragma mark *** getters ***
+-(CommonNavigationViews *)naviView{
+    if (!_naviView) {
+        _naviView = [[CommonNavigationViews alloc] initWithFrame:CGRectMake(0, 0, Screen_width, 44+StatusBar_Height) title:@"找回密码" image:MImage(@"chec")];
+        
+    }
+    return _naviView;
+}
+
+-(FindPassView *)phoneNum{
+    if (!_phoneNum) {
+        _phoneNum = [[FindPassView alloc] initWithFrame:CGRectMake(0, 100, 0.8*Screen_width, 40) headImage:MImage(@"tel") isSafe:NO hasArrows:NO withplaceholderStr:@"手机号"];
+       
+    }
+    return _phoneNum;
+}
 
 @end

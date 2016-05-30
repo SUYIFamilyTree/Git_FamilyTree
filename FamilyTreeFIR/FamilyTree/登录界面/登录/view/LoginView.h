@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "AccountView.h"
+#import "TopView.h"
+#import "OtherLoginView.h"
 @class LoginView;
 
 @protocol LoginViewDelegate <NSObject>
+
+@optional
 
 -(void)loginView:(LoginView *)loginView didSelectedTopViewBtn:(UIButton *)sender;
 -(void)loginView:(LoginView *)loginView didSelectedOtherLoginBtn:(UIButton *)sender;
@@ -22,6 +26,11 @@
 @end
 
 @interface LoginView : UIView
+
+@property (nonatomic,strong)  AccountView *accountView; /*账号*/
+@property (nonatomic,strong)  AccountView *passwordView; /*密码*/
+@property (nonatomic,strong)  TopView *topView; /*顶部控件*/
+
 @property (nonatomic,weak)   id<LoginViewDelegate> delegate; /*代理人*/
 
 @end

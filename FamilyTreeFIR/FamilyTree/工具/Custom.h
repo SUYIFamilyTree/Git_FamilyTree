@@ -27,6 +27,12 @@ __block __weak __typeof(&*self)weakSelf = self;
 //view自身宽高
 #define SelfView_width self.bounds.size.width
 #define SelfView_height self.bounds.size.height
+
+//导航栏，状态栏
+
+#define StatusBar_Height [[UIApplication sharedApplication] statusBarFrame].size.height
+#define NavigationBar_Height self.navigationController.navigationBar.frame.size.height
+
 //字体大小
 #define MFont(font)   [UIFont systemFontOfSize:(font)]
 #define BFont(font)   [UIFont boldSystemFontOfSize:(font)]
