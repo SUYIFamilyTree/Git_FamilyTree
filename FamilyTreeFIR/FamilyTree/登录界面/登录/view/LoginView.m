@@ -40,6 +40,7 @@ typedef enum : NSUInteger {
         [self addSubview:self.passwordView];
         [self addSubview:self.otherLoginView];
         [self addSubview:self.tourBtn];
+        
     }
     return self;
 }
