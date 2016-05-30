@@ -172,6 +172,7 @@
 		ADE2D17B1CF6FBD3009D1ADF /* FamilyShopView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE2D17A1CF6FBD3009D1ADF /* FamilyShopView.m */; };
 		ADE2D17E1CF7052C009D1ADF /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE2D17D1CF7052C009D1ADF /* TableView.m */; };
 		ADF854BA1CF53FF700D222B7 /* bg-1.png in Resources */ = {isa = PBXBuildFile; fileRef = ADF854B91CF53FF700D222B7 /* bg-1.png */; };
+		BC1EA60A1CFC00D8006F6454 /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1EA6091CFC00D8006F6454 /* SearchTableViewCell.m */; };
 		BCE2AD541CF8339000EC98F5 /* FamilyTreeTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE2AD531CF8339000EC98F5 /* FamilyTreeTopView.m */; };
 		BCE2AD5B1CF83FC700EC98F5 /* SearchFamilyTreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE2AD5A1CF83FC700EC98F5 /* SearchFamilyTreeViewController.m */; };
 		BCE2AD6C1CF8401F00EC98F5 /* adress.png in Resources */ = {isa = PBXBuildFile; fileRef = BCE2AD5D1CF8401F00EC98F5 /* adress.png */; };
@@ -410,6 +411,8 @@
 		ADE2D17D1CF7052C009D1ADF /* TableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableView.m; sourceTree = "<group>"; };
 		ADF854B81CF53A9200D222B7 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		ADF854B91CF53FF700D222B7 /* bg-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-1.png"; sourceTree = "<group>"; };
+		BC1EA6081CFC00D8006F6454 /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
+		BC1EA6091CFC00D8006F6454 /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
 		BCE2AD521CF8339000EC98F5 /* FamilyTreeTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FamilyTreeTopView.h; path = "FamilyTree/家谱/家谱首页/controller/FamilyTreeTopView.h"; sourceTree = SOURCE_ROOT; };
 		BCE2AD531CF8339000EC98F5 /* FamilyTreeTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FamilyTreeTopView.m; path = "FamilyTree/家谱/家谱首页/controller/FamilyTreeTopView.m"; sourceTree = SOURCE_ROOT; };
 		BCE2AD591CF83FC700EC98F5 /* SearchFamilyTreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFamilyTreeViewController.h; sourceTree = "<group>"; };
@@ -988,10 +991,21 @@
 			path = "登录界面";
 			sourceTree = "<group>";
 		};
+		BC1EA6071CFC00A3006F6454 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				BC1EA6081CFC00D8006F6454 /* SearchTableViewCell.h */,
+				BC1EA6091CFC00D8006F6454 /* SearchTableViewCell.m */,
+			);
+			name = view;
+			path = controller;
+			sourceTree = "<group>";
+		};
 		BCE2AD571CF83F3600EC98F5 /* 查询 */ = {
 			isa = PBXGroup;
 			children = (
 				BCE2AD581CF83F3600EC98F5 /* controller */,
+				BC1EA6071CFC00A3006F6454 /* view */,
 			);
 			path = "查询";
 			sourceTree = "<group>";
@@ -1400,6 +1414,7 @@
 				ADB9266A1CF7EBAC00AA8B6E /* FamilyTreeViewController.m in Sources */,
 				AD2ACD8B1CF3FD57009D4A24 /* PersonalCenterViewController.m in Sources */,
 				AD15B2781CF8184A00C0EEB7 /* RegisViewController.m in Sources */,
+				BC1EA60A1CFC00D8006F6454 /* SearchTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
