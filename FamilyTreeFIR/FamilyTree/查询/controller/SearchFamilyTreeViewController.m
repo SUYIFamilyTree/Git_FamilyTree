@@ -8,7 +8,7 @@
 
 #import "SearchFamilyTreeViewController.h"
 #import "SearchTableViewCell.h"
-
+#import "CommonNavigationViews.h"
 @interface SearchFamilyTreeViewController()<UITableViewDelegate,UITableViewDataSource>
 /** 搜索栏*/
 @property (nonatomic, strong) UIView *searchView;
@@ -23,7 +23,9 @@
     self.navigationController.navigationBarHidden = YES;
     self.view.backgroundColor = LH_RGBCOLOR(236, 236, 236);
     //导航栏
-    [self initNavi];
+    //[self initNavi];
+    CommonNavigationViews *navi = [[CommonNavigationViews alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 64) title:@"查询" image:MImage(@"chec")];
+    [self.view addSubview:navi];
     //搜索栏
     [self initSearchBar];
     //添加表格
@@ -42,7 +44,7 @@
     topLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:topLabel];
     
-    UIButton *leftButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 35, 8, 15)];
+    UIButton *leftButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 35, 22, 22)];
     [leftButton setBackgroundImage:MImage(@"fanhui.png") forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(clickLeftButton) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:leftButton];

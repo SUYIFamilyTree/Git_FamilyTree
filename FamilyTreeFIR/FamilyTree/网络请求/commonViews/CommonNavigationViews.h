@@ -13,8 +13,13 @@
 @property (nonatomic,strong) UIView *backView; /*头部*/
 @property (nonatomic,strong) UILabel *titleLabel; /*标题*/
 @property (nonatomic,strong) UIButton *rightBtn; /*右边按钮*/
+@property (nonatomic,strong) UIView *rightView;
+
 
 - (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title image:(UIImage *)imageName;
+
+- (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title;
+
 //返回按钮
 -(void)respondsToReturnBtn;
 
