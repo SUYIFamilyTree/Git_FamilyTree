@@ -113,9 +113,9 @@
         _rightView = [[UIView alloc]initWithFrame:CGRectMake(0.8*CGRectW(self), StatusBar_Height, 0.2*CGRectW(self), 64-StatusBar_Height)];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(respondsToRightBtn:)];
         [_rightView addGestureRecognizer:tap];
-        UILabel *myFamilyLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_rightView), CGRectY(_rightView), CGRectW(_rightView)*0.7, CGRectH(_rightView))];
+        UILabel *myFamilyLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_rightView), CGRectY(_rightView), CGRectW(_rightView)*0.8, CGRectH(_rightView))];
         myFamilyLabel.text = @"我的家谱";
-        myFamilyLabel.font = MFont(11);
+        myFamilyLabel.font = MFont(12);
         myFamilyLabel.textColor = [UIColor whiteColor];
         myFamilyLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:myFamilyLabel];
