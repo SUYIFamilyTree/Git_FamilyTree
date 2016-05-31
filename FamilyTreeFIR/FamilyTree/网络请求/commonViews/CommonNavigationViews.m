@@ -27,6 +27,18 @@
     return self;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self addSubview:self.backView];
+        [self addSubview:self.titleLabel];
+        self.titleLabel.text = title;
+        [self addSubview:self.rightView];
+    }
+    return self;
+}
+
+
 #pragma mark *** Events ***
 
 -(void)respondsToReturnBtn{
@@ -92,10 +104,27 @@
         _rightBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
         
         [_rightBtn addTarget:self action:@selector(respondsToRightBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
     }
     return _rightBtn;
 }
 
+-(UIView *)rightView{
+    if (!_rightView) {
+        _rightView = [[UIView alloc]initWithFrame:CGRectMake(0.8*CGRectW(self), StatusBar_Height, 0.2*CGRectW(self), 64-StatusBar_Height)];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(respondsToRightBtn:)];
+        [_rightView addGestureRecognizer:tap];
+        UILabel *myFamilyLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_rightView), CGRectY(_rightView), CGRectW(_rightView)*0.7, CGRectH(_rightView))];
+        myFamilyLabel.text = @"我的家谱";
+        myFamilyLabel.font = MFont(11);
+        myFamilyLabel.textColor = [UIColor whiteColor];
+        myFamilyLabel.textAlignment = NSTextAlignmentLeft;
+        [self addSubview:myFamilyLabel];
+        UIImageView *jiantou = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(_rightView)+CGRectW(myFamilyLabel), CGRectY(myFamilyLabel)+20, 10, 6)];
+        jiantou.image = MImage(@"sel.png");
+        [self addSubview:jiantou];
+
+    }
+    return _rightView;
+}
 
 @end

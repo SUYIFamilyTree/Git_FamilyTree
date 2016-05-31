@@ -12,14 +12,17 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     //配置导航栏
-   CommonNavigationViews *navi = [[CommonNavigationViews alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 64) title:@"图文影音" image:MImage(@"chec")];
+    CommonNavigationViews *navi = [[CommonNavigationViews alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 64) title:@"图文影音"];
     [self.view addSubview:navi];
     //设置背景
     UIImageView *bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
     bgImageView.image = MImage(@"bg");
     [self.view addSubview:bgImageView];
     
+    
+    
 }
+
 @end
 
 
