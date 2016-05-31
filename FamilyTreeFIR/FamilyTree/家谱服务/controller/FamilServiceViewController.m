@@ -9,7 +9,6 @@
 #import "FamilServiceViewController.h"
 
 #import "TopSearchView.h"
-#import "ScrollerView.h"
 #import "CollectionFamilyView.h"
 #import "FamilyShopView.h"
 #import "TableView.h"
@@ -74,10 +73,18 @@
 
 -(void)familyShopViewDidTapView:(FamilyShopView *)famShop{
     MYLog(@"点击商城");
+    WholeWorldViewController *wholeVc = [[WholeWorldViewController alloc] initWithTitle:@"四海同宗" image:nil];
+    
+    [self.navigationController pushViewController:wholeVc animated:YES];
+    
 }
 
 -(void)CollevtionFamily:(CollectionFamilyView *)collecView didSelectedItemAtIndexPath:(NSIndexPath *)indexPath{
     MYLog(@"点击collection -- %ld",indexPath.row);
+    if (indexPath.row == 3) {
+        FamilyHelpViewController *helpVc = [[FamilyHelpViewController alloc] initWithTitle:@"赏金寻亲" image:nil];;
+        [self.navigationController pushViewController:helpVc animated:YES];
+    }
 }
 
 #pragma mark *** getters ***
@@ -104,7 +111,7 @@
 }
 -(ScrollerView *)scrollerView{
     if (!_scrollerView) {
-        _scrollerView = [[ScrollerView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topSearchView.frame), Screen_width, ScrollerView_Height)];
+        _scrollerView = [[ScrollerView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topSearchView.frame), Screen_width, ScrollerView_Height) images:nil];
         
         
     }
@@ -115,7 +122,6 @@
         _collecFamView = [[CollectionFamilyView alloc] initWithFrame:CGRectMake(0, 15, Screen_width*0.85, 130)];
         _collecFamView.center = CGPointMake(self.view.center.x,CGRectGetMaxY(self.scrollerView.frame)+15+_collecFamView.bounds.size.height/2);
         _collecFamView.delegate = self;
-        
         
     }
     return _collecFamView;

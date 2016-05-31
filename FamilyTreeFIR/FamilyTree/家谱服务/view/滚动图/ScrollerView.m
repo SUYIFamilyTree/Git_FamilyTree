@@ -10,9 +10,7 @@
 
 
 @interface ScrollerView()<UIScrollViewDelegate>
-{
-    NSMutableArray *_imageNames;
-}
+
 @property (nonatomic,strong) UIScrollView *scrollView; /*滚动图*/
 @property (nonatomic,strong) UIPageControl *pageContro; /*分页控件*/
 @property (nonatomic,strong) UIImageView *leftImage; /*滚动图左*/
@@ -30,12 +28,19 @@
     //摧毁定时器
     [self.timer invalidate];
 }
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame images:(NSMutableArray *)imageNames
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self initData];
+        
+        if (!imageNames) {
+            [self initData];
+        }else{
+            _imageNames = imageNames;
+        }
+        
         [self initUI];
+        
         
     }
     return self;
