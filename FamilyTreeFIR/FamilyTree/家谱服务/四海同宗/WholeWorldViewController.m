@@ -129,7 +129,6 @@ static NSString *const kReusableIdentifier = @"PinAnnotation";
 //    pinAnnotationView.annotation = annotation;
     pinAnnotationView.image=[UIImage imageNamed:@"ci"];
     pinAnnotationView.canShowCallout = YES;
-
     return pinAnnotationView;
 }
 
