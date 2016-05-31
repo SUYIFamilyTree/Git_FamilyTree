@@ -15,6 +15,8 @@
 @property (nonatomic,strong) UIButton *rightBtn; /*右边按钮*/
 
 - (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title image:(UIImage *)imageName;
+
+
 //返回按钮
 -(void)respondsToReturnBtn;
 

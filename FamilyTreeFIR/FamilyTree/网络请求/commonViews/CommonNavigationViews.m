@@ -64,7 +64,7 @@
         _backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Screen_width, 44+StatusBar_Height)];
         _backView.backgroundColor = LH_RGBCOLOR(75, 88, 91);
         
-        UIButton *returnBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, CGRectGetHeight(_backView.bounds)/2-30+StatusBar_Height, 44, 44)];
+        UIButton *returnBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_backView.bounds)/2-30+StatusBar_Height, 44, 44)];
         [returnBtn setImage:MImage(@"fanhui") forState:0];
         
         [returnBtn addTarget:self action:@selector(respondsToReturnBtn) forControlEvents:UIControlEventTouchUpInside];
@@ -96,5 +96,6 @@
     }
     return _rightBtn;
 }
+
 
 @end

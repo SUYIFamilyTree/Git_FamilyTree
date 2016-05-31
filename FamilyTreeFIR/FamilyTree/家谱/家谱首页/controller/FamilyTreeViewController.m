@@ -11,6 +11,7 @@
 #import "NSDictionary+FromNSString.h"
 #import "FamilyTreeTopView.h"
 #import "SearchFamilyTreeViewController.h"
+#import "ImageAndTextViewController.h"
 @interface FamilyTreeViewController ()<FamilyTreeTopViewDelegate>
 
 @end
@@ -196,8 +197,12 @@
     switch (sender.tag) {
         case 1001:
             //跳转
+        {
             NSLog(@"图文影像");
+            ImageAndTextViewController *imageTextVC = [[ImageAndTextViewController alloc]init];
+            [self.navigationController pushViewController:imageTextVC animated:YES];
             break;
+        }
         case 1002:
             //跳转
             NSLog(@"世系图");
