@@ -73,9 +73,6 @@
 
 -(void)familyShopViewDidTapView:(FamilyShopView *)famShop{
     MYLog(@"点击商城");
-    WholeWorldViewController *wholeVc = [[WholeWorldViewController alloc] initWithTitle:@"四海同宗" image:nil];
-    
-    [self.navigationController pushViewController:wholeVc animated:YES];
     
 }
 

@@ -204,8 +204,12 @@
             break;
         }
         case 1002:
+        {
             //跳转
             NSLog(@"世系图");
+            WholeWorldViewController *wholeVc = [[WholeWorldViewController alloc] initWithTitle:@"四海同宗" image:nil];
+            [self.navigationController pushViewController:wholeVc animated:YES];
+        }
             break;
         case 1003:
             //跳转

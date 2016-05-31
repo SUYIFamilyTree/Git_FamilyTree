@@ -731,7 +731,6 @@
 			isa = PBXGroup;
 			children = (
 				AD8DAADD1CFD750C009B7958 /* 宗亲互助 */,
-				AD8DAAA51CFD2F65009B7958 /* 四海同宗 */,
 				AD49FED51CF6A0ED00DF9F7E /* controller */,
 				AD49FED81CF6A0ED00DF9F7E /* model */,
 				AD49FED91CF6A0ED00DF9F7E /* view */,
@@ -868,8 +867,9 @@
 				AD8DAAA91CFD30B9009B7958 /* HeaderSelectView.h */,
 				AD8DAAAA1CFD30B9009B7958 /* HeaderSelectView.m */,
 			);
-			path = "四海同宗";
-			sourceTree = "<group>";
+			name = "四海同宗";
+			path = "FamilyTree/家谱服务/四海同宗";
+			sourceTree = SOURCE_ROOT;
 		};
 		AD8DAAB21CFD6492009B7958 /* 四海同宗 */ = {
 			isa = PBXGroup;
@@ -1241,6 +1241,7 @@
 		ADC3278C1CF3FBCC00CEAE53 /* 家谱 */ = {
 			isa = PBXGroup;
 			children = (
+				AD8DAAA51CFD2F65009B7958 /* 四海同宗 */,
 				BC03269C1CFD201C0089EE4C /* 图文影音 */,
 				AD024C471CF68531003380E5 /* 家谱首页 */,
 			);
@@ -1511,6 +1512,8 @@
 				ADA380631CFC256100B596B7 /* search@3x.png in Resources */,
 				ADCD5C9C1CF451C000770356 /* shop_icon_a@2x.png in Resources */,
 				ADCD5C8E1CF451C000770356 /* geren_icon_b@3x.png in Resources */,
+				BC0326CB1CFD23D50089EE4C /* ht_bt@3x.png in Resources */,
+				BC0326C51CFD23D50089EE4C /* book@3x.png in Resources */,
 				AD8DAB011CFD76A5009B7958 /* sj_icon_4@2x.png in Resources */,
 				AD7388431CF6C5AF0076B2AD /* icon_1.png in Resources */,
 				ADA380561CFC256100B596B7 /* adress@2x.png in Resources */,
@@ -1532,6 +1535,7 @@
 				ADC3277F1CF3FB8B00CEAE53 /* return.png in Resources */,
 				AD8DAAD91CFD6492009B7958 /* yel@3x.png in Resources */,
 				AD73885F1CF6C5AF0076B2AD /* laBa@2x.png in Resources */,
+				BC0326BF1CFD23D50089EE4C /* bk_fenye@3x.png in Resources */,
 				AD8DAADA1CFD6492009B7958 /* yel_sm.png in Resources */,
 				ADA380611CFC256100B596B7 /* search.png in Resources */,
 				ADB926441CF7E10D00AA8B6E /* fanhui.png in Resources */,
@@ -1597,6 +1601,8 @@
 				ADA3805B1CFC256100B596B7 /* fanhui.png in Resources */,
 				AD7388441CF6C5AF0076B2AD /* icon_1@2x.png in Resources */,
 				AD7388581CF6C5AF0076B2AD /* icon_8.png in Resources */,
+				BC0326CE1CFD23D50089EE4C /* jz_bg@3x.png in Resources */,
+				BC0326C31CFD23D50089EE4C /* book.png in Resources */,
 				AD8DAB021CFD76A5009B7958 /* sj_icon_4@3x.png in Resources */,
 				AD8DAAD21CFD6492009B7958 /* red@2x.png in Resources */,
 				AD49FED01CF69E1900DF9F7E /* bg@3x.png in Resources */,
@@ -1648,6 +1654,7 @@
 				BC0326C11CFD23D50089EE4C /* bk_ye@2x.png in Resources */,
 				ADA380601CFC256100B596B7 /* find@3x.png in Resources */,
 				AD73884D1CF6C5AF0076B2AD /* icon_4@2x.png in Resources */,
+				BC0326CC1CFD23D50089EE4C /* jz_bg.png in Resources */,
 				AD8DAACE1CFD6492009B7958 /* map.png in Resources */,
 				AD7388481CF6C5AF0076B2AD /* icon_2@3x.png in Resources */,
 				AD024C651CF68655003380E5 /* human_1@2x.png in Resources */,
