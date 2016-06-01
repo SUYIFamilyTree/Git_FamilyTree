@@ -137,6 +137,13 @@ static NSString *const kReuserableUITableViewCell = @"UITableViewCell";
     return 40;
 }
 
+#pragma mark *** tableViewDelegate ***
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    DetailFamHeViewController *detailVc = [[DetailFamHeViewController alloc] initWithTitle:@"宗亲互助" image:nil];
+    [self.navigationController pushViewController:detailVc animated:YES];
+}
+
 #pragma mark *** getters ***
 -(UITableView *)tableView{
     if (!_tableView) {

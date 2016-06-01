@@ -1,0 +1,18 @@
+//
+//  InputView.h
+//  FamilyTree
+//
+//  Created by 王子豪 on 16/6/1.
+//  Copyright © 2016年 王子豪. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface InputView : UIView
+@property (nonatomic,strong) UILabel *inputLabel;; /*选择输入的文字*/
+@property (nonatomic,assign) NSInteger length; /*长度*/
+@property (nonatomic,copy) NSArray *dataArr; /*点出来的数据*/
+
+
+- (instancetype)initWithFrame:(CGRect)frame Length:(NSInteger)length withData:(NSArray *)dataArr;
+@end

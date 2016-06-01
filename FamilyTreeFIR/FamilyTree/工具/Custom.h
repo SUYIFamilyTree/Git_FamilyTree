@@ -46,6 +46,7 @@ __block __weak __typeof(&*self)weakSelf = self;
 #define IsEquallString(_Str1,_Str2)  [_Str1 isEqualToString:_Str2]
 //RGB
 #define LH_RGBCOLOR(R, G, B)    [UIColor colorWithRed:(R)/255.0 green:(G)/255.0 blue:(B)/255.0 alpha:1.0]
+#define BorderColor LH_RGBCOLOR(215, 215, 215).CGColor
 //addmethod
 #define CGRectOrigin(v)    v.frame.origin
 #define CGRectSize(v)      v.frame.size
