@@ -12,6 +12,7 @@
 #import "FamilyTreeTopView.h"
 #import "SearchFamilyTreeViewController.h"
 #import "ImageAndTextViewController.h"
+#import "LineageViewController.h"
 @interface FamilyTreeViewController ()<FamilyTreeTopViewDelegate>
 
 @end
@@ -207,7 +208,8 @@
         {
             //跳转
             NSLog(@"世系图");
-            
+            LineageViewController *lineageVC = [[LineageViewController alloc]init];
+            [self.navigationController pushViewController:lineageVC animated:YES];
         }
             break;
         case 1003:

@@ -112,6 +112,8 @@ static NSString *const kReusableIdentifier = @"PinAnnotation";
     
 }
 
+
+
 //自定义标注数据原视图
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
