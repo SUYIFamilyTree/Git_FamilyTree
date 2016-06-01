@@ -12,9 +12,20 @@
 #define BtnWidth 50
 #define GapToleft 15
 static NSString *const kReusableCellIdentifier = @"cellIdentifier";
+static NSString *const kReuserableUITableViewCell = @"UITableViewCell";
+
+
+
+
 
 
 @interface FamilyHelpViewController ()<UITableViewDataSource,UITableViewDelegate>
+@property (nonatomic,strong) NSArray *dataSource; /*数据源*/
+
+@property (nonatomic,assign) NSInteger selectedBtnNum; /*选择的第几个btn*/
+
+
+
 @property (nonatomic,strong) UILabel *myLabel; /*label*/
 @property (nonatomic,strong) UITableView *tableView; /*table*/
 
@@ -33,6 +44,9 @@ static NSString *const kReusableCellIdentifier = @"cellIdentifier";
 
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
+    
+    _selectedBtnNum = 0;
+    
     NSArray *topTitles = @[@"产品众筹",@"赏金寻亲",@"捐款圆梦",@"我提供",@"我需要"];
     NSArray *imageNames = @[@"sj_icon_1",@"sj_icon_2",@"sj_icon_3",@"sj_icon_4",@"sj_icon_5"];
     for (int idx = 0; idx<topTitles.count; idx++) {
@@ -56,6 +70,7 @@ static NSString *const kReusableCellIdentifier = @"cellIdentifier";
         self.myLabel = label;
         
         label.sd_layout.topSpaceToView(btn,5).widthIs(BtnWidth).leftEqualToView(btn).heightIs(15);
+    
         
     }
     //滚动图
@@ -67,24 +82,59 @@ static NSString *const kReusableCellIdentifier = @"cellIdentifier";
     
     scroView.sd_layout.leftSpaceToView(self.view,0).rightSpaceToView(self.view,0).topSpaceToView(self.myLabel,10);
     
+    //tableView
+    [self.view addSubview:self.tableView];
+    
+    self.tableView.sd_layout.leftSpaceToView(self.view,0).rightSpaceToView(self.view,0).topSpaceToView(self.myLabel,0.3*Screen_height+20).bottomSpaceToView(self.tabBarController.tabBar,0);
+    
 }
 
 #pragma mark *** Events ***
 -(void)respondsToAllBtn:(UIButton *)sender{
+    MYLog(@"%ld",sender.tag);
+    _selectedBtnNum = sender.tag;
+   
+    [self.tableView reloadData];
     
 }
 
-#pragma mark *** tabledelegate ***
+#pragma mark *** tableDataSource ***
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
-}
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    HelpTableTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kReusableCellIdentifier forIndexPath:indexPath];
-    if (!cell) {
-        cell = [[HelpTableTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kReusableCellIdentifier];
+    if (_selectedBtnNum==0) {
+        return 5;
     }
     
+    return self.dataSource.count;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    //选中第产品众筹
+    if (_selectedBtnNum == 0) {
+        HelpTableTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kReusableCellIdentifier forIndexPath:indexPath];
+        if (!cell) {
+            cell = [[HelpTableTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kReusableCellIdentifier];
+        }
+        
+        cell.leftImageView.image = MImage(@"sj_bg");
+        
+        return cell;
+    }
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kReuserableUITableViewCell forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kReuserableUITableViewCell];
+    }
+    
+    cell.textLabel.text = self.dataSource[indexPath.row];
+    
+    
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (_selectedBtnNum == 0) {
+        return 0.2*Screen_width+10;
+    }
+    return 40;
 }
 
 #pragma mark *** getters ***
@@ -94,8 +144,18 @@ static NSString *const kReusableCellIdentifier = @"cellIdentifier";
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [_tableView registerClass:[HelpTableTableViewCell class] forCellReuseIdentifier:kReusableCellIdentifier];
+        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kReuserableUITableViewCell];
     }
     return _tableView;
+}
+
+-(NSArray *)dataSource{
+    if (!_dataSource) {
+        _dataSource = @[@"怀宁陈氏陈大大80搜眼成功在合肥举行",@"安寝护士呼啸而预估三娘在上海举办虎离成功",@"西安网师办教育修船成功",@"昨天但是大量数据库大力加快速度"];
+        
+    }
+    
+    return _dataSource;
 }
 
 @end
