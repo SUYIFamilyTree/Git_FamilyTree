@@ -218,7 +218,7 @@
     if (swipe.direction == UISwipeGestureRecognizerDirectionRight)
     {
         MYLog(@"向右轻扫");
-        self.contentImageView.image = MImage(@"bk_fenye");
+        self.contentImageView.image = MImage(@"sss_bg");
     }
 }
 
