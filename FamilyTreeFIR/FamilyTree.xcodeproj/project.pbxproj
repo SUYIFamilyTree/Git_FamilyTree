@@ -1940,6 +1940,7 @@
 				BC2943A31CFE9F7B006671B9 /* LineageCellView.m in Sources */,
 				AD49FEE01CF6A0ED00DF9F7E /* FamilServiceViewController.m in Sources */,
 				BC0326A01CFD22070089EE4C /* ImageAndTextViewController.m in Sources */,
+				BC29439D1CFE8D87006671B9 /* PersonModel.m in Sources */,
 				ADB9734A1CFE8647007B876B /* AddMemberViewController.m in Sources */,
 				ADE2D17E1CF7052C009D1ADF /* TableView.m in Sources */,
 				AD2ACD851CF3FD21009D4A24 /* ShoppingViewController.m in Sources */,
