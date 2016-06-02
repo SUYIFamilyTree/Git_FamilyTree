@@ -1578,12 +1578,12 @@
 		BC2943A91CFEA873006671B9 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				BCCE8A921CFFF289005A5E21 /* PrivateWorshipTableViewCell.m */,
 				BCCE8A931CFFF289005A5E21 /* PrivateWorshipView.h */,
 				BCCE8A941CFFF289005A5E21 /* PrivateWorshipView.m */,
 				BCCE8A951CFFF289005A5E21 /* PublicWorshipView.h */,
 				BCCE8A961CFFF289005A5E21 /* PublicWorshipView.m */,
 				BCCE8A971CFFF289005A5E21 /* PrivateWorshipTableViewCell.h */,
+				BCCE8A921CFFF289005A5E21 /* PrivateWorshipTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";

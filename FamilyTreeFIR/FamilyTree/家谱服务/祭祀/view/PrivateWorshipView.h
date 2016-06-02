@@ -18,7 +18,9 @@
 
 @interface PrivateWorshipView : UIView
 /** 我的私人墓园*/
-@property (nonatomic, strong) UITableView *MyTableView;
+@property (nonatomic, strong) UITableView *myTableView;
+/** 墓园排行*/
+@property (nonatomic, strong) UITableView *cemeterialListTableView;
 /** 是否编辑状态*/
 @property (nonatomic, assign) BOOL PrivateWorshipEdit;
 
