@@ -93,7 +93,7 @@
     self.addCemeterialBtn.backgroundColor = [UIColor whiteColor];
     [self.addCemeterialBtn setTitle:@"新建墓园" forState:UIControlStateNormal];
     [self.addCemeterialBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.addCemeterialBtn.titleLabel.font = MFont(12);
+    self.addCemeterialBtn.titleLabel.font = MFont(13);
     [self.addCemeterialBtn setImage:MImage(@"mcGuanli_xinjian.png") forState:UIControlStateNormal];
     self.addCemeterialBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.addCemeterialBtn.hidden = YES;
