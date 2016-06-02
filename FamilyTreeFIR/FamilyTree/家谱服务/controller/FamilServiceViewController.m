@@ -13,7 +13,7 @@
 #import "FamilyShopView.h"
 #import "TableView.h"
 #import "SearchFamilyTreeViewController.h"
-
+#import "WorshipViewController.h"
 
 #define ScrollerView_Height 210
 @interface FamilServiceViewController ()<TopSearchViewDelegate,TableViewDelegate,FamilyShopViewDelegate,CollectionFamilyDelegate>
@@ -81,6 +81,10 @@
     if (indexPath.row == 3) {
         FamilyHelpViewController *helpVc = [[FamilyHelpViewController alloc] initWithTitle:@"赏金寻亲" image:nil];;
         [self.navigationController pushViewController:helpVc animated:YES];
+    }
+    if (indexPath.row == 7) {
+        WorshipViewController *worshipVC = [[WorshipViewController alloc]init];
+        [self.navigationController pushViewController:worshipVC animated:YES];
     }
 }
 
