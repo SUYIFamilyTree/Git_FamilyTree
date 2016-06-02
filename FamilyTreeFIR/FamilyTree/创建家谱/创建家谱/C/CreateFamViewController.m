@@ -8,6 +8,7 @@
 
 #import "CreateFamViewController.h"
 #import "BackScrollAndDetailView.h"
+#import "CreateFamView.h"
 @interface CreateFamViewController ()
 
 @end
@@ -16,12 +17,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    BackScrollAndDetailView *vis = [[BackScrollAndDetailView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height)];
-    vis.backgroundColor  = [UIColor redColor];
+ 
     self.automaticallyAdjustsScrollViewInsets=false;
-    [self.view addSubview:vis];
+    
+    [self initUI];
 }
 
+#pragma mark *** 初始化界面 ***
+-(void)initUI{
+    //公共部分图
+    CreateFamView *creFamView = [[CreateFamView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height)];
+    [self.view addSubview:creFamView];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

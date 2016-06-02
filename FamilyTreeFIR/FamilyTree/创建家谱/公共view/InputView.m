@@ -30,10 +30,11 @@
         self.frame = frame;
         
         [self addSubview:self.inputLabel];
-        UILabel *triLabel = [[UILabel alloc] initWithFrame:CGRectMake(length-15, 12, 10, 10)];
+        UILabel *triLabel = [[UILabel alloc] initWithFrame:CGRectMake(length-13, 15, 10, 10)];
         triLabel.text = @"▼";
-        triLabel.font = MFont(10);
+        triLabel.font = MFont(8);
         [self addSubview:triLabel];
+        
         
     }
     return self;

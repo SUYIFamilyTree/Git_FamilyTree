@@ -64,9 +64,13 @@
 }
 
 
+
 -(void)clickEditBtn:(UIButton *)sender{
+    
     sender.selected = !sender.selected;
+ 
     self.PrivateWorshipEdit = sender.selected;
+    
     //进入编辑状态
     [self.delegate PrivateWorshipView:self didSelect:sender.selected];
     
