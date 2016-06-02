@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CemeterialModel.h"
 
 @class PrivateWorshipTableViewCell;
 @protocol  PrivateWorshipTableViewCellDelegate<NSObject>
@@ -25,5 +26,7 @@
 @property (nonatomic, assign)BOOL cellEdit;
 /** 代理人*/
 @property (nonatomic, weak) id<PrivateWorshipTableViewCellDelegate> delegate;
+/** 私人墓园*/
+@property (nonatomic, strong) CemeterialModel *cemeterialModel;
 
 @end

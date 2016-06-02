@@ -12,7 +12,7 @@
 #import "PublicWorshipView.h"
 #import "PrivateWorshipTableViewCell.h"
 
-@interface WorshipViewController()<UIScrollViewDelegate,PrivateWorshipViewDelegate,PrivateWorshipTableViewCellDelegate>
+@interface WorshipViewController()<UIScrollViewDelegate,PrivateWorshipViewDelegate>
 /** 分段控件*/
 @property (nonatomic, strong) UISegmentedControl *headerSegment;
 /** 滚动视图*/
@@ -34,6 +34,7 @@
     [self.view addSubview:navi];
     //添加分段控件
     [self initSegment];
+    self.privateWorshipV.delegate = self;
 }
 
 -(void)initSegment{
@@ -106,21 +107,9 @@
 
 #pragma mark - PrivateWorshipViewDelegate
 -(void)PrivateWorshipView:(PrivateWorshipView *)privateWorshipView didSelect:(BOOL)isEditing{
-    //点击编辑按钮
-    //self.privateWorshipV.PrivateWorshipEdit = isEditing;
-    [self.privateWorshipV.MyTableView reloadData];
     
 }
 
 
-#pragma mark - PrivateWorshipTableViewCellDelegate
--(void)cemeterialDidEdit:(PrivateWorshipTableViewCell *)cell{
-    //跳转到编辑页面
-}
-
--(void)cemeterialDidDelete:(PrivateWorshipTableViewCell *)cell{
-    //删除该行
-    
-}
 
 @end

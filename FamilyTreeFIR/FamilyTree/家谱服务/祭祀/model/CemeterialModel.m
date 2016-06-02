@@ -9,5 +9,13 @@
 #import "CemeterialModel.h"
 
 @implementation CemeterialModel
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+        _CemeterialModelEdit = NO;
+    }
+    return self;
+}
+
 
 @end
