@@ -8,7 +8,7 @@
 
 #import "InputView.h"
 
-#define Input_height 30
+#define Input_height 40
 
 @interface InputView()
 {
@@ -51,27 +51,30 @@
     _isSelectedBtn = !_isSelectedBtn;
     
     if (_isSelectedBtn) {
-        [UIView animateWithDuration:0.3f animations:^{
-            self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _length, (1+_dataArr.count)*Input_height);
+//        [UIView animateWithDuration:0.3f animations:^{
+            self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _length, (1+_dataArr.count)*(Input_height-10));
             self.layer.borderWidth = 1.0f;
             self.layer.borderColor = BorderColor;
             for (int idx = 0; idx<_dataArr.count; idx++) {
-                UIButton *selecBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, (idx+1)*Input_height, _length,Input_height)];
+                UIButton *selecBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, (idx+1)*(Input_height-10), _length,Input_height-10)];
                 [selecBtn setTitleColor:[UIColor blackColor] forState:0];
                 selecBtn.backgroundColor = [UIColor whiteColor];
                 [selecBtn setTitle:_dataArr[idx] forState:0];
                 
                 selecBtn.tag = idx+10;
                 
-                selecBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -_length+20, 0, 0);
+                NSInteger len = ((NSString *)_dataArr[idx]).length*10;
+                NSLog(@"%@--%ld",((NSString *)_dataArr[idx]),len-_length);
+                
+                selecBtn.titleEdgeInsets = UIEdgeInsetsMake(0, len-_length, 0, 0);
                 
                 [selecBtn addTarget:self action:@selector(respondsToExtendLabelBtn:) forControlEvents:UIControlEventTouchUpInside];
                 
                 [self addSubview:selecBtn];
-            }
-        }];
+            } 
+//        }];
     }else{
-        [UIView animateWithDuration:0.3f animations:^{
+//        [UIView animateWithDuration:0.3f animations:^{
             self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _length, Input_height);
             
             [self.subviews enumerateObjectsUsingBlock:^(UIButton * obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -81,7 +84,7 @@
                 }
             }];
             
-        }];
+//        }];
         
     }
  

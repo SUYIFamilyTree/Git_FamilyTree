@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface BackScrollAndDetailView : UIView
+@property (nonatomic,strong) InputView *inputView; /*是否结婚*/
 
+@property (nonatomic,strong) UITextField *parnName; /*配偶名*/
+
+
+@property (nonatomic,strong) UIImageView *selecProtrai; /*选择头像*/
 @end

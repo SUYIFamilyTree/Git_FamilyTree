@@ -16,7 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    BackScrollAndDetailView *vis = [[BackScrollAndDetailView alloc] initWithFrame:self.view.bounds];
+    BackScrollAndDetailView *vis = [[BackScrollAndDetailView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height)];
+    vis.backgroundColor  = [UIColor redColor];
+    self.automaticallyAdjustsScrollViewInsets=false;
     [self.view addSubview:vis];
 }
 

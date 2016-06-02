@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class InputView;
+
+@protocol InputViewDelegate <NSObject>
+
+-(void)InputView:(InputView *)inputView didSeletedLabel:(UILabel *)inputLabel;
+
+@end
+
 @interface InputView : UIView
 @property (nonatomic,strong) UILabel *inputLabel;; /*选择输入的文字*/
 @property (nonatomic,assign) NSInteger length; /*长度*/
