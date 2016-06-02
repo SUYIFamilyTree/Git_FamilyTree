@@ -129,8 +129,11 @@
 -(void)loginView:(LoginView *)loginView didSelectedOtherLoginBtn:(UIButton *)sender{
     switch (sender.tag) {
         case 0:
+        {
             NSLog(@"qq");
-            break;
+            CreateFamViewController *creVc = [[CreateFamViewController alloc] initWithTitle:@"创建家谱" image:nil];
+            [self.navigationController pushViewController:creVc animated:YES];
+        }
         case 1:
             NSLog(@"weixin");
             break;
