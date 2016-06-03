@@ -11,6 +11,8 @@
 #import "ToRegistView.h"
 #import "LoginModel.h"
 
+#import "RechargeViewController.h"
+
 #define ReGistView_height 180
 #define AnimationsTime 0.4f
 @interface LoginViewController ()<LoginViewDelegate,ToRegisViewDelegate>
@@ -135,8 +137,13 @@
             [self.navigationController pushViewController:creVc animated:YES];
         }
         case 1:
+        {
             NSLog(@"weixin");
+            RechargeViewController *rechargeVC = [[RechargeViewController alloc]init];
+            [self.navigationController pushViewController:rechargeVC animated:YES];
+            
             break;
+        }
         case 2:
             NSLog(@"weibo");
             break;

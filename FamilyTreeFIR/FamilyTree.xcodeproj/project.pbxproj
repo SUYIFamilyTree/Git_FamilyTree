@@ -286,6 +286,10 @@
 		BC3CF3DC1D01299700437ED6 /* woman@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3DB1D01299700437ED6 /* woman@3x.png */; };
 		BC3CF3DF1D0129FE00437ED6 /* woman.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3DD1D0129FE00437ED6 /* woman.png */; };
 		BC3CF3E01D0129FE00437ED6 /* woman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3DE1D0129FE00437ED6 /* woman@2x.png */; };
+		BC3CF3E81D01318C00437ED6 /* chongZhi_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E51D01318C00437ED6 /* chongZhi_sel.png */; };
+		BC3CF3E91D01318C00437ED6 /* chongZhi_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E61D01318C00437ED6 /* chongZhi_sel@2x.png */; };
+		BC3CF3EA1D01318C00437ED6 /* chongZhi_sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E71D01318C00437ED6 /* chongZhi_sel@3x.png */; };
+		BC3CF3ED1D0131C100437ED6 /* RechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3CF3EC1D0131C100437ED6 /* RechargeViewController.m */; };
 		BCCE8A911CFFD16E005A5E21 /* CemeterialModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCE8A901CFFD16E005A5E21 /* CemeterialModel.m */; };
 		BCCE8A981CFFF289005A5E21 /* PrivateWorshipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCE8A921CFFF289005A5E21 /* PrivateWorshipTableViewCell.m */; };
 		BCCE8A991CFFF289005A5E21 /* PrivateWorshipView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCE8A941CFFF289005A5E21 /* PrivateWorshipView.m */; };
@@ -648,6 +652,11 @@
 		BC3CF3DB1D01299700437ED6 /* woman@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "woman@3x.png"; path = "../../../../woman@3x.png"; sourceTree = "<group>"; };
 		BC3CF3DD1D0129FE00437ED6 /* woman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = woman.png; path = ../../../../woman.png; sourceTree = "<group>"; };
 		BC3CF3DE1D0129FE00437ED6 /* woman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "woman@2x.png"; path = "../../../../woman@2x.png"; sourceTree = "<group>"; };
+		BC3CF3E51D01318C00437ED6 /* chongZhi_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chongZhi_sel.png; sourceTree = "<group>"; };
+		BC3CF3E61D01318C00437ED6 /* chongZhi_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chongZhi_sel@2x.png"; sourceTree = "<group>"; };
+		BC3CF3E71D01318C00437ED6 /* chongZhi_sel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chongZhi_sel@3x.png"; sourceTree = "<group>"; };
+		BC3CF3EB1D0131C100437ED6 /* RechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeViewController.h; sourceTree = "<group>"; };
+		BC3CF3EC1D0131C100437ED6 /* RechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeViewController.m; sourceTree = "<group>"; };
 		BCCE8A8F1CFFD16E005A5E21 /* CemeterialModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CemeterialModel.h; sourceTree = "<group>"; };
 		BCCE8A901CFFD16E005A5E21 /* CemeterialModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CemeterialModel.m; sourceTree = "<group>"; };
 		BCCE8A921CFFF289005A5E21 /* PrivateWorshipTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateWorshipTableViewCell.m; sourceTree = "<group>"; };
@@ -1273,6 +1282,7 @@
 		ADC3272E1CF3FB8B00CEAE53 /* 素材图 */ = {
 			isa = PBXGroup;
 			children = (
+				BC3CF3E41D01318C00437ED6 /* 充值 */,
 				BC2943C61CFEC163006671B9 /* 私人墓园 */,
 				AD8DAAE11CFD76A5009B7958 /* 赏金寻亲 */,
 				AD8DAAB21CFD6492009B7958 /* 四海同宗 */,
@@ -1359,6 +1369,7 @@
 		ADC3278B1CF3FBCC00CEAE53 /* 个人中心 */ = {
 			isa = PBXGroup;
 			children = (
+				BC3CF3E21D01316400437ED6 /* 支付 */,
 				AD2ACD891CF3FD57009D4A24 /* PersonalCenterViewController.h */,
 				AD2ACD8A1CF3FD57009D4A24 /* PersonalCenterViewController.m */,
 			);
@@ -1575,6 +1586,33 @@
 				BC2943CF1CFEC163006671B9 /* mcGuanli_xinjian@3x.png */,
 			);
 			path = "私人墓园";
+			sourceTree = "<group>";
+		};
+		BC3CF3E21D01316400437ED6 /* 支付 */ = {
+			isa = PBXGroup;
+			children = (
+				BC3CF3E31D01316400437ED6 /* controller */,
+			);
+			path = "支付";
+			sourceTree = "<group>";
+		};
+		BC3CF3E31D01316400437ED6 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				BC3CF3EB1D0131C100437ED6 /* RechargeViewController.h */,
+				BC3CF3EC1D0131C100437ED6 /* RechargeViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		BC3CF3E41D01318C00437ED6 /* 充值 */ = {
+			isa = PBXGroup;
+			children = (
+				BC3CF3E51D01318C00437ED6 /* chongZhi_sel.png */,
+				BC3CF3E61D01318C00437ED6 /* chongZhi_sel@2x.png */,
+				BC3CF3E71D01318C00437ED6 /* chongZhi_sel@3x.png */,
+			);
+			path = "充值";
 			sourceTree = "<group>";
 		};
 		BCCE8A8E1CFFD14D005A5E21 /* model */ = {
@@ -1843,7 +1881,9 @@
 				BC0326D61CFD23D50089EE4C /* zp_top@2x.png in Resources */,
 				AD024C6C1CF68655003380E5 /* kuang@3x.png in Resources */,
 				ADB926481CF7E10D00AA8B6E /* impor@2x.png in Resources */,
+				BC3CF3E91D01318C00437ED6 /* chongZhi_sel@2x.png in Resources */,
 				ADB926601CF7E10D00AA8B6E /* loginbg@2x.png in Resources */,
+				BC3CF3E81D01318C00437ED6 /* chongZhi_sel.png in Resources */,
 				AD8DAACF1CFD6492009B7958 /* map@2x.png in Resources */,
 				ADB926571CF7E10D00AA8B6E /* tel@2x.png in Resources */,
 				AD024C711CF68655003380E5 /* sel@2x.png in Resources */,
@@ -1906,6 +1946,7 @@
 				ADCD5C891CF451C000770356 /* geren_icon_a.png in Resources */,
 				ADC327891CF3FB8B00CEAE53 /* weixin@2x.png in Resources */,
 				AD8DAAD61CFD6492009B7958 /* red_sm@3x.png in Resources */,
+				BC3CF3EA1D01318C00437ED6 /* chongZhi_sel@3x.png in Resources */,
 				BC29437B1CFE8165006671B9 /* man_sm@3x.png in Resources */,
 				ADCD5C991CF451C000770356 /* jiaPu_icon_b@2x.png in Resources */,
 				ADCD5C901CF451C000770356 /* index_icon_a@2x.png in Resources */,
@@ -2034,6 +2075,7 @@
 				BC2943A31CFE9F7B006671B9 /* LineageCellView.m in Sources */,
 				AD49FEE01CF6A0ED00DF9F7E /* FamilServiceViewController.m in Sources */,
 				BC0326A01CFD22070089EE4C /* ImageAndTextViewController.m in Sources */,
+				BC3CF3ED1D0131C100437ED6 /* RechargeViewController.m in Sources */,
 				BC29439D1CFE8D87006671B9 /* PersonModel.m in Sources */,
 				ADB9734A1CFE8647007B876B /* AddMemberViewController.m in Sources */,
 				ADE2D17E1CF7052C009D1ADF /* TableView.m in Sources */,
