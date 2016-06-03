@@ -139,8 +139,9 @@
         case 1:
         {
             NSLog(@"weixin");
-            RechargeViewController *rechargeVC = [[RechargeViewController alloc]init];
-            [self.navigationController pushViewController:rechargeVC animated:YES];
+            //测试支付界面
+//            RechargeViewController *rechargeVC = [[RechargeViewController alloc]init];
+//            [self.navigationController pushViewController:rechargeVC animated:YES];
             
             break;
         }
