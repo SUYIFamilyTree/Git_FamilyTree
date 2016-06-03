@@ -138,13 +138,19 @@
 
 
 -(void)clickEditBtn:(UIButton *)sender{
+    
     sender.selected = !sender.selected;
+
+ 
+    self.PrivateWorshipEdit = sender.selected;
+
     for (int i = 0; i < 2; i++) {
         self.cemeterialArr[i].CemeterialModelEdit = sender.selected;
     }
     [self.myTableView reloadData];
     
     self.addCemeterialBtn.hidden = !sender.selected;
+
     
     //进入编辑状态
     [self.delegate PrivateWorshipView:self didSelect:sender.selected];

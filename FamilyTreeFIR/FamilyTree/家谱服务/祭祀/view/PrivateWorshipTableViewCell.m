@@ -117,6 +117,18 @@
 
 }
 
+-(void)setEditBtn:(UIButton *)editBtn{
+    _editBtn = editBtn;
+//    _editBtn.hidden = !_cellEdit;
+}
+
+-(void)setDeleteBtn:(UIButton *)deleteBtn{
+    _deleteBtn = deleteBtn;
+//    _deleteBtn.hidden = !_cellEdit;
+}
+
+
+
 -(void)clickEditBtn:(UIButton *)sender{
     MYLog(@"编辑");
     [self.delegate cemeterialDidEdit:self];
