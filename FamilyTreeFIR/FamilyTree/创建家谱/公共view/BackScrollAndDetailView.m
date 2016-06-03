@@ -8,25 +8,15 @@
 
 #import "BackScrollAndDetailView.h"
 
-#define GapOfView 15
+#define ScrollContentHeight 1150
 
-#define InputView_height 40
+#define FirstViewFrameOfheight 315+GapOfView
+
 
 @interface BackScrollAndDetailView()
 
-
-@property (nonatomic,strong) UIScrollView *backView; /*滚动背景*/
-@property (nonatomic,strong) UIView *whiteBack; /*半透明背景*/
-
-@property (nonatomic,strong) UIButton *createBtn; /*创建按钮*/
-
-
-
-
-
-
-
 @end
+
 @implementation BackScrollAndDetailView
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -35,7 +25,7 @@
         [self addSubview:self.backView];
         [self.backView addSubview:self.createBtn];
         [self.backView addSubview:self.whiteBack];
-        
+      
         [self.backView addSubview:self.inputView];
         [self.backView addSubview:self.parnName];
         [self.backView addSubview:self.selecProtrai];
@@ -57,6 +47,7 @@
     //配偶年月日
     self.birthLabel = [self creatLabelTextWithTitle:@"生辰:" TitleFrame:CGRectMake(20, GapOfView+CGRectYH(self.selecProtrai), 50, InputView_height) inputViewLength:0.13*Screen_width dataArr:@[@"1990",@"1992",@"1992"] inputViewLabel:@"1990" FinText:@"年" withStar:NO];
     [self.backView addSubview:self.birthLabel];
+    
     
     self.monthLabel = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(CGRectXW(self.birthLabel)+25, GapOfView+CGRectYH(self.selecProtrai), 0, InputView_height) inputViewLength:0.13*Screen_width dataArr:@[@"1",@"22",@"3"] inputViewLabel:@"不详" FinText:@"月" withStar:NO];
     [self.backView addSubview:self.monthLabel];
@@ -112,18 +103,17 @@
     [self.backView addSubview:self.moveCity];
     
     self.moveCity.sd_layout.leftEqualToView(self.selfTextView).rightEqualToView(self.selfTextView).topSpaceToView(self.uploadImageBtn,GapOfView).heightIs(InputView_height);
-    
-    
 }
 
 
 //创建labelText
 -(InputView *)creatLabelTextWithTitle:(NSString *)title TitleFrame:(CGRect)frame inputViewLength:(NSInteger)length dataArr:(NSArray *)dataArr inputViewLabel:(NSString *)labelText FinText:(NSString *)finStr withStar:(BOOL)star{
+    
     UILabel *theLabel = [[UILabel alloc] initWithFrame:frame];
     theLabel.text = title;
     [self.backView addSubview:theLabel];
     
-    InputView *inputView = [[InputView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(theLabel.frame), theLabel.frame.origin.y, length+10, InputView_height) Length:length+10 withData:dataArr];
+    InputView *inputView = [[InputView alloc] initWithFrame:CGRectMake(CGRectXW(theLabel), theLabel.frame.origin.y, length+10, InputView_height) Length:length+10 withData:dataArr];
     inputView.inputLabel.text = labelText;
     
     UILabel *finLabel = [UILabel new];
@@ -138,7 +128,7 @@
         starLabel.text = @"*";
         starLabel.textColor = [UIColor redColor];
         [self.backView addSubview:starLabel];
-        starLabel.sd_layout.leftSpaceToView(finLabel,5).widthIs(10).heightIs(InputView_height).topEqualToView(inputView);
+        starLabel.sd_layout.leftSpaceToView(finStr?finLabel:inputView,5).widthIs(10).heightIs(InputView_height).topEqualToView(inputView);
     }
     return inputView;
 }
@@ -154,19 +144,16 @@
 -(UIScrollView *)backView{
     if (!_backView) {
         _backView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, Screen_width, Screen_height)];
-        _backView.contentSize = CGSizeMake(Screen_width, Screen_height*2);
+        _backView.contentSize = CGSizeMake(Screen_width, ScrollContentHeight);
         _backView.bounces = NO;
         _backView.backgroundColor = [UIColor colorWithPatternImage:MImage(@"cratebg.png")];
-        
-        
-        
         
     }
     return _backView;
 }
 -(UIButton *)createBtn{
     if (!_createBtn) {
-        _createBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.backView.bounds)*2-50-64, Screen_width-20, 40)];
+        _createBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, ScrollContentHeight-50-64, Screen_width-20, 40)];
         [_createBtn setTitle:@"创 建" forState:0];
         _createBtn.backgroundColor = LH_RGBCOLOR(74, 81, 97);
         [_createBtn addTarget:self action:@selector(respondsToCreatBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -176,7 +163,7 @@
 }
 -(UIView *)whiteBack{
     if (!_whiteBack) {
-        _whiteBack = [[UIView alloc] initWithFrame:CGRectMake(10, 15, Screen_width-20, Screen_height*2-40-50-64)];
+        _whiteBack = [[UIView alloc] initWithFrame:CGRectMake(10, 15, Screen_width-20, ScrollContentHeight-40-50-64)];
         _whiteBack.backgroundColor = [UIColor colorWithWhite:1 alpha:0.7];
         
         UILabel *redLabel = [UILabel new];
@@ -199,7 +186,7 @@
 
 -(InputView *)birtime{
     if (!_birtime) {
-        _birtime = [[InputView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.birthLabel.frame), CGRectYH(self.birthLabel)+GapOfView, 0.25*Screen_width, InputView_height) Length:0.25*Screen_width withData:@[@"0:00-2:00",@"2:00-4:00"]];
+        _birtime = [[InputView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.birthLabel.frame), CGRectYH(self.birthLabel)+GapOfView, 0.3*Screen_width, InputView_height) Length:0.3*Screen_width withData:@[@"0:00-2:00",@"2:00-4:00"]];
         _birtime.inputLabel.text = @"0:00-2:00";
         
         UILabel *starLabel = [UILabel new];
@@ -208,16 +195,16 @@
         starLabel.textColor = [UIColor redColor];
         [self.backView addSubview:starLabel];
         starLabel.sd_layout.leftSpaceToView(_birtime,5).widthIs(10).heightIs(InputView_height).topEqualToView(_birtime);
-
         
     }
     return _birtime;
 }
 
+//第一个控件是否结婚
 -(InputView *)inputView{
     if (!_inputView) {
         
-        UILabel *theLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 300, 80, InputView_height)];
+        UILabel *theLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, FirstViewFrameOfheight, 80, InputView_height)];
         theLabel.text = @"是否结婚:";
         [self.backView addSubview:theLabel];
         

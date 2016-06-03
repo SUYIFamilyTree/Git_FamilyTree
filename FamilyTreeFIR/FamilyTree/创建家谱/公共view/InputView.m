@@ -8,7 +8,7 @@
 
 #import "InputView.h"
 
-#define Input_height 40
+#define Input_height InputView_height
 
 @interface InputView()
 {
@@ -99,7 +99,7 @@
         _inputLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,_length , Input_height)];
         _inputLabel.layer.borderWidth = 1.0f;
         _inputLabel.layer.borderColor = BorderColor;
-        
+        _inputLabel.backgroundColor = [UIColor whiteColor];
         _inputLabel.textColor = [UIColor blackColor];
         _inputLabel.userInteractionEnabled   = YES;
         

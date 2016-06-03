@@ -31,6 +31,10 @@
 #import "CreateFamViewController.h"
 #import "AddMemberViewController.h"
 #import "InputView.h"
+#import "ClickRoundView.h"
+#import "DiscAndNameView.h"
+
+
 //扩展方法
 #import <UIView+SDAutoLayout.h>
 #import "NSDictionary+FromNSString.h"
