@@ -97,6 +97,7 @@
     [self.addCemeterialBtn setImage:MImage(@"mcGuanli_xinjian.png") forState:UIControlStateNormal];
     self.addCemeterialBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.addCemeterialBtn.hidden = YES;
+    [self.addCemeterialBtn addTarget:self action:@selector(clickAddCemeterialBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.addCemeterialBtn];
 }
 #pragma mark - UITableViewDataSource
@@ -129,12 +130,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([tableView isEqual:self.myTableView]){
-       return 80;
-    }else{
-        return 80;
-    }
     
+    UITableViewCell *cell = [self tableView:self.myTableView cellForRowAtIndexPath:indexPath];
+    return cell.frame.size.height;
 }
 
 
@@ -151,7 +149,10 @@
     //进入编辑状态
     [self.delegate PrivateWorshipView:self didSelect:sender.selected];
     
-    
+}
+
+-(void)clickAddCemeterialBtn:(UIButton *)sender{
+    //新建墓园
     
 }
 
