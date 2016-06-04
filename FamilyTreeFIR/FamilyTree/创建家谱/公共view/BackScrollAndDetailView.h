@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DiscAndNameView.h"
+
+#define GapOfView 15
 
 @interface BackScrollAndDetailView : UIView
 @property (nonatomic,strong) InputView *inputView; /*是否结婚*/
@@ -15,6 +18,12 @@
 
 
 @property (nonatomic,strong) UIImageView *selecProtrai; /*选择头像*/
+
+
+@property (nonatomic,strong) UIScrollView *backView; /*滚动背景*/
+@property (nonatomic,strong) UIView *whiteBack; /*半透明背景*/
+
+@property (nonatomic,strong) UIButton *createBtn; /*创建按钮*/
 
 //配偶
 @property (nonatomic,strong) InputView *birthLabel; /*生辰年*/
@@ -42,4 +51,9 @@
 @property (nonatomic,strong) UIButton *uploadVideoBtn; /*上传影音资料*/
 
 @property (nonatomic,strong) UITextField *moveCity; /*迁移者居住地*/
+
+
+
+//创建labelText
+-(InputView *)creatLabelTextWithTitle:(NSString *)title TitleFrame:(CGRect)frame inputViewLength:(NSInteger)length dataArr:(NSArray *)dataArr inputViewLabel:(NSString *)labelText FinText:(NSString *)finStr withStar:(BOOL)star;
 @end

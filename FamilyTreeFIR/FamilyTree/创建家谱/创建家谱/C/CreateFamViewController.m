@@ -25,7 +25,7 @@
 
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
-    //公共部分图
+    
     CreateFamView *creFamView = [[CreateFamView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height)];
     [self.view addSubview:creFamView];
 }

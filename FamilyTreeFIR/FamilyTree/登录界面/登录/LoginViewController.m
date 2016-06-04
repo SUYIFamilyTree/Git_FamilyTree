@@ -136,17 +136,19 @@
             CreateFamViewController *creVc = [[CreateFamViewController alloc] initWithTitle:@"创建家谱" image:nil];
             [self.navigationController pushViewController:creVc animated:YES];
         }
+            break;
         case 1:
         {
             NSLog(@"weixin");
-            //测试支付界面
-//            RechargeViewController *rechargeVC = [[RechargeViewController alloc]init];
-//            [self.navigationController pushViewController:rechargeVC animated:YES];
-            
-            break;
+            AddMemberViewController *addM = [[AddMemberViewController alloc] initWithTitle:@"添加成员" image:nil];
+            [self.navigationController pushViewController:addM animated:YES];
         }
+            break;
+        
         case 2:
+        {
             NSLog(@"weibo");
+        }
             break;
         default:
             break;

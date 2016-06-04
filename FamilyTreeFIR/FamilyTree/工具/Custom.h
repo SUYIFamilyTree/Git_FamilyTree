@@ -67,4 +67,7 @@ __block __weak __typeof(&*self)weakSelf = self;
 #define LoginStates @"loginStatus"
 #define UserId @"userid"
 #define Password @"password"
+//创建家谱控件高度
+#define InputView_height 40
+
 #endif /* Custom_h */
