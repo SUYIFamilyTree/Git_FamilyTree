@@ -8,6 +8,7 @@
 
 #import "CreateFamView.h"
 @interface CreateFamView()
+
 @property (nonatomic,strong) DiscAndNameView *famName; /*家族名称*/
 
 @property (nonatomic,strong) DiscAndNameView *famfarName; /*祖宗姓名*/
@@ -21,7 +22,6 @@
 @property (nonatomic,strong) ClickRoundView *diXiView; /*嫡系*/
 
 @property (nonatomic,strong) ClickRoundView * famousPerson; /*家族名人*/
-
 
 @end
 
