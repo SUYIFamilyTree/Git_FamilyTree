@@ -33,6 +33,7 @@
 #import "InputView.h"
 #import "ClickRoundView.h"
 #import "DiscAndNameView.h"
+#import "FortuneTodayViewController.h"
 
 
 //扩展方法

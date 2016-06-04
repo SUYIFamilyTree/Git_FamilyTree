@@ -148,6 +148,8 @@
         case 2:
         {
             NSLog(@"weibo");
+            FortuneTodayViewController *forToda = [[FortuneTodayViewController alloc] initWithTitle:@"今日运势" image:nil];
+            [self.navigationController pushViewController:forToda animated:YES];
         }
             break;
         default:
