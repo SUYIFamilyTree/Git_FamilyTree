@@ -11,6 +11,8 @@
 #import "ToRegistView.h"
 #import "LoginModel.h"
 
+#import "RechargeViewController.h"
+
 #define ReGistView_height 180
 #define AnimationsTime 0.4f
 @interface LoginViewController ()<LoginViewDelegate,ToRegisViewDelegate>
@@ -142,6 +144,7 @@
             [self.navigationController pushViewController:addM animated:YES];
         }
             break;
+        }
         case 2:
         {
             NSLog(@"weibo");

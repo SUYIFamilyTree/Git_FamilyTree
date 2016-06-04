@@ -26,7 +26,12 @@
 @property (nonatomic, assign)BOOL cellEdit;
 /** 代理人*/
 @property (nonatomic, weak) id<PrivateWorshipTableViewCellDelegate> delegate;
-/** 私人墓园*/
-@property (nonatomic, strong) CemeterialModel *cemeterialModel;
-
+/** 祭陵图*/
+@property (nonatomic, strong) UIImageView *cemeterialImageView;
+/** 祭陵名字*/
+@property (nonatomic, strong) NSString *cemeterialName;
+/** 园号*/
+@property (nonatomic, strong) NSString *cemeterialID;
+/** 浏览人数*/
+@property (nonatomic, strong) NSString *visitorNumber;
 @end
