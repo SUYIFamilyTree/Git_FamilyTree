@@ -19,14 +19,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    FamilServiceViewController *fam = [FamilServiceViewController new];
-    [self.navigationController pushViewController:fam animated:false];
     
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    
 }
 
 

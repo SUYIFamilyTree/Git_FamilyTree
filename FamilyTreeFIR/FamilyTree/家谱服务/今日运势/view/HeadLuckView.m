@@ -7,8 +7,8 @@
 //
 
 #import "HeadLuckView.h"
-#define LucyFont MFont(14)
-#define LucyLabelHeight 25
+#define LucyFont MFont(0.037*Screen_width)
+#define LucyLabelHeight 0.0375*Screen_height
 #define PortraitsSize 0.16*Screen_width
 @interface HeadLuckView()
 
@@ -40,13 +40,13 @@
     NSDateComponents *dateComs = [[NSDateComponents alloc] init];
     dateComs = [calendar components:NSCalendarUnitMonth | NSCalendarUnitDay |NSCalendarUnitWeekday fromDate:[NSDate date]];
     
-    UILabel *monLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.22*Screen_width, 0.02*Screen_height, 0.3*Screen_width, 30)];
+    UILabel *monLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.22*Screen_width, 0.02*Screen_height, 0.4*Screen_width, 30)];
+    monLabel.font = MFont(0.05*Screen_width);
     monLabel.text = [NSString stringWithFormat:@"%ld.%ld      星期%@",[dateComs month] ,[dateComs day],[self changeWithComsdateWeek:[dateComs weekday]]];
     self.todayDate = monLabel;
     [self addSubview:monLabel];
     
-    
-    
+
 }
 
 //生肖图
@@ -96,7 +96,7 @@
 -(NSString *)changeWithComsdateWeek:(NSInteger)week{
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     
-    formatter.numberStyle = kCFNumberFormatterRoundHalfDown;
+    formatter.numberStyle = NSNumberFormatterRoundHalfDown;
     
     NSString *finStr = [formatter stringFromNumber:[NSNumber numberWithInteger:week-1]];
     
