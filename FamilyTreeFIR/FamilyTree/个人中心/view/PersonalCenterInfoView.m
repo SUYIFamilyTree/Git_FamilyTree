@@ -61,7 +61,6 @@
         CGSize maximumLabelSize = CGSizeMake(100, 9999);//labelsize的最大值
         //关键语句
         CGSize expectSize = [textLabel sizeThatFits:maximumLabelSize];
-        //别忘了把frame给回label，如果用xib加了约束的话可以只改一个约束的值
         textLabel.frame = CGRectMake(0, 0.1770*CGRectH(imageView), CGRectW(imageView), expectSize.height);
         [imageView addSubview:textLabel];
     }

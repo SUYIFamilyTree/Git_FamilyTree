@@ -26,13 +26,18 @@
         //阴阳五行命理
         self.numerologyArr = @[@"火命，阴阳五行命理为",@"1金    2木    0水    3火    2土",@"五行缺水，阳气太旺,阳盛阴衰"];
         [self initNumerologyLBs];
+        //命理图
+        UIImageView *numerologyIV = [[UIImageView alloc]initWithFrame:CGRectMake(0.5030*CGRectW(self), 0.4506*CGRectH(self), 0.3298*CGRectW(self), 0.3873*CGRectH(self))];
+        numerologyIV.image = MImage(@"human_xuxian");
+        [self addSubview:numerologyIV];
+        
         //生辰八字
         UILabel *shengChenBaZiLB = [[UILabel alloc]initWithFrame:CGRectMake(0.8997*CGRectW(self), 0.4304*CGRectH(self), 0.1094*CGRectW(self), 0.3997*CGRectH(self))];
         shengChenBaZiLB.text = @"生\n辰\n八\n字";
         shengChenBaZiLB.font = MFont(15);
         shengChenBaZiLB.numberOfLines = 0;
         [self addSubview:shengChenBaZiLB];
-        //[CALayer drawBottomDashBorder:shengChenBaZiLB];
+        
     
 
         
@@ -40,6 +45,7 @@
     }
     return self;
 }
+
 
 -(void)initNumerologyLBs{
     for (int i = 0; i < 3; i++) {

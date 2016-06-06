@@ -11,7 +11,10 @@
 #import "PersonalCenterHeaderView.h"
 #import "PersonalCenterInfoView.h"
 #import "PersonalCenterNumerologyView.h"
-@interface PersonalCenterViewController ()<PersonalCenterHeaderViewDelegate>
+#import "PersonalCenterTodayFortuneView.h"
+
+
+@interface PersonalCenterViewController ()<PersonalCenterHeaderViewDelegate,PersonalCenterTodayFortuneViewDelegate>
 /** 全屏滚动*/
 @property (nonatomic, strong) UIScrollView *scrollView;
 
@@ -48,6 +51,11 @@
     //命理视图
     PersonalCenterNumerologyView *numerologyView = [[PersonalCenterNumerologyView alloc]initWithFrame:CGRectMake(0.0418*Screen_width, CGRectYH(infoView), 0.9164*Screen_width, 0.3511*Screen_height)];
     [self.scrollView addSubview:numerologyView];
+    //今日运势视图
+    PersonalCenterTodayFortuneView *todayFortuneView = [[PersonalCenterTodayFortuneView alloc]initWithFrame:CGRectMake(0.0418*Screen_width, CGRectYH(numerologyView)+0.0306*Screen_height, 0.4485*Screen_width, 0.2622*Screen_height)];
+    todayFortuneView.delegate = self;
+    [self.scrollView addSubview:todayFortuneView];
+    
     
 }
 
@@ -60,6 +68,8 @@
     }
     return _scrollView;
 }
+
+
 
 //点击vip按钮
 -(void)clickVipBtn:(UIButton *)sender{
@@ -79,5 +89,12 @@
 -(void)clickSameCityMoneyViewToPay{
     //跳转同城币支付页面
     MYLog(@"跳转同城币支付页面");
+}
+
+#pragma mark - PersonalCenterTodayFortuneViewDelegate
+-(void)clickPayForFortuneBtn{
+    MYLog(@"跳转续时运势页面");
+   
+
 }
 @end
