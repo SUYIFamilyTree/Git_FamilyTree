@@ -60,7 +60,7 @@ __block __weak __typeof(&*self)weakSelf = self;
 #define USERDEFAULT [NSUserDefaults standardUserDefaults]
 
 //RootURL
-#define RootURL @"http://59.53.92.160:85/Api/Mobile/TestPost"
+#define RootURL @"http://59.53.92.160:1085/Api/Mobile/TestPost"
 #define SecretKeySend @"abc123"
 #define SecretKeyReiceive @"123abc"
 //登录信息
