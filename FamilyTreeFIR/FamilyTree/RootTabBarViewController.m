@@ -92,7 +92,7 @@
     //配置标签栏颜色
     self.tabBar.barTintColor = [UIColor whiteColor];
     self.tabBar.tintColor = [UIColor blackColor];
-    self.selectedIndex = 1;
+    self.selectedIndex = 0;
     
 //    [self initTabBarItem];
     

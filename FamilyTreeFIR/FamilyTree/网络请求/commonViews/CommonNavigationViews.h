@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class CommonNavigationViews;
+@protocol CommandNavigationViewsDelegate <NSObject>
 
+-(void)CommonNavigationViews:(CommonNavigationViews *)comView respondsToRightBtn:(UIButton *)sender;
+
+@end
 @interface CommonNavigationViews : UIView
 
 @property (nonatomic,strong) UIView *backView; /*头部*/
@@ -26,5 +31,6 @@
 //右边按钮
 -(void)respondsToRightBtn:(UIButton *)sender;
 
+@property (nonatomic,weak) id<CommandNavigationViewsDelegate> delegate; /*代理人*/
 
 @end

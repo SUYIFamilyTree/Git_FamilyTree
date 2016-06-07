@@ -31,6 +31,9 @@
     [super viewDidLoad];
     
     self.navigationController.navigationBarHidden = YES;
+    if (self.tabBarController) {
+        
+    }
     
     [self.view addSubview:self.loginView];
     //如果登录
@@ -64,7 +67,7 @@
     switch (sender.tag) {
         case 0:
             //返回按钮
-            NSLog(@"返回按钮");
+            [self.navigationController popViewControllerAnimated:YES];
             break;
         case 1:
         {
@@ -197,6 +200,7 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
+
 
 #pragma mark *** getters ***
 -(LoginView *)loginView{

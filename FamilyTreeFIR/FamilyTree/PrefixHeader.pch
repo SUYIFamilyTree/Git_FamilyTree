@@ -40,7 +40,7 @@
 #import <UIView+SDAutoLayout.h>
 #import "NSDictionary+FromNSString.h"
 #import "NSString+md5.h"
-
+#import "ScreenAdaptation.h"
 //网络请求
 #import "TCJPHTTPRequestManager.h"
 //工具

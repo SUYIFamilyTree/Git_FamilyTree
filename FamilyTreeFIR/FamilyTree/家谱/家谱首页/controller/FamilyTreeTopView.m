@@ -14,11 +14,18 @@
 #define MenusBtn_size 22
 
 @interface FamilyTreeTopView()
+
 @property (nonatomic,strong) UIView *backView; /*黑色背景*/
 @property (nonatomic,strong) UIView *searchView; /*搜索框*/
 @property (nonatomic,strong) UILabel *searchLabel; /*输入关键词*/
 @property (nonatomic,strong) UIImageView *searchImage; /*搜索图片*/
 @property (nonatomic,strong) UIView *menuBtn; /*右边菜单栏*/
+
+@property (nonatomic,strong) UILabel *titleLabel; /*右边菜单栏标题*/
+
+
+
+
 @end
 
 @implementation FamilyTreeTopView
@@ -52,7 +59,13 @@
     if (_delegate && [_delegate respondsToSelector:@selector(TopSearchView:didRespondsToMenusBtn:)]) {
         [_delegate TopSearchView:self didRespondsToMenusBtn:sender];
     }
+
+    
 }
+
+
+
+#pragma mark *** tableViewDelegate ***
 
 #pragma mark *** getters ***
 -(UIView *)backView{
@@ -99,19 +112,20 @@
         _menuBtn = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.frame)-0.07*Screen_width-MenusBtn_size/2-0.15*Screen_width+15, SearchToTop+(SearchView_Height-MenusBtn_size), MenusBtn_size+0.15*Screen_width, MenusBtn_size*0.8)];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(respondsToMenuBtn:)];
         [_menuBtn addGestureRecognizer:tap];
-        UILabel *myFamilyLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_menuBtn), CGRectY(_menuBtn), CGRectW(_menuBtn)*0.7, CGRectH(_menuBtn))];
+        UILabel *myFamilyLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_menuBtn), CGRectY(_menuBtn), CGRectW(_menuBtn)*0.65, CGRectH(_menuBtn))];
         myFamilyLabel.text = @"我的家谱";
         myFamilyLabel.font = MFont(12);
         myFamilyLabel.textColor = [UIColor whiteColor];
         myFamilyLabel.textAlignment = NSTextAlignmentLeft;
-        [self addSubview:myFamilyLabel];
-        UIImageView *jiantou = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(_menuBtn)+CGRectW(myFamilyLabel), CGRectY(_menuBtn)+7, 10, 6)];
+        self.titleLabel = myFamilyLabel;
+
+        [self addSubview:self.titleLabel];
+        UIImageView *jiantou = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(_menuBtn)+CGRectW(myFamilyLabel), CGRectY(_menuBtn)+5, 10, 6)];
         jiantou.image = MImage(@"sel.png");
         [self addSubview:jiantou];
         
     }
     return _menuBtn;
 }
-
 
 @end

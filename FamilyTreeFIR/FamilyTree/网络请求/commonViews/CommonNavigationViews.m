@@ -51,6 +51,9 @@
 
 -(void)respondsToRightBtn:(UIButton *)sender{
     MYLog(@"右按钮");
+    if (_delegate && [_delegate respondsToSelector:@selector(CommonNavigationViews:respondsToRightBtn:)]) {
+        [_delegate CommonNavigationViews:self respondsToRightBtn:sender];
+    }
 }
 //获取当前view导航控制器
 - (UINavigationController*)viewController {
@@ -62,11 +65,9 @@
         if ([nextResponder isKindOfClass:[UINavigationController class]]) {
             
             return (UINavigationController*)nextResponder;
-            
+
         }
-        
     }
-    
     return nil;
     
 }
