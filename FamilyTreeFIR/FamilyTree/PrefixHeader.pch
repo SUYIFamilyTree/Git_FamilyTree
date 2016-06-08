@@ -34,6 +34,11 @@
 #import "ClickRoundView.h"
 #import "DiscAndNameView.h"
 #import "FortuneTodayViewController.h"
+#import "NewsCenterViewController.h"
+#import "NewsTableView.h"
+#import "NewsCell.h"
+#import "PortraitAndNameViews.h"
+#import "HundredNamesView.h"
 
 
 //扩展方法
@@ -41,6 +46,8 @@
 #import "NSDictionary+FromNSString.h"
 #import "NSString+md5.h"
 #import "ScreenAdaptation.h"
+#import "CALayer+drawborder.h"
+#import "UIColor+random.h"
 //网络请求
 #import "TCJPHTTPRequestManager.h"
 //工具

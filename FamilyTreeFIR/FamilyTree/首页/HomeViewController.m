@@ -104,6 +104,8 @@ typedef enum : NSUInteger {
         case HomeNameSource:
         {
             MYLog(@"姓氏起源");
+            NewsCenterViewController *newCenter = [[NewsCenterViewController alloc] initWithTitle:@"新闻中心" image:nil];
+            [self.navigationController pushViewController:newCenter animated:true];
         }
             break;
             
@@ -152,10 +154,7 @@ typedef enum : NSUInteger {
         [btn addTarget:self action:@selector(respondsToBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btn];
     }
-    
 }
-
-
 
 #pragma mark *** getters ***
 
