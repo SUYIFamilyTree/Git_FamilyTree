@@ -9,5 +9,6 @@
 #import "TopSearchView.h"
 
 @interface TopBackSearch : TopSearchView
+@property (nonatomic,strong) UIButton *backBtn; /*返回按钮*/
 
 @end

@@ -217,8 +217,12 @@
             NSLog(@"阅读家谱");
             break;
         case 1004:
+        {
             //跳转
             NSLog(@"字辈");
+            GennerationViewController *gennerVc = [[GennerationViewController alloc] init];
+            [self.navigationController pushViewController:gennerVc animated:YES];
+        }
             break;
         case 1005:
         {

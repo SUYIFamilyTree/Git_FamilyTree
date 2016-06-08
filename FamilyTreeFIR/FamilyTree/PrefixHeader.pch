@@ -39,8 +39,8 @@
 #import "NewsCell.h"
 #import "PortraitAndNameViews.h"
 #import "HundredNamesView.h"
-
-
+#import "TopBackSearch.h"
+#import "GennerationViewController.h"
 //扩展方法
 #import <UIView+SDAutoLayout.h>
 #import "NSDictionary+FromNSString.h"

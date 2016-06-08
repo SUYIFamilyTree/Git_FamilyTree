@@ -207,9 +207,7 @@
     if (!_loginView) {
         _loginView = [[LoginView alloc] initWithFrame:self.view.bounds];
         _loginView.delegate = self;
-        
-        
-        _loginView.accountView.inputTextView.placeholder = @"用   户   名";
+        _loginView.accountView.inputTextView.placeholder = @"用户名/手机号";
         [_loginView.accountView setAccPlaceholder];
         
         if ([USERDEFAULT objectForKey:UserId]&&[USERDEFAULT objectForKey:Password]) {

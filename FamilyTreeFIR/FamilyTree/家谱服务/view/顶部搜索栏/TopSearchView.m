@@ -8,18 +8,9 @@
 
 #import "TopSearchView.h"
 
-#define SearchToTop 30
-#define SearchView_Height 25
-#define SearchImage_Size 15
 
-#define MenusBtn_size 22
 @interface TopSearchView ()
-@property (nonatomic,strong) UIView *backView; /*黑色背景*/
-@property (nonatomic,strong) UIView *searchView; /*搜索框*/
-@property (nonatomic,strong) UILabel *searchLabel; /*输入关键词*/
-@property (nonatomic,strong) UIImageView *searchImage; /*搜索图片*/
 
-@property (nonatomic,strong) UIButton *menuBtn; /*右边菜单栏*/
 
 
 

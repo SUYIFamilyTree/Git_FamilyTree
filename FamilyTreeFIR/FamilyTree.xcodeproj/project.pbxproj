@@ -179,6 +179,8 @@
 		ADA7FEFB1D07C51000EDBEE4 /* HundredNamesView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA7FEFA1D07C51000EDBEE4 /* HundredNamesView.m */; };
 		ADA7FF011D07E51500EDBEE4 /* CustonCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA7FEFE1D07E51500EDBEE4 /* CustonCollectionViewCell.m */; };
 		ADA7FF021D07E51500EDBEE4 /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA7FF001D07E51500EDBEE4 /* NewsCell.m */; };
+		ADA7FF061D08115700EDBEE4 /* GennerationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA7FF051D08115700EDBEE4 /* GennerationViewController.m */; };
+		ADA7FF0D1D0814DF00EDBEE4 /* TopBackSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA7FF0C1D0814DF00EDBEE4 /* TopBackSearch.m */; };
 		ADB7F03A1D027A52001F151D /* FortuneTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F0391D027A52001F151D /* FortuneTodayViewController.m */; };
 		ADB7F03F1D027BF9001F151D /* HeadLuckView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F03E1D027BF9001F151D /* HeadLuckView.m */; };
 		ADB7F0681D0297EE001F151D /* todayYS_learn_blues.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB7F0411D0297EE001F151D /* todayYS_learn_blues.png */; };
@@ -647,6 +649,10 @@
 		ADA7FEFE1D07E51500EDBEE4 /* CustonCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustonCollectionViewCell.m; sourceTree = "<group>"; };
 		ADA7FEFF1D07E51500EDBEE4 /* NewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell.h; sourceTree = "<group>"; };
 		ADA7FF001D07E51500EDBEE4 /* NewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell.m; sourceTree = "<group>"; };
+		ADA7FF041D08115700EDBEE4 /* GennerationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GennerationViewController.h; sourceTree = "<group>"; };
+		ADA7FF051D08115700EDBEE4 /* GennerationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GennerationViewController.m; sourceTree = "<group>"; };
+		ADA7FF0B1D0814DF00EDBEE4 /* TopBackSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopBackSearch.h; sourceTree = "<group>"; };
+		ADA7FF0C1D0814DF00EDBEE4 /* TopBackSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopBackSearch.m; sourceTree = "<group>"; };
 		ADAB7E101CF4050B00C3C143 /* DefineHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefineHeader.h; sourceTree = "<group>"; };
 		ADB7F0311D026E7A001F151D /* woman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = woman.png; path = ../../../woman.png; sourceTree = "<group>"; };
 		ADB7F0321D026E7A001F151D /* woman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "woman@2x.png"; path = "../../../woman@2x.png"; sourceTree = "<group>"; };
@@ -1379,6 +1385,25 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
+		ADA7FF031D080E4800EDBEE4 /* 字辈 */ = {
+			isa = PBXGroup;
+			children = (
+				ADA7FF0A1D0814DF00EDBEE4 /* views */,
+				ADA7FF041D08115700EDBEE4 /* GennerationViewController.h */,
+				ADA7FF051D08115700EDBEE4 /* GennerationViewController.m */,
+			);
+			path = "字辈";
+			sourceTree = "<group>";
+		};
+		ADA7FF0A1D0814DF00EDBEE4 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				ADA7FF0B1D0814DF00EDBEE4 /* TopBackSearch.h */,
+				ADA7FF0C1D0814DF00EDBEE4 /* TopBackSearch.m */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
 		ADB7F0371D0278AB001F151D /* 今日运势 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1841,6 +1866,7 @@
 		ADC3278C1CF3FBCC00CEAE53 /* 家谱 */ = {
 			isa = PBXGroup;
 			children = (
+				ADA7FF031D080E4800EDBEE4 /* 字辈 */,
 				BC29438E1CFE8247006671B9 /* 世系图 */,
 				BC2943871CFE81D9006671B9 /* 四海同宗 */,
 				BC03269C1CFD201C0089EE4C /* 图文影音 */,
@@ -2758,6 +2784,7 @@
 				BC0CA7E11CFFFB38007B0F90 /* DetailFamHeViewController.m in Sources */,
 				BC29438C1CFE81D9006671B9 /* HeaderSelectView.m in Sources */,
 				BC2943A81CFEA506006671B9 /* WorshipViewController.m in Sources */,
+				ADA7FF061D08115700EDBEE4 /* GennerationViewController.m in Sources */,
 				AD15B28D1CF8555600C0EEB7 /* ToRegistView.m in Sources */,
 				ADB9261D1CF7DF1900AA8B6E /* AccountView.m in Sources */,
 				ADC326FD1CF3E3DF00CEAE53 /* AppDelegate.m in Sources */,
@@ -2778,6 +2805,7 @@
 				ADA380661CFC299700B596B7 /* LoginModel.m in Sources */,
 				ADB973501CFEB2D7007B876B /* InputView.m in Sources */,
 				ADB9261E1CF7DF1900AA8B6E /* LoginView.m in Sources */,
+				ADA7FF0D1D0814DF00EDBEE4 /* TopBackSearch.m in Sources */,
 				BCF1FFFF1D02A2D100D65E60 /* PersonalCenterNumerologyView.m in Sources */,
 				AD8DAB081CFD84A5009B7958 /* HelpTableTableViewCell.m in Sources */,
 				BC29438D1CFE81D9006671B9 /* WholeWorldViewController.m in Sources */,
