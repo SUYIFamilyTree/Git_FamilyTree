@@ -14,6 +14,7 @@
 #import "TableView.h"
 #import "SearchFamilyTreeViewController.h"
 #import "WorshipViewController.h"
+#import "TeachViewController.h"
 
 #define ScrollerView_Height 210
 @interface FamilServiceViewController ()<TopSearchViewDelegate,TableViewDelegate,FamilyShopViewDelegate,CollectionFamilyDelegate>
@@ -68,6 +69,7 @@
 }
 
 -(void)tableView:(TableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     MYLog(@"点击table-- %ld 行 ",indexPath.row);
 }
 
@@ -78,14 +80,54 @@
 
 -(void)CollevtionFamily:(CollectionFamilyView *)collecView didSelectedItemAtIndexPath:(NSIndexPath *)indexPath{
     MYLog(@"点击collection -- %ld",indexPath.row);
-    if (indexPath.row == 3) {
-        FamilyHelpViewController *helpVc = [[FamilyHelpViewController alloc] initWithTitle:@"赏金寻亲" image:nil];;
-        [self.navigationController pushViewController:helpVc animated:YES];
+    switch (indexPath.row) {
+        case 0:
+        {
+            
+        }
+            break;
+        case 1:
+        {
+            
+        }
+            break;
+        case 2:
+        {
+            TeachViewController *teachVc = [[TeachViewController alloc] initWithTitle:@"教你修谱" image:nil];
+            [self.navigationController pushViewController:teachVc animated:YES];
+        }
+            break;
+        case 3:
+        {
+            FamilyHelpViewController *helpVc = [[FamilyHelpViewController alloc] initWithTitle:@"赏金寻亲" image:nil];;
+            [self.navigationController pushViewController:helpVc animated:YES];
+        }
+            break;
+        case 4:
+        {
+            
+        }
+            break;
+        case 5:
+        {
+            
+        }
+            break;
+        case 6:
+        {
+            
+        }
+            break;
+        case 7:
+        {
+            WorshipViewController *worshipVC = [[WorshipViewController alloc]init];
+            [self.navigationController pushViewController:worshipVC animated:YES];
+        }
+            break;
+        default:
+            break;
     }
-    if (indexPath.row == 7) {
-        WorshipViewController *worshipVC = [[WorshipViewController alloc]init];
-        [self.navigationController pushViewController:worshipVC animated:YES];
-    }
+    
 }
 
 #pragma mark *** getters ***

@@ -13,4 +13,6 @@
 //字典装字符串
 +(NSString *) stringWithDic:(NSDictionary *)dic;
 +(NSString *)getCurrentTimeAddNumber;
+//横向转竖向字符串
++(NSString *)verticalStringWith:(NSString *)string;
 @end

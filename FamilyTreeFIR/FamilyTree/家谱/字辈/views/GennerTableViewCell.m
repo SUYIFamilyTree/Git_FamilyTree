@@ -1,0 +1,102 @@
+//
+//  GennerTableViewCell.m
+//  FamilyTree
+//
+//  Created by 王子豪 on 16/6/12.
+//  Copyright © 2016年 王子豪. All rights reserved.
+//
+
+#import "GennerTableViewCell.h"
+@interface GennerTableViewCell()
+
+
+
+
+@end
+@implementation GennerTableViewCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        
+        [self.contentView addSubview:self.generNumber];
+        [self.contentView addSubview:self.personNumber];
+        [self.contentView addSubview:self.perName];
+        
+        
+    }
+    return self;
+}
+
+#pragma mark *** 初始化数据 ***
+-(void)initData{
+    
+}
+#pragma mark *** 初始化界面 ***
+-(void)initUI{
+    
+}
+
+//头像和详情
+-(void)initPorInfo{
+    
+    NSArray *perArr = @[@"杨唯一",@"杨味儿",@"养胃三"];
+    NSArray *infoArr = @[@[@"屠夫",@"位置",@"杨拘役"],@[@"屠夫",@"侍郎",@"屠夫"],@[@"屠夫",@"杨伟三",@"未知"]];
+    if (_nameArr) {
+        perArr = _nameArr;
+    }
+    if (_idArr) {
+        infoArr = _idArr;
+    }
+    
+    for (int idx = 0; idx<perArr.count; idx++) {
+        
+        PortraiView *porInfo = [[PortraiView alloc] initWithFrame:AdaptationFrame(CGRectXW(self.perName)/AdaptationWidth()+24 +idx*(110+48), 43, 110, 253) portaitImage:nil porName:perArr[idx] infoArr:infoArr[idx]];
+        [self.contentView addSubview:porInfo];
+    }
+    
+    
+    
+}
+
+#pragma mark *** getters ***
+
+-(UILabel *)generNumber{
+    if (!_generNumber) {
+        _generNumber = [[UILabel alloc] initWithFrame:AdaptationFrame(0, 123, 112, 40)];
+        _generNumber.text = @"第几代";
+        _generNumber.textAlignment = 1;
+        _generNumber.font = MFont(15);
+        
+    }
+    return _generNumber;
+}
+-(UILabel *)personNumber{
+    if (!_personNumber) {
+        _personNumber = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectYH(self.generNumber)+20*AdaptationWidth(), self.generNumber.bounds.size.width, _generNumber.bounds.size.height)];
+        _personNumber.text = @"2人";
+        _personNumber.font = MFont(14);
+        _personNumber.textAlignment = 1;
+        
+    }
+    return _personNumber;
+}
+-(UILabel *)perName{
+    if (!_perName) {
+        
+        UIView *bacView = [[UIView alloc] initWithFrame:AdaptationFrame(CGRectXW(self.generNumber)/AdaptationWidth(), 0, 90, 339)];
+        [self.contentView addSubview:bacView];
+        [CALayer drawLeftBorder:bacView];
+        [CALayer drawRightBorder:bacView];
+        
+        _perName = [[UILabel alloc] initWithFrame:CGRectMake(CGRectXW(self.generNumber), 20*AdaptationWidth(), 95*AdaptationWidth(), 90)];
+        _perName.textAlignment = 1;
+        _perName.numberOfLines = 0;
+        _perName.font = MFont(15);
+        
+    }
+    return _perName;
+}
+
+@end

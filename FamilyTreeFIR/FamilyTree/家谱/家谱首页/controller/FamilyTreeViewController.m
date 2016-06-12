@@ -13,7 +13,15 @@
 #import "SearchFamilyTreeViewController.h"
 #import "ImageAndTextViewController.h"
 #import "LineageViewController.h"
-@interface FamilyTreeViewController ()<FamilyTreeTopViewDelegate>
+#import "CreatFamilyTree.h"
+@interface FamilyTreeViewController ()<FamilyTreeTopViewDelegate,CreatFamilyTreeDelegate>
+{
+    BOOL _selectedCreatBtn;
+}
+@property (nonatomic,strong) UIButton *creatBtn; /*创建家谱Btn*/
+
+@property (nonatomic,strong) CreatFamilyTree *crtFamTree; /*创建家谱view*/
+
 
 @end
 
@@ -40,6 +48,9 @@
     
     //图在左侧的view
     [self initLView];
+    
+    //创建家谱按钮
+    [self.view addSubview:self.creatBtn];
     
 }
 
@@ -239,6 +250,12 @@
 }
 
 
+-(void)respondsToCreatBtn:(UIButton *)sender{
+    
+    [self.view addSubview:self.crtFamTree];
+   
+}
+
 #pragma mark - FamilyTreeTopViewDelegate
 -(void)TopSearchViewDidTapView:(FamilyTreeTopView *)topSearchView{
     MYLog(@"点击搜索栏");
@@ -254,6 +271,39 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark *** createTreeDelegate ***
+
+-(void)CreateFamilyTree:(CreatFamilyTree *)creatTree didSelectedBtn:(UIButton *)sender{
+    
+    if (creatTree.type == CreatefamilyTreeTypeThreeBtn) {
+        if (sender.tag == 0) {
+            CreateFamViewController *creVc = [[CreateFamViewController alloc] initWithTitle:@"创建家谱" image:nil];
+            [self.navigationController pushViewController:creVc animated:YES];
+        }
+    }
+    
+    MYLog(@"%ld",sender.tag);
+}
+
+#pragma mark *** getters ***
+
+-(UIButton *)creatBtn{
+    if (!_creatBtn) {
+        _creatBtn = [[UIButton alloc] initWithFrame:CGRectMake(Screen_width-105*AdaptationWidth(), Screen_height-self.tabBarController.tabBar.bounds.size.height-2*105*AdaptationWidth(), 105*AdaptationWidth(), 105*AdaptationWidth())];
+        [_creatBtn setImage:MImage(@"noJP_cj_open") forState:UIControlStateNormal];
+        [_creatBtn addTarget:self action:@selector(respondsToCreatBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _creatBtn;
+}
+-(CreatFamilyTree *)crtFamTree{
+    if (!_crtFamTree) {
+        _crtFamTree = [[CreatFamilyTree alloc] initWithFrame: AdaptationFrame(62, 495, 517, 373) withType:CreatefamilyTreeTypeThreeBtn];
+        _crtFamTree.delegate = self;
+        
+    }
+    return _crtFamTree;
 }
 
 

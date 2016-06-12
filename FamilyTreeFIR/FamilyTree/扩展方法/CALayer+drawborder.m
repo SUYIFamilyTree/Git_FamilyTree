@@ -12,9 +12,9 @@
 //画底部实线(灰色)
 +(void)drawBottomBorder:(UIView *)drawObject{
     CALayer *border = [CALayer layer];
-    float height=drawObject.frame.size.height-1.0f;
+    float height=drawObject.frame.size.height;
     float width=drawObject.frame.size.width;
-    border.frame = CGRectMake(5.0f, height, width-10.0f, 1.0f);
+    border.frame = CGRectMake(5.0f, height, width, 1.0f);
     border.backgroundColor = [UIColor colorWithRed:214/255.0 green:214/255.0 blue:214/255.0 alpha:1].CGColor;
     [drawObject.layer addSublayer:border];
 }

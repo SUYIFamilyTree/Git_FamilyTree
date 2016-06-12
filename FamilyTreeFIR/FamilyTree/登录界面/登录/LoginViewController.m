@@ -112,7 +112,6 @@
 //                [self.loginView.accountView removeFromSuperview];
 //                [self.loginView.passwordView removeFromSuperview];
                 
-
             }];
             
         }
@@ -136,8 +135,6 @@
         case 0:
         {
             NSLog(@"qq");
-            CreateFamViewController *creVc = [[CreateFamViewController alloc] initWithTitle:@"创建家谱" image:nil];
-            [self.navigationController pushViewController:creVc animated:YES];
         }
             break;
         case 1:

@@ -19,10 +19,14 @@
     [super viewDidLoad];
  
     self.automaticallyAdjustsScrollViewInsets=false;
+    self.tabBarController.tabBar.hidden = YES;
     
     [self initUI];
 }
-
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.tabBarController.tabBar.hidden = false;
+}
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
     

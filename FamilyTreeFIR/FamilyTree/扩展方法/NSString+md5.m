@@ -49,8 +49,24 @@
     
     
     return currentKey;
+  
+}
+
++(NSString *)verticalStringWith:(NSString *)string{
     
+    NSMutableString *mustt = [NSMutableString stringWithString:string];
     
+    NSInteger lengt = mustt.length;
+    NSLog(@"LLL---%ld", lengt);
+    for (int idx = 0; idx<lengt-1; idx++) {
+        
+        [mustt insertString:@"\n" atIndex:1+idx*2];
+        NSLog(@"%d", idx);
+    }
+    
+    NSString *resultStr = mustt;
+  
+    return resultStr;
 }
 
 @end

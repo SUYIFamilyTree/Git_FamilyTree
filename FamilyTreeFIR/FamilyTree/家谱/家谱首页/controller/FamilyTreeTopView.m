@@ -23,9 +23,6 @@
 
 @property (nonatomic,strong) UILabel *titleLabel; /*右边菜单栏标题*/
 
-
-
-
 @end
 
 @implementation FamilyTreeTopView
