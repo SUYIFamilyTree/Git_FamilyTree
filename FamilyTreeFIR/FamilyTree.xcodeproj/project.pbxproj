@@ -1927,6 +1927,7 @@
 		ADC3272E1CF3FB8B00CEAE53 /* 素材图 */ = {
 			isa = PBXGroup;
 			children = (
+				BCE9451C1D0CF3BA0089FF22 /* 个人中心 */,
 				ADD23D001D0D549E008986F6 /* 教你修谱 */,
 				ADD23CC61D0D0C48008986F6 /* 字辈 */,
 				AD4D317D1D055C4C0095F3F1 /* 首页 */,
@@ -2801,6 +2802,7 @@
 				AD8DAAFC1CFD76A5009B7958 /* sj_icon_2@3x.png in Resources */,
 				BC0326DC1CFD99590089EE4C /* sss_bg@2x.png in Resources */,
 				ADB926471CF7E10D00AA8B6E /* impor.png in Resources */,
+				BCE945791D0CF3BA0089FF22 /* gr_ct_2@3x.png in Resources */,
 				ADD23CF21D0D4000008986F6 /* noJP_cj_open@3x.png in Resources */,
 				ADC327761CF3FB8B00CEAE53 /* login.png in Resources */,
 				AD7388501CF6C5AF0076B2AD /* icon_5@2x.png in Resources */,
@@ -2852,6 +2854,7 @@
 				ADCD5CA01CF451C000770356 /* shop_icon_b@3x.png in Resources */,
 				BCE945A11D0CF3BA0089FF22 /* gr_ct_ys_1.png in Resources */,
 				ADCD5C8A1CF451C000770356 /* geren_icon_a@2x.png in Resources */,
+				BCE945BB1D0CF3BA0089FF22 /* human_add@3x.png in Resources */,
 				ADD23CEF1D0D4000008986F6 /* noJP_cj@3x.png in Resources */,
 				AD8DAAD51CFD6492009B7958 /* red_sm@2x.png in Resources */,
 				BCE945B51D0CF3BA0089FF22 /* gr_ct_ys_gray2@3x.png in Resources */,
