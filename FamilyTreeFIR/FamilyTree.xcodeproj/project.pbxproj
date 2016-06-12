@@ -1946,7 +1946,7 @@
 				BCE945021D0CF3910089FF22 /* controller */,
 				BCE945051D0CF3910089FF22 /* view */,
 				BC142FF71D05424000F3A9AF /* 续时永久 */,
-				BC3CF3E21D01316400437ED6 /* 支付 */,
+				BC3CF3E21D01316400437ED6 /* 充值 */,
 			);
 			path = "个人中心";
 			sourceTree = "<group>";
@@ -2046,16 +2046,8 @@
 		BC142FF71D05424000F3A9AF /* 续时永久 */ = {
 			isa = PBXGroup;
 			children = (
-				BC142FF81D05424000F3A9AF /* controller */,
 			);
 			path = "续时永久";
-			sourceTree = "<group>";
-		};
-		BC142FF81D05424000F3A9AF /* controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = controller;
 			sourceTree = "<group>";
 		};
 		BC1EA6071CFC00A3006F6454 /* view */ = {
@@ -2189,11 +2181,12 @@
 			path = "私人墓园";
 			sourceTree = "<group>";
 		};
-		BC3CF3E21D01316400437ED6 /* 支付 */ = {
+		BC3CF3E21D01316400437ED6 /* 充值 */ = {
 			isa = PBXGroup;
 			children = (
 				BC3CF3E31D01316400437ED6 /* controller */,
 			);
+			name = "充值";
 			path = "支付";
 			sourceTree = "<group>";
 		};
