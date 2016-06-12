@@ -21,8 +21,7 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.5];
-        self.money = 888.0f;
+        self.money = 88.0f;
         self.sameCityMoney = 1273;
         [self initMoneyView];
         [self initSameCityMoneyView];
@@ -34,6 +33,8 @@
 -(void)initMoneyView{
     self.moneyView = [[UIView alloc]initWithFrame:CGRectMake(0.47*Screen_width, 8, 0.233*Screen_width, CGRectH(self)/7*4)];
     self.moneyView.backgroundColor = [UIColor whiteColor];
+    self.moneyView.layer.borderWidth = 1;
+    self.moneyView.layer.borderColor = LH_RGBCOLOR(225, 225, 225).CGColor;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickMoneyView:)];
     [self.moneyView addGestureRecognizer:tap];
     [self addSubview:self.moneyView];
@@ -45,7 +46,7 @@
     //中间金钱
     UILabel *moneyLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(addIV), 0, CGRectW(self.moneyView)-2*CGRectW(addIV)-8, CGRectH(self.moneyView))];
     moneyLabel.text = [NSString stringWithFormat:@"¥%.1lf",self.money];
-    moneyLabel.font = MFont(12);
+    moneyLabel.font = MFont(13);
     moneyLabel.textAlignment = NSTextAlignmentCenter;
     [self.moneyView addSubview:moneyLabel];
     
@@ -61,6 +62,8 @@
 -(void)initSameCityMoneyView{
     self.sameCityMoneyView = [[UIView alloc]initWithFrame:CGRectMake(0.727*Screen_width, 8, 0.233*Screen_width, CGRectH(self)/7*4)];
     self.sameCityMoneyView.backgroundColor = [UIColor whiteColor];
+    self.sameCityMoneyView.layer.borderWidth = 1;
+    self.sameCityMoneyView.layer.borderColor = LH_RGBCOLOR(225, 225, 225).CGColor;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickSameCityMoneyView:)];
     [self.sameCityMoneyView addGestureRecognizer:tap];
     [self addSubview:self.sameCityMoneyView];
@@ -72,12 +75,12 @@
     //中间金钱
     UILabel *moneyLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(addIV), 0, CGRectW(self.moneyView)-2*CGRectW(addIV)-8, CGRectH(self.moneyView))];
     moneyLabel.text = [NSString stringWithFormat:@"%ld",self.sameCityMoney];
-    moneyLabel.font = MFont(12);
+    moneyLabel.font = MFont(13);
     moneyLabel.textAlignment = NSTextAlignmentCenter;
     [self.sameCityMoneyView addSubview:moneyLabel];
     
     //右侧钱袋
-    UIImageView *moneyBagIV = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectXW(moneyLabel)+3, 4, CGRectW(addIV)-3, CGRectH(addIV))];
+    UIImageView *moneyBagIV = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectXW(moneyLabel), 4, CGRectW(addIV), CGRectH(addIV))];
     moneyBagIV.image = MImage(@"human_ss");
     [self.sameCityMoneyView addSubview:moneyBagIV];
  
@@ -86,6 +89,7 @@
 -(void)clickMoneyView:(UIButton *)sender{
     MYLog(@"点击了金钱视图");
     [self.delegate clickMoneyViewToPay];
+    
 }
 
 -(void)clickSameCityMoneyView:(UIButton *)sender{

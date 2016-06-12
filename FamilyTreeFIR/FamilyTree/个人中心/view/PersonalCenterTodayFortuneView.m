@@ -14,24 +14,25 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.5];
+        UIImageView *bgIV = [[UIImageView alloc]initWithFrame:self.bounds];
+        bgIV.image = MImage(@"gr_ct_ys_bg");
+        bgIV.layer.shadowColor = [UIColor clearColor].CGColor;
+        bgIV.layer.shadowOffset = CGSizeMake(2, 2);
+        [self addSubview:bgIV];
         //今日运势
-        UILabel *todayFortuneLB = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,0.4814*CGRectW(self), 0.2047*CGRectH(self))];
+        UILabel *todayFortuneLB = [[UILabel alloc]initWithFrame:CGRectMake(0.0350*CGRectW(self), 15,0.4046*CGRectW(self), 0.1261*CGRectH(self))];
+        //todayFortuneLB.backgroundColor = [UIColor redColor];
         todayFortuneLB.text = @"今日运势";
         todayFortuneLB.textAlignment = NSTextAlignmentCenter;
         todayFortuneLB.font = MFont(14);
         [self addSubview:todayFortuneLB];
         //续时运势
-        UIButton *payForFortuneBtn = [[UIButton alloc]initWithFrame:CGRectMake(CGRectXW(todayFortuneLB), 0.0512*CGRectH(self), 0.3261*CGRectW(self), 0.1085*CGRectW(self))];
+        UIButton *payForFortuneBtn = [[UIButton alloc]initWithFrame:CGRectMake(CGRectXW(todayFortuneLB)+5, 15, 0.3077*CGRectW(self), 13)];
         [payForFortuneBtn setTitle:@"续时运势" forState:UIControlStateNormal];
         payForFortuneBtn.backgroundColor = [UIColor redColor];
-        payForFortuneBtn.titleLabel.font = MFont(11);
+        payForFortuneBtn.titleLabel.font = MFont(10);
         [payForFortuneBtn addTarget:self action:@selector(payForFortune:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:payForFortuneBtn];
-        //线
-        UIView *lineView =[[UIView alloc]initWithFrame:CGRectMake(0.0311*CGRectW(self), CGRectYH(todayFortuneLB), 0.9378*CGRectW(self), 1)];
-        lineView.backgroundColor = [UIColor colorWithRed:214/255.0 green:214/255.0 blue:214/255.0 alpha:1];
-        [self addSubview:lineView];
         //运势星级
         [self initFortuneStar];
         
@@ -41,20 +42,16 @@
 }
 
 -(void)initFortuneStar{
-    NSArray *strArr = @[@"综合运势：",@"桃花运：",@"事业运：",@"财富运："];
-    NSArray *starNumberArr = @[@3,@3,@4,@2];
+    NSArray *strArr = @[@"综合 :",@"桃花 :",@"事业 :",@"财富 :"];
+    NSArray *starNumberArr = @[@3,@5,@3,@4];
     for (int i = 0; i < 4; i++) {
-        UILabel *fortuneLabel = [[UILabel alloc]initWithFrame:CGRectMake(0.0745*CGRectW(self), 0.2515*CGRectH(self)+0.1695*CGRectH(self)*i, 0.3416*CGRectW(self), 0.1695*CGRectH(self))];
+        UILabel *fortuneLabel = [[UILabel alloc]initWithFrame:CGRectMake(0.0745*CGRectW(self), 0.3015*CGRectH(self)+0.1695*CGRectH(self)*i, 0.2416*CGRectW(self), 0.1695*CGRectH(self))];
         fortuneLabel.font = MFont(12);
-        fortuneLabel.backgroundColor = [UIColor redColor];
+        //fortuneLabel.backgroundColor = [UIColor redColor];
         fortuneLabel.text = strArr[i];
-        fortuneLabel.textAlignment = NSTextAlignmentCenter;
-        fortuneLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        CGSize maximumLabelSize = CGSizeMake(100, 9999);//labelsize的最大值
-        CGSize expectSize = [fortuneLabel sizeThatFits:maximumLabelSize];
-        fortuneLabel.frame = CGRectMake(0.0745*CGRectW(self), 0.2515*CGRectH(self)+0.1695*CGRectH(self)*i, expectSize.width, 0.1695*CGRectH(self));
         [self addSubview:fortuneLabel];
-        
+        DrawStarsView *starsView = [[DrawStarsView alloc]initWithFrame:CGRectMake(CGRectXW(fortuneLabel), CGRectY(fortuneLabel)+3, 0.5*CGRectW(self), 13) SetRedNumber:[starNumberArr[i] intValue] SetRedImage:[UIImage imageNamed:[NSString stringWithFormat:@"gr_ct_ys_%d",i]] SetNormalImage:[UIImage imageNamed:[NSString stringWithFormat:@"gr_ct_ys_gray%d",i]]];
+        [self addSubview:starsView];
         
     }
 }
@@ -64,8 +61,6 @@
 -(void)payForFortune:(UIButton *)sender{
     MYLog(@"点击续时运势");
     [self.delegate clickPayForFortuneBtn];
-    
-    
 }
 
 

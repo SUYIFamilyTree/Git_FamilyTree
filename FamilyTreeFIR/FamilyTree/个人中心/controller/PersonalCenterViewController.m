@@ -12,64 +12,141 @@
 #import "PersonalCenterInfoView.h"
 #import "PersonalCenterNumerologyView.h"
 #import "PersonalCenterTodayFortuneView.h"
+#import "PersonalCenterCliffordView.h"
+#import "PersonalCenterMyPhotoAlbumsView.h"
 
-
-@interface PersonalCenterViewController ()<PersonalCenterHeaderViewDelegate,PersonalCenterTodayFortuneViewDelegate>
+@interface PersonalCenterViewController ()<PersonalCenterHeaderViewDelegate,PersonalCenterTodayFortuneViewDelegate,UITableViewDataSource,UITableViewDelegate,PersonalCenterMyPhotoAlbumsViewDelegate>
 /** 全屏滚动*/
 @property (nonatomic, strong) UIScrollView *scrollView;
 
-
+/** 家族动态*/
+@property (nonatomic, strong) NSArray *familyTreeNewsArr;
 @end
 
 @implementation PersonalCenterViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBarHidden = YES;
-    CommonNavigationViews *navi = [[CommonNavigationViews alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 64) title:@"小雪" image:MImage(@"chec")];
-    [navi.leftBtn setImage:MImage(@"human_write") forState:UIControlStateNormal];
-    [navi.leftBtn setTitle:@"VIP3" forState:UIControlStateNormal];
-    navi.leftBtn.titleLabel.font = MFont(14);
-    CGRect frame =navi.leftBtn.frame;
-    frame.size.width = 100;
-    navi.leftBtn.frame = frame;
-    [navi.leftBtn addTarget:self action:@selector(clickVipBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:navi];
+    [self initNavi];
     
     [self.view addSubview:self.scrollView];
     //添加背景图
-    UIImageView *bgIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, Screen_height*2)];
-    bgIV.image = MImage(@"human_bg");
+    UIImageView *bgIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 780)];
+    bgIV.image = MImage(@"gr_ct_bg");
     [self.scrollView addSubview:bgIV];
+    //添加背景模糊视图
+    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, 33)];
+    bgView.backgroundColor = [UIColor whiteColor];
+    bgView.alpha = 0.8;
+    [self.view addSubview:bgView];
     //添加头部视图
-    PersonalCenterHeaderView *headerView = [[PersonalCenterHeaderView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 0.062*Screen_height)];
+    PersonalCenterHeaderView *headerView = [[PersonalCenterHeaderView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, 33)];
     headerView.delegate = self;
-    [self.scrollView addSubview:headerView];
+    [self.view addSubview:headerView];
     //切换家谱及头像视图
-    PersonalCenterInfoView *infoView = [[PersonalCenterInfoView alloc]initWithFrame:CGRectMake(0, CGRectYH(headerView), Screen_width, 0.3636*Screen_height)];
+    PersonalCenterInfoView *infoView = [[PersonalCenterInfoView alloc]initWithFrame:CGRectMake(0, 33, Screen_width, 138)];
     [self.scrollView addSubview:infoView];
     //命理视图
-    PersonalCenterNumerologyView *numerologyView = [[PersonalCenterNumerologyView alloc]initWithFrame:CGRectMake(0.0418*Screen_width, CGRectYH(infoView), 0.9164*Screen_width, 0.3511*Screen_height)];
+    PersonalCenterNumerologyView *numerologyView = [[PersonalCenterNumerologyView alloc]initWithFrame:CGRectMake(0, CGRectYH(infoView), Screen_width, 175)];
     [self.scrollView addSubview:numerologyView];
     //今日运势视图
-    PersonalCenterTodayFortuneView *todayFortuneView = [[PersonalCenterTodayFortuneView alloc]initWithFrame:CGRectMake(0.0418*Screen_width, CGRectYH(numerologyView)+0.0306*Screen_height, 0.4485*Screen_width, 0.2622*Screen_height)];
+    PersonalCenterTodayFortuneView *todayFortuneView = [[PersonalCenterTodayFortuneView alloc]initWithFrame:CGRectMake(0.0406*Screen_width, CGRectYH(numerologyView), 0.4469*Screen_width, 119)];
     todayFortuneView.delegate = self;
     [self.scrollView addSubview:todayFortuneView];
-    
-    
+    //求签祈福
+    PersonalCenterCliffordView *cliffordView = [[PersonalCenterCliffordView alloc]initWithFrame:CGRectMake(0.5156*Screen_width, CGRectY(todayFortuneView), 0.4469*Screen_width, 119)];
+    [self.scrollView addSubview:cliffordView];
+    //家族动态
+    UIView *tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectYH(cliffordView), Screen_width, 40)];
+    [self.scrollView addSubview:tableHeaderView];
+    UILabel *familyTreeNewsLB = [[UILabel alloc]initWithFrame:CGRectMake(22, 17, 60, 15)];
+    familyTreeNewsLB.text = @"家族动态";
+    familyTreeNewsLB.font = MFont(14);
+    [tableHeaderView addSubview:familyTreeNewsLB];
+    UITableView *familyTreeNewsTB = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectYH(tableHeaderView), Screen_width, 88)];
+    familyTreeNewsTB.backgroundColor = [UIColor clearColor];
+    familyTreeNewsTB.bounces = NO;
+    familyTreeNewsTB.dataSource = self;
+    familyTreeNewsTB.delegate = self;
+    [self.scrollView addSubview:familyTreeNewsTB];
+    //我的相册
+    PersonalCenterMyPhotoAlbumsView *myPhotoAlbumsView = [[PersonalCenterMyPhotoAlbumsView alloc]initWithFrame:CGRectMake(0, CGRectYH(familyTreeNewsTB)+15, Screen_width, 150)];
+    myPhotoAlbumsView.delegate = self;
+    [self.scrollView addSubview:myPhotoAlbumsView];
+
 }
+
+#pragma mark - 视图初始化
+-(void)initNavi{
+    self.navigationController.navigationBarHidden = YES;
+    CommonNavigationViews *navi = [[CommonNavigationViews alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 64) title:@"小雪" image:MImage(@"chec")];
+    navi.leftBtn.hidden = YES;
+    UIButton *personalInfoEditBtn = [[UIButton alloc]initWithFrame:CGRectMake(10, 30, 20, 20)];
+    
+    [personalInfoEditBtn setBackgroundImage:MImage(@"gr_ct_tit_wt") forState:UIControlStateNormal];
+    [personalInfoEditBtn addTarget:self action:@selector(clickPersonalInfoBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [navi addSubview:personalInfoEditBtn];
+    UIButton *vipBtn = [[UIButton alloc]init];
+    
+    [vipBtn setTitle:@"VIP3" forState:UIControlStateNormal];
+    vipBtn.titleLabel.font = MFont(15);
+    [vipBtn addTarget:self action:@selector(clickVipBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [navi addSubview:vipBtn];
+    vipBtn.sd_layout.leftSpaceToView(personalInfoEditBtn,5).bottomSpaceToView(navi,15).widthIs(35).heightIs(15);
+    [self.view addSubview:navi];
+
+}
+
+#pragma mark - UITableViewDataSource
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.familyTreeNewsArr.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    }
+    cell.textLabel.text = self.familyTreeNewsArr[indexPath.row];
+    cell.textLabel.font = MFont(12);
+    cell.backgroundColor = [UIColor clearColor];
+    cell.contentView.backgroundColor = indexPath.row%2?[UIColor clearColor]:[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:0.5];
+    cell.textLabel.textColor = LH_RGBCOLOR(118, 118, 118);
+    return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 22;
+}
+
+#pragma mark - UITableViewDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 
 #pragma mark - lazyLoad
 -(UIScrollView *)scrollView{
     if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height)];
-        _scrollView.contentSize = CGSizeMake(Screen_width, Screen_height*2);
+        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-49-64)];
+        _scrollView.contentSize = CGSizeMake(Screen_width, 780);
         _scrollView.bounces = NO;
     }
     return _scrollView;
 }
 
+-(NSArray *)familyTreeNewsArr{
+    if (!_familyTreeNewsArr) {
+        _familyTreeNewsArr = @[@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会"];
+    }
+    return _familyTreeNewsArr;
+}
 
+
+//点击个人信息编辑
+-(void)clickPersonalInfoBtn:(UIButton *)sender{
+    MYLog(@"点击个人信息编辑");
+}
 
 //点击vip按钮
 -(void)clickVipBtn:(UIButton *)sender{
@@ -94,7 +171,11 @@
 #pragma mark - PersonalCenterTodayFortuneViewDelegate
 -(void)clickPayForFortuneBtn{
     MYLog(@"跳转续时运势页面");
-   
-
 }
+
+#pragma mark - PersonalCenterMyPhotoAlbumsViewDelegate
+-(void)clickMoreBtnTo{
+    MYLog(@"跳转我的相册");
+}
+
 @end
