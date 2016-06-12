@@ -9,7 +9,7 @@
 #import "SettlementCenterViewController.h"
 #import "CommonNavigationViews.h"
 #import "RechargeViewController.h"
-#import "PersonalCenterViewController.h"
+
 
 @interface SettlementCenterViewController ()
 /** 订单信息数组*/
@@ -108,8 +108,7 @@
         RechargeViewController *rechargeVC = [[RechargeViewController alloc]init];
         [self.navigationController pushViewController:rechargeVC animated:YES];
     }else{
-        PersonalCenterViewController *personalCenterVC = [[PersonalCenterViewController alloc]init];
-        [self.navigationController pushViewController:personalCenterVC animated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
     }
     
     
