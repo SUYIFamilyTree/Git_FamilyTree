@@ -334,6 +334,7 @@
 		BC142FEF1D053CC500F3A9AF /* xuShi_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BC142FEC1D053CC500F3A9AF /* xuShi_bg.png */; };
 		BC142FF01D053CC500F3A9AF /* xuShi_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC142FED1D053CC500F3A9AF /* xuShi_bg@2x.png */; };
 		BC142FF11D053CC500F3A9AF /* xuShi_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC142FEE1D053CC500F3A9AF /* xuShi_bg@3x.png */; };
+		BC1B0F6D1D0CFCF100095D5F /* RechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1B0F6C1D0CFCF100095D5F /* RechargeViewController.m */; };
 		BC1EA60A1CFC00D8006F6454 /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1EA6091CFC00D8006F6454 /* SearchTableViewCell.m */; };
 		BC2943731CFE8165006671B9 /* lt.png in Resources */ = {isa = PBXBuildFile; fileRef = BC2943611CFE8165006671B9 /* lt.png */; };
 		BC2943741CFE8165006671B9 /* lt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC2943621CFE8165006671B9 /* lt@2x.png */; };
@@ -368,7 +369,6 @@
 		BC3CF3E81D01318C00437ED6 /* chongZhi_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E51D01318C00437ED6 /* chongZhi_sel.png */; };
 		BC3CF3E91D01318C00437ED6 /* chongZhi_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E61D01318C00437ED6 /* chongZhi_sel@2x.png */; };
 		BC3CF3EA1D01318C00437ED6 /* chongZhi_sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E71D01318C00437ED6 /* chongZhi_sel@3x.png */; };
-		BC3CF3ED1D0131C100437ED6 /* RechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3CF3EC1D0131C100437ED6 /* RechargeViewController.m */; };
 		BCCE8A911CFFD16E005A5E21 /* CemeterialModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCE8A901CFFD16E005A5E21 /* CemeterialModel.m */; };
 		BCCE8A981CFFF289005A5E21 /* PrivateWorshipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCE8A921CFFF289005A5E21 /* PrivateWorshipTableViewCell.m */; };
 		BCCE8A991CFFF289005A5E21 /* PrivateWorshipView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCE8A941CFFF289005A5E21 /* PrivateWorshipView.m */; };
@@ -883,6 +883,8 @@
 		BC142FEC1D053CC500F3A9AF /* xuShi_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xuShi_bg.png; sourceTree = "<group>"; };
 		BC142FED1D053CC500F3A9AF /* xuShi_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xuShi_bg@2x.png"; sourceTree = "<group>"; };
 		BC142FEE1D053CC500F3A9AF /* xuShi_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xuShi_bg@3x.png"; sourceTree = "<group>"; };
+		BC1B0F6B1D0CFCF100095D5F /* RechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeViewController.h; sourceTree = "<group>"; };
+		BC1B0F6C1D0CFCF100095D5F /* RechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeViewController.m; sourceTree = "<group>"; };
 		BC1EA6081CFC00D8006F6454 /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
 		BC1EA6091CFC00D8006F6454 /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
 		BC2943611CFE8165006671B9 /* lt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lt.png; sourceTree = "<group>"; };
@@ -924,8 +926,6 @@
 		BC3CF3E51D01318C00437ED6 /* chongZhi_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chongZhi_sel.png; sourceTree = "<group>"; };
 		BC3CF3E61D01318C00437ED6 /* chongZhi_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chongZhi_sel@2x.png"; sourceTree = "<group>"; };
 		BC3CF3E71D01318C00437ED6 /* chongZhi_sel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chongZhi_sel@3x.png"; sourceTree = "<group>"; };
-		BC3CF3EB1D0131C100437ED6 /* RechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeViewController.h; sourceTree = "<group>"; };
-		BC3CF3EC1D0131C100437ED6 /* RechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeViewController.m; sourceTree = "<group>"; };
 		BCCE8A8F1CFFD16E005A5E21 /* CemeterialModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CemeterialModel.h; sourceTree = "<group>"; };
 		BCCE8A901CFFD16E005A5E21 /* CemeterialModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CemeterialModel.m; sourceTree = "<group>"; };
 		BCCE8A921CFFF289005A5E21 /* PrivateWorshipTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateWorshipTableViewCell.m; sourceTree = "<group>"; };
@@ -1945,8 +1945,7 @@
 			children = (
 				BCE945021D0CF3910089FF22 /* controller */,
 				BCE945051D0CF3910089FF22 /* view */,
-				BC142FF71D05424000F3A9AF /* 续时永久 */,
-				BC3CF3E21D01316400437ED6 /* 充值 */,
+				BC1B0F691D0CFCF100095D5F /* 充值 */,
 			);
 			path = "个人中心";
 			sourceTree = "<group>";
@@ -2043,11 +2042,21 @@
 			path = "续时永久";
 			sourceTree = "<group>";
 		};
-		BC142FF71D05424000F3A9AF /* 续时永久 */ = {
+		BC1B0F691D0CFCF100095D5F /* 充值 */ = {
 			isa = PBXGroup;
 			children = (
+				BC1B0F6A1D0CFCF100095D5F /* controller */,
 			);
-			path = "续时永久";
+			path = "充值";
+			sourceTree = "<group>";
+		};
+		BC1B0F6A1D0CFCF100095D5F /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				BC1B0F6B1D0CFCF100095D5F /* RechargeViewController.h */,
+				BC1B0F6C1D0CFCF100095D5F /* RechargeViewController.m */,
+			);
+			path = controller;
 			sourceTree = "<group>";
 		};
 		BC1EA6071CFC00A3006F6454 /* view */ = {
@@ -2179,24 +2188,6 @@
 				BC2943CF1CFEC163006671B9 /* mcGuanli_xinjian@3x.png */,
 			);
 			path = "私人墓园";
-			sourceTree = "<group>";
-		};
-		BC3CF3E21D01316400437ED6 /* 充值 */ = {
-			isa = PBXGroup;
-			children = (
-				BC3CF3E31D01316400437ED6 /* controller */,
-			);
-			name = "充值";
-			path = "支付";
-			sourceTree = "<group>";
-		};
-		BC3CF3E31D01316400437ED6 /* controller */ = {
-			isa = PBXGroup;
-			children = (
-				BC3CF3EB1D0131C100437ED6 /* RechargeViewController.h */,
-				BC3CF3EC1D0131C100437ED6 /* RechargeViewController.m */,
-			);
-			path = controller;
 			sourceTree = "<group>";
 		};
 		BC3CF3E41D01318C00437ED6 /* 充值 */ = {
@@ -2936,12 +2927,12 @@
 				BCF100051D02B11400D65E60 /* CALayer+drawborder.m in Sources */,
 				AD8DAAE01CFD7533009B7958 /* FamilyHelpViewController.m in Sources */,
 				AD8DAAAE1CFD3155009B7958 /* BaseViewController.m in Sources */,
+				BC1B0F6D1D0CFCF100095D5F /* RechargeViewController.m in Sources */,
 				ADA7FEF31D07A82300EDBEE4 /* PortraitAndNameViews.m in Sources */,
 				AD15B28A1CF84D2C00C0EEB7 /* CommonNavigationViews.m in Sources */,
 				BC2943A31CFE9F7B006671B9 /* LineageCellView.m in Sources */,
 				AD49FEE01CF6A0ED00DF9F7E /* FamilServiceViewController.m in Sources */,
 				BC0326A01CFD22070089EE4C /* ImageAndTextViewController.m in Sources */,
-				BC3CF3ED1D0131C100437ED6 /* RechargeViewController.m in Sources */,
 				BC29439D1CFE8D87006671B9 /* PersonModel.m in Sources */,
 				ADE2D17E1CF7052C009D1ADF /* TableView.m in Sources */,
 				BCCE8A991CFFF289005A5E21 /* PrivateWorshipView.m in Sources */,
