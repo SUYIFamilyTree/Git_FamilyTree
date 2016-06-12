@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface DrawStarsView : UIView
--(instancetype)initWithFrame:(CGRect)frame redStars:(int)redNumber;
+-(instancetype)initWithFrame:(CGRect)frame SetRedNumber:(int)redNumber SetRedImage:(UIImage *)redImage SetNormalImage:(UIImage *)normalImage;
 @end
