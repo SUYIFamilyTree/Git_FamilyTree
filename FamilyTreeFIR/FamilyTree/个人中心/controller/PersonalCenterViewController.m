@@ -14,8 +14,13 @@
 #import "PersonalCenterTodayFortuneView.h"
 #import "PersonalCenterCliffordView.h"
 #import "PersonalCenterMyPhotoAlbumsView.h"
+#import "PayForFortuneView.h"
+#import "PayForForeverFortuneView.h"
+#import "RechargeViewController.h"
+#import "FortuneTodayViewController.h"
+#import "SettlementCenterViewController.h"
 
-@interface PersonalCenterViewController ()<PersonalCenterHeaderViewDelegate,PersonalCenterTodayFortuneViewDelegate,UITableViewDataSource,UITableViewDelegate,PersonalCenterMyPhotoAlbumsViewDelegate>
+@interface PersonalCenterViewController ()<PersonalCenterHeaderViewDelegate,PersonalCenterTodayFortuneViewDelegate,UITableViewDataSource,UITableViewDelegate,PersonalCenterMyPhotoAlbumsViewDelegate,PayForFortuneViewDelegate,PayForForeverFortuneViewDelegate>
 /** 全屏滚动*/
 @property (nonatomic, strong) UIScrollView *scrollView;
 
@@ -51,6 +56,8 @@
     [self.scrollView addSubview:numerologyView];
     //今日运势视图
     PersonalCenterTodayFortuneView *todayFortuneView = [[PersonalCenterTodayFortuneView alloc]initWithFrame:CGRectMake(0.0406*Screen_width, CGRectYH(numerologyView), 0.4469*Screen_width, 119)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ToFortuneTodayView)];
+    [todayFortuneView addGestureRecognizer:tap];
     todayFortuneView.delegate = self;
     [self.scrollView addSubview:todayFortuneView];
     //求签祈福
@@ -159,18 +166,28 @@
 
 #pragma mark - PersonalCenterHeaderViewDelegate
 -(void)clickMoneyViewToPay{
-    //跳转支付页面
-    MYLog(@"跳转支付页面");
+    //跳转充值页面
+    RechargeViewController *rechargeVC = [[RechargeViewController alloc]init];
+    [self.navigationController pushViewController:rechargeVC animated:YES];
 }
 
 -(void)clickSameCityMoneyViewToPay{
-    //跳转同城币支付页面
+    //跳转同城币充值页面
     MYLog(@"跳转同城币支付页面");
+}
+
+-(void)ToFortuneTodayView{
+    FortuneTodayViewController *fortuneTodayVC = [[FortuneTodayViewController alloc]init];
+    [self.navigationController pushViewController:fortuneTodayVC animated:YES];
 }
 
 #pragma mark - PersonalCenterTodayFortuneViewDelegate
 -(void)clickPayForFortuneBtn{
     MYLog(@"跳转续时运势页面");
+    PayForFortuneView *payForFortuneView = [[PayForFortuneView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
+    payForFortuneView.delegate = self;
+    [self.view addSubview:payForFortuneView];
+    
 }
 
 #pragma mark - PersonalCenterMyPhotoAlbumsViewDelegate
@@ -178,4 +195,17 @@
     MYLog(@"跳转我的相册");
 }
 
+#pragma mark - PayForFortuneViewDelegate
+-(void)toPayForForeverFortuneView{
+    MYLog(@"跳转续时永久页面");
+    PayForForeverFortuneView *payForForeverFortuneView = [[PayForForeverFortuneView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
+    payForForeverFortuneView.delegate = self;
+    [self.view addSubview:payForForeverFortuneView];
+}
+
+#pragma mark - PayForForeverFortuneViewDelegate
+-(void)clickPayForForeverFortuneSure{
+    SettlementCenterViewController *settlementCenterVC = [[SettlementCenterViewController alloc]init];
+    [self.navigationController pushViewController:settlementCenterVC animated:YES];
+}
 @end

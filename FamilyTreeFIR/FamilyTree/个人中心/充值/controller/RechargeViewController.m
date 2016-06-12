@@ -55,9 +55,9 @@
 
 
 -(void)initChooseMoney{
-    //金融选择
+    //金额选择
     UILabel *label1 = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(self.bgView)+20, CGRectY(self.bgView)+10, 70, 20)];
-    label1.text = @"金融选择";
+    label1.text = @"金额选择";
     label1.textAlignment = NSTextAlignmentLeft;
     label1.font = MFont(16);
     [self.view addSubview:label1];
@@ -66,10 +66,12 @@
         CGFloat btnWidth = (Screen_width-20-50-30*2)/3;
         UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(CGRectX(self.bgView)+25+(btnWidth+30)*(i/3?(i-3):i),CGRectY(self.bgView)+30+20+(i/3?55:0), btnWidth, 40)];
         NSString *buttonStr = [NSString stringWithFormat:@"%@元",self.moneyArr[i]];
-        button.backgroundColor = LH_RGBCOLOR(75, 88, 91);
+        button.backgroundColor = LH_RGBCOLOR(219, 220, 220);
         button.layer.cornerRadius = 2.0;
         [button setTitle:buttonStr forState:UIControlStateNormal];
         [button addTarget:self action:@selector(clickChooseMoneyBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         button.tag = 1+i;
         [self.view addSubview:button];
         
@@ -128,6 +130,13 @@
 
 -(void)clickChooseMoneyBtn:(UIButton *)sender{
     MYLog(@"选中%@元", self.moneyArr[sender.tag-1]);
+    //让选中的金额变色，其他返回未选中状态
+    for (int i = 0 ; i < 6; i++) {
+        UIButton *button =(UIButton *)[self.view viewWithTag:1+i];
+        button.selected = NO;
+        sender.selected = YES;
+        button.backgroundColor = button.selected?LH_RGBCOLOR(75, 88, 91):LH_RGBCOLOR(219, 220, 220);
+    }
 }
 
 -(void)clickOtherMoneyBtn:(UIButton *)sender{
