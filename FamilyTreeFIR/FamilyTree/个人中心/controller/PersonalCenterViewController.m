@@ -19,6 +19,7 @@
 #import "RechargeViewController.h"
 #import "FortuneTodayViewController.h"
 #import "SettlementCenterViewController.h"
+#import "VIPView.h"
 
 @interface PersonalCenterViewController ()<PersonalCenterHeaderViewDelegate,PersonalCenterTodayFortuneViewDelegate,UITableViewDataSource,UITableViewDelegate,PersonalCenterMyPhotoAlbumsViewDelegate,PayForFortuneViewDelegate,PayForForeverFortuneViewDelegate>
 /** 全屏滚动*/
@@ -158,6 +159,8 @@
 //点击vip按钮
 -(void)clickVipBtn:(UIButton *)sender{
     MYLog(@"点击vip");
+    VIPView *vipView = [[VIPView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
+    [self.view addSubview:vipView];
 }
 
 -(void)viewWillAppear:(BOOL)animated{

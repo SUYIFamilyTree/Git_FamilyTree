@@ -109,6 +109,7 @@
         [self.navigationController pushViewController:rechargeVC animated:YES];
     }else{
         [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
     }
     
     

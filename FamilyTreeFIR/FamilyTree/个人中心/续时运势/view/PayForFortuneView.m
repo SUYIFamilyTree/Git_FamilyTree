@@ -16,7 +16,7 @@
         //设置背景
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
         //设置中间框背景
-        UIImageView *payForFortuneIV = [[UIImageView alloc]initWithFrame:CGRectMake(0.0406*CGRectW(self), 0.2737*CGRectH(self), 0.9188*CGRectW(self), 0.3402*CGRectH(self))];
+        UIImageView *payForFortuneIV = [[UIImageView alloc]initWithFrame:CGRectMake(0.0406*CGRectW(self), 0.2737*CGRectH(self), 0.9188*CGRectW(self), 0.4253*CGRectH(self))];
         payForFortuneIV.image = MImage(@"xuShi_bg");
         payForFortuneIV.userInteractionEnabled = YES;
         [self addSubview:payForFortuneIV];
