@@ -53,6 +53,18 @@
     
     self.headIV = [[HeadImageView alloc]initWithFrame:CGRectMake(0.0469*CGRectW(self), 0.1533*CGRectH(self), 0.2344*CGRectW(self), 0.5474*CGRectH(self))];
     self.headIV.userInteractionEnabled = YES;
+    //加载首先访问本地沙盒是否存在相关图片
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"headImage"];
+    UIImage *headImage = [UIImage imageWithContentsOfFile:fullPath];
+    if (!headImage)
+    {
+        //默认头像
+        self.headIV.headInsideIV.image = MImage(@"xiuGaitouxiang_sel1");
+    }
+    else
+    {
+        self.headIV.headInsideIV.image = headImage;
+    }
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget: self action:@selector(clickHeadIV)];
     [self.headIV addGestureRecognizer:tap];
     [self addSubview:self.headIV];
