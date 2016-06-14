@@ -171,7 +171,12 @@ typedef enum : NSUInteger {
         _naviBar = [[CommonNavigationViews alloc] initWithFrame:CGRectMake(0, 0, Screen_width, 64) title:@"同城家谱" image:nil];
         [_naviBar.leftBtn setImage:MImage(@"index_logo") forState:0];
         _naviBar.backView.backgroundColor = [UIColor clearColor];
-        [_naviBar.rightBtn setTitle:@"登录" forState:0];
+        if ([[USERDEFAULT objectForKey:LoginStates] boolValue]) {
+            [_naviBar.rightBtn setTitle:@"切换账号" forState:0];
+        }else{
+            [_naviBar.rightBtn setTitle:@"登录" forState:0];
+
+        }
         _naviBar.rightBtn.titleLabel.font = MFont(13);
         _naviBar.rightBtn.frame = CGRectMake(CGRectGetMaxX(_naviBar.backView.frame)-70, CGRectGetHeight(_naviBar.backView.bounds)/2-30+StatusBar_Height+10, 60, 25);
         _naviBar.titleLabel.font = [UIFont boldSystemFontOfSize:16];

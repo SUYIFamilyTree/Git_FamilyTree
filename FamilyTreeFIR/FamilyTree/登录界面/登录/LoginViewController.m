@@ -21,6 +21,9 @@
 
 @property (nonatomic,strong) ToRegistView *regisView; /*注册view*/
 
+@property (nonatomic,strong) RootTabBarViewController *tabBarVc; /*标签控制器*/
+
+
 
 @end
 
@@ -53,11 +56,44 @@
 //点击获取验证码
 -(void)ToRegisViewDidSelectedVerfication:(ToRegistView *)registView{
     MYLog(@"获取验证码");
+     NSLog(@"%@", registView.accountView.inputTextView.text);
+    
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"mobile":registView.accountView.inputTextView.text,@"content":@"123456"} requestID:@0 requestcode:@"sendsms" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSLog(@"%@", responseObject);
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error.description);
+    }];
+    
 }
 
 //点击立即注册
 
 -(void)ToRegisViewDidSelectedRegistBtn:(ToRegistView *)registView{
+    
+    
+    NSString *accStr = registView.accountView.inputTextView.text;
+    NSString *pasStr = registView.passwordView.inputTextView.text;
+    NSNumber *lng = @0;
+    NSNumber *lat = @0;
+    
+    NSLog(@"acc-%@pas-%@", accStr,pasStr);
+    
+//    NSDictionary *dic = @{@"MeAccount":accStr,@"MePassword":pasStr,@"MeLng":@"0",@"MeLat":@"0"};
+    NSDictionary *dic = @{@"MeAccount":accStr,@"MePassword":pasStr};
+
+    
+    [TCJPHTTPRequestManager POSTWithParameters:dic requestID:@0 requestcode:@"register" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            
+            NSLog(@"zhuce%@", responseObject);
+            
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error.description);
+    }];
+    
     MYLog(@"立即注册");
 }
 
@@ -148,8 +184,7 @@
         case 2:
         {
             NSLog(@"weibo");
-            FortuneTodayViewController *forToda = [[FortuneTodayViewController alloc] initWithTitle:@"今日运势" image:nil];
-            [self.navigationController pushViewController:forToda animated:YES];
+           
         }
             break;
         default:
@@ -175,7 +210,7 @@
             [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserId];
             [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:Password];
             
-            [self loginView:nil didSelectedTourBtn:nil];
+            [self.navigationController pushViewController:self.tabBarVc animated:YES];
             
         }
         
@@ -188,8 +223,11 @@
 //游客按钮
 -(void)loginView:(LoginView *)loginView didSelectedTourBtn:(UIButton *)sender{
     NSLog(@"游客请进！");
-    RootTabBarViewController *tabBar = [[RootTabBarViewController alloc] init];
-    [self.navigationController pushViewController:tabBar animated:YES];
+    [USERDEFAULT setObject:@false forKey:LoginStates];
+    
+    [self.navigationController pushViewController:self.tabBarVc animated:YES];
+    
+    
 }
 
 #pragma mark *** touch ***
@@ -225,5 +263,13 @@
         
     }
     return _regisView;
+}
+
+-(RootTabBarViewController *)tabBarVc{
+    if (!_tabBarVc) {
+        _tabBarVc = [[RootTabBarViewController alloc] init];
+        
+    }
+    return _tabBarVc;
 }
 @end

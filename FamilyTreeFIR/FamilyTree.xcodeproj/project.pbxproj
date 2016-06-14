@@ -2191,6 +2191,7 @@
 		ADC3272E1CF3FB8B00CEAE53 /* 素材图 */ = {
 			isa = PBXGroup;
 			children = (
+				BCDE423B1D0E43C300921373 /* vip */,
 				AD1F3C221D0F98B60085EDFB /* 新建墓园 */,
 				ADA4C1501D0E87A600CA9067 /* 供花果 */,
 				ADA4C11B1D0E5D7700CA9067 /* 墓园名称 */,
@@ -3240,6 +3241,7 @@
 				BCE945781D0CF3BA0089FF22 /* gr_ct_2@2x.png in Resources */,
 				ADCD5C941CF451C000770356 /* index_icon_b@3x.png in Resources */,
 				ADCD5C9A1CF451C000770356 /* jiaPu_icon_b@3x.png in Resources */,
+				BCDE42521D0E43C300921373 /* vip_jindu_red@2x.png in Resources */,
 				ADD23CF51D0D4000008986F6 /* haveJP_cj_open@3x.png in Resources */,
 				AD4D31B41D055C4D0095F3F1 /* index_icon_yunShi.png in Resources */,
 				BC2943D01CFEC163006671B9 /* ggJiDian_tuc.png in Resources */,

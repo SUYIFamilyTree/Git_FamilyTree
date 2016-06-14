@@ -14,6 +14,8 @@
 -(void)ToRegisViewDidSelectedRegistBtn:(ToRegistView *)registView;
 @end
 @interface ToRegistView : UIView
+@property (nonatomic,strong) AccountView *accountView; /*手机号*/
+@property (nonatomic,strong) AccountView *passwordView; /*验证码*/
 @property (nonatomic,weak) id<ToRegisViewDelegate> delegate; /*代理人*/
 
 @end
