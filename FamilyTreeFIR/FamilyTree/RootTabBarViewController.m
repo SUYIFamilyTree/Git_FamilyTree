@@ -96,8 +96,26 @@
     
 //    [self initTabBarItem];
     
+    UISwipeGestureRecognizer *swipGes = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(respondsToSwipGes:)];
+    swipGes.direction = UISwipeGestureRecognizerDirectionLeft;
+    
+    [self.tabBar addGestureRecognizer:swipGes];
+    
+    
 }
+-(void)respondsToSwipGes:(UISwipeGestureRecognizer *)gesture{
+    if (gesture.direction == UISwipeGestureRecognizerDirectionLeft) {
+        if (self.selectedIndex+1>3) {
+            self.selectedIndex = 0;
+        }else{
+            self.selectedIndex+=1;
+        }
+    }
+    
+    
+    NSLog(@"%ld", self.selectedIndex);
 
+}
 #pragma mark *** 自定义标签栏item ***
 -(void)initTabBarItem{
     //便利删除标签栏说有控件

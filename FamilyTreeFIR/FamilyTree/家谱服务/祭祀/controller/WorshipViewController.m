@@ -11,6 +11,7 @@
 #import "PrivateWorshipView.h"
 #import "PublicWorshipView.h"
 #import "PrivateWorshipTableViewCell.h"
+#import "CemeteryViewController.h"
 
 @interface WorshipViewController()<UIScrollViewDelegate,PrivateWorshipViewDelegate>
 /** 分段控件*/
@@ -110,6 +111,10 @@
     
 }
 
+-(void)PrivateWorshipView:(PrivateWorshipView *)privateWorshipView didSelectTableRowAtIndexPath:(NSIndexPath *)index{
+    CemeteryViewController *cemeVc = [[CemeteryViewController alloc] initWithTitle:@"墓园名称" image:nil];
+    [self.navigationController pushViewController:cemeVc animated:YES];
+}
 
 
 @end

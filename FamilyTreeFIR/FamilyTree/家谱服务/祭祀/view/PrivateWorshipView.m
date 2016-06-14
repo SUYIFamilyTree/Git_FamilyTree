@@ -135,6 +135,11 @@
     return cell.frame.size.height;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (_delegate && [_delegate respondsToSelector:@selector(PrivateWorshipView:didSelectTableRowAtIndexPath:)]) {
+        [_delegate PrivateWorshipView:self didSelectTableRowAtIndexPath:indexPath];
+    }
+}
 
 
 -(void)clickEditBtn:(UIButton *)sender{

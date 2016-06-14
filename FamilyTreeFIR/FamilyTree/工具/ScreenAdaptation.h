@@ -10,7 +10,7 @@
 #define ScreenAdaptation_h
 
 #import <UIKit/UIKit.h>
-
+#import "Custom.h"
 /**
  将IPHONE_WIDTH改为设计图纸的宽度
  在使用的时候直接使用BQAdaptationFrame函数
@@ -21,11 +21,9 @@
 
 #define IPHONE_WIDTH 720
 
-#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
-#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
 static inline CGFloat AdaptationWidth() {
-    return SCREEN_WIDTH / IPHONE_WIDTH;
+    return Screen_width / IPHONE_WIDTH;
 }
 
 static inline CGSize AdaptationSize(CGFloat width, CGFloat height) {

@@ -13,6 +13,8 @@
 
 -(void)PrivateWorshipView:(PrivateWorshipView *)privateWorshipView didSelect:(BOOL)isEditing;
 
+-(void)PrivateWorshipView:(PrivateWorshipView *)privateWorshipView didSelectTableRowAtIndexPath:(NSIndexPath *)index;
+
 @end
 
 
