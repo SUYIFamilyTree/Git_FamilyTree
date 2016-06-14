@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HeadImageView.h"
 
 @interface PersonalCenterInfoView : UIView
-
+/** 头像视图*/
+@property (nonatomic, strong) HeadImageView *headIV;
 @end

@@ -20,13 +20,20 @@
 #import "FortuneTodayViewController.h"
 #import "SettlementCenterViewController.h"
 #import "VIPView.h"
+#import "EditHeadView.h"
 
-@interface PersonalCenterViewController ()<PersonalCenterHeaderViewDelegate,PersonalCenterTodayFortuneViewDelegate,UITableViewDataSource,UITableViewDelegate,PersonalCenterMyPhotoAlbumsViewDelegate,PayForFortuneViewDelegate,PayForForeverFortuneViewDelegate>
+
+@interface PersonalCenterViewController ()<PersonalCenterHeaderViewDelegate,PersonalCenterTodayFortuneViewDelegate,UITableViewDataSource,UITableViewDelegate,PersonalCenterMyPhotoAlbumsViewDelegate,PayForFortuneViewDelegate,PayForForeverFortuneViewDelegate,VIPViewDelegate>
 /** 全屏滚动*/
 @property (nonatomic, strong) UIScrollView *scrollView;
-
 /** 家族动态*/
 @property (nonatomic, strong) NSArray *familyTreeNewsArr;
+/** vip视图*/
+@property (nonatomic, strong) VIPView *vipView;
+/** 导航栏vip按钮*/
+@property (nonatomic, strong) UIButton *vipBtn;
+/** 切换家谱及头像视图*/
+@property (nonatomic, strong) PersonalCenterInfoView *infoView;
 @end
 
 @implementation PersonalCenterViewController
@@ -50,10 +57,10 @@
     headerView.delegate = self;
     [self.view addSubview:headerView];
     //切换家谱及头像视图
-    PersonalCenterInfoView *infoView = [[PersonalCenterInfoView alloc]initWithFrame:CGRectMake(0, 33, Screen_width, 138)];
-    [self.scrollView addSubview:infoView];
+    self.infoView = [[PersonalCenterInfoView alloc]initWithFrame:CGRectMake(0, 33, Screen_width, 138)];
+    [self.scrollView addSubview:self.infoView];
     //命理视图
-    PersonalCenterNumerologyView *numerologyView = [[PersonalCenterNumerologyView alloc]initWithFrame:CGRectMake(0, CGRectYH(infoView), Screen_width, 175)];
+    PersonalCenterNumerologyView *numerologyView = [[PersonalCenterNumerologyView alloc]initWithFrame:CGRectMake(0, CGRectYH(self.infoView), Screen_width, 175)];
     [self.scrollView addSubview:numerologyView];
     //今日运势视图
     PersonalCenterTodayFortuneView *todayFortuneView = [[PersonalCenterTodayFortuneView alloc]initWithFrame:CGRectMake(0.0406*Screen_width, CGRectYH(numerologyView), 0.4469*Screen_width, 119)];
@@ -94,13 +101,13 @@
     [personalInfoEditBtn setBackgroundImage:MImage(@"gr_ct_tit_wt") forState:UIControlStateNormal];
     [personalInfoEditBtn addTarget:self action:@selector(clickPersonalInfoBtn:) forControlEvents:UIControlEventTouchUpInside];
     [navi addSubview:personalInfoEditBtn];
-    UIButton *vipBtn = [[UIButton alloc]init];
+    self.vipBtn = [[UIButton alloc]init];
     
-    [vipBtn setTitle:@"VIP3" forState:UIControlStateNormal];
-    vipBtn.titleLabel.font = MFont(15);
-    [vipBtn addTarget:self action:@selector(clickVipBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [navi addSubview:vipBtn];
-    vipBtn.sd_layout.leftSpaceToView(personalInfoEditBtn,5).bottomSpaceToView(navi,15).widthIs(35).heightIs(15);
+    [self.vipBtn setTitle:@"VIP3" forState:UIControlStateNormal];
+    self.vipBtn.titleLabel.font = MFont(15);
+    [self.vipBtn addTarget:self action:@selector(clickVipBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [navi addSubview:self.vipBtn];
+    self.vipBtn.sd_layout.leftSpaceToView(personalInfoEditBtn,5).bottomSpaceToView(navi,15).widthIs(35).heightIs(15);
     [self.view addSubview:navi];
 
 }
@@ -150,6 +157,13 @@
     return _familyTreeNewsArr;
 }
 
+-(VIPView *)vipView{
+    if (!_vipView) {
+        _vipView = [[VIPView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
+        _vipView.delegate = self;
+    }
+    return _vipView;
+}
 
 //点击个人信息编辑
 -(void)clickPersonalInfoBtn:(UIButton *)sender{
@@ -159,8 +173,12 @@
 //点击vip按钮
 -(void)clickVipBtn:(UIButton *)sender{
     MYLog(@"点击vip");
-    VIPView *vipView = [[VIPView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
-    [self.view addSubview:vipView];
+    sender.selected = !sender.selected;
+    if (sender.selected == YES) {
+        [self.view addSubview:self.vipView];
+    }else{
+        [self.vipView removeFromSuperview];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -211,4 +229,10 @@
     SettlementCenterViewController *settlementCenterVC = [[SettlementCenterViewController alloc]init];
     [self.navigationController pushViewController:settlementCenterVC animated:YES];
 }
+
+#pragma mark - VIPViewDelegate
+-(void)clickVipBackBtn{
+    self.vipBtn.selected = NO;
+}
+
 @end
