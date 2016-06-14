@@ -142,7 +142,8 @@
 -(void)clickBackBtn:(UIButton *)sender{
     //保存设置
     [self.delegate editHeadView:self HeadInsideImage:self.headIV.headInsideIV.image];
-    
+    //保存图片进入沙盒中
+    [self saveImage:self.headIV.headInsideIV.image withName:@"headImage"];
     [self removeFromSuperview];
 }
 
@@ -153,12 +154,26 @@
 
 -(void)clickChooseBorderBtn:(UIButton *)sender{
     MYLog(@"相框选择");
+    
 }
 
 -(void)chooseHeadBtn:(UIButton *)sender{
     self.headIV.headInsideIV.image = MImage(self.headStrArr[sender.tag-555]);
-    //保存图片进入沙盒中
-    [self saveImage:self.headIV.headInsideIV.image withName:@"headImage"];
+    //让选中的添加边框
+    for (int i = 0 ; i < 12; i++) {
+        UIButton *button =(UIButton *)[self viewWithTag:555+i];
+        button.selected = NO;
+        sender.selected = YES;
+        if (button.selected) {
+            button.layer.borderColor = LH_RGBCOLOR(110, 96, 90).CGColor;
+            button.layer.borderWidth = 1;
+            MYLog(@"添加边框");
+        }else{
+            button.layer.borderColor = [UIColor clearColor].CGColor;
+        }
+    }
+
+    
     
 }
 

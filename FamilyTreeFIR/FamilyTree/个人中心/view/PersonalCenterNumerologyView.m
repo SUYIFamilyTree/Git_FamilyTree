@@ -85,6 +85,7 @@
     for (int i = 0; i < 5; i++) {
         UIImageView *wuXingIV = [[UIImageView alloc]initWithFrame:CGRectMake(0.5*CGRectW(self)+0.1563*CGRectW(self)*i-0.1563*CGRectW(self)*3*(i/3), 0.4286*CGRectH(self)+(0.0857*CGRectH(self)+5)*(i/3), 0.0781*CGRectW(self), 0.0857*CGRectH(self))];
         wuXingIV.image = [UIImage imageNamed:[NSString stringWithFormat:@"gr_ct_%d",i]];
+        wuXingIV.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:wuXingIV];
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(wuXingIV)+5,CGRectY(wuXingIV)+2,10,10)];
         label.text = [NSString stringWithFormat:@"%@",self.wuXingArr[i]];
