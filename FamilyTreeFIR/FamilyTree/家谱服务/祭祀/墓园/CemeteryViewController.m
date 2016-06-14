@@ -19,6 +19,9 @@ enum {
 #import "InputCherishView.h"
 #define bacheight (Screen_height-self.tabBarController.tabBar.bounds.size.height-64)
 @interface CemeteryViewController ()
+{
+    BOOL _selectedMianhuaiBtn;
+}
 @property (nonatomic,strong) UIScrollView *scrollView; /*背景滚动图*/
 
 @property (nonatomic,strong) UIImageView *cemImageView; /*背景图*/
@@ -96,7 +99,14 @@ enum {
             break;
         case BTNMianhuaiTag:
         {
+            _selectedMianhuaiBtn = !_selectedMianhuaiBtn;
             [self.view addSubview:self.inputView];
+
+            if (_selectedMianhuaiBtn) {
+                self.inputView.hidden = false;
+            }else{
+                self.inputView.hidden = true;
+            }
         }
             break;
         default:

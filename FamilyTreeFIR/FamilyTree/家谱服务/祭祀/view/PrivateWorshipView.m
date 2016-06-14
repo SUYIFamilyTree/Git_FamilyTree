@@ -164,6 +164,10 @@
 
 -(void)clickAddCemeterialBtn:(UIButton *)sender{
     //新建墓园
+   
+    if (_delegate && [_delegate respondsToSelector:@selector(PrivateWorshipViewDidSelectedCreateCem:)]) {
+        [_delegate PrivateWorshipViewDidSelectedCreateCem:self];
+    }
     
 }
 

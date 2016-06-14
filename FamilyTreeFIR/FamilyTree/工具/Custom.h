@@ -26,6 +26,7 @@ __block __weak __typeof(&*self)weakSelf = self;
 #define Screen_height CGRectGetHeight([UIScreen mainScreen].bounds)
 #define StatusBar_Height [[UIApplication sharedApplication] statusBarFrame].size.height
 #define NavigationBar_Height self.navigationController.navigationBar.frame.size.height
+#define HeightExceptNaviAndTabbar (Screen_height-64-self.tabBarController.tabBar.bounds.size.height)
 //view自身宽高
 #define SelfView_width self.bounds.size.width
 #define SelfView_height self.bounds.size.height

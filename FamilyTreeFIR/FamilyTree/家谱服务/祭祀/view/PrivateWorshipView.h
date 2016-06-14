@@ -14,7 +14,7 @@
 -(void)PrivateWorshipView:(PrivateWorshipView *)privateWorshipView didSelect:(BOOL)isEditing;
 
 -(void)PrivateWorshipView:(PrivateWorshipView *)privateWorshipView didSelectTableRowAtIndexPath:(NSIndexPath *)index;
-
+-(void)PrivateWorshipViewDidSelectedCreateCem:(PrivateWorshipView *)privateWorshipView;
 @end
 
 

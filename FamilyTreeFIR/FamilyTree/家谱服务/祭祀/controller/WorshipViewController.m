@@ -12,6 +12,8 @@
 #import "PublicWorshipView.h"
 #import "PrivateWorshipTableViewCell.h"
 #import "CemeteryViewController.h"
+#import "CreateCemViewController.h"
+
 
 @interface WorshipViewController()<UIScrollViewDelegate,PrivateWorshipViewDelegate>
 /** 分段控件*/
@@ -116,5 +118,9 @@
     [self.navigationController pushViewController:cemeVc animated:YES];
 }
 
+-(void)PrivateWorshipViewDidSelectedCreateCem:(PrivateWorshipView *)privateWorshipView{
+    CreateCemViewController *createCemVc = [[CreateCemViewController alloc] initWithTitle:@"在线祭祀" image:nil];
+    [self.navigationController pushViewController:createCemVc animated:YES];
+}
 
 @end
