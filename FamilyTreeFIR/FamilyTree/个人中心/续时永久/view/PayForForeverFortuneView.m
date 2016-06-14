@@ -25,7 +25,7 @@
     if (self) {
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
         //中间框
-        self.payForForeverFortuneIV = [[UIImageView alloc]initWithFrame:CGRectMake(0.0406*CGRectW(self), 0.2483*CGRectH(self), 0.9188*CGRectW(self), 0.3793*CGRectH(self))];
+        self.payForForeverFortuneIV = [[UIImageView alloc]initWithFrame:CGRectMake(0.0406*CGRectW(self), 0.2483*CGRectH(self), 0.9188*CGRectW(self), 0.4274*CGRectH(self))];
         self.payForForeverFortuneIV.image = MImage(@"xuShi_bg");
         self.payForForeverFortuneIV.userInteractionEnabled = YES;
         [self addSubview:self.payForForeverFortuneIV];

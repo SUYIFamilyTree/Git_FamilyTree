@@ -104,6 +104,7 @@
     if (!_changeFamilyTreeView) {
         _changeFamilyTreeView = [[UIView alloc]init];
         _changeFamilyTreeView.backgroundColor = [UIColor clearColor];
+//        _changeFamilyTreeView.backgroundColor = [UIColor redColor];
     }
     return _changeFamilyTreeView;
 }
@@ -119,8 +120,7 @@
     //设置切换家谱弹出动画
     WK(weakSelf);
     if (self.changeFamilyTreeView.frame.size.width == 0) {
-        self.changeFamilyTreeView.frame = CGRectMake(0.6*Screen_width,0,0,CGRectH(self));
-        
+        self.changeFamilyTreeView.frame = CGRectMake(0.8781*Screen_width,0,0,CGRectH(self));
         [UIView animateWithDuration:1 animations:^{
             [self addSubview:self.changeFamilyTreeView];
             weakSelf.changeFamilyTreeView.frame = CGRectMake(0, 0, 0.8781*Screen_width, CGRectH(self));
