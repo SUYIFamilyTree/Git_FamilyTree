@@ -138,14 +138,17 @@
     if (self.changeFamilyTreeView.frame.size.width == 0) {
         self.changeFamilyTreeView.frame = CGRectMake(0.8781*Screen_width,0,0,CGRectH(self));
         [UIView animateWithDuration:1 animations:^{
-            [self addSubview:self.changeFamilyTreeView];
-            weakSelf.changeFamilyTreeView.frame = CGRectMake(0, 0, 0.8781*Screen_width, CGRectH(self));
-            [self initFamilyTreeNameBtns];
+            [weakSelf addSubview:weakSelf.changeFamilyTreeView];
+            weakSelf.changeFamilyTreeView.frame = CGRectMake(0, 0, 0.8781*Screen_width, CGRectH(weakSelf));
+            [weakSelf initFamilyTreeNameBtns];
         }];
     }else{
         [UIView animateWithDuration:1 animations:^{
-            weakSelf.changeFamilyTreeView.frame = CGRectMake(0.8781*Screen_width,0,0,CGRectH(self));
+            weakSelf.changeFamilyTreeView.frame = CGRectMake(0.8781*Screen_width,0,0,CGRectH(weakSelf));
         }];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf.changeFamilyTreeView removeFromSuperview];
+        });
     }
 }
 
