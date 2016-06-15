@@ -31,15 +31,25 @@ typedef enum : NSUInteger {
 
 @property (nonatomic,strong) UILabel *time_StatuLabel; /*丙申年农历*/
 
-
+@property (nonatomic,strong) LoginViewController *logVc; /*登录Vc*/
 
 @end
 
 @implementation HomeViewController
+
+
+
 #pragma mark *** 生命周期 ***
 - (void)viewDidLoad {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
     [super viewDidLoad];
+    
+    //先跳转到登录页面
+    
+    [self.navigationController pushViewController:self.logVc animated:false];
+    
+    //注册通知
+    [self registerNotifacation];
+    
     self.view.backgroundColor = [UIColor clearColor];
     self.automaticallyAdjustsScrollViewInsets = false;
     self.navigationController.navigationBar.hidden = YES;
@@ -48,14 +58,30 @@ typedef enum : NSUInteger {
     [self initBtn];
 }
 
+
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = false;
+}
+
+-(void)registerNotifacation{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(respondsToNotifacation) name:LogStatusNotifacation object:nil];
+    
+}
+-(void)respondsToNotifacation{
+    if ([[USERDEFAULT objectForKey:LoginStates] boolValue]) {
+        [_naviBar.rightBtn setTitle:@"切换账号" forState:0];
+    }else{
+        [_naviBar.rightBtn setTitle:@"登录" forState:0];
+        
+    }
 }
 #pragma mark *** 初始化数据 ***
 -(void)initData{
     _ScrImages = [@[@"index_lunbo",@"index_icon_fuWu",@"index_icon_human",@"index_icon_s1"] mutableCopy];
 }
+
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
     [self.view addSubview:self.topScrollerView];
@@ -105,6 +131,7 @@ typedef enum : NSUInteger {
         {
             MYLog(@"姓氏起源");
             NewsCenterViewController *newCenter = [[NewsCenterViewController alloc] initWithTitle:@"新闻中心" image:nil];
+            newCenter.bacScrollView.contentOffset = CGPointMake(0, newCenter.hundredVies.frame.origin.y-375*AdaptationWidth());
             [self.navigationController pushViewController:newCenter animated:true];
         }
             break;
@@ -117,9 +144,8 @@ typedef enum : NSUInteger {
 -(void)CommonNavigationViews:(CommonNavigationViews *)comView respondsToRightBtn:(UIButton *)sender{
     
     MYLog(@"登录按钮");
-    LoginViewController *logVc = [LoginViewController new];
-    [self.navigationController pushViewController:logVc animated:YES];
-    self.tabBarController.tabBar.hidden = YES;
+    [self.navigationController pushViewController:self.logVc animated:YES];
+  
     
 }
 
@@ -195,5 +221,12 @@ typedef enum : NSUInteger {
     return _time_StatuLabel;
 }
 
+-(LoginViewController *)logVc{
+    if (!_logVc) {
+        _logVc = [[LoginViewController alloc] init];
+        
+    }
+    return _logVc;
+}
 
 @end

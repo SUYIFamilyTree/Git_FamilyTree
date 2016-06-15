@@ -45,18 +45,20 @@
     
     MYLog(@"返回按钮");
     
-    [[self viewController] popViewControllerAnimated:YES];
+    [[self getNaiViewController] popViewControllerAnimated:YES];
     
 }
 
 -(void)respondsToRightBtn:(UIButton *)sender{
+    
     MYLog(@"右按钮");
     if (_delegate && [_delegate respondsToSelector:@selector(CommonNavigationViews:respondsToRightBtn:)]) {
         [_delegate CommonNavigationViews:self respondsToRightBtn:sender];
     }
+    
 }
 //获取当前view导航控制器
-- (UINavigationController*)viewController {
+- (UINavigationController*)getNaiViewController {
     
     for (UIView* next = [self superview]; next; next = next.superview) {
         
@@ -98,6 +100,8 @@
     }
     return _titleLabel;
 }
+
+
 
 -(UIButton *)rightBtn{
     if (!_rightBtn) {

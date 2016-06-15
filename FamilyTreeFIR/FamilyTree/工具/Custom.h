@@ -70,5 +70,7 @@ __block __weak __typeof(&*self)weakSelf = self;
 #define Password @"password"
 //创建家谱控件高度
 #define InputView_height 40
+//通知字段
+#define LogStatusNotifacation @"loginNotifacation"
 
 #endif /* Custom_h */

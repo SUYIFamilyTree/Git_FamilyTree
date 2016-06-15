@@ -31,6 +31,14 @@ NSString * _Nonnull const kSelectedImageWithFamilyTreeVc = @"jiaPu_icon_b";
 NSString * _Nonnull const kSelectedImageWithShoppingVc = @"shop_icon_b";
 NSString * _Nonnull const kSelectedImageWithPersonalCenterVc = @"geren_icon_b";
 
-
++(void)showAlertViewControllerAutoDissmissWithTarGet:(id)target Message:(NSString *)message delay:(NSInteger)time handler:(void (^)(UIAlertAction *))handler{
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    [target presentViewController:alert animated:YES completion:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        });
+    }];
+}
 
 @end

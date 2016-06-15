@@ -32,8 +32,20 @@ UIKIT_EXTERN NSString * _Nonnull const kSelectedImageWithShoppingVc;
 UIKIT_EXTERN NSString * _Nonnull const kSelectedImageWithPersonalCenterVc;
 
 
+/**
+ *  弹出框自动消失
+ *
+ *  @param title 弹出框内容
+ */
 
-
+/**
+ *  弹出框
+ *
+ *  @param target  调用UIAlertController的对象
+ *  @param message 提示语句
+ *  @param time    延时多少秒消失
+ */
+//+ (void)showAlertViewControllerAutoDissmissWithTarGet:(id _Nonnull)target Message:(NSString * _Nonnull)message delay:(NSInteger)time handler:(void (^)(UIAlertAction *action))handler;
 
 
 
