@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VIPView : UIView
+@class VIPView;
 
+@protocol VIPViewDelegate <NSObject>
+
+-(void)clickVipBackBtn;
+
+@end
+
+@interface VIPView : UIView
+/** 代理人*/
+@property (nonatomic, weak) id<VIPViewDelegate> delegate;
 @end

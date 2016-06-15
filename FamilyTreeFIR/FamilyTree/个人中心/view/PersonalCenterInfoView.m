@@ -7,10 +7,11 @@
 //
 
 #import "PersonalCenterInfoView.h"
+#import "UIView+getCurrentViewController.h"
+#import "EditHeadView.h"
 
-@interface PersonalCenterInfoView()
-/** 头像视图*/
-@property (nonatomic, strong) UIImageView *headIV;
+
+@interface PersonalCenterInfoView()<EditHeadViewDelegate>
 /** 信息数组*/
 @property (nonatomic, strong) NSArray *infoArr;
 /** 当前族谱名*/
@@ -21,6 +22,7 @@
 @property (nonatomic, strong) UIView *changeFamilyTreeView;
 /** 切换家谱名数组*/
 @property (nonatomic, strong) NSArray *changeFamilyTreeNameArr;
+
 @end
 
 @implementation PersonalCenterInfoView
@@ -33,7 +35,6 @@
         [self addSubview:bgIV];
         //头像
         [self initHeadIV];
-        self.headIV.image = MImage(@"gr_ct_qieHuanJiaPu_tx");
         //4个信息标签
         self.infoArr = @[@"排\n行\n三",@"字\n辈\n\n安",@"第\n一\n三\n八\n代",@"陈\n安\n一"];
         [self initFourLBs];
@@ -48,7 +49,24 @@
 }
 
 -(void)initHeadIV{
-    self.headIV = [[UIImageView alloc]initWithFrame:CGRectMake(20, 20, 80, 80)];
+    
+    
+    self.headIV = [[HeadImageView alloc]initWithFrame:CGRectMake(0.0469*CGRectW(self), 0.1533*CGRectH(self), 0.2344*CGRectW(self), 0.5474*CGRectH(self))];
+    self.headIV.userInteractionEnabled = YES;
+    //加载首先访问本地沙盒是否存在相关图片
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"headImage"];
+    UIImage *headImage = [UIImage imageWithContentsOfFile:fullPath];
+    if (!headImage)
+    {
+        //默认头像
+        self.headIV.headInsideIV.image = MImage(@"xiuGaitouxiang_sel1");
+    }
+    else
+    {
+        self.headIV.headInsideIV.image = headImage;
+    }
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget: self action:@selector(clickHeadIV)];
+    [self.headIV addGestureRecognizer:tap];
     [self addSubview:self.headIV];
 }
 
@@ -85,7 +103,6 @@
 -(void)initFamilyTreeNameBtns{
     for (int i = 0; i < 6; i++) {
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0.7863*Screen_width-(0.0938*Screen_width+0.0063*Screen_width)*i, 0, 0.0938*Screen_width, CGRectH(self))];
-        //btn.backgroundColor = [UIColor redColor];
         [btn setBackgroundImage:MImage(@"gr_ct_qieHuanJiaPu_bg_a") forState:UIControlStateNormal];
         if (i < self.changeFamilyTreeNameArr.count) {
             btn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 40, 0);
@@ -104,7 +121,6 @@
     if (!_changeFamilyTreeView) {
         _changeFamilyTreeView = [[UIView alloc]init];
         _changeFamilyTreeView.backgroundColor = [UIColor clearColor];
-//        _changeFamilyTreeView.backgroundColor = [UIColor redColor];
     }
     return _changeFamilyTreeView;
 }
@@ -142,6 +158,13 @@
     }];
 }
 
+-(void)clickHeadIV{
+    MYLog(@"点击头像修改");
+    EditHeadView *editHeadView = [[EditHeadView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
+    editHeadView.delegate = self;
+    [[self viewController].view addSubview:editHeadView];
+}
+
 //高度自适应
 -(void)labelHeightToFit:(UILabel *)label andFrame:(CGRect)frame{
     label.numberOfLines = 0;//根据最大行数需求来设置
@@ -152,5 +175,12 @@
     CGSize expectSize = [label sizeThatFits:maximumLabelSize];
     label.frame = CGRectMake(frame.origin.x,frame.origin.y,frame.size.width, expectSize.height);
 
+}
+
+
+#pragma mark - EditHeadViewDelegate
+-(void)editHeadView:(EditHeadView *)editHeadView HeadInsideImage:(UIImage *)headInsideImage{
+    self.headIV.headInsideIV.image = headInsideImage;
+    MYLog(@"跳转回来了");
 }
 @end

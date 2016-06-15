@@ -8,6 +8,12 @@
 
 #import "PersonalCenterMyPhotoAlbumsView.h"
 #import "CALayer+drawborder.h"
+#import "UIView+getCurrentViewController.h"
+
+@interface PersonalCenterViewController()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+
+@end
+
 @implementation PersonalCenterMyPhotoAlbumsView
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -38,6 +44,7 @@
 -(void)clickMoreBtn:(UIButton *)sender{
     MYLog(@"相册更多");
     [self.delegate clickMoreBtnTo];
+    [self toPhotoLibrary];
 }
 
 -(void)initPhotosIV{
@@ -47,4 +54,18 @@
         [self addSubview:photosIV];
     }
 }
+
+- (void)toPhotoLibrary {
+    
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+    //允许编辑图片
+    imagePicker.allowsEditing = YES;
+    //类型 是 相机  或  相册
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    //设置代理
+    //imagePicker.delegate = self;
+    [[self viewController] presentViewController:imagePicker animated:YES completion:nil];
+
+}
+
 @end

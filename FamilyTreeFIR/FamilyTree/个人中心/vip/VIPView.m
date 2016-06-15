@@ -150,6 +150,9 @@
 }
 
 -(void)clickBackBtn:(UIButton *)sender{
+    [self.delegate clickVipBackBtn];
     [self removeFromSuperview];
+    
+    
 }
 @end
