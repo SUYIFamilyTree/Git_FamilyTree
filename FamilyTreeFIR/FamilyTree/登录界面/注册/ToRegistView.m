@@ -9,8 +9,7 @@
 #import "ToRegistView.h"
 #import "AccountView.h"
 @interface ToRegistView()
-@property (nonatomic,strong) AccountView *accountView; /*手机号*/
-@property (nonatomic,strong) AccountView *passwordView; /*验证码*/
+
 @property (nonatomic,strong) UIButton *verificationBtn; /*验证码按钮*/
 @property (nonatomic,strong) UIButton *registButton; /*注册按钮*/
 

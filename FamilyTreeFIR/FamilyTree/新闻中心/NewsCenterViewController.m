@@ -9,7 +9,6 @@
 #import "NewsCenterViewController.h"
 
 @interface NewsCenterViewController ()
-@property (nonatomic,strong) UIScrollView *bacScrollView; /*背景滚动图*/
 
 @property (nonatomic,strong) UIView *whiteView; /*背景白*/
 
@@ -21,7 +20,6 @@
 
 @property (nonatomic,strong) PortraitAndNameViews *proAndName; /*头像和名字*/
 
-@property (nonatomic,strong) HundredNamesView *hundredVies; /*百家姓*/
 
 @property (nonatomic,strong) NewsTableView *nameTableNews; /*百家姓新闻*/
 

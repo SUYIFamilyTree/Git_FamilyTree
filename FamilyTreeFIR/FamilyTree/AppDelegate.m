@@ -25,15 +25,15 @@
     //初始化window
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-//    RootTabBarViewController *rootVc = [[RootTabBarViewController alloc] init];
+    RootTabBarViewController *rootVc = [[RootTabBarViewController alloc] init];
     
-    LoginViewController *loginVc = [[LoginViewController alloc] init];
+//    LoginViewController *loginVc = [[LoginViewController alloc] init];
     
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVc];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootVc];
     
     _window.backgroundColor = [UIColor grayColor];
     
-    _window.rootViewController = nav;
+    _window.rootViewController = rootVc;
     
     
     [_window makeKeyAndVisible];

@@ -8,6 +8,7 @@
 
 #import "HundredNamesView.h"
 #import "CustonCollectionViewCell.h"
+#import "FamilyNamesViewController.h"
 static NSString *const kReusableCollecCellIdentifier = @"CollectioncellIdentifier";
 
 @interface HundredNamesView()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate>
@@ -69,6 +70,11 @@ static NSString *const kReusableCollecCellIdentifier = @"CollectioncellIdentifie
     cell.displayLabel.text = @"王";
     
     return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    FamilyNamesViewController *famName = [[FamilyNamesViewController alloc] initWithTitle:@"百家姓" image:nil];
+    [[self viewController].navigationController pushViewController:famName animated:YES];
 }
 
 #pragma mark *** getters ***

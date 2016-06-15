@@ -31,11 +31,13 @@
     
     NSDictionary *params = @{@"requestuserid":requestID,@"timestamp":timeStamp,@"requestcode":requestcode,@"requestdata":customParams,@"md5check":md5check,@"reserved":@""};
     
+    NSLog(@"pa----:%@", params);
+    
     [manager POST:RootURL parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSError *error;
         NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSUTF8StringEncoding error:&error];
-        NSLog(@"%@",jsonDic);
+        NSLog(@"base---%@",jsonDic);
         NSString *jsonStr = [NSString stringWithFormat:@"%@",jsonDic];
         NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];

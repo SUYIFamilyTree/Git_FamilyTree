@@ -48,6 +48,7 @@
 #import "ScreenAdaptation.h"
 #import "CALayer+drawborder.h"
 #import "UIColor+random.h"
+#import "UIView+getCurrentViewController.h"
 //网络请求
 #import "TCJPHTTPRequestManager.h"
 //工具

@@ -7,7 +7,9 @@
 //
 
 #import "BaseViewController.h"
-
+#import "HundredNamesView.h"
 @interface NewsCenterViewController : BaseViewController
+@property (nonatomic,strong) UIScrollView *bacScrollView; /*背景滚动图*/
+@property (nonatomic,strong) HundredNamesView *hundredVies; /*百家姓*/
 
 @end

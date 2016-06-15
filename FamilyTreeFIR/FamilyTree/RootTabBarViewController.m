@@ -152,13 +152,10 @@
             btn.imageEdgeInsets = UIEdgeInsetsMake(-20, 0, 0, -45);
             
             btn.titleEdgeInsets = UIEdgeInsetsMake(19, 0, 0, 19);
-
         }
-
         //添加按钮
         [self.tabBar addSubview:btn];
     }
-    
 }
 #pragma mark *** BtnEvents ***
 
