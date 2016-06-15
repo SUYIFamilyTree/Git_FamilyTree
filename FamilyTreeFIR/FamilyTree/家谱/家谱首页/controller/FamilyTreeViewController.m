@@ -266,6 +266,9 @@
 }
 -(void)TopSearchView:(FamilyTreeTopView *)topSearchView didRespondsToMenusBtn:(UIButton *)sender{
     MYLog(@"点击我的家谱");
+    
+    SelectMyFamilyView *selFv = [[SelectMyFamilyView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, 640*AdaptationWidth())];
+    [self.view addSubview:selFv];
 }
 
 
