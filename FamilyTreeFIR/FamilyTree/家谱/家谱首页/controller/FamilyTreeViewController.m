@@ -15,13 +15,17 @@
 #import "LineageViewController.h"
 #import "CreatFamilyTree.h"
 #import "ManagerFamilyViewController.h"
-@interface FamilyTreeViewController ()<FamilyTreeTopViewDelegate,CreatFamilyTreeDelegate>
+@interface FamilyTreeViewController ()<FamilyTreeTopViewDelegate,CreatFamilyTreeDelegate,SelectMyFamilyViewDelegate>
 {
     BOOL _selectedCreatBtn;
+    BOOL _selectedMyFam;
 }
 @property (nonatomic,strong) UIButton *creatBtn; /*创建家谱Btn*/
 
 @property (nonatomic,strong) CreatFamilyTree *crtFamTree; /*创建家谱view*/
+
+@property (nonatomic,strong) SelectMyFamilyView *selecMyFamView; /*我的家谱点出来的视图*/
+
 
 
 @end
@@ -61,8 +65,7 @@
 #pragma mark - 视图搭建
 //设置导航栏
 -(void)initNavi{
-#define StatusBar_Height [[UIApplication sharedApplication] statusBarFrame].size.height
-#define NavigationBar_Height self.navigationController.navigationBar.frame.size.height
+
     FamilyTreeTopView *topView = [[FamilyTreeTopView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, StatusBar_Height+NavigationBar_Height)];
     topView.delegate = self;
     [self.view addSubview:topView];
@@ -266,16 +269,15 @@
 }
 -(void)TopSearchView:(FamilyTreeTopView *)topSearchView didRespondsToMenusBtn:(UIButton *)sender{
     MYLog(@"点击我的家谱");
+    _selectedMyFam = !_selectedMyFam;
+    if (_selectedMyFam) {
+        [self.view addSubview:self.selecMyFamView];
+    }else{
     
-    SelectMyFamilyView *selFv = [[SelectMyFamilyView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, 640*AdaptationWidth())];
-    [self.view addSubview:selFv];
+         [self.selecMyFamView removeFromSuperview];
+    }
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark *** createTreeDelegate ***
 
@@ -295,7 +297,11 @@
     
     MYLog(@"%ld",sender.tag);
 }
+#pragma mark *** SelectMyFamViewDelegate ***
 
+-(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectItemTitle:(NSString *)title{
+    NSLog(@"%@", title);
+}
 #pragma mark *** getters ***
 
 -(UIButton *)creatBtn{
@@ -315,5 +321,13 @@
     return _crtFamTree;
 }
 
+-(SelectMyFamilyView *)selecMyFamView{
+    if (!_selecMyFamView) {
+        _selecMyFamView = [[SelectMyFamilyView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
+        _selecMyFamView.delegate = self;
+        
+    }
+    return _selecMyFamView;
+}
 
 @end

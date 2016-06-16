@@ -216,7 +216,9 @@
             [USERDEFAULT setObject:@true forKey:LoginStates];
             [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserId];
             [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:Password];
-        
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            
         }
         
     } failure:^(NSError *error) {

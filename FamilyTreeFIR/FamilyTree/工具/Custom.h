@@ -39,6 +39,7 @@ __block __weak __typeof(&*self)weakSelf = self;
 //字体大小
 #define MFont(font)   [UIFont systemFontOfSize:(font)]
 #define BFont(font)   [UIFont boldSystemFontOfSize:(font)]
+#define WFont(font)   [UIFont systemFontOfSize:(font*AdaptationWidth())]
 //图片命名
 #define MImage(image) [UIImage imageNamed:(image)]
 

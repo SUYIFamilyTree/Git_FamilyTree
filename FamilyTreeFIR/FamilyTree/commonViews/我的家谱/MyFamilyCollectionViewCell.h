@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MyFamilyCollectionViewCell : UICollectionViewCell
+@property (nonatomic,strong) UILabel *titleLabel; /*内容*/
 
 @end

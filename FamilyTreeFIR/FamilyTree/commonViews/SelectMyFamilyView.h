@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class SelectMyFamilyView;
+
+@protocol SelectMyFamilyViewDelegate <NSObject>
+
+-(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectItemTitle:(NSString *)title;
+
+@end
+
 @interface SelectMyFamilyView : UIView
+@property (nonatomic,weak) id<SelectMyFamilyViewDelegate> delegate; /*代理人*/
 
 @end

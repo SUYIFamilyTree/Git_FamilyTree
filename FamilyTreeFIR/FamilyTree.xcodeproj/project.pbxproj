@@ -897,8 +897,8 @@
 		ADA98E911D11584B005B23EC /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		ADA98E921D11584B005B23EC /* CommonNavigationViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonNavigationViews.h; sourceTree = "<group>"; };
 		ADA98E931D11584B005B23EC /* CommonNavigationViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonNavigationViews.m; sourceTree = "<group>"; };
-		ADA98E941D11584B005B23EC /* SelectMyFamilyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectMyFamilyView.h; sourceTree = "<group>"; };
-		ADA98E951D11584B005B23EC /* SelectMyFamilyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectMyFamilyView.m; sourceTree = "<group>"; };
+		ADA98E941D11584B005B23EC /* SelectMyFamilyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectMyFamilyView.h; path = ../SelectMyFamilyView.h; sourceTree = "<group>"; };
+		ADA98E951D11584B005B23EC /* SelectMyFamilyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectMyFamilyView.m; path = ../SelectMyFamilyView.m; sourceTree = "<group>"; };
 		ADA98E9A1D115898005B23EC /* MyFamilyCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFamilyCollectionViewCell.h; sourceTree = "<group>"; };
 		ADA98E9B1D115898005B23EC /* MyFamilyCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFamilyCollectionViewCell.m; sourceTree = "<group>"; };
 		ADAB7E101CF4050B00C3C143 /* DefineHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefineHeader.h; sourceTree = "<group>"; };
@@ -1962,8 +1962,6 @@
 				ADA98E911D11584B005B23EC /* BaseViewController.m */,
 				ADA98E921D11584B005B23EC /* CommonNavigationViews.h */,
 				ADA98E931D11584B005B23EC /* CommonNavigationViews.m */,
-				ADA98E941D11584B005B23EC /* SelectMyFamilyView.h */,
-				ADA98E951D11584B005B23EC /* SelectMyFamilyView.m */,
 			);
 			path = commonViews;
 			sourceTree = "<group>";
@@ -1973,6 +1971,8 @@
 			children = (
 				ADA98E9A1D115898005B23EC /* MyFamilyCollectionViewCell.h */,
 				ADA98E9B1D115898005B23EC /* MyFamilyCollectionViewCell.m */,
+				ADA98E941D11584B005B23EC /* SelectMyFamilyView.h */,
+				ADA98E951D11584B005B23EC /* SelectMyFamilyView.m */,
 			);
 			path = "我的家谱";
 			sourceTree = "<group>";
@@ -2338,6 +2338,7 @@
 		ADC3272E1CF3FB8B00CEAE53 /* 素材图 */ = {
 			isa = PBXGroup;
 			children = (
+				BC96727F1D10E8D500F60534 /* 个人信息 */,
 				BC5F15EA1D0FF224004F3622 /* vip */,
 				BC5F15BF1D0FF1D4004F3622 /* 修改图像 */,
 				BC5F151C1D0FF1CA004F3622 /* 个人中心 */,
@@ -3806,6 +3807,7 @@
 				BC5F15181D0FF1AD004F3622 /* RechargeViewController.m in Sources */,
 				ADA98E741D10F5EF005B23EC /* FamilyNamesViewController.m in Sources */,
 				ADA7FEF31D07A82300EDBEE4 /* PortraitAndNameViews.m in Sources */,
+				BC96727E1D10E4BF00F60534 /* EditPersonalInfoView.m in Sources */,
 				ADA98E961D11584C005B23EC /* BaseViewController.m in Sources */,
 				ADD23CC51D0D0085008986F6 /* PortraiView.m in Sources */,
 				BC2943A31CFE9F7B006671B9 /* LineageCellView.m in Sources */,
