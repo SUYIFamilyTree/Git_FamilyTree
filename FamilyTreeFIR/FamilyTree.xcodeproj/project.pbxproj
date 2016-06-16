@@ -335,6 +335,7 @@
 		ADC327881CF3FB8B00CEAE53 /* weixin.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3275B1CF3FB8B00CEAE53 /* weixin.png */; };
 		ADC327891CF3FB8B00CEAE53 /* weixin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3275C1CF3FB8B00CEAE53 /* weixin@2x.png */; };
 		ADC3278A1CF3FB8B00CEAE53 /* weixin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3275D1CF3FB8B00CEAE53 /* weixin@3x.png */; };
+		ADC4F1AF1D125410003D2B27 /* DataSelectPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC4F1AE1D125410003D2B27 /* DataSelectPickView.m */; };
 		ADCD5C891CF451C000770356 /* geren_icon_a.png in Resources */ = {isa = PBXBuildFile; fileRef = ADCD5C711CF451C000770356 /* geren_icon_a.png */; };
 		ADCD5C8A1CF451C000770356 /* geren_icon_a@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADCD5C721CF451C000770356 /* geren_icon_a@2x.png */; };
 		ADCD5C8B1CF451C000770356 /* geren_icon_a@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADCD5C731CF451C000770356 /* geren_icon_a@3x.png */; };
@@ -1034,6 +1035,8 @@
 		ADC3275B1CF3FB8B00CEAE53 /* weixin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weixin.png; sourceTree = "<group>"; };
 		ADC3275C1CF3FB8B00CEAE53 /* weixin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weixin@2x.png"; sourceTree = "<group>"; };
 		ADC3275D1CF3FB8B00CEAE53 /* weixin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weixin@3x.png"; sourceTree = "<group>"; };
+		ADC4F1AD1D125410003D2B27 /* DataSelectPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSelectPickView.h; sourceTree = "<group>"; };
+		ADC4F1AE1D125410003D2B27 /* DataSelectPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSelectPickView.m; sourceTree = "<group>"; };
 		ADCD5C711CF451C000770356 /* geren_icon_a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = geren_icon_a.png; sourceTree = "<group>"; };
 		ADCD5C721CF451C000770356 /* geren_icon_a@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "geren_icon_a@2x.png"; sourceTree = "<group>"; };
 		ADCD5C731CF451C000770356 /* geren_icon_a@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "geren_icon_a@3x.png"; sourceTree = "<group>"; };
@@ -1624,6 +1627,7 @@
 		AD6788991D06AA9D00D6CF52 /* 新闻中心 */ = {
 			isa = PBXGroup;
 			children = (
+				ADC4F1B01D12794A003D2B27 /* model */,
 				ADA98E711D10F5CD005B23EC /* 百家姓 */,
 				AD716D601D06D012004F422E /* Views */,
 				AD716D5D1D06C0A0004F422E /* news_lunbo.png */,
@@ -1957,6 +1961,7 @@
 		ADA98E8F1D11584B005B23EC /* commonViews */ = {
 			isa = PBXGroup;
 			children = (
+				ADC4F1AC1D125397003D2B27 /* 选择视图picker */,
 				ADA98E991D11586F005B23EC /* 我的家谱 */,
 				ADA98E901D11584B005B23EC /* BaseViewController.h */,
 				ADA98E911D11584B005B23EC /* BaseViewController.m */,
@@ -2463,6 +2468,22 @@
 				AD2ACD811CF3FD06009D4A24 /* HomeViewController.m */,
 			);
 			path = "首页";
+			sourceTree = "<group>";
+		};
+		ADC4F1AC1D125397003D2B27 /* 选择视图picker */ = {
+			isa = PBXGroup;
+			children = (
+				ADC4F1AD1D125410003D2B27 /* DataSelectPickView.h */,
+				ADC4F1AE1D125410003D2B27 /* DataSelectPickView.m */,
+			);
+			path = "选择视图picker";
+			sourceTree = "<group>";
+		};
+		ADC4F1B01D12794A003D2B27 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		ADD23CC61D0D0C48008986F6 /* 字辈 */ = {
@@ -3843,6 +3864,7 @@
 				BC5F15171D0FF1AD004F3622 /* EditHeadView.m in Sources */,
 				ADA7FF011D07E51500EDBEE4 /* CustonCollectionViewCell.m in Sources */,
 				ADB9734D1CFE86FF007B876B /* BackScrollAndDetailView.m in Sources */,
+				ADC4F1AF1D125410003D2B27 /* DataSelectPickView.m in Sources */,
 				ADA4C1151D0E437E00CA9067 /* CemeteryViewController.m in Sources */,
 				AD8E603D1CFC0BDA00355C06 /* FindPassView.m in Sources */,
 				AD1F3C211D0F92770085EDFB /* CreateCemViewController.m in Sources */,

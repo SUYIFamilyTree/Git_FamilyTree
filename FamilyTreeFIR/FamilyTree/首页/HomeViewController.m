@@ -40,6 +40,13 @@ typedef enum : NSUInteger {
 
 
 #pragma mark *** 生命周期 ***
+
+-(void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

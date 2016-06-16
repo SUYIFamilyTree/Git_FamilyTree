@@ -45,7 +45,7 @@ UIKIT_EXTERN NSString * _Nonnull const kSelectedImageWithPersonalCenterVc;
  *  @param message 提示语句
  *  @param time    延时多少秒消失
  */
-//+ (void)showAlertViewControllerAutoDissmissWithTarGet:(id _Nonnull)target Message:(NSString * _Nonnull)message delay:(NSInteger)time handler:(void (^)(UIAlertAction *action))handler;
++ (void)showAlertViewControllerAutoDissmissWithTarGet:(id _Nonnull)target Message:(NSString * _Nonnull)message delay:(NSInteger)time complete:(void (^ _Nullable)(BOOL))complete;
 
 
 

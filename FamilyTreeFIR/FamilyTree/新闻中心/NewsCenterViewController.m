@@ -43,6 +43,17 @@
     [self.bacScrollView addSubview:self.hundredVies];
     [self.bacScrollView addSubview:self.nameTableNews];
     
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"userid":@"0",@"query":@"郭氏家谱",@"type":@"MyGen"} requestID:@0 requestcode:@"querymygen" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
+            NSLog(@"news---%@", dic);
+        }
+        
+        
+    } failure:^(NSError *error) {
+        MYLog(@"%@",error.description);
+    }];
+    
 }
 
 #pragma mark *** getters ***

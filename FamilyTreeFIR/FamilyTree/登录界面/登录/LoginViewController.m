@@ -85,19 +85,21 @@
     
     NSString *accStr = registView.accountView.inputTextView.text;
     NSString *pasStr = registView.passwordView.inputTextView.text;
-    NSNumber *lng = @0;
-    NSNumber *lat = @0;
+//    NSNumber *lng = @0;
+//    NSNumber *lat = @0;
  
     NSLog(@"acc-%@pas-%@", accStr,pasStr);
     
-//    NSDictionary *dic = @{@"MeAccount":accStr,@"MePassword":pasStr,@"MeLng":@"0",@"MeLat":@"0"};
-    NSDictionary *dic = @{@"MeAccount":accStr,@"MePassword":pasStr};
+    NSDictionary *dic = @{@"MeAccount":accStr,@"MePassword":pasStr,@"MeLng":@"0",@"MeLat":@"0"};
+//    NSDictionary *dic = @{@"MeAccount":accStr,@"MePassword":pasStr};
 
     
     [TCJPHTTPRequestManager POSTWithParameters:dic requestID:@0 requestcode:@"register" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             
-            NSLog(@"zhuce%@", responseObject);
+            NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
+            NSLog(@"%@", dic);
+
             
         }
     } failure:^(NSError *error) {
@@ -209,7 +211,7 @@
             //登录成功
 
             NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
-            NSLog(@"%@", dic);
+//            NSLog(@"%@", dic);
             
             [LoginModel sharedLoginMode].MeAreacodeid = dic[@"MeAreacodeid"];
             //存储用户信息
@@ -218,6 +220,8 @@
             [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:Password];
             
             [self.navigationController popViewControllerAnimated:YES];
+            
+            
             
         }
         
