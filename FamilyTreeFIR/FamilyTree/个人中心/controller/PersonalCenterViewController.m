@@ -21,7 +21,7 @@
 #import "SettlementCenterViewController.h"
 #import "VIPView.h"
 #import "EditHeadView.h"
-
+#import "EditPersonalInfoView.h"
 
 @interface PersonalCenterViewController ()<PersonalCenterHeaderViewDelegate,PersonalCenterTodayFortuneViewDelegate,UITableViewDataSource,UITableViewDelegate,PersonalCenterMyPhotoAlbumsViewDelegate,PayForFortuneViewDelegate,PayForForeverFortuneViewDelegate,VIPViewDelegate>
 /** 全屏滚动*/
@@ -34,6 +34,8 @@
 @property (nonatomic, strong) UIButton *vipBtn;
 /** 切换家谱及头像视图*/
 @property (nonatomic, strong) PersonalCenterInfoView *infoView;
+/** 个人信息编辑页面*/
+@property (nonatomic, strong) EditPersonalInfoView *editPersonalInfoView;
 @end
 
 @implementation PersonalCenterViewController
@@ -165,9 +167,33 @@
     return _vipView;
 }
 
+-(EditPersonalInfoView *)editPersonalInfoView{
+    if (!_editPersonalInfoView) {
+        _editPersonalInfoView = [[EditPersonalInfoView alloc]initWithFrame:CGRectMake(0, 64, 0, Screen_height-49-64)];
+    }
+    return _editPersonalInfoView;
+}
 //点击个人信息编辑
 -(void)clickPersonalInfoBtn:(UIButton *)sender{
     MYLog(@"点击个人信息编辑");
+    WK(weakSelf);
+    
+    if (self.editPersonalInfoView.frame.size.width == 0) {
+        [UIView animateWithDuration:1 animations:^{
+            [weakSelf.view addSubview:weakSelf.editPersonalInfoView];
+            weakSelf.editPersonalInfoView.frame = CGRectMake(0, 64, Screen_width, Screen_height-49-64);
+        }];
+    }else{
+        [UIView animateWithDuration:1 animations:^{
+            weakSelf.editPersonalInfoView.frame = CGRectMake(0,64,0,Screen_height-49-64);
+        }];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf.editPersonalInfoView removeFromSuperview];
+        });
+    }
+
+
+    
 }
 
 //点击vip按钮
@@ -234,5 +260,6 @@
 -(void)clickVipBackBtn{
     self.vipBtn.selected = NO;
 }
+
 
 @end
