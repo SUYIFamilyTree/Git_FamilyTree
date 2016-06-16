@@ -70,12 +70,18 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
 
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kReusableMyheaderIdentifier forIndexPath:indexPath];
+    if (indexPath.section == 0) {
+        UILabel *label = [[UILabel alloc] initWithFrame:AdaptationFrame(0, 0, 200, 84)];
+        label.text = @"我的家谱";
+        label.textAlignment = 0;
+        label.font = MFont(30*AdaptationWidth());
+        [view addSubview:label];
+    }else if (indexPath.section == 1){
+        UIView *lineView = [[UIView alloc] initWithFrame:AdaptationFrame(0, 43, 658, 1)];
+        lineView.backgroundColor = LH_RGBCOLOR(240, 240, 240);
+        [view addSubview:lineView];
+    }
     
-    UILabel *label = [[UILabel alloc] initWithFrame:AdaptationFrame(0, 0, 200, 84)];
-    label.text = @"我的家谱";
-    label.textAlignment = 0;
-    label.font = MFont(30*AdaptationWidth());
-    [view addSubview:label];
     
     return view;
 }
@@ -106,6 +112,7 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
         _collectionView.backgroundColor = [UIColor whiteColor];
         [_collectionView registerClass:[MyFamilyCollectionViewCell class] forCellWithReuseIdentifier:kReusableMyFamCellIdentifier];
         [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kReusableMyheaderIdentifier];
+        //背景
         UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,Screen_width, _collectionView.bounds.size.height)];
         whiteView.backgroundColor = [UIColor whiteColor];
         UIView *halfBlackView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectYH(whiteView), Screen_width, 500*AdaptationWidth())];
