@@ -101,8 +101,6 @@
     return _titleLabel;
 }
 
-
-
 -(UIButton *)rightBtn{
     if (!_rightBtn) {
         _rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.frame)-44+5, CGRectGetHeight(_backView.bounds)/2-30+StatusBar_Height+10, 25, 25)];

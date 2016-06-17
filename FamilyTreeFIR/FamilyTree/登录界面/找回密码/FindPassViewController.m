@@ -112,7 +112,7 @@
                 break;
         }
     }
-    
+
     //确认修改按钮
     UIButton *sureBtn = [[UIButton alloc] init];
     [sureBtn setTitle:@"确认修改" forState:0];
@@ -128,11 +128,36 @@
 #pragma mark *** Events ***
 
 -(void)respondsToFindVerBtn{
+    
     MYLog(@"验证码");
+ 
 }
 
 -(void)respondsToSureBtn{
     MYLog(@"确认修改");
+    
+    NSString *phoneNum = self.phoneNum.inputTextView.text;
+    NSString *password = self.nPass.inputTextView.text;
+    NSString *surePs = self.nSurePass.inputTextView.text;
+    
+    if ([password isEqualToString:surePs]) {
+        [TCJPHTTPRequestManager POSTWithParameters:@{@"user":phoneNum,@"newpass":password} requestID:@0 requestcode:kRequestCodeBackPassword success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+            if (succe) {
+               [Tools showAlertViewControllerAutoDissmissWithTarGet:self Message:@"修改成功" delay:1 complete:^(BOOL complete) {
+                   if (complete) {
+                       [self.navigationController popViewControllerAnimated:YES];
+                   }
+               }];
+            }
+        } failure:^(NSError *error) {
+            
+        }];
+    }else{
+        [Tools showAlertViewControllerAutoDissmissWithTarGet:self Message:@"两次输入密码不正确" delay:1 complete:nil];
+    }
+    
+    
+    
 }
 
 #pragma mark *** getters ***
@@ -144,12 +169,12 @@
     return _naviView;
 }
 
--(FindPassView *)phoneNum{
-    if (!_phoneNum) {
-        _phoneNum = [[FindPassView alloc] initWithFrame:CGRectMake(0, 100, 0.8*Screen_width, 40) headImage:MImage(@"tel") isSafe:NO hasArrows:NO withplaceholderStr:@"手机号"];
-       
-    }
-    return _phoneNum;
-}
+//-(FindPassView *)phoneNum{
+//    if (!_phoneNum) {
+//        _phoneNum = [[FindPassView alloc] initWithFrame:CGRectMake(0, 100, 0.8*Screen_width, 40) headImage:MImage(@"tel") isSafe:NO hasArrows:NO withplaceholderStr:@"手机号"];
+//       
+//    }
+//    return _phoneNum;
+//}
 
 @end

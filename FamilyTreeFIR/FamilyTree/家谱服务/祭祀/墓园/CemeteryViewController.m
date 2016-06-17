@@ -30,7 +30,16 @@ enum {
 
 @property (nonatomic,strong) CemGoodsShopView *goodsView; /*祭祀商品*/
 
+@property (nonatomic,copy) NSMutableArray *goodsImagesArr; /*买的祭祀商品数组*/
+
+
 @property (nonatomic,strong) InputCherishView *inputView; /*输入缅怀语*/
+
+@property (nonatomic,strong) NSMutableArray *cherishArr; /*所有缅怀语*/
+
+@property (nonatomic,strong) UIView *allCherishView; /*全部缅怀语的view*/
+
+
 
 
 
@@ -55,20 +64,38 @@ enum {
     [self.scrollView addSubview:self.cemImageView];
       [self initXiangLu];
     [self.scrollView addSubview:self.detailView];
+    
+    [self allGoodsdisplay];
+    
     [self initRightBtn];
+    [self reloadCherishLabels];
     
     
     
 }
 //香炉
 -(void)initXiangLu{
+    
     for (int idx = 0; idx<2; idx++) {
         UIImageView *image = [[UIImageView alloc] initWithFrame:AdaptationFrame((0.7*bacheight-Screen_width/2)/AdaptationWidth()+50+idx*(350+140), 520, 126, 226)];
         image.image = MImage(@"my_name_xiangLu");
         
         [self.scrollView addSubview:image];
     }
+    
 }
+
+//所有买了的贡品
+-(void)allGoodsdisplay{
+    for (int idx = 0; idx<self.goodsImagesArr.count; idx++) {
+        UIImageView *godsIma = [[UIImageView alloc] initWithFrame:AdaptationFrame(idx*105, 740, 105, 80)];
+        godsIma.image = MImage(self.goodsImagesArr[idx]);
+        [self.scrollView addSubview:godsIma];
+    }
+    
+}
+
+
 //三个btn
 -(void)initRightBtn{
     
@@ -82,6 +109,62 @@ enum {
         [self.view addSubview:btn];
     }
 }
+
+
+
+
+//缅怀语言 布局
+
+-(void)reloadCherishLabels{
+    
+    
+    [self.scrollView addSubview:self.allCherishView];
+    
+    for (UIView *view in self.allCherishView.subviews) {
+        [view removeFromSuperview];
+    }
+    
+    for (int idx = 0; idx<3; idx++) {
+        
+        NSInteger randX = (random()%30+180);
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:AdaptationFrame(randX, 50+85*idx, 300, 35)];
+        label.font = WFont(random()%5+20);
+        label.textColor = [UIColor random];
+        
+        label.text = self.cherishArr[idx];
+        [label sizeToFit];
+        
+        [self.allCherishView addSubview:label];
+        
+    }
+    for (int idx = 0; idx<3; idx++) {
+        
+        NSInteger randX =  random()%30+40;
+        UILabel *label = [[UILabel alloc] initWithFrame:AdaptationFrame(randX, 90+82*idx, 300, 35)];
+        label.font = WFont(random()%5+20);
+        label.textColor = [UIColor random];
+        label.text = self.cherishArr[3+idx];
+        [label sizeToFit];
+        
+        [self.allCherishView addSubview:label];
+    }
+    for (int idx = 0; idx<3; idx++) {
+        
+        NSInteger randX = (random()%50+380);
+
+        UILabel *label = [[UILabel alloc] initWithFrame:AdaptationFrame(randX, 90+82*idx, 300, 35)];
+        label.font = WFont(random()%5+20);
+        label.textColor = [UIColor random];
+        label.text = self.cherishArr[6+idx];
+        [label sizeToFit];
+        
+        [self.allCherishView addSubview:label];
+    }
+    
+}
+
+
 #pragma mark *** btnEvents ***
 
 -(void)respondsToCemBtn:(UIButton *)sender{
@@ -113,7 +196,12 @@ enum {
             break;
     }
 }
-
+//提交btn
+-(void)respondsToCommitBtn:(UIButton *)sender{
+    [self.cherishArr removeLastObject];
+    [self.cherishArr insertObject:self.inputView.textView.text atIndex:0];
+    [self reloadCherishLabels];
+}
 #pragma mark *** getters ***
 -(UIScrollView *)scrollView{
     if (!_scrollView) {
@@ -151,8 +239,31 @@ enum {
 -(InputCherishView *)inputView{
     if (!_inputView) {
         _inputView = [[InputCherishView alloc] initWithFrame:AdaptationFrame(170, 955, 375, 162)];
+        [_inputView.commitBtn addTarget:self action:@selector(respondsToCommitBtn:) forControlEvents:UIControlEventTouchUpInside];
+        
         
     }
     return _inputView;
+}
+-(NSMutableArray *)cherishArr{
+    if (!_cherishArr) {
+        _cherishArr = [@[@"在天堂快快乐乐，不孤单1",@"在天堂快快乐乐，不孤单2",@"在天堂快快乐乐，不孤单3",@"在天堂快快乐乐，不孤单4",@"在天堂快快乐乐，不孤单5",@"在天堂快快乐乐，不孤单6",@"在天堂快快乐乐，不孤单7",@"在天堂快快乐乐，不孤单8",@"在天堂快快乐乐，不孤单9"] mutableCopy];
+        
+    }
+    return _cherishArr;
+}
+-(UIView *)allCherishView{
+    if (!_allCherishView) {
+        _allCherishView = [[UIView alloc] initWithFrame:AdaptationFrame(0.7*bacheight-Screen_width/2/AdaptationWidth()+Screen_width/2/AdaptationWidth(), 0, Screen_width/AdaptationWidth(), 300)];
+    }
+    return _allCherishView;
+}
+
+-(NSMutableArray *)goodsImagesArr{
+    if (!_goodsImagesArr) {
+        _goodsImagesArr = [@[@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour"] mutableCopy];
+        
+    }
+    return _goodsImagesArr;
 }
 @end

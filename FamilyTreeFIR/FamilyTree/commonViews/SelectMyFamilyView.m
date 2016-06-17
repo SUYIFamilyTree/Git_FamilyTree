@@ -1,0 +1,134 @@
+//
+//  SelectMyFamilyView.m
+//  FamilyTree
+//
+//  Created by 王子豪 on 16/6/15.
+//  Copyright © 2016年 王子豪. All rights reserved.
+//
+
+#import "SelectMyFamilyView.h"
+#import "MyFamilyCollectionViewCell.h"
+
+static NSString *const kReusableMyFamCellIdentifier = @"MyFamcellIdentifier";
+static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
+
+
+
+@interface SelectMyFamilyView()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,UICollectionViewDelegate>
+{
+    NSArray *_dataSource;
+    
+}
+@property (nonatomic,strong) UICollectionView *collectionView; /*集合*/
+
+@end
+
+@implementation SelectMyFamilyView
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self initData];
+        [self initUI];
+    }
+    return self;
+}
+
+#pragma mark *** 初始化数据 ***
+-(void)initData{
+    
+    
+    NSArray *arr = @[@"我的家谱1",@"我的家谱2",@"我的家谱3"];
+    NSArray *arr2 = @[@"修谱名目",@"家训家风",@"世系图",@"字辈",@"恩荣录",@"名人传记",@"图文影音",@"家族互助",@"风俗礼仪",@"祠堂",@"坟茔",@"契约"];
+    _dataSource = @[arr,arr2];
+    
+    
+    
+}
+#pragma mark *** 初始化界面 ***
+-(void)initUI{
+    [self addSubview:self.collectionView];
+}
+
+#pragma mark *** delegate ***
+
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return _dataSource.count;
+}
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return ((NSArray *)(_dataSource[section])).count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    MyFamilyCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kReusableMyFamCellIdentifier forIndexPath:indexPath];
+    cell.titleLabel.text = _dataSource[indexPath.section][indexPath.row];
+    
+   return cell;
+    
+}
+
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kReusableMyheaderIdentifier forIndexPath:indexPath];
+    if (indexPath.section == 0) {
+        UILabel *label = [[UILabel alloc] initWithFrame:AdaptationFrame(0, 0, 200, 84)];
+        label.text = @"我的家谱";
+        label.textAlignment = 0;
+        label.font = MFont(30*AdaptationWidth());
+        [view addSubview:label];
+    }else if (indexPath.section == 1){
+        UIView *lineView = [[UIView alloc] initWithFrame:AdaptationFrame(0, 43, 658, 1)];
+        lineView.backgroundColor = LH_RGBCOLOR(240, 240, 240);
+        [view addSubview:lineView];
+    }
+    
+    
+    return view;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    MyFamilyCollectionViewCell *cell = ((MyFamilyCollectionViewCell *)([collectionView cellForItemAtIndexPath:indexPath]));
+    if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectItemTitle:)]) {
+        [_delegate SelectMyFamilyViewDelegate:self didSelectItemTitle:cell.titleLabel.text];
+    }
+}
+
+#pragma mark *** respondsToBlackArea ***
+//点击黑色背景移除视图
+-(void)respondsToBlackArea{
+    [self removeFromSuperview];
+}
+#pragma mark *** getters ***
+-(UICollectionView *)collectionView{
+    if (!_collectionView) {
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.minimumLineSpacing = 22*AdaptationWidth();
+        flowLayout.minimumInteritemSpacing = 28*AdaptationWidth();
+        flowLayout.itemSize = AdaptationSize(200, 73);
+        flowLayout.headerReferenceSize = AdaptationSize(200, 84);
+        _collectionView = [[UICollectionView alloc] initWithFrame:AdaptationFrame(30, 0, self.bounds.size.width/AdaptationWidth()-60, 634) collectionViewLayout:flowLayout];;
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.backgroundColor = [UIColor whiteColor];
+        [_collectionView registerClass:[MyFamilyCollectionViewCell class] forCellWithReuseIdentifier:kReusableMyFamCellIdentifier];
+        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kReusableMyheaderIdentifier];
+        //背景
+        UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,Screen_width, _collectionView.bounds.size.height)];
+        whiteView.backgroundColor = [UIColor whiteColor];
+        UIView *halfBlackView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectYH(whiteView), Screen_width, 500*AdaptationWidth())];
+        halfBlackView.backgroundColor = [UIColor blackColor];
+        halfBlackView.alpha = 0.6;
+        halfBlackView.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer *tapHaG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondsToBlackArea)];
+        [halfBlackView addGestureRecognizer:tapHaG];
+        
+        
+        [self addSubview:whiteView];
+        [self addSubview:halfBlackView];
+    }
+    return _collectionView;
+}
+
+
+@end
