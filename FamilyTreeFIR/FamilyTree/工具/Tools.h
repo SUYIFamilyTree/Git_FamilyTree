@@ -31,6 +31,16 @@ UIKIT_EXTERN NSString * _Nonnull const kSelectedImageWithFamilyTreeVc;
 UIKIT_EXTERN NSString * _Nonnull const kSelectedImageWithShoppingVc;
 UIKIT_EXTERN NSString * _Nonnull const kSelectedImageWithPersonalCenterVc;
 
+#pragma mark *** 网络请求requestCode ***
+
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeLogin;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeRegister;;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeUpdatePassword;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeBackPassword;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeEditProfile;
+
+
+
 
 /**
  *  弹出框自动消失

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface InputCherishView : UIView
-
+@property (nonatomic,strong) UITextView *textView; /*说的话*/
+@property (nonatomic,strong) UIButton *commitBtn; /*提交*/
 @end

@@ -8,8 +8,7 @@
 
 #import "InputCherishView.h"
 @interface InputCherishView()
-@property (nonatomic,strong) UITextView *textView; /*说的话*/
-@property (nonatomic,strong) UIButton *commitBtn; /*提交*/
+
 
 
 @end

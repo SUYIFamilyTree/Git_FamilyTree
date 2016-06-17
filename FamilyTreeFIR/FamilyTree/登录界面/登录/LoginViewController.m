@@ -94,7 +94,7 @@
 //    NSDictionary *dic = @{@"MeAccount":accStr,@"MePassword":pasStr};
 
     
-    [TCJPHTTPRequestManager POSTWithParameters:dic requestID:@0 requestcode:@"register" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    [TCJPHTTPRequestManager POSTWithParameters:dic requestID:@0 requestcode:kRequestCodeRegister success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             
             NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
@@ -206,7 +206,7 @@
 
     NSDictionary *logDic = @{@"user":self.loginView.accountView.inputTextView.text,@"pass":self.loginView.passwordView.inputTextView.text};
     
-    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:@"login" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:kRequestCodeLogin success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             //登录成功
 

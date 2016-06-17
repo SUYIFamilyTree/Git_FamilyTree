@@ -141,7 +141,7 @@
     NSString *surePs = self.nSurePass.inputTextView.text;
     
     if ([password isEqualToString:surePs]) {
-        [TCJPHTTPRequestManager POSTWithParameters:@{@"user":phoneNum,@"newpass":password} requestID:@0 requestcode:@"backpswd" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        [TCJPHTTPRequestManager POSTWithParameters:@{@"user":phoneNum,@"newpass":password} requestID:@0 requestcode:kRequestCodeBackPassword success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
             if (succe) {
                [Tools showAlertViewControllerAutoDissmissWithTarGet:self Message:@"修改成功" delay:1 complete:^(BOOL complete) {
                    if (complete) {
