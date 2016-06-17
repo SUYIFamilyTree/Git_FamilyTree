@@ -485,7 +485,6 @@
 		BC5F157C1D0FF1CA004F3622 /* gr_ct_4@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F152B1D0FF1CA004F3622 /* gr_ct_4@3x.png */; };
 		BC5F157D1D0FF1CA004F3622 /* gr_ct_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F152C1D0FF1CA004F3622 /* gr_ct_bg.png */; };
 		BC5F157E1D0FF1CA004F3622 /* gr_ct_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F152D1D0FF1CA004F3622 /* gr_ct_bg@2x.png */; };
-		BC5F157F1D0FF1CA004F3622 /* gr_ct_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F152E1D0FF1CA004F3622 /* gr_ct_bg@3x.png */; };
 		BC5F15801D0FF1CA004F3622 /* gr_ct_jiang_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F152F1D0FF1CA004F3622 /* gr_ct_jiang_bg.png */; };
 		BC5F15811D0FF1CA004F3622 /* gr_ct_jiang_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15301D0FF1CA004F3622 /* gr_ct_jiang_bg@2x.png */; };
 		BC5F15821D0FF1CA004F3622 /* gr_ct_jiang_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15311D0FF1CA004F3622 /* gr_ct_jiang_bg@3x.png */; };
@@ -525,7 +524,6 @@
 		BC5F15A41D0FF1CA004F3622 /* gr_ct_ys_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15531D0FF1CA004F3622 /* gr_ct_ys_bg.png */; };
 		BC5F15A51D0FF1CA004F3622 /* gr_ct_ys_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15541D0FF1CA004F3622 /* gr_ct_ys_bg@2x.png */; };
 		BC5F15A61D0FF1CA004F3622 /* gr_ct_ys_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15551D0FF1CA004F3622 /* gr_ct_ys_bg@3x.png */; };
-		BC5F15A71D0FF1CA004F3622 /* gr_ct_ys_gray0.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15561D0FF1CA004F3622 /* gr_ct_ys_gray0.png */; };
 		BC5F15A81D0FF1CA004F3622 /* gr_ct_ys_gray0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15571D0FF1CA004F3622 /* gr_ct_ys_gray0@2x.png */; };
 		BC5F15A91D0FF1CA004F3622 /* gr_ct_ys_gray0@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15581D0FF1CA004F3622 /* gr_ct_ys_gray0@3x.png */; };
 		BC5F15AA1D0FF1CA004F3622 /* gr_ct_ys_gray1.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15591D0FF1CA004F3622 /* gr_ct_ys_gray1.png */; };
@@ -546,7 +544,6 @@
 		BC5F15B91D0FF1CA004F3622 /* human_ss.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15681D0FF1CA004F3622 /* human_ss.png */; };
 		BC5F15BA1D0FF1CA004F3622 /* human_ss@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15691D0FF1CA004F3622 /* human_ss@2x.png */; };
 		BC5F15BB1D0FF1CA004F3622 /* human_ss@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F156A1D0FF1CA004F3622 /* human_ss@3x.png */; };
-		BC5F15BC1D0FF1CA004F3622 /* human_wuxingImg.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F156B1D0FF1CA004F3622 /* human_wuxingImg.png */; };
 		BC5F15BD1D0FF1CA004F3622 /* human_wuxingImg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F156C1D0FF1CA004F3622 /* human_wuxingImg@2x.png */; };
 		BC5F15BE1D0FF1CA004F3622 /* human_wuxingImg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F156D1D0FF1CA004F3622 /* human_wuxingImg@3x.png */; };
 		BC5F15D51D0FF1D4004F3622 /* xiuGaitouxiang_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15C01D0FF1D4004F3622 /* xiuGaitouxiang_bg.png */; };
@@ -585,6 +582,7 @@
 		BC5F16061D0FF224004F3622 /* vip_right.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15F71D0FF224004F3622 /* vip_right.png */; };
 		BC5F16071D0FF224004F3622 /* vip_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15F81D0FF224004F3622 /* vip_right@2x.png */; };
 		BC5F16081D0FF224004F3622 /* vip_right@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15F91D0FF224004F3622 /* vip_right@3x.png */; };
+		BC65210F1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC65210E1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.m */; };
 		BC96727E1D10E4BF00F60534 /* EditPersonalInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC96727D1D10E4BF00F60534 /* EditPersonalInfoView.m */; };
 		BC9672881D10E8D500F60534 /* geran_background_s.png in Resources */ = {isa = PBXBuildFile; fileRef = BC9672801D10E8D500F60534 /* geran_background_s.png */; };
 		BC9672891D10E8D500F60534 /* geran_background_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC9672811D10E8D500F60534 /* geran_background_s@2x.png */; };
@@ -598,6 +596,7 @@
 		BC9672961D11511900F60534 /* geren_jiao.png in Resources */ = {isa = PBXBuildFile; fileRef = BC9672931D11511900F60534 /* geren_jiao.png */; };
 		BC9672971D11511900F60534 /* geren_jiao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC9672941D11511900F60534 /* geren_jiao@2x.png */; };
 		BC9672981D11511900F60534 /* geren_jiao@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC9672951D11511900F60534 /* geren_jiao@3x.png */; };
+		BC9C8E251D13F10B00C445D0 /* CustomPikcerDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9C8E241D13F10B00C445D0 /* CustomPikcerDateView.m */; };
 		BCCE8A911CFFD16E005A5E21 /* CemeterialModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCE8A901CFFD16E005A5E21 /* CemeterialModel.m */; };
 		BCCE8A981CFFF289005A5E21 /* PrivateWorshipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCE8A921CFFF289005A5E21 /* PrivateWorshipTableViewCell.m */; };
 		BCCE8A991CFFF289005A5E21 /* PrivateWorshipView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCE8A941CFFF289005A5E21 /* PrivateWorshipView.m */; };
@@ -1313,6 +1312,8 @@
 		BC5F15F71D0FF224004F3622 /* vip_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vip_right.png; sourceTree = "<group>"; };
 		BC5F15F81D0FF224004F3622 /* vip_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vip_right@2x.png"; sourceTree = "<group>"; };
 		BC5F15F91D0FF224004F3622 /* vip_right@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vip_right@3x.png"; sourceTree = "<group>"; };
+		BC65210D1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPersonalInfoDetailViewController.h; sourceTree = "<group>"; };
+		BC65210E1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPersonalInfoDetailViewController.m; sourceTree = "<group>"; };
 		BC96727C1D10E4BF00F60534 /* EditPersonalInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPersonalInfoView.h; sourceTree = "<group>"; };
 		BC96727D1D10E4BF00F60534 /* EditPersonalInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPersonalInfoView.m; sourceTree = "<group>"; };
 		BC9672801D10E8D500F60534 /* geran_background_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = geran_background_s.png; sourceTree = "<group>"; };
@@ -1328,6 +1329,8 @@
 		BC9672931D11511900F60534 /* geren_jiao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = geren_jiao.png; sourceTree = "<group>"; };
 		BC9672941D11511900F60534 /* geren_jiao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "geren_jiao@2x.png"; sourceTree = "<group>"; };
 		BC9672951D11511900F60534 /* geren_jiao@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "geren_jiao@3x.png"; sourceTree = "<group>"; };
+		BC9C8E231D13F10B00C445D0 /* CustomPikcerDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPikcerDateView.h; sourceTree = "<group>"; };
+		BC9C8E241D13F10B00C445D0 /* CustomPikcerDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPikcerDateView.m; sourceTree = "<group>"; };
 		BCCE8A8F1CFFD16E005A5E21 /* CemeterialModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CemeterialModel.h; sourceTree = "<group>"; };
 		BCCE8A901CFFD16E005A5E21 /* CemeterialModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CemeterialModel.m; sourceTree = "<group>"; };
 		BCCE8A921CFFF289005A5E21 /* PrivateWorshipTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateWorshipTableViewCell.m; sourceTree = "<group>"; };
@@ -3052,6 +3055,10 @@
 				BC96727D1D10E4BF00F60534 /* EditPersonalInfoView.m */,
 				BC9672901D11298800F60534 /* EditPersonalInfoTableViewCell.h */,
 				BC9672911D11298800F60534 /* EditPersonalInfoTableViewCell.m */,
+				BC65210D1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.h */,
+				BC65210E1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.m */,
+				BC9C8E231D13F10B00C445D0 /* CustomPikcerDateView.h */,
+				BC9C8E241D13F10B00C445D0 /* CustomPikcerDateView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3315,8 +3322,6 @@
 				ADA380621CFC256100B596B7 /* search@2x.png in Resources */,
 				AD4D31A61D055C4D0095F3F1 /* index_icon_jiaPu@2x.png in Resources */,
 				AD024C661CF68655003380E5 /* human_1@3x.png in Resources */,
-				BCE945AD1D0CF3BA0089FF22 /* gr_ct_ys_gray0.png in Resources */,
-				BCE945841D0CF3BA0089FF22 /* gr_ct_jiang_bg@2x.png in Resources */,
 				ADA98E761D10FA12005B23EC /* jcjs_bg.png in Resources */,
 				ADA380631CFC256100B596B7 /* search@3x.png in Resources */,
 				BC5F15B71D0FF1CA004F3622 /* human_redMoney@2x.png in Resources */,
@@ -3497,7 +3502,6 @@
 				ADCD5C941CF451C000770356 /* index_icon_b@3x.png in Resources */,
 				BC5F15E31D0FF1D4004F3622 /* xiuGaitouxiang_sel3@3x.png in Resources */,
 				ADCD5C9A1CF451C000770356 /* jiaPu_icon_b@3x.png in Resources */,
-				BCDE42521D0E43C300921373 /* vip_jindu_red@2x.png in Resources */,
 				ADD23CF51D0D4000008986F6 /* haveJP_cj_open@3x.png in Resources */,
 				AD4D31B41D055C4D0095F3F1 /* index_icon_yunShi.png in Resources */,
 				BC2943D01CFEC163006671B9 /* ggJiDian_tuc.png in Resources */,
@@ -3536,7 +3540,6 @@
 				BC0326C31CFD23D50089EE4C /* book.png in Resources */,
 				AD8DAB021CFD76A5009B7958 /* sj_icon_4@3x.png in Resources */,
 				AD8DAAD21CFD6492009B7958 /* red@2x.png in Resources */,
-				BCE945711D0CF3BA0089FF22 /* gr_ct_0.png in Resources */,
 				AD4D31AA1D055C4D0095F3F1 /* index_icon_linQian@3x.png in Resources */,
 				AD8DAAD31CFD6492009B7958 /* red@3x.png in Resources */,
 				ADCD5C921CF451C000770356 /* index_icon_b.png in Resources */,
@@ -3795,7 +3798,6 @@
 				AD8DAAE01CFD7533009B7958 /* FamilyHelpViewController.m in Sources */,
 				BC5F15181D0FF1AD004F3622 /* RechargeViewController.m in Sources */,
 				AD8DAAAE1CFD3155009B7958 /* BaseViewController.m in Sources */,
-				BC1B0F6D1D0CFCF100095D5F /* RechargeViewController.m in Sources */,
 				ADA98E741D10F5EF005B23EC /* FamilyNamesViewController.m in Sources */,
 				ADA7FEF31D07A82300EDBEE4 /* PortraitAndNameViews.m in Sources */,
 				BC96727E1D10E4BF00F60534 /* EditPersonalInfoView.m in Sources */,
@@ -3808,6 +3810,7 @@
 				BC5F150C1D0FF1AD004F3622 /* PersonalCenterViewController.m in Sources */,
 				BC5F15141D0FF1AD004F3622 /* PersonalCenterTodayFortuneView.m in Sources */,
 				AD49FEE01CF6A0ED00DF9F7E /* FamilServiceViewController.m in Sources */,
+				BC65210F1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.m in Sources */,
 				BC0326A01CFD22070089EE4C /* ImageAndTextViewController.m in Sources */,
 				BC29439D1CFE8D87006671B9 /* PersonModel.m in Sources */,
 				ADE2D17E1CF7052C009D1ADF /* TableView.m in Sources */,
@@ -3834,6 +3837,7 @@
 				BC5F15171D0FF1AD004F3622 /* EditHeadView.m in Sources */,
 				ADA7FF011D07E51500EDBEE4 /* CustonCollectionViewCell.m in Sources */,
 				ADB9734D1CFE86FF007B876B /* BackScrollAndDetailView.m in Sources */,
+				BC9C8E251D13F10B00C445D0 /* CustomPikcerDateView.m in Sources */,
 				ADA4C1151D0E437E00CA9067 /* CemeteryViewController.m in Sources */,
 				AD8E603D1CFC0BDA00355C06 /* FindPassView.m in Sources */,
 				AD1F3C211D0F92770085EDFB /* CreateCemViewController.m in Sources */,
@@ -3867,7 +3871,6 @@
 				AD15B2751CF817EB00C0EEB7 /* FindPassViewController.m in Sources */,
 				BCDE42651D0E45CE00921373 /* UIView+getCurrentViewController.m in Sources */,
 				ADBA017A1D016E0A0016AB00 /* AddMenberView.m in Sources */,
-				BC1B0F771D0D0F0A00095D5F /* PayForForeverFortuneView.m in Sources */,
 				ADA98E821D1126D2005B23EC /* ManagerFamilyViewController.m in Sources */,
 				BCCE8A981CFFF289005A5E21 /* PrivateWorshipTableViewCell.m in Sources */,
 				BC5F151A1D0FF1AD004F3622 /* PayForForeverFortuneView.m in Sources */,

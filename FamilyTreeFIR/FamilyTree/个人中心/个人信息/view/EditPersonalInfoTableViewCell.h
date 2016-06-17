@@ -14,7 +14,19 @@ typedef NS_ENUM(NSInteger, EditPersonalInfoTableViewCellCustomStyle){
     EditPersonalInfoTableViewCellStyleArrow,
 };
 
+@class EditPersonalInfoTableViewCell;
+
+@protocol EditPersonalInfoTableViewCellDelegate <NSObject>
+-(void)respondToEditBtn:(UIButton *)sender;
+-(void)respondToPullDownBtn:(UIButton *)sender;
+
+@end
+
 @interface EditPersonalInfoTableViewCell : UITableViewCell
+
+/** 代理人*/
+@property (nonatomic, weak) id<EditPersonalInfoTableViewCellDelegate> delegate;
+
 /** 标题*/
 @property (nonatomic, strong) UILabel *customTitleLB;
 /** 详细信息*/
