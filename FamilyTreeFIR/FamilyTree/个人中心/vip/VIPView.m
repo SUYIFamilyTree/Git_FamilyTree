@@ -67,10 +67,10 @@
         [self.bgIV addSubview:rightBtn];
         
         //关闭按钮
-        UIButton *backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0.9*CGRectW(self.bgIV), 0, 0.1*CGRectW(self.bgIV), 0.1*CGRectH(self.bgIV))];
-        backBtn.backgroundColor = [UIColor redColor];
+        UIButton *backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0.935*CGRectW(self), 0.015*CGRectH(self), 0.05*CGRectW(self), 0.05*CGRectW(self))];
+        [backBtn setBackgroundImage:MImage(@"close") forState:UIControlStateNormal];
         [backBtn addTarget:self action:@selector(clickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [self.bgIV addSubview:backBtn];
+        [self addSubview:backBtn];
         
     }
     return self;

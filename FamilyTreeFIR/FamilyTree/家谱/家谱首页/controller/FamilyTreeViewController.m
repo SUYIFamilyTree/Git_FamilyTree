@@ -269,8 +269,7 @@
 }
 -(void)TopSearchView:(FamilyTreeTopView *)topSearchView didRespondsToMenusBtn:(UIButton *)sender{
     MYLog(@"点击我的家谱");
-    _selectedMyFam = !_selectedMyFam;
-    if (_selectedMyFam) {
+    if (sender.selected) {
         [self.view addSubview:self.selecMyFamView];
     }else{
     
