@@ -16,11 +16,7 @@
 @property (nonatomic,strong) UILabel *contLabelfis; /*内容1*/
 @property (nonatomic,strong) UILabel *contLabelSen; /*内容2*/
 
-
 @property (nonatomic,strong) UIButton *analyseDiv; /*解签*/
-
-
-
 
 @end
 

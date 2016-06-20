@@ -93,9 +93,7 @@
     self.tabBar.barTintColor = [UIColor whiteColor];
     self.tabBar.tintColor = [UIColor blackColor];
     self.selectedIndex = 0;
-    
-//    [self initTabBarItem];
-    
+
     UISwipeGestureRecognizer *swipGes = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(respondsToSwipGes:)];
     swipGes.direction = UISwipeGestureRecognizerDirectionLeft;
     
@@ -111,7 +109,6 @@
             self.selectedIndex+=1;
         }
     }
-    
     
     NSLog(@"%ld", self.selectedIndex);
 
