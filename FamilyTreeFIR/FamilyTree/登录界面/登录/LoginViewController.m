@@ -209,15 +209,15 @@
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:kRequestCodeLogin success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             //登录成功
-
             NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
 //            NSLog(@"%@", dic);
             
-            [LoginModel sharedLoginMode].MeAreacodeid = dic[@"MeAreacodeid"];
+            
             //存储用户信息
+            [USERDEFAULT setObject:dic[@"MeId"] forKey:@"userid"];
             [USERDEFAULT setObject:@true forKey:LoginStates];
-            [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserId];
-            [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:Password];
+            [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserAccount];
+            [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:UserPassword];
             
             [self.navigationController popViewControllerAnimated:YES];
             
@@ -228,8 +228,6 @@
     } failure:^(NSError *error) {
         MYLog(@"失败---%@",error.description);
     }];
-    
-    
 }
 //游客按钮
 -(void)loginView:(LoginView *)loginView didSelectedTourBtn:(UIButton *)sender{
@@ -256,9 +254,9 @@
         _loginView.accountView.inputTextView.placeholder = @"用户名/手机号";
         [_loginView.accountView setAccPlaceholder];
         
-        if ([USERDEFAULT objectForKey:UserId]&&[USERDEFAULT objectForKey:Password]) {
-            _loginView.accountView.inputTextView.text = [USERDEFAULT objectForKey:UserId];
-            _loginView.passwordView.inputTextView.text = [USERDEFAULT objectForKey:Password];
+        if ([USERDEFAULT objectForKey:UserAccount]&&[USERDEFAULT objectForKey:UserPassword]) {
+            _loginView.accountView.inputTextView.text = [USERDEFAULT objectForKey:UserAccount];
+            _loginView.passwordView.inputTextView.text = [USERDEFAULT objectForKey:UserPassword];
         }
         
     }

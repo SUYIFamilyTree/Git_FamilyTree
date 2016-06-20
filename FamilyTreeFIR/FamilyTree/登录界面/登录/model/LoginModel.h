@@ -10,7 +10,7 @@
 
 @interface LoginModel : NSObject
 
-@property (nonatomic,copy) NSString *MeAreacodeid; /*账号id*/
+@property (nonatomic,assign) NSInteger *MeId; /*账号id*/
 
 
 +(instancetype)sharedLoginMode;

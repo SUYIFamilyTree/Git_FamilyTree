@@ -60,15 +60,19 @@
 //                    NSLog(@"返回的%@",dic[@"md5check"]);
             if ([dic[@"md5check"]isEqualToString:md5ReceiveStr]) {
                 succe = YES;
+                
+            }else{
+                
             }
             
             success(responseObject,succe,dic);
+            
 
         }
         
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         fail(error);
+        
     }];
 
     

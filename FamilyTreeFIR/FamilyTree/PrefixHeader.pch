@@ -52,6 +52,7 @@
 #import "UIView+getCurrentViewController.h"
 //网络请求
 #import "TCJPHTTPRequestManager.h"
+#import "SXLoadingView.h"
 //工具
 #import "Tools.h"
 #import "Custom.h"

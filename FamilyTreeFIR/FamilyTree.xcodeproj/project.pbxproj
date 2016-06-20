@@ -614,6 +614,8 @@
 		BCF97C4D1D17988B004D46AB /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = BCF97C4A1D17988B004D46AB /* close.png */; };
 		BCF97C4E1D17988B004D46AB /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BCF97C4B1D17988B004D46AB /* close@2x.png */; };
 		BCF97C4F1D17988B004D46AB /* close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BCF97C4C1D17988B004D46AB /* close@3x.png */; };
+		BCF97C591D17B46D004D46AB /* SXLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF97C531D17B46D004D46AB /* SXLoadingView.m */; };
+		BCF97C5A1D17B46D004D46AB /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF97C561D17B46D004D46AB /* MBProgressHUD+Add.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1367,6 +1369,10 @@
 		BCF97C4A1D17988B004D46AB /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		BCF97C4B1D17988B004D46AB /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
 		BCF97C4C1D17988B004D46AB /* close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@3x.png"; sourceTree = "<group>"; };
+		BCF97C521D17B46D004D46AB /* SXLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXLoadingView.h; sourceTree = "<group>"; };
+		BCF97C531D17B46D004D46AB /* SXLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXLoadingView.m; sourceTree = "<group>"; };
+		BCF97C551D17B46D004D46AB /* MBProgressHUD+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Add.h"; sourceTree = "<group>"; };
+		BCF97C561D17B46D004D46AB /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1489,6 +1495,8 @@
 			children = (
 				AD195B341CF5A8D5000E32C7 /* TCJPHTTPRequestManager.h */,
 				AD195B351CF5A8D5000E32C7 /* TCJPHTTPRequestManager.m */,
+				BCF97C511D17B46D004D46AB /* 加载提示 */,
+				BCF97C541D17B46D004D46AB /* MBProgressHUD */,
 			);
 			path = "网络请求";
 			sourceTree = "<group>";
@@ -3166,6 +3174,24 @@
 			path = "基类";
 			sourceTree = "<group>";
 		};
+		BCF97C511D17B46D004D46AB /* 加载提示 */ = {
+			isa = PBXGroup;
+			children = (
+				BCF97C521D17B46D004D46AB /* SXLoadingView.h */,
+				BCF97C531D17B46D004D46AB /* SXLoadingView.m */,
+			);
+			path = "加载提示";
+			sourceTree = "<group>";
+		};
+		BCF97C541D17B46D004D46AB /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				BCF97C551D17B46D004D46AB /* MBProgressHUD+Add.h */,
+				BCF97C561D17B46D004D46AB /* MBProgressHUD+Add.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		DCB18B7EB1AEECA7554BE53E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -3890,6 +3916,7 @@
 				ADA4C1691D0E8A1200CA9067 /* CemGoodsShopView.m in Sources */,
 				ADBA01771D016DD90016AB00 /* AddMemberViewController.m in Sources */,
 				ADC326FA1CF3E3DF00CEAE53 /* main.m in Sources */,
+				BCF97C591D17B46D004D46AB /* SXLoadingView.m in Sources */,
 				BC5F15171D0FF1AD004F3622 /* EditHeadView.m in Sources */,
 				ADA7FF011D07E51500EDBEE4 /* CustonCollectionViewCell.m in Sources */,
 				ADB9734D1CFE86FF007B876B /* BackScrollAndDetailView.m in Sources */,
@@ -3917,6 +3944,7 @@
 				BCDE42681D0E555700921373 /* NSString+arabicToChinese.m in Sources */,
 				AD8DAB081CFD84A5009B7958 /* HelpTableTableViewCell.m in Sources */,
 				BC29438D1CFE81D9006671B9 /* WholeWorldViewController.m in Sources */,
+				BCF97C5A1D17B46D004D46AB /* MBProgressHUD+Add.m in Sources */,
 				BCCE8A9A1CFFF289005A5E21 /* PublicWorshipView.m in Sources */,
 				AD2ACD7F1CF3FC9C009D4A24 /* RootTabBarViewController.m in Sources */,
 				AD195B381CF5A8D5000E32C7 /* TCJPHTTPRequestManager.m in Sources */,

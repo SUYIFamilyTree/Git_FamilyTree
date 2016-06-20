@@ -135,7 +135,6 @@
         _registButton.titleLabel.font = MFont(18);
         
         [_registButton addTarget:self action:@selector(respondsToRegistBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
     }
     return _registButton;
 }

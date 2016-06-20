@@ -42,6 +42,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //网络请求加载数据
+    [self getData];
+    
+    
     [self initNavi];
     
     [self.view addSubview:self.scrollView];
@@ -92,6 +97,27 @@
     [self.scrollView addSubview:myPhotoAlbumsView];
 
 }
+
+-(void)getData{
+    NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getmemallinfo" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            //登录成功
+            NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
+            //            NSLog(@"%@", dic);
+            MYLog(@"成功%@",dic[@"scbz"][@"wx"]);
+            
+        }
+        
+    } failure:^(NSError *error) {
+        MYLog(@"失败---%@",error.description);
+    }];
+}
+
+    
+    
+
+
 
 #pragma mark - 视图初始化
 -(void)initNavi{
@@ -191,9 +217,6 @@
             [weakSelf.editPersonalInfoView removeFromSuperview];
         });
     }
-
-
-    
 }
 
 //点击vip按钮
