@@ -8,8 +8,9 @@
 
 #import "ImageAndTextViewController.h"
 #import "CommonNavigationViews.h"
+#import "SelectMyFamilyView.h"
 
-@interface ImageAndTextViewController()<UITableViewDelegate,UITableViewDataSource>
+@interface ImageAndTextViewController()<UITableViewDelegate,UITableViewDataSource,CommandNavigationViewsDelegate,SelectMyFamilyViewDelegate>
 /** 书视图*/
 @property (nonatomic, strong) UIImageView *bookImageView;
 /** 左侧表视图*/
@@ -34,7 +35,8 @@
 @property (nonatomic, strong) UILabel *rightViewLBC;
 /** 正文右侧视图标签d*/
 @property (nonatomic, strong) UILabel *rightViewLBD;
-
+/** 家谱选择视图*/
+@property (nonatomic, strong) SelectMyFamilyView *selecMyFamView;
 @end
 
 @implementation ImageAndTextViewController
@@ -43,6 +45,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     //配置导航栏
     CommonNavigationViews *navi = [[CommonNavigationViews alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 64) title:@"图文影音"];
+    navi.delegate = self;
     [self.view addSubview:navi];
     //设置背景
     UIImageView *bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
@@ -184,6 +187,14 @@
     return _rightView;
 }
 
+-(UIView *)selecMyFamView{
+    if (!_selecMyFamView) {
+        _selecMyFamView = [[SelectMyFamilyView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
+        _selecMyFamView.delegate = self;
+    }
+    return _selecMyFamView;
+}
+
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.leftListArr.count;
@@ -222,7 +233,24 @@
     }
 }
 
+#pragma mark - CommandNavigationViewsDelegate
+-(void)CommonNavigationViews:(CommonNavigationViews *)comView respondsToRightBtn:(UIButton *)sender{
+    MYLog(@"点击我的家谱");
+    sender.selected = !sender.selected;
+    if (sender.selected) {
+        [self.view addSubview:self.selecMyFamView];
+    }else{
+        
+        [self.selecMyFamView removeFromSuperview];
+    }
 
+}
+
+#pragma mark *** SelectMyFamViewDelegate ***
+
+-(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectItemTitle:(NSString *)title{
+    NSLog(@"%@", title);
+}
 
 @end
 

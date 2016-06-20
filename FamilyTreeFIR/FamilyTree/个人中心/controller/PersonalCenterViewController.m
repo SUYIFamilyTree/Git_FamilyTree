@@ -179,15 +179,15 @@
     WK(weakSelf);
     
     if (self.editPersonalInfoView.frame.size.width == 0) {
-        [UIView animateWithDuration:1 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             [weakSelf.view addSubview:weakSelf.editPersonalInfoView];
             weakSelf.editPersonalInfoView.frame = CGRectMake(0, 64, Screen_width, Screen_height-49-64);
         }];
     }else{
-        [UIView animateWithDuration:1 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             weakSelf.editPersonalInfoView.frame = CGRectMake(0,64,0,Screen_height-49-64);
         }];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [weakSelf.editPersonalInfoView removeFromSuperview];
         });
     }

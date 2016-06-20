@@ -33,7 +33,7 @@
         [self addSubview:self.backView];
         [self addSubview:self.titleLabel];
         self.titleLabel.text = title;
-        [self addSubview:self.rightView];
+        [self addSubview:self.MyFamilyRightBtn];
     }
     return self;
 }
@@ -50,7 +50,7 @@
 }
 
 -(void)respondsToRightBtn:(UIButton *)sender{
-    
+    //sender.selected = !sender.selected;
     MYLog(@"右按钮");
     if (_delegate && [_delegate respondsToSelector:@selector(CommonNavigationViews:respondsToRightBtn:)]) {
         [_delegate CommonNavigationViews:self respondsToRightBtn:sender];
@@ -111,23 +111,20 @@
     return _rightBtn;
 }
 
--(UIView *)rightView{
-    if (!_rightView) {
-        _rightView = [[UIView alloc]initWithFrame:CGRectMake(0.8*CGRectW(self), StatusBar_Height, 0.2*CGRectW(self), 64-StatusBar_Height)];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(respondsToRightBtn:)];
-        [_rightView addGestureRecognizer:tap];
-        UILabel *myFamilyLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_rightView), CGRectY(_rightView), CGRectW(_rightView)*0.8, CGRectH(_rightView))];
-        myFamilyLabel.text = @"我的家谱";
-        myFamilyLabel.font = MFont(12);
-        myFamilyLabel.textColor = [UIColor whiteColor];
-        myFamilyLabel.textAlignment = NSTextAlignmentLeft;
-        [self addSubview:myFamilyLabel];
-        UIImageView *jiantou = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(_rightView)+CGRectW(myFamilyLabel), CGRectY(myFamilyLabel)+20, 10, 6)];
-        jiantou.image = MImage(@"sel.png");
-        [self addSubview:jiantou];
+-(UIButton *)MyFamilyRightBtn{
+    if (!_MyFamilyRightBtn) {
+        _MyFamilyRightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0.8*Screen_width, 30, 0.2*Screen_width, 24)];
+        [_MyFamilyRightBtn setTitle:@"我的家谱" forState:UIControlStateNormal];
+        _MyFamilyRightBtn.titleLabel.font = MFont(12);
+        [_MyFamilyRightBtn setImage:MImage(@"sel2") forState:UIControlStateNormal];
+        [_MyFamilyRightBtn setImage:MImage(@"sel1") forState:UIControlStateSelected];
+        _MyFamilyRightBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, -3, -95);
+        _MyFamilyRightBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 0);
+        _MyFamilyRightBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [_MyFamilyRightBtn addTarget:self action:@selector(respondsToRightBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_MyFamilyRightBtn];
 
     }
-    return _rightView;
+    return _MyFamilyRightBtn;
 }
-
 @end
