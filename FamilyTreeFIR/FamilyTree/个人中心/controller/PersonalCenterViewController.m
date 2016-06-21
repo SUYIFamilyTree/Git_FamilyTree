@@ -22,10 +22,22 @@
 #import "VIPView.h"
 #import "EditHeadView.h"
 #import "EditPersonalInfoView.h"
+#import "MemallInfoModel.h"
+
 
 @interface PersonalCenterViewController ()<PersonalCenterHeaderViewDelegate,PersonalCenterTodayFortuneViewDelegate,UITableViewDataSource,UITableViewDelegate,PersonalCenterMyPhotoAlbumsViewDelegate,PayForFortuneViewDelegate,PayForForeverFortuneViewDelegate,VIPViewDelegate>
 /** 全屏滚动*/
 @property (nonatomic, strong) UIScrollView *scrollView;
+
+/** 头部视图*/
+@property (nonatomic, strong) PersonalCenterHeaderView *headerView;
+/** 命理视图*/
+@property (nonatomic, strong) PersonalCenterNumerologyView *numerologyView;
+/** 今日运势视图*/
+@property (nonatomic, strong) PersonalCenterTodayFortuneView *todayFortuneView;
+/** 求签祈福视图*/
+@property (nonatomic, strong)PersonalCenterCliffordView *cliffordView;
+
 /** 家族动态*/
 @property (nonatomic, strong) NSArray *familyTreeNewsArr;
 /** vip视图*/
@@ -36,19 +48,16 @@
 @property (nonatomic, strong) PersonalCenterInfoView *infoView;
 /** 个人信息编辑页面*/
 @property (nonatomic, strong) EditPersonalInfoView *editPersonalInfoView;
+/** 个人中心模型*/
+@property (nonatomic, strong) MemallInfoModel *memallInfo;
+
 @end
 
 @implementation PersonalCenterViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //网络请求加载数据
-    [self getData];
-    
-    
     [self initNavi];
-    
     [self.view addSubview:self.scrollView];
     //添加背景图
     UIImageView *bgIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 780)];
@@ -59,27 +68,74 @@
     bgView.backgroundColor = [UIColor whiteColor];
     bgView.alpha = 0.8;
     [self.view addSubview:bgView];
+    
+    //网络请求加载数据加载页面
+    [self getData];
+    
+    //[self initMainView];
+    
+}
+
+-(void)getData{
+    NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
+    WK(weakSelf)
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getmemallinfo" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            weakSelf.memallInfo = [MemallInfoModel modelWithJSON:jsonDic[@"data"]];
+            [self initMainView];
+        }
+        
+    } failure:^(NSError *error) {
+        MYLog(@"失败---%@",error.description);
+    }];
+}
+
+    
+#pragma mark - 视图初始化
+-(void)initNavi{
+    self.navigationController.navigationBarHidden = YES;
+    
+    NSString *title = IsNilString([USERDEFAULT valueForKey:@"MeNickname"])?@"小雪":[USERDEFAULT valueForKey:@"MeNickname"];
+    CommonNavigationViews *navi = [[CommonNavigationViews alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 64) title:title image:MImage(@"chec")];
+    navi.leftBtn.hidden = YES;
+    UIButton *personalInfoEditBtn = [[UIButton alloc]initWithFrame:CGRectMake(10, 30, 20, 20)];
+    
+    [personalInfoEditBtn setBackgroundImage:MImage(@"gr_ct_tit_wt") forState:UIControlStateNormal];
+    [personalInfoEditBtn addTarget:self action:@selector(clickPersonalInfoBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [navi addSubview:personalInfoEditBtn];
+    self.vipBtn = [[UIButton alloc]init];
+    NSString *vipLevelStr = [NSString stringWithFormat:@"VIP%@",[USERDEFAULT valueForKey:@"MeViplevel"]];
+    [self.vipBtn setTitle:vipLevelStr forState:UIControlStateNormal];
+    self.vipBtn.titleLabel.font = MFont(15);
+    [self.vipBtn addTarget:self action:@selector(clickVipBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [navi addSubview:self.vipBtn];
+    self.vipBtn.sd_layout.leftSpaceToView(personalInfoEditBtn,5).bottomSpaceToView(navi,15).widthIs(35).heightIs(15);
+    [self.view addSubview:navi];
+
+}
+
+-(void)initMainView{
     //添加头部视图
-    PersonalCenterHeaderView *headerView = [[PersonalCenterHeaderView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, 33)];
-    headerView.delegate = self;
-    [self.view addSubview:headerView];
+    self.headerView = [[PersonalCenterHeaderView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, 33)];
+    self.headerView.delegate = self;
+    [self.view addSubview:self.headerView];
     //切换家谱及头像视图
     self.infoView = [[PersonalCenterInfoView alloc]initWithFrame:CGRectMake(0, 33, Screen_width, 138)];
     [self.scrollView addSubview:self.infoView];
     //命理视图
-    PersonalCenterNumerologyView *numerologyView = [[PersonalCenterNumerologyView alloc]initWithFrame:CGRectMake(0, CGRectYH(self.infoView), Screen_width, 175)];
-    [self.scrollView addSubview:numerologyView];
+    self.numerologyView = [[PersonalCenterNumerologyView alloc]initWithFrame:CGRectMake(0, CGRectYH(self.infoView), Screen_width, 175)];
+    [self.scrollView addSubview:self.numerologyView];
     //今日运势视图
-    PersonalCenterTodayFortuneView *todayFortuneView = [[PersonalCenterTodayFortuneView alloc]initWithFrame:CGRectMake(0.0406*Screen_width, CGRectYH(numerologyView), 0.4469*Screen_width, 119)];
+    self.todayFortuneView = [[PersonalCenterTodayFortuneView alloc]initWithFrame:CGRectMake(0.0406*Screen_width, CGRectYH(self.numerologyView), 0.4469*Screen_width, 119)];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ToFortuneTodayView)];
-    [todayFortuneView addGestureRecognizer:tap];
-    todayFortuneView.delegate = self;
-    [self.scrollView addSubview:todayFortuneView];
+    [self.todayFortuneView addGestureRecognizer:tap];
+    self.todayFortuneView.delegate = self;
+    [self.scrollView addSubview:self.todayFortuneView];
     //求签祈福
-    PersonalCenterCliffordView *cliffordView = [[PersonalCenterCliffordView alloc]initWithFrame:CGRectMake(0.5156*Screen_width, CGRectY(todayFortuneView), 0.4469*Screen_width, 119)];
-    [self.scrollView addSubview:cliffordView];
+    self.cliffordView = [[PersonalCenterCliffordView alloc]initWithFrame:CGRectMake(0.5156*Screen_width, CGRectY(self.todayFortuneView), 0.4469*Screen_width, 119)];
+    [self.scrollView addSubview:self.cliffordView];
     //家族动态
-    UIView *tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectYH(cliffordView), Screen_width, 40)];
+    UIView *tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectYH(self.cliffordView), Screen_width, 40)];
     [self.scrollView addSubview:tableHeaderView];
     UILabel *familyTreeNewsLB = [[UILabel alloc]initWithFrame:CGRectMake(22, 17, 60, 15)];
     familyTreeNewsLB.text = @"家族动态";
@@ -96,48 +152,20 @@
     myPhotoAlbumsView.delegate = self;
     [self.scrollView addSubview:myPhotoAlbumsView];
 
+    [self initData];
 }
 
--(void)getData{
-    NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
-    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getmemallinfo" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        if (succe) {
-            //登录成功
-            NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
-            //            NSLog(@"%@", dic);
-            MYLog(@"成功%@",dic[@"scbz"][@"wx"]);
-            
-        }
+-(void)initData{
+    //让金额为登录请求返回的值
+    self.headerView.money =  [[USERDEFAULT valueForKey:@"MeBalance"] doubleValue];
+    self.headerView.sameCityMoney = [[USERDEFAULT valueForKey:@"MeIntegral"] intValue];
+    //命理数据
+    [self.numerologyView reloadData:self.memallInfo.scbz];
+    //今日运势数据
+    [self.todayFortuneView reloadData:self.memallInfo.grys];
+    //求签数据
+    [self.cliffordView reloadData:self.memallInfo.grqw];
         
-    } failure:^(NSError *error) {
-        MYLog(@"失败---%@",error.description);
-    }];
-}
-
-    
-    
-
-
-
-#pragma mark - 视图初始化
--(void)initNavi{
-    self.navigationController.navigationBarHidden = YES;
-    CommonNavigationViews *navi = [[CommonNavigationViews alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 64) title:@"小雪" image:MImage(@"chec")];
-    navi.leftBtn.hidden = YES;
-    UIButton *personalInfoEditBtn = [[UIButton alloc]initWithFrame:CGRectMake(10, 30, 20, 20)];
-    
-    [personalInfoEditBtn setBackgroundImage:MImage(@"gr_ct_tit_wt") forState:UIControlStateNormal];
-    [personalInfoEditBtn addTarget:self action:@selector(clickPersonalInfoBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [navi addSubview:personalInfoEditBtn];
-    self.vipBtn = [[UIButton alloc]init];
-    
-    [self.vipBtn setTitle:@"VIP3" forState:UIControlStateNormal];
-    self.vipBtn.titleLabel.font = MFont(15);
-    [self.vipBtn addTarget:self action:@selector(clickVipBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [navi addSubview:self.vipBtn];
-    self.vipBtn.sd_layout.leftSpaceToView(personalInfoEditBtn,5).bottomSpaceToView(navi,15).widthIs(35).heightIs(15);
-    [self.view addSubview:navi];
-
 }
 
 #pragma mark - UITableViewDataSource

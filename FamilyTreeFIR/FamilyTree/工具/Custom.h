@@ -89,7 +89,7 @@ __block __weak __typeof(&*self)weakSelf = self;
 #define UserAccount @"userAccount"
 #define UserPassword @"userPassword"
 //保存用户登录信息
-#define GetUserId [USERDEFAULT valueForKey:@"userid"]
+#define GetUserId  [USERDEFAULT valueForKey:@"userid"]
 
 //判断数据是否为空
 #define IsNilString(__String) (__String==nil || [__String isEqualToString:@""]|| [__String isEqualToString:@"null"])

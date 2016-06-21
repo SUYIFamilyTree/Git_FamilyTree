@@ -50,10 +50,12 @@
 #import "CALayer+drawborder.h"
 #import "UIColor+random.h"
 #import "UIView+getCurrentViewController.h"
+#import "NSString+addLineBreakOrSpace.h"
 //网络请求
 #import "TCJPHTTPRequestManager.h"
 #import "SXLoadingView.h"
 //工具
 #import "Tools.h"
 #import "Custom.h"
+#import <YYKit.h>
 #endif /* PrefixHeader_pch */
