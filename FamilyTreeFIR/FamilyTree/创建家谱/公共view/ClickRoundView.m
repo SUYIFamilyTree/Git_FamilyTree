@@ -35,7 +35,7 @@
         
         self.titleLabel.text = title;
         
-        self.titleLabel.sd_layout.leftSpaceToView(self.roundBtn,-5).bottomEqualToView(self.roundBtn).topEqualToView(self.roundBtn).widthIs(title.length*25);
+        self.titleLabel.sd_layout.leftSpaceToView(self.roundBtn,-5).bottomEqualToView(self.roundBtn).topEqualToView(self.roundBtn).widthIs(title.length*37*AdaptationWidth());
     }
     return self;
 }

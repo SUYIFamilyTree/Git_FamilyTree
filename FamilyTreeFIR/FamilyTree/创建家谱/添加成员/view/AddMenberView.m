@@ -43,7 +43,7 @@
     self.fatheView = [self creatLabelTextWithTitle:@"父亲:" TitleFrame:CGRectMake(20, CGRectYH(self.name)+GapOfView, 50, InputView_height) inputViewLength:70 dataArr:@[@"  爱的",@"  收到",@"  速度"] inputViewLabel:@" 杜正存" FinText:nil withStar:false];
     [self.backView addSubview:self.fatheView];
     
-    self.motherView = [self creatLabelTextWithTitle:@"母亲:" TitleFrame:CGRectMake(Screen_width-350*AdaptationWidth(), CGRectYH(self.name)+GapOfView, 70, InputView_height) inputViewLength:60 dataArr:@[@"  爱的",@"  收到",@"  速度"] inputViewLabel:@" 不详" FinText:nil withStar:YES];
+    self.motherView = [self creatLabelTextWithTitle:@"母亲:" TitleFrame:CGRectMake(Screen_width-350*AdaptationWidth(), CGRectYH(self.name)+GapOfView, 50, InputView_height) inputViewLength:60 dataArr:@[@"  爱的",@"  收到",@"  速度"] inputViewLabel:@" 不详" FinText:nil withStar:YES];
     [self.backView addSubview:self.motherView];
     [self.backView addSubview:self.sexInView];
     

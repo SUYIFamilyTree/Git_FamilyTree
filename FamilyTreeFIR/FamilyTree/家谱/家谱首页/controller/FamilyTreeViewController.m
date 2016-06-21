@@ -288,7 +288,7 @@
             [self.navigationController pushViewController:creVc animated:YES];
         }
         if (sender.tag == 2) {
-            ManagerFamilyViewController *manager = [[ManagerFamilyViewController alloc] initWithTitle:@"管理家谱" image:nil];
+           ManagerFamilyViewController *manager = [[ManagerFamilyViewController alloc] initWithTitle:@"管理家谱" image:nil];
             [manager.comNavi.rightBtn removeFromSuperview];
             [self.navigationController pushViewController:manager animated:YES];
         }

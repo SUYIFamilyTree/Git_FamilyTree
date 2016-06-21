@@ -14,16 +14,21 @@
 
 @implementation RollView
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.rollImageView];
+        
+        self.rollLabel.text = [NSString verticalStringWith:title];
         [self addSubview:self.rollLabel];
+
     }
     return self;
 }
+
+
 
 -(UIImageView *)rollImageView{
     if (!_rollImageView) {
@@ -39,7 +44,6 @@
         _rollLabel.numberOfLines = 0;
         _rollLabel.textAlignment = 1;
         _rollLabel.font = MFont(30*AdaptationWidth());
-        _rollLabel.text = [NSString verticalStringWith:@"段正淳1|5代卷谱"];
         _rollLabel.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
     }
     return _rollLabel;

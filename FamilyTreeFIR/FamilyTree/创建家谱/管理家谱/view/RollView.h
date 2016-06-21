@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface RollView : UIView
-
+- (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title;
 @end

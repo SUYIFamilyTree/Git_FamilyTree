@@ -41,6 +41,9 @@
 #import "TopBackSearch.h"
 #import "GennerationViewController.h"
 #import "SelectMyFamilyView.h"
+#import "RollView.h"
+#import "RollDetailView.h"
+#import "WDetailManagerViewController.h"
 //扩展方法
 #import <UIView+SDAutoLayout.h>
 #import "NSDictionary+FromNSString.h"
