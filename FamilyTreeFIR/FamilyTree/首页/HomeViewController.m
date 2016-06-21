@@ -8,7 +8,7 @@
 
 #import "HomeViewController.h"
 #import "Tools.h"
-
+#import "DivinationViewController.h"
 #import "LineView.h"
 
 typedef enum : NSUInteger {
@@ -126,6 +126,9 @@ typedef enum : NSUInteger {
         case HomeLinQian:
         {
             MYLog(@"灵签");
+            DivinationViewController *divVc = [[DivinationViewController alloc] initWithTitle:@"灵签" image:nil];
+            [self.navigationController pushViewController:divVc animated:YES];
+            
         }
             break;
         case HomeService:
@@ -152,6 +155,8 @@ typedef enum : NSUInteger {
     
     MYLog(@"登录按钮");
     [self.navigationController pushViewController:self.logVc animated:YES];
+    
+  
   
     
 }
