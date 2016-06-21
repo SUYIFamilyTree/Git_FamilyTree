@@ -22,7 +22,6 @@
 #import "WholeWorldViewController.h"
 #import "LoginView.h"
 #import "RootTabBarViewController.h"
-#import "RegisViewController.h"
 #import "FindPassViewController.h"
 #import "HeaderSelectView.h"
 #import "FamilyHelpViewController.h"

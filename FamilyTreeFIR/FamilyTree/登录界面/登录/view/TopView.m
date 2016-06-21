@@ -49,7 +49,7 @@
 
 -(UIButton *)regisBtn{
     if (!_regisBtn) {
-        _regisBtn = [[UIButton alloc] initWithFrame:CGRectMake(Screen_width*0.55, Frame_height, 50, BackBtn_size)];
+        _regisBtn = [[UIButton alloc] initWithFrame:CGRectMake(0.58*Screen_width, Frame_height, 50, BackBtn_size)];
         [_regisBtn setTitle:@"注册" forState:UIControlStateNormal];
         _regisBtn.titleLabel.font = [UIFont systemFontOfSize:TitleFont];
         
@@ -60,7 +60,6 @@
     if (!_verticalLine) {
         _verticalLine = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.regisBtn.frame)+GapBetweenView, Frame_height+15, 1, BackBtn_size-30)];
         _verticalLine.backgroundColor = [UIColor whiteColor];
-        
         
     }
     return _verticalLine;

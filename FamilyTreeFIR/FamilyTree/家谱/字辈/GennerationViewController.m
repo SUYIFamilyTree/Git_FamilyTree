@@ -32,12 +32,6 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
     [self initData];
     [self initUI];
     
-    
-    
-    
-    
-    
-    
 }
 #pragma mark *** 初始化数据 ***
 -(void)initData{

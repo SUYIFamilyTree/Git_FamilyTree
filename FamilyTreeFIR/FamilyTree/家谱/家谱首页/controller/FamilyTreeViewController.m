@@ -292,6 +292,10 @@
             [manager.comNavi.rightBtn removeFromSuperview];
             [self.navigationController pushViewController:manager animated:YES];
         }
+        if (sender.tag == 1) {
+            AddMemberViewController *add = [[AddMemberViewController alloc] initWithTitle:@"添加成员" image:nil];
+            [self.navigationController pushViewController:add animated:YES];
+        }
     }
     
     MYLog(@"%ld",sender.tag);

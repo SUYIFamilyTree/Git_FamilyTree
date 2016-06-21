@@ -35,7 +35,7 @@
         
         self.titleLabel.text = title;
         
-        self.titleLabel.sd_layout.leftSpaceToView(self.roundBtn,-5).bottomEqualToView(self.roundBtn).topEqualToView(self.roundBtn).widthIs(title.length*18);
+        self.titleLabel.sd_layout.leftSpaceToView(self.roundBtn,-5).bottomEqualToView(self.roundBtn).topEqualToView(self.roundBtn).widthIs(title.length*25);
     }
     return self;
 }
@@ -72,14 +72,15 @@
         
         [_roundBtn addSubview:rouView];
         
-        NSInteger pointSize = rouView.bounds.size.height/3;
+        CGFloat pointSize = rouView.bounds.size.height/3;
         
 //        UIView *pointView = [[UIView alloc] initWithFrame:CGRectMake(pointSize, pointSize, pointSize, pointSize)];
         UIView *pointView = [UIView new];
-        pointView.layer.cornerRadius = pointView.bounds.size.width/2;
+        pointView.layer.cornerRadius =  2.8;
         pointView.layer.borderWidth = 1.0f;
         pointView.layer.masksToBounds = YES;
         pointView.backgroundColor = [UIColor blackColor];
+        
         [rouView addSubview:pointView];
         pointView.sd_layout.leftSpaceToView(rouView,pointSize).topSpaceToView(rouView,pointSize).rightSpaceToView(rouView,pointSize).bottomSpaceToView(rouView,pointSize);
         self.blackPointView = pointView;
@@ -94,7 +95,7 @@
 -(UILabel *)titleLabel{
     if (!_titleLabel) {
         _titleLabel = [UILabel new];
-        
+        _titleLabel.font  = WFont(35);
         if (_isStar) {
             UILabel *starLabel = [UILabel new];
             starLabel.font = MFont(16);

@@ -18,7 +18,6 @@
 		AD024C6B1CF68655003380E5 /* kuang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD024C591CF68655003380E5 /* kuang@2x.png */; };
 		AD024C6C1CF68655003380E5 /* kuang@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD024C5A1CF68655003380E5 /* kuang@3x.png */; };
 		AD15B2751CF817EB00C0EEB7 /* FindPassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD15B2741CF817EB00C0EEB7 /* FindPassViewController.m */; };
-		AD15B2781CF8184A00C0EEB7 /* RegisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD15B2771CF8184A00C0EEB7 /* RegisViewController.m */; };
 		AD15B2801CF8448600C0EEB7 /* newUser_tel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD15B27A1CF8448600C0EEB7 /* newUser_tel@2x.png */; };
 		AD15B2811CF8448600C0EEB7 /* newUser_tel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD15B27B1CF8448600C0EEB7 /* newUser_tel@3x.png */; };
 		AD15B2821CF8448600C0EEB7 /* newUser_yanzheng.png in Resources */ = {isa = PBXBuildFile; fileRef = AD15B27C1CF8448600C0EEB7 /* newUser_yanzheng.png */; };
@@ -574,7 +573,6 @@
 		BC5F15971D0FF1CA004F3622 /* gr_ct_tit_wt@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15461D0FF1CA004F3622 /* gr_ct_tit_wt@3x.png */; };
 		BC5F15981D0FF1CA004F3622 /* gr_ct_ys_0.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15471D0FF1CA004F3622 /* gr_ct_ys_0.png */; };
 		BC5F15991D0FF1CA004F3622 /* gr_ct_ys_0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15481D0FF1CA004F3622 /* gr_ct_ys_0@2x.png */; };
-		BC5F159A1D0FF1CA004F3622 /* gr_ct_ys_0@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15491D0FF1CA004F3622 /* gr_ct_ys_0@3x.png */; };
 		BC5F159B1D0FF1CA004F3622 /* gr_ct_ys_1.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F154A1D0FF1CA004F3622 /* gr_ct_ys_1.png */; };
 		BC5F159C1D0FF1CA004F3622 /* gr_ct_ys_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F154B1D0FF1CA004F3622 /* gr_ct_ys_1@2x.png */; };
 		BC5F159D1D0FF1CA004F3622 /* gr_ct_ys_1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F154C1D0FF1CA004F3622 /* gr_ct_ys_1@3x.png */; };
@@ -712,8 +710,6 @@
 		AD024C5A1CF68655003380E5 /* kuang@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kuang@3x.png"; sourceTree = "<group>"; };
 		AD15B2731CF817EB00C0EEB7 /* FindPassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindPassViewController.h; sourceTree = "<group>"; };
 		AD15B2741CF817EB00C0EEB7 /* FindPassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPassViewController.m; sourceTree = "<group>"; };
-		AD15B2761CF8184A00C0EEB7 /* RegisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisViewController.h; sourceTree = "<group>"; };
-		AD15B2771CF8184A00C0EEB7 /* RegisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisViewController.m; sourceTree = "<group>"; };
 		AD15B27A1CF8448600C0EEB7 /* newUser_tel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newUser_tel@2x.png"; path = "增加成员/newUser_tel@2x.png"; sourceTree = "<group>"; };
 		AD15B27B1CF8448600C0EEB7 /* newUser_tel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "newUser_tel@3x.png"; path = "增加成员/newUser_tel@3x.png"; sourceTree = "<group>"; };
 		AD15B27C1CF8448600C0EEB7 /* newUser_yanzheng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = newUser_yanzheng.png; path = "增加成员/newUser_yanzheng.png"; sourceTree = "<group>"; };
@@ -2343,8 +2339,6 @@
 			children = (
 				AD15B28B1CF8555600C0EEB7 /* ToRegistView.h */,
 				AD15B28C1CF8555600C0EEB7 /* ToRegistView.m */,
-				AD15B2761CF8184A00C0EEB7 /* RegisViewController.h */,
-				AD15B2771CF8184A00C0EEB7 /* RegisViewController.m */,
 			);
 			path = "注册";
 			sourceTree = "<group>";
@@ -3795,7 +3789,6 @@
 				BC5F15A51D0FF1CA004F3622 /* gr_ct_ys_bg@2x.png in Resources */,
 				ADB7F06E1D0297EE001F151D /* todayYS_learn_whites.png in Resources */,
 				BC5F15A31D0FF1CA004F3622 /* gr_ct_ys_3@3x.png in Resources */,
-				AD024C711CF68655003380E5 /* sel@2x.png in Resources */,
 				AD5F5C091D1788400035710F /* qiuQian_sm_xl@3x.png in Resources */,
 				ADB7F0851D0297EE001F151D /* todayYS_Wl_TitIMG@3x.png in Resources */,
 				ADA4C14A1D0E5D7700CA9067 /* my_name_xiangLu@2x.png in Resources */,
@@ -4250,7 +4243,6 @@
 				AD73886D1CF6E4860076B2AD /* CustomCollectionViewCell.m in Sources */,
 				ADE2D17B1CF6FBD3009D1ADF /* FamilyShopView.m in Sources */,
 				ADB9266A1CF7EBAC00AA8B6E /* FamilyTreeViewController.m in Sources */,
-				AD15B2781CF8184A00C0EEB7 /* RegisViewController.m in Sources */,
 				BC1EA60A1CFC00D8006F6454 /* SearchTableViewCell.m in Sources */,
 				BC9672921D11298800F60534 /* EditPersonalInfoTableViewCell.m in Sources */,
 			);
