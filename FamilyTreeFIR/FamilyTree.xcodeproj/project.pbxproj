@@ -403,6 +403,8 @@
 		ADC327881CF3FB8B00CEAE53 /* weixin.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3275B1CF3FB8B00CEAE53 /* weixin.png */; };
 		ADC327891CF3FB8B00CEAE53 /* weixin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3275C1CF3FB8B00CEAE53 /* weixin@2x.png */; };
 		ADC3278A1CF3FB8B00CEAE53 /* weixin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3275D1CF3FB8B00CEAE53 /* weixin@3x.png */; };
+		ADC472201D1A2472000388AF /* WRollDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC4721F1D1A2472000388AF /* WRollDetailView.m */; };
+		ADC472231D1A5A88000388AF /* WSwitchDetailFamView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC472221D1A5A88000388AF /* WSwitchDetailFamView.m */; };
 		ADC4F1AF1D125410003D2B27 /* DataSelectPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC4F1AE1D125410003D2B27 /* DataSelectPickView.m */; };
 		ADCD5C891CF451C000770356 /* geren_icon_a.png in Resources */ = {isa = PBXBuildFile; fileRef = ADCD5C711CF451C000770356 /* geren_icon_a.png */; };
 		ADCD5C8A1CF451C000770356 /* geren_icon_a@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADCD5C721CF451C000770356 /* geren_icon_a@2x.png */; };
@@ -1181,6 +1183,10 @@
 		ADC3275B1CF3FB8B00CEAE53 /* weixin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weixin.png; sourceTree = "<group>"; };
 		ADC3275C1CF3FB8B00CEAE53 /* weixin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weixin@2x.png"; sourceTree = "<group>"; };
 		ADC3275D1CF3FB8B00CEAE53 /* weixin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weixin@3x.png"; sourceTree = "<group>"; };
+		ADC4721E1D1A2472000388AF /* WRollDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WRollDetailView.h; sourceTree = "<group>"; };
+		ADC4721F1D1A2472000388AF /* WRollDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WRollDetailView.m; sourceTree = "<group>"; };
+		ADC472211D1A5A88000388AF /* WSwitchDetailFamView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSwitchDetailFamView.h; sourceTree = "<group>"; };
+		ADC472221D1A5A88000388AF /* WSwitchDetailFamView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSwitchDetailFamView.m; sourceTree = "<group>"; };
 		ADC4F1AD1D125410003D2B27 /* DataSelectPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSelectPickView.h; sourceTree = "<group>"; };
 		ADC4F1AE1D125410003D2B27 /* DataSelectPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSelectPickView.m; sourceTree = "<group>"; };
 		ADCD5C711CF451C000770356 /* geren_icon_a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = geren_icon_a.png; sourceTree = "<group>"; };
@@ -2181,6 +2187,10 @@
 				ADA98E841D11272F005B23EC /* RollView.m */,
 				ADA98E891D11276B005B23EC /* RollDetailView.h */,
 				ADA98E8A1D11276B005B23EC /* RollDetailView.m */,
+				ADC4721E1D1A2472000388AF /* WRollDetailView.h */,
+				ADC4721F1D1A2472000388AF /* WRollDetailView.m */,
+				ADC472211D1A5A88000388AF /* WSwitchDetailFamView.h */,
+				ADC472221D1A5A88000388AF /* WSwitchDetailFamView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -4224,6 +4234,7 @@
 				AD5F5C121D1798DE0035710F /* UseItemView.m in Sources */,
 				BC5F15111D0FF1AD004F3622 /* PersonalCenterInfoView.m in Sources */,
 				BC5F150E1D0FF1AD004F3622 /* HeadImageView.m in Sources */,
+				ADC472201D1A2472000388AF /* WRollDetailView.m in Sources */,
 				AD73886A1CF6E0090076B2AD /* CollectionFamilyView.m in Sources */,
 				ADB926641CF7E28600AA8B6E /* LineView.m in Sources */,
 				ADB7F03F1D027BF9001F151D /* HeadLuckView.m in Sources */,
@@ -4270,6 +4281,7 @@
 				BC2943A01CFE9F30006671B9 /* LineageViewController.m in Sources */,
 				ADA4C1721D0E92DF00CA9067 /* CemSingleGoodsCollectionViewCell.m in Sources */,
 				ADA98E981D11584C005B23EC /* SelectMyFamilyView.m in Sources */,
+				ADC472231D1A5A88000388AF /* WSwitchDetailFamView.m in Sources */,
 				ADC059E11D002CB0001F7C1B /* CreateFamView.m in Sources */,
 				BCE2AD5B1CF83FC700EC98F5 /* SearchFamilyTreeViewController.m in Sources */,
 				ADD23CFE1D0D4947008986F6 /* CreatFamilyTree.m in Sources */,

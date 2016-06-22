@@ -14,14 +14,24 @@
 
 @implementation RollView
 
-- (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title
+- (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title rollType:(RollViewType)rollType
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
+        
+        
         [self addSubview:self.rollImageView];
         
-        self.rollLabel.text = [NSString verticalStringWith:title];
+        
+        if (rollType == RollViewTypeDecade) {
+            self.rollLabel.text = title;
+
+        }else if(rollType == RollViewTypeUnitsDigit){
+            self.rollLabel.text = [NSString verticalStringWith:title];
+
+        }
+        
         [self addSubview:self.rollLabel];
 
     }
@@ -40,7 +50,7 @@
 
 -(UILabel *)rollLabel{
     if (!_rollLabel) {
-        _rollLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40*AdaptationWidth(), self.bounds.size.height)];
+        _rollLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 35*AdaptationWidth(), self.bounds.size.height)];
         _rollLabel.numberOfLines = 0;
         _rollLabel.textAlignment = 1;
         _rollLabel.font = MFont(30*AdaptationWidth());
