@@ -110,7 +110,7 @@
         }
     }
     
-    NSLog(@"%ld", self.selectedIndex);
+    NSLog(@"--%ld", self.selectedIndex);
 
 }
 #pragma mark *** 自定义标签栏item ***

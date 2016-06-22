@@ -19,6 +19,7 @@
 {
     BOOL _selectedCreatBtn;
     BOOL _selectedMyFam;
+    
 }
 @property (nonatomic,strong) UIButton *creatBtn; /*创建家谱Btn*/
 
@@ -76,16 +77,10 @@
     CGFloat widthSpace = 10;
     CGFloat btnWidth = (Screen_width - 10*4-30)/5;
     CGFloat btnHeight = 0.2*Screen_height;
-    NSArray *BtnArrStr = @[@"图文影像",@"世系图",@"阅读家谱",@"字辈",@"四海同宗"];
+    NSArray *btnImageNames = @[@"kuang1",@"kuang2",@"kuang3",@"kuang4",@"kuang5"];
     for (int i = 0; i < 5; i++) {
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(15+widthSpace*i+btnWidth*i, 10+64, btnWidth, btnHeight)];
-        [btn setTitle:BtnArrStr[i] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btn setBackgroundImage:MImage(@"kuang.png") forState:UIControlStateNormal];
-        [btn setTitleEdgeInsets:UIEdgeInsetsMake(20, 20, 20, 20)];
-        btn.titleLabel.font = MFont(11);
-        btn.titleLabel.numberOfLines = 0;
-        btn.backgroundColor = [UIColor colorWithRed:251/255.0 green:251/255.0 blue:251/255.0 alpha:0.5];
+        [btn setImage:MImage(btnImageNames[i]) forState:UIControlStateNormal];
         btn.tag = 1000+i+1;
         [btn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btn];
@@ -255,8 +250,12 @@
 
 
 -(void)respondsToCreatBtn:(UIButton *)sender{
-    
-    [self.view addSubview:self.crtFamTree];
+    _selectedCreatBtn = !_selectedCreatBtn;
+    if (_selectedCreatBtn) {
+        [self.view addSubview:self.crtFamTree];
+    }else{
+        [_crtFamTree removeFromSuperview];
+    }
    
 }
 
@@ -288,9 +287,13 @@
             [self.navigationController pushViewController:creVc animated:YES];
         }
         if (sender.tag == 2) {
-            ManagerFamilyViewController *manager = [[ManagerFamilyViewController alloc] initWithTitle:@"管理家谱" image:nil];
+           ManagerFamilyViewController *manager = [[ManagerFamilyViewController alloc] initWithTitle:@"管理家谱" image:nil];
             [manager.comNavi.rightBtn removeFromSuperview];
             [self.navigationController pushViewController:manager animated:YES];
+        }
+        if (sender.tag == 1) {
+            AddMemberViewController *add = [[AddMemberViewController alloc] initWithTitle:@"添加成员" image:nil];
+            [self.navigationController pushViewController:add animated:YES];
         }
     }
     

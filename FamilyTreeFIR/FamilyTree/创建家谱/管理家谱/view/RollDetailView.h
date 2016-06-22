@@ -9,5 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface RollDetailView : UIView
+@property (nonatomic,strong) UIImageView *headImageView; /*头像*/
+@property (nonatomic,strong) UILabel *nameLabel; /*名字*/
+@property (nonatomic,strong) UILabel *genLabel; /*代数*/
+@property (nonatomic,copy) NSArray *leftArr; /*左边数据*/
+@property (nonatomic,copy) NSArray *rightArr; /*左边数据*/
+
+- (instancetype)initWithFrame:(CGRect)frame leftViewDataArr:(NSArray *)leftArr rightViewDataArr:(NSArray *)rightArr;
 
 @end

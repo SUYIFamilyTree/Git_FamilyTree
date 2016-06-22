@@ -9,7 +9,7 @@
 #import "DivinationViewController.h"
 #import "UseItemView.h"
 #import "WAfterDivinationViewController.h"
-
+#define AnimationTime 1.5f
 enum {
     //本身btntag
     XZBtnTag = 10,
@@ -132,6 +132,11 @@ enum {
 #pragma mark *** 摇一摇 ***
 -(void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event{
     [self.diviAnimations startAnimating];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(AnimationTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        WAfterDivinationViewController *afterVc = [[WAfterDivinationViewController alloc] initWithTitle:@"灵签" image:nil];
+        [self.navigationController pushViewController:afterVc animated:YES];
+    });
 }
 
 
@@ -187,26 +192,23 @@ enum {
     if (!_diviAnimations) {
         _diviAnimations = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 300*AdaptationWidth(), 350*AdaptationWidth())];
         _diviAnimations.contentMode = UIViewContentModeScaleAspectFit;
-        _diviAnimations.image = MImage(@"0.jpg");
+        _diviAnimations.image = MImage(@"qiuQian_zt_qian21");
         
-        _diviAnimations.center = CGPointMake(self.view.center.x, self.view.center.y-130*AdaptationWidth());
+        _diviAnimations.center = CGPointMake(self.view.center.x+20*AdaptationWidth(), self.view.center.y-130*AdaptationWidth());
+        
         NSMutableArray *imageArrs = [@[] mutableCopy];
-        for (int idx = 0; idx<16; idx++) {
-            NSString *imStr = [NSString stringWithFormat:@"%d.jpg",idx];
+        
+        for (int idx = 21; idx>0; idx--) {
+            NSString *imStr = [NSString stringWithFormat:@"qiuQian_zt_qian%d",idx];
             [imageArrs addObject:MImage(imStr)];
         }
         _diviAnimations.animationImages = imageArrs;
-        _diviAnimations.animationDuration = 1.5f;
+        _diviAnimations.animationDuration = AnimationTime;
         _diviAnimations.animationRepeatCount = 1;
-        
-        
         
     }
     return _diviAnimations;
 }
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    WAfterDivinationViewController *afterVc = [[WAfterDivinationViewController alloc] initWithTitle:@"灵签" image:nil];
-    [self.navigationController pushViewController:afterVc animated:YES];
-}
+
 @end

@@ -31,10 +31,11 @@
         
         [self addSubview:self.titleLabel];
         self.titleLabel.text = title;
-        self.titleLabel.sd_layout.leftSpaceToView(self,3).topSpaceToView(self,0).bottomSpaceToView(self,0).widthIs(title.length*16);
+        self.titleLabel.sd_layout.leftSpaceToView(self,3).topSpaceToView(self,0).bottomSpaceToView(self,0).widthIs(title.length*35*AdaptationWidth());
         
         [self addSubview:self.detailLabel];
         self.detailLabel.text = detailcont;
+        
         self.detailLabel.sd_layout.leftSpaceToView(self.titleLabel,0).topEqualToView(self.titleLabel).bottomEqualToView(self.titleLabel).rightSpaceToView(self,0);
         
         if (_isStar) {
@@ -49,6 +50,8 @@
     if (!_titleLabel) {
         _titleLabel = [UILabel new];
         _titleLabel.textColor = LH_RGBCOLOR(166, 166, 166);
+        _titleLabel.font = WFont(35);
+        
         
     }
     return _titleLabel;
@@ -56,6 +59,7 @@
 -(UILabel *)detailLabel{
     if (!_detailLabel) {
         _detailLabel = [UILabel new];
+        _detailLabel.font = WFont(35);
     }
     return _detailLabel;
 }

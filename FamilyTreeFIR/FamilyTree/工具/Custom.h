@@ -70,6 +70,9 @@ __block __weak __typeof(&*self)weakSelf = self;
 #define InputView_height 40
 //通知字段
 #define LogStatusNotifacation @"loginNotifacation"
+//管理家谱
+#define ZeroContentOffset 320
+
 
 
 

@@ -42,14 +42,11 @@
     [self initInputTextView];
     
     //布局
-    self.whiteBackView.sd_layout.heightIs(0.45*Screen_height).topSpaceToView(self.naviView,15).leftSpaceToView(self.view,20).rightSpaceToView(self.view,20);
+    self.whiteBackView.sd_layout.heightIs(300).topSpaceToView(self.naviView,15).leftSpaceToView(self.view,20).rightSpaceToView(self.view,20);
         
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
 #pragma mark *** 初始化方法 ***
 
 //背景图
@@ -121,7 +118,7 @@
     [sureBtn addTarget:self action:@selector(respondsToSureBtn) forControlEvents:UIControlEventTouchUpInside];
     [self.whiteBackView addSubview:sureBtn];
     
-    sureBtn.sd_layout.leftSpaceToView(self.whiteBackView,15).rightSpaceToView(self.whiteBackView,15).bottomSpaceToView(self.whiteBackView,0.067*Screen_width).heightIs(40);
+    sureBtn.sd_layout.leftSpaceToView(self.whiteBackView,15).rightSpaceToView(self.whiteBackView,15).bottomSpaceToView(self.whiteBackView,20).heightIs(40);
     
 }
 
@@ -130,10 +127,19 @@
 -(void)respondsToFindVerBtn{
     
     MYLog(@"验证码");
+    
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"mobile":self.phoneNum.inputTextView.text,@"content":@"123456"} requestID:@0 requestcode:@"sendsms" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSLog(@"%@", responseObject);
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error.description);
+    }];
  
 }
 
 -(void)respondsToSureBtn{
+    
     MYLog(@"确认修改");
     
     NSString *phoneNum = self.phoneNum.inputTextView.text;
@@ -156,8 +162,6 @@
         [Tools showAlertViewControllerAutoDissmissWithTarGet:self Message:@"两次输入密码不正确" delay:1 complete:nil];
     }
     
-    
-    
 }
 
 #pragma mark *** getters ***
@@ -169,12 +173,6 @@
     return _naviView;
 }
 
-//-(FindPassView *)phoneNum{
-//    if (!_phoneNum) {
-//        _phoneNum = [[FindPassView alloc] initWithFrame:CGRectMake(0, 100, 0.8*Screen_width, 40) headImage:MImage(@"tel") isSafe:NO hasArrows:NO withplaceholderStr:@"手机号"];
-//       
-//    }
-//    return _phoneNum;
-//}
+
 
 @end

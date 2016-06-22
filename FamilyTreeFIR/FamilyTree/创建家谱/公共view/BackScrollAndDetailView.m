@@ -31,6 +31,9 @@
         [self.backView addSubview:self.selecProtrai];
  
         [self initUI];
+        
+        //设置font
+        
        
     }
     return self;
@@ -57,9 +60,10 @@
     
     [self.backView addSubview:self.birtime];
     
+    
     //自己年月日
     
-    self.liveNowLabel = [self creatLabelTextWithTitle:@"是否健在:" TitleFrame:CGRectMake(20, CGRectYH(self.birtime)+GapOfView, 80, InputView_height) inputViewLength:50 dataArr:@[@" 是",@" 否"] inputViewLabel:@"否" FinText:@"" withStar:NO];
+    self.liveNowLabel = [self creatLabelTextWithTitle:@"是否健在:" TitleFrame:CGRectMake(20, CGRectYH(self.birtime)+GapOfView, 90, InputView_height) inputViewLength:50 dataArr:@[@" 是",@" 否"] inputViewLabel:@"否" FinText:@"" withStar:NO];
     [self.backView addSubview:self.liveNowLabel];
     
     self.selfYear  = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(20, CGRectYH(self.liveNowLabel)+GapOfView, 0, InputView_height) inputViewLength:0.13*Screen_width dataArr:@[@"1990",@"1992",@"1992"] inputViewLabel:@"1990" FinText:@"年" withStar:NO];
@@ -71,10 +75,12 @@
     [self.backView addSubview:self.selfDay];
     
     //字辈
-    self.generationLabel = [self creatLabelTextWithTitle:@"字辈:" TitleFrame:CGRectMake(20, CGRectYH(self.selfYear)+GapOfView, 0.15*Screen_width, InputView_height) inputViewLength:0.23*Screen_width dataArr:@[@"  第一代",@"  第二代",@"  地三代"] inputViewLabel:@" 第三代" FinText:@"" withStar:NO];
+    self.generationLabel = [self creatLabelTextWithTitle:@"字辈:" TitleFrame:CGRectMake(20, CGRectYH(self.selfYear)+GapOfView, 0.15*Screen_width, InputView_height) inputViewLength:0.23*Screen_width dataArr:@[@" 第一代",@" 第二代",@" 地三代"] inputViewLabel:@" 第三代" FinText:@"" withStar:NO];
     
     [self.backView addSubview:self.generationLabel];
     [self.backView addSubview:self.gennerationNex];
+    
+    
     
     //个人简介
     [self.backView addSubview:self.selfTextView];
@@ -86,6 +92,7 @@
     
     UIButton *videoBtn = [UIButton new];
     [videoBtn setTitle:@"上传影音资料" forState:0];
+    videoBtn.titleLabel.font = WFont(32);
     [videoBtn setTitleColor:[UIColor blackColor] forState:0];
     videoBtn.layer.borderWidth = 1.0f;
     videoBtn.layer.borderColor = BorderColor;
@@ -103,6 +110,19 @@
     [self.backView addSubview:self.moveCity];
     
     self.moveCity.sd_layout.leftEqualToView(self.selfTextView).rightEqualToView(self.selfTextView).topSpaceToView(self.uploadImageBtn,GapOfView).heightIs(InputView_height);
+    
+    //层级关系改变
+    [self.backView bringSubviewToFront:self.generationLabel];
+    [self.backView bringSubviewToFront:self.selfYear];
+    [self.backView bringSubviewToFront:self.selfMonth];
+    [self.backView bringSubviewToFront:self.selfDay];
+    [self.backView bringSubviewToFront:self.liveNowLabel];
+    [self.backView bringSubviewToFront:self.birtime];
+    [self.backView bringSubviewToFront:self.dayLabel];
+    [self.backView bringSubviewToFront:self.monthLabel];
+    [self.backView bringSubviewToFront:self.birthLabel];
+    [self.backView bringSubviewToFront:self.inputView];
+    
 }
 
 
@@ -111,6 +131,7 @@
     
     UILabel *theLabel = [[UILabel alloc] initWithFrame:frame];
     theLabel.text = title;
+    theLabel.font = WFont(33);
     [self.backView addSubview:theLabel];
     
     InputView *inputView = [[InputView alloc] initWithFrame:CGRectMake(CGRectXW(theLabel), theLabel.frame.origin.y, length+10, InputView_height) Length:length+10 withData:dataArr];
@@ -204,8 +225,9 @@
 -(InputView *)inputView{
     if (!_inputView) {
         
-        UILabel *theLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, FirstViewFrameOfheight, 80, InputView_height)];
+        UILabel *theLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, FirstViewFrameOfheight, 90, InputView_height)];
         theLabel.text = @"是否结婚:";
+        theLabel.font = WFont(35);
         [self.backView addSubview:theLabel];
         
         _inputView = [[InputView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(theLabel.frame), theLabel.frame.origin.y, 70, InputView_height) Length:50 withData:@[@" 是",@" 否"]];
@@ -219,6 +241,7 @@
     if (!_parnName) {
         UILabel *theLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectYH(self.inputView)+GapOfView, 0.34*Screen_width, InputView_height)];
         theLabel.text = @"输入配偶姓名:";
+        theLabel.font = WFont(35);
         [self.backView addSubview:theLabel];
         _parnName = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(theLabel.frame), theLabel.frame.origin.y, 0.5*Screen_width, InputView_height)];
         _parnName.backgroundColor = [UIColor whiteColor];
@@ -239,6 +262,7 @@
         
         UIButton *seletBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectXW(_selecProtrai)+20, _selecProtrai.frame.origin.y, 0.5*Screen_width, InputView_height)];
         [seletBtn setTitle:@"选择头像" forState:0];
+        seletBtn.titleLabel.font = WFont(35);
         [seletBtn setTitleColor:[UIColor blackColor] forState:0];
         seletBtn.layer.borderWidth = 1.0f;
         seletBtn.layer.borderColor = BorderColor;
@@ -253,6 +277,7 @@
     if (!_gennerationNex) {
         _gennerationNex = [[UILabel alloc] initWithFrame:CGRectMake(CGRectXW(self.generationLabel)+10, CGRectYH(self.selfYear)+GapOfView, 0.45*Screen_width, InputView_height)];
         _gennerationNex.text = @"十、大、啊、实、打";
+        _gennerationNex.font = WFont(35);
         _gennerationNex.backgroundColor = [UIColor whiteColor];
         _gennerationNex.layer.borderWidth = 1.0f;
         _gennerationNex.textAlignment = 1;
@@ -283,6 +308,7 @@
         
         UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, _uploadImageBtn.bounds.size.width/2-5, 40)];
         label1.text  = @"上传图片";
+        label1.font = WFont(32);
         [_uploadImageBtn addSubview:label1];
         
         UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(CGRectXW(label1), 0, _uploadImageBtn.bounds.size.width/2, 40)];

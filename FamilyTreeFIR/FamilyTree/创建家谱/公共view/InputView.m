@@ -56,11 +56,14 @@
             self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _length, (1+_dataArr.count)*(Input_height-10));
             self.layer.borderWidth = 1.0f;
             self.layer.borderColor = BorderColor;
+        
             for (int idx = 0; idx<_dataArr.count; idx++) {
+                
                 UIButton *selecBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, (idx+1)*(Input_height-10), _length,Input_height-10)];
                 [selecBtn setTitleColor:[UIColor blackColor] forState:0];
                 selecBtn.backgroundColor = [UIColor whiteColor];
                 [selecBtn setTitle:_dataArr[idx] forState:0];
+                selecBtn.titleLabel.font = WFont(35);
                 
                 selecBtn.tag = idx+10;
                 
@@ -72,7 +75,8 @@
                 [selecBtn addTarget:self action:@selector(respondsToExtendLabelBtn:) forControlEvents:UIControlEventTouchUpInside];
                 
                 [self addSubview:selecBtn];
-            } 
+                                
+            }
 //        }];
     }else{
 //        [UIView animateWithDuration:0.3f animations:^{
@@ -88,6 +92,8 @@
 //        }];
         
     }
+    
+    
  
 }
 
@@ -102,7 +108,8 @@
         _inputLabel.backgroundColor = [UIColor whiteColor];
         _inputLabel.textColor = [UIColor blackColor];
         _inputLabel.userInteractionEnabled   = YES;
-        
+        _inputLabel.textAlignment = 0;
+        _inputLabel.font = WFont(35);
         UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(extendTheLabel)];
         [_inputLabel addGestureRecognizer:tapGes];
         

@@ -26,6 +26,7 @@
     if (self) {
         //左侧五行图
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 15, 0.4156*CGRectW(self), 0.8114*CGRectH(self))];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.image = MImage(@"human_wuxingImg");
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:imageView];
@@ -42,8 +43,6 @@
         [self initNumerlogyLB];
     
 
-        
-       
     }
     return self;
 }

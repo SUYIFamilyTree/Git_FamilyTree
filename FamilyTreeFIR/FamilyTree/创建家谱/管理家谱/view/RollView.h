@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+//十位以上的数字和个位数字竖着显示
+typedef enum : NSUInteger {
+    RollViewTypeDecade,//十位
+    RollViewTypeUnitsDigit,//个位
+} RollViewType;
 
 @interface RollView : UIView
+
+- (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title rollType:(RollViewType)rollType;
 
 @end
