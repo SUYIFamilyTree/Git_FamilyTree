@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "HeadImageView.h"
+#import "MemallInfoModel.h"
 
 @interface PersonalCenterInfoView : UIView
 /** 头像视图*/
 @property (nonatomic, strong) HeadImageView *headIV;
 
+-(void)reloadData:(NSArray<MemallInfoHyjpModel *> *)hyjpArr;
 
 @end

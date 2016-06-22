@@ -20,14 +20,19 @@
 @property (nonatomic, strong) UIImageView *leftFirstCircle;
 /** 左侧第二个圆*/
 @property (nonatomic, strong) UIImageView *leftSecondCircle;
+
+
 /** 账户信息表*/
 @property (nonatomic, strong) UITableView *accountInfoTB;
 /** 个人信息表*/
 @property (nonatomic, strong) UITableView *personalInfoTB;
+/** 个人登录返回信息*/
+@property (nonatomic, strong) LoginModel *loginModel;
+
 /** 账户信息标题数组*/
 @property (nonatomic, copy) NSArray *accountInfoTitleArr;
 /** 账户信息详细数组*/
-@property (nonatomic, copy) NSArray *accountInfoDetailArr;
+@property (nonatomic, strong) NSMutableArray *accountInfoDetailArr;
 /** 个人信息标题数组*/
 @property (nonatomic, copy) NSArray *personalInfoTitleArr;
 /** 个人信息详细数组*/
@@ -73,7 +78,7 @@
         //账户信息表
         [self initAccountInfoTB];
         //个人信息表
-        self.personalInfoDetailArr = [NSMutableArray arrayWithObjects:@"陈安一",@"阿一",@"中国",@"安徽-怀宁",@"男",@"1999年09月09日09时",@"身份证",@"******",@"律师",@"本科",@"",@"(空)",@"(空)", nil];
+//        self.personalInfoDetailArr = [NSMutableArray arrayWithObjects:@"陈安一",@"阿一",@"中国",@"安徽-怀宁",@"男",@"1999年09月09日09时",@"身份证",@"******",@"律师",@"本科",@"",@"(空)",@"(空)", nil];
         [self initPersonalInfoTB];
     }
     return self;
@@ -112,12 +117,12 @@
     return _accountInfoTitleArr;
 }
 
--(NSArray *)accountInfoDetailArr{
-    if (!_accountInfoDetailArr) {
-        _accountInfoDetailArr = @[@"001021",@"ay001",@"******",@"158****8888",@"client@tcjp.com"];
-    }
-    return _accountInfoDetailArr;
-}
+//-(NSArray *)accountInfoDetailArr{
+//    if (!_accountInfoDetailArr) {
+//        _accountInfoDetailArr = @[@"001021",@"ay001",@"******",@"158****8888",@"client@tcjp.com"];
+//    }
+//    return _accountInfoDetailArr;
+//}
 
 -(NSArray *)personalInfoTitleArr{
     if (!_personalInfoTitleArr) {
@@ -217,10 +222,26 @@
     self.personalInfoTB.delegate = self;
     self.personalInfoTB.tag = 1002;
     [self.BgIV addSubview:self.personalInfoTB];
-    
 }
 
+#pragma mark - 数据加载
+-(void)reloadEditPersonalInfoData:(LoginModel *)loginModel{
+    self.loginModel = loginModel;
+    self.accountInfoDetailArr = [NSMutableArray array];
+    
+    [self.accountInfoDetailArr addObject:[NSString stringWithFormat:@"%ld",self.loginModel.MeId]];
+    [self.accountInfoDetailArr addObject:self.loginModel.MeAccount];
+    [self.accountInfoDetailArr addObject:@"******"];
+    [self.accountInfoDetailArr addObject: [self getLockMobileWithString:self.loginModel.MeMobile]];
+    [self.accountInfoDetailArr addObject:self.loginModel.MeEmail];
+    
+    self.personalInfoDetailArr = [NSMutableArray array];
+    //        self.personalInfoDetailArr = [NSMutableArray arrayWithObjects:@"陈安一",@"阿一",@"中国",@"安徽-怀宁",@"男",@"1999年09月09日09时",@"身份证",@"******",@"律师",@"本科",@"",@"(空)",@"(空)", nil];
 
+    [self.personalInfoDetailArr addObject:self.loginModel.MeName];
+    
+    
+}
 
 #pragma mark - ScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -256,7 +277,7 @@
             accountInfoCell.customTitleLB.text = [self.accountInfoTitleArr[indexPath.row] stringByAppendingString:@":"];
             [self labelWidthToFit:accountInfoCell.customTitleLB andFrame:CGRectMake(8, 0, 100, 26)];
             accountInfoCell.customDetailLB.text = self.accountInfoDetailArr[indexPath.row];
-            accountInfoCell.delegate = self;
+                        accountInfoCell.delegate = self;
             accountInfoCell.editBtn.tag = 333+indexPath.row;
         }
         return accountInfoCell;
@@ -395,6 +416,14 @@
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, Screen_width, CGRectH(pickerViewTitleView))];
     label.textColor = [UIColor redColor];
     [pickerViewTitleView addSubview:label];
+    UIButton *sureBtn = [[UIButton alloc]initWithFrame:CGRectMake(0.8*Screen_width, 0, 0.2*Screen_width, CGRectH(pickerViewTitleView))];
+    //sureBtn.backgroundColor = [UIColor redColor];
+    
+    [sureBtn addTarget:self action:@selector(clickPickerViewSureBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [sureBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [sureBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    sureBtn.tag = 666+(sender.tag-444);
+    [pickerViewTitleView addSubview:sureBtn];
     //pickerView and datepick
     if (sender.tag-444 != 5) {
         //pickerView
@@ -414,14 +443,14 @@
         CALayer *didSelectedTopBorder = [CALayer layer];
         float didSelectedWidth=pickerViewDidSelectedTopAndBottomBorderView.frame.size.width;
         float didSelectedHeight=pickerViewDidSelectedTopAndBottomBorderView.frame.size.height;
-        didSelectedTopBorder.frame = CGRectMake(0, 0, didSelectedWidth, 1.0f);
+        didSelectedTopBorder.frame = CGRectMake(0, -1, didSelectedWidth, 1.0f);
         didSelectedTopBorder.backgroundColor = [UIColor redColor].CGColor;
         [pickerViewDidSelectedTopAndBottomBorderView.layer addSublayer:didSelectedTopBorder];
         CALayer *didSelectedBottomBorder = [CALayer layer];
         didSelectedBottomBorder.frame = CGRectMake(0, didSelectedHeight, didSelectedWidth, 1.0f);
         didSelectedBottomBorder.backgroundColor = [UIColor redColor].CGColor;
         [pickerViewDidSelectedTopAndBottomBorderView.layer addSublayer:didSelectedBottomBorder];
-
+        
     }else{
         CustomPikcerDateView *customPickerDateView  = [[CustomPikcerDateView alloc]initWithFrame:CGRectMake(0, 0.7952*Screen_height-64, Screen_width, 0.2048*Screen_height)];
         customPickerDateView.backgroundColor = [UIColor whiteColor];
@@ -558,6 +587,9 @@
     [tableView reloadData];
 }
 
+
+
+
 #pragma mark - CustomPickerDateViewDelegate
 -(void)getCustomPickerDateViewYear:(NSInteger)year andMonth:(NSInteger)month andDay:(NSInteger)day andHour:(NSInteger)hour{
     self.personalInfoDetailArr[5] = [NSString stringWithFormat:@"%ld年%.2ld月%.2ld日%.2ld时",year,month,day,hour];
@@ -579,6 +611,12 @@
     [self endEditing:YES];
 }
 
+//pickerView确定按钮
+-(void)clickPickerViewSureBtn:(UIButton *)sender{
+    MYLog(@"%ld",sender.tag - 666);
+    [self.pickerViewGrayBgView removeFromSuperview];
+    [self viewController].tabBarController.tabBar.hidden = NO;
+}
 //关pickerView
 -(void)clickPickerViewGrayBgViewForRemove{
     [self.pickerViewGrayBgView removeFromSuperview];
@@ -595,6 +633,17 @@
     CGSize expectSize = [label sizeThatFits:maximumLabelSize];
     label.frame = CGRectMake(frame.origin.x,frame.origin.y,expectSize.width, frame.size.height);
     
+}
+
+//电话号码加*处理
+-(NSString *)getLockMobileWithString:(NSString *)str{
+    if (!IsNilString(str)) {
+        NSMutableString *mutableStr = [NSMutableString stringWithString:str];
+        [mutableStr replaceCharactersInRange:NSMakeRange(4, 4) withString:@"****"];
+        return [mutableStr copy];
+
+    }
+    return @"";
 }
 
 - (void)clearSeparatorWithView:(UIView * )view

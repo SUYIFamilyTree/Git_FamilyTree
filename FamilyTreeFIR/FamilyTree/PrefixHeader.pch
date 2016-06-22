@@ -51,6 +51,7 @@
 #import "UIColor+random.h"
 #import "UIView+getCurrentViewController.h"
 #import "NSString+addLineBreakOrSpace.h"
+#import "NSString+arabicToChinese.h"
 //网络请求
 #import "TCJPHTTPRequestManager.h"
 #import "SXLoadingView.h"

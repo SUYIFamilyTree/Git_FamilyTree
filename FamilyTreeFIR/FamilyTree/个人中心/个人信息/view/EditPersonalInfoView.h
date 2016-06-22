@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "LoginModel.h"
 @interface EditPersonalInfoView : UIScrollView
-
+-(void)reloadEditPersonalInfoData:(LoginModel *)loginModel;
 @end

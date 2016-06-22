@@ -14,14 +14,15 @@
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         //画星星
-        CGFloat redIVWidth = (CGRectW(self)-4*5)/5;
+        CGFloat redIVWidth = (CGRectW(self)-4*3)/5;
         for (int i = 0; i < redNumber; i++) {
-            UIImageView *RedIV = [[UIImageView alloc]initWithFrame:CGRectMake((redIVWidth+5)*i, 0, redIVWidth,CGRectH(self))];
+            UIImageView *RedIV = [[UIImageView alloc]initWithFrame:CGRectMake((redIVWidth+3)*i, 0, redIVWidth,CGRectH(self))];
+            RedIV.contentMode = UIViewContentModeScaleAspectFit;
             RedIV.image = redImage;
             [self addSubview:RedIV];
         }
         for (int i = redNumber ; i < 5; i++) {
-            UIImageView *normalIV = [[UIImageView alloc]initWithFrame:CGRectMake((redIVWidth+5)*redNumber+(redIVWidth+5)*(i-redNumber), 0, redIVWidth, CGRectH(self))];
+            UIImageView *normalIV = [[UIImageView alloc]initWithFrame:CGRectMake((redIVWidth+3)*redNumber+(redIVWidth+3)*(i-redNumber), 0, redIVWidth, CGRectH(self))];
             normalIV.image = normalImage;
             [self addSubview:normalIV];
         }

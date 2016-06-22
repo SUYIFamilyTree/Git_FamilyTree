@@ -224,6 +224,8 @@
             [USERDEFAULT setObject:loginModel.MeNickname forKey:@"MeNickname"];
             //vip等级
             [USERDEFAULT setObject:@(loginModel.MeViplevel) forKey:@"MeViplevel"];
+            //头像路径
+            [USERDEFAULT setObject:loginModel.MeExtension forKey:@"MeExtension"];
             [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserAccount];
             [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:UserPassword];
             

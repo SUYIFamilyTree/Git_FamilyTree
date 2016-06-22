@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "MemallInfoModel.h"
+
 @interface PersonalCenterCliffordView : UIView
 -(void)reloadData:(MemallInfoGrqwModel *)grqw;
+-(void)reloadDevoutData:(DevoutModel *)devout;
 @end

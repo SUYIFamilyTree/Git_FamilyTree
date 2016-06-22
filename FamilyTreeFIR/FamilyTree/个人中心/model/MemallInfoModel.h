@@ -105,3 +105,12 @@
 
 @end
 
+
+@interface DevoutModel : NSObject
+/** 总虔诚度*/
+@property (nonatomic, assign) NSInteger qcdy;
+/** 月虔诚度*/
+@property (nonatomic, assign) NSInteger qcdz;
+/** 虔诚等级*/
+//@property (nonatomic, strong) <#type#> <#name#>;
+@end

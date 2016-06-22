@@ -9,8 +9,12 @@
 #import "PersonalCenterMyPhotoAlbumsView.h"
 #import "CALayer+drawborder.h"
 #import "UIView+getCurrentViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
-@interface PersonalCenterViewController()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface PersonalCenterMyPhotoAlbumsView()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+
+/** 三张照片视图*/
+@property (nonatomic, strong) NSMutableArray<UIImageView *> *grxcIVsArr;
 
 @end
 
@@ -48,9 +52,11 @@
 }
 
 -(void)initPhotosIV{
+    self.grxcIVsArr = [NSMutableArray array];
     for (int i = 0; i < 3; i++) {
         UIImageView *photosIV = [[UIImageView alloc]initWithFrame:CGRectMake(0.0875*CGRectW(self)+0.2813*CGRectW(self)*i, 40, 0.2578*CGRectW(self), 90)];
-        photosIV.image = MImage(@"gr_ct_photo");
+        
+        [self.grxcIVsArr addObject:photosIV];
         [self addSubview:photosIV];
     }
 }
@@ -66,6 +72,14 @@
     //imagePicker.delegate = self;
     [[self viewController] presentViewController:imagePicker animated:YES completion:nil];
 
+}
+
+-(void)reloadData:(NSArray<MemallInfoGrxcModel *> *)grxcArr{
+    for (int i = 0; i < 3; i++) {
+//        [self.grxcIVsArr[i] setImageWithURL:[NSURL URLWithString:grxcArr[i].imgurl] placeholder:[UIImage imageNamed:[NSString stringWithFormat:@"grxc%d.png",i]]];
+        
+        self.grxcIVsArr[i].image = MImage(@"gr_ct_photo");
+    }
 }
 
 @end
