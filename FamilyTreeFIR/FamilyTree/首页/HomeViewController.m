@@ -190,6 +190,20 @@ typedef enum : NSUInteger {
         btn.tag = idx;
         [btn setImage:MImage(imageNames[idx]) forState:0];
         [btn addTarget:self action:@selector(respondsToBtn:) forControlEvents:UIControlEventTouchUpInside];
+        //今天运势
+        if (idx==1) {
+            UILabel *scroLabel = [[UILabel alloc] initWithFrame:AdaptationFrame(90, 84, 56, 50)];
+            scroLabel.text = @"95";
+            scroLabel.font = BFont(35*AdaptationWidth());
+            scroLabel.textColor = [UIColor redColor];
+            [btn addSubview:scroLabel];
+            if ([scroLabel.text integerValue]>=100) {
+                scroLabel.font = BFont(27*AdaptationWidth());
+            }
+            if ([scroLabel.text integerValue]<10) {
+                scroLabel.frame = AdaptationFrame(100, 84, 56, 50);
+            }
+        }
         [self.view addSubview:btn];
     }
 }

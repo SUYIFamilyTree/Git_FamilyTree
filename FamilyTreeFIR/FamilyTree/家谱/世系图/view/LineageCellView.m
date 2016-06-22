@@ -27,6 +27,7 @@
 -(UIImageView *)headIV{
     if (!_headIV) {
         _headIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, CGRectW(self), CGRectH(self)/3*2)];
+        _headIV.contentMode = UIViewContentModeScaleAspectFit;
         _headIV.image = self.isMan?MImage(@"man"):MImage(@"woman");
     }
     return _headIV;
