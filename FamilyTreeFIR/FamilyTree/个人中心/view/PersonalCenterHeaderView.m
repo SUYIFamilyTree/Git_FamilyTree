@@ -21,8 +21,6 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        self.money = 88.0f;
-        self.sameCityMoney = 1273;
         [self initMoneyView];
         [self initSameCityMoneyView];
     }

@@ -12,4 +12,6 @@
 @interface PersonalCenterInfoView : UIView
 /** 头像视图*/
 @property (nonatomic, strong) HeadImageView *headIV;
+
+
 @end

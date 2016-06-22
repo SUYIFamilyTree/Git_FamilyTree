@@ -480,6 +480,8 @@
 		ADE2D17E1CF7052C009D1ADF /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE2D17D1CF7052C009D1ADF /* TableView.m */; };
 		ADE3BBD31D13E795006523C4 /* DivinationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE3BBD21D13E795006523C4 /* DivinationViewController.m */; };
 		ADF854BA1CF53FF700D222B7 /* bg-1.png in Resources */ = {isa = PBXBuildFile; fileRef = ADF854B91CF53FF700D222B7 /* bg-1.png */; };
+		BC00EA051D18CFA200BF1DC3 /* MemallInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC00EA041D18CFA200BF1DC3 /* MemallInfoModel.m */; };
+		BC00EA0B1D190E0A00BF1DC3 /* NSString+addLineBreakOrSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = BC00EA0A1D190E0A00BF1DC3 /* NSString+addLineBreakOrSpace.m */; };
 		BC0326A01CFD22070089EE4C /* ImageAndTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC03269F1CFD22070089EE4C /* ImageAndTextViewController.m */; };
 		BC0326C01CFD23D50089EE4C /* bk_ye.png in Resources */ = {isa = PBXBuildFile; fileRef = BC0326A51CFD23D50089EE4C /* bk_ye.png */; };
 		BC0326C11CFD23D50089EE4C /* bk_ye@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC0326A61CFD23D50089EE4C /* bk_ye@2x.png */; };
@@ -702,6 +704,8 @@
 		BCF97C4D1D17988B004D46AB /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = BCF97C4A1D17988B004D46AB /* close.png */; };
 		BCF97C4E1D17988B004D46AB /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BCF97C4B1D17988B004D46AB /* close@2x.png */; };
 		BCF97C4F1D17988B004D46AB /* close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BCF97C4C1D17988B004D46AB /* close@3x.png */; };
+		BCF97C591D17B46D004D46AB /* SXLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF97C531D17B46D004D46AB /* SXLoadingView.m */; };
+		BCF97C5A1D17B46D004D46AB /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF97C561D17B46D004D46AB /* MBProgressHUD+Add.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1286,6 +1290,10 @@
 		ADE3BBD21D13E795006523C4 /* DivinationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivinationViewController.m; sourceTree = "<group>"; };
 		ADF854B81CF53A9200D222B7 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		ADF854B91CF53FF700D222B7 /* bg-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-1.png"; sourceTree = "<group>"; };
+		BC00EA031D18CFA200BF1DC3 /* MemallInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemallInfoModel.h; sourceTree = "<group>"; };
+		BC00EA041D18CFA200BF1DC3 /* MemallInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemallInfoModel.m; sourceTree = "<group>"; };
+		BC00EA091D190E0A00BF1DC3 /* NSString+addLineBreakOrSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+addLineBreakOrSpace.h"; sourceTree = "<group>"; };
+		BC00EA0A1D190E0A00BF1DC3 /* NSString+addLineBreakOrSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+addLineBreakOrSpace.m"; sourceTree = "<group>"; };
 		BC03269E1CFD22070089EE4C /* ImageAndTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAndTextViewController.h; sourceTree = "<group>"; };
 		BC03269F1CFD22070089EE4C /* ImageAndTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageAndTextViewController.m; sourceTree = "<group>"; };
 		BC0326A51CFD23D50089EE4C /* bk_ye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bk_ye.png; sourceTree = "<group>"; };
@@ -1549,6 +1557,10 @@
 		BCF97C4A1D17988B004D46AB /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		BCF97C4B1D17988B004D46AB /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
 		BCF97C4C1D17988B004D46AB /* close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@3x.png"; sourceTree = "<group>"; };
+		BCF97C521D17B46D004D46AB /* SXLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXLoadingView.h; sourceTree = "<group>"; };
+		BCF97C531D17B46D004D46AB /* SXLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXLoadingView.m; sourceTree = "<group>"; };
+		BCF97C551D17B46D004D46AB /* MBProgressHUD+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Add.h"; sourceTree = "<group>"; };
+		BCF97C561D17B46D004D46AB /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1677,6 +1689,8 @@
 				BCDE42641D0E45CE00921373 /* UIView+getCurrentViewController.m */,
 				BCDE42661D0E555700921373 /* NSString+arabicToChinese.h */,
 				BCDE42671D0E555700921373 /* NSString+arabicToChinese.m */,
+				BC00EA091D190E0A00BF1DC3 /* NSString+addLineBreakOrSpace.h */,
+				BC00EA0A1D190E0A00BF1DC3 /* NSString+addLineBreakOrSpace.m */,
 			);
 			path = "扩展方法";
 			sourceTree = "<group>";
@@ -1686,6 +1700,8 @@
 			children = (
 				AD195B341CF5A8D5000E32C7 /* TCJPHTTPRequestManager.h */,
 				AD195B351CF5A8D5000E32C7 /* TCJPHTTPRequestManager.m */,
+				BCF97C511D17B46D004D46AB /* 加载提示 */,
+				BCF97C541D17B46D004D46AB /* MBProgressHUD */,
 			);
 			path = "网络请求";
 			sourceTree = "<group>";
@@ -2886,6 +2902,15 @@
 			path = "登录界面";
 			sourceTree = "<group>";
 		};
+		BC00EA021D18CF4500BF1DC3 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				BC00EA031D18CFA200BF1DC3 /* MemallInfoModel.h */,
+				BC00EA041D18CFA200BF1DC3 /* MemallInfoModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		BC03269C1CFD201C0089EE4C /* 图文影音 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3095,6 +3120,7 @@
 			children = (
 				BC5F14DC1D0FF1AD004F3622 /* controller */,
 				BC5F14DF1D0FF1AD004F3622 /* view */,
+				BC00EA021D18CF4500BF1DC3 /* model */,
 				BC96727A1D10E4B400F60534 /* 个人信息 */,
 				BC5F14F01D0FF1AD004F3622 /* vip */,
 				BC5F14F31D0FF1AD004F3622 /* vip选项 */,
@@ -3472,6 +3498,24 @@
 			children = (
 			);
 			path = "基类";
+			sourceTree = "<group>";
+		};
+		BCF97C511D17B46D004D46AB /* 加载提示 */ = {
+			isa = PBXGroup;
+			children = (
+				BCF97C521D17B46D004D46AB /* SXLoadingView.h */,
+				BCF97C531D17B46D004D46AB /* SXLoadingView.m */,
+			);
+			path = "加载提示";
+			sourceTree = "<group>";
+		};
+		BCF97C541D17B46D004D46AB /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				BCF97C551D17B46D004D46AB /* MBProgressHUD+Add.h */,
+				BCF97C561D17B46D004D46AB /* MBProgressHUD+Add.m */,
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		DCB18B7EB1AEECA7554BE53E /* Pods */ = {
@@ -4283,6 +4327,7 @@
 				ADA4C1691D0E8A1200CA9067 /* CemGoodsShopView.m in Sources */,
 				ADBA01771D016DD90016AB00 /* AddMemberViewController.m in Sources */,
 				ADC326FA1CF3E3DF00CEAE53 /* main.m in Sources */,
+				BCF97C591D17B46D004D46AB /* SXLoadingView.m in Sources */,
 				BC5F15171D0FF1AD004F3622 /* EditHeadView.m in Sources */,
 				ADA7FF011D07E51500EDBEE4 /* CustonCollectionViewCell.m in Sources */,
 				ADB9734D1CFE86FF007B876B /* BackScrollAndDetailView.m in Sources */,
@@ -4291,6 +4336,7 @@
 				ADA4C1151D0E437E00CA9067 /* CemeteryViewController.m in Sources */,
 				AD8E603D1CFC0BDA00355C06 /* FindPassView.m in Sources */,
 				AD1F3C211D0F92770085EDFB /* CreateCemViewController.m in Sources */,
+				BC00EA0B1D190E0A00BF1DC3 /* NSString+addLineBreakOrSpace.m in Sources */,
 				AD5F5C121D1798DE0035710F /* UseItemView.m in Sources */,
 				BC5F15111D0FF1AD004F3622 /* PersonalCenterInfoView.m in Sources */,
 				BC5F150E1D0FF1AD004F3622 /* HeadImageView.m in Sources */,
@@ -4314,6 +4360,7 @@
 				BCDE42681D0E555700921373 /* NSString+arabicToChinese.m in Sources */,
 				AD8DAB081CFD84A5009B7958 /* HelpTableTableViewCell.m in Sources */,
 				BC29438D1CFE81D9006671B9 /* WholeWorldViewController.m in Sources */,
+				BCF97C5A1D17B46D004D46AB /* MBProgressHUD+Add.m in Sources */,
 				BCCE8A9A1CFFF289005A5E21 /* PublicWorshipView.m in Sources */,
 				AD2ACD7F1CF3FC9C009D4A24 /* RootTabBarViewController.m in Sources */,
 				AD195B381CF5A8D5000E32C7 /* TCJPHTTPRequestManager.m in Sources */,
@@ -4351,6 +4398,7 @@
 				ADB9261C1CF7DF1900AA8B6E /* LoginViewController.m in Sources */,
 				AD67889C1D06AD5B00D6CF52 /* NewsCenterViewController.m in Sources */,
 				AD73886D1CF6E4860076B2AD /* CustomCollectionViewCell.m in Sources */,
+				BC00EA051D18CFA200BF1DC3 /* MemallInfoModel.m in Sources */,
 				ADE2D17B1CF6FBD3009D1ADF /* FamilyShopView.m in Sources */,
 				ADB9266A1CF7EBAC00AA8B6E /* FamilyTreeViewController.m in Sources */,
 				BC1EA60A1CFC00D8006F6454 /* SearchTableViewCell.m in Sources */,

@@ -10,7 +10,7 @@
 
 @interface PersonalCenterCliffordView()
 /** 签运*/
-@property (nonatomic, strong) NSArray *divinationsArr;
+@property (nonatomic, strong) NSMutableArray *divinationsArr;
 /** 祈福等级*/
 @property (nonatomic, assign) int cliffodLevel;
 /** 虔诚度*/
@@ -26,8 +26,8 @@
         bgIV.image = MImage(@"gr_ct_jiang_bg");
         [self addSubview:bgIV];
         //求签
-        self.divinationsArr = @[@"三等中平策",@"规规矩矩"];
-        [self initDivinationLBs];
+        //self.divinationsArr = @[@"三等中平策",@"规规矩矩"];
+       
         //祈福
         self.cliffodLevel = 3;
         self.devoutDgree = 310;
@@ -79,6 +79,13 @@
     devoutDgreeNumberLB.text = [NSString stringWithFormat:@"%d",self.devoutDgree];
     devoutDgreeNumberLB.font = MFont(12);
     [self addSubview:devoutDgreeNumberLB];
+}
+
+-(void)reloadData:(MemallInfoGrqwModel *)grqw{
+    self.divinationsArr = [NSMutableArray array];
+    [self.divinationsArr addObject:[NSString stringWithFormat:@"%ld",grqw.qh]];
+    [self.divinationsArr addObject:grqw.qwhh];
+     [self initDivinationLBs];
 }
 
 @end

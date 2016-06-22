@@ -209,15 +209,23 @@
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:kRequestCodeLogin success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             //登录成功
-
-            NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
-//            NSLog(@"%@", dic);
+            LoginModel *loginModel = [LoginModel modelWithJSON:jsonDic[@"data"]];
             
-            [LoginModel sharedLoginMode].MeAreacodeid = dic[@"MeAreacodeid"];
+            
             //存储用户信息
+            //id
+            [USERDEFAULT setObject:@(loginModel.MeId) forKey:@"userid"];
             [USERDEFAULT setObject:@true forKey:LoginStates];
-            [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserId];
-            [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:Password];
+            //余额
+            [USERDEFAULT setObject:@(loginModel.MeBalance) forKey:@"MeBalance"];
+            //同城币
+            [USERDEFAULT setObject:@(loginModel.MeIntegral) forKey:@"MeIntegral"];
+            //昵称
+            [USERDEFAULT setObject:loginModel.MeNickname forKey:@"MeNickname"];
+            //vip等级
+            [USERDEFAULT setObject:@(loginModel.MeViplevel) forKey:@"MeViplevel"];
+            [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserAccount];
+            [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:UserPassword];
             
             [self.navigationController popViewControllerAnimated:YES];
             
@@ -228,15 +236,14 @@
     } failure:^(NSError *error) {
         MYLog(@"失败---%@",error.description);
     }];
-    
-    
 }
 //游客按钮
 -(void)loginView:(LoginView *)loginView didSelectedTourBtn:(UIButton *)sender{
     
     NSLog(@"游客请进！");
     [USERDEFAULT setObject:@false forKey:LoginStates];
-    
+    //游客进入id为1的测试账号
+    [USERDEFAULT setObject:@1 forKey:@"userid"];
     [self.navigationController popViewControllerAnimated:YES];
     
 }
@@ -256,9 +263,9 @@
         _loginView.accountView.inputTextView.placeholder = @"用户名/手机号";
         [_loginView.accountView setAccPlaceholder];
         
-        if ([USERDEFAULT objectForKey:UserId]&&[USERDEFAULT objectForKey:Password]) {
-            _loginView.accountView.inputTextView.text = [USERDEFAULT objectForKey:UserId];
-            _loginView.passwordView.inputTextView.text = [USERDEFAULT objectForKey:Password];
+        if ([USERDEFAULT objectForKey:UserAccount]&&[USERDEFAULT objectForKey:UserPassword]) {
+            _loginView.accountView.inputTextView.text = [USERDEFAULT objectForKey:UserAccount];
+            _loginView.passwordView.inputTextView.text = [USERDEFAULT objectForKey:UserPassword];
         }
         
     }

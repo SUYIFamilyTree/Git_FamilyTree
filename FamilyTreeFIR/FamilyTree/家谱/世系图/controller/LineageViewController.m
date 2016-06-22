@@ -61,7 +61,6 @@
         
         [self.selecMyFamView removeFromSuperview];
     }
-    
 }
 
 #pragma mark *** SelectMyFamViewDelegate ***

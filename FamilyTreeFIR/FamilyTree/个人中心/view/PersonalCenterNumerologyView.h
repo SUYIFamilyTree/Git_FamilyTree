@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MemallInfoModel.h"
 
 @interface PersonalCenterNumerologyView : UIView
+
+
+-(void)reloadData:(MemallInfoScbzModel *)scbz;
 
 @end

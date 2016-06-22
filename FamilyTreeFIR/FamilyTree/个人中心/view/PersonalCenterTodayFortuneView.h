@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MemallInfoModel.h"
 @class PersonalCenterTodayFortuneView;
 
 @protocol PersonalCenterTodayFortuneViewDelegate <NSObject>
@@ -21,5 +21,6 @@
 /** 代理人*/
 @property (nonatomic, weak) id<PersonalCenterTodayFortuneViewDelegate> delegate;
 
+-(void)reloadData:(MemallInfoGrysModel *)grys;
 
 @end

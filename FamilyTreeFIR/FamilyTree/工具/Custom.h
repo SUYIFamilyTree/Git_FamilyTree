@@ -65,16 +65,39 @@ __block __weak __typeof(&*self)weakSelf = self;
 #define RootURL @"http://59.53.92.160:1085/Api/Mobile/TestPost"
 #define SecretKeySend @"abc123"
 #define SecretKeyReiceive @"123abc"
-//登录信息
-#define LoginStates @"loginStatus"
-#define UserId @"userid"
-#define Password @"password"
+
 //创建家谱控件高度
 #define InputView_height 40
 //通知字段
 #define LogStatusNotifacation @"loginNotifacation"
 //管理家谱
 #define ZeroContentOffset 320
+
+
+
+
+
+//提示信息显示 时间
+#define  SXLoadingTime 1.5
+
+#define DidLoadFailure @"加载失败"
+#define DidLoadSuccess @"加载成功"
+
+#define LoadComplete @"已经加载完了"
+#define IsLoading @"正在加载数据,请稍后..."
+
+
+//登录信息
+#define LoginStates @"loginStatus"
+#define UserAccount @"userAccount"
+#define UserPassword @"userPassword"
+//保存用户登录信息
+#define GetUserId  [USERDEFAULT valueForKey:@"userid"]
+
+//判断数据是否为空
+#define IsNilString(__String) (__String==nil || [__String isEqualToString:@""]|| [__String isEqualToString:@"null"])
+#define IsNull(__Text) [__Text isKindOfClass:[NSNull class]]
+
 
 
 #endif /* Custom_h */
