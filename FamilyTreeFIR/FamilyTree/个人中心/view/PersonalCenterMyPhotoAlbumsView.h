@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MemallInfoModel.h"
 @class PersonalCenterMyPhotoAlbumsView;
 
 @protocol  PersonalCenterMyPhotoAlbumsViewDelegate<NSObject>
@@ -19,4 +19,6 @@
 @interface PersonalCenterMyPhotoAlbumsView : UIView
 /** 代理人*/
 @property (nonatomic, weak) id<PersonalCenterMyPhotoAlbumsViewDelegate> delegate;
+
+-(void)reloadData:(NSArray<MemallInfoGrxcModel *> *)grxcArr;
 @end

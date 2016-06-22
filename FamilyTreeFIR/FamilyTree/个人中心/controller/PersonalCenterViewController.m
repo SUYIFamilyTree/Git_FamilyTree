@@ -23,33 +23,46 @@
 #import "EditHeadView.h"
 #import "EditPersonalInfoView.h"
 #import "MemallInfoModel.h"
-
+#import "LoginModel.h"
 
 @interface PersonalCenterViewController ()<PersonalCenterHeaderViewDelegate,PersonalCenterTodayFortuneViewDelegate,UITableViewDataSource,UITableViewDelegate,PersonalCenterMyPhotoAlbumsViewDelegate,PayForFortuneViewDelegate,PayForForeverFortuneViewDelegate,VIPViewDelegate>
 /** 全屏滚动*/
 @property (nonatomic, strong) UIScrollView *scrollView;
-
+/** 导航栏*/
+@property (nonatomic, strong) CommonNavigationViews *navi;
 /** 头部视图*/
 @property (nonatomic, strong) PersonalCenterHeaderView *headerView;
+/** 切换家谱及头像视图*/
+@property (nonatomic, strong) PersonalCenterInfoView *infoView;
 /** 命理视图*/
 @property (nonatomic, strong) PersonalCenterNumerologyView *numerologyView;
 /** 今日运势视图*/
 @property (nonatomic, strong) PersonalCenterTodayFortuneView *todayFortuneView;
 /** 求签祈福视图*/
 @property (nonatomic, strong)PersonalCenterCliffordView *cliffordView;
+/** 家族动态表视图*/
+@property (nonatomic, strong) UITableView *familyTreeNewsTB;
+/** 个人相册视图*/
+@property (nonatomic, strong) PersonalCenterMyPhotoAlbumsView *myPhotoAlbumsView;
 
-/** 家族动态*/
+/** 登录个人信息模型*/
+@property (nonatomic, strong) LoginModel *loginModel;
+/** 个人中心模型*/
+@property (nonatomic, strong) MemallInfoModel *memallInfo;
+/** 虔诚度模型*/
+@property (nonatomic, strong) DevoutModel *devoutModel;
+
+
+/** 家族动态数组*/
 @property (nonatomic, strong) NSArray *familyTreeNewsArr;
 /** vip视图*/
 @property (nonatomic, strong) VIPView *vipView;
 /** 导航栏vip按钮*/
 @property (nonatomic, strong) UIButton *vipBtn;
-/** 切换家谱及头像视图*/
-@property (nonatomic, strong) PersonalCenterInfoView *infoView;
+
 /** 个人信息编辑页面*/
 @property (nonatomic, strong) EditPersonalInfoView *editPersonalInfoView;
-/** 个人中心模型*/
-@property (nonatomic, strong) MemallInfoModel *memallInfo;
+
 
 @end
 
@@ -70,24 +83,66 @@
     [self.view addSubview:bgView];
     
     //网络请求加载数据加载页面
-    [self getData];
+    [self getNaviData];
+    [self getMainData];
     
-    //[self initMainView];
+    //初始化界面
+    [self initMainView];
     
 }
 
--(void)getData{
+-(void)getNaviData{
+    NSDictionary *logDic = @{@"user":[USERDEFAULT valueForKey:UserAccount],@"pass":[USERDEFAULT valueForKey:UserPassword]};
+    WK(weakSelf)
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:@"login" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            weakSelf.loginModel = [LoginModel modelWithJSON:jsonDic[@"data"]];
+            //昵称
+            [USERDEFAULT setObject:weakSelf.loginModel.MeNickname forKey:@"MeNickname"];
+            //vip等级
+            [USERDEFAULT setObject:@(weakSelf.loginModel.MeViplevel) forKey:@"MeViplevel"];
+            
+            
+            [weakSelf initNaviData];
+            [weakSelf.editPersonalInfoView reloadEditPersonalInfoData:weakSelf.loginModel];
+        }else{
+            
+        }
+    } failure:^(NSError *error) {
+        MYLog(@"失败---%@",error.description);
+    }];
+
+}
+
+-(void)getMainData{
     NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
     WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getmemallinfo" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
+            //[SXLoadingView showProgressHUD:@"加载成功" duration:0.5];
             weakSelf.memallInfo = [MemallInfoModel modelWithJSON:jsonDic[@"data"]];
-            [self initMainView];
+            [weakSelf initNaviData];
+            [weakSelf initData];
+        }else{
+            [SXLoadingView showProgressHUD:jsonDic[@"message"] duration:0.5];
         }
-        
     } failure:^(NSError *error) {
         MYLog(@"失败---%@",error.description);
     }];
+    
+    
+//    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getdevout" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+//        if (succe) {
+//            MYLog(@"虔诚度%@",jsonDic);
+//            //self.cliffordView reloadData:
+//            
+//        }else{
+//            [SXLoadingView showProgressHUD:jsonDic[@"message"] duration:1];
+//        }
+//    } failure:^(NSError *error) {
+//        MYLog(@"失败---%@",error.description);
+//    }];
+
 }
 
     
@@ -95,22 +150,23 @@
 -(void)initNavi{
     self.navigationController.navigationBarHidden = YES;
     
-    NSString *title = IsNilString([USERDEFAULT valueForKey:@"MeNickname"])?@"小雪":[USERDEFAULT valueForKey:@"MeNickname"];
-    CommonNavigationViews *navi = [[CommonNavigationViews alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 64) title:title image:MImage(@"chec")];
-    navi.leftBtn.hidden = YES;
+//    NSString *title = IsNilString([USERDEFAULT valueForKey:@"MeNickname"])?@"小雪":[USERDEFAULT valueForKey:@"MeNickname"];
+    //NSString *title = [USERDEFAULT valueForKey:@"MeNickname"];
+    self.navi = [[CommonNavigationViews alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 64) title:@"" image:MImage(@"chec")];
+    self.navi.leftBtn.hidden = YES;
     UIButton *personalInfoEditBtn = [[UIButton alloc]initWithFrame:CGRectMake(10, 30, 20, 20)];
     
     [personalInfoEditBtn setBackgroundImage:MImage(@"gr_ct_tit_wt") forState:UIControlStateNormal];
     [personalInfoEditBtn addTarget:self action:@selector(clickPersonalInfoBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [navi addSubview:personalInfoEditBtn];
+    [self.navi addSubview:personalInfoEditBtn];
     self.vipBtn = [[UIButton alloc]init];
     NSString *vipLevelStr = [NSString stringWithFormat:@"VIP%@",[USERDEFAULT valueForKey:@"MeViplevel"]];
     [self.vipBtn setTitle:vipLevelStr forState:UIControlStateNormal];
     self.vipBtn.titleLabel.font = MFont(15);
     [self.vipBtn addTarget:self action:@selector(clickVipBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [navi addSubview:self.vipBtn];
-    self.vipBtn.sd_layout.leftSpaceToView(personalInfoEditBtn,5).bottomSpaceToView(navi,15).widthIs(35).heightIs(15);
-    [self.view addSubview:navi];
+    [self.navi addSubview:self.vipBtn];
+    self.vipBtn.sd_layout.leftSpaceToView(personalInfoEditBtn,5).bottomSpaceToView(self.navi,15).widthIs(35).heightIs(15);
+    [self.view addSubview:self.navi];
 
 }
 
@@ -141,36 +197,56 @@
     familyTreeNewsLB.text = @"家族动态";
     familyTreeNewsLB.font = MFont(14);
     [tableHeaderView addSubview:familyTreeNewsLB];
-    UITableView *familyTreeNewsTB = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectYH(tableHeaderView), Screen_width, 88)];
-    familyTreeNewsTB.backgroundColor = [UIColor clearColor];
-    familyTreeNewsTB.bounces = NO;
-    familyTreeNewsTB.dataSource = self;
-    familyTreeNewsTB.delegate = self;
-    [self.scrollView addSubview:familyTreeNewsTB];
+    self.familyTreeNewsTB = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectYH(tableHeaderView), Screen_width, 88)];
+    self.familyTreeNewsTB.backgroundColor = [UIColor clearColor];
+    self.familyTreeNewsTB.bounces = NO;
+    self.familyTreeNewsTB.dataSource = self;
+    self.familyTreeNewsTB.delegate = self;
+    [self.scrollView addSubview:self.familyTreeNewsTB];
     //我的相册
-    PersonalCenterMyPhotoAlbumsView *myPhotoAlbumsView = [[PersonalCenterMyPhotoAlbumsView alloc]initWithFrame:CGRectMake(0, CGRectYH(familyTreeNewsTB)+15, Screen_width, 150)];
-    myPhotoAlbumsView.delegate = self;
-    [self.scrollView addSubview:myPhotoAlbumsView];
+    self.myPhotoAlbumsView = [[PersonalCenterMyPhotoAlbumsView alloc]initWithFrame:CGRectMake(0, CGRectYH(self.familyTreeNewsTB)+15, Screen_width, 150)];
+    self.myPhotoAlbumsView.delegate = self;
+    [self.scrollView addSubview:self.myPhotoAlbumsView];
 
-    [self initData];
+    
 }
-
+//导航栏数据刷新
+-(void)initNaviData{
+    //导航栏数据
+    self.navi.titleLabel.text = [USERDEFAULT valueForKey:@"MeNickname"];
+    NSString *vipLevelStr = [NSString stringWithFormat:@"VIP%@",[USERDEFAULT valueForKey:@"MeViplevel"]];
+    [self.vipBtn setTitle:vipLevelStr forState:UIControlStateNormal];
+}
+//主界面数据刷新
 -(void)initData{
     //让金额为登录请求返回的值
     self.headerView.money =  [[USERDEFAULT valueForKey:@"MeBalance"] doubleValue];
     self.headerView.sameCityMoney = [[USERDEFAULT valueForKey:@"MeIntegral"] intValue];
+    //会员家谱数据
+    [self.infoView reloadData:self.memallInfo.hyjp];
     //命理数据
     [self.numerologyView reloadData:self.memallInfo.scbz];
     //今日运势数据
     [self.todayFortuneView reloadData:self.memallInfo.grys];
     //求签数据
     [self.cliffordView reloadData:self.memallInfo.grqw];
-        
+    //家族动态数据
+    [self.familyTreeNewsTB reloadData];
+    //个人相册数据
+    [self.myPhotoAlbumsView reloadData:self.memallInfo.grxc];
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = YES;
+    [self getMainData];
+    [self getNaviData];
+    
+}
+
 
 #pragma mark - UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.familyTreeNewsArr.count;
+    return self.memallInfo.jzdt.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -178,7 +254,8 @@
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    cell.textLabel.text = self.familyTreeNewsArr[indexPath.row];
+//    cell.textLabel.text = self.familyTreeNewsArr[indexPath.row];
+    cell.textLabel.text = self.memallInfo.jzdt[indexPath.row].artitle;
     cell.textLabel.font = MFont(12);
     cell.backgroundColor = [UIColor clearColor];
     cell.contentView.backgroundColor = indexPath.row%2?[UIColor clearColor]:[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:0.5];
@@ -206,12 +283,12 @@
     return _scrollView;
 }
 
--(NSArray *)familyTreeNewsArr{
-    if (!_familyTreeNewsArr) {
-        _familyTreeNewsArr = @[@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会"];
-    }
-    return _familyTreeNewsArr;
-}
+//-(NSArray *)familyTreeNewsArr{
+//    if (!_familyTreeNewsArr) {
+//        _familyTreeNewsArr = @[@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会"];
+//    }
+//    return _familyTreeNewsArr;
+//}
 
 -(VIPView *)vipView{
     if (!_vipView) {
@@ -227,11 +304,13 @@
     }
     return _editPersonalInfoView;
 }
+
+
 //点击个人信息编辑
 -(void)clickPersonalInfoBtn:(UIButton *)sender{
     MYLog(@"点击个人信息编辑");
     WK(weakSelf);
-    
+    [self.editPersonalInfoView reloadEditPersonalInfoData:weakSelf.loginModel];
     if (self.editPersonalInfoView.frame.size.width == 0) {
         [UIView animateWithDuration:0.5 animations:^{
             [weakSelf.view addSubview:weakSelf.editPersonalInfoView];
@@ -258,9 +337,6 @@
     }
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    self.navigationController.navigationBarHidden = YES;
-}
 
 #pragma mark - PersonalCenterHeaderViewDelegate
 -(void)clickMoneyViewToPay{

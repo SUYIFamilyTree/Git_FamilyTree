@@ -31,7 +31,7 @@
 @property (nonatomic, copy) NSString *MeRegistertime;
 
 @property (nonatomic, copy) NSString *MeCardnum;
-
+/** 头像路径*/
 @property (nonatomic, copy) NSString *MeExtension;
 
 @property (nonatomic, copy) NSString *MeIsblack;

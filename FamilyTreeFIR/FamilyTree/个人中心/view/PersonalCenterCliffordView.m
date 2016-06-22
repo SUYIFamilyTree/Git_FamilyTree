@@ -82,10 +82,14 @@
 }
 
 -(void)reloadData:(MemallInfoGrqwModel *)grqw{
+    //签文
     self.divinationsArr = [NSMutableArray array];
     [self.divinationsArr addObject:[NSString stringWithFormat:@"%ld",grqw.qh]];
     [self.divinationsArr addObject:grqw.qwhh];
-     [self initDivinationLBs];
+    [self initDivinationLBs];
 }
 
+-(void)reloadDevoutData:(DevoutModel *)devout{
+    
+}
 @end

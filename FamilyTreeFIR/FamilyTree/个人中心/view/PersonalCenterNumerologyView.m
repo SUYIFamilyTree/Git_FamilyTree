@@ -28,6 +28,7 @@
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 15, 0.4156*CGRectW(self), 0.8114*CGRectH(self))];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.image = MImage(@"human_wuxingImg");
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:imageView];
         //生辰八字
         [self initBirthdateAndCharacter];
