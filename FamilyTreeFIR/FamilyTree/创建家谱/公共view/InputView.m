@@ -14,6 +14,8 @@
 {
     BOOL _isSelectedBtn;
 }
+@property (nonatomic,strong) UIScrollView *backScroView; /*背景可滚动*/
+
 
 @end
 
@@ -42,9 +44,11 @@
 
 #pragma mark *** events ***
 //点击展开视图
--(void)respondsToExtendLabelBtn:(UIButton *)sender{
-    self.inputLabel.text = sender.titleLabel.text;
+-(void)respondsToExtendLabelGes:(UITapGestureRecognizer *)sender{
+    UILabel *gesView = (UILabel *)sender.view;
+    self.inputLabel.text = gesView.text;
     [self extendTheLabel];
+    
 }
 
 //点击label展开视图
@@ -52,41 +56,45 @@
     _isSelectedBtn = !_isSelectedBtn;
     
     if (_isSelectedBtn) {
+        
+        
+        
 //        [UIView animateWithDuration:0.3f animations:^{
-            self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _length, (1+_dataArr.count)*(Input_height-10));
+        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _length, ((1+_dataArr.count)>4?4:(1+_dataArr.count))*(Input_height-10));
             self.layer.borderWidth = 1.0f;
             self.layer.borderColor = BorderColor;
         
+        
             for (int idx = 0; idx<_dataArr.count; idx++) {
                 
-                UIButton *selecBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, (idx+1)*(Input_height-10), _length,Input_height-10)];
-                [selecBtn setTitleColor:[UIColor blackColor] forState:0];
-                selecBtn.backgroundColor = [UIColor whiteColor];
-                [selecBtn setTitle:_dataArr[idx] forState:0];
-                selecBtn.titleLabel.font = WFont(35);
+                UILabel *seleclabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (idx)*(Input_height-10), _length,Input_height-10)];
+                seleclabel.textColor = [UIColor blackColor];
+                seleclabel.backgroundColor = [UIColor whiteColor];
+                seleclabel.text = [NSString stringWithFormat:@"  %@",_dataArr[idx]];
+                seleclabel.userInteractionEnabled = YES;
+                seleclabel.font = WFont(35);
                 
-                selecBtn.tag = idx+10;
+                seleclabel.textAlignment = 0;
                 
-                NSInteger len = ((NSString *)_dataArr[idx]).length*10;
-                NSLog(@"%@--%ld",((NSString *)_dataArr[idx]),len-_length);
+                UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondsToExtendLabelGes:)];
                 
-                selecBtn.titleEdgeInsets = UIEdgeInsetsMake(0, len-_length, 0, 0);
                 
-                [selecBtn addTarget:self action:@selector(respondsToExtendLabelBtn:) forControlEvents:UIControlEventTouchUpInside];
+                [seleclabel addGestureRecognizer:tapGes];
                 
-                [self addSubview:selecBtn];
-                                
+                
+                
+                [self.backScroView addSubview:seleclabel];
+                [self addSubview:self.backScroView];
+                
             }
-//        }];
+
+        //        }];
     }else{
 //        [UIView animateWithDuration:0.3f animations:^{
             self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _length, Input_height);
             
-            [self.subviews enumerateObjectsUsingBlock:^(UIButton * obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                if (obj.tag == idx+8) {
-                    
+            [self.backScroView.subviews enumerateObjectsUsingBlock:^(UILabel* obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     [obj removeFromSuperview];
-                }
             }];
             
 //        }];
@@ -107,7 +115,7 @@
         _inputLabel.layer.borderColor = BorderColor;
         _inputLabel.backgroundColor = [UIColor whiteColor];
         _inputLabel.textColor = [UIColor blackColor];
-        _inputLabel.userInteractionEnabled   = YES;
+        _inputLabel.userInteractionEnabled  = YES;
         _inputLabel.textAlignment = 0;
         _inputLabel.font = WFont(35);
         UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(extendTheLabel)];
@@ -115,6 +123,17 @@
         
     }
     return _inputLabel;
+}
+
+-(UIScrollView *)backScroView{
+    if (!_backScroView) {
+        
+        _backScroView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, (Input_height-10), _length, (Input_height-10)*3)];
+        _backScroView.bounces = true;
+        _backScroView.contentSize = CGSizeMake(_length, (Input_height-10)*_dataArr.count);
+        
+    }
+    return _backScroView;
 }
 
 

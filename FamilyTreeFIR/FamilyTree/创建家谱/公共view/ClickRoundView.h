@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ClickRoundView : UIView
+
+@property (nonatomic,assign) BOOL marked; /*标记*/
+
 - (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title isStar:(BOOL)star;
 
 @end

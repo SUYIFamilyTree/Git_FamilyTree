@@ -23,6 +23,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
         _isStar = star;
  
         self.layer.borderWidth = 1.0f;
@@ -56,9 +57,9 @@
     }
     return _titleLabel;
 }
--(UILabel *)detailLabel{
+-(UITextField *)detailLabel{
     if (!_detailLabel) {
-        _detailLabel = [UILabel new];
+        _detailLabel = [UITextField new];
         _detailLabel.font = WFont(35);
     }
     return _detailLabel;

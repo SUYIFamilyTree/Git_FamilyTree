@@ -77,7 +77,7 @@
     CGFloat widthSpace = 10;
     CGFloat btnWidth = (Screen_width - 10*4-30)/5;
     CGFloat btnHeight = 0.2*Screen_height;
-    NSArray *btnImageNames = @[@"kuang1",@"kuang2",@"kuang3",@"kuang4",@"kuang5"];
+    NSArray *btnImageNames = @[@"kuang1",@"kuang4",@"kuang3",@"kuang2",@"kuang5"];
     for (int i = 0; i < 5; i++) {
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(15+widthSpace*i+btnWidth*i, 10+64, btnWidth, btnHeight)];
         [btn setImage:MImage(btnImageNames[i]) forState:UIControlStateNormal];

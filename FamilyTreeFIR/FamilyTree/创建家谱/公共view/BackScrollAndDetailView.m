@@ -5,7 +5,10 @@
 //  Created by 王子豪 on 16/6/1.
 //  Copyright © 2016年 王子豪. All rights reserved.
 //
-
+enum{
+    UPloadImageTag,
+    UPloadVideoTag
+};
 #import "BackScrollAndDetailView.h"
 
 #define ScrollContentHeight 1150
@@ -40,22 +43,41 @@
 }
 
 #pragma mark *** events ***
--(void)respondsToCreatBtn:(UIButton *)sender{
+-(void)respondsToBackScrlCreatBtn:(UIButton *)sender{
     MYLog(@"创建！");
+    if (_delegate && [_delegate respondsToSelector:@selector(BackScrollAndDetailViewDidTapCreateButton)]) {
+        [_delegate BackScrollAndDetailViewDidTapCreateButton];
+    };
 }
 
 #pragma mark *** UI ***
 
 -(void)initUI{
+    
+    NSMutableArray *yearArr = [@[] mutableCopy];
+    for (int idx = 2016; idx>=1900; idx--) {
+        NSString *str = [NSString stringWithFormat:@"%d",idx];
+        [yearArr addObject:str];
+    }
+    NSMutableArray *dayArr = [@[] mutableCopy];
+    for (int idx = 1; idx<32; idx++) {
+        if (idx<10) {
+            [dayArr addObject:[NSString stringWithFormat:@"0%d",idx]];
+        }else{
+            [dayArr addObject:[NSString stringWithFormat:@"%d",idx]];
+        }
+    }
+   
+    
     //配偶年月日
-    self.birthLabel = [self creatLabelTextWithTitle:@"生辰:" TitleFrame:CGRectMake(20, GapOfView+CGRectYH(self.selecProtrai), 50, InputView_height) inputViewLength:0.13*Screen_width dataArr:@[@"1990",@"1992",@"1992"] inputViewLabel:@"1990" FinText:@"年" withStar:NO];
+    self.birthLabel = [self creatLabelTextWithTitle:@"生辰:" TitleFrame:CGRectMake(20, GapOfView+CGRectYH(self.selecProtrai), 50, InputView_height) inputViewLength:0.15*Screen_width dataArr:yearArr inputViewLabel:@"1990" FinText:@"年" withStar:NO];
     [self.backView addSubview:self.birthLabel];
     
     
-    self.monthLabel = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(CGRectXW(self.birthLabel)+25, GapOfView+CGRectYH(self.selecProtrai), 0, InputView_height) inputViewLength:0.13*Screen_width dataArr:@[@"1",@"22",@"3"] inputViewLabel:@"不详" FinText:@"月" withStar:NO];
+    self.monthLabel = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(CGRectXW(self.birthLabel)+25, GapOfView+CGRectYH(self.selecProtrai), 0, InputView_height) inputViewLength:0.13*Screen_width dataArr:@[@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12"] inputViewLabel:@"不详" FinText:@"月" withStar:NO];
     [self.backView addSubview:self.monthLabel];
     
-    self.dayLabel = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(CGRectXW(self.monthLabel)+25, GapOfView+ CGRectYH(self.selecProtrai), 0, InputView_height) inputViewLength:0.13*Screen_width dataArr:@[@"1",@"22"] inputViewLabel:@"不详" FinText:@"日" withStar:false];
+    self.dayLabel = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(CGRectXW(self.monthLabel)+25, GapOfView+ CGRectYH(self.selecProtrai), 0, InputView_height) inputViewLength:0.13*Screen_width dataArr:dayArr inputViewLabel:@"不详" FinText:@"日" withStar:false];
     [self.backView addSubview:self.dayLabel];
     
     [self.backView addSubview:self.birtime];
@@ -63,19 +85,32 @@
     
     //自己年月日
     
-    self.liveNowLabel = [self creatLabelTextWithTitle:@"是否健在:" TitleFrame:CGRectMake(20, CGRectYH(self.birtime)+GapOfView, 90, InputView_height) inputViewLength:50 dataArr:@[@" 是",@" 否"] inputViewLabel:@"否" FinText:@"" withStar:NO];
+    self.liveNowLabel = [self creatLabelTextWithTitle:@"是否健在:" TitleFrame:CGRectMake(20, CGRectYH(self.birtime)+GapOfView, 90, InputView_height) inputViewLength:50 dataArr:@[@"是",@"否"] inputViewLabel:@"否" FinText:@"" withStar:NO];
     [self.backView addSubview:self.liveNowLabel];
     
-    self.selfYear  = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(20, CGRectYH(self.liveNowLabel)+GapOfView, 0, InputView_height) inputViewLength:0.13*Screen_width dataArr:@[@"1990",@"1992",@"1992"] inputViewLabel:@"1990" FinText:@"年" withStar:NO];
-    self.selfMonth = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(CGRectXW(self.selfYear)+25, CGRectYH(self.liveNowLabel)+GapOfView, 0, InputView_height) inputViewLength:0.13*Screen_width dataArr:@[@"19",@"19",@"19"] inputViewLabel:@"1990" FinText:@"月" withStar:NO];
-    self.selfDay = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(CGRectXW(self.selfMonth)+25, CGRectYH(self.liveNowLabel)+GapOfView, 0, InputView_height) inputViewLength:0.13*Screen_width dataArr:@[@"190",@"12",@"192"] inputViewLabel:@"1990" FinText:@"日" withStar:true];
+    
+    
+    self.selfYear  = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(20, CGRectYH(self.liveNowLabel)+GapOfView, 0, InputView_height) inputViewLength:0.15*Screen_width dataArr:yearArr inputViewLabel:@"1990" FinText:@"年" withStar:NO];
+    self.selfMonth = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(CGRectXW(self.selfYear)+25, CGRectYH(self.liveNowLabel)+GapOfView, 0, InputView_height) inputViewLength:0.13*Screen_width dataArr:@[@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12"] inputViewLabel:@"" FinText:@"月" withStar:NO];
+    
+  
+    
+    self.selfDay = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(CGRectXW(self.selfMonth)+25, CGRectYH(self.liveNowLabel)+GapOfView, 0, InputView_height) inputViewLength:0.13*Screen_width dataArr:dayArr inputViewLabel:@"01" FinText:@"日" withStar:true];
     
     [self.backView addSubview:self.selfYear];
     [self.backView addSubview:self.selfMonth];
     [self.backView addSubview:self.selfDay];
     
     //字辈
-    self.generationLabel = [self creatLabelTextWithTitle:@"字辈:" TitleFrame:CGRectMake(20, CGRectYH(self.selfYear)+GapOfView, 0.15*Screen_width, InputView_height) inputViewLength:0.23*Screen_width dataArr:@[@" 第一代",@" 第二代",@" 地三代"] inputViewLabel:@" 第三代" FinText:@"" withStar:NO];
+    
+    NSMutableArray *allGenNum = [@[] mutableCopy];
+    
+    for (int idx = 1; idx<1000; idx++) {
+        NSString *str = [NSString stringWithFormat:@"第%d代",idx];
+        [allGenNum addObject:str];
+    }
+    
+    self.generationLabel = [self creatLabelTextWithTitle:@"字辈:" TitleFrame:CGRectMake(20, CGRectYH(self.selfYear)+GapOfView, 0.15*Screen_width, InputView_height) inputViewLength:0.23*Screen_width dataArr:allGenNum inputViewLabel:@" 第一代" FinText:@"" withStar:NO];
     
     [self.backView addSubview:self.generationLabel];
     [self.backView addSubview:self.gennerationNex];
@@ -96,6 +131,7 @@
     [videoBtn setTitleColor:[UIColor blackColor] forState:0];
     videoBtn.layer.borderWidth = 1.0f;
     videoBtn.layer.borderColor = BorderColor;
+    videoBtn.tag = UPloadVideoTag;
     [videoBtn addTarget:self action:@selector(respondsToUploadbtn:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.backView addSubview:videoBtn];
@@ -106,6 +142,7 @@
     textF.layer.borderWidth = 1.0f;
     textF.layer.borderColor = BorderColor;
     textF.placeholder = @"迁移者填居住地";
+    textF.textAlignment  = 1;
     self.moveCity = textF;
     [self.backView addSubview:self.moveCity];
     
@@ -135,7 +172,7 @@
     [self.backView addSubview:theLabel];
     
     InputView *inputView = [[InputView alloc] initWithFrame:CGRectMake(CGRectXW(theLabel), theLabel.frame.origin.y, length+10, InputView_height) Length:length+10 withData:dataArr];
-    inputView.inputLabel.text = labelText;
+
     
     UILabel *finLabel = [UILabel new];
     finLabel.text = finStr;
@@ -154,10 +191,29 @@
     return inputView;
 }
 
+
+
+
+
 #pragma mark *** BtnEvents ***
 
 -(void)respondsToUploadbtn:(UIButton *)sender{
-    MYLog(@"上传");
+    MYLog(@"上传图片");
+    switch (sender.tag) {
+        case UPloadImageTag:
+        {
+            
+        }
+            break;
+        case UPloadVideoTag:
+        {
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark *** getters ***
@@ -177,7 +233,7 @@
         _createBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, ScrollContentHeight-50-64, Screen_width-20, 40)];
         [_createBtn setTitle:@"创 建" forState:0];
         _createBtn.backgroundColor = LH_RGBCOLOR(74, 81, 97);
-        [_createBtn addTarget:self action:@selector(respondsToCreatBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [_createBtn addTarget:self action:@selector(respondsToBackScrlCreatBtn:) forControlEvents:UIControlEventTouchUpInside];
         
     }
     return _createBtn;
@@ -207,8 +263,7 @@
 
 -(InputView *)birtime{
     if (!_birtime) {
-        _birtime = [[InputView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.birthLabel.frame), CGRectYH(self.birthLabel)+GapOfView, 0.3*Screen_width, InputView_height) Length:0.3*Screen_width withData:@[@"0:00-2:00",@"2:00-4:00"]];
-        _birtime.inputLabel.text = @"0:00-2:00";
+        _birtime = [[InputView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.birthLabel.frame), CGRectYH(self.birthLabel)+GapOfView, 0.34*Screen_width, InputView_height) Length:0.34*Screen_width withData:@[@"0:00-2:00",@"2:00-4:00",@"4:00-6:00",@"6:00-8:00",@"8:00-10:00",@"10:00-12:00",@"12:00-14:00",@"14:00-16:00",@"16:00-18:00",@"18:00-20:00",@"20:00-22:00",@"22:00-00:00"]];
         
         UILabel *starLabel = [UILabel new];
         starLabel.font = MFont(16);
@@ -230,9 +285,8 @@
         theLabel.font = WFont(35);
         [self.backView addSubview:theLabel];
         
-        _inputView = [[InputView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(theLabel.frame), theLabel.frame.origin.y, 70, InputView_height) Length:50 withData:@[@" 是",@" 否"]];
+        _inputView = [[InputView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(theLabel.frame), theLabel.frame.origin.y, 70, InputView_height) Length:50 withData:@[@"是",@"否"]];
         _inputView.inputLabel.backgroundColor = [UIColor whiteColor];
-        _inputView.inputLabel.text = @" 否";
         
     }
     return _inputView;
@@ -248,6 +302,7 @@
         _parnName.layer.borderWidth = 1.0f;
         _parnName.layer.borderColor = BorderColor;
         _parnName.placeholder = @"第一（原）配姓名";
+        _parnName.textAlignment = 1;
     }
     return _parnName;
 }
@@ -273,10 +328,10 @@
     return _selecProtrai;
 }
 
--(UILabel *)gennerationNex{
+-(UITextField *)gennerationNex{
     if (!_gennerationNex) {
-        _gennerationNex = [[UILabel alloc] initWithFrame:CGRectMake(CGRectXW(self.generationLabel)+10, CGRectYH(self.selfYear)+GapOfView, 0.45*Screen_width, InputView_height)];
-        _gennerationNex.text = @"十、大、啊、实、打";
+        _gennerationNex = [[UITextField alloc] initWithFrame:CGRectMake(CGRectXW(self.generationLabel)+10, CGRectYH(self.selfYear)+GapOfView, 0.45*Screen_width, InputView_height)];
+        _gennerationNex.text = @"琚";
         _gennerationNex.font = WFont(35);
         _gennerationNex.backgroundColor = [UIColor whiteColor];
         _gennerationNex.layer.borderWidth = 1.0f;
@@ -305,6 +360,7 @@
         _uploadImageBtn.layer.borderColor = BorderColor;
         _uploadImageBtn.layer.borderWidth = 1.0f;
         [_uploadImageBtn addTarget:self action:@selector(respondsToUploadbtn:) forControlEvents:UIControlEventTouchUpInside];
+        _uploadImageBtn.tag = UPloadImageTag;
         
         UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, _uploadImageBtn.bounds.size.width/2-5, 40)];
         label1.text  = @"上传图片";

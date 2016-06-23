@@ -12,7 +12,8 @@
 
 @protocol InputViewDelegate <NSObject>
 
--(void)InputView:(InputView *)inputView didSeletedLabel:(UILabel *)inputLabel;
+//下拉选择结束过后
+-(void)InputView:(InputView *)inputView didFinishSelectLabel:(UILabel *)inputLabel;
 
 @end
 
