@@ -9,7 +9,9 @@
 #import "EditPersonalInfoView.h"
 #import "EditPersonalInfoTableViewCell.h"
 #import "EditPersonalInfoDetailViewController.h"
+#import "EditPasswordViewController.h"
 #import "CustomPikcerDateView.h"
+#import "DateModel.h"
 
 @interface EditPersonalInfoView()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,EditPersonalInfoTableViewCellDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CustomPikcerDateViewDelegate>
 /** 滚动背景图*/
@@ -226,6 +228,7 @@
 
 #pragma mark - 数据加载
 -(void)reloadEditPersonalInfoData:(LoginModel *)loginModel{
+    MYLog(@"到这了");
     self.loginModel = loginModel;
     self.accountInfoDetailArr = [NSMutableArray array];
     
@@ -235,12 +238,27 @@
     [self.accountInfoDetailArr addObject: [self getLockMobileWithString:self.loginModel.MeMobile]];
     [self.accountInfoDetailArr addObject:self.loginModel.MeEmail];
     
-    self.personalInfoDetailArr = [NSMutableArray array];
-    //        self.personalInfoDetailArr = [NSMutableArray arrayWithObjects:@"陈安一",@"阿一",@"中国",@"安徽-怀宁",@"男",@"1999年09月09日09时",@"身份证",@"******",@"律师",@"本科",@"",@"(空)",@"(空)", nil];
 
-    [self.personalInfoDetailArr addObject:self.loginModel.MeName];
+    //        self.personalInfoDetailArr = [NSMutableArray arrayWithObjects:@"陈安一",@"阿一",@"中国",@"安徽-怀宁",@"男",@"1999年09月09日09时",@"身份证",@"******",@"律师",@"本科",@"",@"(空)",@"(空)", nil];
+#warning 待接口格式更改接入
+        self.personalInfoDetailArr = [NSMutableArray array];
+        [self.personalInfoDetailArr addObject:self.loginModel.MeName];
+        [self.personalInfoDetailArr addObject:self.loginModel.MeNickname];
     
-    
+        [self.personalInfoDetailArr addObject:@"中国"];
+        [self.personalInfoDetailArr addObject:@"安徽-怀宁"];
+    [self.personalInfoDetailArr addObject:@[@"女",@"男",@"保密"][[self.loginModel.MeSex intValue]]];
+    DateModel *dateModel = [[DateModel alloc]initWithDateStr:self.loginModel.MeBirthday];
+    NSString *MeBirthdayStr = [NSString stringWithFormat:@"%04ld年%02ld月%02ld日%02ld时",dateModel.year,dateModel.month,dateModel.day,dateModel.hour];
+    [self.personalInfoDetailArr addObject:MeBirthdayStr];
+    [self.personalInfoDetailArr addObject:self.loginModel.MeCertype];
+    [self.personalInfoDetailArr addObject:@"******"];
+    [self.personalInfoDetailArr addObject:@"律师"];
+    [self.personalInfoDetailArr addObject:@"本科"];
+    [self.personalInfoDetailArr addObject:@""];
+    [self.personalInfoDetailArr addObject:@"(空)"];
+    [self.personalInfoDetailArr addObject:@"(空)"];
+   
 }
 
 #pragma mark - ScrollViewDelegate
@@ -291,7 +309,6 @@
                 case 7:
                     personalInfoCell = [[EditPersonalInfoTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"personalInfoCell" WithCustomStyle:EditPersonalInfoTableViewCellStyleEdit];
                     break;
-                case 2:
                 case 3:
                 case 4:
                 case 5:
@@ -376,8 +393,13 @@
 
 #pragma mark - EditPersonalInfoTableViewCellDelegate
 -(void)respondToEditBtn:(UIButton *)sender{
-    if (sender.tag < 444) {
-       MYLog(@"%ld",sender.tag-333);
+    if (sender.tag-333 == 2) {
+        EditPasswordViewController *editPasswordVC = [[EditPasswordViewController alloc]init];
+        editPasswordVC.detailStr = self.accountInfoTitleArr[sender.tag-333];
+        editPasswordVC.TFStr = self.accountInfoDetailArr[sender.tag-333];
+        [[self viewController].navigationController pushViewController:editPasswordVC animated:NO];
+    }else if(sender.tag < 444){
+        MYLog(@"%ld",sender.tag-333);
         EditPersonalInfoDetailViewController *editDetaiVC = [[EditPersonalInfoDetailViewController alloc]init];
         editDetaiVC.detailStr = self.accountInfoTitleArr[sender.tag-333];
         editDetaiVC.TFStr = self.accountInfoDetailArr[sender.tag-333];
@@ -388,7 +410,7 @@
         editDetaiVC.detailStr = self.personalInfoTitleArr[sender.tag-444];
         editDetaiVC.TFStr = self.personalInfoDetailArr[sender.tag-444];
         [[self viewController].navigationController pushViewController:editDetaiVC animated:NO];
-
+        
     }
 }
 

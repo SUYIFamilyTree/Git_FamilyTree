@@ -10,6 +10,7 @@
 #import "RootTabBarViewController.h"
 #import "LoginViewController.h"
 #import "TCJPHTTPRequestManager.h"
+
 @interface AppDelegate ()
 
 @end
@@ -38,8 +39,27 @@
     
     [_window makeKeyAndVisible];
    
+//    //查询相关数据存储plist文件
+//    //查询职业
+//    NSDictionary *logDic = @{@"typeval":@"GRXL"};
+//    //WK(weakSelf)
+//    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@1 requestcode:@"getsyntype" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+//        if (succe) {
+//            
+//            //weakSelf.memallInfo = [MemallInfoModel modelWithJSON:jsonDic[@"data"]];
+//            NSString *filePath = [UserDocumentD stringByAppendingPathComponent:@"job.plist"];
+//            NSArray *array = @[@"abc",@123,@"a-d-g"];
+//            
+//            //[array writeToFile: atomically:YES];
+//            
+//        }else{
+//            //[SXLoadingView showProgressHUD:jsonDic[@"message"] duration:0.5];
+//        }
+//    } failure:^(NSError *error) {
+//        MYLog(@"失败---%@",error.description);
+//    }];
  
-    
+   
     
     return YES;
 }

@@ -118,11 +118,12 @@
     NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
     WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getmemallinfo" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        [SXLoadingView showProgressHUD:@"正在加载" duration:0.5];
         if (succe) {
-            //[SXLoadingView showProgressHUD:@"加载成功" duration:0.5];
             weakSelf.memallInfo = [MemallInfoModel modelWithJSON:jsonDic[@"data"]];
             [weakSelf initNaviData];
-            [weakSelf initData];
+            [weakSelf initMainData];
+            [SXLoadingView hideProgressHUD];
         }else{
             [SXLoadingView showProgressHUD:jsonDic[@"message"] duration:0.5];
         }
@@ -218,12 +219,14 @@
     [self.vipBtn setTitle:vipLevelStr forState:UIControlStateNormal];
 }
 //主界面数据刷新
--(void)initData{
+-(void)initMainData{
     //让金额为登录请求返回的值
     self.headerView.money =  [[USERDEFAULT valueForKey:@"MeBalance"] doubleValue];
     self.headerView.sameCityMoney = [[USERDEFAULT valueForKey:@"MeIntegral"] intValue];
     //会员家谱数据
+    
     [self.infoView reloadData:self.memallInfo.hyjp];
+    
     //命理数据
     [self.numerologyView reloadData:self.memallInfo.scbz];
     //今日运势数据
@@ -240,8 +243,64 @@
     self.navigationController.navigationBarHidden = YES;
     [self getMainData];
     [self getNaviData];
+}
+
+//点击个人信息编辑
+-(void)clickPersonalInfoBtn:(UIButton *)sender{
+    sender.selected = !sender.selected;
+    MYLog(@"点击个人信息编辑");
+    WK(weakSelf)
+    if (!sender.selected) {
+        [UIView animateWithDuration:0.5 animations:^{
+            weakSelf.editPersonalInfoView.frame = CGRectMake(0,64,0,Screen_height-49-64);
+        }];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf.editPersonalInfoView removeFromSuperview];
+        });
+        
+    }
+    
+    
+    NSDictionary *logDic = @{@"user":[USERDEFAULT valueForKey:UserAccount],@"pass":[USERDEFAULT valueForKey:UserPassword]};
+    
+    if (sender.selected) {
+        
+        [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:@"login" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+            if (succe) {
+                weakSelf.loginModel = [LoginModel modelWithJSON:jsonDic[@"data"]];
+                weakSelf.editPersonalInfoView = [[EditPersonalInfoView alloc]initWithFrame:CGRectMake(0, 64, 0, Screen_height-49-64)];
+                [self.view addSubview:self.editPersonalInfoView];
+                [weakSelf.editPersonalInfoView reloadEditPersonalInfoData:weakSelf.loginModel];
+                
+                [UIView animateWithDuration:0.5 animations:^{
+                    weakSelf.editPersonalInfoView.frame = CGRectMake(0, 64, Screen_width, Screen_height-49-64);
+                }];
+                
+                
+            }else{
+                
+            }
+        } failure:^(NSError *error) {
+            MYLog(@"失败---%@",error.description);
+        }];
+        
+    };
     
 }
+
+//点击vip按钮
+-(void)clickVipBtn:(UIButton *)sender{
+    MYLog(@"点击vip");
+    sender.selected = !sender.selected;
+    if (sender.selected == YES) {
+        [self.view addSubview:self.vipView];
+    }else{
+        [self.vipView removeFromSuperview];
+    }
+}
+
+
+
 
 
 #pragma mark - UITableViewDataSource
@@ -298,44 +357,14 @@
     return _vipView;
 }
 
--(EditPersonalInfoView *)editPersonalInfoView{
-    if (!_editPersonalInfoView) {
-        _editPersonalInfoView = [[EditPersonalInfoView alloc]initWithFrame:CGRectMake(0, 64, 0, Screen_height-49-64)];
-    }
-    return _editPersonalInfoView;
-}
+//-(EditPersonalInfoView *)editPersonalInfoView{
+//    if (!_editPersonalInfoView) {
+//        _editPersonalInfoView = [[EditPersonalInfoView alloc]initWithFrame:CGRectMake(0, 64, 0, Screen_height-49-64)];
+//    }
+//    return _editPersonalInfoView;
+//}
 
 
-//点击个人信息编辑
--(void)clickPersonalInfoBtn:(UIButton *)sender{
-    MYLog(@"点击个人信息编辑");
-    WK(weakSelf);
-    [self.editPersonalInfoView reloadEditPersonalInfoData:weakSelf.loginModel];
-    if (self.editPersonalInfoView.frame.size.width == 0) {
-        [UIView animateWithDuration:0.5 animations:^{
-            [weakSelf.view addSubview:weakSelf.editPersonalInfoView];
-            weakSelf.editPersonalInfoView.frame = CGRectMake(0, 64, Screen_width, Screen_height-49-64);
-        }];
-    }else{
-        [UIView animateWithDuration:0.5 animations:^{
-            weakSelf.editPersonalInfoView.frame = CGRectMake(0,64,0,Screen_height-49-64);
-        }];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf.editPersonalInfoView removeFromSuperview];
-        });
-    }
-}
-
-//点击vip按钮
--(void)clickVipBtn:(UIButton *)sender{
-    MYLog(@"点击vip");
-    sender.selected = !sender.selected;
-    if (sender.selected == YES) {
-        [self.view addSubview:self.vipView];
-    }else{
-        [self.vipView removeFromSuperview];
-    }
-}
 
 
 #pragma mark - PersonalCenterHeaderViewDelegate

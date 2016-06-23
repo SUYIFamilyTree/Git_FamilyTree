@@ -98,6 +98,9 @@ __block __weak __typeof(&*self)weakSelf = self;
 #define IsNilString(__String) (__String==nil || [__String isEqualToString:@""]|| [__String isEqualToString:@"null"])
 #define IsNull(__Text) [__Text isKindOfClass:[NSNull class]]
 
+//存贮路径
+#define UserDocumentD NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]
+
 
 
 #endif /* Custom_h */
