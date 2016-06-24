@@ -52,11 +52,34 @@
 //        NSLog(@"Person has a property: '%s'", propertyName);
 //    }
     
-    NSArray *createModel = @[self.cFameView.famName.titleLabel.text,self.cFameView.famfarName.titleLabel.text,self.cFameView.gennerNum.inputLabel.text,self.cFameView.famBookName.text,self.cFameView.sexInpuView.inputLabel.text,[NSNumber numberWithBool:self.cFameView.diXiView.marked],[NSNumber numberWithBool:self.cFameView.famousPerson.marked],self.cFameView.inputView.inputLabel.text,self.cFameView.parnName.text,self.cFameView.selecProtrai.image,self.cFameView.birtime.inputLabel.text,self.cFameView.monthLabel.inputLabel.text,self.cFameView.dayLabel.inputLabel.text,self.cFameView.birtime.inputLabel.text,self.cFameView.liveNowLabel.inputLabel.text,self.cFameView.selfYear.inputLabel.text,self.cFameView.selfMonth.inputLabel.text,self.cFameView.selfDay.inputLabel.text,self.cFameView.generationLabel.inputLabel.text,self.cFameView.gennerationNex.text,self.cFameView.moveCity.text];
+    //创建家谱
     
-    NSLog(@"%@", createModel);
+//    NSArray *createModel = @[self.cFameView.famName.titleLabel.text,
+//                             self.cFameView.famfarName.titleLabel.text,
+//                             self.cFameView.gennerNum.inputLabel.text,
+//                             self.cFameView.famBookName.text,
+//                             self.cFameView.sexInpuView.inputLabel.text,
+//                             [NSNumber numberWithBool:self.cFameView.diXiView.marked],
+//                             [NSNumber numberWithBool:self.cFameView.famousPerson.marked],
+//                             self.cFameView.inputView.inputLabel.text,
+//                             self.cFameView.parnName.text,self.cFameView.selecProtrai.image,
+//                             self.cFameView.birtime.inputLabel.text,
+//                             self.cFameView.monthLabel.inputLabel.text,
+//                             self.cFameView.dayLabel.inputLabel.text,
+//                             self.cFameView.birtime.inputLabel.text,
+//                             self.cFameView.liveNowLabel.inputLabel.text,
+//                             self.cFameView.selfYear.inputLabel.text,
+//                             self.cFameView.selfMonth.inputLabel.text,self.cFameView.selfDay.inputLabel.text,self.cFameView.generationLabel.inputLabel.text,self.cFameView.gennerationNex.text,self.cFameView.moveCity.text];
     
+//    NSLog(@"%@", createModel);
     
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"geid":@1} requestID:@0 requestcode:kRequestCodeQuerygendata success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSLog(@"%@", jsonDic[@"data"]);
+        }
+    } failure:^(NSError *error) {
+        
+    }];
     
 }
 #pragma mark *** 初始化界面 ***
@@ -66,6 +89,7 @@
     creFamView.delegate = self;
     self.cFameView = creFamView;
     [self.view addSubview:self.cFameView];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -73,4 +97,7 @@
 }
 
 
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
 @end

@@ -32,11 +32,17 @@ NSString * _Nonnull const kSelectedImageWithShoppingVc = @"shop_icon_b";
 NSString * _Nonnull const kSelectedImageWithPersonalCenterVc = @"geren_icon_b";
 
 #pragma mark *** 网络请求requestcode ***
+//登录
 NSString * _Nonnull const kRequestCodeLogin = @"login";
 NSString * _Nonnull const kRequestCodeRegister = @"register";
 NSString * _Nonnull const kRequestCodeUpdatePassword = @"updatepswd";
 NSString * _Nonnull const kRequestCodeEditProfile = @"editperinfo";
 NSString * _Nonnull const kRequestCodeBackPassword = @"backpswd";
+
+//家谱
+NSString * _Nonnull const kRequestCodeCreategen = @"creategen";
+NSString * _Nonnull const kRequestCodeQuerygendata = @"querygendeta";
+
 
 +(void)showAlertViewControllerAutoDissmissWithTarGet:(id)target Message:(NSString *)message delay:(NSInteger)time complete:(void (^)(BOOL))complete{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];

@@ -22,6 +22,7 @@
 @property (nonatomic,assign) NSInteger length; /*长度*/
 @property (nonatomic,copy) NSArray *dataArr; /*点出来的数据*/
 
+@property (nonatomic,weak) id<InputViewDelegate> delegate; /*代理人*/
 
 - (instancetype)initWithFrame:(CGRect)frame Length:(NSInteger)length withData:(NSArray *)dataArr;
 @end

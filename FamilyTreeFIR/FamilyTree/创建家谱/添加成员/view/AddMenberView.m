@@ -20,7 +20,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self initAddUI];
-        
     }
     return self;
 }
@@ -35,7 +34,7 @@
     [self.backView addSubview:self.motherView];
     [self.backView addSubview:self.sexInView];
     
-    self.idView = [self creatLabelTextWithTitle:@"身份:" TitleFrame:CGRectMake(CGRectXW(self.sexInView)+20*AdaptationWidth(), self.sexInView.frame.origin.y, 50, InputView_height) inputViewLength:50 dataArr:@[@"嫡出",@"嫡出",@"嫡出"] inputViewLabel:@" 嫡出" FinText:nil withStar:NO];
+    self.idView = [self creatLabelTextWithTitle:@"身份:" TitleFrame:CGRectMake(CGRectXW(self.sexInView)+20*AdaptationWidth(), self.sexInView.frame.origin.y, 50, InputView_height) inputViewLength:50 dataArr:@[@"嫡出",@"嫡出",@"嫡出"] inputViewLabel:@"嫡出" FinText:nil withStar:NO];
     [self.backView addSubview:self.idView];
     [self.backView addSubview:self.famousPerson];
     
@@ -47,10 +46,10 @@
         [allGenNum addObject:str];
     }
     
-    self.gennerNum   = [self creatLabelTextWithTitle:@"家族第几代:" TitleFrame:CGRectMake(20, CGRectYH(self.sexInView)+GapOfView, 0.25*Screen_width, InputView_height) inputViewLength:0.2*Screen_width dataArr:allGenNum inputViewLabel:@"第一代" FinText:nil withStar:YES];
+    self.gennerNum   = [self creatLabelTextWithTitle:@"家族第几代:" TitleFrame:CGRectMake(20, CGRectYH(self.sexInView)+GapOfView, 0.25*Screen_width, InputView_height) inputViewLength:0.2*Screen_width dataArr:allGenNum inputViewLabel:@"第1代" FinText:nil withStar:YES];
     [self.backView addSubview:self.gennerNum];
     
-    self.rankingView = [self creatLabelTextWithTitle:@"           排行:" TitleFrame:CGRectMake(20, CGRectYH(self.gennerNum)+GapOfView, 0.25*Screen_width, InputView_height) inputViewLength:0.2*Screen_width dataArr:allGenNum    inputViewLabel:@"第一代" FinText:nil withStar:YES];
+    self.rankingView = [self creatLabelTextWithTitle:@"           排行:" TitleFrame:CGRectMake(20, CGRectYH(self.gennerNum)+GapOfView, 0.25*Screen_width, InputView_height) inputViewLength:0.2*Screen_width dataArr:allGenNum    inputViewLabel:@"第1代" FinText:nil withStar:YES];
     self.rankingView.inputLabel.textAlignment = 0;
     
     [self.backView addSubview:self.rankingView];
@@ -76,7 +75,7 @@
 -(InputView *)sexInView{
     if (!_sexInView) {
         _sexInView = [[InputView alloc] initWithFrame:CGRectMake(20, CGRectYH(self.fatheView)+GapOfView, 50, InputView_height) Length:50 withData:@[@"男",@"女"]];
-        _sexInView.inputLabel.text = @" 男";
+        _sexInView.inputLabel.text = @"  男";
         
     }
     return _sexInView;

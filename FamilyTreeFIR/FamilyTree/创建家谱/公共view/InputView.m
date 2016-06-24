@@ -49,6 +49,10 @@
     self.inputLabel.text = gesView.text;
     [self extendTheLabel];
     
+    if (_delegate && [_delegate respondsToSelector:@selector(InputView:didFinishSelectLabel:)]) {
+        [_delegate InputView:self didFinishSelectLabel:gesView];
+    };
+    
 }
 
 //点击label展开视图

@@ -40,7 +40,7 @@
         [allGenNum addObject:str];
     }
     
-    self.gennerNum = [self creatLabelTextWithTitle:@"祖宗是家族第几代:" TitleFrame:CGRectMake(20, CGRectYH(self.famfarName)+GapOfView, 0.4*Screen_width, InputView_height) inputViewLength:0.2*Screen_width dataArr:allGenNum inputViewLabel:@"第一代" FinText:nil withStar:YES];
+    self.gennerNum = [self creatLabelTextWithTitle:@"祖宗是家族第几代:" TitleFrame:CGRectMake(20, CGRectYH(self.famfarName)+GapOfView, 0.4*Screen_width, InputView_height) inputViewLength:0.2*Screen_width dataArr:allGenNum inputViewLabel:@"第1代" FinText:nil withStar:YES];
     [self.backView addSubview:self.gennerNum];
     
     [self.backView addSubview:self.famBookName];
@@ -87,6 +87,7 @@
 -(InputView *)sexInpuView{
     if (!_sexInpuView) {
         _sexInpuView = [[InputView alloc] initWithFrame:CGRectMake(20, CGRectYH(self.famfarName)+GapOfView*3+InputView_height*2, 50, InputView_height) Length:50 withData:@[@"男",@"女"]];
+        _sexInpuView.inputLabel.text = @"  男";
         
     }
     return _sexInpuView;
