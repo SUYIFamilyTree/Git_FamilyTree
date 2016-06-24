@@ -12,6 +12,13 @@ static LoginModel *loginModel = nil;
 
 @implementation LoginModel
 
++ (NSDictionary *)modelCustomPropertyMapper{
+    return @{
+             @"userId":@"id"
+             };
+}
+
+
 +(instancetype)sharedLoginMode{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -23,19 +30,7 @@ static LoginModel *loginModel = nil;
 
 @end
 
-@implementation LoginKzxxModel
 
-@end
-
-
-@implementation LoginMembModel
-
-@end
-
-
-@implementation LoginAreaModel
-
-@end
 
 
 

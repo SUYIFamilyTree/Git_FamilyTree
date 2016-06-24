@@ -40,10 +40,7 @@ NSString * _Nonnull const kRequestCodeEditProfile = @"editperinfo";
 NSString * _Nonnull const kRequestCodeBackPassword = @"backpswd";
 
 NSString * _Nonnull const kRequestCodeGetMemallInfo = @"getmemallinfo";
-
-//家谱
-NSString * _Nonnull const kRequestCodeCreategen = @"creategen";
-NSString * _Nonnull const kRequestCodeQuerygendata = @"querygendeta";
+NSString * _Nonnull const kRequestCodeQueryMem = @"querymem";
 
 
 +(void)showAlertViewControllerAutoDissmissWithTarGet:(id)target Message:(NSString *)message delay:(NSInteger)time complete:(void (^)(BOOL))complete{

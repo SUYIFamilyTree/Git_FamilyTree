@@ -28,8 +28,8 @@
 @property (nonatomic, strong) UITableView *accountInfoTB;
 /** 个人信息表*/
 @property (nonatomic, strong) UITableView *personalInfoTB;
-/** 个人登录返回信息*/
-@property (nonatomic, strong) LoginModel *loginModel;
+/** 个人信息模型*/
+@property (nonatomic, strong) QueryModel *queryModel;
 
 /** 账户信息标题数组*/
 @property (nonatomic, copy) NSArray *accountInfoTitleArr;
@@ -237,30 +237,30 @@
 }
 
 #pragma mark - 数据加载
--(void)reloadEditPersonalInfoData:(LoginModel *)loginModel{
-    self.loginModel = loginModel;
+-(void)reloadEditPersonalInfoData:(QueryModel *)queryModel{
+    self.queryModel = queryModel;
     self.accountInfoDetailArr = [NSMutableArray array];
     
-    [self.accountInfoDetailArr addObject:[NSString stringWithFormat:@"%ld",self.loginModel.memb.MeId]];
-    [self.accountInfoDetailArr addObject:self.loginModel.memb.MeAccount];
+    [self.accountInfoDetailArr addObject:[NSString stringWithFormat:@"%ld",self.queryModel.memb.MeId]];
+    [self.accountInfoDetailArr addObject:self.queryModel.memb.MeAccount];
     [self.accountInfoDetailArr addObject:@"******"];
-    [self.accountInfoDetailArr addObject: [self getLockMobileWithString:self.loginModel.memb.MeMobile]];
-    [self.accountInfoDetailArr addObject:self.loginModel.memb.MeEmail];
+    [self.accountInfoDetailArr addObject: [self getLockMobileWithString:self.queryModel.memb.MeMobile]];
+    [self.accountInfoDetailArr addObject:self.queryModel.memb.MeEmail];
     
 
     //        self.personalInfoDetailArr = [NSMutableArray arrayWithObjects:@"陈安一",@"阿一",@"中国",@"安徽-怀宁",@"男",@"1999年09月09日09时",@"身份证",@"******",@"律师",@"本科",@"",@"(空)",@"(空)", nil];
 #warning 待接口格式更改接入
         self.personalInfoDetailArr = [NSMutableArray array];
-        [self.personalInfoDetailArr addObject:self.loginModel.memb.MeName];
-        [self.personalInfoDetailArr addObject:self.loginModel.memb.MeNickname];
+        [self.personalInfoDetailArr addObject:self.queryModel.memb.MeName];
+        [self.personalInfoDetailArr addObject:self.queryModel.memb.MeNickname];
     
         [self.personalInfoDetailArr addObject:@"中国"];
         [self.personalInfoDetailArr addObject:@"安徽-怀宁"];
-    [self.personalInfoDetailArr addObject:@[@"女",@"男",@"保密"][[self.loginModel.memb.MeSex intValue]]];
-    DateModel *dateModel = [[DateModel alloc]initWithDateStr:self.loginModel.memb.MeBirthday];
+    [self.personalInfoDetailArr addObject:@[@"女",@"男",@"保密"][[self.queryModel.memb.MeSex intValue]]];
+    DateModel *dateModel = [[DateModel alloc]initWithDateStr:self.queryModel.memb.MeBirthday];
     NSString *MeBirthdayStr = [NSString stringWithFormat:@"%04ld年%02ld月%02ld日%02ld时",dateModel.year,dateModel.month,dateModel.day,dateModel.hour];
     [self.personalInfoDetailArr addObject:MeBirthdayStr];
-    [self.personalInfoDetailArr addObject:self.loginModel.memb.MeCertype];
+    [self.personalInfoDetailArr addObject:self.queryModel.memb.MeCertype];
     [self.personalInfoDetailArr addObject:@"******"];
     [self.personalInfoDetailArr addObject:@"律师"];
     [self.personalInfoDetailArr addObject:@"本科"];

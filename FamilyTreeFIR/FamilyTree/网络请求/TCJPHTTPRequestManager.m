@@ -38,7 +38,7 @@
         }else{
             authcode = [USERDEFAULT valueForKey:@"authcode"];
         }
-    MYLog(@"授权验证码%@",authcode);
+    //MYLog(@"授权验证码%@",authcode);
     
     NSDictionary *params = @{
                              @"requestuserid":requestID,
@@ -50,14 +50,13 @@
                              @"reserved":@""
                              };
     
-    //NSLog(@"请求的参数----:%@", params);
     NSLog(@"请求的参数----:%@", params);
     
     [manager POST:RootURL parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSError *error;
         NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSUTF8StringEncoding error:&error];
-        NSLog(@"得到的返回---%@",jsonDic);
+        //NSLog(@"得到的返回---%@",jsonDic);
         
         NSString *jsonStr = [NSString stringWithFormat:@"%@",jsonDic];
         NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
@@ -78,7 +77,6 @@
 //                    NSLog(@"返回的%@",dic[@"md5check"]);
             if ([dic[@"md5check"]isEqualToString:md5ReceiveStr]) {
                 succe = YES;
-                
             }else{
                 
             }
