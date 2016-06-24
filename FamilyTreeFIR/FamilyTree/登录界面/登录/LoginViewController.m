@@ -210,8 +210,6 @@
         if (succe) {
             //登录成功
             LoginModel *loginModel = [LoginModel modelWithJSON:jsonDic[@"data"]];
-            
-            
             //存储用户信息
             //id
             [USERDEFAULT setObject:@(loginModel.userId) forKey:@"userid"];
@@ -220,15 +218,7 @@
                             forKey:@"authcode"];
             
             [USERDEFAULT setObject:@true forKey:LoginStates];
-//            //余额
-//            [USERDEFAULT setObject:@(loginModel.memb.MeBalance) forKey:@"MeBalance"];
-//            //同城币
-//            [USERDEFAULT setObject:@(loginModel.memb.MeIntegral) forKey:@"MeIntegral"];
-//            //昵称
-//            [USERDEFAULT setObject:loginModel.memb.MeNickname forKey:@"MeNickname"];
-//            //vip等级
-//            [USERDEFAULT setObject:@(loginModel.memb.MeViplevel) forKey:@"MeViplevel"];
-//            //头像路径
+            //头像路径
 //            [USERDEFAULT setObject:loginModel.kzxx.Photo forKey:@"Photo"];
             [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserAccount];
             [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:UserPassword];
@@ -250,6 +240,40 @@
     NSLog(@"游客请进！");
     [USERDEFAULT setObject:@false forKey:LoginStates];
     //游客进入id为1的测试账号
+    NSDictionary *logDic = @{@"user":@"test1234",@"pass":@"111111"};
+    
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:kRequestCodeLogin success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            //登录成功
+            LoginModel *loginModel = [LoginModel modelWithJSON:jsonDic[@"data"]];
+            
+            
+            //存储用户信息
+            //id
+            [USERDEFAULT setObject:@(loginModel.userId) forKey:@"userid"];
+            //登录授权认证码
+            [USERDEFAULT setObject:loginModel.auth
+                            forKey:@"authcode"];
+            
+//            [USERDEFAULT setObject:@true forKey:LoginStates];
+            //头像路径
+            //            [USERDEFAULT setObject:loginModel.kzxx.Photo forKey:@"Photo"];
+//            [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserAccount];
+//            [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:UserPassword];
+            
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            
+            
+            
+        }
+        
+    } failure:^(NSError *error) {
+        MYLog(@"失败---%@",error.description);
+    }];
+
+    
+    
     [USERDEFAULT setObject:@1 forKey:@"userid"];
     [self.navigationController popViewControllerAnimated:YES];
     

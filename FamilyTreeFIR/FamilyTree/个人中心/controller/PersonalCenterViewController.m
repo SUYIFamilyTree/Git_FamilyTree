@@ -24,6 +24,7 @@
 #import "EditPersonalInfoView.h"
 #import "MemallInfoModel.h"
 #import "QueryModel.h"
+#import "JobModel.h"
 
 @interface PersonalCenterViewController ()<PersonalCenterHeaderViewDelegate,PersonalCenterTodayFortuneViewDelegate,UITableViewDataSource,UITableViewDelegate,PersonalCenterMyPhotoAlbumsViewDelegate,PayForFortuneViewDelegate,PayForForeverFortuneViewDelegate,VIPViewDelegate>
 /** 全屏滚动*/
@@ -249,29 +250,68 @@
     }
     
     
-    NSDictionary *logDic = @{@"user":[USERDEFAULT valueForKey:UserAccount],@"pass":[USERDEFAULT valueForKey:UserPassword]};
+     NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
     
     if (sender.selected) {
-        
-        [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:kRequestCodeLogin success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeQueryMem success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
             if (succe) {
                 weakSelf.queryModel = [QueryModel modelWithJSON:jsonDic[@"data"]];
                 weakSelf.editPersonalInfoView = [[EditPersonalInfoView alloc]initWithFrame:CGRectMake(0, 64, 0, Screen_height-49-64)];
                 [self.view addSubview:self.editPersonalInfoView];
+                
                 [weakSelf.editPersonalInfoView reloadEditPersonalInfoData:weakSelf.queryModel];
                 
                 [UIView animateWithDuration:0.5 animations:^{
                     weakSelf.editPersonalInfoView.frame = CGRectMake(0, 64, Screen_width, Screen_height-49-64);
                 }];
-                
             }else{
-                
             }
         } failure:^(NSError *error) {
             MYLog(@"失败---%@",error.description);
         }];
         
-    };
+        //生成职业plist文件
+        NSDictionary *logDic = @{@"typeval":@"GRZY"};
+        [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetsyntype success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+            MYLog(@"%@",jsonDic[@"message"]);
+            if (succe) {
+                NSArray<JobModel *> *arr = [NSArray modelArrayWithClass:[JobModel class] json:jsonDic[@"data"]];
+                NSMutableArray *mutableArr = [NSMutableArray array];
+                JobModel *jobModel = [[JobModel alloc]init];
+                for (jobModel in arr) {
+                    [mutableArr addObject:jobModel.syntype];
+                }
+                NSString *filePath = [UserDocumentD stringByAppendingPathComponent:@"job.plist"];
+                
+                [mutableArr writeToFile:filePath atomically:YES];
+            }else{
+            }
+        } failure:^(NSError *error) {
+            MYLog(@"失败---%@",error.description);
+        }];
+        //生成地区plist文件
+//        NSDictionary *logDic1 = @{@"country":@"中国"};
+//        [TCJPHTTPRequestManager POSTWithParameters:logDic1 requestID:GetUserId requestcode:@"getprovince" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+//            MYLog(@"%@",jsonDic[@"message"]);
+//            if (succe) {
+//                NSArray<JobModel *> *arr = [NSArray modelArrayWithClass:[JobModel class] json:jsonDic[@"data"]];
+//                NSMutableArray *mutableArr = [NSMutableArray array];
+//                JobModel *jobModel = [[JobModel alloc]init];
+//                for (jobModel in arr) {
+//                    [mutableArr addObject:jobModel.syntype];
+//                }
+//                NSString *filePath = [UserDocumentD stringByAppendingPathComponent:@"job.plist"];
+//                
+//                [mutableArr writeToFile:filePath atomically:YES];
+//            }else{
+//            }
+//        } failure:^(NSError *error) {
+//            MYLog(@"失败---%@",error.description);
+//        }];
+
+        
+    }
+    
     
 }
 
@@ -285,10 +325,6 @@
         [self.vipView removeFromSuperview];
     }
 }
-
-
-
-
 
 #pragma mark - UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

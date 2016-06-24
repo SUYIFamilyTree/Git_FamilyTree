@@ -10,7 +10,7 @@
 #import "RootTabBarViewController.h"
 #import "LoginViewController.h"
 #import "TCJPHTTPRequestManager.h"
-#import "JobModel.h"
+
 
 @interface AppDelegate ()
 
@@ -35,28 +35,6 @@
     
     [_window makeKeyAndVisible];
    
-    //查询相关数据存储plist文件
-    //职业=”GRZY”,学历=”GRXL”,证件类型=”GRZJ”,身份类型=”GRSF”
-    //查询职业
-//    NSDictionary *logDic = @{@"typeval":@"GRZY"};
-//    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@1 requestcode:@"getsyntype" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-//        if (succe) {
-//            NSArray<JobModel *> *arr = [NSArray modelArrayWithClass:[JobModel class] json:jsonDic[@"data"]];
-//            NSMutableArray *mutableArr = [NSMutableArray array];
-//            JobModel *jobModel = [[JobModel alloc]init];
-//            for (jobModel in arr) {
-//                [mutableArr addObject:jobModel.syntype];
-//            }
-//            NSString *filePath = [UserDocumentD stringByAppendingPathComponent:@"job.plist"];
-//            
-//            [mutableArr writeToFile:filePath atomically:YES];
-//        }else{
-//            
-//        }
-//    } failure:^(NSError *error) {
-//        MYLog(@"失败---%@",error.description);
-//    }];
-// 
     return YES;
 }
 
