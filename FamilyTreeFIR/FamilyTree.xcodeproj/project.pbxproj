@@ -544,6 +544,7 @@
 		BC3CF3E81D01318C00437ED6 /* chongZhi_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E51D01318C00437ED6 /* chongZhi_sel.png */; };
 		BC3CF3E91D01318C00437ED6 /* chongZhi_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E61D01318C00437ED6 /* chongZhi_sel@2x.png */; };
 		BC3CF3EA1D01318C00437ED6 /* chongZhi_sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E71D01318C00437ED6 /* chongZhi_sel@3x.png */; };
+		BC458A861D1CC64300AA0DDF /* JobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC458A851D1CC64300AA0DDF /* JobModel.m */; };
 		BC5F150C1D0FF1AD004F3622 /* PersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14DE1D0FF1AD004F3622 /* PersonalCenterViewController.m */; };
 		BC5F150D1D0FF1AD004F3622 /* DrawStarsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14E11D0FF1AD004F3622 /* DrawStarsView.m */; };
 		BC5F150E1D0FF1AD004F3622 /* HeadImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14E31D0FF1AD004F3622 /* HeadImageView.m */; };
@@ -1368,6 +1369,8 @@
 		BC3CF3E51D01318C00437ED6 /* chongZhi_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chongZhi_sel.png; sourceTree = "<group>"; };
 		BC3CF3E61D01318C00437ED6 /* chongZhi_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chongZhi_sel@2x.png"; sourceTree = "<group>"; };
 		BC3CF3E71D01318C00437ED6 /* chongZhi_sel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chongZhi_sel@3x.png"; sourceTree = "<group>"; };
+		BC458A841D1CC64300AA0DDF /* JobModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobModel.h; sourceTree = "<group>"; };
+		BC458A851D1CC64300AA0DDF /* JobModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobModel.m; sourceTree = "<group>"; };
 		BC5F14DD1D0FF1AD004F3622 /* PersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterViewController.h; sourceTree = "<group>"; };
 		BC5F14DE1D0FF1AD004F3622 /* PersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterViewController.m; sourceTree = "<group>"; };
 		BC5F14E01D0FF1AD004F3622 /* DrawStarsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawStarsView.h; sourceTree = "<group>"; };
@@ -3116,6 +3119,8 @@
 			children = (
 				BC2B1E1A1D1BC301004E916D /* DateModel.h */,
 				BC2B1E1B1D1BC301004E916D /* DateModel.m */,
+				BC458A841D1CC64300AA0DDF /* JobModel.h */,
+				BC458A851D1CC64300AA0DDF /* JobModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -4368,6 +4373,7 @@
 				ADA98E9C1D115898005B23EC /* MyFamilyCollectionViewCell.m in Sources */,
 				ADA4C16F1D0E925700CA9067 /* AllGoodsView.m in Sources */,
 				ADC13BA31D1926C7000F901C /* WDetailManagerViewController.m in Sources */,
+				BC458A861D1CC64300AA0DDF /* JobModel.m in Sources */,
 				ADA380661CFC299700B596B7 /* LoginModel.m in Sources */,
 				ADB973501CFEB2D7007B876B /* InputView.m in Sources */,
 				ADD23D091D0D54C2008986F6 /* TeachViewController.m in Sources */,

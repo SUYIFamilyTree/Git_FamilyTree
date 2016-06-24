@@ -7,8 +7,36 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class LoginKzxxModel,LoginMembModel,LoginAreaModel;
 @interface LoginModel : NSObject
+
+@property (nonatomic, strong) LoginKzxxModel *kzxx;
+
+@property (nonatomic, strong) LoginMembModel *memb;
+
+@property (nonatomic, strong) LoginAreaModel *area;
+
++(instancetype)sharedLoginMode;
+
+@end
+
+@interface LoginKzxxModel : NSObject
+
+@property (nonatomic, copy) NSString *Photo;
+
+@property (nonatomic, copy) NSString *Grxl;
+
+@property (nonatomic, copy) NSString *Grah;
+
+@property (nonatomic, copy) NSString *Grqm;
+
+@property (nonatomic, copy) NSString *Grjl;
+
+@property (nonatomic, copy) NSString *Grzy;
+
+@end
+
+@interface LoginMembModel : NSObject
 
 @property (nonatomic, copy) NSString *MeSurname;
 
@@ -31,7 +59,7 @@
 @property (nonatomic, copy) NSString *MeRegistertime;
 
 @property (nonatomic, copy) NSString *MeCardnum;
-/** 头像路径*/
+
 @property (nonatomic, copy) NSString *MeExtension;
 
 @property (nonatomic, copy) NSString *MeIsblack;
@@ -72,6 +100,27 @@
 
 @property (nonatomic, copy) NSString *MeKeepstr01;
 
-+(instancetype)sharedLoginMode;
+@end
+
+@interface LoginAreaModel : NSObject
+
+@property (nonatomic, assign) NSInteger AreaId;
+
+@property (nonatomic, copy) NSString *AreaCountry;
+
+@property (nonatomic, copy) NSString *AreaMapcode;
+
+@property (nonatomic, copy) NSString *AreaCountryCode;
+
+@property (nonatomic, copy) NSString *AreaMap;
+
+@property (nonatomic, copy) NSString *AreaProvince;
+
+@property (nonatomic, copy) NSString *AreaCity;
+
+@property (nonatomic, copy) NSString *AreaCode;
+
+@property (nonatomic, copy) NSString *AreaMailcode;
 
 @end
+

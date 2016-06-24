@@ -37,6 +37,9 @@ NSString * _Nonnull const kRequestCodeRegister = @"register";
 NSString * _Nonnull const kRequestCodeUpdatePassword = @"updatepswd";
 NSString * _Nonnull const kRequestCodeEditProfile = @"editperinfo";
 NSString * _Nonnull const kRequestCodeBackPassword = @"backpswd";
+NSString * _Nonnull const kRequestCodeGetMemallInfo = @"getmemallinfo";
+
+
 
 +(void)showAlertViewControllerAutoDissmissWithTarGet:(id)target Message:(NSString *)message delay:(NSInteger)time complete:(void (^)(BOOL))complete{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];

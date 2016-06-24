@@ -22,3 +22,21 @@ static LoginModel *loginModel = nil;
 }
 
 @end
+
+@implementation LoginKzxxModel
+
+@end
+
+
+@implementation LoginMembModel
+
+@end
+
+
+@implementation LoginAreaModel
+
+@end
+
+
+
+

@@ -34,11 +34,11 @@ UIKIT_EXTERN NSString * _Nonnull const kSelectedImageWithPersonalCenterVc;
 #pragma mark *** 网络请求requestCode ***
 
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeLogin;
-UIKIT_EXTERN NSString * _Nonnull const kRequestCodeRegister;;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeRegister;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeUpdatePassword;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeBackPassword;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeEditProfile;
-
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetMemallInfo;
 
 
 

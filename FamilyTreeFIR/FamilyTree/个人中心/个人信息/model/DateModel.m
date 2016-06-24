@@ -12,10 +12,10 @@
 -(instancetype)initWithDateStr:(NSString *)str{
     self = [super init];
     if (self) {
-        self.year = [[str substringWithRange:NSMakeRange(1, 4)] intValue];
-        self.month = [[str substringWithRange:NSMakeRange(6, 2)] intValue];
-        self.day = [[str substringWithRange:NSMakeRange(9, 2)] intValue];
-        self.hour = [[str substringWithRange:NSMakeRange(12, 2)] intValue];
+        self.year = [[str substringWithRange:NSMakeRange(0, 4)] intValue];
+        self.month = [[str substringWithRange:NSMakeRange(5, 2)] intValue];
+        self.day = [[str substringWithRange:NSMakeRange(8, 2)] intValue];
+        self.hour = [[str substringWithRange:NSMakeRange(11, 2)] intValue];
     }
     return self;
 }

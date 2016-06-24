@@ -164,21 +164,31 @@
 
 -(NSArray *)documentCategoryArr{
     if (!_documentCategoryArr) {
-        _documentCategoryArr = @[@"身份证",@"军官证",@"武警警官证"];
+        _documentCategoryArr = @[@"身份证",@"机动车驾驶证",@"营业执照",@"军官证",@"武警警官证"];
     }
     return _documentCategoryArr;
 }
 
+//-(NSArray *)jobArr{
+//    if (!_jobArr) {
+//        _jobArr = @[@"律师",@"教师",@"警察"];
+//    }
+//    return _jobArr;
+//}
+
 -(NSArray *)jobArr{
     if (!_jobArr) {
-        _jobArr = @[@"律师",@"教师",@"警察"];
+    NSString *filePath = [UserDocumentD stringByAppendingPathComponent:@"job.plist"];
+    
+        _jobArr = [NSArray arrayWithContentsOfFile:filePath];
     }
     return _jobArr;
 }
 
+
 -(NSArray *)studyArr{
     if (!_studyArr) {
-        _studyArr = @[@"高中",@"本科",@"硕士",@"博士"];
+        _studyArr = @[@"小学",@"初中",@"中专",@"高中",@"大专",@"本科",@"硕士",@"博士"];
     }
     return _studyArr;
 }
@@ -228,30 +238,29 @@
 
 #pragma mark - 数据加载
 -(void)reloadEditPersonalInfoData:(LoginModel *)loginModel{
-    MYLog(@"到这了");
     self.loginModel = loginModel;
     self.accountInfoDetailArr = [NSMutableArray array];
     
-    [self.accountInfoDetailArr addObject:[NSString stringWithFormat:@"%ld",self.loginModel.MeId]];
-    [self.accountInfoDetailArr addObject:self.loginModel.MeAccount];
+    [self.accountInfoDetailArr addObject:[NSString stringWithFormat:@"%ld",self.loginModel.memb.MeId]];
+    [self.accountInfoDetailArr addObject:self.loginModel.memb.MeAccount];
     [self.accountInfoDetailArr addObject:@"******"];
-    [self.accountInfoDetailArr addObject: [self getLockMobileWithString:self.loginModel.MeMobile]];
-    [self.accountInfoDetailArr addObject:self.loginModel.MeEmail];
+    [self.accountInfoDetailArr addObject: [self getLockMobileWithString:self.loginModel.memb.MeMobile]];
+    [self.accountInfoDetailArr addObject:self.loginModel.memb.MeEmail];
     
 
     //        self.personalInfoDetailArr = [NSMutableArray arrayWithObjects:@"陈安一",@"阿一",@"中国",@"安徽-怀宁",@"男",@"1999年09月09日09时",@"身份证",@"******",@"律师",@"本科",@"",@"(空)",@"(空)", nil];
 #warning 待接口格式更改接入
         self.personalInfoDetailArr = [NSMutableArray array];
-        [self.personalInfoDetailArr addObject:self.loginModel.MeName];
-        [self.personalInfoDetailArr addObject:self.loginModel.MeNickname];
+        [self.personalInfoDetailArr addObject:self.loginModel.memb.MeName];
+        [self.personalInfoDetailArr addObject:self.loginModel.memb.MeNickname];
     
         [self.personalInfoDetailArr addObject:@"中国"];
         [self.personalInfoDetailArr addObject:@"安徽-怀宁"];
-    [self.personalInfoDetailArr addObject:@[@"女",@"男",@"保密"][[self.loginModel.MeSex intValue]]];
-    DateModel *dateModel = [[DateModel alloc]initWithDateStr:self.loginModel.MeBirthday];
+    [self.personalInfoDetailArr addObject:@[@"女",@"男",@"保密"][[self.loginModel.memb.MeSex intValue]]];
+    DateModel *dateModel = [[DateModel alloc]initWithDateStr:self.loginModel.memb.MeBirthday];
     NSString *MeBirthdayStr = [NSString stringWithFormat:@"%04ld年%02ld月%02ld日%02ld时",dateModel.year,dateModel.month,dateModel.day,dateModel.hour];
     [self.personalInfoDetailArr addObject:MeBirthdayStr];
-    [self.personalInfoDetailArr addObject:self.loginModel.MeCertype];
+    [self.personalInfoDetailArr addObject:self.loginModel.memb.MeCertype];
     [self.personalInfoDetailArr addObject:@"******"];
     [self.personalInfoDetailArr addObject:@"律师"];
     [self.personalInfoDetailArr addObject:@"本科"];
@@ -481,6 +490,11 @@
 
         //[self clearSeparatorWithView:datePicker];
         label.text = [NSString stringWithFormat:@"请选择%@",self.pickerViewTitleArr[5]];
+        UILabel *tipLabel = [[UILabel alloc]initWithFrame:CGRectMake(0.3*Screen_width, 0, 0.5*Screen_width, CGRectH(pickerViewTitleView))];
+        tipLabel.textColor = [UIColor grayColor];
+        tipLabel.text = @"(具体时辰请采用进一法)";
+        tipLabel.font = MFont(12);
+        [pickerViewTitleView addSubview:tipLabel];
 //        //确定按钮
 //        UIButton *sureBtn = [[UIButton alloc]initWithFrame:CGRectMake(Screen_width/5*4, 0, Screen_width/5, 0.0455*Screen_height-1)];
 //        sureBtn.backgroundColor = [UIColor whiteColor];

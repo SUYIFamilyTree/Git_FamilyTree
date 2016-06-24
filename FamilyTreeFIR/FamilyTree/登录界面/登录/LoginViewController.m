@@ -34,12 +34,12 @@
     [super viewDidLoad];
 
     [self.view addSubview:self.loginView];
-    //如果登录
-    if ([[USERDEFAULT objectForKey:LoginStates] isEqual:@true]) {
-        
-        [self.navigationController popViewControllerAnimated:false];
-        
-    }
+//    //如果登录
+//    if ([[USERDEFAULT objectForKey:LoginStates] isEqual:@true]) {
+//        
+//        [self.navigationController popViewControllerAnimated:false];
+//        
+//    }
     
     
 }
@@ -214,20 +214,25 @@
             
             //存储用户信息
             //id
-            [USERDEFAULT setObject:@(loginModel.MeId) forKey:@"userid"];
+            [USERDEFAULT setObject:@(loginModel.memb.MeId) forKey:@"userid"];
+            //登录授权认证码
+            [USERDEFAULT setObject:loginModel.memb.MeKeepstr01
+                            forKey:@"authcode"];
+            
             [USERDEFAULT setObject:@true forKey:LoginStates];
             //余额
-            [USERDEFAULT setObject:@(loginModel.MeBalance) forKey:@"MeBalance"];
+            [USERDEFAULT setObject:@(loginModel.memb.MeBalance) forKey:@"MeBalance"];
             //同城币
-            [USERDEFAULT setObject:@(loginModel.MeIntegral) forKey:@"MeIntegral"];
+            [USERDEFAULT setObject:@(loginModel.memb.MeIntegral) forKey:@"MeIntegral"];
             //昵称
-            [USERDEFAULT setObject:loginModel.MeNickname forKey:@"MeNickname"];
+            [USERDEFAULT setObject:loginModel.memb.MeNickname forKey:@"MeNickname"];
             //vip等级
-            [USERDEFAULT setObject:@(loginModel.MeViplevel) forKey:@"MeViplevel"];
+            [USERDEFAULT setObject:@(loginModel.memb.MeViplevel) forKey:@"MeViplevel"];
             //头像路径
-            [USERDEFAULT setObject:loginModel.MeExtension forKey:@"MeExtension"];
+            [USERDEFAULT setObject:loginModel.kzxx.Photo forKey:@"Photo"];
             [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserAccount];
             [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:UserPassword];
+            
             
             [self.navigationController popViewControllerAnimated:YES];
             

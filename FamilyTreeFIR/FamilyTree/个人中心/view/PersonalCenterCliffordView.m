@@ -84,9 +84,15 @@
 -(void)reloadData:(MemallInfoGrqwModel *)grqw{
     //签文
     self.divinationsArr = [NSMutableArray array];
-    [self.divinationsArr addObject:[NSString stringWithFormat:@"%ld",grqw.qh]];
-    [self.divinationsArr addObject:grqw.qwhh];
+    if (grqw.qh) {
+        [self.divinationsArr addObject:[NSString stringWithFormat:@"%ld",grqw.qh]];
+        [self.divinationsArr addObject:grqw.qwhh];
+    }else{
+            [self.divinationsArr addObject:@""];
+            [self.divinationsArr addObject:@""];
+    }
     [self initDivinationLBs];
+
 }
 
 -(void)reloadDevoutData:(DevoutModel *)devout{
