@@ -100,13 +100,17 @@
 }
 
 -(void)reloadData:(MemallInfoScbzModel *)scbz{
-    NSString *scbzStr = [scbz.scbz stringByReplacingOccurrencesOfString:@"," withString:@""];
-    NSMutableString *scbzSpace = [NSString addSpace:scbzStr withNumber:2];
-    self.birthdateLB.text = [scbzSpace substringToIndex:10];
-    self.characterLB.text = [scbzSpace substringFromIndex:11];
-    
-    for (int i = 0; i < 5; i++) {
-       self.wuXingLBArr[i].text = [scbz.wxnum substringWithRange:NSMakeRange(2*i, 1)];
+    if (scbz.scbz) {
+        NSString *scbzStr = [scbz.scbz stringByReplacingOccurrencesOfString:@"," withString:@""];
+        NSMutableString *scbzSpace = [NSString addSpace:scbzStr withNumber:2];
+        self.birthdateLB.text = [scbzSpace substringToIndex:10];
+        self.characterLB.text = [scbzSpace substringFromIndex:11];
+        for (int i = 0; i < 5; i++) {
+            self.wuXingLBArr[i].text = [scbz.wxnum substringWithRange:NSMakeRange(2*i, 1)];
+        }
+    }else{
+        self.birthdateLB.text = @"";
+        self.characterLB.text = @"";
     }
 }
 @end

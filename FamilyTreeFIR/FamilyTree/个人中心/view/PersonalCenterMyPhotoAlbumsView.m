@@ -75,12 +75,14 @@
 }
 
 -(void)reloadData:(NSArray<MemallInfoGrxcModel *> *)grxcArr{
-    if (grxcArr.count != 0) {
+    if (grxcArr.count == 0) {
         for (int i = 0; i < 3; i++) {
-            //        [self.grxcIVsArr[i] setImageWithURL:[NSURL URLWithString:grxcArr[i].imgurl] placeholder:[UIImage imageNamed:[NSString stringWithFormat:@"grxc%d.png",i]]];
             
             self.grxcIVsArr[i].image = MImage(@"gr_ct_photo");
         }
+    }else{
+        //        [self.grxcIVsArr[i] setImageWithURL:[NSURL URLWithString:grxcArr[i].imgurl] placeholder:[UIImage imageNamed:[NSString stringWithFormat:@"grxc%d.png",i]]];
+
     }
 }
 

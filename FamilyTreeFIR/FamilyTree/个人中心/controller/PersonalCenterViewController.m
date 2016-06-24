@@ -98,7 +98,6 @@
             //vip等级
             [USERDEFAULT setObject:@(weakSelf.loginModel.memb.MeViplevel) forKey:@"MeViplevel"];
             
-            
             [weakSelf initNaviData];
             [weakSelf.editPersonalInfoView reloadEditPersonalInfoData:weakSelf.loginModel];
         }else{
@@ -267,7 +266,6 @@
                 [UIView animateWithDuration:0.5 animations:^{
                     weakSelf.editPersonalInfoView.frame = CGRectMake(0, 64, Screen_width, Screen_height-49-64);
                 }];
-                
                 
             }else{
                 

@@ -44,7 +44,6 @@
     //职业=”GRZY”,学历=”GRXL”,证件类型=”GRZJ”,身份类型=”GRSF”
     //查询职业
     NSDictionary *logDic = @{@"typeval":@"GRZY"};
-    //WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@1 requestcode:@"getsyntype" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             NSArray<JobModel *> *arr = [NSArray modelArrayWithClass:[JobModel class] json:jsonDic[@"data"]];
