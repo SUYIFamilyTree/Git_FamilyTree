@@ -50,6 +50,7 @@
                              @"reserved":@""
                              };
     
+    //NSLog(@"请求的参数----:%@", params);
     NSLog(@"请求的参数----:%@", params);
     
     [manager POST:RootURL parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
