@@ -9,5 +9,17 @@
 #import "BackScrollAndDetailView.h"
 
 @interface AddMenberView : BackScrollAndDetailView
+@property (nonatomic,strong) DiscAndNameView *name; /*性名*/
+@property (nonatomic,strong) InputView *fatheView; /*父亲*/
+@property (nonatomic,strong) InputView *motherView; /*母亲*/
 
+@property (nonatomic,strong) InputView *sexInView; /*性别*/
+
+@property (nonatomic,strong) InputView *idView; /*身份*/
+
+@property (nonatomic,strong) ClickRoundView *famousPerson; /*家族名人*/
+
+@property (nonatomic,strong) InputView *gennerNum; /*第几代*/
+
+@property (nonatomic,strong) InputView *rankingView; /*排行*/
 @end

@@ -11,6 +11,13 @@
 
 #define GapOfView 15
 
+@class BackScrollAndDetailView;
+@protocol BackScrollAndDetailViewDelegate <NSObject>
+
+-(void)BackScrollAndDetailViewDidTapCreateButton;
+
+@end
+
 @interface BackScrollAndDetailView : UIView
 @property (nonatomic,strong) InputView *inputView; /*是否结婚*/
 
@@ -43,7 +50,7 @@
 
 @property (nonatomic,strong) InputView *generationLabel; /*字辈*/
 
-@property (nonatomic,strong) UILabel *gennerationNex; /*字辈后面那块*/
+@property (nonatomic,strong) UITextField *gennerationNex; /*字辈后面那块*/
 
 @property (nonatomic,strong) UITextView *selfTextView; /*个人简介*/
 
@@ -52,8 +59,11 @@
 
 @property (nonatomic,strong) UITextField *moveCity; /*迁移者居住地*/
 
+@property (nonatomic,weak) id<BackScrollAndDetailViewDelegate> delegate; /*代理人*/
 
 
 //创建labelText
 -(InputView *)creatLabelTextWithTitle:(NSString *)title TitleFrame:(CGRect)frame inputViewLength:(NSInteger)length dataArr:(NSArray *)dataArr inputViewLabel:(NSString *)labelText FinText:(NSString *)finStr withStar:(BOOL)star;
+
+
 @end

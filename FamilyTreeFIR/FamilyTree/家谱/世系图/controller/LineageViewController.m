@@ -39,7 +39,6 @@
 -(void)initPerson{
     LineageCellView *ziji = [[LineageCellView alloc]initWithFrame:CGRectMake((Screen_width-cell_width)/2, 64+(Screen_height-49-64)/2, cell_width, cell_height)];
     [self.view addSubview:ziji];
-    
 }
 
 #pragma mark - lazyLoad
@@ -69,8 +68,6 @@
     NSLog(@"%@", title);
 }
 
-
-    
 
 
 @end

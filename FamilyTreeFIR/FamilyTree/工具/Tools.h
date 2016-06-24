@@ -38,6 +38,7 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodeRegister;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeUpdatePassword;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeBackPassword;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeEditProfile;
+
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetMemallInfo;
 UIKIT_EXTERN NSString * _Nonnull const
     kRequestCodeQueryMem;

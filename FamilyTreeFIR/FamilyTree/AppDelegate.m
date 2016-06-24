@@ -29,14 +29,9 @@
     
     RootTabBarViewController *rootVc = [[RootTabBarViewController alloc] init];
     
-//    LoginViewController *loginVc = [[LoginViewController alloc] init];
-    
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootVc];
-    
     _window.backgroundColor = [UIColor grayColor];
     
     _window.rootViewController = rootVc;
-    
     
     [_window makeKeyAndVisible];
    

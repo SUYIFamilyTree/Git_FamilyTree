@@ -13,7 +13,6 @@
 {
     BOOL _isStar;
 }
-@property (nonatomic,assign) BOOL marked; /*标记*/
 
 @property (nonatomic,strong) UIButton *roundBtn; /*圆点*/
 
@@ -30,6 +29,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         _isStar = star;
+        _marked = false;
         [self addSubview:self.roundBtn];
         [self addSubview:self.titleLabel];
         

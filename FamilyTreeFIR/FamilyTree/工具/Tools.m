@@ -32,11 +32,13 @@ NSString * _Nonnull const kSelectedImageWithShoppingVc = @"shop_icon_b";
 NSString * _Nonnull const kSelectedImageWithPersonalCenterVc = @"geren_icon_b";
 
 #pragma mark *** 网络请求requestcode ***
+//登录
 NSString * _Nonnull const kRequestCodeLogin = @"login";
 NSString * _Nonnull const kRequestCodeRegister = @"register";
 NSString * _Nonnull const kRequestCodeUpdatePassword = @"updatepswd";
 NSString * _Nonnull const kRequestCodeEditProfile = @"editperinfo";
 NSString * _Nonnull const kRequestCodeBackPassword = @"backpswd";
+
 NSString * _Nonnull const kRequestCodeGetMemallInfo = @"getmemallinfo";
 NSString * _Nonnull const kRequestCodeQueryMem = @"querymem";
 

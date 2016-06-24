@@ -9,19 +9,7 @@
 #import "CreateFamView.h"
 @interface CreateFamView()
 
-@property (nonatomic,strong) DiscAndNameView *famName; /*家族名称*/
 
-@property (nonatomic,strong) DiscAndNameView *famfarName; /*祖宗姓名*/
-
-@property (nonatomic,strong) InputView *gennerNum; /*第几代*/
-
-@property (nonatomic,strong) UIButton *famBookName; /*家谱名称*/
-
-@property (nonatomic,strong) InputView *sexInpuView; /*性别*/
-
-@property (nonatomic,strong) ClickRoundView *diXiView; /*嫡系*/
-
-@property (nonatomic,strong) ClickRoundView * famousPerson; /*家族名人*/
 
 @end
 
@@ -30,11 +18,11 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
+    
     if (self) {
-        
         [self initCreatUI];
-        
     }
+    
     return self;
 }
 
@@ -45,8 +33,14 @@
     [self.backView addSubview:self.famName];
     [self.backView addSubview:self.famfarName];
 //
-
-    self.gennerNum = [self creatLabelTextWithTitle:@"祖宗是家族第几代:" TitleFrame:CGRectMake(20, CGRectYH(self.famfarName)+GapOfView, 0.4*Screen_width, InputView_height) inputViewLength:0.2*Screen_width dataArr:@[@"  第一代",@"  第二代",@"  地三代"] inputViewLabel:@" 第一代" FinText:nil withStar:YES];
+    NSMutableArray *allGenNum = [@[] mutableCopy];
+    
+    for (int idx = 1; idx<100; idx++) {
+        NSString *str = [NSString stringWithFormat:@"第%d代",idx];
+        [allGenNum addObject:str];
+    }
+    
+    self.gennerNum = [self creatLabelTextWithTitle:@"祖宗是家族第几代:" TitleFrame:CGRectMake(20, CGRectYH(self.famfarName)+GapOfView, 0.4*Screen_width, InputView_height) inputViewLength:0.2*Screen_width dataArr:allGenNum inputViewLabel:@"第1代" FinText:nil withStar:YES];
     [self.backView addSubview:self.gennerNum];
     
     [self.backView addSubview:self.famBookName];
@@ -59,41 +53,41 @@
     
     [self.backView bringSubviewToFront:self.gennerNum];
     
-    
 }
 
 -(DiscAndNameView *)famName{
     if (!_famName) {
-        _famName = [[DiscAndNameView alloc] initWithFrame:CGRectMake(20,40+GapOfView, 0.6*Screen_width+10, InputView_height) title:@"家族名称:" detailCont:@"云南大理段氏" isStar:YES];
+        _famName = [[DiscAndNameView alloc] initWithFrame:CGRectMake(20,40+GapOfView, 0.6*Screen_width+10, InputView_height) title:@"家族名称:" detailCont:@"" isStar:YES];
     }
     return _famName;
 }
 
 -(DiscAndNameView *)famfarName{
     if (!_famfarName) {
-        _famfarName = [[DiscAndNameView alloc] initWithFrame:CGRectMake(20, CGRectYH(self.famName)+GapOfView, self.famName.bounds.size.width, InputView_height) title:@"祖宗姓名:（字）:" detailCont:@"段正淳" isStar:true];
+        _famfarName = [[DiscAndNameView alloc] initWithFrame:CGRectMake(20, CGRectYH(self.famName)+GapOfView, self.famName.bounds.size.width, InputView_height) title:@"祖宗姓名（字）:" detailCont:@"" isStar:true];
         
     }
     return _famfarName;
 }
 
--(UIButton *)famBookName{
+-(UITextField *)famBookName{
     if (!_famBookName) {
-        _famBookName = [UIButton new];
-        [_famBookName setTitle:@"收卷家谱名称：段正淳（1-5）带卷普" forState:0];
-        _famBookName.titleLabel.font = WFont(35);
-        [_famBookName setTitleColor:[UIColor blackColor] forState:0];
+        _famBookName = [UITextField new];
+        [_famBookName setText:@"收卷家谱名称：段正淳（1-5）带卷普"];
+        _famBookName.font = WFont(35);
+        [_famBookName setTextColor:[UIColor blackColor] ];
         _famBookName.backgroundColor = [UIColor whiteColor];
         _famBookName.layer.borderColor = BorderColor;
         _famBookName.layer.borderWidth = 1.0f;
+        _famBookName.textAlignment = 1;
         
     }
     return _famBookName;
 }
 -(InputView *)sexInpuView{
     if (!_sexInpuView) {
-        _sexInpuView = [[InputView alloc] initWithFrame:CGRectMake(20, CGRectYH(self.famfarName)+GapOfView*3+InputView_height*2, 50, InputView_height) Length:50 withData:@[@" 男",@" 女"]];
-        _sexInpuView.inputLabel.text = @" 男";
+        _sexInpuView = [[InputView alloc] initWithFrame:CGRectMake(20, CGRectYH(self.famfarName)+GapOfView*3+InputView_height*2, 50, InputView_height) Length:50 withData:@[@"男",@"女"]];
+        _sexInpuView.inputLabel.text = @"  男";
         
     }
     return _sexInpuView;

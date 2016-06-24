@@ -12,7 +12,8 @@
 
 @protocol InputViewDelegate <NSObject>
 
--(void)InputView:(InputView *)inputView didSeletedLabel:(UILabel *)inputLabel;
+//下拉选择结束过后
+-(void)InputView:(InputView *)inputView didFinishSelectLabel:(UILabel *)inputLabel;
 
 @end
 
@@ -21,6 +22,7 @@
 @property (nonatomic,assign) NSInteger length; /*长度*/
 @property (nonatomic,copy) NSArray *dataArr; /*点出来的数据*/
 
+@property (nonatomic,weak) id<InputViewDelegate> delegate; /*代理人*/
 
 - (instancetype)initWithFrame:(CGRect)frame Length:(NSInteger)length withData:(NSArray *)dataArr;
 @end

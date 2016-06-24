@@ -290,6 +290,8 @@
 		ADA98E971D11584C005B23EC /* CommonNavigationViews.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA98E931D11584B005B23EC /* CommonNavigationViews.m */; };
 		ADA98E981D11584C005B23EC /* SelectMyFamilyView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA98E951D11584B005B23EC /* SelectMyFamilyView.m */; };
 		ADA98E9C1D115898005B23EC /* MyFamilyCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA98E9B1D115898005B23EC /* MyFamilyCollectionViewCell.m */; };
+		ADB2D1061D1CCCA10072C022 /* LYFoundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB2D1051D1CCCA10072C022 /* LYFoundation+Log.m */; };
+		ADB2D1091D1CCEE60072C022 /* CreateFamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB2D1081D1CCEE60072C022 /* CreateFamModel.m */; };
 		ADB7F03A1D027A52001F151D /* FortuneTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F0391D027A52001F151D /* FortuneTodayViewController.m */; };
 		ADB7F03F1D027BF9001F151D /* HeadLuckView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB7F03E1D027BF9001F151D /* HeadLuckView.m */; };
 		ADB7F0681D0297EE001F151D /* todayYS_learn_blues.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB7F0411D0297EE001F151D /* todayYS_learn_blues.png */; };
@@ -1063,6 +1065,9 @@
 		ADA98E9A1D115898005B23EC /* MyFamilyCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFamilyCollectionViewCell.h; sourceTree = "<group>"; };
 		ADA98E9B1D115898005B23EC /* MyFamilyCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFamilyCollectionViewCell.m; sourceTree = "<group>"; };
 		ADAB7E101CF4050B00C3C143 /* DefineHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefineHeader.h; sourceTree = "<group>"; };
+		ADB2D1051D1CCCA10072C022 /* LYFoundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LYFoundation+Log.m"; sourceTree = "<group>"; };
+		ADB2D1071D1CCEE60072C022 /* CreateFamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFamModel.h; sourceTree = "<group>"; };
+		ADB2D1081D1CCEE60072C022 /* CreateFamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateFamModel.m; sourceTree = "<group>"; };
 		ADB7F0311D026E7A001F151D /* woman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = woman.png; path = ../../../woman.png; sourceTree = "<group>"; };
 		ADB7F0321D026E7A001F151D /* woman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "woman@2x.png"; path = "../../../woman@2x.png"; sourceTree = "<group>"; };
 		ADB7F0331D026E7A001F151D /* woman@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "woman@3x.png"; path = "../../../woman@3x.png"; sourceTree = "<group>"; };
@@ -1740,6 +1745,7 @@
 		AD2ACD8C1CF3FE3A009D4A24 /* 工具 */ = {
 			isa = PBXGroup;
 			children = (
+				ADB2D1051D1CCCA10072C022 /* LYFoundation+Log.m */,
 				AD4D31C01D056C280095F3F1 /* ScreenAdaptation.h */,
 				AD2ACD8D1CF3FE5E009D4A24 /* Tools.h */,
 				AD2ACD8E1CF3FE5E009D4A24 /* Tools.m */,
@@ -2556,6 +2562,8 @@
 		ADC059DC1D002C70001F7C1B /* model */ = {
 			isa = PBXGroup;
 			children = (
+				ADB2D1071D1CCEE60072C022 /* CreateFamModel.h */,
+				ADB2D1081D1CCEE60072C022 /* CreateFamModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -4425,11 +4433,13 @@
 				BCE2AD5B1CF83FC700EC98F5 /* SearchFamilyTreeViewController.m in Sources */,
 				ADD23CFE1D0D4947008986F6 /* CreatFamilyTree.m in Sources */,
 				ADA7FF021D07E51500EDBEE4 /* NewsCell.m in Sources */,
+				ADB2D1091D1CCEE60072C022 /* CreateFamModel.m in Sources */,
 				BC5F151B1D0FF1AD004F3622 /* PayForFortuneView.m in Sources */,
 				ADB926201CF7DF1900AA8B6E /* TopView.m in Sources */,
 				ADB9261C1CF7DF1900AA8B6E /* LoginViewController.m in Sources */,
 				AD67889C1D06AD5B00D6CF52 /* NewsCenterViewController.m in Sources */,
 				AD73886D1CF6E4860076B2AD /* CustomCollectionViewCell.m in Sources */,
+				ADB2D1061D1CCCA10072C022 /* LYFoundation+Log.m in Sources */,
 				BC00EA051D18CFA200BF1DC3 /* MemallInfoModel.m in Sources */,
 				ADE2D17B1CF6FBD3009D1ADF /* FamilyShopView.m in Sources */,
 				ADB9266A1CF7EBAC00AA8B6E /* FamilyTreeViewController.m in Sources */,
