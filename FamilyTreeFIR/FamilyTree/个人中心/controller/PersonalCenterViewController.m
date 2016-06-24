@@ -23,7 +23,7 @@
 #import "EditHeadView.h"
 #import "EditPersonalInfoView.h"
 #import "MemallInfoModel.h"
-#import "LoginModel.h"
+#import "QueryModel.h"
 
 @interface PersonalCenterViewController ()<PersonalCenterHeaderViewDelegate,PersonalCenterTodayFortuneViewDelegate,UITableViewDataSource,UITableViewDelegate,PersonalCenterMyPhotoAlbumsViewDelegate,PayForFortuneViewDelegate,PayForForeverFortuneViewDelegate,VIPViewDelegate>
 /** 全屏滚动*/
@@ -45,8 +45,8 @@
 /** 个人相册视图*/
 @property (nonatomic, strong) PersonalCenterMyPhotoAlbumsView *myPhotoAlbumsView;
 
-/** 登录个人信息模型*/
-@property (nonatomic, strong) LoginModel *loginModel;
+/** 个人信息模型*/
+@property (nonatomic, strong) QueryModel *queryModel;
 /** 个人中心模型*/
 @property (nonatomic, strong) MemallInfoModel *memallInfo;
 /** 虔诚度模型*/
@@ -88,20 +88,17 @@
 }
 
 -(void)getNaviData{
-    NSDictionary *logDic = @{@"user":[USERDEFAULT valueForKey:UserAccount],@"pass":[USERDEFAULT valueForKey:UserPassword]};
+    MYLog(@"请求个人信息");
+    NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
     WK(weakSelf)
-    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:kRequestCodeLogin success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeQueryMem success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-            weakSelf.loginModel = [LoginModel modelWithJSON:jsonDic[@"data"]];
-            //昵称
-            [USERDEFAULT setObject:weakSelf.loginModel.memb.MeNickname forKey:@"MeNickname"];
-            //vip等级
-            [USERDEFAULT setObject:@(weakSelf.loginModel.memb.MeViplevel) forKey:@"MeViplevel"];
-            
+            MYLog(@"%@",jsonDic[@"data"]);
+            weakSelf.queryModel = [QueryModel modelWithJSON:jsonDic[@"data"]];
             [weakSelf initNaviData];
-            [weakSelf.editPersonalInfoView reloadEditPersonalInfoData:weakSelf.loginModel];
+            [weakSelf.editPersonalInfoView reloadEditPersonalInfoData:weakSelf.queryModel];
         }else{
-            
+            MYLog(@"%@",jsonDic[@"message"]);
         }
     } failure:^(NSError *error) {
         MYLog(@"失败---%@",error.description);
@@ -206,8 +203,8 @@
 //导航栏数据刷新
 -(void)initNaviData{
     //导航栏数据
-    self.navi.titleLabel.text = [USERDEFAULT valueForKey:@"MeNickname"];
-    NSString *vipLevelStr = [NSString stringWithFormat:@"VIP%@",[USERDEFAULT valueForKey:@"MeViplevel"]];
+    self.navi.titleLabel.text = self.queryModel.memb.MeNickname;
+    NSString *vipLevelStr = [NSString stringWithFormat:@"VIP%@",@(self.queryModel.memb.MeViplevel)];
     [self.vipBtn setTitle:vipLevelStr forState:UIControlStateNormal];
 }
 //主界面数据刷新
@@ -258,10 +255,10 @@
         
         [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:kRequestCodeLogin success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
             if (succe) {
-                weakSelf.loginModel = [LoginModel modelWithJSON:jsonDic[@"data"]];
+                weakSelf.queryModel = [QueryModel modelWithJSON:jsonDic[@"data"]];
                 weakSelf.editPersonalInfoView = [[EditPersonalInfoView alloc]initWithFrame:CGRectMake(0, 64, 0, Screen_height-49-64)];
                 [self.view addSubview:self.editPersonalInfoView];
-                [weakSelf.editPersonalInfoView reloadEditPersonalInfoData:weakSelf.loginModel];
+                [weakSelf.editPersonalInfoView reloadEditPersonalInfoData:weakSelf.queryModel];
                 
                 [UIView animateWithDuration:0.5 animations:^{
                     weakSelf.editPersonalInfoView.frame = CGRectMake(0, 64, Screen_width, Screen_height-49-64);

@@ -214,22 +214,22 @@
             
             //存储用户信息
             //id
-            [USERDEFAULT setObject:@(loginModel.memb.MeId) forKey:@"userid"];
+            [USERDEFAULT setObject:@(loginModel.userId) forKey:@"userid"];
             //登录授权认证码
-            [USERDEFAULT setObject:loginModel.memb.MeKeepstr01
+            [USERDEFAULT setObject:loginModel.auth
                             forKey:@"authcode"];
             
             [USERDEFAULT setObject:@true forKey:LoginStates];
-            //余额
-            [USERDEFAULT setObject:@(loginModel.memb.MeBalance) forKey:@"MeBalance"];
-            //同城币
-            [USERDEFAULT setObject:@(loginModel.memb.MeIntegral) forKey:@"MeIntegral"];
-            //昵称
-            [USERDEFAULT setObject:loginModel.memb.MeNickname forKey:@"MeNickname"];
-            //vip等级
-            [USERDEFAULT setObject:@(loginModel.memb.MeViplevel) forKey:@"MeViplevel"];
-            //头像路径
-            [USERDEFAULT setObject:loginModel.kzxx.Photo forKey:@"Photo"];
+//            //余额
+//            [USERDEFAULT setObject:@(loginModel.memb.MeBalance) forKey:@"MeBalance"];
+//            //同城币
+//            [USERDEFAULT setObject:@(loginModel.memb.MeIntegral) forKey:@"MeIntegral"];
+//            //昵称
+//            [USERDEFAULT setObject:loginModel.memb.MeNickname forKey:@"MeNickname"];
+//            //vip等级
+//            [USERDEFAULT setObject:@(loginModel.memb.MeViplevel) forKey:@"MeViplevel"];
+//            //头像路径
+//            [USERDEFAULT setObject:loginModel.kzxx.Photo forKey:@"Photo"];
             [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserAccount];
             [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:UserPassword];
             

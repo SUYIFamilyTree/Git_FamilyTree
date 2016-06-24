@@ -38,7 +38,7 @@
         }else{
             authcode = [USERDEFAULT valueForKey:@"authcode"];
         }
-    MYLog(@"授权验证码%@",authcode);
+    //MYLog(@"授权验证码%@",authcode);
     
     NSDictionary *params = @{
                              @"requestuserid":requestID,
@@ -50,18 +50,18 @@
                              @"reserved":@""
                              };
     
-    //NSLog(@"请求的参数----:%@", params);
+    NSLog(@"请求的参数----:%@", params);
     
     [manager POST:RootURL parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSError *error;
         NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSUTF8StringEncoding error:&error];
-        NSLog(@"得到的返回---%@",jsonDic);
+        //NSLog(@"得到的返回---%@",jsonDic);
         
         NSString *jsonStr = [NSString stringWithFormat:@"%@",jsonDic];
         NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        //NSLog(@"转成ios的返回--%@", dic);
+        NSLog(@"转成ios的返回--%@", dic);
         BOOL succe = NO;
         //判断md5是不是为约定的来验证返回数据的完整性和有效性
         //MD5(data+SecretKey+result+resultcode+timestamp)，SecretKey由双方约定，为可配置参数，测试环境的SecretKey暂定为：123abc。
@@ -77,7 +77,6 @@
 //                    NSLog(@"返回的%@",dic[@"md5check"]);
             if ([dic[@"md5check"]isEqualToString:md5ReceiveStr]) {
                 succe = YES;
-                
             }else{
                 
             }
