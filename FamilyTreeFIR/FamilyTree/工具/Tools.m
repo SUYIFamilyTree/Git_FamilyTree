@@ -38,6 +38,9 @@ NSString * _Nonnull const kRequestCodeRegister = @"register";
 NSString * _Nonnull const kRequestCodeUpdatePassword = @"updatepswd";
 NSString * _Nonnull const kRequestCodeEditProfile = @"editperinfo";
 NSString * _Nonnull const kRequestCodeBackPassword = @"backpswd";
+NSString * _Nonnull const kRequestCodeGetMemallInfo = @"getmemallinfo";
+
+
 
 //家谱
 NSString * _Nonnull const kRequestCodeCreategen = @"creategen";

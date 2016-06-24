@@ -541,9 +541,12 @@
 		BC2943D61CFEC163006671B9 /* mcGuanli_xinjian.png in Resources */ = {isa = PBXBuildFile; fileRef = BC2943CD1CFEC163006671B9 /* mcGuanli_xinjian.png */; };
 		BC2943D71CFEC163006671B9 /* mcGuanli_xinjian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC2943CE1CFEC163006671B9 /* mcGuanli_xinjian@2x.png */; };
 		BC2943D81CFEC163006671B9 /* mcGuanli_xinjian@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC2943CF1CFEC163006671B9 /* mcGuanli_xinjian@3x.png */; };
+		BC2B1E1C1D1BC301004E916D /* DateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2B1E1B1D1BC301004E916D /* DateModel.m */; };
+		BC2B1E1F1D1BD88E004E916D /* EditPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2B1E1E1D1BD88E004E916D /* EditPasswordViewController.m */; };
 		BC3CF3E81D01318C00437ED6 /* chongZhi_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E51D01318C00437ED6 /* chongZhi_sel.png */; };
 		BC3CF3E91D01318C00437ED6 /* chongZhi_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E61D01318C00437ED6 /* chongZhi_sel@2x.png */; };
 		BC3CF3EA1D01318C00437ED6 /* chongZhi_sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E71D01318C00437ED6 /* chongZhi_sel@3x.png */; };
+		BC458A861D1CC64300AA0DDF /* JobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC458A851D1CC64300AA0DDF /* JobModel.m */; };
 		BC5F150C1D0FF1AD004F3622 /* PersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14DE1D0FF1AD004F3622 /* PersonalCenterViewController.m */; };
 		BC5F150D1D0FF1AD004F3622 /* DrawStarsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14E11D0FF1AD004F3622 /* DrawStarsView.m */; };
 		BC5F150E1D0FF1AD004F3622 /* HeadImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14E31D0FF1AD004F3622 /* HeadImageView.m */; };
@@ -1364,9 +1367,15 @@
 		BC2943CD1CFEC163006671B9 /* mcGuanli_xinjian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mcGuanli_xinjian.png; sourceTree = "<group>"; };
 		BC2943CE1CFEC163006671B9 /* mcGuanli_xinjian@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mcGuanli_xinjian@2x.png"; sourceTree = "<group>"; };
 		BC2943CF1CFEC163006671B9 /* mcGuanli_xinjian@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mcGuanli_xinjian@3x.png"; sourceTree = "<group>"; };
+		BC2B1E1A1D1BC301004E916D /* DateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateModel.h; sourceTree = "<group>"; };
+		BC2B1E1B1D1BC301004E916D /* DateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateModel.m; sourceTree = "<group>"; };
+		BC2B1E1D1D1BD88E004E916D /* EditPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPasswordViewController.h; sourceTree = "<group>"; };
+		BC2B1E1E1D1BD88E004E916D /* EditPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPasswordViewController.m; sourceTree = "<group>"; };
 		BC3CF3E51D01318C00437ED6 /* chongZhi_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chongZhi_sel.png; sourceTree = "<group>"; };
 		BC3CF3E61D01318C00437ED6 /* chongZhi_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chongZhi_sel@2x.png"; sourceTree = "<group>"; };
 		BC3CF3E71D01318C00437ED6 /* chongZhi_sel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chongZhi_sel@3x.png"; sourceTree = "<group>"; };
+		BC458A841D1CC64300AA0DDF /* JobModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobModel.h; sourceTree = "<group>"; };
+		BC458A851D1CC64300AA0DDF /* JobModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobModel.m; sourceTree = "<group>"; };
 		BC5F14DD1D0FF1AD004F3622 /* PersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterViewController.h; sourceTree = "<group>"; };
 		BC5F14DE1D0FF1AD004F3622 /* PersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterViewController.m; sourceTree = "<group>"; };
 		BC5F14E01D0FF1AD004F3622 /* DrawStarsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawStarsView.h; sourceTree = "<group>"; };
@@ -3113,6 +3122,17 @@
 			path = "私人墓园";
 			sourceTree = "<group>";
 		};
+		BC2B1E191D1BC2EE004E916D /* model */ = {
+			isa = PBXGroup;
+			children = (
+				BC2B1E1A1D1BC301004E916D /* DateModel.h */,
+				BC2B1E1B1D1BC301004E916D /* DateModel.m */,
+				BC458A841D1CC64300AA0DDF /* JobModel.h */,
+				BC458A851D1CC64300AA0DDF /* JobModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		BC3CF3E41D01318C00437ED6 /* 充值 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3436,6 +3456,7 @@
 		BC96727A1D10E4B400F60534 /* 个人信息 */ = {
 			isa = PBXGroup;
 			children = (
+				BC2B1E191D1BC2EE004E916D /* model */,
 				BC96727B1D10E4B400F60534 /* view */,
 			);
 			path = "个人信息";
@@ -3450,6 +3471,8 @@
 				BC9672911D11298800F60534 /* EditPersonalInfoTableViewCell.m */,
 				BC65210D1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.h */,
 				BC65210E1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.m */,
+				BC2B1E1D1D1BD88E004E916D /* EditPasswordViewController.h */,
+				BC2B1E1E1D1BD88E004E916D /* EditPasswordViewController.m */,
 				BC9C8E231D13F10B00C445D0 /* CustomPikcerDateView.h */,
 				BC9C8E241D13F10B00C445D0 /* CustomPikcerDateView.m */,
 			);
@@ -4358,6 +4381,7 @@
 				ADA98E9C1D115898005B23EC /* MyFamilyCollectionViewCell.m in Sources */,
 				ADA4C16F1D0E925700CA9067 /* AllGoodsView.m in Sources */,
 				ADC13BA31D1926C7000F901C /* WDetailManagerViewController.m in Sources */,
+				BC458A861D1CC64300AA0DDF /* JobModel.m in Sources */,
 				ADA380661CFC299700B596B7 /* LoginModel.m in Sources */,
 				ADB973501CFEB2D7007B876B /* InputView.m in Sources */,
 				ADD23D091D0D54C2008986F6 /* TeachViewController.m in Sources */,
@@ -4372,6 +4396,7 @@
 				BCCE8A9A1CFFF289005A5E21 /* PublicWorshipView.m in Sources */,
 				AD2ACD7F1CF3FC9C009D4A24 /* RootTabBarViewController.m in Sources */,
 				AD195B381CF5A8D5000E32C7 /* TCJPHTTPRequestManager.m in Sources */,
+				BC2B1E1F1D1BD88E004E916D /* EditPasswordViewController.m in Sources */,
 				ADA98E851D11272F005B23EC /* RollView.m in Sources */,
 				AD7388171CF6C2050076B2AD /* TopSearchView.m in Sources */,
 				BCCE8A911CFFD16E005A5E21 /* CemeterialModel.m in Sources */,
@@ -4393,6 +4418,7 @@
 				ADA4C14F1D0E862900CA9067 /* CemIntroViewController.m in Sources */,
 				AD195B371CF5A8D5000E32C7 /* NSString+md5.m in Sources */,
 				ADB9261F1CF7DF1900AA8B6E /* OtherLoginView.m in Sources */,
+				BC2B1E1C1D1BC301004E916D /* DateModel.m in Sources */,
 				BC2943A01CFE9F30006671B9 /* LineageViewController.m in Sources */,
 				ADA4C1721D0E92DF00CA9067 /* CemSingleGoodsCollectionViewCell.m in Sources */,
 				ADA98E981D11584C005B23EC /* SelectMyFamilyView.m in Sources */,

@@ -52,6 +52,10 @@
 -(void)clickSureEditBtn:(UIButton *)sender{
     MYLog(@"确认修改");
     //上传数据
+    
+    
+    
+    
     [self.navigationController popViewControllerAnimated:YES];
     
 }

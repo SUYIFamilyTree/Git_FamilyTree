@@ -10,6 +10,8 @@
 #import "RootTabBarViewController.h"
 #import "LoginViewController.h"
 #import "TCJPHTTPRequestManager.h"
+#import "JobModel.h"
+
 @interface AppDelegate ()
 
 @end

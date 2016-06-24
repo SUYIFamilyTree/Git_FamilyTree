@@ -18,6 +18,9 @@
 /** 经处理过的家谱数据数组*/
 @property (nonatomic, strong) NSArray *hyjpArrC;
 
+/** 切换家谱标签用于类似按钮操作*/
+@property (nonatomic, strong) UILabel *changeFamilyTreeLB;
+
 /** 当前族谱标签*/
 @property (nonatomic, strong) UILabel *currentFamilyTreeNameLB;
 /** 弹出切换家谱视图*/
@@ -74,14 +77,14 @@
     [self addSubview:self.currentFamilyTreeNameLB];
     
     //切换家谱
-    UILabel *changeFamilyTreeLB = [[UILabel alloc]init];
-    changeFamilyTreeLB.font = MFont(12);
-    changeFamilyTreeLB.text = @"切\n换\n家\n谱";
-    [self labelHeightToFit:changeFamilyTreeLB andFrame:CGRectMake(0.9259*Screen_width, 0.2174*CGRectH(self), 0.0469*Screen_width, 200)];
-    [self addSubview:changeFamilyTreeLB];
+    self.changeFamilyTreeLB = [[UILabel alloc]init];
+    self.changeFamilyTreeLB.font = MFont(12);
+    self.changeFamilyTreeLB.text = @"切\n换\n家\n谱";
+    [self labelHeightToFit:self.changeFamilyTreeLB andFrame:CGRectMake(0.9259*Screen_width, 0.2174*CGRectH(self), 0.0469*Screen_width, 200)];
+    [self addSubview:self.changeFamilyTreeLB];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickChangeFamilyTreeName:)];
-    changeFamilyTreeLB.userInteractionEnabled = YES;
-    [changeFamilyTreeLB addGestureRecognizer:tap];
+    self.changeFamilyTreeLB.userInteractionEnabled = YES;
+    [self.changeFamilyTreeLB addGestureRecognizer:tap];
     
 }
 
@@ -114,18 +117,26 @@
 
 //加载数据
 -(void)reloadData:(NSArray<MemallInfoHyjpModel *> *)hyjpArr{
-    
-    self.hyjpArrC = [self addlineBreaksWithArr:hyjpArr];
-    self.currentFamilyTreeNameLB.text = self.hyjpArrC[0][@"jpname"];
+    if (hyjpArr.count != 0) {
+        self.changeFamilyTreeLB.userInteractionEnabled = YES;
+        self.hyjpArrC = [self addlineBreaksWithArr:hyjpArr];
+        self.currentFamilyTreeNameLB.text = self.hyjpArrC[0][@"jpname"];
+        self.currentFamilyTreeInfoLBsArr[3].text = self.hyjpArrC[0][@"jphyname"];
+        self.currentFamilyTreeInfoLBsArr[2].text = self.hyjpArrC[0][@"jpdai"];
+        self.currentFamilyTreeInfoLBsArr[1].text = self.hyjpArrC[0][@"jpzb"];
+        self.currentFamilyTreeInfoLBsArr[0].text = self.hyjpArrC[0][@"jpph"];
+    }else{
+        self.changeFamilyTreeLB.userInteractionEnabled = NO;
+        self.currentFamilyTreeNameLB.text = @"";
+        self.currentFamilyTreeInfoLBsArr[3].text = @"";        self.currentFamilyTreeInfoLBsArr[2].text = @"";
+        self.currentFamilyTreeInfoLBsArr[1].text = @"";        self.currentFamilyTreeInfoLBsArr[0].text = @"";
+
+    }
     [self labelHeightToFit:self.currentFamilyTreeNameLB andFrame:CGRectMake(0.8113*Screen_width, 0.1674*CGRectH(self), 0.0469*Screen_width, 200)];
-    self.currentFamilyTreeInfoLBsArr[3].text = self.hyjpArrC[0][@"jphyname"];
-    self.currentFamilyTreeInfoLBsArr[2].text = self.hyjpArrC[0][@"jpdai"];
-    self.currentFamilyTreeInfoLBsArr[1].text = self.hyjpArrC[0][@"jpzb"];
-    self.currentFamilyTreeInfoLBsArr[0].text = self.hyjpArrC[0][@"jpph"];
     for (int i = 0; i < 4; i++) {
         [self labelHeightToFit:self.currentFamilyTreeInfoLBsArr[i] andFrame:CGRectMake(0.380*Screen_width+(0.0938*Screen_width+0.0063*Screen_width)*i, 0.1530*CGRectH(self), 0.0938*Screen_width, 200)];
     }
-    
+
     [self.headIV.headInsideIV setImageWithURL:[USERDEFAULT valueForKey:@"MeExtension"] placeholder:[UIImage imageNamed:@"headImage.png"]];
 }
 
@@ -145,6 +156,7 @@
 }
 
 -(void)clickChangeFamilyTreeName:(UILabel *)sender{
+   
     //设置切换家谱弹出动画
     WK(weakSelf);
     if (self.changeFamilyTreeView.frame.size.width == 0) {

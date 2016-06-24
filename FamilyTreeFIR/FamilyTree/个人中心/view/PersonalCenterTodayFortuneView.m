@@ -64,11 +64,18 @@
 -(void)reloadData:(MemallInfoGrysModel *)grys{
     //运势星级
     self.starNumberArr = [NSMutableArray array];
-    [self.starNumberArr addObject:@([grys.all intValue]/20)];
-    [self.starNumberArr addObject:@([grys.love intValue]/20)];
-    [self.starNumberArr addObject:@([grys.work intValue]/20)];
-    [self.starNumberArr addObject:@([grys.money intValue]/20)];
-    [self initFortuneStar];
+    if (grys.all) {
+        [self.starNumberArr addObject:@([grys.all intValue]/20)];
+        [self.starNumberArr addObject:@([grys.love intValue]/20)];
+        [self.starNumberArr addObject:@([grys.work intValue]/20)];
+        [self.starNumberArr addObject:@([grys.money intValue]/20)];
+    }else{
+        [self.starNumberArr addObject:@0];
+        [self.starNumberArr addObject:@0];
+        [self.starNumberArr addObject:@0];
+        [self.starNumberArr addObject:@0];
+    }
+     [self initFortuneStar];
 }
 
 @end

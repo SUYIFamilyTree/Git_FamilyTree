@@ -82,10 +82,6 @@
     bgView.alpha = 0.8;
     [self.view addSubview:bgView];
     
-    //网络请求加载数据加载页面
-    [self getNaviData];
-    [self getMainData];
-    
     //初始化界面
     [self initMainView];
     
@@ -94,14 +90,13 @@
 -(void)getNaviData{
     NSDictionary *logDic = @{@"user":[USERDEFAULT valueForKey:UserAccount],@"pass":[USERDEFAULT valueForKey:UserPassword]};
     WK(weakSelf)
-    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:@"login" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:kRequestCodeLogin success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             weakSelf.loginModel = [LoginModel modelWithJSON:jsonDic[@"data"]];
             //昵称
-            [USERDEFAULT setObject:weakSelf.loginModel.MeNickname forKey:@"MeNickname"];
+            [USERDEFAULT setObject:weakSelf.loginModel.memb.MeNickname forKey:@"MeNickname"];
             //vip等级
-            [USERDEFAULT setObject:@(weakSelf.loginModel.MeViplevel) forKey:@"MeViplevel"];
-            
+            [USERDEFAULT setObject:@(weakSelf.loginModel.memb.MeViplevel) forKey:@"MeViplevel"];
             
             [weakSelf initNaviData];
             [weakSelf.editPersonalInfoView reloadEditPersonalInfoData:weakSelf.loginModel];
@@ -117,12 +112,13 @@
 -(void)getMainData{
     NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
     WK(weakSelf)
-    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getmemallinfo" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetMemallInfo success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        [SXLoadingView showProgressHUD:@"正在加载" duration:0.5];
         if (succe) {
-            //[SXLoadingView showProgressHUD:@"加载成功" duration:0.5];
             weakSelf.memallInfo = [MemallInfoModel modelWithJSON:jsonDic[@"data"]];
             [weakSelf initNaviData];
-            [weakSelf initData];
+            [weakSelf initMainData];
+            [SXLoadingView hideProgressHUD];
         }else{
             [SXLoadingView showProgressHUD:jsonDic[@"message"] duration:0.5];
         }
@@ -149,9 +145,6 @@
 #pragma mark - 视图初始化
 -(void)initNavi{
     self.navigationController.navigationBarHidden = YES;
-    
-//    NSString *title = IsNilString([USERDEFAULT valueForKey:@"MeNickname"])?@"小雪":[USERDEFAULT valueForKey:@"MeNickname"];
-    //NSString *title = [USERDEFAULT valueForKey:@"MeNickname"];
     self.navi = [[CommonNavigationViews alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 64) title:@"" image:MImage(@"chec")];
     self.navi.leftBtn.hidden = YES;
     UIButton *personalInfoEditBtn = [[UIButton alloc]initWithFrame:CGRectMake(10, 30, 20, 20)];
@@ -218,7 +211,7 @@
     [self.vipBtn setTitle:vipLevelStr forState:UIControlStateNormal];
 }
 //主界面数据刷新
--(void)initData{
+-(void)initMainData{
     //让金额为登录请求返回的值
     self.headerView.money =  [[USERDEFAULT valueForKey:@"MeBalance"] doubleValue];
     self.headerView.sameCityMoney = [[USERDEFAULT valueForKey:@"MeIntegral"] intValue];
@@ -238,10 +231,66 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = YES;
+    //界面出现就重新加载数据
     [self getMainData];
     [self getNaviData];
+}
+
+//点击个人信息编辑
+-(void)clickPersonalInfoBtn:(UIButton *)sender{
+    sender.selected = !sender.selected;
+    MYLog(@"点击个人信息编辑");
+    WK(weakSelf)
+    if (!sender.selected) {
+        [UIView animateWithDuration:0.5 animations:^{
+            weakSelf.editPersonalInfoView.frame = CGRectMake(0,64,0,Screen_height-49-64);
+        }];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf.editPersonalInfoView removeFromSuperview];
+        });
+        
+    }
+    
+    
+    NSDictionary *logDic = @{@"user":[USERDEFAULT valueForKey:UserAccount],@"pass":[USERDEFAULT valueForKey:UserPassword]};
+    
+    if (sender.selected) {
+        
+        [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:kRequestCodeLogin success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+            if (succe) {
+                weakSelf.loginModel = [LoginModel modelWithJSON:jsonDic[@"data"]];
+                weakSelf.editPersonalInfoView = [[EditPersonalInfoView alloc]initWithFrame:CGRectMake(0, 64, 0, Screen_height-49-64)];
+                [self.view addSubview:self.editPersonalInfoView];
+                [weakSelf.editPersonalInfoView reloadEditPersonalInfoData:weakSelf.loginModel];
+                
+                [UIView animateWithDuration:0.5 animations:^{
+                    weakSelf.editPersonalInfoView.frame = CGRectMake(0, 64, Screen_width, Screen_height-49-64);
+                }];
+                
+            }else{
+                
+            }
+        } failure:^(NSError *error) {
+            MYLog(@"失败---%@",error.description);
+        }];
+        
+    };
     
 }
+
+//点击vip按钮
+-(void)clickVipBtn:(UIButton *)sender{
+    MYLog(@"点击vip");
+    sender.selected = !sender.selected;
+    if (sender.selected == YES) {
+        [self.view addSubview:self.vipView];
+    }else{
+        [self.vipView removeFromSuperview];
+    }
+}
+
+
+
 
 
 #pragma mark - UITableViewDataSource
@@ -254,7 +303,6 @@
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-//    cell.textLabel.text = self.familyTreeNewsArr[indexPath.row];
     cell.textLabel.text = self.memallInfo.jzdt[indexPath.row].artitle;
     cell.textLabel.font = MFont(12);
     cell.backgroundColor = [UIColor clearColor];
@@ -283,12 +331,6 @@
     return _scrollView;
 }
 
-//-(NSArray *)familyTreeNewsArr{
-//    if (!_familyTreeNewsArr) {
-//        _familyTreeNewsArr = @[@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会",@"怀宁陈氏，5月31日举办认亲大会"];
-//    }
-//    return _familyTreeNewsArr;
-//}
 
 -(VIPView *)vipView{
     if (!_vipView) {
@@ -298,44 +340,10 @@
     return _vipView;
 }
 
--(EditPersonalInfoView *)editPersonalInfoView{
-    if (!_editPersonalInfoView) {
-        _editPersonalInfoView = [[EditPersonalInfoView alloc]initWithFrame:CGRectMake(0, 64, 0, Screen_height-49-64)];
-    }
-    return _editPersonalInfoView;
-}
 
 
-//点击个人信息编辑
--(void)clickPersonalInfoBtn:(UIButton *)sender{
-    MYLog(@"点击个人信息编辑");
-    WK(weakSelf);
-    [self.editPersonalInfoView reloadEditPersonalInfoData:weakSelf.loginModel];
-    if (self.editPersonalInfoView.frame.size.width == 0) {
-        [UIView animateWithDuration:0.5 animations:^{
-            [weakSelf.view addSubview:weakSelf.editPersonalInfoView];
-            weakSelf.editPersonalInfoView.frame = CGRectMake(0, 64, Screen_width, Screen_height-49-64);
-        }];
-    }else{
-        [UIView animateWithDuration:0.5 animations:^{
-            weakSelf.editPersonalInfoView.frame = CGRectMake(0,64,0,Screen_height-49-64);
-        }];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf.editPersonalInfoView removeFromSuperview];
-        });
-    }
-}
 
-//点击vip按钮
--(void)clickVipBtn:(UIButton *)sender{
-    MYLog(@"点击vip");
-    sender.selected = !sender.selected;
-    if (sender.selected == YES) {
-        [self.view addSubview:self.vipView];
-    }else{
-        [self.vipView removeFromSuperview];
-    }
-}
+
 
 
 #pragma mark - PersonalCenterHeaderViewDelegate
