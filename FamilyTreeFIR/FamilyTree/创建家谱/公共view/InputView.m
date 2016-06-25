@@ -28,7 +28,9 @@
         _length = length;
         _dataArr = dataArr;
         
-        
+        self.layer.borderWidth = 1.0f;
+        self.layer.borderColor = BorderColor;
+        self.backgroundColor = [UIColor whiteColor];
         self.frame = frame;
         
         [self addSubview:self.inputLabel];
@@ -61,7 +63,7 @@
     
     if (_isSelectedBtn) {
         
-        
+        self.backScroView.backgroundColor = [UIColor whiteColor];
         
 //        [UIView animateWithDuration:0.3f animations:^{
         self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _length, ((1+_dataArr.count)>4?4:(1+_dataArr.count))*(Input_height-10));
@@ -71,10 +73,9 @@
         
             for (int idx = 0; idx<_dataArr.count; idx++) {
                 
-                UILabel *seleclabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (idx)*(Input_height-10), _length,Input_height-10)];
+                UILabel *seleclabel = [[UILabel alloc] initWithFrame:CGRectMake(20*AdaptationWidth(), (idx)*(Input_height-10), _length,Input_height-10)];
                 seleclabel.textColor = [UIColor blackColor];
-                seleclabel.backgroundColor = [UIColor whiteColor];
-                seleclabel.text = [NSString stringWithFormat:@"  %@",_dataArr[idx]];
+                seleclabel.text = [NSString stringWithFormat:@"%@",_dataArr[idx]];
                 seleclabel.userInteractionEnabled = YES;
                 seleclabel.font = WFont(35);
                 
@@ -84,15 +85,12 @@
                 
                 
                 [seleclabel addGestureRecognizer:tapGes];
-                
-                
+     
                 
                 [self.backScroView addSubview:seleclabel];
                 [self addSubview:self.backScroView];
                 
             }
-
-        //        }];
     }else{
 //        [UIView animateWithDuration:0.3f animations:^{
             self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _length, Input_height);
@@ -100,7 +98,9 @@
             [self.backScroView.subviews enumerateObjectsUsingBlock:^(UILabel* obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     [obj removeFromSuperview];
             }];
-            
+        
+        self.backScroView.backgroundColor = [UIColor clearColor];
+        
 //        }];
         
     }
@@ -114,9 +114,9 @@
 
 -(UILabel *)inputLabel{
     if (!_inputLabel) {
-        _inputLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,_length , Input_height)];
-        _inputLabel.layer.borderWidth = 1.0f;
-        _inputLabel.layer.borderColor = BorderColor;
+        _inputLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0,_length-20*AdaptationWidth() , Input_height)];
+//        _inputLabel.layer.borderWidth = 1.0f;
+//        _inputLabel.layer.borderColor = BorderColor;
         _inputLabel.backgroundColor = [UIColor whiteColor];
         _inputLabel.textColor = [UIColor blackColor];
         _inputLabel.userInteractionEnabled  = YES;
@@ -135,6 +135,7 @@
         _backScroView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, (Input_height-10), _length, (Input_height-10)*3)];
         _backScroView.bounces = true;
         _backScroView.contentSize = CGSizeMake(_length, (Input_height-10)*_dataArr.count);
+        _backScroView.backgroundColor = [UIColor whiteColor];
         
     }
     return _backScroView;

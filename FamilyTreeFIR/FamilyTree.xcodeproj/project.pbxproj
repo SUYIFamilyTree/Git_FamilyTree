@@ -161,6 +161,7 @@
 		AD7388631CF6C5AF0076B2AD /* lunbo_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD73883C1CF6C5AF0076B2AD /* lunbo_bg@3x.png */; };
 		AD73886A1CF6E0090076B2AD /* CollectionFamilyView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7388691CF6E0090076B2AD /* CollectionFamilyView.m */; };
 		AD73886D1CF6E4860076B2AD /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD73886C1CF6E4860076B2AD /* CustomCollectionViewCell.m */; };
+		AD8C61E11D1E54A2005CDA68 /* WTools.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8C61E01D1E54A2005CDA68 /* WTools.m */; };
 		AD8DAAC81CFD6492009B7958 /* ci.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8DAAB31CFD6492009B7958 /* ci.png */; };
 		AD8DAAC91CFD6492009B7958 /* ci@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8DAAB41CFD6492009B7958 /* ci@2x.png */; };
 		AD8DAACA1CFD6492009B7958 /* ci@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8DAAB51CFD6492009B7958 /* ci@3x.png */; };
@@ -909,6 +910,8 @@
 		AD7388691CF6E0090076B2AD /* CollectionFamilyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionFamilyView.m; sourceTree = "<group>"; };
 		AD73886B1CF6E4860076B2AD /* CustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCollectionViewCell.h; sourceTree = "<group>"; };
 		AD73886C1CF6E4860076B2AD /* CustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCollectionViewCell.m; sourceTree = "<group>"; };
+		AD8C61DF1D1E54A2005CDA68 /* WTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTools.h; sourceTree = "<group>"; };
+		AD8C61E01D1E54A2005CDA68 /* WTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTools.m; sourceTree = "<group>"; };
 		AD8DAAB31CFD6492009B7958 /* ci.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ci.png; sourceTree = "<group>"; };
 		AD8DAAB41CFD6492009B7958 /* ci@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ci@2x.png"; sourceTree = "<group>"; };
 		AD8DAAB51CFD6492009B7958 /* ci@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ci@3x.png"; sourceTree = "<group>"; };
@@ -1751,6 +1754,8 @@
 				AD2ACD8E1CF3FE5E009D4A24 /* Tools.m */,
 				ADAB7E101CF4050B00C3C143 /* DefineHeader.h */,
 				AD195B2C1CF5A81A000E32C7 /* Custom.h */,
+				AD8C61DF1D1E54A2005CDA68 /* WTools.h */,
+				AD8C61E01D1E54A2005CDA68 /* WTools.m */,
 			);
 			path = "工具";
 			sourceTree = "<group>";
@@ -4325,6 +4330,7 @@
 				BC5F15131D0FF1AD004F3622 /* PersonalCenterNumerologyView.m in Sources */,
 				BCE2AD541CF8339000EC98F5 /* FamilyTreeTopView.m in Sources */,
 				BCF100051D02B11400D65E60 /* CALayer+drawborder.m in Sources */,
+				AD8C61E11D1E54A2005CDA68 /* WTools.m in Sources */,
 				AD8DAAE01CFD7533009B7958 /* FamilyHelpViewController.m in Sources */,
 				BC5F15181D0FF1AD004F3622 /* RechargeViewController.m in Sources */,
 				ADA98E741D10F5EF005B23EC /* FamilyNamesViewController.m in Sources */,

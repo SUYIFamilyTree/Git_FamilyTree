@@ -75,7 +75,7 @@
 -(InputView *)sexInView{
     if (!_sexInView) {
         _sexInView = [[InputView alloc] initWithFrame:CGRectMake(20, CGRectYH(self.fatheView)+GapOfView, 50, InputView_height) Length:50 withData:@[@"男",@"女"]];
-        _sexInView.inputLabel.text = @"  男";
+        _sexInView.inputLabel.text = @"男";
         
     }
     return _sexInView;

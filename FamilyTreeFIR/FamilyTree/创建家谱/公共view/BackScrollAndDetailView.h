@@ -59,6 +59,9 @@
 
 @property (nonatomic,strong) UITextField *moveCity; /*迁移者居住地*/
 
+@property (nonatomic,strong) NSMutableArray *gennerNexArr; /*字辈arr*/
+
+
 @property (nonatomic,weak) id<BackScrollAndDetailViewDelegate> delegate; /*代理人*/
 
 

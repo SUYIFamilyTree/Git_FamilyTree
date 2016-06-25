@@ -58,6 +58,7 @@
 #import "TCJPHTTPRequestManager.h"
 #import "SXLoadingView.h"
 //工具
+#import "WTools.h"
 #import "Tools.h"
 #import "Custom.h"
 #import <YYKit.h>

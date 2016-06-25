@@ -1,11 +1,11 @@
+//////
+//////  LYFoundation+Log.m
+//////  DownLoader
+//////
+//////  Created by yangjingkai on 16/6/12.
+//////  Copyright © 2016年 chai. All rights reserved.
+//////
 ////
-////  LYFoundation+Log.m
-////  DownLoader
-////
-////  Created by yangjingkai on 16/6/12.
-////  Copyright © 2016年 chai. All rights reserved.
-////
-//
 //#import <Foundation/Foundation.h>
 //
 //@implementation NSDictionary (Log)

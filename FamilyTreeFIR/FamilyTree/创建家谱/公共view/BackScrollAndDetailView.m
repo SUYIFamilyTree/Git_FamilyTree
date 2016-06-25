@@ -18,7 +18,6 @@ enum{
 
 @interface BackScrollAndDetailView()<InputViewDelegate,UITextFieldDelegate>
 
-@property (nonatomic,strong) NSMutableArray *gennerNexArr; /*字辈arr*/
 
 @end
 
@@ -175,7 +174,7 @@ enum{
     [self.backView addSubview:theLabel];
     
     InputView *inputView = [[InputView alloc] initWithFrame:CGRectMake(CGRectXW(theLabel), theLabel.frame.origin.y, length+10, InputView_height) Length:length+10 withData:dataArr];
-    inputView.inputLabel.text = [NSString stringWithFormat:@"  %@",labelText];
+    inputView.inputLabel.text = [NSString stringWithFormat:@"%@",labelText];
 
     UILabel *finLabel = [UILabel new];
     finLabel.text = finStr;
@@ -196,24 +195,24 @@ enum{
 
 
 #pragma mark *** InputViewDelegate ***
-
+//选择完是否健在，字辈代数之后的判断
 -(void)InputView:(InputView *)inputView didFinishSelectLabel:(UILabel *)inputLabel{
     
     if (inputView == self.liveNowLabel) {
         
-        if ([self.liveNowLabel.inputLabel.text isEqualToString:@"  否"]) {
+        if ([self.liveNowLabel.inputLabel.text isEqualToString:@"是"]) {
             
-            self.selfYear.inputLabel.text = @"  ----";
-            self.selfMonth.inputLabel.text = @"  --";
-            self.selfDay.inputLabel.text = @"  --";
+            self.selfYear.inputLabel.text = @"----";
+            self.selfMonth.inputLabel.text = @"--";
+            self.selfDay.inputLabel.text = @"--";
             self.selfYear.userInteractionEnabled = false;
             self.selfMonth.userInteractionEnabled = false;
             self.selfDay.userInteractionEnabled = false;
             
         }else{
-            self.selfYear.inputLabel.text = @"  1990";
-            self.selfMonth.inputLabel.text = @"  01";
-            self.selfDay.inputLabel.text = @"  01";
+            self.selfYear.inputLabel.text = @"1990";
+            self.selfMonth.inputLabel.text = @"01";
+            self.selfDay.inputLabel.text = @"01";
             self.selfYear.userInteractionEnabled = true;
             self.selfMonth.userInteractionEnabled = true;
             self.selfDay.userInteractionEnabled = true;
@@ -221,7 +220,7 @@ enum{
         
     }else if (inputView == self.generationLabel){
         
-        NSString *str2=[self.generationLabel.inputLabel.text substringFromIndex:2];
+        NSString *str2=[self.generationLabel.inputLabel.text substringFromIndex:0];
         NSUInteger index =  [self.generationLabel.dataArr indexOfObject:str2];
 
         self.gennerationNex.text = self.gennerNexArr[index];
@@ -231,14 +230,12 @@ enum{
 }
 
 #pragma mark *** UITextFieldDelegate ***
-
+//结束编辑 将字辈str放入数组
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     
-    NSString *str2=[self.generationLabel.inputLabel.text substringFromIndex:2];
+    NSString *str2=[self.generationLabel.inputLabel.text substringFromIndex:0];
     NSUInteger index =  [self.generationLabel.dataArr indexOfObject:str2];
-    NSLog(@"%@--%ld", str2,index);
     [self.gennerNexArr replaceObjectAtIndex:index withObject:self.gennerationNex.text];
-    NSLog(@"%@", self.gennerNexArr);
 
 }
 
@@ -261,6 +258,10 @@ enum{
         default:
             break;
     }
+}
+
+-(void)resignKerborad{
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
 
 #pragma mark *** getters ***
@@ -289,6 +290,11 @@ enum{
     if (!_whiteBack) {
         _whiteBack = [[UIView alloc] initWithFrame:CGRectMake(10, 15, Screen_width-20, ScrollContentHeight-40-50-64)];
         _whiteBack.backgroundColor = [UIColor colorWithWhite:1 alpha:0.7];
+        _whiteBack.userInteractionEnabled = YES;
+        
+        //点击收键盘手势
+        UITapGestureRecognizer *tapG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignKerborad)];
+        [_whiteBack addGestureRecognizer:tapG];
         
         UILabel *redLabel = [UILabel new];
         redLabel.font  = MFont(13);
@@ -311,7 +317,7 @@ enum{
 -(InputView *)birtime{
     if (!_birtime) {
         _birtime = [[InputView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.birthLabel.frame), CGRectYH(self.birthLabel)+GapOfView, 0.34*Screen_width, InputView_height) Length:0.34*Screen_width withData:@[@"0:00-2:00",@"2:00-4:00",@"4:00-6:00",@"6:00-8:00",@"8:00-10:00",@"10:00-12:00",@"12:00-14:00",@"14:00-16:00",@"16:00-18:00",@"18:00-20:00",@"20:00-22:00",@"22:00-00:00"]];
-        _birtime.inputLabel.text = @"  8:00-10:00";
+        _birtime.inputLabel.text = @"8:00-10:00";
         UILabel *starLabel = [UILabel new];
         starLabel.font = MFont(16);
         starLabel.text = @"*";
@@ -335,7 +341,7 @@ enum{
         
         _inputView = [[InputView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(theLabel.frame), theLabel.frame.origin.y, 70, InputView_height) Length:50 withData:@[@"是",@"否"]];
         _inputView.inputLabel.backgroundColor = [UIColor whiteColor];
-        _inputView.inputLabel.text = @"  否";
+        _inputView.inputLabel.text = @"否";
         
     }
     return _inputView;

@@ -87,7 +87,7 @@
 -(InputView *)sexInpuView{
     if (!_sexInpuView) {
         _sexInpuView = [[InputView alloc] initWithFrame:CGRectMake(20, CGRectYH(self.famfarName)+GapOfView*3+InputView_height*2, 50, InputView_height) Length:50 withData:@[@"男",@"女"]];
-        _sexInpuView.inputLabel.text = @"  男";
+        _sexInpuView.inputLabel.text = @"男";
         
     }
     return _sexInpuView;
@@ -104,5 +104,6 @@
     }
     return _famousPerson;
 }
+
 
 @end
