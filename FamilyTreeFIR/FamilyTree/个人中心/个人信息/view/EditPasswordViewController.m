@@ -47,7 +47,7 @@
     self.oldPasswordTX.text = self.TFStr;
     self.oldPasswordTX.layer.borderColor = LH_RGBCOLOR(219, 219, 219).CGColor;
     self.oldPasswordTX.layer.borderWidth = 1;
-    self.oldPasswordTX.userInteractionEnabled = NO;
+    self.oldPasswordTX.secureTextEntry = YES;
     [self.bgView addSubview:self.oldPasswordTX];
     
     self.nPasswordTX = [[UITextField alloc]initWithFrame:CGRectMake(0.3*CGRectW(self.bgView), 0.05*CGRectH(self.bgView)+0.2*CGRectH(self.bgView), 0.6*CGRectW(self.bgView), 0.15*CGRectH(self.bgView))];
@@ -75,12 +75,28 @@
 
 -(void)clickSureEditBtn:(UIButton *)sender{
     MYLog(@"确认修改");
-    if ([self.nPasswordTX.text isEqualToString:self.surePasswordTX.text]) {
-        [self.navigationController popViewControllerAnimated:YES];
-        //上传数据
-        
-    }else{
+    if (![self.oldPasswordTX.text isEqualToString:[USERDEFAULT valueForKey:UserPassword]]) {
+        [SXLoadingView showProgressHUD:@"旧密码输入错误" duration:1];
+    }else if(![self.nPasswordTX.text isEqualToString:self.surePasswordTX.text]) {
         [SXLoadingView showAlertHUD:@"两次输入密码不一致" duration:1];
+    }else{
+        //上传数据
+        NSDictionary *logDic = @{
+                                 @"user":[USERDEFAULT valueForKey:UserAccount],
+                                 @"password":[USERDEFAULT valueForKey:UserPassword],
+                                 @"newpass":self.nPasswordTX.text
+                                 };
+        WK(weakSelf);
+        [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeUpdatepswd success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+            if (succe) {
+                //[SXLoadingView showAlertHUD:@"更改成功" duration:0.5];
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+            }else{
+                
+            }
+        } failure:^(NSError *error) {
+            MYLog(@"失败---%@",error.description);
+        }];
     }
     
     

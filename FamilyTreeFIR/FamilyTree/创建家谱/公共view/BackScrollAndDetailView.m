@@ -289,7 +289,6 @@ enum{
     if (!_whiteBack) {
         _whiteBack = [[UIView alloc] initWithFrame:CGRectMake(10, 15, Screen_width-20, ScrollContentHeight-40-50-64)];
         _whiteBack.backgroundColor = [UIColor colorWithWhite:1 alpha:0.7];
-        
         UILabel *redLabel = [UILabel new];
         redLabel.font  = MFont(13);
         redLabel.textColor = [UIColor redColor];

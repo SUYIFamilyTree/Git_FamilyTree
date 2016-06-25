@@ -13,7 +13,7 @@
 #import "CustomPikcerDateView.h"
 #import "DateModel.h"
 
-@interface EditPersonalInfoView()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,EditPersonalInfoTableViewCellDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CustomPikcerDateViewDelegate>
+@interface EditPersonalInfoView()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,EditPersonalInfoTableViewCellDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CustomPikcerDateViewDelegate,EditPersonalInfoDetailViewControllerDelegate>
 /** 滚动背景图*/
 @property (nonatomic, strong) UIImageView *BgIV;
 /** 左侧一根线*/
@@ -28,17 +28,11 @@
 @property (nonatomic, strong) UITableView *accountInfoTB;
 /** 个人信息表*/
 @property (nonatomic, strong) UITableView *personalInfoTB;
-/** 个人信息模型*/
-@property (nonatomic, strong) QueryModel *queryModel;
 
 /** 账户信息标题数组*/
 @property (nonatomic, copy) NSArray *accountInfoTitleArr;
-/** 账户信息详细数组*/
-@property (nonatomic, strong) NSMutableArray *accountInfoDetailArr;
 /** 个人信息标题数组*/
 @property (nonatomic, copy) NSArray *personalInfoTitleArr;
-/** 个人信息详细数组*/
-@property (nonatomic, strong) NSMutableArray *personalInfoDetailArr;
 /** 爱好选择标题数组*/
 @property (nonatomic, copy) NSArray *interestTitleArr;
 /** 国籍*/
@@ -80,7 +74,6 @@
         //账户信息表
         [self initAccountInfoTB];
         //个人信息表
-//        self.personalInfoDetailArr = [NSMutableArray arrayWithObjects:@"陈安一",@"阿一",@"中国",@"安徽-怀宁",@"男",@"1999年09月09日09时",@"身份证",@"******",@"律师",@"本科",@"",@"(空)",@"(空)", nil];
         [self initPersonalInfoTB];
     }
     return self;
@@ -118,13 +111,6 @@
     }
     return _accountInfoTitleArr;
 }
-
-//-(NSArray *)accountInfoDetailArr{
-//    if (!_accountInfoDetailArr) {
-//        _accountInfoDetailArr = @[@"001021",@"ay001",@"******",@"158****8888",@"client@tcjp.com"];
-//    }
-//    return _accountInfoDetailArr;
-//}
 
 -(NSArray *)personalInfoTitleArr{
     if (!_personalInfoTitleArr) {
@@ -168,13 +154,6 @@
     }
     return _documentCategoryArr;
 }
-
-//-(NSArray *)jobArr{
-//    if (!_jobArr) {
-//        _jobArr = @[@"律师",@"教师",@"警察"];
-//    }
-//    return _jobArr;
-//}
 
 -(NSArray *)jobArr{
     if (!_jobArr) {
@@ -238,36 +217,32 @@
 
 #pragma mark - 数据加载
 -(void)reloadEditPersonalInfoData:(QueryModel *)queryModel{
-    self.queryModel = queryModel;
     self.accountInfoDetailArr = [NSMutableArray array];
-    
-    [self.accountInfoDetailArr addObject:[NSString stringWithFormat:@"%ld",self.queryModel.memb.MeId]];
-    [self.accountInfoDetailArr addObject:self.queryModel.memb.MeAccount];
+    [self.accountInfoDetailArr addObject:[NSString stringWithFormat:@"%ld",queryModel.memb.MeId]];
+    [self.accountInfoDetailArr addObject:queryModel.memb.MeAccount];
     [self.accountInfoDetailArr addObject:@"******"];
-    [self.accountInfoDetailArr addObject: [self getLockMobileWithString:self.queryModel.memb.MeMobile]];
-    [self.accountInfoDetailArr addObject:self.queryModel.memb.MeEmail];
+    [self.accountInfoDetailArr addObject: [self getLockMobileWithString:queryModel.memb.MeMobile]];
+    [self.accountInfoDetailArr addObject:queryModel.memb.MeEmail];
     
-
-    //        self.personalInfoDetailArr = [NSMutableArray arrayWithObjects:@"陈安一",@"阿一",@"中国",@"安徽-怀宁",@"男",@"1999年09月09日09时",@"身份证",@"******",@"律师",@"本科",@"",@"(空)",@"(空)", nil];
-#warning 待接口格式更改接入
-        self.personalInfoDetailArr = [NSMutableArray array];
-        [self.personalInfoDetailArr addObject:self.queryModel.memb.MeName];
-        [self.personalInfoDetailArr addObject:self.queryModel.memb.MeNickname];
     
-        [self.personalInfoDetailArr addObject:@"中国"];
-        [self.personalInfoDetailArr addObject:@"安徽-怀宁"];
-    [self.personalInfoDetailArr addObject:@[@"女",@"男",@"保密"][[self.queryModel.memb.MeSex intValue]]];
-    DateModel *dateModel = [[DateModel alloc]initWithDateStr:self.queryModel.memb.MeBirthday];
+    self.personalInfoDetailArr = [NSMutableArray array];
+    [self.personalInfoDetailArr addObject:queryModel.memb.MeName];
+    [self.personalInfoDetailArr addObject:queryModel.memb.MeNickname];
+#warning 待接口更改
+    //[self.personalInfoDetailArr addObject:queryModel.area.AreaCountry];
+    [self.personalInfoDetailArr addObject:@"中国"];
+    [self.personalInfoDetailArr addObject:[NSString stringWithFormat:@"%@-%@",queryModel.area.AreaProvince,queryModel.area.AreaCity]];
+    [self.personalInfoDetailArr addObject:@[@"女",@"男",@"保密"][[queryModel.memb.MeSex intValue]]];
+    DateModel *dateModel = [[DateModel alloc]initWithDateStr:queryModel.memb.MeBirthday];
     NSString *MeBirthdayStr = [NSString stringWithFormat:@"%04ld年%02ld月%02ld日%02ld时",dateModel.year,dateModel.month,dateModel.day,dateModel.hour];
     [self.personalInfoDetailArr addObject:MeBirthdayStr];
-    [self.personalInfoDetailArr addObject:self.queryModel.memb.MeCertype];
-    [self.personalInfoDetailArr addObject:@"******"];
-    [self.personalInfoDetailArr addObject:@"律师"];
-    [self.personalInfoDetailArr addObject:@"本科"];
+    [self.personalInfoDetailArr addObject:queryModel.memb.MeCertype];
+    [self.personalInfoDetailArr addObject:IsNilString(queryModel.memb.MeCardnum) ?@"":@"******"];
+    [self.personalInfoDetailArr addObject:queryModel.kzxx.Grzy];
+    [self.personalInfoDetailArr addObject:queryModel.kzxx.Grxl];
     [self.personalInfoDetailArr addObject:@""];
-    [self.personalInfoDetailArr addObject:@"(空)"];
-    [self.personalInfoDetailArr addObject:@"(空)"];
-   
+    [self.personalInfoDetailArr addObject:queryModel.kzxx.Grqm];
+    [self.personalInfoDetailArr addObject:queryModel.kzxx.Grjl];
 }
 
 #pragma mark - ScrollViewDelegate
@@ -301,12 +276,12 @@
             }else{
                 accountInfoCell = [[EditPersonalInfoTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"accoutInfoCell" WithCustomStyle:EditPersonalInfoTableViewCellStyleEdit];
             }
-            accountInfoCell.customTitleLB.text = [self.accountInfoTitleArr[indexPath.row] stringByAppendingString:@":"];
-            [self labelWidthToFit:accountInfoCell.customTitleLB andFrame:CGRectMake(8, 0, 100, 26)];
-            accountInfoCell.customDetailLB.text = self.accountInfoDetailArr[indexPath.row];
-                        accountInfoCell.delegate = self;
-            accountInfoCell.editBtn.tag = 333+indexPath.row;
         }
+        accountInfoCell.customTitleLB.text = [self.accountInfoTitleArr[indexPath.row] stringByAppendingString:@":"];
+        [self labelWidthToFit:accountInfoCell.customTitleLB andFrame:CGRectMake(8, 0, 100, 26)];
+        accountInfoCell.customDetailLB.text = self.accountInfoDetailArr[indexPath.row];
+        accountInfoCell.delegate = self;
+        accountInfoCell.editBtn.tag = 333+indexPath.row;
         return accountInfoCell;
     }
     
@@ -402,22 +377,23 @@
 
 #pragma mark - EditPersonalInfoTableViewCellDelegate
 -(void)respondToEditBtn:(UIButton *)sender{
+    EditPersonalInfoDetailViewController *editDetaiVC = [[EditPersonalInfoDetailViewController alloc]init];
     if (sender.tag-333 == 2) {
         EditPasswordViewController *editPasswordVC = [[EditPasswordViewController alloc]init];
         editPasswordVC.detailStr = self.accountInfoTitleArr[sender.tag-333];
-        editPasswordVC.TFStr = self.accountInfoDetailArr[sender.tag-333];
+        //editPasswordVC.TFStr = self.accountInfoDetailArr[sender.tag-333];
         [[self viewController].navigationController pushViewController:editPasswordVC animated:NO];
     }else if(sender.tag < 444){
         MYLog(@"%ld",sender.tag-333);
-        EditPersonalInfoDetailViewController *editDetaiVC = [[EditPersonalInfoDetailViewController alloc]init];
         editDetaiVC.detailStr = self.accountInfoTitleArr[sender.tag-333];
         editDetaiVC.TFStr = self.accountInfoDetailArr[sender.tag-333];
+        editDetaiVC.delegate = self;
         [[self viewController].navigationController pushViewController:editDetaiVC animated:NO];
     }else{
         MYLog(@"%ld",sender.tag-444);
-        EditPersonalInfoDetailViewController *editDetaiVC = [[EditPersonalInfoDetailViewController alloc]init];
         editDetaiVC.detailStr = self.personalInfoTitleArr[sender.tag-444];
         editDetaiVC.TFStr = self.personalInfoDetailArr[sender.tag-444];
+        editDetaiVC.delegate = self;
         [[self viewController].navigationController pushViewController:editDetaiVC animated:NO];
         
     }
@@ -495,13 +471,7 @@
         tipLabel.text = @"(具体时辰请采用进一法)";
         tipLabel.font = MFont(12);
         [pickerViewTitleView addSubview:tipLabel];
-//        //确定按钮
-//        UIButton *sureBtn = [[UIButton alloc]initWithFrame:CGRectMake(Screen_width/5*4, 0, Screen_width/5, 0.0455*Screen_height-1)];
-//        sureBtn.backgroundColor = [UIColor whiteColor];
-//        [sureBtn setTitle:@"确定" forState:UIControlStateNormal];
-//        [sureBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//        [sureBtn addTarget:self action:@selector(birthdayChanged) forControlEvents:UIControlEventTouchUpInside];
-//        [pickerViewTitleView addSubview:sureBtn];
+
     }
 }
 
@@ -633,6 +603,36 @@
     [tableView reloadData];
     
 }
+
+#pragma mark - EditPersonalInfoDetailViewControllerDelegate
+-(void)EditPersonalInfoDetailViewController:(EditPersonalInfoDetailViewController *)editVC withTitle:(NSString *)title withDetail:(NSString *)detail{
+    MYLog(@"%@",title);
+    if ([title isEqualToString:@"手机"]) {
+        self.accountInfoDetailArr[3] = detail;
+        [self.accountInfoTB reloadData];
+
+    }
+    if ([title isEqualToString:@"邮箱"]) {
+        self.accountInfoDetailArr[4] = detail;
+        [self.accountInfoTB reloadData];
+    }
+    
+    if ([title isEqualToString:@"姓名"]) {
+        self.personalInfoDetailArr[0] = detail;
+        [self.personalInfoTB reloadData];
+    }
+    if ([title isEqualToString:@"昵称"]) {
+        self.personalInfoDetailArr[1] = detail;
+        [self.personalInfoTB reloadData];
+    }
+    if ([title isEqualToString:@"证件末6位"]) {
+        self.personalInfoDetailArr[7] = detail;
+        [self.personalInfoTB reloadData];
+    }
+    
+}
+
+
 
 #pragma mark - 点击方法
 //点击爱好

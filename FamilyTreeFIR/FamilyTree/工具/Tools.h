@@ -43,7 +43,7 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetMemallInfo;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeQueryMem;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeQuerygendata;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetsyntype;
-
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeUpdatepswd;
 /**
  *  弹出框自动消失
  *

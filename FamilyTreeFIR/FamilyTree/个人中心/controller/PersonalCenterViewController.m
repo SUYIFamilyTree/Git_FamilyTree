@@ -86,18 +86,19 @@
     //初始化界面
     [self initMainView];
     
+    [SXLoadingView showProgressHUD:@"正在加载数据" duration:0.5];
+    
 }
 
 -(void)getNaviData{
-    MYLog(@"请求个人信息");
     NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
     WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeQueryMem success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-            MYLog(@"%@",jsonDic[@"data"]);
+            //MYLog(@"%@",jsonDic[@"data"]);
             weakSelf.queryModel = [QueryModel modelWithJSON:jsonDic[@"data"]];
             [weakSelf initNaviData];
-            [weakSelf.editPersonalInfoView reloadEditPersonalInfoData:weakSelf.queryModel];
+            
         }else{
             MYLog(@"%@",jsonDic[@"message"]);
         }
@@ -111,7 +112,6 @@
     NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
     WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetMemallInfo success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        [SXLoadingView showProgressHUD:@"正在加载" duration:0.5];
         if (succe) {
             weakSelf.memallInfo = [MemallInfoModel modelWithJSON:jsonDic[@"data"]];
             [weakSelf initNaviData];
@@ -207,6 +207,8 @@
     self.navi.titleLabel.text = self.queryModel.memb.MeNickname;
     NSString *vipLevelStr = [NSString stringWithFormat:@"VIP%@",@(self.queryModel.memb.MeViplevel)];
     [self.vipBtn setTitle:vipLevelStr forState:UIControlStateNormal];
+    self.headerView.money = (double)self.queryModel.memb.MeBalance;
+    self.headerView.sameCityMoney = self.queryModel.memb.MeIntegral;
 }
 //主界面数据刷新
 -(void)initMainData{
@@ -240,19 +242,52 @@
     MYLog(@"点击个人信息编辑");
     WK(weakSelf)
     if (!sender.selected) {
+//        _accountInfoTitleArr = @[@"ID",@"账号",@"密码",@"手机",@"邮箱"];
+//        _personalInfoTitleArr = @[@"姓名",@"昵称",@"国籍",@"地区",@"性别",@"生日",@"证件",@"证件末6位",@"职业",@"学历",@"爱好",@"个人签名",@"经历"];
+            //上传数据
+            //取地区安徽-怀宁左边的为
+            NSDictionary *logDic = @{
+                                     @"meaccount":[USERDEFAULT valueForKey:UserAccount],
+                                     @"mename":self.editPersonalInfoView.personalInfoDetailArr[0],
+                                     @"menickname":self.editPersonalInfoView.personalInfoDetailArr[1],
+                                     @"country":@"中国",
+                                     @"province":@"安徽",
+                                     @"city":@"怀宁",
+                                     @"mesex":@"0",
+                                     @"mebirthday":@"1987-11-24 13:00:00",
+                                     @"mecertype":self.editPersonalInfoView.personalInfoDetailArr[6],
+                                     @"mecardnum":self.editPersonalInfoView.personalInfoDetailArr[7],
+                                     @"occupation":self.editPersonalInfoView.personalInfoDetailArr[8],
+                                     @"education":self.editPersonalInfoView.personalInfoDetailArr[9],
+                                     @"hobby":@"运动",
+                                     @"perSign":@"",
+                                     @"experience":@""
+            };
+            [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeEditProfile success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+                MYLog(@"%@",jsonDic[@"message"]);
+                if (succe) {
+                    
+                    }else{
+        
+                }
+            } failure:^(NSError *error) {
+                MYLog(@"失败---%@",error.description);
+            }];
+
         [UIView animateWithDuration:0.5 animations:^{
             weakSelf.editPersonalInfoView.frame = CGRectMake(0,64,0,Screen_height-49-64);
         }];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
             [weakSelf.editPersonalInfoView removeFromSuperview];
         });
-        
     }
     
     
-     NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
     
     if (sender.selected) {
+        NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
+
         [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeQueryMem success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
             if (succe) {
                 weakSelf.queryModel = [QueryModel modelWithJSON:jsonDic[@"data"]];
@@ -271,8 +306,8 @@
         }];
         
         //生成职业plist文件
-        NSDictionary *logDic = @{@"typeval":@"GRZY"};
-        [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetsyntype success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        NSDictionary *logDic1 = @{@"typeval":@"GRZY"};
+        [TCJPHTTPRequestManager POSTWithParameters:logDic1 requestID:GetUserId requestcode:kRequestCodeGetsyntype success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
             MYLog(@"%@",jsonDic[@"message"]);
             if (succe) {
                 NSArray<JobModel *> *arr = [NSArray modelArrayWithClass:[JobModel class] json:jsonDic[@"data"]];
