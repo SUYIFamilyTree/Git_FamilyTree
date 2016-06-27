@@ -479,6 +479,7 @@
 		ADD23D051D0D549E008986F6 /* jnxp_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADD23D021D0D549E008986F6 /* jnxp_bg@2x.png */; };
 		ADD23D061D0D549E008986F6 /* jnxp_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADD23D031D0D549E008986F6 /* jnxp_bg@3x.png */; };
 		ADD23D091D0D54C2008986F6 /* TeachViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD23D081D0D54C2008986F6 /* TeachViewController.m */; };
+		ADE265A81D20C4C800F12FC9 /* WSelectMyFamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE265A71D20C4C800F12FC9 /* WSelectMyFamModel.m */; };
 		ADE2D17B1CF6FBD3009D1ADF /* FamilyShopView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE2D17A1CF6FBD3009D1ADF /* FamilyShopView.m */; };
 		ADE2D17E1CF7052C009D1ADF /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE2D17D1CF7052C009D1ADF /* TableView.m */; };
 		ADE3BBD31D13E795006523C4 /* DivinationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE3BBD21D13E795006523C4 /* DivinationViewController.m */; };
@@ -1294,6 +1295,8 @@
 		ADD23D031D0D549E008986F6 /* jnxp_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jnxp_bg@3x.png"; sourceTree = "<group>"; };
 		ADD23D071D0D54C2008986F6 /* TeachViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachViewController.h; sourceTree = "<group>"; };
 		ADD23D081D0D54C2008986F6 /* TeachViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachViewController.m; sourceTree = "<group>"; };
+		ADE265A61D20C4C800F12FC9 /* WSelectMyFamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSelectMyFamModel.h; sourceTree = "<group>"; };
+		ADE265A71D20C4C800F12FC9 /* WSelectMyFamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSelectMyFamModel.m; sourceTree = "<group>"; };
 		ADE2D1791CF6FBD3009D1ADF /* FamilyShopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyShopView.h; sourceTree = "<group>"; };
 		ADE2D17A1CF6FBD3009D1ADF /* FamilyShopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyShopView.m; sourceTree = "<group>"; };
 		ADE2D17C1CF7052C009D1ADF /* TableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableView.h; sourceTree = "<group>"; };
@@ -2299,6 +2302,8 @@
 				ADA98E9B1D115898005B23EC /* MyFamilyCollectionViewCell.m */,
 				ADA98E941D11584B005B23EC /* SelectMyFamilyView.h */,
 				ADA98E951D11584B005B23EC /* SelectMyFamilyView.m */,
+				ADE265A61D20C4C800F12FC9 /* WSelectMyFamModel.h */,
+				ADE265A71D20C4C800F12FC9 /* WSelectMyFamModel.m */,
 			);
 			path = "我的家谱";
 			sourceTree = "<group>";
@@ -4332,6 +4337,7 @@
 				BCF100051D02B11400D65E60 /* CALayer+drawborder.m in Sources */,
 				AD8C61E11D1E54A2005CDA68 /* WTools.m in Sources */,
 				AD8DAAE01CFD7533009B7958 /* FamilyHelpViewController.m in Sources */,
+				ADE265A81D20C4C800F12FC9 /* WSelectMyFamModel.m in Sources */,
 				BC5F15181D0FF1AD004F3622 /* RechargeViewController.m in Sources */,
 				ADA98E741D10F5EF005B23EC /* FamilyNamesViewController.m in Sources */,
 				ADA7FEF31D07A82300EDBEE4 /* PortraitAndNameViews.m in Sources */,

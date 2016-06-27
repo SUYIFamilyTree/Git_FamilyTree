@@ -16,7 +16,7 @@ enum{
 #define FirstViewFrameOfheight 315+GapOfView
 
 
-@interface BackScrollAndDetailView()<InputViewDelegate,UITextFieldDelegate>
+@interface BackScrollAndDetailView()<InputViewDelegate,UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 
 @end
@@ -35,6 +35,7 @@ enum{
         [self.backView addSubview:self.selecProtrai];
  
         [self initUI];
+        [self initBaseImagePicker];
         
         //设置font
         
@@ -50,6 +51,13 @@ enum{
         [_delegate BackScrollAndDetailViewDidTapCreateButton];
     };
 }
+
+
+-(void)initBaseImagePicker{
+    _imagePickerController = [[UIImagePickerController alloc] init];
+    _imagePickerController.delegate = self;
+}
+
 
 #pragma mark *** UI ***
 
@@ -69,6 +77,7 @@ enum{
         }
     }
    
+    
     
     //配偶年月日
     self.birthLabel = [self creatLabelTextWithTitle:@"生辰:" TitleFrame:CGRectMake(20, GapOfView+CGRectYH(self.selecProtrai), 50, InputView_height) inputViewLength:0.15*Screen_width dataArr:yearArr inputViewLabel:@"1990" FinText:@"年" withStar:NO];
@@ -264,6 +273,30 @@ enum{
     [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
 
+-(void)respondsToSelectHeadImage:(id)sender{
+    NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        _imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+        _imagePickerController.mediaTypes = @[mediaTypes[0]];
+        _imagePickerController.allowsEditing = YES;
+        
+        
+        [[self viewController] presentViewController:_imagePickerController animated:YES completion:nil];
+    }
+}
+#pragma mark *** UIImagePickerControllerDelegate ***
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    
+    
+        self.selecProtrai.image = info[UIImagePickerControllerEditedImage] ;
+        
+        [[self viewController] dismissViewControllerAnimated:YES completion:nil];
+    
+    
+}
+
+
 #pragma mark *** getters ***
 
 -(UIScrollView *)backView{
@@ -339,8 +372,8 @@ enum{
     
         [self.backView addSubview:theLabel];
         
-        _inputView = [[InputView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(theLabel.frame), theLabel.frame.origin.y, 70, InputView_height) Length:50 withData:@[@"是",@"否"]];
-        _inputView.inputLabel.backgroundColor = [UIColor whiteColor];
+        _inputView = [[InputView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(theLabel.frame), theLabel.frame.origin.y, 60, InputView_height) Length:60 withData:@[@"是",@"否"]];
+        
         _inputView.inputLabel.text = @"否";
         
     }
@@ -377,6 +410,7 @@ enum{
         seletBtn.layer.borderWidth = 1.0f;
         seletBtn.layer.borderColor = BorderColor;
         seletBtn.backgroundColor = [UIColor whiteColor];
+        [seletBtn addTarget:self action:@selector(respondsToSelectHeadImage:) forControlEvents:UIControlEventTouchUpInside];
         [self.backView addSubview:seletBtn];
         
     }

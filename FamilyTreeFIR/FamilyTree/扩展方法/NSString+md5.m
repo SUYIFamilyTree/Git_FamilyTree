@@ -69,4 +69,14 @@
     return resultStr;
 }
 
++(NSDictionary *)jsonStringWithDic:(NSDictionary *)dic{
+    NSString *jsonStr = [NSString stringWithFormat:@"%@",dic];
+    NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSDictionary *redic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    
+    return redic;
+    
+}
+
 @end

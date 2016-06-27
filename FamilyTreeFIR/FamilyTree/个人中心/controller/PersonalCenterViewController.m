@@ -110,7 +110,6 @@
     NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
     WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetMemallInfo success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        [SXLoadingView showProgressHUD:@"正在加载" duration:0.5];
         if (succe) {
             weakSelf.memallInfo = [MemallInfoModel modelWithJSON:jsonDic[@"data"]];
             [weakSelf initNaviData];

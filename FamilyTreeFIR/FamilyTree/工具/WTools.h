@@ -14,5 +14,16 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodecreategen;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodequerygenlist;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodequerymygen;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodequerygendeta;
-UIKIT_EXTERN NSString * _Nonnull const kRequestCodequeryclan ;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodequeryclan;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeuploadgenan;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeuploadgentt;
+
+//UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
+//
+//UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
+//UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
+//UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
+//UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
+
+
 @end

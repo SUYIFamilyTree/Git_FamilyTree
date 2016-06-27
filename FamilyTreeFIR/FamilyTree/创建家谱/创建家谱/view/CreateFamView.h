@@ -24,4 +24,7 @@
 
 @property (nonatomic,strong) ClickRoundView * famousPerson; /*家族名人*/
 
+@property (nonatomic,strong) UIImageView *famTotem; /*家族图腾图*/
+
+
 @end

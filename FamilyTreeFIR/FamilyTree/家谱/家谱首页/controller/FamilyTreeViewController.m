@@ -268,12 +268,15 @@
 }
 -(void)TopSearchView:(FamilyTreeTopView *)topSearchView didRespondsToMenusBtn:(UIButton *)sender{
     MYLog(@"点击我的家谱");
+    
     if (sender.selected) {
         [self.view addSubview:self.selecMyFamView];
     }else{
     
          [self.selecMyFamView removeFromSuperview];
     }
+    
+    [self.selecMyFamView updateDataSourceAndUI];
 }
 
 
@@ -328,7 +331,9 @@
         _selecMyFamView = [[SelectMyFamilyView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
         _selecMyFamView.delegate = self;
         
+        
     }
+    [_selecMyFamView.collectionView reloadData];
     return _selecMyFamView;
 }
 

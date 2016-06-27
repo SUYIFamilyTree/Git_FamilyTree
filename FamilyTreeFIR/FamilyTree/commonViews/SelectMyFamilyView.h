@@ -17,6 +17,10 @@
 @end
 
 @interface SelectMyFamilyView : UIView
-@property (nonatomic,weak) id<SelectMyFamilyViewDelegate> delegate; /*代理人*/
 
+@property (nonatomic,strong) UICollectionView *collectionView; /*集合*/
+@property (nonatomic,copy) NSMutableArray *dataSource; /*家谱数据*/
+
+@property (nonatomic,weak) id<SelectMyFamilyViewDelegate> delegate; /*代理人*/
+-(void)updateDataSourceAndUI;
 @end

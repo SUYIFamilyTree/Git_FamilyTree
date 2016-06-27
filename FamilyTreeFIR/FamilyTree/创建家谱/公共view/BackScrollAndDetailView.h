@@ -19,6 +19,11 @@
 @end
 
 @interface BackScrollAndDetailView : UIView
+
+{
+    UIImagePickerController *_imagePickerController;
+}
+
 @property (nonatomic,strong) InputView *inputView; /*是否结婚*/
 
 @property (nonatomic,strong) UITextField *parnName; /*配偶名*/

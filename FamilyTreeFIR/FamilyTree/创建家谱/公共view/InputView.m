@@ -117,7 +117,7 @@
         _inputLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0,_length-20*AdaptationWidth() , Input_height)];
 //        _inputLabel.layer.borderWidth = 1.0f;
 //        _inputLabel.layer.borderColor = BorderColor;
-        _inputLabel.backgroundColor = [UIColor whiteColor];
+//        _inputLabel.backgroundColor = [UIColor whiteColor];
         _inputLabel.textColor = [UIColor blackColor];
         _inputLabel.userInteractionEnabled  = YES;
         _inputLabel.textAlignment = 0;
@@ -135,7 +135,7 @@
         _backScroView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, (Input_height-10), _length, (Input_height-10)*3)];
         _backScroView.bounces = true;
         _backScroView.contentSize = CGSizeMake(_length, (Input_height-10)*_dataArr.count);
-        _backScroView.backgroundColor = [UIColor whiteColor];
+//        _backScroView.backgroundColor = [UIColor whiteColor];
         
     }
     return _backScroView;
