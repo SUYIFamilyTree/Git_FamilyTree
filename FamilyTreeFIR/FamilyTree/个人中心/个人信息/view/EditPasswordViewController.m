@@ -76,7 +76,7 @@
 -(void)clickSureEditBtn:(UIButton *)sender{
     MYLog(@"确认修改");
     if (![self.oldPasswordTX.text isEqualToString:[USERDEFAULT valueForKey:UserPassword]]) {
-        [SXLoadingView showProgressHUD:@"旧密码输入错误" duration:1];
+        [SXLoadingView showAlertHUD:@"旧密码输入错误" duration:1];
     }else if(![self.nPasswordTX.text isEqualToString:self.surePasswordTX.text]) {
         [SXLoadingView showAlertHUD:@"两次输入密码不一致" duration:1];
     }else{

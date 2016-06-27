@@ -99,7 +99,7 @@
             
             NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
             NSLog(@"%@", dic);
-
+            MYLog(@"%@",jsonDic[@"message"]);
             
         }
     } failure:^(NSError *error) {

@@ -14,4 +14,5 @@
 /** 个人信息详细数组*/
 @property (nonatomic, strong) NSMutableArray *personalInfoDetailArr;
 -(void)reloadEditPersonalInfoData:(QueryModel *)queryModel;
+-(NSMutableString *)getInterestStr;
 @end

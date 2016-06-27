@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class EditPasswordViewController;
+
 @interface EditPasswordViewController : UIViewController
 /** 更改哪项内容*/
 @property (nonatomic, copy) NSString *detailStr;
 /** 文本框内容*/
 @property (nonatomic, copy) NSString *TFStr;
+
+
 @end

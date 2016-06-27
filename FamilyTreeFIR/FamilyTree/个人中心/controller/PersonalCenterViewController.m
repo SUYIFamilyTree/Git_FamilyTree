@@ -25,6 +25,7 @@
 #import "MemallInfoModel.h"
 #import "QueryModel.h"
 #import "JobModel.h"
+#import "AreaModel.h"
 
 @interface PersonalCenterViewController ()<PersonalCenterHeaderViewDelegate,PersonalCenterTodayFortuneViewDelegate,UITableViewDataSource,UITableViewDelegate,PersonalCenterMyPhotoAlbumsViewDelegate,PayForFortuneViewDelegate,PayForForeverFortuneViewDelegate,VIPViewDelegate>
 /** 全屏滚动*/
@@ -242,38 +243,64 @@
     MYLog(@"点击个人信息编辑");
     WK(weakSelf)
     if (!sender.selected) {
-//        _accountInfoTitleArr = @[@"ID",@"账号",@"密码",@"手机",@"邮箱"];
-//        _personalInfoTitleArr = @[@"姓名",@"昵称",@"国籍",@"地区",@"性别",@"生日",@"证件",@"证件末6位",@"职业",@"学历",@"爱好",@"个人签名",@"经历"];
-            //上传数据
-            //取地区安徽-怀宁左边的为
-            NSDictionary *logDic = @{
-                                     @"meaccount":[USERDEFAULT valueForKey:UserAccount],
-                                     @"mename":self.editPersonalInfoView.personalInfoDetailArr[0],
-                                     @"menickname":self.editPersonalInfoView.personalInfoDetailArr[1],
-                                     @"country":@"中国",
-                                     @"province":@"安徽",
-                                     @"city":@"怀宁",
-                                     @"mesex":@"0",
-                                     @"mebirthday":@"1987-11-24 13:00:00",
-                                     @"mecertype":self.editPersonalInfoView.personalInfoDetailArr[6],
-                                     @"mecardnum":self.editPersonalInfoView.personalInfoDetailArr[7],
-                                     @"occupation":self.editPersonalInfoView.personalInfoDetailArr[8],
-                                     @"education":self.editPersonalInfoView.personalInfoDetailArr[9],
-                                     @"hobby":@"运动",
-                                     @"perSign":@"",
-                                     @"experience":@""
-            };
-            [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeEditProfile success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-                MYLog(@"%@",jsonDic[@"message"]);
-                if (succe) {
-                    
-                    }else{
+        //上传数据
+        //获取省，市
+        NSRange range = [self.editPersonalInfoView.personalInfoDetailArr[3] rangeOfString:@"-"];
         
-                }
-            } failure:^(NSError *error) {
-                MYLog(@"失败---%@",error.description);
-            }];
-
+        NSString *proStr = [self.editPersonalInfoView.personalInfoDetailArr[3] substringToIndex:(range.location)];
+        NSString *cityStr = [self.editPersonalInfoView.personalInfoDetailArr[3] substringFromIndex:range.location+1];
+        //获取性别
+        NSString *sexStr;
+        if ([self.editPersonalInfoView.personalInfoDetailArr[4] isEqualToString:@"女"]) {
+            sexStr = @"0";
+        }else if([self.editPersonalInfoView.personalInfoDetailArr[4] isEqualToString:@"男"]){
+            sexStr = @"1";
+        }else{
+            sexStr = @"保密";
+        }
+        //时间转换(生日)
+        NSMutableString *birthdayStr = [NSMutableString stringWithString:self.editPersonalInfoView.personalInfoDetailArr[5]];
+        [birthdayStr replaceCharactersInRange:NSMakeRange(4, 1) withString:@"-"];
+        [birthdayStr replaceCharactersInRange:NSMakeRange(7, 1) withString:@"-"];
+        [birthdayStr replaceCharactersInRange:NSMakeRange(10, 1) withString:@"T"];
+        [birthdayStr replaceCharactersInRange:NSMakeRange(13, 1) withString:@":00:00"];
+        //爱好
+        MYLog(@"%@",[self.editPersonalInfoView getInterestStr]);
+        //个人签名
+        UITextField *signTX = (UITextField *)[self.editPersonalInfoView viewWithTag:888+11];
+        //个人经历
+        UITextField *experienceTX = (UITextField *)[self.editPersonalInfoView viewWithTag:888+12];
+        NSDictionary *logDic = @{
+                                 @"meaccount":[USERDEFAULT valueForKey:UserAccount],
+                                 @"mobile":self.editPersonalInfoView.accountInfoDetailArr[3],
+                                 @"email":self.editPersonalInfoView.accountInfoDetailArr[4],
+                                 @"mename":self.editPersonalInfoView.personalInfoDetailArr[0],
+                                 @"menickname":self.editPersonalInfoView.personalInfoDetailArr[1],
+                                 @"country":@"中国",
+                                 @"province":proStr,
+                                 @"city":cityStr,
+                                 @"mesex":sexStr,
+                                 @"mebirthday":birthdayStr,
+                                 @"mecertype":self.editPersonalInfoView.personalInfoDetailArr[6],
+                                 @"mecardnum":self.editPersonalInfoView.personalInfoDetailArr[7],
+                                 @"occupation":self.editPersonalInfoView.personalInfoDetailArr[8],
+                                 @"education":self.editPersonalInfoView.personalInfoDetailArr[9],
+                                 @"hobby":[self.editPersonalInfoView getInterestStr],
+                                 @"perSign":signTX.text,
+                                 @"experience":experienceTX.text
+                                 };
+        MYLog(@"%@",logDic);
+        [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeEditProfile success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+            MYLog(@"修改个人资料%@",jsonDic[@"message"]);
+            if (succe) {
+                
+            }else{
+                
+            }
+        } failure:^(NSError *error) {
+            MYLog(@"失败---%@",error.description);
+        }];
+        
         [UIView animateWithDuration:0.5 animations:^{
             weakSelf.editPersonalInfoView.frame = CGRectMake(0,64,0,Screen_height-49-64);
         }];
@@ -307,16 +334,41 @@
         
         //生成职业plist文件
         NSDictionary *logDic1 = @{@"typeval":@"GRZY"};
-        [TCJPHTTPRequestManager POSTWithParameters:logDic1 requestID:GetUserId requestcode:kRequestCodeGetsyntype success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-            MYLog(@"%@",jsonDic[@"message"]);
-            if (succe) {
-                NSArray<JobModel *> *arr = [NSArray modelArrayWithClass:[JobModel class] json:jsonDic[@"data"]];
-                NSMutableArray *mutableArr = [NSMutableArray array];
-                JobModel *jobModel = [[JobModel alloc]init];
-                for (jobModel in arr) {
-                    [mutableArr addObject:jobModel.syntype];
+        
+       [TCJPHTTPRequestManager POSTWithParameters:logDic1 requestID:GetUserId requestcode:kRequestCodeGetsyntype success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+                MYLog(@"%@",jsonDic[@"message"]);
+                if (succe) {
+                    NSArray<JobModel *> *arr = [NSArray modelArrayWithClass:[JobModel class] json:jsonDic[@"data"]];
+                    NSMutableArray *mutableArr = [NSMutableArray array];
+                    JobModel *jobModel = [[JobModel alloc]init];
+                    for (jobModel in arr) {
+                        [mutableArr addObject:jobModel.syntype];
+                    }
+                    NSString *filePath = [UserDocumentD stringByAppendingPathComponent:@"job.plist"];
+                    [mutableArr writeToFile:filePath atomically:YES];
+                }else{
                 }
-                NSString *filePath = [UserDocumentD stringByAppendingPathComponent:@"job.plist"];
+            } failure:^(NSError *error) {
+                MYLog(@"失败---%@",error.description);
+            }];
+
+    
+    
+        //生成地区plist文件
+        NSDictionary *logDic2 = @{@"country":@"中国"};
+        [TCJPHTTPRequestManager POSTWithParameters:logDic2 requestID:GetUserId requestcode:kRequestCodeGetprovince success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+            
+            if (succe) {
+                NSArray<AreaModel *> *arr = [NSArray modelArrayWithClass:[AreaModel class] json:jsonDic[@"data"]];
+                NSMutableArray *mutableArr = [NSMutableArray array];
+                AreaModel *areaModel = [[AreaModel alloc]init];
+                for (areaModel in arr) {
+                    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+                    [dic setObject:areaModel.proname forKey:@"proname"];
+                    [dic setObject:areaModel.cityname forKey:@"cityname"];
+                    [mutableArr addObject:dic];
+                }
+                NSString *filePath = [UserDocumentD stringByAppendingPathComponent:@"area.plist"];
                 
                 [mutableArr writeToFile:filePath atomically:YES];
             }else{
@@ -324,25 +376,6 @@
         } failure:^(NSError *error) {
             MYLog(@"失败---%@",error.description);
         }];
-        //生成地区plist文件
-//        NSDictionary *logDic1 = @{@"country":@"中国"};
-//        [TCJPHTTPRequestManager POSTWithParameters:logDic1 requestID:GetUserId requestcode:@"getprovince" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-//            MYLog(@"%@",jsonDic[@"message"]);
-//            if (succe) {
-//                NSArray<JobModel *> *arr = [NSArray modelArrayWithClass:[JobModel class] json:jsonDic[@"data"]];
-//                NSMutableArray *mutableArr = [NSMutableArray array];
-//                JobModel *jobModel = [[JobModel alloc]init];
-//                for (jobModel in arr) {
-//                    [mutableArr addObject:jobModel.syntype];
-//                }
-//                NSString *filePath = [UserDocumentD stringByAppendingPathComponent:@"job.plist"];
-//                
-//                [mutableArr writeToFile:filePath atomically:YES];
-//            }else{
-//            }
-//        } failure:^(NSError *error) {
-//            MYLog(@"失败---%@",error.description);
-//        }];
 
         
     }
