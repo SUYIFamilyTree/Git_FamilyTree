@@ -40,9 +40,11 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodeBackPassword;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeEditProfile;
 
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetMemallInfo;
-UIKIT_EXTERN NSString * _Nonnull const
-    kRequestCodeQueryMem;
-
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeQueryMem;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeQuerygendata;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetsyntype;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeUpdatepswd;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetprovince;
 
 /**
  *  弹出框自动消失

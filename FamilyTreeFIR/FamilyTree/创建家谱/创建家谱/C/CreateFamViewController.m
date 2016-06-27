@@ -145,6 +145,8 @@
     [self.view addSubview:self.cFameView];
     
 }
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

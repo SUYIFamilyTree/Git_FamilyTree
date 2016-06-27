@@ -90,7 +90,7 @@
 
 -(UIView*)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
-    UILabel*label=[[UILabel alloc]initWithFrame:CGRectMake(Screen_width*component/6.0, 0,Screen_width/5.0, 30)];
+    UILabel *label = [[UILabel alloc]init];
     label.font=[UIFont systemFontOfSize:15.0];
     label.tag=component*900+row;
     label.textAlignment=NSTextAlignmentCenter;
