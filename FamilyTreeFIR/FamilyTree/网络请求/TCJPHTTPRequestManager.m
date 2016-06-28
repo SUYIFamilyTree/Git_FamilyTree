@@ -31,7 +31,7 @@
     NSString *md5check = [NSString md5Str:md5checkStr];
     //NSLog(@"md5afterStr--%@", md5check);
     
-//        NSMutableString  *autocode = [NSMutableString string];
+    //NSMutableString  *autocode = [NSMutableString string];
     NSString *authcode;
         if ([requestcode isEqualToString:@"login"]||[requestcode isEqualToString:@"register"]||[requestcode isEqualToString:@"sendsms"]) {
             authcode = @"";

@@ -73,10 +73,6 @@ __block __weak __typeof(&*self)weakSelf = self;
 //管理家谱
 #define ZeroContentOffset 320
 
-
-
-
-
 //提示信息显示 时间
 #define  SXLoadingTime 1.5
 

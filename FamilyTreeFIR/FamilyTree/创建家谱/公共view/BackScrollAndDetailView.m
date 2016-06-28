@@ -100,13 +100,14 @@ enum{
     
     
     
-    self.selfYear  = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(20, CGRectYH(self.liveNowLabel)+GapOfView, 0, InputView_height) inputViewLength:0.15*Screen_width dataArr:yearArr inputViewLabel:@"1990" FinText:@"年" withStar:NO];
-    self.selfMonth = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(CGRectXW(self.selfYear)+25, CGRectYH(self.liveNowLabel)+GapOfView, 0, InputView_height) inputViewLength:0.13*Screen_width dataArr:@[@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12"] inputViewLabel:@"01" FinText:@"月" withStar:NO];
-    
+    self.selfYear  = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(20, CGRectYH(self.liveNowLabel)+GapOfView, 0, InputView_height) inputViewLength:0.15*Screen_width dataArr:yearArr inputViewLabel:@"-" FinText:@"年" withStar:NO];
+    self.selfYear.userInteractionEnabled = false;
+    self.selfMonth = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(CGRectXW(self.selfYear)+25, CGRectYH(self.liveNowLabel)+GapOfView, 0, InputView_height) inputViewLength:0.13*Screen_width dataArr:@[@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12"] inputViewLabel:@"-" FinText:@"月" withStar:NO];
+    self.selfMonth.userInteractionEnabled = false;
   
     
-    self.selfDay = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(CGRectXW(self.selfMonth)+25, CGRectYH(self.liveNowLabel)+GapOfView, 0, InputView_height) inputViewLength:0.13*Screen_width dataArr:dayArr inputViewLabel:@"01" FinText:@"日" withStar:true];
-    
+    self.selfDay = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(CGRectXW(self.selfMonth)+25, CGRectYH(self.liveNowLabel)+GapOfView, 0, InputView_height) inputViewLength:0.13*Screen_width dataArr:dayArr inputViewLabel:@"-" FinText:@"日" withStar:true];
+    self.selfDay.userInteractionEnabled = false;
     [self.backView addSubview:self.selfYear];
     [self.backView addSubview:self.selfMonth];
     [self.backView addSubview:self.selfDay];
@@ -208,12 +209,12 @@ enum{
 -(void)InputView:(InputView *)inputView didFinishSelectLabel:(UILabel *)inputLabel{
     
     if (inputView == self.liveNowLabel) {
-        
+        //是否健在的处理
         if ([self.liveNowLabel.inputLabel.text isEqualToString:@"是"]) {
             
-            self.selfYear.inputLabel.text = @"----";
-            self.selfMonth.inputLabel.text = @"--";
-            self.selfDay.inputLabel.text = @"--";
+            self.selfYear.inputLabel.text = @"-";
+            self.selfMonth.inputLabel.text = @"-";
+            self.selfDay.inputLabel.text = @"-";
             self.selfYear.userInteractionEnabled = false;
             self.selfMonth.userInteractionEnabled = false;
             self.selfDay.userInteractionEnabled = false;
@@ -234,6 +235,16 @@ enum{
 
         self.gennerationNex.text = self.gennerNexArr[index];
         
+    }else if (inputView == self.inputView){
+        //是否结婚的处理
+        if ([inputView.inputLabel.text isEqualToString:@"否"]) {
+            self.parnName.placeholder = @"--";
+            self.parnName.userInteractionEnabled = false;
+        }else{
+            self.parnName.userInteractionEnabled = true;
+            self.parnName.placeholder = @"第一（原）配姓名";
+
+        }
     }
     
 }
@@ -362,6 +373,8 @@ enum{
     return _birtime;
 }
 
+
+
 //第一个控件是否结婚
 -(InputView *)inputView{
     if (!_inputView) {
@@ -374,8 +387,8 @@ enum{
         
         _inputView = [[InputView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(theLabel.frame), theLabel.frame.origin.y, 60, InputView_height) Length:60 withData:@[@"是",@"否"]];
         
-        _inputView.inputLabel.text = @"否";
-        
+        _inputView.inputLabel.text = @"是";
+        _inputView.delegate = self;
     }
     return _inputView;
 }

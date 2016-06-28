@@ -57,11 +57,13 @@
     
     //创建家谱按钮
     [self.view addSubview:self.creatBtn];
-    
+        
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = YES;
+    //更新数据
+    [self getFamInfo];
 }
 #pragma mark - 视图搭建
 //设置导航栏
@@ -200,6 +202,30 @@
 
 }
 
+
+#pragma mark *** 网络请求 ***
+
+-(void)getFamInfo{
+    [SXLoadingView showProgressHUD:@"正在加载"];
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"query":@"",@"type":@"MyGen"} requestID:GetUserId requestcode:kRequestCodequerymygen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSLog(@"？---%@", jsonDic[@"data"]);
+            
+            NSString *jsonStr = [NSString stringWithFormat:@"%@",jsonDic[@"data"]];
+            NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+            NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            NSLog(@"----%@", arr);
+            NSMutableArray *allFamNams = [@[] mutableCopy];
+            for (NSDictionary *dic in arr) {
+                [allFamNams addObject:dic[@"GeName"]];
+            }
+            [WSelectMyFamModel sharedWselectMyFamModel].myFamArray = allFamNams;
+        }
+        [SXLoadingView hideProgressHUD];
+    } failure:^(NSError *error) {
+        MYLog(@"失败");
+    }];
+}
 
 #pragma mark - 事件
 //给5个button添加点击事件跳转

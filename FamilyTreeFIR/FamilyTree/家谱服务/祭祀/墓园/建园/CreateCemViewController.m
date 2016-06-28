@@ -75,18 +75,27 @@
     whiteView.backgroundColor = [UIColor whiteColor];
     [self.backScroView addSubview:whiteView];
     
-    self.cemName = [UITextField new];
-    self.cemMaster = [UITextField new];
-    self.cemSaying = [UITextField new];
-    self.cemBirDead = [UITextField new];
-    self.cemIntro = [UITextField new];
-    NSArray *fieldArr = @[self.cemName,self.cemMaster,self.cemSaying,self.cemBirDead,self.cemIntro];
     NSArray *titleArr = @[@"墓园名称：",@"墓主人：",@"墓志铭：",@"生辰忌日：",@"生平简介："];
     
-    [fieldArr enumerateObjectsUsingBlock:^(UITextField *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj = [self createLabelAndTextViewWithFrame:AdaptationFrame(74, 40+idx*75, 130, 50) title:titleArr[idx] toView:whiteView];
-        [whiteView addSubview:obj];
-    }];
+    self.cemName = [self createLabelAndTextViewWithFrame:AdaptationFrame(74, 40, 130, 50) title:titleArr[0] toView:whiteView];
+  
+    self.cemMaster = [self createLabelAndTextViewWithFrame:AdaptationFrame(74, 40+1*75, 130, 50) title:titleArr[1] toView:whiteView];
+    self.cemSaying = [self createLabelAndTextViewWithFrame:AdaptationFrame(74, 40+2*75, 130, 50) title:titleArr[2] toView:whiteView];
+    self.cemBirDead = [self createLabelAndTextViewWithFrame:AdaptationFrame(74, 40+3*75, 130, 50) title:titleArr[3] toView:whiteView];
+    self.cemIntro = [self createLabelAndTextViewWithFrame:AdaptationFrame(74, 40+4*75, 130, 50) title:titleArr[4] toView:whiteView];
+    
+    
+    
+//    self.cemName = [UITextField new];
+//    NSLog(@"%@", self.cemName);
+//    NSMutableArray *fieldArr = [@[self.cemName,self.cemMaster,self.cemSaying,self.cemBirDead,self.cemIntro] mutableCopy];
+//
+//    [fieldArr enumerateObjectsUsingBlock:^(UITextField *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        obj = [self createLabelAndTextViewWithFrame:AdaptationFrame(74, 40+idx*75, 130, 50) title:titleArr[idx] toView:whiteView];
+//        [whiteView addSubview:obj];
+//    }];
+    
+    
     
 }
 
@@ -103,6 +112,23 @@
 #pragma mark *** events ***
 -(void)respondsToCreateCemBtn:(UIButton *)sender{
     MYLog(@"建园");
+    NSLog(@"%@",_cemName.text);
+    NSDictionary *dic = @{@"CeName":self.cemName.text,
+                          @"CeMaster":self.cemMaster.text,
+                          @"CeEpitaph":self.cemSaying.text,
+                          @"CeCeDeathday":self.cemBirDead.text,
+                          @"CeBrief":self.cemIntro.text,
+                          @"CeType":@"PRI",
+                          };
+    [TCJPHTTPRequestManager POSTWithParameters:dic requestID:GetUserId requestcode:kRequestCodecreatecemetery success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+                                                    if (succe) {
+                                                        NSLog(@"%@", jsonDic[@"data"]);
+                                                        [SXLoadingView showAlertHUD:@"创建成功" duration:0.5];
+                                                    }
+                                                } failure:^(NSError *error) {
+                                                    MYLog(@"失败");
+                                                }];
+
 }
 -(void)respondsToAddCemImage:(UIButton *)sender{
     NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
@@ -136,7 +162,8 @@
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectXW(label), frame.origin.y, 350*AdaptationWidth(), 50*AdaptationWidth())];
     textField.layer.borderColor = BorderColor;
     textField.layer.borderWidth = 1.0f;
-    
+    textField.text = @"";
+    [backView addSubview:textField];
     return textField;
 }
 

@@ -26,17 +26,48 @@ NSString * _Nonnull const kRequestCodequeryclan = @"queryclan";
 NSString * _Nonnull const kRequestCodeuploadgenan = @"uploadgenan";
 //上传家谱图腾头像
 NSString * _Nonnull const kRequestCodeuploadgentt = @"uploadgentt";
-
 //上传家谱共享图片
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //上传家谱共享视频
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 
+
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+
+//添加墓园
+NSString * _Nonnull const kRequestCodecreatecemetery = @"createcemetery";
+//编辑墓园
+NSString * _Nonnull const kRequestCodeeditcemetery = @"editcemetery";
+//墓园详情
+NSString * _Nonnull const kRequestCodecemeterdetail = @"cemeterdetail";
+//墓园列表
+NSString * _Nonnull const kRequestCodecemeterylist = @"cemeterylist";
+
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+
+//管理家谱通知字段
+
+NSString * _Nonnull const kNotificationCodeManagerFam = @"managerFame";
+
 
 
 

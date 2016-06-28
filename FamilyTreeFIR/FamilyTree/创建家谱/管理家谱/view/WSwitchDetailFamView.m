@@ -7,7 +7,10 @@
 //
 
 #import "WSwitchDetailFamView.h"
+
+#define arrLenthCount (_famNamesArray.count>4?5:_famNamesArray.count)
 @interface WSwitchDetailFamView()
+@property (nonatomic,strong) UIScrollView *backScroView; /*滚动家谱*/
 
 @end
 @implementation WSwitchDetailFamView
@@ -18,6 +21,8 @@
         _famNamesArray = famNames;
         [self initData];
         [self initUI];
+        [self registrNotification];
+        
     }
     return self;
 }
@@ -27,11 +32,36 @@
     
 }
 
+-(void)getAllFamNames{
+    //更新数据
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"query":@"",@"type":@"MyGen"} requestID:GetUserId requestcode:kRequestCodequerymygen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSString *jsonStr = [NSString stringWithFormat:@"%@",jsonDic[@"data"]];
+            NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+            NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            NSMutableArray *allFamNams = [@[] mutableCopy];
+            for (NSDictionary *dic in arr) {
+                [allFamNams addObject:dic[@"GeName"]];
+            }
+            [WSelectMyFamModel sharedWselectMyFamModel].myFamArray = allFamNams;
+            _famNamesArray = [WSelectMyFamModel sharedWselectMyFamModel].myFamArray;
+            [self reloadDataForUI];
+        }
+    } failure:^(NSError *error) {
+        MYLog(@"失败");
+    }];
+}
+
+-(void)registrNotification{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAllFamNames) name:kNotificationCodeManagerFam object:nil];
+}
+
 
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
+    [self addSubview:self.backScroView];
     //卷谱
-    NSMutableArray *allBtnArrs = [_famNamesArray mutableCopy];
+    NSMutableArray *allBtnArrs = [[WSelectMyFamModel sharedWselectMyFamModel].myFamArray mutableCopy];
     [allBtnArrs insertObject:@"切换家谱" atIndex:0];
     [allBtnArrs addObject:@"创建家谱"];
     for (int idx = 0; idx<allBtnArrs.count; idx++) {
@@ -44,14 +74,22 @@
         btn.titleLabel.font = WFont(30);
         btn.tag = idx;
         [btn addTarget:self action:@selector(respondsToAllBtnArs:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:btn];
+        if (idx == 0) {
+            [self addSubview:btn];
+        }else if ([btn.titleLabel.text isEqualToString:@"创建家谱"]) {
+            btn.frame = AdaptationFrame(0, (arrLenthCount==0?arrLenthCount+1:arrLenthCount)*63, 187, 61);
+            [self addSubview:btn];
+        }else{
+            
+        [self.backScroView addSubview:btn];
+            
+        }
     }
-    
     
     //新增和删除
     NSArray *addDeletArr = @[@"新增卷谱",@"删除卷谱"];
     for (int idx = 0; idx<addDeletArr.count; idx++) {
-        UIButton *btn = [[UIButton alloc] initWithFrame:AdaptationFrame(35, allBtnArrs.count*63+70+60*idx, 140, 60)];
+        UIButton *btn = [[UIButton alloc] initWithFrame:AdaptationFrame(35,(arrLenthCount==0?arrLenthCount+1:arrLenthCount)*63+100+60*idx, 140, 60)];
         btn.backgroundColor = [UIColor blackColor];
         btn.layer.cornerRadius = 2;
         btn.alpha = 0.8;
@@ -61,15 +99,29 @@
         [btn addTarget:self action:@selector(respondsToAllBtnArs:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btn];
     }
+
+}
+
+-(void)reloadDataForUI{
+    [self removeAllSubviews];
+    //更新count不然bug
+    _backScroView.contentSize = AdaptationSize(187, (_famNamesArray.count+1)*63);
+    [self initUI];
     
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, allBtnArrs.count*63*AdaptationWidth()+190);
 }
 #pragma mark *** events ***
 -(void)respondsToAllBtnArs:(UIButton *)sender{
-    NSLog(@"%@", sender.titleLabel.text);
     if (_delegate && [_delegate respondsToSelector:@selector(WswichDetailFamViewDelegate:didSelectedButton:)]) {
         [_delegate WswichDetailFamViewDelegate:self didSelectedButton:sender];
     };
 }
-
+#pragma mark *** getters ***
+-(UIScrollView *)backScroView{
+    if (!_backScroView) {
+        _backScroView = [[UIScrollView alloc] initWithFrame:AdaptationFrame(0, 0, 187, arrLenthCount*63)];
+        _backScroView.bounces = true;
+        _backScroView.contentSize = AdaptationSize(187, (_famNamesArray.count+1)*63);
+    }
+    return _backScroView;
+}
 @end

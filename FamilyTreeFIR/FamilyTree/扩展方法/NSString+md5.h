@@ -17,5 +17,8 @@
 +(NSString *)verticalStringWith:(NSString *)string;
 
 //json字典转字典
-+(NSDictionary *)jsonStringWithDic:(NSDictionary *)dic;
++(NSDictionary *)jsonDicWithDic:(NSDictionary *)dic;
+
+//json数组转数组
++(NSArray*)jsonArrWithArr:(NSArray *)arr;
 @end
