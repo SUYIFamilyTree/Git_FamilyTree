@@ -46,6 +46,9 @@
 //        comps = [calendar0 components:unitFlags fromDate:[NSDate date]];
 //        NSInteger year=[comps year];
 
+
+        
+        
         self.startYear=1900;
         self.yearRange=200;
         self.dayRange=[self isAllDay:self.startYear andMonth:1];
