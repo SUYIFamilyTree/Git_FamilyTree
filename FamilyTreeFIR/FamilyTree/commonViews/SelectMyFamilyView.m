@@ -43,26 +43,9 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
 
 -(void)updateDataSourceAndUI{
     //获取我的所有家谱
-    
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"query":@"",@"type":@"MyGen"} requestID:GetUserId requestcode:kRequestCodequerymygen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        if (succe) {
-                        NSLog(@"？---%@", jsonDic[@"data"]);
-            
-            NSString *jsonStr = [NSString stringWithFormat:@"%@",jsonDic[@"data"]];
-            NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
-            NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-            NSLog(@"----%@", arr);
-            NSMutableArray *allFamNams = [@[] mutableCopy];
-            for (NSDictionary *dic in arr) {
-                [allFamNams addObject:dic[@"GeName"]];
-            }
-            [WSelectMyFamModel sharedWselectMyFamModel].myFamArray = allFamNams;
-            _dataSource[0] = [WSelectMyFamModel sharedWselectMyFamModel].myFamArray;
-            [self.collectionView reloadData];
-        }
-    } failure:^(NSError *error) {
+    _dataSource[0] = [WSelectMyFamModel sharedWselectMyFamModel].myFamArray;
+    [self.collectionView reloadData];
         
-    }];
 }
 
 #pragma mark *** 初始化界面 ***

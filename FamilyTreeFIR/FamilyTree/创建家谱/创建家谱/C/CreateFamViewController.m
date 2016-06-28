@@ -70,7 +70,7 @@
     NSString *genNumber = [self.cFameView.gennerNum.inputLabel.text stringByReplacingOccurrencesOfString:@"第" withString:@""];
     NSString *genNumberF = [genNumber stringByReplacingOccurrencesOfString:@"代" withString:@""];
     
-    //空值处理
+    //首卷家谱空值处理
     if ([self.cFameView.famBookName.text isEqualToString:@""]) {
         self.cFameView.famBookName.text = @"";
     }
@@ -80,9 +80,16 @@
         return;
     }
     if ([self.cFameView.famfarName.detailLabel.text isEqualToString:@""]||self.cFameView.famfarName.titleLabel.text.length == 0) {
-        [SXLoadingView showProgressHUD:@"祖宗姓名不能为空" duration:0.5];
+        [SXLoadingView showAlertHUD:@"祖宗姓名不能为空" duration:0.5];
         return;
     }
+    
+    //结婚对象空处理
+    if ([self.cFameView.parnName.text isEqualToString:@""]) {
+        self.cFameView.parnName.text = @"";
+    }
+    
+    NSString *parName = [self.cFameView.inputView.inputLabel.text isEqualToString:@""]?self.cFameView.parnName.text:@"";
     
     NSDictionary *dic = @{@"Ds":genNumberF,
                           @"GeSurname":@"",
@@ -95,13 +102,15 @@
                           @"GemeSurname":@"",
                           @"GemeName":self.cFameView.famfarName.detailLabel.text,
                           @"GemeSex":[self.cFameView.sexInpuView.inputLabel.text isEqualToString:@"女"]?@"0":@"1",
+                          @"GemeIsfamous":self.cFameView.famousPerson.marked?@"1":@"0",
+                          
                           @"GemeYear":self.cFameView.birthLabel.inputLabel.text,
                           @"GemeMonth":self.cFameView.monthLabel.inputLabel.text,
                           @"GemeDay":self.cFameView.dayLabel.inputLabel.text,
                           @"GemeHour":self.cFameView.birtime.inputLabel.text,
                           @"GemeDeathtime":[self.cFameView.liveNowLabel.inputLabel.text isEqualToString:@"是"]?@"":[NSString stringWithFormat:@"%@-%@-%@",self.cFameView.selfYear.inputLabel.text,self.cFameView.selfMonth.inputLabel.text,self.cFameView.selfDay.inputLabel.text],
                           @"GemeIslife":[self.cFameView.liveNowLabel.inputLabel.text isEqualToString:@"是"]?@"1":@"0",
-                          @"Po":self.cFameView.parnName.text,
+                          @"Po":parName,
                           @"IsEnt":self.cFameView.diXiView.marked?@"1":@"0",
                           @"DsList":genDsListDic};
     
@@ -110,13 +119,16 @@
         
         if (succe) {
             
-            NSLog(@"%@", jsonDic[@"data"]);
+//            NSLog(@"%@", jsonDic[@"data"]);
             
+            NSDictionary *JTdic = [NSString jsonDicWithDic:jsonDic[@"data"]];
             
-            NSDictionary *JTdic = [NSString jsonStringWithDic:jsonDic[@"data"]];
-            NSLog(@"dididi--%@", JTdic);
+//            NSLog(@"dididi--%@", JTdic);
             callBack(succe,JTdic[@"geid"]);
             [SXLoadingView showProgressHUD:@"创建成功！" duration:0.5];
+            //通知创建完成更新页面
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationCodeManagerFam object:nil];
+            
         }else{
             [SXLoadingView showProgressHUD:jsonDic[@"创建失败.."] duration:0.5];
         }

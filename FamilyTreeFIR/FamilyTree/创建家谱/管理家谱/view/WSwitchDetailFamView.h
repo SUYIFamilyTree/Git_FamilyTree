@@ -22,5 +22,5 @@
 @property (nonatomic,weak) id<WswichDetailFamViewDelegate> delegate; /*代理人*/
 
 - (instancetype)initWithFrame:(CGRect)frame famNamesArr:(NSArray *)famNames;
-
+-(void)initUI;
 @end

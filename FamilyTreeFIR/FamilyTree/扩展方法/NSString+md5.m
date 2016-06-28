@@ -69,14 +69,20 @@
     return resultStr;
 }
 
-+(NSDictionary *)jsonStringWithDic:(NSDictionary *)dic{
++(NSDictionary *)jsonDicWithDic:(NSDictionary *)dic{
     NSString *jsonStr = [NSString stringWithFormat:@"%@",dic];
     NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSDictionary *redic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    NSDictionary *reDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     
-    return redic;
+    return reDic;
     
 }
-
++(NSArray *)jsonArrWithArr:(NSArray *)arr{
+    NSString *jsonStr = [NSString stringWithFormat:@"%@",arr];
+    NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSArray * reArr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    
+    return reArr;
+}
 @end

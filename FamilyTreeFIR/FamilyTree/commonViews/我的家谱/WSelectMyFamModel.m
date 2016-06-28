@@ -17,6 +17,8 @@ static WSelectMyFamModel *famModel = nil;
         famModel = [[WSelectMyFamModel alloc] init];
         famModel.myFamArray = [@[] mutableCopy];
     });
+    
+  
     return famModel;
 }
 @end

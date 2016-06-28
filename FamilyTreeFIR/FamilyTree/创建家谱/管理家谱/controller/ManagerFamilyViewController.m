@@ -12,8 +12,8 @@
 
 @interface ManagerFamilyViewController ()<WswichDetailFamViewDelegate>
 {
-    BOOL _selectedRollView;
-    BOOL _selectedSwithBtn;
+    BOOL _selectedRollView;//是否选择了某个卷谱
+//    BOOL _selectedSwithBtn;
 }
 @property (nonatomic,strong) UIScrollView *backScrollView; /*背景滚动图*/
 
@@ -24,6 +24,8 @@
 @property (nonatomic,strong) WRollDetailView *detailView; /*具体人数等*/
 
 @property (nonatomic,strong) WSwitchDetailFamView *switchDetailView; /*点击切换家谱之后的显示*/
+
+@property (nonatomic,strong) CreateFamModel *famModel; /*家谱信息model*/
 
 
 @end
@@ -87,29 +89,87 @@
         
        [self.detailView removeFromSuperview];
     }
-    NSLog(@"%ld", gesture.view.tag);
+//    NSLog(@"%ld", gesture.view.tag);
     
 }
 //切换家谱事件
 -(void)respondsToSwitchFam:(UIButton *)sender{
     NSLog(@"%@", NSStringFromSelector(_cmd));
-    _selectedSwithBtn = !_selectedSwithBtn;
     
-    if (_selectedSwithBtn) {
         [self.view addSubview:self.switchDetailView];
         [self.view bringSubviewToFront:self.switchDetailView];
         self.switchFam.hidden = YES;
-    }
     
     
 }
 
 #pragma mark *** WswithDelegate ***
 -(void)WswichDetailFamViewDelegate:(WSwitchDetailFamView *)detaiView didSelectedButton:(UIButton *)sender{
+
     if ([sender.titleLabel.text isEqualToString:@"切换家谱"]) {
         [_switchDetailView removeFromSuperview];
         self.switchFam.hidden = false;
+    }else if ([sender.titleLabel.text isEqualToString:@"创建家谱"]){
+        CreateFamViewController *crefa = [[CreateFamViewController alloc] initWithTitle:@"创建家谱" image:nil];
+        [self.navigationController pushViewController:crefa animated:YES];
+    }else if ([sender.titleLabel.text isEqualToString:@"新增卷谱"]){
+        
+    }else if ([sender.titleLabel.text isEqualToString:@"删除卷谱"]){
+        
     }
+    else{
+        //网络请求家谱详情
+        [self postGetFamInfoWithtitle:sender.titleLabel.text callBack:^(NSArray *genIDArr) {
+            
+            [self posGetDetailFamInfoWithID:genIDArr[0] callBack:^(id respondsDic) {
+                
+            
+//                NSLog(@"%@", respondsDic[@"data"]);
+                
+                
+                WK(weakSelf)
+
+                        weakSelf.famModel = [CreateFamModel modelWithJSON:respondsDic[@"data"]];
+                
+//                        NSLog(@"???---%@", self.famModel.data.GeName);
+  
+                
+            }];
+            
+        }];
+        
+    }
+    
+    
+}
+
+#pragma mark *** 请求家谱信息 ***
+//请求家谱id
+-(void)postGetFamInfoWithtitle:(NSString *)title callBack:(void (^)(NSArray *genIDArr))callback{
+    //网络请求家谱详情
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"query":title,@"type":@"MyGen"} requestID:GetUserId requestcode:kRequestCodequerymygen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSMutableArray *idArr = [@[] mutableCopy];
+            for (NSDictionary *dic in [NSString jsonArrWithArr:jsonDic[@"data"]]) {
+                [idArr addObject:dic[@"Geid"]];
+            }
+            callback(idArr);
+        }else{
+            [SXLoadingView showAlertHUD:@"???" duration:0.5];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+-(void)posGetDetailFamInfoWithID:(NSString *)genId callBack:(void (^)(id respondsDic))callBack{
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"geid":genId} requestID:GetUserId requestcode:kRequestCodeQuerygendata success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            callBack(jsonDic);
+        }
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark *** getters ***
@@ -133,8 +193,6 @@
         _famImage.image = MImage(@"jp_IMG");
         
         UILabel *nameLabel = [[UILabel alloc] initWithFrame:AdaptationFrame(0, 15, 131, 325)];
-        
-        
         nameLabel.text = [NSString verticalStringWith:@"云南大理段氏"];
         nameLabel.textAlignment = 1;
         nameLabel.numberOfLines = 0;
@@ -159,9 +217,14 @@
 }
 -(WSwitchDetailFamView *)switchDetailView{
     if (!_switchDetailView) {
-        _switchDetailView = [[WSwitchDetailFamView alloc] initWithFrame:AdaptationFrame(self.view.bounds.size.width/AdaptationWidth()-187, 395+143, 187, 200) famNamesArr:@[@"大理段氏",@"怀宁陈氏",@"怀宁张氏"]];
+        _switchDetailView = [[WSwitchDetailFamView alloc] initWithFrame:AdaptationFrame(self.view.bounds.size.width/AdaptationWidth()-187, 395+143, 187, 600) famNamesArr:[WSelectMyFamModel sharedWselectMyFamModel].myFamArray];
         _switchDetailView.delegate = self;
     }
+    
+    
     return _switchDetailView;
 }
 @end
+
+
+
