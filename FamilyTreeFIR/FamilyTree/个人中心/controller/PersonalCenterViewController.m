@@ -26,6 +26,7 @@
 #import "QueryModel.h"
 #import "JobModel.h"
 #import "AreaModel.h"
+#import "VIPInfoModel.h"
 
 @interface PersonalCenterViewController ()<PersonalCenterHeaderViewDelegate,PersonalCenterTodayFortuneViewDelegate,UITableViewDataSource,UITableViewDelegate,PersonalCenterMyPhotoAlbumsViewDelegate,PayForFortuneViewDelegate,PayForForeverFortuneViewDelegate,VIPViewDelegate>
 /** 全屏滚动*/
@@ -118,6 +119,9 @@
             [weakSelf initNaviData];
             [weakSelf initMainData];
             [SXLoadingView hideProgressHUD];
+            [weakSelf initTodayFortuneView];
+            //今日运势数据
+            [self.todayFortuneView reloadData:self.memallInfo.grys];
         }else{
             [SXLoadingView showProgressHUD:jsonDic[@"message"] duration:0.5];
         }
@@ -126,17 +130,18 @@
     }];
     
     
-//    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getdevout" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-//        if (succe) {
-//            MYLog(@"虔诚度%@",jsonDic);
-//            //self.cliffordView reloadData:
-//            
-//        }else{
-//            [SXLoadingView showProgressHUD:jsonDic[@"message"] duration:1];
-//        }
-//    } failure:^(NSError *error) {
-//        MYLog(@"失败---%@",error.description);
-//    }];
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getdevout" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            MYLog(@"虔诚度%@",jsonDic);
+            DevoutModel *devoutModel = [DevoutModel modelWithJSON:jsonDic[@"data"]];
+            [self.cliffordView reloadDevoutData:devoutModel];
+            
+        }else{
+            
+        }
+    } failure:^(NSError *error) {
+        MYLog(@"失败---%@",error.description);
+    }];
 
 }
 
@@ -152,8 +157,6 @@
     [personalInfoEditBtn addTarget:self action:@selector(clickPersonalInfoBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.navi addSubview:personalInfoEditBtn];
     self.vipBtn = [[UIButton alloc]init];
-    NSString *vipLevelStr = [NSString stringWithFormat:@"VIP%@",[USERDEFAULT valueForKey:@"MeViplevel"]];
-    [self.vipBtn setTitle:vipLevelStr forState:UIControlStateNormal];
     self.vipBtn.titleLabel.font = MFont(15);
     [self.vipBtn addTarget:self action:@selector(clickVipBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.navi addSubview:self.vipBtn];
@@ -174,13 +177,9 @@
     self.numerologyView = [[PersonalCenterNumerologyView alloc]initWithFrame:CGRectMake(0, CGRectYH(self.infoView), Screen_width, 175)];
     [self.scrollView addSubview:self.numerologyView];
     //今日运势视图
-    self.todayFortuneView = [[PersonalCenterTodayFortuneView alloc]initWithFrame:CGRectMake(0.0406*Screen_width, CGRectYH(self.numerologyView), 0.4469*Screen_width, 119)];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ToFortuneTodayView)];
-    [self.todayFortuneView addGestureRecognizer:tap];
-    self.todayFortuneView.delegate = self;
-    [self.scrollView addSubview:self.todayFortuneView];
+    
     //求签祈福
-    self.cliffordView = [[PersonalCenterCliffordView alloc]initWithFrame:CGRectMake(0.5156*Screen_width, CGRectY(self.todayFortuneView), 0.4469*Screen_width, 119)];
+    self.cliffordView = [[PersonalCenterCliffordView alloc]initWithFrame:CGRectMake(0.5156*Screen_width, 346, 0.4469*Screen_width, 119)];
     [self.scrollView addSubview:self.cliffordView];
     //家族动态
     UIView *tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectYH(self.cliffordView), Screen_width, 40)];
@@ -202,11 +201,21 @@
 
     
 }
+
+-(void)initTodayFortuneView{
+    //今日运势视图
+    self.todayFortuneView = [[PersonalCenterTodayFortuneView alloc]initWithFrame:CGRectMake(0.0406*Screen_width, 346, 0.4469*Screen_width, 119)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ToFortuneTodayView)];
+    [self.todayFortuneView addGestureRecognizer:tap];
+    self.todayFortuneView.delegate = self;
+    [self.scrollView addSubview:self.todayFortuneView];
+}
 //导航栏数据刷新
 -(void)initNaviData{
     //导航栏数据
     self.navi.titleLabel.text = self.queryModel.memb.MeNickname;
     NSString *vipLevelStr = [NSString stringWithFormat:@"VIP%@",@(self.queryModel.memb.MeViplevel)];
+    [USERDEFAULT setObject:vipLevelStr forKey:VIPLevel];
     [self.vipBtn setTitle:vipLevelStr forState:UIControlStateNormal];
     self.headerView.money = (double)self.queryModel.memb.MeBalance;
     self.headerView.sameCityMoney = self.queryModel.memb.MeIntegral;
@@ -220,8 +229,8 @@
     [self.infoView reloadData:self.memallInfo.hyjp];
     //命理数据
     [self.numerologyView reloadData:self.memallInfo.scbz];
-    //今日运势数据
-    [self.todayFortuneView reloadData:self.memallInfo.grys];
+//    //今日运势数据
+//    [self.todayFortuneView reloadData:self.memallInfo.grys];
     //求签数据
     [self.cliffordView reloadData:self.memallInfo.grqw];
     //家族动态数据
@@ -237,6 +246,7 @@
     [self getNaviData];
 }
 
+#pragma mark - 点击事件
 //点击个人信息编辑
 -(void)clickPersonalInfoBtn:(UIButton *)sender{
     sender.selected = !sender.selected;
@@ -293,7 +303,7 @@
         [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeEditProfile success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
             MYLog(@"修改个人资料%@",jsonDic[@"message"]);
             if (succe) {
-                
+                [weakSelf getNaviData];
             }else{
                 
             }
@@ -308,6 +318,8 @@
             
             [weakSelf.editPersonalInfoView removeFromSuperview];
         });
+        
+        
     }
     
     
@@ -388,11 +400,36 @@
     MYLog(@"点击vip");
     sender.selected = !sender.selected;
     if (sender.selected == YES) {
-        [self.view addSubview:self.vipView];
+        [self getVIPInfoData];
+        
     }else{
         [self.vipView removeFromSuperview];
     }
 }
+
+-(void)getVIPInfoData{
+    NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
+    WK(weakSelf)
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetVIPtq success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        //MYLog(@"%@",jsonDic[@"message"]);
+        if (succe) {
+            //MYLog(@"%@",jsonDic[@"data"]);
+            NSArray<VIPInfoModel *> *arr = [NSArray modelArrayWithClass:[VIPInfoModel class] json:jsonDic[@"data"]];
+            weakSelf.vipView = [[VIPView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
+            _vipView.delegate = weakSelf;
+            [weakSelf.view addSubview:weakSelf.vipView];
+            [weakSelf.vipView reloadVIPInfoData:arr];
+        }else{
+            
+        }
+        
+    } failure:^(NSError *error) {
+        MYLog(@"失败---%@",error.description);
+    }];
+    
+    
+}
+
 
 #pragma mark - UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -431,18 +468,6 @@
     }
     return _scrollView;
 }
-
-
--(VIPView *)vipView{
-    if (!_vipView) {
-        _vipView = [[VIPView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
-        _vipView.delegate = self;
-    }
-    return _vipView;
-}
-
-
-
 
 
 

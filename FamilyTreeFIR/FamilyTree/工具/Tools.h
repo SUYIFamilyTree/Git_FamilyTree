@@ -45,6 +45,7 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodeQuerygendata;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetsyntype;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeUpdatepswd;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetprovince;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetVIPtq;
 
 /**
  *  弹出框自动消失

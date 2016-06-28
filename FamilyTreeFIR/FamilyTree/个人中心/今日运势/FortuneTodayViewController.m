@@ -20,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.comNavi.titleLabel.text = @"今日运势";
     [self initData];
     [self initForUI];
 }

@@ -45,6 +45,7 @@ NSString * _Nonnull const kRequestCodeQuerygendata = @"querygendeta";
 NSString * _Nonnull const kRequestCodeGetsyntype =  @"getsyntype";
 NSString * _Nonnull const kRequestCodeUpdatepswd = @"updatepswd";
 NSString * _Nonnull const kRequestCodeGetprovince = @"getprovince";
+NSString * _Nonnull const kRequestCodeGetVIPtq = @"getviptq";
 
 
 +(void)showAlertViewControllerAutoDissmissWithTarGet:(id)target Message:(NSString *)message delay:(NSInteger)time complete:(void (^)(BOOL))complete{

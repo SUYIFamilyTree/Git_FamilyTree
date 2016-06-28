@@ -87,6 +87,10 @@ __block __weak __typeof(&*self)weakSelf = self;
 #define LoginStates @"loginStatus"
 #define UserAccount @"userAccount"
 #define UserPassword @"userPassword"
+#define VIPLevel @"VIPLevel"
+#define MeNickName @"MeNickname"
+
+
 //保存用户登录信息
 #define GetUserId  [USERDEFAULT valueForKey:@"userid"]
 
