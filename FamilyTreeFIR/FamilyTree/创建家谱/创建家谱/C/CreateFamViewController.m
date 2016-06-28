@@ -10,7 +10,8 @@
 #import "BackScrollAndDetailView.h"
 #import "CreateFamView.h"
 
-#import <objc/runtime.h>
+
+
 @interface CreateFamViewController ()<BackScrollAndDetailViewDelegate>
 @property (nonatomic,strong) CreateFamView *cFameView; /*创建家谱view*/
 
@@ -26,62 +27,115 @@
     
     [self initUI];
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = true;
+
+}
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.tabBarController.tabBar.hidden = false;
 }
 
+
 #pragma mark *** BackScrollAndDetailViewDelegate ***
 -(void)BackScrollAndDetailViewDidTapCreateButton{
-//    unsigned int count;
-//    objc_property_t *lis = class_copyPropertyList([CreateFamView class], &count);
-//    
-//    for (int idx = 0; idx<count; idx++) {
-//        objc_property_t *th = lis + idx;
-//        const char * name = property_getName(*th);
-//        NSLog(@"Person has a property: '%s'", name);
-//    }
-//    
-//    int i;
-//    unsigned int propertyCount = 0;
-//    objc_property_t *propertyList = class_copyPropertyList([BackScrollAndDetailView class], &propertyCount);
-//    
-//    for ( i=0; i < propertyCount; i++ ) {
-//        objc_property_t *thisProperty = propertyList + i;
-//        const char* propertyName = property_getName(*thisProperty);
-//        NSLog(@"Person has a property: '%s'", propertyName);
-//    }
+    [self postCreateFamWithBlock:^(BOOL back,NSString *genID) {
+        if (back) {
+            
+            
+//            NSData *imageData = UIImageJPEGRepresentation(self.cFameView.famTotem.image, 1.0);
+//            NSString *encodeImageData = [imageData base64EncodedString];
+//            
+//            [self postUploadheadImageWithGeID:genID base64CodeStr:encodeImageData];
+        }
+    }];
     
+    
+}
+//请求创建家谱
+-(void)postCreateFamWithBlock:(void (^)(BOOL back,NSString *genID))callBack{
     //创建家谱
+    NSMutableDictionary *genDsListDic = [NSMutableDictionary dictionary];
     
-//    NSArray *createModel = @[self.cFameView.famName.titleLabel.text,
-//                             self.cFameView.famfarName.titleLabel.text,
-//                             self.cFameView.gennerNum.inputLabel.text,
-//                             self.cFameView.famBookName.text,
-//                             self.cFameView.sexInpuView.inputLabel.text,
-//                             [NSNumber numberWithBool:self.cFameView.diXiView.marked],
-//                             [NSNumber numberWithBool:self.cFameView.famousPerson.marked],
-//                             self.cFameView.inputView.inputLabel.text,
-//                             self.cFameView.parnName.text,self.cFameView.selecProtrai.image,
-//                             self.cFameView.birtime.inputLabel.text,
-//                             self.cFameView.monthLabel.inputLabel.text,
-//                             self.cFameView.dayLabel.inputLabel.text,
-//                             self.cFameView.birtime.inputLabel.text,
-//                             self.cFameView.liveNowLabel.inputLabel.text,
-//                             self.cFameView.selfYear.inputLabel.text,
-//                             self.cFameView.selfMonth.inputLabel.text,self.cFameView.selfDay.inputLabel.text,self.cFameView.generationLabel.inputLabel.text,self.cFameView.gennerationNex.text,self.cFameView.moveCity.text];
+    [self.cFameView.gennerNexArr enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        if (![obj isEqualToString:@""]) {
+            [genDsListDic setValue:@[obj] forKey:[NSString stringWithFormat:@"%ld",idx+1]];
+        }
+        
+    }];
+    //    NSLog(@"1111---%@", genDsListDic);
+    //截取代数
+    NSString *genNumber = [self.cFameView.gennerNum.inputLabel.text stringByReplacingOccurrencesOfString:@"第" withString:@""];
+    NSString *genNumberF = [genNumber stringByReplacingOccurrencesOfString:@"代" withString:@""];
     
-//    NSLog(@"%@", createModel);
+    //空值处理
+    if ([self.cFameView.famBookName.text isEqualToString:@""]) {
+        self.cFameView.famBookName.text = @"";
+    }
+    NSLog(@"famName---%@", self.cFameView.famName.detailLabel.text);
+    if ([self.cFameView.famName.detailLabel.text isEqualToString:@""]||self.cFameView.famName.titleLabel.text.length == 0) {
+        [SXLoadingView showAlertHUD:@"家谱名称不能为空" duration:0.5];
+        return;
+    }
+    if ([self.cFameView.famfarName.detailLabel.text isEqualToString:@""]||self.cFameView.famfarName.titleLabel.text.length == 0) {
+        [SXLoadingView showProgressHUD:@"祖宗姓名不能为空" duration:0.5];
+        return;
+    }
     
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"geid":@1} requestID:@0 requestcode:kRequestCodeQuerygendata success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    NSDictionary *dic = @{@"Ds":genNumberF,
+                          @"GeSurname":@"",
+                          @"JpName":self.cFameView.famBookName.text,
+                          @"GeName":self.cFameView.famName.detailLabel.text,
+                          @"GePhoto":@"",
+                          @"Photo":@"",
+                          @"Grjl":self.cFameView.selfTextView.text,
+                          @"Jzd":self.cFameView.moveCity.text,
+                          @"GemeSurname":@"",
+                          @"GemeName":self.cFameView.famfarName.detailLabel.text,
+                          @"GemeSex":[self.cFameView.sexInpuView.inputLabel.text isEqualToString:@"女"]?@"0":@"1",
+                          @"GemeYear":self.cFameView.birthLabel.inputLabel.text,
+                          @"GemeMonth":self.cFameView.monthLabel.inputLabel.text,
+                          @"GemeDay":self.cFameView.dayLabel.inputLabel.text,
+                          @"GemeHour":self.cFameView.birtime.inputLabel.text,
+                          @"GemeDeathtime":[self.cFameView.liveNowLabel.inputLabel.text isEqualToString:@"是"]?@"":[NSString stringWithFormat:@"%@-%@-%@",self.cFameView.selfYear.inputLabel.text,self.cFameView.selfMonth.inputLabel.text,self.cFameView.selfDay.inputLabel.text],
+                          @"GemeIslife":[self.cFameView.liveNowLabel.inputLabel.text isEqualToString:@"是"]?@"1":@"0",
+                          @"Po":self.cFameView.parnName.text,
+                          @"IsEnt":self.cFameView.diXiView.marked?@"1":@"0",
+                          @"DsList":genDsListDic};
+    
+    [SXLoadingView showProgressHUD:@"正在创建家谱..."];
+    [TCJPHTTPRequestManager POSTWithParameters:dic requestID:GetUserId requestcode:kRequestCodecreategen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        
         if (succe) {
+            
             NSLog(@"%@", jsonDic[@"data"]);
+            
+            
+            NSDictionary *JTdic = [NSString jsonStringWithDic:jsonDic[@"data"]];
+            NSLog(@"dididi--%@", JTdic);
+            callBack(succe,JTdic[@"geid"]);
+            [SXLoadingView showProgressHUD:@"创建成功！" duration:0.5];
+        }else{
+            [SXLoadingView showProgressHUD:jsonDic[@"创建失败.."] duration:0.5];
+        }
+    } failure:^(NSError *error) {
+        MYLog(@"失败");
+    }];
+}
+//请求上传家谱图像
+-(void)postUploadheadImageWithGeID:(NSString *)genID base64CodeStr:(NSString *)baseCode{
+    
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"genid":genID,@"imgbt":baseCode} requestID:GetUserId requestcode:kRequestCodeuploadgenan success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSLog(@"%@", jsonDic);
         }
     } failure:^(NSError *error) {
         
     }];
-    
 }
+
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
     
@@ -100,7 +154,4 @@
 
 
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self.view endEditing:YES];
-}
 @end

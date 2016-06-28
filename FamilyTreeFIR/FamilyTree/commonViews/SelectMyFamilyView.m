@@ -15,11 +15,7 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
 
 
 @interface SelectMyFamilyView()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,UICollectionViewDelegate>
-{
-    NSArray *_dataSource;
-    
-}
-@property (nonatomic,strong) UICollectionView *collectionView; /*集合*/
+
 
 @end
 
@@ -30,21 +26,45 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
     if (self) {
         [self initData];
         [self initUI];
+        
     }
+    
     return self;
 }
 
 #pragma mark *** 初始化数据 ***
 -(void)initData{
     
-    
-    NSArray *arr = @[@"我的家谱1",@"我的家谱2",@"我的家谱3"];
+    NSArray *arr = @[@""];
     NSArray *arr2 = @[@"修谱名目",@"家训家风",@"世系图",@"字辈",@"恩荣录",@"名人传记",@"图文影音",@"家族互助",@"风俗礼仪",@"祠堂",@"坟茔",@"契约"];
-    _dataSource = @[arr,arr2];
-    
-    
-    
+    _dataSource = [@[arr,arr2] mutableCopy];
+
 }
+
+-(void)updateDataSourceAndUI{
+    //获取我的所有家谱
+    
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"query":@"",@"type":@"MyGen"} requestID:GetUserId requestcode:kRequestCodequerymygen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+                        NSLog(@"？---%@", jsonDic[@"data"]);
+            
+            NSString *jsonStr = [NSString stringWithFormat:@"%@",jsonDic[@"data"]];
+            NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
+            NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            NSLog(@"----%@", arr);
+            NSMutableArray *allFamNams = [@[] mutableCopy];
+            for (NSDictionary *dic in arr) {
+                [allFamNams addObject:dic[@"GeName"]];
+            }
+            [WSelectMyFamModel sharedWselectMyFamModel].myFamArray = allFamNams;
+            _dataSource[0] = [WSelectMyFamModel sharedWselectMyFamModel].myFamArray;
+            [self.collectionView reloadData];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
     [self addSubview:self.collectionView];
@@ -69,14 +89,16 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
 }
 
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    
     UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kReusableMyheaderIdentifier forIndexPath:indexPath];
+    [view removeAllSubviews];
     if (indexPath.section == 0) {
         UILabel *label = [[UILabel alloc] initWithFrame:AdaptationFrame(0, 0, 200, 84)];
         label.text = @"我的家谱";
         label.textAlignment = 0;
         label.font = MFont(30*AdaptationWidth());
         [view addSubview:label];
-    }else if (indexPath.section == 1){
+    }else {
         UIView *lineView = [[UIView alloc] initWithFrame:AdaptationFrame(0, 43, 658, 1)];
         lineView.backgroundColor = LH_RGBCOLOR(240, 240, 240);
         [view addSubview:lineView];

@@ -15,4 +15,7 @@
 +(NSString *)getCurrentTimeAddNumber;
 //横向转竖向字符串
 +(NSString *)verticalStringWith:(NSString *)string;
+
+//json字典转字典
++(NSDictionary *)jsonStringWithDic:(NSDictionary *)dic;
 @end

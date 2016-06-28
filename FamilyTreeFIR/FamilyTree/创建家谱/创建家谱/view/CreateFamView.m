@@ -6,10 +6,17 @@
 //  Copyright © 2016年 王子豪. All rights reserved.
 //
 
+typedef enum : NSUInteger {
+    SelectedFamTotem,
+    SelectFamHeadView,
+    
+} ImagePickType;
+
 #import "CreateFamView.h"
-@interface CreateFamView()
 
+@interface CreateFamView()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
+@property (nonatomic,assign) ImagePickType pickType; /*区别图片选择器选择的图片*/
 
 @end
 
@@ -20,10 +27,16 @@
     self = [super initWithFrame:frame];
     
     if (self) {
+        [self initImagePicker];
         [self initCreatUI];
     }
-    
     return self;
+}
+-(void)initImagePicker{
+//    _creImagePickerController = [[UIImagePickerController alloc] init];
+//   
+//    _creImagePickerController.delegate = self;
+    
 }
 
 #pragma mark *** 初始化界面 ***
@@ -32,7 +45,7 @@
     [self.backView addSubview:self.famousPerson];
     [self.backView addSubview:self.famName];
     [self.backView addSubview:self.famfarName];
-//
+
     NSMutableArray *allGenNum = [@[] mutableCopy];
     
     for (int idx = 1; idx<100; idx++) {
@@ -41,6 +54,7 @@
     }
     
     self.gennerNum = [self creatLabelTextWithTitle:@"祖宗是家族第几代:" TitleFrame:CGRectMake(20, CGRectYH(self.famfarName)+GapOfView, 0.4*Screen_width, InputView_height) inputViewLength:0.2*Screen_width dataArr:allGenNum inputViewLabel:@"第1代" FinText:nil withStar:YES];
+    
     [self.backView addSubview:self.gennerNum];
     
     [self.backView addSubview:self.famBookName];
@@ -53,11 +67,53 @@
     
     [self.backView bringSubviewToFront:self.gennerNum];
     
+    [self.backView addSubview:self.famTotem];
+    
 }
 
+#pragma mark *** Events ***
+-(void)respondsToSelectHeadImage:(id)sender{
+    
+    if ([sender class] == [UITapGestureRecognizer class]) {
+        NSLog(@"ges");
+        _pickType = SelectedFamTotem;
+        
+    }
+    if ([sender class] == [UIButton class]) {
+        _pickType = SelectFamHeadView;
+    }
+
+    NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        _imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        _imagePickerController.mediaTypes = @[mediaTypes[0]];
+        _imagePickerController.allowsEditing = YES;
+
+        [[self viewController] presentViewController:_imagePickerController animated:YES completion:nil];
+        
+    }
+    
+}
+#pragma mark *** UIImagePickerControllerDelegate ***
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    
+    NSLog(@"%@", info);
+    
+    if (_pickType == SelectedFamTotem) {
+        self.famTotem.image = info[UIImagePickerControllerEditedImage];
+    }else if (_pickType == SelectFamHeadView){
+        self.selecProtrai.image = info[UIImagePickerControllerEditedImage];
+    }
+    
+    [[self viewController] dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+#pragma mark *** getters ***
 -(DiscAndNameView *)famName{
     if (!_famName) {
-        _famName = [[DiscAndNameView alloc] initWithFrame:CGRectMake(20,40+GapOfView, 0.6*Screen_width+10, InputView_height) title:@"家族名称:" detailCont:@"" isStar:YES];
+        _famName = [[DiscAndNameView alloc] initWithFrame:CGRectMake(20,40+GapOfView, 0.6*Screen_width+10, InputView_height) title:@"家谱名称:" detailCont:@"" isStar:YES];
     }
     return _famName;
 }
@@ -73,7 +129,7 @@
 -(UITextField *)famBookName{
     if (!_famBookName) {
         _famBookName = [UITextField new];
-        [_famBookName setText:@"收卷家谱名称：段正淳（1-5）带卷普"];
+        _famBookName.placeholder = @"首卷家谱名称";
         _famBookName.font = WFont(35);
         [_famBookName setTextColor:[UIColor blackColor] ];
         _famBookName.backgroundColor = [UIColor whiteColor];
@@ -87,7 +143,7 @@
 -(InputView *)sexInpuView{
     if (!_sexInpuView) {
         _sexInpuView = [[InputView alloc] initWithFrame:CGRectMake(20, CGRectYH(self.famfarName)+GapOfView*3+InputView_height*2, 50, InputView_height) Length:50 withData:@[@"男",@"女"]];
-        _sexInpuView.inputLabel.text = @"  男";
+        _sexInpuView.inputLabel.text = @"男";
         
     }
     return _sexInpuView;
@@ -104,5 +160,22 @@
     }
     return _famousPerson;
 }
+
+-(UIImageView *)famTotem{
+    if (!_famTotem) {
+        _famTotem = [[UIImageView alloc] initWithFrame:AdaptationFrame(540, 67, 127, 327)];
+        _famTotem.backgroundColor = [UIColor grayColor];
+        _famTotem.userInteractionEnabled = true;
+        UITapGestureRecognizer *tapGess = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondsToSelectHeadImage:)];
+     
+        
+        [_famTotem addGestureRecognizer:tapGess];
+        
+        
+    }
+    return _famTotem;
+}
+
+
 
 @end

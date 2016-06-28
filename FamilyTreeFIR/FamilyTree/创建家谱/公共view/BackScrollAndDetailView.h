@@ -19,6 +19,11 @@
 @end
 
 @interface BackScrollAndDetailView : UIView
+
+{
+    UIImagePickerController *_imagePickerController;
+}
+
 @property (nonatomic,strong) InputView *inputView; /*是否结婚*/
 
 @property (nonatomic,strong) UITextField *parnName; /*配偶名*/
@@ -58,6 +63,9 @@
 @property (nonatomic,strong) UIButton *uploadVideoBtn; /*上传影音资料*/
 
 @property (nonatomic,strong) UITextField *moveCity; /*迁移者居住地*/
+
+@property (nonatomic,strong) NSMutableArray *gennerNexArr; /*字辈arr*/
+
 
 @property (nonatomic,weak) id<BackScrollAndDetailViewDelegate> delegate; /*代理人*/
 

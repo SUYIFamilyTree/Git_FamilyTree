@@ -44,6 +44,7 @@
 #import "RollView.h"
 #import "RollDetailView.h"
 #import "WDetailManagerViewController.h"
+#import "WSelectMyFamModel.h"
 //扩展方法
 #import <UIView+SDAutoLayout.h>
 #import "NSDictionary+FromNSString.h"
@@ -58,6 +59,7 @@
 #import "TCJPHTTPRequestManager.h"
 #import "SXLoadingView.h"
 //工具
+#import "WTools.h"
 #import "Tools.h"
 #import "Custom.h"
 #import <YYKit.h>
