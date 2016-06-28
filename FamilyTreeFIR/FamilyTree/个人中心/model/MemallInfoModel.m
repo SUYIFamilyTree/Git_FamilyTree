@@ -55,3 +55,9 @@
 @implementation MemallInfoHyjpModel
 
 @end
+
+@implementation DevoutModel
+
+
+
+@end

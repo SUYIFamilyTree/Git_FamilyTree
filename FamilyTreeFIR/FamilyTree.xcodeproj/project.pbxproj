@@ -679,6 +679,7 @@
 		BC5F16071D0FF224004F3622 /* vip_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15F81D0FF224004F3622 /* vip_right@2x.png */; };
 		BC5F16081D0FF224004F3622 /* vip_right@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5F15F91D0FF224004F3622 /* vip_right@3x.png */; };
 		BC65210F1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC65210E1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.m */; };
+		BC7299F41D22147D008FEB71 /* VIPInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC7299F31D22147D008FEB71 /* VIPInfoModel.m */; };
 		BC96727E1D10E4BF00F60534 /* EditPersonalInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC96727D1D10E4BF00F60534 /* EditPersonalInfoView.m */; };
 		BC9672881D10E8D500F60534 /* geran_background_s.png in Resources */ = {isa = PBXBuildFile; fileRef = BC9672801D10E8D500F60534 /* geran_background_s.png */; };
 		BC9672891D10E8D500F60534 /* geran_background_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC9672811D10E8D500F60534 /* geran_background_s@2x.png */; };
@@ -1533,6 +1534,8 @@
 		BC5F15F91D0FF224004F3622 /* vip_right@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vip_right@3x.png"; sourceTree = "<group>"; };
 		BC65210D1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPersonalInfoDetailViewController.h; sourceTree = "<group>"; };
 		BC65210E1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPersonalInfoDetailViewController.m; sourceTree = "<group>"; };
+		BC7299F21D22147D008FEB71 /* VIPInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIPInfoModel.h; path = ../../model/VIPInfoModel.h; sourceTree = "<group>"; };
+		BC7299F31D22147D008FEB71 /* VIPInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIPInfoModel.m; path = ../../model/VIPInfoModel.m; sourceTree = "<group>"; };
 		BC96727C1D10E4BF00F60534 /* EditPersonalInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPersonalInfoView.h; sourceTree = "<group>"; };
 		BC96727D1D10E4BF00F60534 /* EditPersonalInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPersonalInfoView.m; sourceTree = "<group>"; };
 		BC9672801D10E8D500F60534 /* geran_background_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = geran_background_s.png; sourceTree = "<group>"; };
@@ -1762,7 +1765,6 @@
 			isa = PBXGroup;
 			children = (
 				ADD23CFF1D0D5454008986F6 /* 教你修谱 */,
-				ADB7F0371D0278AB001F151D /* 今日运势 */,
 				BC2943A41CFEA4E1006671B9 /* 祭祀 */,
 				AD8DAADD1CFD750C009B7958 /* 宗亲互助 */,
 				AD49FED51CF6A0ED00DF9F7E /* controller */,
@@ -2309,7 +2311,8 @@
 				ADB7F0381D027A52001F151D /* FortuneTodayViewController.h */,
 				ADB7F0391D027A52001F151D /* FortuneTodayViewController.m */,
 			);
-			path = "今日运势";
+			name = "今日运势";
+			path = "../家谱服务/今日运势";
 			sourceTree = "<group>";
 		};
 		ADB7F03B1D027BC3001F151D /* model */ = {
@@ -3166,6 +3169,7 @@
 				BC5F14FA1D0FF1AD004F3622 /* 充值 */,
 				BC5F14FE1D0FF1AD004F3622 /* 结算中心 */,
 				BC5F15041D0FF1AD004F3622 /* 续时永久 */,
+				ADB7F0371D0278AB001F151D /* 今日运势 */,
 				BC5F15081D0FF1AD004F3622 /* 续时运势 */,
 			);
 			path = "个人中心";
@@ -3206,6 +3210,7 @@
 		BC5F14F01D0FF1AD004F3622 /* vip */ = {
 			isa = PBXGroup;
 			children = (
+				BC7299F51D2214D3008FEB71 /* model */,
 				BC5F14F11D0FF1AD004F3622 /* VIPView.h */,
 				BC5F14F21D0FF1AD004F3622 /* VIPView.m */,
 			);
@@ -3461,6 +3466,15 @@
 				BCF97C4C1D17988B004D46AB /* close@3x.png */,
 			);
 			path = vip;
+			sourceTree = "<group>";
+		};
+		BC7299F51D2214D3008FEB71 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				BC7299F21D22147D008FEB71 /* VIPInfoModel.h */,
+				BC7299F31D22147D008FEB71 /* VIPInfoModel.m */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		BC96727A1D10E4B400F60534 /* 个人信息 */ = {
@@ -4429,6 +4443,7 @@
 				ADA4C14F1D0E862900CA9067 /* CemIntroViewController.m in Sources */,
 				AD195B371CF5A8D5000E32C7 /* NSString+md5.m in Sources */,
 				ADB9261F1CF7DF1900AA8B6E /* OtherLoginView.m in Sources */,
+				BC7299F41D22147D008FEB71 /* VIPInfoModel.m in Sources */,
 				BC2B1E1C1D1BC301004E916D /* DateModel.m in Sources */,
 				BC2943A01CFE9F30006671B9 /* LineageViewController.m in Sources */,
 				ADA4C1721D0E92DF00CA9067 /* CemSingleGoodsCollectionViewCell.m in Sources */,

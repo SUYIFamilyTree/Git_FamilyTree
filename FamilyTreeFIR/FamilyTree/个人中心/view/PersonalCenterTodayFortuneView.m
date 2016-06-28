@@ -36,6 +36,8 @@
         payForFortuneBtn.titleLabel.font = MFont(10);
         [payForFortuneBtn addTarget:self action:@selector(payForFortune:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:payForFortuneBtn];
+        //运势
+        //[self initFortuneStar];
     }
     return self;
 }
@@ -77,5 +79,7 @@
     }
      [self initFortuneStar];
 }
+
+
 
 @end

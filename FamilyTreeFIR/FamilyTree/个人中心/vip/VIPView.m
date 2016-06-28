@@ -18,10 +18,16 @@
 @property (nonatomic, assign) int currentVIPLevel;
 /** 进度*/
 @property (nonatomic, strong) NSString *progressStr;
-/** 几天后到期*/
-@property (nonatomic, assign) int Deadline;
-/** 会员详情数组*/
+
+
+///** 几天后到期*/
+//@property (nonatomic, assign) int Deadline;
+/* 查看某会员详情数组*/
 @property (nonatomic, strong) NSArray<NSString *> *VIPInfoStrArr;
+/** 所有的会员详情数组*/
+@property (nonatomic, strong) NSArray<VIPInfoModel *> *VIPInfoArr;
+/** 会员详情标签数组*/
+@property (nonatomic, strong) NSMutableArray<UILabel *> *VIPInfoLBArr;
 @end
 
 @implementation VIPView
@@ -37,24 +43,14 @@
         //加入会员按钮
         [self initAddToVIPBtn];
         //会员等级标签及进度视图
-        self.currentVIPLevel = 3;
+        self.currentVIPLevel = [[USERDEFAULT valueForKey:VIPLevel] intValue];
         self.progressStr = @"400/500";
-        self.Deadline = 7;
+        //self.Deadline = 7;
         [self initVIPProgress];
-        //会员详情
-        self.VIPInfoStrArr = @[@"论坛版主优先权优于VIP3以下的用户。",
-                               @"我需要发布数量1个",
-                               @"好友里排名显示前于VIP3以下的用户。",
-                               @"每日求签次数1次",
-                               @"签到奖励每天14-15同城币",
-                               @"贡品清茶、檀香、供油免费",
-                               @"昵称金色标识",
-                               @"数字家谱专享模板。",
-                               @"商城优惠额度95折。",
-                               @"每月签文详解名字12次",
-                               @"运程免费时间1周",
-                               @"动态头像。",];
-        [self initVIPInfoLBs];
+        
+        self.VIPInfoLBArr = [NSMutableArray array];
+        //会员等级详情
+        //[self initVIPInfoLBs];
         //左右箭头翻页
         UIButton *leftBtn =[[UIButton alloc]initWithFrame:CGRectMake(0.0171*CGRectW(self.bgIV), 0.4309*CGRectH(self.bgIV), 0.0785*CGRectW(self.bgIV), 0.0726*CGRectH(self.bgIV))];
         [leftBtn setBackgroundImage:MImage(@"vip_left") forState:UIControlStateNormal];
@@ -116,43 +112,78 @@
     nextVIPLevelLB.font = MFont(13);
     [self.bgIV addSubview:nextVIPLevelLB];
 
-    //到期时间
-    UILabel *deadlineLB = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(VIPProgressBgIV), CGRectYH(VIPProgressBgIV), CGRectW(VIPProgressBgIV)+10, 0.0451*CGRectH(self))];
-    deadlineLB.text = [NSString stringWithFormat:@"VIP%d%@天后到期",self.currentVIPLevel,[NSString translation:self.Deadline]];
-    deadlineLB.font = MFont(11);
-    [self.bgIV addSubview:deadlineLB];
+//    //到期时间
+//    UILabel *deadlineLB = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(VIPProgressBgIV), CGRectYH(VIPProgressBgIV), CGRectW(VIPProgressBgIV)+10, 0.0451*CGRectH(self))];
+//    deadlineLB.text = [NSString stringWithFormat:@"VIP%d%@天后到期",self.currentVIPLevel,[NSString translation:self.Deadline]];
+//    deadlineLB.font = MFont(11);
+//    [self.bgIV addSubview:deadlineLB];
     
 }
 
 -(void)initVIPInfoLBs{
-    for (int i = 0; i < self.VIPInfoStrArr.count; i++) {
+    for (int i = 0; i < 11; i++) {
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0.1024*CGRectW(self.bgIV), 0.1874*CGRectH(self.bgIV)+0.0515*CGRectH(self.bgIV)*i, 0.8*CGRectW(self.bgIV), 0.0515*CGRectH(self.bgIV))];
-        label.text = self.VIPInfoStrArr[i];
         label.font = MFont(13);
+        if (i >= self.VIPInfoStrArr.count) {
+                label.text = @"";
+            }else{
+                label.text = self.VIPInfoStrArr[i];
+            }
+        
         label.textColor = LH_RGBCOLOR(118, 126, 124);
         [self.bgIV addSubview:label];
+        [self.VIPInfoLBArr addObject:label];
     }
+    
 }
 
 -(void)clickAddToVipBtn:(UIButton *)sender{
     VIPSelectViewController *VIPSelectVC = [[VIPSelectViewController alloc]init];
     [[self viewController].navigationController pushViewController:VIPSelectVC animated:YES];
-    [self removeFromSuperview];
     
 }
 
 -(void)clickLeftBtnForLookVIPInfo:(UIButton *)sender{
-    MYLog(@"向前查看vip");
+    if (self.currentVIPLevel != 0) {
+        self.currentVIPLevel --;
+        self.VIPInfoStrArr = self.VIPInfoArr[self.currentVIPLevel].content;
+        for (int i = 0; i < 11; i++) {
+            if (i >= self.VIPInfoStrArr.count) {
+                self.VIPInfoLBArr[i].text = @"";
+            }else{
+                self.VIPInfoLBArr[i].text = self.VIPInfoStrArr[i];
+            }
+        }
+
+    }
 }
 
 -(void)clickRightBtnForLookVIPInfo:(UIButton *)sender{
-    MYLog(@"向后查看vip");
+    if (self.currentVIPLevel != 8){
+        self.currentVIPLevel ++;
+        self.VIPInfoStrArr = self.VIPInfoArr[self.currentVIPLevel].content;
+        for (int i = 0; i < 11; i++) {
+            if (i >= self.VIPInfoStrArr.count) {
+                self.VIPInfoLBArr[i].text = @"";
+            }else{
+                self.VIPInfoLBArr[i].text = self.VIPInfoStrArr[i];
+            }
+        }
+
+    }
 }
 
 -(void)clickBackBtn:(UIButton *)sender{
     [self.delegate clickVipBackBtn];
     [self removeFromSuperview];
-    
-    
 }
+
+-(void)reloadVIPInfoData:(NSArray<VIPInfoModel *> *)VIPInfoArr{
+    //[self.VIPInfoLBArr removeAllObjects];
+    self.VIPInfoArr = VIPInfoArr;
+    self.currentVIPLevel = [[USERDEFAULT valueForKey:VIPLevel] intValue];
+    self.VIPInfoStrArr = VIPInfoArr[self.currentVIPLevel].content;
+    [self initVIPInfoLBs];
+}
+
 @end

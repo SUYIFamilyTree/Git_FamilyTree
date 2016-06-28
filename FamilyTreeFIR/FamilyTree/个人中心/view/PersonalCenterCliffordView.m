@@ -11,10 +11,10 @@
 @interface PersonalCenterCliffordView()
 /** 签运*/
 @property (nonatomic, strong) NSMutableArray *divinationsArr;
-/** 祈福等级*/
-@property (nonatomic, assign) int cliffodLevel;
-/** 虔诚度*/
-@property (nonatomic, assign) int devoutDgree;
+/** 总虔诚度标签*/
+@property (nonatomic, strong) UILabel *devoutDgreeNumberLB;
+/** 虔诚等级标签*/
+@property (nonatomic, strong) UILabel *cliffordLevelNumberLB;
 @end
 
 
@@ -29,8 +29,8 @@
         //self.divinationsArr = @[@"三等中平策",@"规规矩矩"];
        
         //祈福
-        self.cliffodLevel = 3;
-        self.devoutDgree = 310;
+//        self.cliffodLevel = 3;
+//        self.devoutDgree = 310;
         [self initClifford];
     }
     return self;
@@ -58,27 +58,25 @@
     UIImageView *cliffordIV = [[UIImageView alloc]initWithFrame:CGRectMake(0.0839*CGRectW(self), 0.5*CGRectH(self), 0.3846*CGRectW(self), 55)];
     cliffordIV.image = MImage(@"gr_ct_jiang_todayJia");
     [self addSubview:cliffordIV];
-    //等级
-    UILabel *cliffordLevelLB = [[UILabel alloc]initWithFrame:CGRectMake(0.6783*CGRectW(self), 0.6555*CGRectH(self), 0.2008*CGRectW(self), 12)];
+    //虔诚度等级
+    UILabel *cliffordLevelLB = [[UILabel alloc]initWithFrame:CGRectMake(0.6083*CGRectW(self), 0.6555*CGRectH(self), 0.2008*CGRectW(self), 12)];
     cliffordLevelLB.text = @"等级:";
     cliffordLevelLB.font = MFont(11);
-    //cliffordLevelLB.backgroundColor = [UIColor redColor];
     [self addSubview:cliffordLevelLB];
-    UILabel *cliffordLevelNumberLB = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(cliffordLevelLB), 0.6555*CGRectH(self)-3, 15, 15)];
-    cliffordLevelNumberLB.text = [NSString stringWithFormat:@"%d",self.cliffodLevel];
-    cliffordLevelNumberLB.textColor = [UIColor redColor];
-    [self addSubview:cliffordLevelNumberLB];
-    //虔诚度
+    self.cliffordLevelNumberLB = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(cliffordLevelLB), 0.6555*CGRectH(self)-3, 25, 15)];
+    self.cliffordLevelNumberLB.font = MFont(11);
+    self.cliffordLevelNumberLB.textColor = [UIColor redColor];
+    [self addSubview:self.cliffordLevelNumberLB];
+    //总虔诚度
     UILabel *devoutDgreeLB = [[UILabel alloc]initWithFrame:CGRectMake(0.5514*CGRectW(self), CGRectYH(cliffordLevelLB)+5, 0.2598*CGRectW(self), 12)];
     devoutDgreeLB.text = @"虔诚度:";
     devoutDgreeLB.font = MFont(11);
     [self addSubview:devoutDgreeLB];
     
-    UILabel *devoutDgreeNumberLB = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(devoutDgreeLB), CGRectY(devoutDgreeLB)-3, 30, 15)];
-    devoutDgreeNumberLB.textColor = [UIColor redColor];
-    devoutDgreeNumberLB.text = [NSString stringWithFormat:@"%d",self.devoutDgree];
-    devoutDgreeNumberLB.font = MFont(12);
-    [self addSubview:devoutDgreeNumberLB];
+    self.devoutDgreeNumberLB = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(devoutDgreeLB), CGRectY(devoutDgreeLB)-3, 30, 15)];
+    self.devoutDgreeNumberLB.textColor = [UIColor redColor];
+    self.devoutDgreeNumberLB.font = MFont(12);
+    [self addSubview:self.devoutDgreeNumberLB];
 }
 
 -(void)reloadData:(MemallInfoGrqwModel *)grqw{
@@ -96,6 +94,7 @@
 }
 
 -(void)reloadDevoutData:(DevoutModel *)devout{
-    
+    self.devoutDgreeNumberLB.text =[NSString stringWithFormat:@"%@",@(devout.qcdz)];
+    self.cliffordLevelNumberLB.text = devout.qcdch;
 }
 @end

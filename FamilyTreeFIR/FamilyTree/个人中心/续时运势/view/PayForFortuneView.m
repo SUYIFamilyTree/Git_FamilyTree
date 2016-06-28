@@ -22,7 +22,7 @@
         [self addSubview:payForFortuneIV];
         //续时提示语
         UILabel *payForFortuneLB = [[UILabel alloc]initWithFrame:CGRectMake(0.1429*CGRectW(payForFortuneIV), 0.1897*CGRectH(payForFortuneIV), 0.7653*CGRectW(payForFortuneIV), 0.1322*CGRectH(payForFortuneIV))];
-        payForFortuneLB.text = @"是否花费10同城币续时我的运程一天？";
+        payForFortuneLB.text = @"是否花费10积分续时我的运程一天？";
         payForFortuneLB.font = MFont(13);
         [payForFortuneIV addSubview:payForFortuneLB];
         //确定按钮
