@@ -27,6 +27,7 @@
     NSString *timeStamp = [NSString getCurrentTimeAddNumber];
     NSString *requestUserId = [NSString stringWithFormat:@"%@",requestID];
     NSString *md5checkStr = [[[[requestData stringByAppendingString:SecretKeySend]stringByAppendingString:requestUserId] stringByAppendingString:requestcode] stringByAppendingString:timeStamp];
+    MYLog(@"requestData:%@",requestData);
     //NSLog(@"md5beforeStr--%@", md5checkStr);
     NSString *md5check = [NSString md5Str:md5checkStr];
     //NSLog(@"md5afterStr--%@", md5check);

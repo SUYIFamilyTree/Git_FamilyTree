@@ -548,6 +548,10 @@
 		BC458A861D1CC64300AA0DDF /* JobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC458A851D1CC64300AA0DDF /* JobModel.m */; };
 		BC458A891D1D1B9200AA0DDF /* QueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC458A881D1D1B9200AA0DDF /* QueryModel.m */; };
 		BC4790631D20BD6F00BA194D /* AreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4790621D20BD6F00BA194D /* AreaModel.m */; };
+		BC51929E1D236C2E0020480F /* VIPGrowUpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC51929D1D236C2E0020480F /* VIPGrowUpModel.m */; };
+		BC5192A11D239D9A0020480F /* NSString+valiMobile.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5192A01D239D9A0020480F /* NSString+valiMobile.m */; };
+		BC5192A41D23A0E30020480F /* NSString+valiEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5192A31D23A0E30020480F /* NSString+valiEmail.m */; };
+		BC5192A71D23A3030020480F /* NSString+valiIdentityCard.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5192A61D23A3030020480F /* NSString+valiIdentityCard.m */; };
 		BC5F150C1D0FF1AD004F3622 /* PersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14DE1D0FF1AD004F3622 /* PersonalCenterViewController.m */; };
 		BC5F150D1D0FF1AD004F3622 /* DrawStarsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14E11D0FF1AD004F3622 /* DrawStarsView.m */; };
 		BC5F150E1D0FF1AD004F3622 /* HeadImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14E31D0FF1AD004F3622 /* HeadImageView.m */; };
@@ -1385,6 +1389,14 @@
 		BC458A881D1D1B9200AA0DDF /* QueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryModel.m; sourceTree = "<group>"; };
 		BC4790611D20BD6F00BA194D /* AreaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaModel.h; sourceTree = "<group>"; };
 		BC4790621D20BD6F00BA194D /* AreaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaModel.m; sourceTree = "<group>"; };
+		BC51929C1D236C2E0020480F /* VIPGrowUpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIPGrowUpModel.h; sourceTree = "<group>"; };
+		BC51929D1D236C2E0020480F /* VIPGrowUpModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIPGrowUpModel.m; sourceTree = "<group>"; };
+		BC51929F1D239D9A0020480F /* NSString+valiMobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+valiMobile.h"; sourceTree = "<group>"; };
+		BC5192A01D239D9A0020480F /* NSString+valiMobile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+valiMobile.m"; sourceTree = "<group>"; };
+		BC5192A21D23A0E30020480F /* NSString+valiEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+valiEmail.h"; sourceTree = "<group>"; };
+		BC5192A31D23A0E30020480F /* NSString+valiEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+valiEmail.m"; sourceTree = "<group>"; };
+		BC5192A51D23A3030020480F /* NSString+valiIdentityCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+valiIdentityCard.h"; sourceTree = "<group>"; };
+		BC5192A61D23A3030020480F /* NSString+valiIdentityCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+valiIdentityCard.m"; sourceTree = "<group>"; };
 		BC5F14DD1D0FF1AD004F3622 /* PersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterViewController.h; sourceTree = "<group>"; };
 		BC5F14DE1D0FF1AD004F3622 /* PersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterViewController.m; sourceTree = "<group>"; };
 		BC5F14E01D0FF1AD004F3622 /* DrawStarsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawStarsView.h; sourceTree = "<group>"; };
@@ -1728,6 +1740,12 @@
 				BC00EA0A1D190E0A00BF1DC3 /* NSString+addLineBreakOrSpace.m */,
 				BC729A051D226000008FEB71 /* NSString+getStarDate.h */,
 				BC729A061D226000008FEB71 /* NSString+getStarDate.m */,
+				BC51929F1D239D9A0020480F /* NSString+valiMobile.h */,
+				BC5192A01D239D9A0020480F /* NSString+valiMobile.m */,
+				BC5192A21D23A0E30020480F /* NSString+valiEmail.h */,
+				BC5192A31D23A0E30020480F /* NSString+valiEmail.m */,
+				BC5192A51D23A3030020480F /* NSString+valiIdentityCard.h */,
+				BC5192A61D23A3030020480F /* NSString+valiIdentityCard.m */,
 			);
 			path = "扩展方法";
 			sourceTree = "<group>";
@@ -3461,6 +3479,8 @@
 			children = (
 				BC7299F21D22147D008FEB71 /* VIPInfoModel.h */,
 				BC7299F31D22147D008FEB71 /* VIPInfoModel.m */,
+				BC51929C1D236C2E0020480F /* VIPGrowUpModel.h */,
+				BC51929D1D236C2E0020480F /* VIPGrowUpModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -4368,6 +4388,7 @@
 				BC7299FE1D225C53008FEB71 /* FortuneTodayViewController.m in Sources */,
 				ADE265A81D20C4C800F12FC9 /* WSelectMyFamModel.m in Sources */,
 				BC5F15181D0FF1AD004F3622 /* RechargeViewController.m in Sources */,
+				BC5192A41D23A0E30020480F /* NSString+valiEmail.m in Sources */,
 				ADA98E741D10F5EF005B23EC /* FamilyNamesViewController.m in Sources */,
 				ADA7FEF31D07A82300EDBEE4 /* PortraitAndNameViews.m in Sources */,
 				BC96727E1D10E4BF00F60534 /* EditPersonalInfoView.m in Sources */,
@@ -4397,6 +4418,7 @@
 				ADB9261D1CF7DF1900AA8B6E /* AccountView.m in Sources */,
 				ADC326FD1CF3E3DF00CEAE53 /* AppDelegate.m in Sources */,
 				ADA7FEFB1D07C51000EDBEE4 /* HundredNamesView.m in Sources */,
+				BC51929E1D236C2E0020480F /* VIPGrowUpModel.m in Sources */,
 				ADBA01711D0132350016AB00 /* DiscAndNameView.m in Sources */,
 				AD716D631D06D041004F422E /* NewsTableView.m in Sources */,
 				ADA4C1691D0E8A1200CA9067 /* CemGoodsShopView.m in Sources */,
@@ -4441,8 +4463,10 @@
 				BC458A891D1D1B9200AA0DDF /* QueryModel.m in Sources */,
 				BCF97C5A1D17B46D004D46AB /* MBProgressHUD+Add.m in Sources */,
 				BCCE8A9A1CFFF289005A5E21 /* PublicWorshipView.m in Sources */,
+				BC5192A11D239D9A0020480F /* NSString+valiMobile.m in Sources */,
 				AD2ACD7F1CF3FC9C009D4A24 /* RootTabBarViewController.m in Sources */,
 				AD195B381CF5A8D5000E32C7 /* TCJPHTTPRequestManager.m in Sources */,
+				BC5192A71D23A3030020480F /* NSString+valiIdentityCard.m in Sources */,
 				BC2B1E1F1D1BD88E004E916D /* EditPasswordViewController.m in Sources */,
 				ADA98E851D11272F005B23EC /* RollView.m in Sources */,
 				AD7388171CF6C2050076B2AD /* TopSearchView.m in Sources */,

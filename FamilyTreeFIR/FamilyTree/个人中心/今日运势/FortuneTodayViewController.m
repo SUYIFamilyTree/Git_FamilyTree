@@ -25,13 +25,13 @@
     self.comNavi.titleLabel.text = @"今日运势";
     [self initData];
     [self initForUI];
-    //[self getMainData];
+    [self getMainData];
     //MYLog(@"%@",[NSString getStarDateWithStar:@"狮子座"]);
 }
 
 -(void)getMainData{
     NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
-    WK(weakSelf)
+    //WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetMemys success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             MYLog(@"%@",jsonDic[@"data"]);
