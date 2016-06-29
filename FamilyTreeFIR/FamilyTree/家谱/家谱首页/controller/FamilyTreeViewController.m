@@ -209,12 +209,12 @@
     [SXLoadingView showProgressHUD:@"正在加载"];
     [TCJPHTTPRequestManager POSTWithParameters:@{@"query":@"",@"type":@"MyGen"} requestID:GetUserId requestcode:kRequestCodequerymygen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-            NSLog(@"？---%@", jsonDic[@"data"]);
+//            NSLog(@"？---%@", jsonDic[@"data"]);
             
             NSString *jsonStr = [NSString stringWithFormat:@"%@",jsonDic[@"data"]];
             NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
             NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-            NSLog(@"----%@", arr);
+//            NSLog(@"----%@", arr);
             NSMutableArray *allFamNams = [@[] mutableCopy];
             for (NSDictionary *dic in arr) {
                 [allFamNams addObject:dic[@"GeName"]];

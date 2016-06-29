@@ -27,8 +27,11 @@
     NSString *timeStamp = [NSString getCurrentTimeAddNumber];
     NSString *requestUserId = [NSString stringWithFormat:@"%@",requestID];
     NSString *md5checkStr = [[[[requestData stringByAppendingString:SecretKeySend]stringByAppendingString:requestUserId] stringByAppendingString:requestcode] stringByAppendingString:timeStamp];
+    
     //NSLog(@"md5beforeStr--%@", md5checkStr);
+    
     NSString *md5check = [NSString md5Str:md5checkStr];
+    
     //NSLog(@"md5afterStr--%@", md5check);
     
     //NSMutableString  *autocode = [NSMutableString string];
@@ -61,11 +64,13 @@
         NSString *jsonStr = [NSString stringWithFormat:@"%@",jsonDic];
         NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+        
         //MYLog(@"转成ios的返回--%@", dic);
         BOOL succe = NO;
         //判断md5是不是为约定的来验证返回数据的完整性和有效性
         //MD5(data+SecretKey+result+resultcode+timestamp)，SecretKey由双方约定，为可配置参数，测试环境的SecretKey暂定为：123abc。
         //NSString *dataStr = [NSString stringWithDic:dic[@"data"]];
+        
         if (!error) {
             NSString *md5Receive = [[[[dic[@"data"] stringByAppendingString:SecretKeyReiceive] stringByAppendingString:[dic[@"result"] boolValue]?@"true":@"false"] stringByAppendingString:dic[@"resultcode"]] stringByAppendingString:dic[@"timestamp"]];
             //NSLog(@"返回数据拼接的字符串--%@", md5Receive);

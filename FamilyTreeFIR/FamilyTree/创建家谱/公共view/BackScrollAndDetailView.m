@@ -16,7 +16,7 @@ enum{
 #define FirstViewFrameOfheight 315+GapOfView
 
 
-@interface BackScrollAndDetailView()<InputViewDelegate,UITextFieldDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface BackScrollAndDetailView()<InputViewDelegate,UITextFieldDelegate,UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 
 @end
@@ -155,6 +155,7 @@ enum{
     textF.layer.borderColor = BorderColor;
     textF.placeholder = @"迁移者填居住地";
     textF.textAlignment  = 1;
+    textF.delegate = self;
     self.moveCity = textF;
     [self.backView addSubview:self.moveCity];
     
@@ -171,6 +172,7 @@ enum{
     [self.backView bringSubviewToFront:self.monthLabel];
     [self.backView bringSubviewToFront:self.birthLabel];
     [self.backView bringSubviewToFront:self.inputView];
+    
     
 }
 
@@ -250,13 +252,42 @@ enum{
 }
 
 #pragma mark *** UITextFieldDelegate ***
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (textField == self.moveCity) {
+        [UIView animateWithDuration:0.5f animations:^{
+            self.backView.frame = CGRectMake(0, -300*AdaptationWidth(), Screen_width, Screen_height);
+        }];
+    }
+}
+
 //结束编辑 将字辈str放入数组
 -(void)textFieldDidEndEditing:(UITextField *)textField{
-    
-    NSString *str2=[self.generationLabel.inputLabel.text substringFromIndex:0];
-    NSUInteger index =  [self.generationLabel.dataArr indexOfObject:str2];
-    [self.gennerNexArr replaceObjectAtIndex:index withObject:self.gennerationNex.text];
+    if (textField == self.gennerationNex) {
+        NSString *str2=[self.generationLabel.inputLabel.text substringFromIndex:0];
+        NSUInteger index =  [self.generationLabel.dataArr indexOfObject:str2];
+        [self.gennerNexArr replaceObjectAtIndex:index withObject:self.gennerationNex.text];
 
+    }else if (textField == self.moveCity){
+        [UIView animateWithDuration:0.5f animations:^{
+            self.backView.frame = CGRectMake(0, 0, Screen_width, Screen_height);
+            
+        }];
+    }
+    
+}
+#pragma mark *** UITextViewDelegate ***
+
+-(void)textViewDidBeginEditing:(UITextView *)textView{
+    [UIView animateWithDuration:0.5f animations:^{
+        self.backView.frame = CGRectMake(0, -200*AdaptationWidth(), Screen_width, Screen_height);
+    }];
+}
+-(void)textViewDidEndEditing:(UITextView *)textView{
+    [UIView animateWithDuration:0.5f animations:^{
+        self.backView.frame = CGRectMake(0, 0, Screen_width, Screen_height);
+        
+    }];
 }
 
 #pragma mark *** BtnEvents ***
@@ -303,10 +334,8 @@ enum{
         self.selecProtrai.image = info[UIImagePickerControllerEditedImage] ;
         
         [[self viewController] dismissViewControllerAnimated:YES completion:nil];
-    
-    
+  
 }
-
 
 #pragma mark *** getters ***
 
@@ -453,6 +482,7 @@ enum{
         _selfTextView.layer.borderWidth = 1.0f;
         _selfTextView.backgroundColor = [UIColor whiteColor];
         _selfTextView.text = @"个人简介（生平经历传记）";
+        _selfTextView.delegate = self;
         
     }
     return _selfTextView;

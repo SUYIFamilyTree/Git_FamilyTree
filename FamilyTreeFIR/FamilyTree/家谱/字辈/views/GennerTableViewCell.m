@@ -20,9 +20,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        [self.contentView addSubview:self.generNumber];
-        [self.contentView addSubview:self.personNumber];
-        [self.contentView addSubview:self.perName];
+        
         
         
     }
@@ -40,6 +38,15 @@
 
 //头像和详情
 -(void)initPorInfo{
+    [self.contentView removeAllSubviews];
+    [self.contentView addSubview:self.generNumber];
+    [self.contentView addSubview:self.personNumber];
+    [self.contentView addSubview:self.perName];
+    
+    UIView *bacView = [[UIView alloc] initWithFrame:AdaptationFrame(CGRectXW(self.generNumber)/AdaptationWidth(), 0, 90, 339)];
+    [self.contentView addSubview:bacView];
+    [CALayer drawLeftBorder:bacView];
+    [CALayer drawRightBorder:bacView];
     
     NSArray *perArr = @[@"杨唯一",@"杨味儿",@"养胃三"];
     NSArray *infoArr = @[@[@"屠夫",@"位置",@"杨拘役"],@[@"屠夫",@"侍郎",@"屠夫"],@[@"屠夫",@"杨伟三",@"未知"]];
@@ -85,10 +92,7 @@
 -(UILabel *)perName{
     if (!_perName) {
         
-        UIView *bacView = [[UIView alloc] initWithFrame:AdaptationFrame(CGRectXW(self.generNumber)/AdaptationWidth(), 0, 90, 339)];
-        [self.contentView addSubview:bacView];
-        [CALayer drawLeftBorder:bacView];
-        [CALayer drawRightBorder:bacView];
+       
         
         _perName = [[UILabel alloc] initWithFrame:CGRectMake(CGRectXW(self.generNumber), 20*AdaptationWidth(), 95*AdaptationWidth(), 90)];
         _perName.textAlignment = 1;

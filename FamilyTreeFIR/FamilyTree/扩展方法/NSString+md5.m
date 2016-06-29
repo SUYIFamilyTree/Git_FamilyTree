@@ -25,8 +25,11 @@
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&error];
     NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSLog(@"zhengchangchanshu---%@",jsonStr);
+    
     NSString *jsonStrn = [jsonStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     NSString *jsonStrnSpace = [jsonStrn stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSLog(@"after-----%@", jsonStrnSpace);
     return jsonStrnSpace;
 }
 
@@ -41,13 +44,10 @@
     
     NSString *currentDate = [formatter stringFromDate:date];
     
-    
-    
     NSInteger randomFour = 1000+random()%(9000);
     
     NSString *currentKey = [NSString stringWithFormat:@"%@%ld",currentDate,randomFour];
-    
-    
+        
     return currentKey;
   
 }

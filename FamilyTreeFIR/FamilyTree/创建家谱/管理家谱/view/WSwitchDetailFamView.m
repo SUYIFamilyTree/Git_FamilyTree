@@ -8,7 +8,7 @@
 
 #import "WSwitchDetailFamView.h"
 
-#define arrLenthCount (_famNamesArray.count>4?5:_famNamesArray.count)
+#define arrLenthCount (_famNamesArray.count>4?5:_famNamesArray.count+1)
 @interface WSwitchDetailFamView()
 @property (nonatomic,strong) UIScrollView *backScroView; /*滚动家谱*/
 
@@ -31,7 +31,6 @@
 -(void)initData{
     
 }
-
 -(void)getAllFamNames{
     //更新数据
     [TCJPHTTPRequestManager POSTWithParameters:@{@"query":@"",@"type":@"MyGen"} requestID:GetUserId requestcode:kRequestCodequerymygen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
@@ -45,6 +44,7 @@
             }
             [WSelectMyFamModel sharedWselectMyFamModel].myFamArray = allFamNams;
             _famNamesArray = [WSelectMyFamModel sharedWselectMyFamModel].myFamArray;
+            //更新完数据刷新界面
             [self reloadDataForUI];
         }
     } failure:^(NSError *error) {
@@ -56,9 +56,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAllFamNames) name:kNotificationCodeManagerFam object:nil];
 }
 
-
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
+    
     [self addSubview:self.backScroView];
     //卷谱
     NSMutableArray *allBtnArrs = [[WSelectMyFamModel sharedWselectMyFamModel].myFamArray mutableCopy];
@@ -85,7 +85,6 @@
             
         }
     }
-    
     //新增和删除
     NSArray *addDeletArr = @[@"新增卷谱",@"删除卷谱"];
     for (int idx = 0; idx<addDeletArr.count; idx++) {
@@ -104,8 +103,11 @@
 
 -(void)reloadDataForUI{
     [self removeAllSubviews];
+    [self.backScroView removeAllSubviews];
     //更新count不然bug
-    _backScroView.contentSize = AdaptationSize(187, (_famNamesArray.count+1)*63);
+    self.backScroView.contentSize = AdaptationSize(187, (_famNamesArray.count+1)*63);
+    self.backScroView.frame =AdaptationFrame(0, 0, 187, arrLenthCount*63);
+
     [self initUI];
     
 }
