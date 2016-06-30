@@ -9,10 +9,8 @@
 #import "GennerTableViewCell.h"
 @interface GennerTableViewCell()
 
-
-
-
 @end
+
 @implementation GennerTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -48,18 +46,25 @@
     [CALayer drawLeftBorder:bacView];
     [CALayer drawRightBorder:bacView];
     
-    NSArray *perArr = @[@"杨唯一",@"杨味儿",@"养胃三"];
-    NSArray *infoArr = @[@[@"屠夫",@"位置",@"杨拘役"],@[@"屠夫",@"侍郎",@"屠夫"],@[@"屠夫",@"杨伟三",@"未知"]];
+    NSArray *perArr = @[@"",@"",@""];
+    NSArray *infoArr = @[@[@"",@"",@""],@[@"",@"",@""],@[@"",@"",@""]];
+//    NSArray *proUrl = @[@[@"",@"",@""],@[@"",@"",@""],@[@"",@"",@""]];
+    NSArray *proUrl = nil;
+
     if (_nameArr) {
         perArr = _nameArr;
     }
     if (_idArr) {
         infoArr = _idArr;
+        
+    }
+    if (_proImageUrlArr) {
+        proUrl = _proImageUrlArr;
     }
     
     for (int idx = 0; idx<perArr.count; idx++) {
         
-        PortraiView *porInfo = [[PortraiView alloc] initWithFrame:AdaptationFrame(CGRectXW(self.perName)/AdaptationWidth()+24 +idx*(110+48), 43, 110, 253) portaitImage:nil porName:perArr[idx] infoArr:infoArr[idx]];
+        PortraiView *porInfo = [[PortraiView alloc] initWithFrame:AdaptationFrame(CGRectXW(self.perName)/AdaptationWidth()+24 +idx*(110+48), 43, 110, 253) portaitImageUrl:proUrl[idx] porName:perArr[idx] infoArr:infoArr[idx]];
         [self.contentView addSubview:porInfo];
     }
     

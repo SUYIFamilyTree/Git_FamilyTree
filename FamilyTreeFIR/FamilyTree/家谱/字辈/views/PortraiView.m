@@ -20,15 +20,14 @@
 
 @end
 @implementation PortraiView
-- (instancetype)initWithFrame:(CGRect)frame portaitImage:(UIImage *)pImage porName:(NSString *)name infoArr:(NSArray *)infoArr
+- (instancetype)initWithFrame:(CGRect)frame portaitImageUrl:(NSString *)pImageUrl porName:(NSString *)name infoArr:(NSArray *)infoArr
 {
     self = [super initWithFrame:frame];
     if (self) {
         
         UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.width)];;
-        if (pImage) {
-            headImage.image = pImage;
-
+        if (pImageUrl) {
+            headImage.imageURL = [NSURL URLWithString:pImageUrl];
         }else{
             headImage.image = MImage(@"ziBei_touxiang_man");
         }

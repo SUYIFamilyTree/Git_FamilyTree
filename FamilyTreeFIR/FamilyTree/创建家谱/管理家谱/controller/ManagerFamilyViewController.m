@@ -147,7 +147,8 @@
                 //将点击家谱名，获取到id，再根据id获取到的家谱详情传到famModel里
                  weakSelf.famModel = [CreateFamModel modelWithJSON:respondsDic[@"data"]];
                 
-                NSDictionary *dic = [NSString jsonDicWithDic:respondsDic[@"data"]];
+//                NSDictionary *dic = [NSString jsonDicWithDic:respondsDic[@"data"]];
+                
                 NSLog(@"???%@", respondsDic[@"data"]);
                 
                 [self reloadUI];

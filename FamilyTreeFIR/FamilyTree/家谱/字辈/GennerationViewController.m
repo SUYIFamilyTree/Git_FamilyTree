@@ -13,9 +13,10 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
 @interface GennerationViewController ()<TopSearchViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
 {
-    NSMutableArray *_allInfoArr;
-    NSMutableArray *_detailInfo;
-    NSMutableArray *_genNameArr;
+    NSMutableArray *_allInfoArr; //名字array
+    NSMutableArray *_detailInfo; //字辈array
+    NSMutableArray *_genNameArr; //详情array
+    NSMutableArray *_imageUrlArr; //图片url
 }
 
 
@@ -39,13 +40,24 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
 }
 #pragma mark *** 初始化数据 ***
 -(void)initData{
-    _allInfoArr = [@[@[@"杨未一",@"杨未二"],@[@"杨琚一",@"杨琚二",@"杨琚三"],@[@"杨新军",@"杨春华",@"杨春梅"],@[@"杨新军",@"杨春华",@"杨春梅"]] mutableCopy];
+//    _allInfoArr = [@[@[@"杨未一",@"杨未二"],@[@"杨琚一",@"杨琚二",@"杨琚三"],@[@"杨新军",@"杨春华",@"杨春梅"],@[@"杨新军",@"杨春华",@"杨春梅"]] mutableCopy];
+//    
+//    _detailInfo = [@[@[@[@"屠夫",@"位置",@"杨拘役"],@[@"屠夫",@"侍郎",@"屠夫"]],
+//                    @[@[@"宰相",@"杨未一",@"未知"],@[@"侍郎",@"杨未一",@"未知"],@[@"屠夫",@"杨伟二",@"未知"]],
+//                    @[@[@"中侍郎",@"扬剧二",@"未知"],@[@"屠夫",@"杨军三",@"未知"],@[@"屠夫",@"杨伟三",@"未知"]],
+//                    @[@[@"中侍郎",@"扬剧二",@"未知"],@[@"屠夫",@"杨军三",@"未知"],@[@"屠夫",@"杨伟三",@"未知"]]]mutableCopy];
+//    _genNameArr = [@[@"未",@"琚吴",@"新弦春品",@"??"]mutableCopy];
+    _allInfoArr = [@[@[@"",@""],@[@"",@"",@""],@[@"",@"",@""],@[@"",@"",@""]] mutableCopy];
     
-    _detailInfo = [@[@[@[@"屠夫",@"位置",@"杨拘役"],@[@"屠夫",@"侍郎",@"屠夫"]],
-                    @[@[@"宰相",@"杨未一",@"未知"],@[@"侍郎",@"杨未一",@"未知"],@[@"屠夫",@"杨伟二",@"未知"]],
-                    @[@[@"中侍郎",@"扬剧二",@"未知"],@[@"屠夫",@"杨军三",@"未知"],@[@"屠夫",@"杨伟三",@"未知"]],
-                    @[@[@"中侍郎",@"扬剧二",@"未知"],@[@"屠夫",@"杨军三",@"未知"],@[@"屠夫",@"杨伟三",@"未知"]]]mutableCopy];
-    _genNameArr = [@[@"未",@"琚吴",@"新弦春品",@"??"]mutableCopy];
+    _detailInfo = [@[@[@[@"",@"",@""],@[@"",@"",@""]],
+                     @[@[@"",@"",@""],@[@"",@"",@""],@[@"",@"",@""]],
+                     @[@[@"",@"",@""],@[@"",@"",@""],@[@"",@"",@""]],
+                     @[@[@"",@"",@""],@[@"",@"",@""],@[@"",@"",@""]]]mutableCopy];
+    
+    _genNameArr = [@[@"",@"",@"",@""]mutableCopy];
+    
+    _imageUrlArr = [@[@[@"",@""],@[@"",@"",@""],@[@"",@"",@""],@[@"",@"",@""]] mutableCopy];
+    
 }
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
@@ -57,6 +69,7 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
 #pragma mark *** 网络请求字辈列表 ***
 
 -(void)PostGennerInfomation{
+//    [SXLoadingView showProgressHUD:@"加载数据"];
     [TCJPHTTPRequestManager POSTWithParameters:@{@"geid":@"1",@"query":@"",@"pagenum":@"1",@"pagesize":@"20"} requestID:GetUserId requestcode:kRequestCodequeryzbgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
 //            NSLog(@"--22-%@", jsonDic[@"data"]);
@@ -70,19 +83,38 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
             [_genNameArr removeAllObjects];
             [_allInfoArr removeAllObjects];
             [_detailInfo removeAllObjects];
+            [_imageUrlArr removeAllObjects];
+            
             //更新所有数据源取model里面的数据
             for (int idx = 0; idx<self.gennerModel.datalist.count; idx++) {
-                [_genNameArr addObject:self.gennerModel.datalist[idx].zb];
+                NSString *ziBei = [self.gennerModel.datalist[idx].zb stringByReplacingOccurrencesOfString:@"," withString:@""];
+                [_genNameArr addObject:ziBei];
+                
                 NSMutableArray *nameArr = [@[] mutableCopy];
+                NSMutableArray *urlArr = [@[] mutableCopy];
                 for (int ij = 0; ij<self.gennerModel.datalist[idx].datas.count; ij++) {
                     [nameArr addObject:self.gennerModel.datalist[idx].datas[ij].name];
+                    [urlArr addObject:self.gennerModel.datalist[idx].datas[ij].photo];
                 }
                 [_allInfoArr addObject:nameArr];
+                [_imageUrlArr addObject:urlArr];
+                
+                NSMutableArray *detailArr = [@[] mutableCopy];
+                for (int index2 = 0; index2<self.gennerModel.datalist[idx].datas.count; index2++) {
+                    NSMutableArray *okuArr = [@[] mutableCopy];
+                    [okuArr addObject:@"未知"];
+                    [okuArr addObject:self.gennerModel.datalist[idx].datas[index2].mother];
+                    [okuArr addObject:self.gennerModel.datalist[idx].datas[index2].father];
+                    
+                    [detailArr addObject:okuArr];
+                }
+                [_detailInfo addObject:detailArr];
                 
             }
-            
-            
+            [SXLoadingView showAlertHUD:@"加载完毕" duration:0.5];
             [self.tableView reloadData];
+            
+            
         }
     } failure:^(NSError *error) {
         
@@ -114,13 +146,16 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
     [CALayer drawBottomBorder:cell];
     
     cell.nameArr = _allInfoArr[indexPath.row];
-//    cell.idArr = _detailInfo[indexPath.row];
+    
+    cell.idArr = _detailInfo[indexPath.row];
+    
+    cell.proImageUrlArr = _imageUrlArr[indexPath.row];
+
     [cell initPorInfo];
     cell.generNumber.text = [NSString stringWithFormat:@"第%ld代",indexPath.row+1];
     cell.personNumber.text = [NSString stringWithFormat:@"%ld人",((NSArray *)_allInfoArr[indexPath.row]).count];
     
     cell.perName.text =  [NSString verticalStringWith:_genNameArr[indexPath.row]];
-        
     
     return cell;
 }

@@ -12,6 +12,8 @@
 @property (nonatomic,copy) NSArray *nameArr; /*名字*/
 @property (nonatomic,copy) NSArray *idArr; /*身份父亲母亲*/
 
+@property (nonatomic,copy) NSArray *proImageUrlArr; /*头像*/
+
 @property (nonatomic,strong) UILabel *generNumber; /*第几代*/
 @property (nonatomic,strong) UILabel *personNumber; /*几个人*/
 @property (nonatomic,strong) UILabel *perName; /*字辈*/

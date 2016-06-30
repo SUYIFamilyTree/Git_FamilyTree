@@ -27,6 +27,8 @@
     self.AddFameView = addM;
     [self.view addSubview:addM];
     
+    [self.view bringSubviewToFront:self.comNavi];
+    
   
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -79,7 +81,7 @@
     //截取代数
     NSString *genNumber = [self.AddFameView.gennerNum.inputLabel.text stringByReplacingOccurrencesOfString:@"第" withString:@""];
     NSString *genNumberF = [genNumber stringByReplacingOccurrencesOfString:@"代" withString:@""];
-    NSDictionary *addDic = @{@"GeId":@"130",
+    NSDictionary *addDic = @{@"GeId":@"1",
                              @"Zb":@"试",
                              @"Father":self.AddFameView.fatheView.inputLabel.text,
                              @"Ds":genNumberF,

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PortraiView : UIView
-- (instancetype)initWithFrame:(CGRect)frame portaitImage:(UIImage *)pImage porName:(NSString *)name infoArr:(NSArray *)infoArr;
+- (instancetype)initWithFrame:(CGRect)frame portaitImageUrl:(NSString *)pImageUrl porName:(NSString *)name infoArr:(NSArray *)infoArr;
 @end
