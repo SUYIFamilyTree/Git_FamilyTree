@@ -7,6 +7,7 @@
 //
 
 #import "ShoppingViewController.h"
+#import "NSString+md5.h"
 
 @interface ShoppingViewController ()
 @property (nonatomic,strong) UITextField *texfield; /*<#desc#>*/
@@ -17,43 +18,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSDictionary *dic1 = @{@"query":@"",@"type":@"Same"};
-   //接口测试
-//    [TCJPHTTPRequestManager POSTWithParameters:dic1 requestID:GetUserId requestcode:kRequestCodequeryclan success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-//        if (succe) {
-//            NSLog(@"查询宗亲--%@", jsonDic[@"data"]);
-//        }
-//    } failure:^(NSError *error) {
-//        
-//    }];
-//    NSDictionary *dic2 = @{@"genid":@"28",@"query":@"",@"pagenum":@"1",@"pagesize":@"20"};
-//    [TCJPHTTPRequestManager POSTWithParameters:dic2 requestID:GetUserId requestcode:kRequestCodequeryzbgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-//        if (succe) {
-//            NSLog(@"字辈成员--%@", jsonDic[@"data"]);
-//        }
-//    } failure:^(NSError *error) {
-//        
-//    }];
+    [self Ceshi];
     
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"geid":@"28"} requestID:GetUserId requestcode:kRequestCodequerygeneration success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    MYLog(@"%@",[NSString md5Str:@"/abc"]);
+    
+}
+
+-(void)Ceshi{
+    UIImage *list =[UIImage imageNamed:@"ci_sm@3x"];
+    NSData *imageData = UIImageJPEGRepresentation(list, 0.5);
+    NSString *encodeimageStr =[imageData base64Encoding];
+    NSLog(@"%@",encodeimageStr);
+    NSString *baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)encodeimageStr,NULL,CFSTR(":/?#[]@!$&’()*+,;="),kCFStringEncodingUTF8);
+    //    NSLog(@"%@",baseString);
+    //    NSString *imgStr =[baseString dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *params =@{@"userid":GetUserId,@"imgbt":@"/abc"};
+    [TCJPHTTPRequestManager POSTWithParameters:params requestID:GetUserId requestcode:@"uploadmemimg" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-             NSLog(@"--%@", [NSString jsonArrWithArr:jsonDic[@"data"]]);
+            NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
+            NSLog(@"%@", dic);
         }
     } failure:^(NSError *error) {
         
     }];
-    
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(100, 200, 200, 200)];
-    btn.backgroundColor = [UIColor redColor];
-    [btn addTarget:self  action:@selector(getpost) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
-    
-    _texfield = [[UITextField alloc] initWithFrame:CGRectMake(100, 400, 100, 50)];
-    _texfield.backgroundColor = [UIColor orangeColor];
-    
-    [self.view addSubview:_texfield];
-    
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
