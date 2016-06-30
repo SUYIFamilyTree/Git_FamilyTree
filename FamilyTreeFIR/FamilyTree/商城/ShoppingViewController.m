@@ -18,9 +18,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self Ceshi];
+    //测试上传图片
+    //[self Ceshi];
+    //测试墓园列表
+    //[self ceshiMuyuanList];
     
-    MYLog(@"%@",[NSString md5Str:@"/abc"]);
+    //测试墓园详情
+    //[self ceshiMuyuanInfo];
+    
+    //测试添加墓园
+    [self ceshiTianjiamuyuan];
+    //MYLog(@"%@",[NSString md5Str:@"/abc"]);
+    
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(100, 200, 200, 200)];
+    btn.backgroundColor = [UIColor redColor];
+    [btn addTarget:self  action:@selector(getpost) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+    
+    _texfield = [[UITextField alloc] initWithFrame:CGRectMake(100, 400, 100, 50)];
+    _texfield.backgroundColor = [UIColor orangeColor];
+    
+    [self.view addSubview:_texfield];
     
 }
 
@@ -43,6 +61,50 @@
     }];
 }
 
+-(void)ceshiMuyuanList{
+    NSDictionary *logDic = @{@"pagenum":@2,@"pagesize":@2,@"meid":@"15",@"type":@"PRI"};
+    
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"cemeterylist" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"墓园列表%@",jsonDic[@"message"]);
+        MYLog(@"墓园列表%@",jsonDic[@"data"]);
+        if (succe) {
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+
+}
+
+-(void)ceshiMuyuanInfo{
+    NSDictionary *logDic = @{@"CeId":@"1"};
+    
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"cemeterdetail" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"墓园详情%@",jsonDic[@"message"]);
+        MYLog(@"墓园详情%@",jsonDic[@"data"]);
+        if (succe) {
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+
+}
+
+-(void)ceshiTianjiamuyuan{
+    NSDictionary *logDic = @{@"CeId":@"1"};
+    
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"cemeterdetail" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"墓园详情%@",jsonDic[@"message"]);
+        MYLog(@"墓园详情%@",jsonDic[@"data"]);
+        if (succe) {
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
