@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "VIPInfoModel.h"
+#import "VIPGrowUpModel.h"
 
 @class VIPView;
 
@@ -22,5 +23,5 @@
 @property (nonatomic, weak) id<VIPViewDelegate> delegate;
 
 -(void)reloadVIPInfoData:(NSArray<VIPInfoModel *> *)VIPInfoArr;
-
+-(void)reloadVIPGrowUpData:(VIPGrowUpModel *)vipGrowUpModel;
 @end

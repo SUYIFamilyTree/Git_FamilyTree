@@ -27,6 +27,7 @@
 #import "JobModel.h"
 #import "AreaModel.h"
 #import "VIPInfoModel.h"
+#import "VIPGrowUpModel.h"
 
 @interface PersonalCenterViewController ()<PersonalCenterHeaderViewDelegate,PersonalCenterTodayFortuneViewDelegate,UITableViewDataSource,UITableViewDelegate,PersonalCenterMyPhotoAlbumsViewDelegate,PayForFortuneViewDelegate,PayForForeverFortuneViewDelegate,VIPViewDelegate>
 /** 全屏滚动*/
@@ -92,6 +93,7 @@
     
 }
 
+#pragma mark - 获取数据
 -(void)getNaviData{
     NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
     WK(weakSelf)
@@ -102,7 +104,7 @@
             [weakSelf initNaviData];
             
         }else{
-            MYLog(@"%@",jsonDic[@"message"]);
+            //MYLog(@"%@",jsonDic[@"message"]);
         }
     } failure:^(NSError *error) {
         MYLog(@"失败---%@",error.description);
@@ -145,7 +147,50 @@
 
 }
 
+-(void)getVIPInfoData{
+    //获取vip特权信息
+    NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
+    WK(weakSelf)
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetVIPtq success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        //MYLog(@"%@",jsonDic[@"message"]);
+        if (succe) {
+            //MYLog(@"%@",jsonDic[@"data"]);
+            NSArray<VIPInfoModel *> *arr = [NSArray modelArrayWithClass:[VIPInfoModel class] json:jsonDic[@"data"]];
+            weakSelf.vipView = [[VIPView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
+            _vipView.delegate = weakSelf;
+            [weakSelf.view addSubview:weakSelf.vipView];
+            [weakSelf.vipView reloadVIPInfoData:arr];
+            [weakSelf getVIPGrowUpData];
+        }else{
+            
+        }
+        
+    } failure:^(NSError *error) {
+        MYLog(@"失败---%@",error.description);
+    }];
     
+}
+
+-(void)getVIPGrowUpData{
+    //获取vip成长值信息
+    NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
+    WK(weakSelf)
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getvipczz" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        //MYLog(@"%@",jsonDic[@"message"]);
+        if (succe) {
+            MYLog(@"%@",jsonDic[@"data"]);
+            VIPGrowUpModel *vipGrowUpModel = [VIPGrowUpModel modelWithJSON:jsonDic[@"data"]];
+            [weakSelf.vipView reloadVIPGrowUpData:vipGrowUpModel];
+        }else{
+            
+        }
+        
+    } failure:^(NSError *error) {
+        MYLog(@"失败---%@",error.description);
+    }];
+
+}
+
 #pragma mark - 视图初始化
 -(void)initNavi{
     self.navigationController.navigationBarHidden = YES;
@@ -407,28 +452,6 @@
     }
 }
 
--(void)getVIPInfoData{
-    NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
-    WK(weakSelf)
-    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetVIPtq success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        //MYLog(@"%@",jsonDic[@"message"]);
-        if (succe) {
-            //MYLog(@"%@",jsonDic[@"data"]);
-            NSArray<VIPInfoModel *> *arr = [NSArray modelArrayWithClass:[VIPInfoModel class] json:jsonDic[@"data"]];
-            weakSelf.vipView = [[VIPView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
-            _vipView.delegate = weakSelf;
-            [weakSelf.view addSubview:weakSelf.vipView];
-            [weakSelf.vipView reloadVIPInfoData:arr];
-        }else{
-            
-        }
-        
-    } failure:^(NSError *error) {
-        MYLog(@"失败---%@",error.description);
-    }];
-    
-    
-}
 
 
 #pragma mark - UITableViewDataSource

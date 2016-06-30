@@ -28,6 +28,10 @@
 @property (nonatomic, strong) NSArray<VIPInfoModel *> *VIPInfoArr;
 /** 会员详情标签数组*/
 @property (nonatomic, strong) NSMutableArray<UILabel *> *VIPInfoLBArr;
+/** 进度条文字进度标签*/
+@property (nonatomic, strong) UILabel *VIPProgressLB;
+/** 进度条红色shitu*/
+@property (nonatomic, strong) UIImageView *VIPProgressRedIV ;
 @end
 
 @implementation VIPView
@@ -44,7 +48,7 @@
         [self initAddToVIPBtn];
         //会员等级标签及进度视图
         self.currentVIPLevel = [[USERDEFAULT valueForKey:VIPLevel] intValue];
-        self.progressStr = @"400/500";
+        //self.progressStr = @"400/500";
         //self.Deadline = 7;
         [self initVIPProgress];
         
@@ -94,16 +98,16 @@
     UIImageView *VIPProgressBgIV = [[UIImageView alloc]initWithFrame:CGRectMake(0.4812*CGRectW(self.bgIV), 0.0890*CGRectH(self.bgIV), 0.3072*CGRectW(self.bgIV), 0.0331*CGRectH(self.bgIV))];
     VIPProgressBgIV.image = MImage(@"vip_jindu");
     [self.bgIV addSubview:VIPProgressBgIV];
-    double ratio = 0.8;//进度比例
-    UIImageView *VIPProgressRedIV = [[UIImageView alloc]initWithFrame:CGRectMake(1, 1, ratio*CGRectW(VIPProgressBgIV)-1, CGRectH(VIPProgressBgIV)-2)];
-    VIPProgressRedIV.image = MImage(@"vip_jindu_red");
-    [VIPProgressBgIV addSubview:VIPProgressRedIV];
+    //double ratio = 0.8;//进度比例
+    self.VIPProgressRedIV = [[UIImageView alloc]initWithFrame:CGRectMake(1, 1, 0, CGRectH(VIPProgressBgIV)-2)];
+    self.VIPProgressRedIV.image = MImage(@"vip_jindu_red");
+    [VIPProgressBgIV addSubview:self.VIPProgressRedIV];
     //进度条文字进度
-    UILabel *VIPProgressLB = [[UILabel alloc]initWithFrame:CGRectMake(0.6*CGRectW(VIPProgressBgIV), 0, 0.4*CGRectW(VIPProgressBgIV), CGRectH(VIPProgressBgIV))];
-    VIPProgressLB.text = self.progressStr;
-    VIPProgressLB.font = MFont(8);
-    VIPProgressLB.textAlignment = NSTextAlignmentRight;
-    [VIPProgressBgIV addSubview:VIPProgressLB];
+    self.VIPProgressLB = [[UILabel alloc]initWithFrame:CGRectMake(0.6*CGRectW(VIPProgressBgIV), 0, 0.4*CGRectW(VIPProgressBgIV), CGRectH(VIPProgressBgIV))];
+    self.VIPProgressLB.text = self.progressStr;
+    self.VIPProgressLB.font = MFont(8);
+    self.VIPProgressLB.textAlignment = NSTextAlignmentRight;
+    [VIPProgressBgIV addSubview:self.VIPProgressLB];
     
     //下一个vip等级
     UILabel *nextVIPLevelLB = [[UILabel alloc]initWithFrame:CGRectMake(0.8191*CGRectW(self.bgIV), CGRectY(currentVIPLevelLB), CGRectW(currentVIPLevelLB), CGRectH(currentVIPLevelLB))];
@@ -184,6 +188,16 @@
     self.currentVIPLevel = [[USERDEFAULT valueForKey:VIPLevel] intValue];
     self.VIPInfoStrArr = VIPInfoArr[self.currentVIPLevel].content;
     [self initVIPInfoLBs];
+}
+
+-(void)reloadVIPGrowUpData:(VIPGrowUpModel *)vipGrowUpModel{
+    [USERDEFAULT setObject:@(vipGrowUpModel.lv) forKey:VIPLevel];
+    self.VIPProgressLB.text = [NSString stringWithFormat:@"%ld/%ld",vipGrowUpModel.val1,vipGrowUpModel.val2];
+    CGRect frame = self.VIPProgressRedIV.frame;
+    if (vipGrowUpModel.val2 != 0) {
+      frame.size.width =vipGrowUpModel.val1/vipGrowUpModel.val2*0.3072*CGRectW(self.bgIV)-1;
+    }
+    self.VIPProgressRedIV.frame = frame;
 }
 
 @end

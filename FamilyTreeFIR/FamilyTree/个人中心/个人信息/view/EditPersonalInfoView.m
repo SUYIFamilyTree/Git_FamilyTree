@@ -241,7 +241,6 @@
     self.personalInfoDetailArr = [NSMutableArray array];
     [self.personalInfoDetailArr addObject:queryModel.memb.MeName];
     [self.personalInfoDetailArr addObject:queryModel.memb.MeNickname];
-#warning 待接口更改
     //[self.personalInfoDetailArr addObject:queryModel.area.AreaCountry];
     [self.personalInfoDetailArr addObject:@"中国"];
     [self.personalInfoDetailArr addObject:[NSString stringWithFormat:@"%@-%@",queryModel.area.AreaProvince,queryModel.area.AreaCity]];
@@ -293,6 +292,9 @@
         accountInfoCell.customTitleLB.text = [self.accountInfoTitleArr[indexPath.row] stringByAppendingString:@":"];
         [self labelWidthToFit:accountInfoCell.customTitleLB andFrame:CGRectMake(8, 0, 100, 26)];
         accountInfoCell.customDetailLB.text = self.accountInfoDetailArr[indexPath.row];
+        if (indexPath.row == 4) {
+            accountInfoCell.customDetailLB.font = MFont(14);
+        }
         accountInfoCell.delegate = self;
         accountInfoCell.editBtn.tag = 333+indexPath.row;
         return accountInfoCell;

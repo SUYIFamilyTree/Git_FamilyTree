@@ -46,7 +46,7 @@ NSString * _Nonnull const kRequestCodeGetsyntype =  @"getsyntype";
 NSString * _Nonnull const kRequestCodeUpdatepswd = @"updatepswd";
 NSString * _Nonnull const kRequestCodeGetprovince = @"getprovince";
 NSString * _Nonnull const kRequestCodeGetVIPtq = @"getviptq";
-
+NSString * _Nonnull const kRequestCodeGetMemys = @"getmemys";
 
 +(void)showAlertViewControllerAutoDissmissWithTarGet:(id)target Message:(NSString *)message delay:(NSInteger)time complete:(void (^)(BOOL))complete{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];

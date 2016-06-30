@@ -9,6 +9,8 @@
 #import "FortuneTodayViewController.h"
 #import "HeadLuckView.h"
 #import "AllLucyNum.h"
+#import "NSString+getStarDate.h"
+
 @interface FortuneTodayViewController ()
 {
     NSArray *_dataSource;
@@ -23,6 +25,27 @@
     self.comNavi.titleLabel.text = @"今日运势";
     [self initData];
     [self initForUI];
+    [self getMainData];
+    //MYLog(@"%@",[NSString getStarDateWithStar:@"狮子座"]);
+}
+
+-(void)getMainData{
+    NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
+    //WK(weakSelf)
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetMemys success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            MYLog(@"%@",jsonDic[@"data"]);
+            
+            
+        }else{
+            MYLog(@"%@",jsonDic[@"message"]);
+        }
+    } failure:^(NSError *error) {
+        MYLog(@"失败---%@",error.description);
+    }];
+
+    
+    
 }
 
 #pragma mark *** 初始化数据 ***
@@ -67,6 +90,8 @@
     [bacScrollView addSubview:treasureLuc];
     
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
