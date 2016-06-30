@@ -222,12 +222,13 @@
 //            [USERDEFAULT setObject:loginModel.kzxx.Photo forKey:@"Photo"];
             [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserAccount];
             [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:UserPassword];
+            [self.navigationController popViewControllerAnimated:YES];
             }
         
     } failure:^(NSError *error) {
         MYLog(@"失败---%@",error.description);
     }];
-    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 //游客按钮
 -(void)loginView:(LoginView *)loginView didSelectedTourBtn:(UIButton *)sender{

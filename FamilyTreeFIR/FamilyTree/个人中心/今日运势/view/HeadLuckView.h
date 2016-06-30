@@ -20,9 +20,9 @@
 
 @property (nonatomic,strong) UILabel *chatNum; /*商谈指数*/
 
-@property (nonatomic,strong) UILabel *lucyColor; /*幸运颜色*/
+@property (nonatomic,strong) UILabel *luckyColor; /*幸运颜色*/
 
-@property (nonatomic,strong) UILabel *lucyNum; /*幸运数*/
+@property (nonatomic,strong) UILabel *luckyNum; /*幸运数*/
 
 @property (nonatomic,strong) UILabel *coupleAite; /*速配星座*/
 

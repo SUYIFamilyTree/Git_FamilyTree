@@ -50,7 +50,7 @@
 }
 
 //生肖图
-
+#warning 12生肖图没有给
 -(void)initHeadProtriaits{
  
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectYH(self.todayDate)-20, PortraitsSize, PortraitsSize)];
@@ -68,28 +68,28 @@
     self.headPortraits.sd_layout.leftSpaceToView(headView,PortraitsSize/8).rightSpaceToView(headView,PortraitsSize/8).topSpaceToView(headView,PortraitsSize/4).bottomSpaceToView(headView,0);
     
     //时间范围
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectX(headView), CGRectYH(headView)+10, PortraitsSize, 12)];;
-    label.text = @"3.21-4.19";
-    label.textAlignment = 1;
-    label.font = MFont(10);
-    [self addSubview:label];
+    self.headPorTime = [[UILabel alloc] initWithFrame:CGRectMake(CGRectX(headView)-5, CGRectYH(headView)+10, PortraitsSize+5, 12)];;
+     //self.headPorTime.text = @"3.21-4.19";
+     self.headPorTime.textAlignment = 1;
+     self.headPorTime.font = MFont(10);
+    [self addSubview:self.headPorTime];
     
     
-    self.headPorTime = label;
+    //self.headPorTime = label;
   
 }
 
 //各种指数
 -(void)initUI{
-    self.lucyNum = [self creatLabelWithFrameX:CGRectX(self.todayDate) FrameY:CGRectYH(self.todayDate) Height:LucyLabelHeight Title:@"健康指数：" content:@"95%"];
-    [self addSubview:self.lucyNum];
-    self.chatNum = [self creatLabelWithFrameX:CGRectXW(self.lucyNum)+0.07*Screen_width FrameY:self.lucyNum.frame.origin.y Height:LucyLabelHeight Title:@"商谈指数：" content:@"94%"];
+    self.healthNum = [self creatLabelWithFrameX:CGRectX(self.todayDate) FrameY:CGRectYH(self.todayDate) Height:LucyLabelHeight Title:@"健康指数：" content:@"20%"];
+    [self addSubview:self.healthNum];
+    self.chatNum = [self creatLabelWithFrameX:CGRectXW(self.healthNum)+0.07*Screen_width FrameY:self.healthNum.frame.origin.y Height:LucyLabelHeight Title:@"商谈指数：" content:@"20%"];
     [self addSubview:self.chatNum];
-    self.lucyColor = [self  creatLabelWithFrameX:self.lucyNum.frame.origin.x-LucyFont.pointSize*5 FrameY:CGRectYH(self.lucyNum) Height:LucyLabelHeight Title:@"幸运颜色：" content:@"墨绿色"];
-    [self addSubview:self.lucyColor];
-    self.lucyNum = [self creatLabelWithFrameX:self.chatNum.frame.origin.x-LucyFont.pointSize*5 FrameY:CGRectYH(self.chatNum) Height:LucyLabelHeight Title:@"幸运数：" content:@"5"];
-    [self addSubview:self.lucyNum];
-    self.coupleAite = [self creatLabelWithFrameX:CGRectX(self.lucyColor)-LucyFont.pointSize*5 FrameY:CGRectYH(self.lucyColor) Height:LucyLabelHeight Title:@"速配星座：" content:@"处女座"];
+    self.luckyColor = [self  creatLabelWithFrameX:self.healthNum.frame.origin.x-LucyFont.pointSize*5 FrameY:CGRectYH(self.healthNum) Height:LucyLabelHeight Title:@"幸运颜色：" content:@"墨绿色"];
+    [self addSubview:self.luckyColor];
+    self.luckyNum = [self creatLabelWithFrameX:self.chatNum.frame.origin.x-LucyFont.pointSize*5 FrameY:CGRectYH(self.chatNum) Height:LucyLabelHeight Title:@"幸运数：" content:@"5"];
+    [self addSubview:self.luckyNum];
+    self.coupleAite = [self creatLabelWithFrameX:CGRectX(self.luckyColor)-LucyFont.pointSize*5 FrameY:CGRectYH(self.luckyColor) Height:LucyLabelHeight Title:@"速配星座：" content:@"白羊座"];
     [self addSubview:self.coupleAite];
 }
 //星期转换
@@ -117,8 +117,9 @@
     [self addSubview:titleLabel];
     
     UILabel *contLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectXW(titleLabel), titleLabel.frame.origin.y, cont.length*LucyFont.pointSize, height)];
-    
+    contLabel.textAlignment = NSTextAlignmentLeft;
     contLabel.font = LucyFont;
+    //contLabel.backgroundColor = [UIColor redColor];
     contLabel.text = cont;
     
     

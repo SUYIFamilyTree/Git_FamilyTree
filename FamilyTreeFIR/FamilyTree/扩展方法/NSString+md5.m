@@ -19,6 +19,7 @@
     }
     return  md5Str;
     
+    
 }
 
 +(NSString *)stringWithDic:(NSDictionary *)dic{

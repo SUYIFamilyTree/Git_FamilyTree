@@ -11,3 +11,12 @@
 @implementation FortuneTodayModel
 
 @end
+
+@implementation FortuneTodayJrModel
+
+@end
+
+@implementation FortuneTodayBzModel
+
+@end
+
