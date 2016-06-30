@@ -201,6 +201,7 @@
 
 //登录按钮
 -(void)loginView:(LoginView *)loginView didSelectedLoginBtn:(UIButton *)sender{
+    [SXLoadingView showProgressHUD:@"正在登录"];
     
     MYLog(@"登录");
 
@@ -209,6 +210,7 @@
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:kRequestCodeLogin success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             //登录成功
+            [SXLoadingView showAlertHUD:@"登录成功" duration:0.5];
             LoginModel *loginModel = [LoginModel modelWithJSON:jsonDic[@"data"]];
             //存储用户信息
             //id

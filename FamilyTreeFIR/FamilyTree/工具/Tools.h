@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "DefineHeader.h"
+
+#import "WGennerationModel.h"
 @interface Tools : NSObject
 
 #pragma mark *** VC Titles ***

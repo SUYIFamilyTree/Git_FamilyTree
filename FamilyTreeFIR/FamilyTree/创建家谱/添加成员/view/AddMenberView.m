@@ -60,7 +60,7 @@
     [self.backView bringSubviewToFront:self.idView];
     [self.backView bringSubviewToFront:self.fatheView];
     [self.backView bringSubviewToFront:self.motherView];
-
+    
 
 }
 #pragma mark *** getters ***

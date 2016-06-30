@@ -49,13 +49,10 @@
     
     NSString *currentDate = [formatter stringFromDate:date];
     
-    
-    
     NSInteger randomFour = 1000+random()%(9000);
     
     NSString *currentKey = [NSString stringWithFormat:@"%@%ld",currentDate,randomFour];
-    
-    
+        
     return currentKey;
   
 }

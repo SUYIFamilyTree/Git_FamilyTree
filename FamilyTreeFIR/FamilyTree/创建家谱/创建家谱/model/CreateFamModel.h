@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 
 
+
 @class Data;
 @interface CreateFamModel : NSObject
 
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) NSArray *Fy;
 
 @property (nonatomic, strong) NSArray *Ct;
+
 
 
 @end
@@ -50,6 +52,8 @@
 @property (nonatomic, copy) NSString *GeHoner;
 
 @property (nonatomic, copy) NSString *GeTradition;
+
+@property (nonatomic, copy) NSString *GeJpname;
 
 @property (nonatomic, copy) NSString *GeLaw;
 

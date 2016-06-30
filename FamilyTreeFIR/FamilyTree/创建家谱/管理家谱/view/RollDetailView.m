@@ -37,13 +37,13 @@
     //左边信息
     for (int idx = 0; idx<_leftArr.count; idx++) {
         NSInteger length = ((NSString *)_leftArr[idx]).length;
-        UILabel *leftLB = [[UILabel alloc] initWithFrame:AdaptationFrame(16, 16, length*50, 30+idx*60)];
+        UILabel *leftLB = [[UILabel alloc] initWithFrame:AdaptationFrame(16, 16, length*50, 50+idx*90)];
         leftLB.font = MFont(22*AdaptationWidth());
         leftLB.text = _leftArr[idx];
         
         
         NSInteger length2 = ((NSString *)_rightArr[idx]).length;
-        UILabel *rightLb = [[UILabel alloc] initWithFrame:AdaptationFrame(CGRectXW(leftLB), 16, length2*50, 30+idx*60)];
+        UILabel *rightLb = [[UILabel alloc] initWithFrame:AdaptationFrame(CGRectXW(leftLB), 16, length2*50, leftLB.bounds.size.height/AdaptationWidth())];
         rightLb.text = _rightArr[idx];
         rightLb.font = leftLB.font;
         

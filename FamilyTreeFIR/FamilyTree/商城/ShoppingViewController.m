@@ -10,6 +10,7 @@
 #import "NSString+md5.h"
 
 @interface ShoppingViewController ()
+@property (nonatomic,strong) UITextField *texfield; /*<#desc#>*/
 
 @end
 
@@ -47,7 +48,18 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)getpost{
+    
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"geid":_texfield.text} requestID:GetUserId requestcode:kRequestCodequerygeneration success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSLog(@"根据id获取家族信息%@", [NSString jsonArrWithArr:jsonDic[@"data"]]);
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
+}
 
 
 @end

@@ -156,6 +156,8 @@
     self.cFameView = creFamView;
     [self.view addSubview:self.cFameView];
     
+    [self.view bringSubviewToFront:self.comNavi];
+    
 }
 
 

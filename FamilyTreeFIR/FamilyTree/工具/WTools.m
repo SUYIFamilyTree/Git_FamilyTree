@@ -19,8 +19,45 @@ NSString * _Nonnull const kRequestCodequerygenlist = @"querygenlist";
 NSString * _Nonnull const kRequestCodequerymygen = @"querymygen";
 //查询家谱详情
 NSString * _Nonnull const kRequestCodequerygendeta = @"querygendeta";
-//查询宗亲信息
+
+#pragma mark *** 未测试接口 ***
+
+//查询家谱字辈成员列表
+NSString * _Nonnull const kRequestCodequeryzbgemelist = @"queryzbgemelist";
+//查询家谱字辈成员详情
+NSString * _Nonnull const kRequestCodequerygemedetailbyid = @"querygemedetailbyid";
+//修改家谱
+NSString * _Nonnull const kRequestCodeeditgen = @"editgen";
+//修改家谱大数据字段
+NSString * _Nonnull const kRequestCodeeditgenbigdata = @"editgenbigdata";
+//申请加入家谱
+NSString * _Nonnull const kRequestCodeapplyjoingen = @"applyjoingen";
+//获取家谱字辈
+NSString * _Nonnull const kRequestCodequerygeneration = @"querygeneration";
+//添加家谱成员
+NSString * _Nonnull const kRequestCodeaddgeme = @"addgeme";
+//加入家谱
+NSString * _Nonnull const kRequestCodejoingen = @"joingen";
+//查询家谱树
+NSString * _Nonnull const kRequestCodequerytreebygenid = @"querytreebygenid";
+//查询待修改家谱成员详情
+NSString * _Nonnull const kRequestCodequerygemedetailbyidforupdate = @"querygemedetailbyidforupdate";
+//修改家谱成员详情
+NSString * _Nonnull const kRequestCodeeditgemedetail = @"editgemedetail";
+
+//查询所有成员列表
+NSString * _Nonnull const kRequestCodequerygemelist = @"querygemelist";
+
+
+#pragma mark *** 未通接口 ***
+//查询宗亲信息--只有接口没数据，传了参数就失败。
 NSString * _Nonnull const kRequestCodequeryclan = @"queryclan";
+
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 
 //上传祖先头像
 NSString * _Nonnull const kRequestCodeuploadgenan = @"uploadgenan";

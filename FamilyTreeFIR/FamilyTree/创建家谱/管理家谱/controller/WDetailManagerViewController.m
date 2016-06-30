@@ -48,9 +48,15 @@ enum{
 //初始化所有具体图
 -(void)initAllDetailManagerDetailView{
     
-    NSArray *titleArr = @[@"姓名：",@"名族：",@"出生地：",@"妻子：",@"养子："];
+    NSArray *titleArr = @[@"姓名：",@"妻子：",@"养子："];
     
-    NSArray *subDetaiArr = @[@[@"段正淳",@"白族",@"大理",@"刀白凤",@"段誉"],@[@"段誉",@"白族",@"大理",@"段正淳",@"刀白凤"],@[@"段正淳",@"白族",@"大理",@"刀白凤",@"段誉"],@[@"段正淳",@"白族",@"大理",@"刀白凤",@"段誉"],@[@"段智兴",@"白族",@"大理",@"刀白凤",@"段誉"],@[@"段智商",@"白族",@"大理",@"刀白凤",@"段誉"]];
+    NSArray *subDetaiArr = @[@[@"段正淳",@"刀白凤",@"段誉"],
+                             @[@"段誉",@"段正淳",@"刀白凤"],
+                             @[@"段正淳",@"刀白凤",@"段誉"],
+                             @[@"段正淳",@"刀白凤",@"段誉"],
+                             @[@"段智兴",@"刀白凤",@"段誉"],
+                             @[@"段智商",@"刀白凤",@"段誉"]];
+    
     NSArray *genNum = @[@"第一代",@"第二代",@"第三代",@"第三代",@"第四代",@"第四代"];
     
     NSArray *frameArr = @[[NSValue valueWithCGPoint:CGPointMake(30+ZeroContentOffset, 30)],[NSValue valueWithCGPoint:CGPointMake(270, 270)],[NSValue valueWithCGPoint:CGPointMake(195, 510)],[NSValue valueWithCGPoint:CGPointMake(195, 750)],[NSValue valueWithCGPoint:CGPointMake(121, 990)],[NSValue valueWithCGPoint:CGPointMake(121, 1230)],];
