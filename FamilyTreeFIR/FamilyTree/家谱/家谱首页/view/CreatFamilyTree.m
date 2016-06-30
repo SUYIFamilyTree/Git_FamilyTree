@@ -26,7 +26,6 @@
         }else if(type == CreatefamilyTreeTypeTwoBtn){
             self.frame = AdaptationFrame(143, 627, 406, 195);
             [self initWithTwoBtnType];
-
         }
         
         

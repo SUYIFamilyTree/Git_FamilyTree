@@ -102,7 +102,13 @@
                              @"GemeIslife":[self.AddFameView.liveNowLabel.inputLabel.text isEqualToString:@"是"]?@"1":@"0",
                              @"Po":self.AddFameView.parnName.text,
                              };
-    
+    [TCJPHTTPRequestManager POSTWithParameters:addDic requestID:GetUserId requestcode:kRequestCodeaddgeme success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSLog(@"%@", jsonDic[@"data"]);
+        }
+    } failure:^(NSError *error) {
+        MYLog(@"失败");
+    }];
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

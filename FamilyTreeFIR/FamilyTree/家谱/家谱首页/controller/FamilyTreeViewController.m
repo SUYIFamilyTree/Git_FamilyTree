@@ -19,11 +19,15 @@
 {
     BOOL _selectedCreatBtn;
     BOOL _selectedMyFam;
+    NSInteger _selectedCreateBtnType;//测试数据之后删
     
 }
+
 @property (nonatomic,strong) UIButton *creatBtn; /*创建家谱Btn*/
 
 @property (nonatomic,strong) CreatFamilyTree *crtFamTree; /*创建家谱view*/
+
+@property (nonatomic,strong) CreatFamilyTree *crtFamTreeNoRight; /*没有管理权限的创建家谱*/
 
 @property (nonatomic,strong) SelectMyFamilyView *selecMyFamView; /*我的家谱点出来的视图*/
 
@@ -57,7 +61,7 @@
     
     //创建家谱按钮
     [self.view addSubview:self.creatBtn];
-        
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -276,11 +280,34 @@
 
 
 -(void)respondsToCreatBtn:(UIButton *)sender{
-    _selectedCreatBtn = !_selectedCreatBtn;
-    if (_selectedCreatBtn) {
+    
+//    _selectedCreatBtn = !_selectedCreatBtn;
+//    
+//    if (_selectedCreatBtn) {
+//        [self.view addSubview:self.crtFamTree];
+//    }else{
+//        [_crtFamTree removeFromSuperview];
+//    }
+    
+  
+    
+    _selectedCreateBtnType +=1;
+    if (_selectedCreateBtnType == 1) {
+        
         [self.view addSubview:self.crtFamTree];
-    }else{
+    }else if(_selectedCreateBtnType ==2){
         [_crtFamTree removeFromSuperview];
+        
+       
+        [self.view addSubview:self.crtFamTreeNoRight];
+
+       
+    }else {
+        [_crtFamTreeNoRight removeFromSuperview];
+        
+         _selectedCreateBtnType = 0;
+        
+        
     }
    
 }
@@ -298,11 +325,10 @@
     if (sender.selected) {
         [self.view addSubview:self.selecMyFamView];
     }else{
-    
          [self.selecMyFamView removeFromSuperview];
     }
-    
     [self.selecMyFamView updateDataSourceAndUI];
+    
 }
 
 
@@ -310,21 +336,22 @@
 
 -(void)CreateFamilyTree:(CreatFamilyTree *)creatTree didSelectedBtn:(UIButton *)sender{
     
-    if (creatTree.type == CreatefamilyTreeTypeThreeBtn) {
+//    if (creatTree.type == CreatefamilyTreeTypeThreeBtn) {
         if (sender.tag == 0) {
             CreateFamViewController *creVc = [[CreateFamViewController alloc] initWithTitle:@"创建家谱" image:nil];
             [self.navigationController pushViewController:creVc animated:YES];
         }
-        if (sender.tag == 2) {
-           ManagerFamilyViewController *manager = [[ManagerFamilyViewController alloc] initWithTitle:@"管理家谱" image:nil];
-            [manager.comNavi.rightBtn removeFromSuperview];
-            [self.navigationController pushViewController:manager animated:YES];
-        }
+    
         if (sender.tag == 1) {
             AddMemberViewController *add = [[AddMemberViewController alloc] initWithTitle:@"添加成员" image:nil];
             [self.navigationController pushViewController:add animated:YES];
         }
+        if (sender.tag == 2) {
+        ManagerFamilyViewController *manager = [[ManagerFamilyViewController alloc] initWithTitle:@"管理家谱" image:nil];
+        [manager.comNavi.rightBtn removeFromSuperview];
+        [self.navigationController pushViewController:manager animated:YES];
     }
+//    }
     
     MYLog(@"%ld",sender.tag);
 }
@@ -351,12 +378,18 @@
     }
     return _crtFamTree;
 }
-
+-(CreatFamilyTree *)crtFamTreeNoRight{
+    if (!_crtFamTreeNoRight) {
+        _crtFamTreeNoRight = [[CreatFamilyTree alloc] initWithFrame: AdaptationFrame(62, 495, 517, 373) withType:CreatefamilyTreeTypeTwoBtn];
+        _crtFamTreeNoRight.delegate = self;
+        
+    }
+    return _crtFamTreeNoRight;
+}
 -(SelectMyFamilyView *)selecMyFamView{
     if (!_selecMyFamView) {
         _selecMyFamView = [[SelectMyFamilyView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
         _selecMyFamView.delegate = self;
-        
         
     }
     [_selecMyFamView.collectionView reloadData];
