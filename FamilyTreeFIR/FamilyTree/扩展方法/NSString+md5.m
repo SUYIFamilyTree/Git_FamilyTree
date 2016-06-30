@@ -25,12 +25,16 @@
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&error];
     NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    NSLog(@"zhengchangchanshu---%@",jsonStr);
+//    NSString *jsonStrn = [jsonStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+//    NSString *jsonStrnSpace = [jsonStrn stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    return jsonStrnSpace;
     
-    NSString *jsonStrn = [jsonStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-    NSString *jsonStrnSpace = [jsonStrn stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSLog(@"after-----%@", jsonStrnSpace);
-    return jsonStrnSpace;
+    NSString *jsonStr1 = [jsonStr stringByReplacingOccurrencesOfString:@"{\n" withString:@"{"];
+    NSString *jsonStr2 = [jsonStr1 stringByReplacingOccurrencesOfString:@"\n}" withString:@"}"];
+    NSString *jsonStr3 = [jsonStr2 stringByReplacingOccurrencesOfString:@" : " withString:@":"];
+    NSString *jsonStr4 = [jsonStr3 stringByReplacingOccurrencesOfString:@",\n" withString:@","];
+    NSString *jsonStr5 = [jsonStr4 stringByReplacingOccurrencesOfString:@"  " withString:@""];
+    return jsonStr5;
 }
 
 
