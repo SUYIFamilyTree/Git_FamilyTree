@@ -49,6 +49,8 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodeUpdatepswd;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetprovince;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetVIPtq;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetMemys;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeUploadCefm;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeCemeteryList;
 /**
  *  弹出框自动消失
  *

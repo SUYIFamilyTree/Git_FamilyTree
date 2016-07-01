@@ -61,7 +61,12 @@
     self.addCemBtn = btn;
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectX(btn), CGRectYH(btn)+20*AdaptationWidth(), btn.bounds.size.width, 40*AdaptationWidth())];
-    label.text = @"添加墓园照片";
+    if (self.creatOrEditStr) {
+        label.text = @"添加墓园照片";
+    }else{
+        label.text = @"修改墓园照片";
+    }
+    
     label.textAlignment = 1;
     label.font = MFont(28*AdaptationWidth());
     
@@ -104,7 +109,11 @@
     UIButton *createCemBtn = [[UIButton alloc] initWithFrame:AdaptationFrame(25, 854, 675, 90)];
     createCemBtn.backgroundColor = LH_RGBCOLOR(74, 88, 91);
     createCemBtn.layer.cornerRadius = 3;
-    [createCemBtn setTitle:@"建园" forState:0];
+    if (self.creatOrEditStr) {
+        [createCemBtn setTitle:@"建园" forState:0];
+    }else{
+        [createCemBtn setTitle:@"确认修改" forState:0];
+    }
     [createCemBtn addTarget:self action:@selector(respondsToCreateCemBtn:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.backScroView addSubview:createCemBtn];
@@ -113,21 +122,41 @@
 -(void)respondsToCreateCemBtn:(UIButton *)sender{
     MYLog(@"建园");
     NSLog(@"%@",_cemName.text);
-    NSDictionary *dic = @{@"CeName":self.cemName.text,
-                          @"CeMaster":self.cemMaster.text,
-                          @"CeEpitaph":self.cemSaying.text,
-                          @"CeCeDeathday":self.cemBirDead.text,
-                          @"CeBrief":self.cemIntro.text,
-                          @"CeType":@"PRI",
-                          };
-    [TCJPHTTPRequestManager POSTWithParameters:dic requestID:GetUserId requestcode:kRequestCodecreatecemetery success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-                                                    if (succe) {
-                                                        NSLog(@"%@", jsonDic[@"data"]);
-                                                        [SXLoadingView showAlertHUD:@"创建成功" duration:0.5];
-                                                    }
-                                                } failure:^(NSError *error) {
-                                                    MYLog(@"失败");
-                                                }];
+    if (self.creatOrEditStr) {
+        NSDictionary *dic = @{@"CeName":self.cemName.text,
+                              @"CeMaster":self.cemMaster.text,
+                              @"CeEpitaph":self.cemSaying.text,
+                              @"CeCeDeathday":self.cemBirDead.text,
+                              @"CeBrief":self.cemIntro.text,
+                              @"CeType":@"PRI",
+                              };
+        [TCJPHTTPRequestManager POSTWithParameters:dic requestID:GetUserId requestcode:kRequestCodecreatecemetery success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+            if (succe) {
+                NSLog(@"%@", jsonDic[@"data"]);
+                [SXLoadingView showAlertHUD:@"创建成功" duration:0.5];
+            }
+        } failure:^(NSError *error) {
+            MYLog(@"失败");
+        }];
+        
+        UIImage *cemeteryImage = self.addCemBtn.imageView.image;
+        NSData *imageData = UIImageJPEGRepresentation(cemeteryImage, 0.5);
+        NSString *encodeimageStr =[imageData base64Encoding];
+        NSDictionary *params =@{@"userid":GetUserId,@"imgbt":encodeimageStr,@"uploadtype":@"ZP",@"ceid":@1};
+        [TCJPHTTPRequestManager POSTWithParameters:params requestID:GetUserId requestcode:kRequestCodeUploadCefm success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+            if (succe) {
+                
+                MYLog(@"墓园图片上传成功%@", jsonDic[@"data"]);
+            }
+        } failure:^(NSError *error) {
+            
+        }];
+
+    }else{
+        //修改墓园信息
+    }
+    
+    
 
 }
 -(void)respondsToAddCemImage:(UIButton *)sender{
@@ -174,5 +203,10 @@
         _backScroView.contentSize = CGSizeMake(Screen_width, 700);
     }
     return _backScroView;
+}
+
+//关键盘
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
 }
 @end

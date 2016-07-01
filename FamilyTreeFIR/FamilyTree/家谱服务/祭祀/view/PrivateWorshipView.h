@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WorshipModel.h"
 
 @class PrivateWorshipView;
 @protocol PrivateWorshipViewDelegate <NSObject>
@@ -25,6 +26,9 @@
 @property (nonatomic, strong) UITableView *cemeterialListTableView;
 /** 是否编辑状态*/
 @property (nonatomic, assign) BOOL PrivateWorshipEdit;
+
+/** 我的墓园数组*/
+@property (nonatomic, strong) NSMutableArray *PrivateViewMyWorshipArr;
 
 /** 代理*/
 @property (nonatomic, weak) id<PrivateWorshipViewDelegate> delegate;

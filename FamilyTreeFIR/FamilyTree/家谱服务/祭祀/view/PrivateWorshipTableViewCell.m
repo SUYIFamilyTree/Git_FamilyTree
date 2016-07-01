@@ -64,7 +64,8 @@
     //祭陵名字
     UILabel *cemeterialNameLB = [[UILabel alloc]init];
     cemeterialNameLB.textAlignment = NSTextAlignmentLeft;
-    cemeterialNameLB.text = @"某某某之祭陵";
+    //cemeterialNameLB.text = @"某某某之祭陵";
+    cemeterialNameLB.text = self.worshipDatalistModel.CeName;
     cemeterialNameLB.font = MFont(12);
     [self addSubview:cemeterialNameLB];
     cemeterialNameLB.sd_layout.leftSpaceToView(self.cemeterialImageView,8).topSpaceToView(self,8).heightIs(20).widthIs(100);
@@ -72,7 +73,8 @@
     //园号
     UILabel *cemeterialIDLB = [[UILabel alloc]init];
     cemeterialIDLB.textAlignment = NSTextAlignmentLeft;
-    cemeterialIDLB.text = @"园号123456";
+    //cemeterialIDLB.text = @"园号123456";
+    cemeterialIDLB.text =[NSString stringWithFormat:@"园号%ld",self.worshipDatalistModel.CeId];
     cemeterialIDLB.font = MFont(10);
     [self addSubview:cemeterialIDLB];
     cemeterialIDLB.sd_layout.leftSpaceToView(self.cemeterialImageView,8).topSpaceToView(cemeterialNameLB,2).heightIs(10).widthIs(60);
@@ -80,8 +82,10 @@
     UILabel *visitorNumberLB = [[UILabel alloc]init];
     visitorNumberLB.textAlignment = NSTextAlignmentLeft;
     visitorNumberLB.font = MFont(10);
-    self.visitorNumber = @"58963人浏览";
-    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:self.visitorNumber];
+    //self.visitorNumber = @"58963人浏览";
+//    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:self.visitorNumber];
+    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld",self.worshipDatalistModel.CeReadcount]];
+    
     NSRange blueRange = NSMakeRange(0, [[noteStr string] rangeOfString:@"人"].location);
     [noteStr addAttribute:NSForegroundColorAttributeName value:LH_RGBCOLOR(19, 154, 219) range:blueRange];
     [visitorNumberLB setAttributedText:noteStr];
@@ -91,7 +95,9 @@
     //某某扫墓
     UILabel *cemeterialPeopleLB =[[UILabel alloc]init];
     cemeterialPeopleLB.textAlignment = NSTextAlignmentLeft;
-    cemeterialPeopleLB.text = @"某某扫墓";
+    //cemeterialPeopleLB.text = @"某某扫墓";
+    cemeterialNameLB.text = [NSString stringWithFormat:@"%@扫墓",self.worshipDatalistModel.Smr];
+    
     cemeterialPeopleLB.font = MFont(10);
     cemeterialPeopleLB.textColor = [UIColor redColor];
     [self addSubview:cemeterialPeopleLB];
@@ -100,7 +106,9 @@
     //酒水
     UILabel *drinkLB =[[UILabel alloc]init];
     drinkLB.textAlignment = NSTextAlignmentLeft;
-    drinkLB.text = @"酒水";
+    //drinkLB.text = @"酒水";
+    drinkLB.text = self.worshipDatalistModel.Lp;
+    
     drinkLB.font = MFont(10);
     drinkLB.textColor = [UIColor redColor];
     [self addSubview:drinkLB];
@@ -109,7 +117,9 @@
     //时间
     UILabel *timeLB =[[UILabel alloc]init];
     timeLB.textAlignment = NSTextAlignmentLeft;
-    timeLB.text = @"2015-5-10 10:11:21";
+    //timeLB.text = @"2015-5-10 10:11:21";
+    timeLB.text = self.worshipDatalistModel.Sj;
+    
     timeLB.font = MFont(10);
     timeLB.textColor = [UIColor redColor];
     [self addSubview:timeLB];

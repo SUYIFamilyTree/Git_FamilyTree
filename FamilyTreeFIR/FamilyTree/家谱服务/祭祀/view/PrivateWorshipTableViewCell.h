@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CemeterialModel.h"
+#import "WorshipModel.h"
 
 @class PrivateWorshipTableViewCell;
 @protocol  PrivateWorshipTableViewCellDelegate<NSObject>
@@ -28,10 +29,14 @@
 @property (nonatomic, weak) id<PrivateWorshipTableViewCellDelegate> delegate;
 /** 祭陵图*/
 @property (nonatomic, strong) UIImageView *cemeterialImageView;
-/** 祭陵名字*/
-@property (nonatomic, strong) NSString *cemeterialName;
-/** 园号*/
-@property (nonatomic, strong) NSString *cemeterialID;
-/** 浏览人数*/
-@property (nonatomic, strong) NSString *visitorNumber;
+///** 祭陵名字*/
+//@property (nonatomic, strong) NSString *cemeterialName;
+///** 园号*/
+//@property (nonatomic, strong) NSString *cemeterialID;
+///** 浏览人数*/
+//@property (nonatomic, strong) NSString *visitorNumber;
+
+/** 墓园列表详情模型*/
+@property (nonatomic, strong) WorshipDatalistModel *worshipDatalistModel;
+
 @end

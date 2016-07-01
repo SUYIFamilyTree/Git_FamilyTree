@@ -9,5 +9,7 @@
 #import "BaseViewController.h"
 
 @interface CreateCemViewController : BaseViewController
+/**新建或者修改墓园 */
+@property (nonatomic, assign) BOOL creatOrEditStr;
 
 @end

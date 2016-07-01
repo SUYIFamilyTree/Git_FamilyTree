@@ -27,7 +27,7 @@
     //[self ceshiMuyuanInfo];
     
     //测试添加墓园
-    [self ceshiTianjiamuyuan];
+    //[self ceshiTianjiamuyuan];
     //MYLog(@"%@",[NSString md5Str:@"/abc"]);
     
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(100, 200, 200, 200)];
@@ -46,11 +46,7 @@
     UIImage *list =[UIImage imageNamed:@"ci_sm@3x"];
     NSData *imageData = UIImageJPEGRepresentation(list, 0.5);
     NSString *encodeimageStr =[imageData base64Encoding];
-    NSLog(@"%@",encodeimageStr);
-    NSString *baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)encodeimageStr,NULL,CFSTR(":/?#[]@!$&’()*+,;="),kCFStringEncodingUTF8);
-    //    NSLog(@"%@",baseString);
-    //    NSString *imgStr =[baseString dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *params =@{@"userid":GetUserId,@"imgbt":@"/abc"};
+    NSDictionary *params =@{@"userid":GetUserId,@"imgbt":encodeimageStr};
     [TCJPHTTPRequestManager POSTWithParameters:params requestID:GetUserId requestcode:@"uploadmemimg" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
@@ -62,7 +58,8 @@
 }
 
 -(void)ceshiMuyuanList{
-    NSDictionary *logDic = @{@"pagenum":@2,@"pagesize":@2,@"meid":@"15",@"type":@"PRI"};
+//    NSDictionary *logDic = @{@"pagenum":@2,@"pagesize":@2,@"meid":@"15",@"type":@"PRI"};
+    NSDictionary *logDic = @{@"pagenum":@2,@"pagesize":@2,@"meid":@"",@"type":@"PRI"};
     
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"cemeterylist" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         MYLog(@"墓园列表%@",jsonDic[@"message"]);

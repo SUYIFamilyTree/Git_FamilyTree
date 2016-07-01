@@ -49,6 +49,7 @@
     return self;
 }
 
+#pragma mark - 视图初始化
 -(void)initHeadIV{
     
     
@@ -104,6 +105,7 @@
         [self.changeFamilyTreeView addSubview:btn];
     }
 }
+
 #pragma mark - lazyLoad
 -(UIView *)changeFamilyTreeView{
     if (!_changeFamilyTreeView) {
@@ -113,9 +115,7 @@
     return _changeFamilyTreeView;
 }
 
-
-
-//加载数据
+#pragma mark - 加载数据
 -(void)reloadData:(NSArray<MemallInfoHyjpModel *> *)hyjpArr{
     if (hyjpArr.count != 0) {
         self.changeFamilyTreeLB.userInteractionEnabled = YES;
@@ -130,31 +130,18 @@
         self.currentFamilyTreeNameLB.text = @"";
         self.currentFamilyTreeInfoLBsArr[3].text = @"";        self.currentFamilyTreeInfoLBsArr[2].text = @"";
         self.currentFamilyTreeInfoLBsArr[1].text = @"";        self.currentFamilyTreeInfoLBsArr[0].text = @"";
-
+        
     }
     [self labelHeightToFit:self.currentFamilyTreeNameLB andFrame:CGRectMake(0.8113*Screen_width, 0.1674*CGRectH(self), 0.0469*Screen_width, 200)];
     for (int i = 0; i < 4; i++) {
         [self labelHeightToFit:self.currentFamilyTreeInfoLBsArr[i] andFrame:CGRectMake(0.380*Screen_width+(0.0938*Screen_width+0.0063*Screen_width)*i, 0.1530*CGRectH(self), 0.0938*Screen_width, 200)];
     }
-
+    
     [self.headIV.headInsideIV setImageWithURL:[USERDEFAULT valueForKey:@"MeExtension"] placeholder:[UIImage imageNamed:@"headImage.png"]];
 }
 
-//对数据进行加换行符和加文字处理
--(NSMutableArray *)addlineBreaksWithArr:(NSArray<MemallInfoHyjpModel *> *)arr{
-    NSMutableArray *mutableArr = [NSMutableArray array];
-    for (int i = 0; i < arr.count; i++) {
-        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-        [dic setValue:[NSString addLineBreaks:arr[i].jpname] forKey:@"jpname"];
-        [dic setValue:[NSString addLineBreaks:arr[i].jphyname] forKey:@"jphyname"];
-        [dic setObject:[NSString addLineBreaks:[NSString stringWithFormat:@"第%@代",[NSString translation:(short)arr[i].jpdai]]] forKey:@"jpdai"];
-        [dic setObject:[NSString addLineBreaks:[NSString stringWithFormat:@"字辈 %@",arr[i].jpzb]] forKey:@"jpzb"];
-        [dic setObject:[NSString addLineBreaks:[NSString stringWithFormat:@"排行%@",[NSString translation:(short)arr[i].jpph]]] forKey:@"jpph"];
-        [mutableArr addObject:dic];
-    }
-    return [mutableArr copy];
-}
 
+#pragma mark - 点击事件
 -(void)clickChangeFamilyTreeName:(UILabel *)sender{
    
     //设置切换家谱弹出动画
@@ -197,6 +184,27 @@
     [[self viewController].view addSubview:editHeadView];
 }
 
+#pragma mark - EditHeadViewDelegate
+-(void)editHeadView:(EditHeadView *)editHeadView HeadInsideImage:(UIImage *)headInsideImage{
+    self.headIV.headInsideIV.image = headInsideImage;
+    MYLog(@"跳转回来了");
+}
+
+//对数据进行加换行符和加文字处理
+-(NSMutableArray *)addlineBreaksWithArr:(NSArray<MemallInfoHyjpModel *> *)arr{
+    NSMutableArray *mutableArr = [NSMutableArray array];
+    for (int i = 0; i < arr.count; i++) {
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        [dic setValue:[NSString addLineBreaks:arr[i].jpname] forKey:@"jpname"];
+        [dic setValue:[NSString addLineBreaks:arr[i].jphyname] forKey:@"jphyname"];
+        [dic setObject:[NSString addLineBreaks:[NSString stringWithFormat:@"第%@代",[NSString translation:(short)arr[i].jpdai]]] forKey:@"jpdai"];
+        [dic setObject:[NSString addLineBreaks:[NSString stringWithFormat:@"字辈 %@",arr[i].jpzb]] forKey:@"jpzb"];
+        [dic setObject:[NSString addLineBreaks:[NSString stringWithFormat:@"排行%@",[NSString translation:(short)arr[i].jpph]]] forKey:@"jpph"];
+        [mutableArr addObject:dic];
+    }
+    return [mutableArr copy];
+}
+
 //高度自适应
 -(void)labelHeightToFit:(UILabel *)label andFrame:(CGRect)frame{
     label.numberOfLines = 0;//根据最大行数需求来设置
@@ -210,9 +218,5 @@
 }
 
 
-#pragma mark - EditHeadViewDelegate
--(void)editHeadView:(EditHeadView *)editHeadView HeadInsideImage:(UIImage *)headInsideImage{
-    self.headIV.headInsideIV.image = headInsideImage;
-    MYLog(@"跳转回来了");
-}
+
 @end

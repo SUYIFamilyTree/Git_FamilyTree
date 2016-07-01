@@ -207,7 +207,6 @@
     [self.navi addSubview:self.vipBtn];
     self.vipBtn.sd_layout.leftSpaceToView(personalInfoEditBtn,5).bottomSpaceToView(self.navi,15).widthIs(35).heightIs(15);
     [self.view addSubview:self.navi];
-
 }
 
 -(void)initMainView{
@@ -446,7 +445,6 @@
     sender.selected = !sender.selected;
     if (sender.selected == YES) {
         [self getVIPInfoData];
-        
     }else{
         [self.vipView removeFromSuperview];
     }

@@ -703,6 +703,7 @@
 		BC9672971D11511900F60534 /* geren_jiao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC9672941D11511900F60534 /* geren_jiao@2x.png */; };
 		BC9672981D11511900F60534 /* geren_jiao@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC9672951D11511900F60534 /* geren_jiao@3x.png */; };
 		BC9C8E251D13F10B00C445D0 /* CustomPikcerDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9C8E241D13F10B00C445D0 /* CustomPikcerDateView.m */; };
+		BCBFE22E1D26672C00C11C80 /* WorshipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBFE22D1D26672C00C11C80 /* WorshipModel.m */; };
 		BCCE8A911CFFD16E005A5E21 /* CemeterialModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCE8A901CFFD16E005A5E21 /* CemeterialModel.m */; };
 		BCCE8A981CFFF289005A5E21 /* PrivateWorshipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCE8A921CFFF289005A5E21 /* PrivateWorshipTableViewCell.m */; };
 		BCCE8A991CFFF289005A5E21 /* PrivateWorshipView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCE8A941CFFF289005A5E21 /* PrivateWorshipView.m */; };
@@ -1580,6 +1581,8 @@
 		BC9672951D11511900F60534 /* geren_jiao@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "geren_jiao@3x.png"; sourceTree = "<group>"; };
 		BC9C8E231D13F10B00C445D0 /* CustomPikcerDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPikcerDateView.h; sourceTree = "<group>"; };
 		BC9C8E241D13F10B00C445D0 /* CustomPikcerDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPikcerDateView.m; sourceTree = "<group>"; };
+		BCBFE22C1D26672C00C11C80 /* WorshipModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorshipModel.h; sourceTree = "<group>"; };
+		BCBFE22D1D26672C00C11C80 /* WorshipModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorshipModel.m; sourceTree = "<group>"; };
 		BCCE8A8F1CFFD16E005A5E21 /* CemeterialModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CemeterialModel.h; sourceTree = "<group>"; };
 		BCCE8A901CFFD16E005A5E21 /* CemeterialModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CemeterialModel.m; sourceTree = "<group>"; };
 		BCCE8A921CFFF289005A5E21 /* PrivateWorshipTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateWorshipTableViewCell.m; sourceTree = "<group>"; };
@@ -3570,6 +3573,8 @@
 			children = (
 				BCCE8A8F1CFFD16E005A5E21 /* CemeterialModel.h */,
 				BCCE8A901CFFD16E005A5E21 /* CemeterialModel.m */,
+				BCBFE22C1D26672C00C11C80 /* WorshipModel.h */,
+				BCBFE22D1D26672C00C11C80 /* WorshipModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -3639,6 +3644,7 @@
 				ADC326F31CF3E3DF00CEAE53 /* Resources */,
 				EA0B07F1BFD4933A6E19A928 /* 📦 Embed Pods Frameworks */,
 				B7F00BED2D279CFABD02A973 /* 📦 Copy Pods Resources */,
+				4B1AA9B5AA12DBFBA5212361 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -4347,6 +4353,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		4B1AA9B5AA12DBFBA5212361 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FamilyTree/Pods-FamilyTree-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B7F00BED2D279CFABD02A973 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4510,6 +4531,7 @@
 				BC5F151B1D0FF1AD004F3622 /* PayForFortuneView.m in Sources */,
 				ADB926201CF7DF1900AA8B6E /* TopView.m in Sources */,
 				ADB9261C1CF7DF1900AA8B6E /* LoginViewController.m in Sources */,
+				BCBFE22E1D26672C00C11C80 /* WorshipModel.m in Sources */,
 				AD67889C1D06AD5B00D6CF52 /* NewsCenterViewController.m in Sources */,
 				AD73886D1CF6E4860076B2AD /* CustomCollectionViewCell.m in Sources */,
 				ADB2D1061D1CCCA10072C022 /* LYFoundation+Log.m in Sources */,

@@ -8,6 +8,8 @@
 
 #import "PrivateWorshipView.h"
 #import "PrivateWorshipTableViewCell.h"
+#import "CreateCemViewController.h"
+
 
 @interface PrivateWorshipView()<UITableViewDataSource,UITableViewDelegate, PrivateWorshipTableViewCellDelegate>
 /** 墓园数组*/
@@ -19,18 +21,26 @@
 
 @implementation PrivateWorshipView
 #pragma mark - lazyLoad
--(NSArray<CemeterialModel *> *)cemeterialArr{
-    if (!_cemeterialArr) {
-        NSMutableArray *arr = [NSMutableArray array];
-        for (int i = 0; i < 2; i++) {
-            CemeterialModel *cemeModel = [[CemeterialModel alloc]init];
-            [arr addObject:cemeModel];
-        }
-        _cemeterialArr = [NSArray arrayWithArray:arr];
+//-(NSArray<CemeterialModel *> *)cemeterialArr{
+//    if (!_cemeterialArr) {
+//        NSMutableArray *arr = [NSMutableArray array];
+//        for (int i = 0; i < 2; i++) {
+//            CemeterialModel *cemeModel = [[CemeterialModel alloc]init];
+//            [arr addObject:cemeModel];
+//        }
+//        _cemeterialArr = [NSArray arrayWithArray:arr];
+//    }
+//    return _cemeterialArr;
+//}
+
+-(NSMutableArray *)PrivateViewMyWorshipArr{
+    if (!_PrivateViewMyWorshipArr) {
+        _PrivateViewMyWorshipArr = [@[] mutableCopy];
     }
-    return _cemeterialArr;
+    return _PrivateViewMyWorshipArr;
 }
 
+#pragma mark - 界面初始化
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
@@ -100,7 +110,8 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if ([tableView isEqual:self.myTableView]) {
-        return 2;
+        return self.PrivateViewMyWorshipArr.count;
+        //return 2;
     }else{
         return 2;
     }
@@ -113,8 +124,11 @@
         if (!cell) {
             cell = [[PrivateWorshipTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"privateWorshipCell"];
         }
-        cell.editBtn.hidden = !self.cemeterialArr[indexPath.row].CemeterialModelEdit;
-        cell.deleteBtn.hidden = !self.cemeterialArr[indexPath.row].CemeterialModelEdit;
+//        cell.editBtn.hidden = !self.cemeterialArr[indexPath.row].CemeterialModelEdit;
+//        cell.deleteBtn.hidden = !self.cemeterialArr[indexPath.row].CemeterialModelEdit;
+        
+        cell.worshipDatalistModel = self.PrivateViewMyWorshipArr[indexPath.row];
+        cell.delegate = self;
         return cell;
     }else{
         PrivateWorshipTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"privateWorshipCell"];
@@ -170,7 +184,13 @@
 
 #pragma mark - PrivateWorshipTableViewCellDelegate
 -(void)cemeterialDidEdit:(PrivateWorshipTableViewCell *)cell{
+    
     //跳转到编辑页面
+    CreateCemViewController *creatCemVC = [[CreateCemViewController alloc]initWithTitle:@"私人墓园" image:nil];
+    creatCemVC.creatOrEditStr = NO;
+    [[self viewController].navigationController pushViewController:creatCemVC animated:YES];
+    
+    
 }
 
 -(void)cemeterialDidDelete:(PrivateWorshipTableViewCell *)cell{

@@ -239,9 +239,9 @@
         case 1001:
             //跳转
         {
-            NSLog(@"图文影像");
-            ImageAndTextViewController *imageTextVC = [[ImageAndTextViewController alloc]init];
-            [self.navigationController pushViewController:imageTextVC animated:YES];
+            NSLog(@"四海同宗");
+            WholeWorldViewController *wholeVc = [[WholeWorldViewController alloc] initWithTitle:@"四海同宗" image:nil];
+            [self.navigationController pushViewController:wholeVc animated:YES];
             break;
         }
         case 1002:
@@ -266,10 +266,10 @@
             break;
         case 1005:
         {
-            NSLog(@"四海同宗");
-            WholeWorldViewController *wholeVc = [[WholeWorldViewController alloc] initWithTitle:@"四海同宗" image:nil];
-            [self.navigationController pushViewController:wholeVc animated:YES];
             //跳转
+            NSLog(@"图文影像");
+            ImageAndTextViewController *imageTextVC = [[ImageAndTextViewController alloc]init];
+            [self.navigationController pushViewController:imageTextVC animated:YES];
         }
             break;
         default:
