@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CreateFamModel.h"
+#import "WIDModel.h"
 @interface WTools : NSObject
 
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodecreategen;
@@ -45,7 +46,8 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodeeditgemedetail;
 //查询家谱所有成员
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodequerygemelist;
 
-
+//进入家谱首页的接口
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodegetintogen;
 
 #pragma mark *** 未通接口 ***
 //查询宗亲信息

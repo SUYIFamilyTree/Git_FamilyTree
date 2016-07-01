@@ -47,13 +47,12 @@ NSString * _Nonnull const kRequestCodeeditgemedetail = @"editgemedetail";
 
 //查询所有成员列表
 NSString * _Nonnull const kRequestCodequerygemelist = @"querygemelist";
+//进入家谱首页的接口
+NSString * _Nonnull const kRequestCodegetintogen = @"getintogen";
 
-
-#pragma mark *** 未通接口 ***
 //查询宗亲信息--只有接口没数据，传了参数就失败。
 NSString * _Nonnull const kRequestCodequeryclan = @"queryclan";
 
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";

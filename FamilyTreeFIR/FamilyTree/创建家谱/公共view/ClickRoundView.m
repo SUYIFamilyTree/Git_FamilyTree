@@ -102,7 +102,9 @@
             starLabel.text = @"*";
             starLabel.textColor = [UIColor redColor];
             [self addSubview:starLabel];
-            starLabel.sd_layout.leftSpaceToView(_titleLabel,0).topEqualToView(_titleLabel).widthIs(10).heightIs(self.bounds.size.height);
+            starLabel.sd_layout.leftSpaceToView(_roundBtn,130*AdaptationWidth()).topEqualToView(_titleLabel).widthIs(10).heightIs(self.bounds.size.height);
+            
+            
         }
         
         

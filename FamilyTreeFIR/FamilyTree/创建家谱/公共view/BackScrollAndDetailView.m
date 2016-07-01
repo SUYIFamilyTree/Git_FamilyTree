@@ -76,8 +76,7 @@ enum{
             [dayArr addObject:[NSString stringWithFormat:@"%d",idx]];
         }
     }
-   
-    
+
     
     //配偶年月日
     self.birthLabel = [self creatLabelTextWithTitle:@"生辰:" TitleFrame:CGRectMake(20, GapOfView+CGRectYH(self.selecProtrai), 50, InputView_height) inputViewLength:0.15*Screen_width dataArr:yearArr inputViewLabel:@"1990" FinText:@"年" withStar:NO];
@@ -97,8 +96,6 @@ enum{
     self.liveNowLabel.delegate = self;
     
     [self.backView addSubview:self.liveNowLabel];
-    
-    
     
     self.selfYear  = [self creatLabelTextWithTitle:@"" TitleFrame:CGRectMake(20, CGRectYH(self.liveNowLabel)+GapOfView, 0, InputView_height) inputViewLength:0.15*Screen_width dataArr:yearArr inputViewLabel:@"-" FinText:@"年" withStar:NO];
     self.selfYear.userInteractionEnabled = false;
@@ -126,8 +123,6 @@ enum{
     
     [self.backView addSubview:self.generationLabel];
     [self.backView addSubview:self.gennerationNex];
-    
-    
     
     //个人简介
     [self.backView addSubview:self.selfTextView];
@@ -389,8 +384,14 @@ enum{
 
 -(InputView *)birtime{
     if (!_birtime) {
-        _birtime = [[InputView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.birthLabel.frame), CGRectYH(self.birthLabel)+GapOfView, 0.34*Screen_width, InputView_height) Length:0.34*Screen_width withData:@[@"0:00-2:00",@"2:00-4:00",@"4:00-6:00",@"6:00-8:00",@"8:00-10:00",@"10:00-12:00",@"12:00-14:00",@"14:00-16:00",@"16:00-18:00",@"18:00-20:00",@"20:00-22:00",@"22:00-00:00"]];
-        _birtime.inputLabel.text = @"8:00-10:00";
+        
+        NSMutableArray *timeArr = [@[] mutableCopy];
+        for (int idx = 0; idx<24; idx++) {
+            [timeArr addObject:[NSString stringWithFormat:@"%d",idx]];
+        }
+ 
+        _birtime = [[InputView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.birthLabel.frame), CGRectYH(self.birthLabel)+GapOfView, 0.15*Screen_width, InputView_height) Length:0.15*Screen_width withData:timeArr];
+        _birtime.inputLabel.text = @"0";
         UILabel *starLabel = [UILabel new];
         starLabel.font = MFont(16);
         starLabel.text = @"*";
@@ -462,6 +463,7 @@ enum{
 -(UITextField *)gennerationNex{
     if (!_gennerationNex) {
         _gennerationNex = [[UITextField alloc] initWithFrame:CGRectMake(CGRectXW(self.generationLabel)+10, CGRectYH(self.selfYear)+GapOfView, 0.45*Screen_width, InputView_height)];
+
         _gennerationNex.text = @"";
         _gennerationNex.font = WFont(35);
         _gennerationNex.backgroundColor = [UIColor whiteColor];
