@@ -58,8 +58,7 @@
     MYLog(@"确认修改");
     if ([self.detailStr isEqualToString:@"昵称"]) {
         [USERDEFAULT setObject:self.detailTF.text forKey:MeNickName];
-    }
-    if ([self.detailStr isEqualToString:@"手机"]) {
+    }else if ([self.detailStr isEqualToString:@"手机"]) {
         if ([[NSString valiMobile:self.detailTF.text] isEqualToString:@""]) {
             MYLog(@"号码正确");
             [self.delegate EditPersonalInfoDetailViewController:self withTitle:self.detailStr withDetail:self.detailTF.text];
@@ -67,28 +66,21 @@
         }else{
             [SXLoadingView showAlertHUD:[NSString valiMobile:self.detailTF.text] duration:1];
         }
-    }
-    
-    if ([self.detailStr isEqualToString:@"邮箱"]){
+    }else if ([self.detailStr isEqualToString:@"邮箱"]){
         if ([NSString validateEmail:self.detailTF.text]) {
             [self.delegate EditPersonalInfoDetailViewController:self withTitle:self.detailStr withDetail:self.detailTF.text];
             [self.navigationController popViewControllerAnimated:YES];
         }else{
             [SXLoadingView showAlertHUD:@"请输入正确的邮箱" duration:1];
         }
-    }
-    
-    if ([self.detailStr isEqualToString:@"证件末6位"]){
+    }else if ([self.detailStr isEqualToString:@"证件末6位"]){
         if ([NSString validateIdentityCard:self.detailTF.text]) {
             [self.delegate EditPersonalInfoDetailViewController:self withTitle:self.detailStr withDetail:self.detailTF.text];
             [self.navigationController popViewControllerAnimated:YES];
         }else{
             [SXLoadingView showAlertHUD:@"请输入正确的身份证号" duration:1];
         }
-    }
-    
-    
-    else{
+    }else{
         [self.delegate EditPersonalInfoDetailViewController:self withTitle:self.detailStr withDetail:self.detailTF.text];
         [self.navigationController popViewControllerAnimated:YES];
     }

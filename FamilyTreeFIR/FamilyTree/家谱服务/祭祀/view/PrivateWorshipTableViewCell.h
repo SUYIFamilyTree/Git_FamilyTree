@@ -23,7 +23,7 @@
 /** 删除按钮*/
 @property (nonatomic, strong) UIButton *deleteBtn;
 /** 是否处于编辑状态*/
-@property (nonatomic, assign)BOOL cellEdit;
+//@property (nonatomic, assign)BOOL cellEdit;
 /** 代理人*/
 @property (nonatomic, weak) id<PrivateWorshipTableViewCellDelegate> delegate;
 /** 祭陵图*/
