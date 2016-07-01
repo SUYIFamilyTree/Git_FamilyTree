@@ -292,6 +292,7 @@
 		ADA98E971D11584C005B23EC /* CommonNavigationViews.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA98E931D11584B005B23EC /* CommonNavigationViews.m */; };
 		ADA98E981D11584C005B23EC /* SelectMyFamilyView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA98E951D11584B005B23EC /* SelectMyFamilyView.m */; };
 		ADA98E9C1D115898005B23EC /* MyFamilyCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA98E9B1D115898005B23EC /* MyFamilyCollectionViewCell.m */; };
+		ADAB221D1D26174A0047B6F0 /* WIDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADAB221C1D26174A0047B6F0 /* WIDModel.m */; };
 		ADB2D1061D1CCCA10072C022 /* LYFoundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB2D1051D1CCCA10072C022 /* LYFoundation+Log.m */; };
 		ADB2D1091D1CCEE60072C022 /* CreateFamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB2D1081D1CCEE60072C022 /* CreateFamModel.m */; };
 		ADB7F0681D0297EE001F151D /* todayYS_learn_blues.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB7F0411D0297EE001F151D /* todayYS_learn_blues.png */; };
@@ -1079,6 +1080,8 @@
 		ADA98E951D11584B005B23EC /* SelectMyFamilyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectMyFamilyView.m; path = ../SelectMyFamilyView.m; sourceTree = "<group>"; };
 		ADA98E9A1D115898005B23EC /* MyFamilyCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFamilyCollectionViewCell.h; sourceTree = "<group>"; };
 		ADA98E9B1D115898005B23EC /* MyFamilyCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFamilyCollectionViewCell.m; sourceTree = "<group>"; };
+		ADAB221B1D26174A0047B6F0 /* WIDModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIDModel.h; sourceTree = "<group>"; };
+		ADAB221C1D26174A0047B6F0 /* WIDModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIDModel.m; sourceTree = "<group>"; };
 		ADAB7E101CF4050B00C3C143 /* DefineHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefineHeader.h; sourceTree = "<group>"; };
 		ADB2D1051D1CCCA10072C022 /* LYFoundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LYFoundation+Log.m"; sourceTree = "<group>"; };
 		ADB2D1071D1CCEE60072C022 /* CreateFamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFamModel.h; sourceTree = "<group>"; };
@@ -2554,6 +2557,8 @@
 		ADBA01751D016DD90016AB00 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				ADAB221B1D26174A0047B6F0 /* WIDModel.h */,
+				ADAB221C1D26174A0047B6F0 /* WIDModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -4394,6 +4399,7 @@
 				ADE265A81D20C4C800F12FC9 /* WSelectMyFamModel.m in Sources */,
 				BC5F15181D0FF1AD004F3622 /* RechargeViewController.m in Sources */,
 				BC5192A41D23A0E30020480F /* NSString+valiEmail.m in Sources */,
+				ADAB221D1D26174A0047B6F0 /* WIDModel.m in Sources */,
 				ADA98E741D10F5EF005B23EC /* FamilyNamesViewController.m in Sources */,
 				ADA7FEF31D07A82300EDBEE4 /* PortraitAndNameViews.m in Sources */,
 				BC96727E1D10E4BF00F60534 /* EditPersonalInfoView.m in Sources */,

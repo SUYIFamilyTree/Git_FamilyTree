@@ -68,6 +68,9 @@
     self.navigationController.navigationBarHidden = YES;
     //更新数据
     [self getFamInfo];
+    
+    [self getFamDetailInfo];
+    
 }
 #pragma mark - 视图搭建
 //设置导航栏
@@ -208,7 +211,7 @@
 
 
 #pragma mark *** 网络请求 ***
-
+//我的所有家谱
 -(void)getFamInfo{
     [SXLoadingView showProgressHUD:@"正在加载"];
     [TCJPHTTPRequestManager POSTWithParameters:@{@"query":@"",@"type":@"MyGen"} requestID:GetUserId requestcode:kRequestCodequerymygen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
@@ -228,6 +231,16 @@
         [SXLoadingView hideProgressHUD];
     } failure:^(NSError *error) {
         MYLog(@"失败");
+    }];
+}
+//家谱首页信息
+-(void)getFamDetailInfo{
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"GeId":@"1"} requestID:GetUserId requestcode:kRequestCodegetintogen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSLog(@"alalalalfan---%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+        }
+    } failure:^(NSError *error) {
+        
     }];
 }
 

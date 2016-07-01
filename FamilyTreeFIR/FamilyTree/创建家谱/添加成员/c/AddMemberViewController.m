@@ -8,9 +8,9 @@
 
 #import "AddMemberViewController.h"
 #import "AddMenberView.h"
-
 @interface AddMemberViewController ()<BackScrollAndDetailViewDelegate>
 @property (nonatomic,strong) AddMenberView *AddFameView; /*创建家谱view*/
+
 
 @end
 
@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     
     self.automaticallyAdjustsScrollViewInsets=false;
     self.tabBarController.tabBar.hidden = YES;
@@ -65,14 +66,9 @@
                              self.AddFameView.moveCity.text];
     
     
-    //获取宗亲
-    [SXLoadingView showProgressHUD:@"正在获取"];
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"query":@"",@"geid":@"1",@"pagenum":@"1",@"pagesize":@"20",@"sex":@""} requestID:GetUserId requestcode:kRequestCodequerygemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        [SXLoadingView hideProgressHUD];
-        NSLog(@"--rrrrr-%@", [ NSString jsonDicWithDic:jsonDic[@"data"]]);
-    } failure:^(NSError *error) {
-        MYLog(@"shibai");
-    }];
+    
+    
+    
     
     
     
@@ -81,11 +77,15 @@
     //截取代数
     NSString *genNumber = [self.AddFameView.gennerNum.inputLabel.text stringByReplacingOccurrencesOfString:@"第" withString:@""];
     NSString *genNumberF = [genNumber stringByReplacingOccurrencesOfString:@"代" withString:@""];
+    
+    NSString *shenfenId = [WIDModel sharedWIDModel].idDic[self.AddFameView.idView.inputLabel.text];
+    NSString *fatherId = [WIDModel sharedWIDModel].fatherDic[self.AddFameView.fatheView.inputLabel.text];
+    
     NSDictionary *addDic = @{@"GeId":@"1",
                              @"Zb":@"试",
-                             @"Father":self.AddFameView.fatheView.inputLabel.text,
+                             @"Father":fatherId,
                              @"Ds":genNumberF,
-                             @"Sf":self.AddFameView.idView.inputLabel.text,
+                             @"Sf":shenfenId,
                              @"Photo":@"",
                              @"Grjl":self.AddFameView.selfTextView.text,
                              @"Jzd":self.AddFameView.moveCity.text,
@@ -101,10 +101,14 @@
                              @"GemeDeathtime":[self.AddFameView.liveNowLabel.inputLabel.text isEqualToString:@"是"]?@"":[NSString stringWithFormat:@"%@-%@-%@",self.AddFameView.selfYear.inputLabel.text,self.AddFameView.selfMonth.inputLabel.text,self.AddFameView.selfDay.inputLabel.text],
                              @"GemeIslife":[self.AddFameView.liveNowLabel.inputLabel.text isEqualToString:@"是"]?@"1":@"0",
                              @"Po":self.AddFameView.parnName.text,
+                             @"Mother":self.AddFameView.motherView.inputLabel.text,
+                             @"IsEnt":@"1",
                              };
+    
     [TCJPHTTPRequestManager POSTWithParameters:addDic requestID:GetUserId requestcode:kRequestCodeaddgeme success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-            NSLog(@"%@", jsonDic[@"data"]);
+            NSLog(@"？？？-----%@", jsonDic[@"data"]);
+            
         }
     } failure:^(NSError *error) {
         MYLog(@"失败");
