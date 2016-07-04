@@ -705,7 +705,6 @@
 		BC9672981D11511900F60534 /* geren_jiao@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC9672951D11511900F60534 /* geren_jiao@3x.png */; };
 		BC9C8E251D13F10B00C445D0 /* CustomPikcerDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9C8E241D13F10B00C445D0 /* CustomPikcerDateView.m */; };
 		BCBFE22E1D26672C00C11C80 /* WorshipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBFE22D1D26672C00C11C80 /* WorshipModel.m */; };
-		BCCE8A911CFFD16E005A5E21 /* CemeterialModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCE8A901CFFD16E005A5E21 /* CemeterialModel.m */; };
 		BCCE8A981CFFF289005A5E21 /* PrivateWorshipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCE8A921CFFF289005A5E21 /* PrivateWorshipTableViewCell.m */; };
 		BCCE8A991CFFF289005A5E21 /* PrivateWorshipView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCE8A941CFFF289005A5E21 /* PrivateWorshipView.m */; };
 		BCCE8A9A1CFFF289005A5E21 /* PublicWorshipView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCE8A961CFFF289005A5E21 /* PublicWorshipView.m */; };
@@ -1586,8 +1585,6 @@
 		BC9C8E241D13F10B00C445D0 /* CustomPikcerDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPikcerDateView.m; sourceTree = "<group>"; };
 		BCBFE22C1D26672C00C11C80 /* WorshipModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorshipModel.h; sourceTree = "<group>"; };
 		BCBFE22D1D26672C00C11C80 /* WorshipModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorshipModel.m; sourceTree = "<group>"; };
-		BCCE8A8F1CFFD16E005A5E21 /* CemeterialModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CemeterialModel.h; sourceTree = "<group>"; };
-		BCCE8A901CFFD16E005A5E21 /* CemeterialModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CemeterialModel.m; sourceTree = "<group>"; };
 		BCCE8A921CFFF289005A5E21 /* PrivateWorshipTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateWorshipTableViewCell.m; sourceTree = "<group>"; };
 		BCCE8A931CFFF289005A5E21 /* PrivateWorshipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateWorshipView.h; sourceTree = "<group>"; };
 		BCCE8A941CFFF289005A5E21 /* PrivateWorshipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateWorshipView.m; sourceTree = "<group>"; };
@@ -3576,8 +3573,6 @@
 		BCCE8A8E1CFFD14D005A5E21 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				BCCE8A8F1CFFD16E005A5E21 /* CemeterialModel.h */,
-				BCCE8A901CFFD16E005A5E21 /* CemeterialModel.m */,
 				BCBFE22C1D26672C00C11C80 /* WorshipModel.h */,
 				BCBFE22D1D26672C00C11C80 /* WorshipModel.m */,
 			);
@@ -4502,7 +4497,6 @@
 				BC2B1E1F1D1BD88E004E916D /* EditPasswordViewController.m in Sources */,
 				ADA98E851D11272F005B23EC /* RollView.m in Sources */,
 				AD7388171CF6C2050076B2AD /* TopSearchView.m in Sources */,
-				BCCE8A911CFFD16E005A5E21 /* CemeterialModel.m in Sources */,
 				ADC059DE1D002C70001F7C1B /* CreateFamViewController.m in Sources */,
 				ADBA016E1D0115370016AB00 /* ClickRoundView.m in Sources */,
 				BC5F150F1D0FF1AD004F3622 /* PersonalCenterCliffordView.m in Sources */,

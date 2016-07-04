@@ -27,9 +27,9 @@
 @property (nonatomic, strong) PublicWorshipView *publickWorshipV;
 
 /** 存储服务器返回我创建的墓园信息*/
-@property (nonatomic, strong) NSMutableArray *myWorshipArr;
+@property (nonatomic, strong) NSMutableArray<WorshipDatalistModel *> *myWorshipArr;
 /** 存储服务器返回排行榜的墓园信息*/
-@property (nonatomic, strong) NSMutableArray *allWorshipArr;
+@property (nonatomic, strong) NSMutableArray<WorshipDatalistModel *> *allWorshipArr;
 //我的墓园请求的页数
 @property (nonatomic, assign) int myPage;
 //总排行墓园请求的页数
@@ -63,18 +63,18 @@
         NSDictionary *logDic = @{@"pagenum":@(self.myPage),@"pagesize":@2,@"meid":[NSString stringWithFormat:@"%@",GetUserId],@"type":@"PRI"};
         WK(weakSelf);
         [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeCemeteryList success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-//            MYLog(@"墓园列表%@",jsonDic[@"message"]);
-//            MYLog(@"墓园列表%@",jsonDic[@"data"]);
+            
             if (succe) {
                 weakSelf.myWorshipModel = [WorshipModel modelWithJSON:jsonDic[@"data"]];
                 if (weakSelf.myWorshipModel.datalist.count != 0) {
+                    
+                    for (int i = 0; i < weakSelf.myWorshipModel.datalist.count; i++) {
+                        weakSelf.myWorshipModel.datalist[i].worshipDatalistModelEdit = weakSelf.privateWorshipV.PrivateWorshipEdit;
+                    }
                     [weakSelf.myWorshipArr addObjectsFromArray:weakSelf.myWorshipModel.datalist];
                     weakSelf.privateWorshipV.PrivateViewMyWorshipArr = weakSelf.myWorshipArr;
                     [weakSelf.privateWorshipV.myTableView reloadData];
                 }
-                
-                MYLog(@"墓园数据:%@",weakSelf.myWorshipArr);
-                
                 [weakSelf.privateWorshipV.myTableView.mj_footer endRefreshing];
             }
         } failure:^(NSError *error) {
@@ -87,6 +87,26 @@
 
 //排行墓园列表
 -(void)getAllWorshipData{
+    NSDictionary *logDic = @{@"pagenum":@(self.allPage),@"pagesize":@2,@"meid":@"",@"type":@"PRI"};
+    WK(weakSelf);
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeCemeteryList success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        
+        if (succe) {
+            weakSelf.allWorshipModel = [WorshipModel modelWithJSON:jsonDic[@"data"]];
+            if (weakSelf.allWorshipModel.datalist.count != 0) {
+                
+                [weakSelf.allWorshipArr addObjectsFromArray:weakSelf.allWorshipModel.datalist];
+                weakSelf.privateWorshipV.PrivateViewAllWorshipArr = weakSelf.allWorshipArr;
+                NSLog(@"数据%@",weakSelf.privateWorshipV.PrivateViewAllWorshipArr);
+                [weakSelf.privateWorshipV.cemeterialListTableView reloadData];
+            }
+            [weakSelf.privateWorshipV.cemeterialListTableView.mj_footer endRefreshing];
+        }
+    } failure:^(NSError *error) {
+        [weakSelf.privateWorshipV.cemeterialListTableView.mj_footer endRefreshing];
+    }];
+
+    
     
 }
 
@@ -98,7 +118,8 @@
     [self.view addSubview:self.headerSegment];
     [self.view addSubview:self.scrollView];
     [self setUpScrollView];
-    [self setUpChildViewControll];
+    [self setUpPrivateWorshipV];
+    [self setUpPublickWorshipV];
     [self.headerSegment addTarget:self action:@selector(segmentSelect:) forControlEvents:UIControlEventValueChanged];
 }
 
@@ -120,30 +141,42 @@
     self.scrollView.contentSize = CGSizeMake(Screen_width * 2, Screen_height - 64 - 50-49-5);
     self.scrollView.bounces = NO;
 }
-/**
- *  设置控制的每一个子控制器
- */
--(void)setUpChildViewControll{
+
+-(void)setUpPrivateWorshipV{
     self.privateWorshipV = [[PrivateWorshipView alloc]initWithFrame:CGRectMake(0,0, Screen_width, CGRectH(self.scrollView))];
     [self setupMyRefreshControl];
-    self.publickWorshipV = [[PublicWorshipView alloc]initWithFrame:CGRectMake(Screen_width, 0, Screen_width, CGRectH(self.scrollView))];
-    
-    //将视图view加入到scrollview上
-    [self.scrollView addSubview:self.publickWorshipV];
+    [self setupAllRefreshControl];
     [self.scrollView addSubview:self.privateWorshipV];
-    
+
+}
+
+-(void)setUpPublickWorshipV{
+    self.publickWorshipV = [[PublicWorshipView alloc]initWithFrame:CGRectMake(Screen_width, 0, Screen_width, CGRectH(self.scrollView))];
+    [self.scrollView addSubview:self.publickWorshipV];
+
 }
 
 - (void)setupMyRefreshControl {
-    //添加到view
     self.privateWorshipV.myTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreMyWorship)];
+
+    
 }
+
+- (void)setupAllRefreshControl {
+    self.privateWorshipV.cemeterialListTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreAllWorship)];
+}
+
+
 
 -(void)loadMoreMyWorship{
     self.myPage++;
     [self getMyWorshipData];
 }
 
+-(void)loadMoreAllWorship{
+    self.allPage++;
+    [self getAllWorshipData];
+}
 
 #pragma mark - lazyLoad
 -(UISegmentedControl *)headerSegment{

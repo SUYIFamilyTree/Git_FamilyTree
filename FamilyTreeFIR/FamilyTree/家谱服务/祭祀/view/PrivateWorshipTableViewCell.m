@@ -10,6 +10,17 @@
 
 
 @interface PrivateWorshipTableViewCell()
+/** 墓园名称标签*/
+@property (nonatomic, strong) UILabel *cemeterialNameLB;
+
+/** 浏览人数标签*/
+@property (nonatomic, strong) UILabel *visitorNumberLB;
+/** 扫墓人标签*/
+@property (nonatomic, strong) UILabel *cemeterialPeopleLB;
+/** 扫墓礼物标签*/
+@property (nonatomic, strong) UILabel *drinkLB;
+/** 扫墓时间标签*/
+@property (nonatomic, strong) UILabel *timeLB;
 
 @end
 
@@ -26,9 +37,34 @@
     return self;
 }
 
+-(void)setWorshipDatalistModel:(WorshipDatalistModel *)worshipDatalistModel{
+    _worshipDatalistModel = worshipDatalistModel;
+    self.cemeterialNameLB.text = [NSString stringWithFormat:@"%@之祭陵",worshipDatalistModel.CeName];
+    self.cemeterialIDLB.text =[NSString stringWithFormat:@"园号%ld",worshipDatalistModel.CeId];
+    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld人浏览",worshipDatalistModel.CeReadcount]];
+    
+    NSRange blueRange = NSMakeRange(0, [[noteStr string] rangeOfString:@"人"].location);
+    [noteStr addAttribute:NSForegroundColorAttributeName value:LH_RGBCOLOR(19, 154, 219) range:blueRange];
+    [self.visitorNumberLB setAttributedText:noteStr];
+    
+    self.cemeterialPeopleLB.text = [NSString stringWithFormat:@"%@扫墓",worshipDatalistModel.Smr];
+    
+    self.drinkLB.text = worshipDatalistModel.Lp;
+    self.timeLB.text = worshipDatalistModel.Sj;
+    
+    self.editBtn.hidden = !worshipDatalistModel.worshipDatalistModelEdit;
+    
+    self.deleteBtn.hidden = !worshipDatalistModel.worshipDatalistModelEdit;
+    
+    [self.cemeterialImageView setImageWithURL:[NSURL URLWithString:worshipDatalistModel.CeCover] placeholder:MImage(@"mcGuanli_mudi")];
+}
+
+
 -(void)initImageView{
     self.cemeterialImageView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 120, 70)];
-    self.cemeterialImageView.image = MImage(@"mcGuanli_mudi");
+//    if (self.cemeterialImageView.image == nil) {
+//       self.cemeterialImageView.image = MImage(@"mcGuanli_mudi");
+//    }
     [self addSubview:self.cemeterialImageView];
     
     CGRect frame = [self frame];
@@ -62,79 +98,49 @@
 
 -(void)initLBs{
     //祭陵名字
-    UILabel *cemeterialNameLB = [[UILabel alloc]init];
-    cemeterialNameLB.textAlignment = NSTextAlignmentLeft;
-    //cemeterialNameLB.text = @"某某某之祭陵";
-    cemeterialNameLB.text = self.worshipDatalistModel.CeName;
-    cemeterialNameLB.font = MFont(12);
-    [self addSubview:cemeterialNameLB];
-    cemeterialNameLB.sd_layout.leftSpaceToView(self.cemeterialImageView,8).topSpaceToView(self,8).heightIs(20).widthIs(100);
+    self.cemeterialNameLB = [[UILabel alloc]init];
+    self.cemeterialNameLB.textAlignment = NSTextAlignmentLeft;
+    self.cemeterialNameLB.font = MFont(12);
+    [self addSubview:self.cemeterialNameLB];
+    self.cemeterialNameLB.sd_layout.leftSpaceToView(self.cemeterialImageView,8).topSpaceToView(self,8).heightIs(20).widthIs(100);
     
     //园号
-    UILabel *cemeterialIDLB = [[UILabel alloc]init];
-    cemeterialIDLB.textAlignment = NSTextAlignmentLeft;
-    //cemeterialIDLB.text = @"园号123456";
-    cemeterialIDLB.text =[NSString stringWithFormat:@"园号%ld",self.worshipDatalistModel.CeId];
-    cemeterialIDLB.font = MFont(10);
-    [self addSubview:cemeterialIDLB];
-    cemeterialIDLB.sd_layout.leftSpaceToView(self.cemeterialImageView,8).topSpaceToView(cemeterialNameLB,2).heightIs(10).widthIs(60);
+    self.cemeterialIDLB = [[UILabel alloc]init];
+    self.cemeterialIDLB.textAlignment = NSTextAlignmentLeft;
+    self.cemeterialIDLB.font = MFont(10);
+    [self addSubview:self.cemeterialIDLB];
+    self.cemeterialIDLB.sd_layout.leftSpaceToView(self.cemeterialImageView,8).topSpaceToView(self.cemeterialNameLB,2).heightIs(10).widthIs(60);
     //浏览人数
-    UILabel *visitorNumberLB = [[UILabel alloc]init];
-    visitorNumberLB.textAlignment = NSTextAlignmentLeft;
-    visitorNumberLB.font = MFont(10);
-    //self.visitorNumber = @"58963人浏览";
-//    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:self.visitorNumber];
-    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld",self.worshipDatalistModel.CeReadcount]];
-    
-    NSRange blueRange = NSMakeRange(0, [[noteStr string] rangeOfString:@"人"].location);
-    [noteStr addAttribute:NSForegroundColorAttributeName value:LH_RGBCOLOR(19, 154, 219) range:blueRange];
-    [visitorNumberLB setAttributedText:noteStr];
-    [self addSubview:visitorNumberLB];
-    visitorNumberLB.sd_layout.leftSpaceToView(cemeterialIDLB,5).topSpaceToView(cemeterialNameLB,2).heightIs(10).widthIs(80);
+    self.visitorNumberLB = [[UILabel alloc]init];
+    self.visitorNumberLB.textAlignment = NSTextAlignmentLeft;
+    self.visitorNumberLB.font = MFont(10);
+    [self addSubview:self.visitorNumberLB];
+    self.visitorNumberLB.sd_layout.leftSpaceToView(self.cemeterialIDLB,5).topSpaceToView(self.cemeterialNameLB,2).heightIs(10).widthIs(80);
 
     //某某扫墓
-    UILabel *cemeterialPeopleLB =[[UILabel alloc]init];
-    cemeterialPeopleLB.textAlignment = NSTextAlignmentLeft;
-    //cemeterialPeopleLB.text = @"某某扫墓";
-    cemeterialNameLB.text = [NSString stringWithFormat:@"%@扫墓",self.worshipDatalistModel.Smr];
-    
-    cemeterialPeopleLB.font = MFont(10);
-    cemeterialPeopleLB.textColor = [UIColor redColor];
-    [self addSubview:cemeterialPeopleLB];
-    cemeterialPeopleLB.sd_layout.leftSpaceToView(self.cemeterialImageView,8).topSpaceToView(cemeterialIDLB,4).widthIs(40).heightIs(10);
+    self.cemeterialPeopleLB =[[UILabel alloc]init];
+    self.cemeterialPeopleLB.textAlignment = NSTextAlignmentLeft;
+    self.cemeterialPeopleLB.font = MFont(10);
+    self.cemeterialPeopleLB.textColor = [UIColor redColor];
+    [self addSubview:self.cemeterialPeopleLB];
+    self.cemeterialPeopleLB.sd_layout.leftSpaceToView(self.cemeterialImageView,8).topSpaceToView(self.cemeterialIDLB,4).widthIs(40).heightIs(10);
     
     //酒水
-    UILabel *drinkLB =[[UILabel alloc]init];
-    drinkLB.textAlignment = NSTextAlignmentLeft;
-    //drinkLB.text = @"酒水";
-    drinkLB.text = self.worshipDatalistModel.Lp;
-    
-    drinkLB.font = MFont(10);
-    drinkLB.textColor = [UIColor redColor];
-    [self addSubview:drinkLB];
-    drinkLB.sd_layout.leftSpaceToView(cemeterialPeopleLB,5).topSpaceToView(cemeterialIDLB,4).widthIs(40).heightIs(10);
+    self.drinkLB =[[UILabel alloc]init];
+    self.drinkLB.textAlignment = NSTextAlignmentLeft;
+    self.drinkLB.font = MFont(10);
+    self.drinkLB.textColor = [UIColor redColor];
+    [self addSubview:self.drinkLB];
+    self.drinkLB.sd_layout.leftSpaceToView(self.cemeterialPeopleLB,5).topSpaceToView(self.cemeterialIDLB,4).widthIs(40).heightIs(10);
     
     //时间
-    UILabel *timeLB =[[UILabel alloc]init];
-    timeLB.textAlignment = NSTextAlignmentLeft;
-    //timeLB.text = @"2015-5-10 10:11:21";
-    timeLB.text = self.worshipDatalistModel.Sj;
-    
-    timeLB.font = MFont(10);
-    timeLB.textColor = [UIColor redColor];
-    [self addSubview:timeLB];
-    timeLB.sd_layout.leftSpaceToView(self.cemeterialImageView,8).topSpaceToView(cemeterialPeopleLB,4).widthIs(100).heightIs(10);
+    self.timeLB =[[UILabel alloc]init];
+    self.timeLB.textAlignment = NSTextAlignmentLeft;
+    self.timeLB.font = MFont(10);
+    self.timeLB.textColor = [UIColor redColor];
+    [self addSubview:self.timeLB];
+    self.timeLB.sd_layout.leftSpaceToView(self.cemeterialImageView,8).topSpaceToView(self.cemeterialPeopleLB,4).widthIs(100).heightIs(10);
 
-}
-
--(void)setEditBtn:(UIButton *)editBtn{
-    _editBtn = editBtn;
-//    _editBtn.hidden = !_cellEdit;
-}
-
--(void)setDeleteBtn:(UIButton *)deleteBtn{
-    _deleteBtn = deleteBtn;
-//    _deleteBtn.hidden = !_cellEdit;
 }
 
 

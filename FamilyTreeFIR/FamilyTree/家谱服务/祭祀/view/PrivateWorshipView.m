@@ -12,8 +12,6 @@
 
 
 @interface PrivateWorshipView()<UITableViewDataSource,UITableViewDelegate, PrivateWorshipTableViewCellDelegate>
-/** 墓园数组*/
-@property (nonatomic, strong) NSArray<CemeterialModel *> *cemeterialArr;
 
 /** 新增墓园按钮*/
 @property (nonatomic, strong) UIButton *addCemeterialBtn;
@@ -21,23 +19,20 @@
 
 @implementation PrivateWorshipView
 #pragma mark - lazyLoad
-//-(NSArray<CemeterialModel *> *)cemeterialArr{
-//    if (!_cemeterialArr) {
-//        NSMutableArray *arr = [NSMutableArray array];
-//        for (int i = 0; i < 2; i++) {
-//            CemeterialModel *cemeModel = [[CemeterialModel alloc]init];
-//            [arr addObject:cemeModel];
-//        }
-//        _cemeterialArr = [NSArray arrayWithArray:arr];
-//    }
-//    return _cemeterialArr;
-//}
+
 
 -(NSMutableArray *)PrivateViewMyWorshipArr{
     if (!_PrivateViewMyWorshipArr) {
         _PrivateViewMyWorshipArr = [@[] mutableCopy];
     }
     return _PrivateViewMyWorshipArr;
+}
+
+-(NSMutableArray<WorshipDatalistModel *> *)PrivateViewAllWorshipArr{
+    if (!_PrivateViewAllWorshipArr) {
+        _PrivateViewAllWorshipArr = [@[] mutableCopy];
+    }
+    return _PrivateViewAllWorshipArr;
 }
 
 #pragma mark - 界面初始化
@@ -75,6 +70,7 @@
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
     self.myTableView.bounces = NO;
+    self.myTableView.tag = 1001;
     [self addSubview:self.myTableView];
 }
 
@@ -92,6 +88,7 @@
     self.cemeterialListTableView.dataSource = self;
     self.cemeterialListTableView.delegate = self;
     self.cemeterialListTableView.bounces = NO;
+    self.cemeterialListTableView.tag = 1002;
     [self addSubview:self.cemeterialListTableView];
 }
 
@@ -109,35 +106,49 @@
 }
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if ([tableView isEqual:self.myTableView]) {
-        return self.PrivateViewMyWorshipArr.count;
-        //return 2;
+    if (tableView.tag == 1001) {
+        if (self.PrivateViewMyWorshipArr.count != 0) {
+            return self.PrivateViewMyWorshipArr.count;
+        }else{
+            return 0;
+        }
+        
+        
     }else{
-        return 2;
+        if (self.PrivateViewAllWorshipArr.count != 0) {
+            return self.PrivateViewAllWorshipArr.count;
+        }else{
+            return 0;
+        }
     }
     
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([tableView isEqual:self.myTableView]) {
-        PrivateWorshipTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"privateWorshipCell"];
-        if (!cell) {
-            cell = [[PrivateWorshipTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"privateWorshipCell"];
+    if ((tableView.tag == 1001) && (indexPath.row < self.PrivateViewMyWorshipArr.count)) {
+        PrivateWorshipTableViewCell *myCell = [tableView dequeueReusableCellWithIdentifier:@"privateWorshipCell"];
+        if (!myCell) {
+            myCell = [[PrivateWorshipTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"privateWorshipCell"];
         }
-//        cell.editBtn.hidden = !self.cemeterialArr[indexPath.row].CemeterialModelEdit;
-//        cell.deleteBtn.hidden = !self.cemeterialArr[indexPath.row].CemeterialModelEdit;
-        
-        cell.worshipDatalistModel = self.PrivateViewMyWorshipArr[indexPath.row];
-        cell.delegate = self;
-        return cell;
+    
+       if (self.PrivateViewMyWorshipArr.count > 0) {
+                myCell.worshipDatalistModel = self.PrivateViewMyWorshipArr[indexPath.row];
+        }
+
+        myCell.delegate = self;
+        return myCell;
     }else{
-        PrivateWorshipTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"privateWorshipCell"];
-        if (!cell) {
-            cell = [[PrivateWorshipTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"privateWorshipCell"];
+        PrivateWorshipTableViewCell *allCell = [tableView dequeueReusableCellWithIdentifier:@"rankingWorshipCell"];
+        if (!allCell) {
+            allCell = [[PrivateWorshipTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"rankingWorshipCell"];
         }
-        
-        return cell;
+        if (self.PrivateViewAllWorshipArr.count != 0 ) {
+            allCell.worshipDatalistModel = self.PrivateViewAllWorshipArr[indexPath.row];
+        }
+        return allCell;
     }
+    
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -156,18 +167,16 @@
 -(void)clickEditBtn:(UIButton *)sender{
     
     sender.selected = !sender.selected;
-
  
     self.PrivateWorshipEdit = sender.selected;
 
-    for (int i = 0; i < 2; i++) {
-        self.cemeterialArr[i].CemeterialModelEdit = sender.selected;
+    for (int i = 0; i < self.PrivateViewMyWorshipArr.count; i++) {
+        self.PrivateViewMyWorshipArr[i].worshipDatalistModelEdit = sender.selected;
     }
     [self.myTableView reloadData];
     
     self.addCemeterialBtn.hidden = !sender.selected;
 
-    
     //进入编辑状态
     [self.delegate PrivateWorshipView:self didSelect:sender.selected];
     
@@ -188,14 +197,30 @@
     //跳转到编辑页面
     CreateCemViewController *creatCemVC = [[CreateCemViewController alloc]initWithTitle:@"私人墓园" image:nil];
     creatCemVC.creatOrEditStr = NO;
+    creatCemVC.CeId = cell.worshipDatalistModel.CeId;
     [[self viewController].navigationController pushViewController:creatCemVC animated:YES];
     
     
 }
 
 -(void)cemeterialDidDelete:(PrivateWorshipTableViewCell *)cell{
-    //删除该行
     
+    //删除该行
+    NSIndexPath *indexPath = [self.myTableView indexPathForCell:cell];
+    //删除数据源
+    [self.PrivateViewMyWorshipArr removeObjectAtIndex:indexPath.row];
+    
+    [self.myTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    //发网络请求
+    NSDictionary *logDic = @{@"CeId":@(cell.worshipDatalistModel.CeId)};
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeDelcemetery success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        //MYLog(@"%@",jsonDic[@"data"]);
+        if (succe) {
+            [SXLoadingView showAlertHUD:@"删除成功" duration:0.5];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 

@@ -31,6 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    MYLog(@"%ld",self.CeId);
     [self initData];
     [self initUI];
 }
@@ -91,17 +92,6 @@
     
     
     
-//    self.cemName = [UITextField new];
-//    NSLog(@"%@", self.cemName);
-//    NSMutableArray *fieldArr = [@[self.cemName,self.cemMaster,self.cemSaying,self.cemBirDead,self.cemIntro] mutableCopy];
-//
-//    [fieldArr enumerateObjectsUsingBlock:^(UITextField *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        obj = [self createLabelAndTextViewWithFrame:AdaptationFrame(74, 40+idx*75, 130, 50) title:titleArr[idx] toView:whiteView];
-//        [whiteView addSubview:obj];
-//    }];
-    
-    
-    
 }
 
 -(void)createCemBtn{
@@ -126,39 +116,69 @@
         NSDictionary *dic = @{@"CeName":self.cemName.text,
                               @"CeMaster":self.cemMaster.text,
                               @"CeEpitaph":self.cemSaying.text,
-                              @"CeCeDeathday":self.cemBirDead.text,
+                              @"CeDeathday":self.cemBirDead.text,
                               @"CeBrief":self.cemIntro.text,
                               @"CeType":@"PRI",
+                              @"CeMeid":GetUserId
                               };
         [TCJPHTTPRequestManager POSTWithParameters:dic requestID:GetUserId requestcode:kRequestCodecreatecemetery success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
             if (succe) {
-                NSLog(@"%@", jsonDic[@"data"]);
+                NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
+                MYLog(@"%@", dic[@"CeId"]);
+                [self uploadWorshipImageWithID:[dic[@"CeId"] intValue]];
                 [SXLoadingView showAlertHUD:@"创建成功" duration:0.5];
+                [self.navigationController popViewControllerAnimated:YES];
             }
         } failure:^(NSError *error) {
             MYLog(@"失败");
         }];
         
-        UIImage *cemeteryImage = self.addCemBtn.imageView.image;
-        NSData *imageData = UIImageJPEGRepresentation(cemeteryImage, 0.5);
-        NSString *encodeimageStr =[imageData base64Encoding];
-        NSDictionary *params =@{@"userid":GetUserId,@"imgbt":encodeimageStr,@"uploadtype":@"ZP",@"ceid":@1};
-        [TCJPHTTPRequestManager POSTWithParameters:params requestID:GetUserId requestcode:kRequestCodeUploadCefm success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-            if (succe) {
-                
-                MYLog(@"墓园图片上传成功%@", jsonDic[@"data"]);
-            }
-        } failure:^(NSError *error) {
-            
-        }];
-
-    }else{
-        //修改墓园信息
     }
     
-    
+    else{
+        //修改墓园信息
+        NSDictionary *dic = @{@"CeName":self.cemName.text,
+                              @"CeMaster":self.cemMaster.text,
+                              @"CeEpitaph":self.cemSaying.text,
+                              @"CeDeathday":self.cemBirDead.text,
+                              @"CeBrief":self.cemIntro.text,
+                              @"CeId":@(self.CeId)
+                              };
+        [TCJPHTTPRequestManager POSTWithParameters:dic requestID:GetUserId requestcode:kRequestCodeEditCemetery success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+            if (succe) {
+                
+                [self uploadWorshipImageWithID:self.CeId];
+                [SXLoadingView showAlertHUD:@"修改成功" duration:0.5];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        } failure:^(NSError *error) {
+            MYLog(@"失败");
+        }];
 
+        
+        
+    }
+    
 }
+
+//上传or修改墓园图片
+-(void)uploadWorshipImageWithID:(NSInteger)CeId{
+    UIImage *cemeteryImage = self.addCemBtn.imageView.image;
+    NSData *imageData = UIImageJPEGRepresentation(cemeteryImage, 0.5);
+    NSString *encodeimageStr =[imageData base64Encoding];
+    NSDictionary *params =@{@"userid":GetUserId,@"imgbt":encodeimageStr,@"uploadtype":@"ZP",@"ceid":@(CeId)};
+    [TCJPHTTPRequestManager POSTWithParameters:params requestID:GetUserId requestcode:kRequestCodeUploadCefm success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            
+            MYLog(@"墓园图片上传成功%@", jsonDic[@"data"]);
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
+}
+
 -(void)respondsToAddCemImage:(UIButton *)sender{
     NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {

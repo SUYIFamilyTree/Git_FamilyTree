@@ -51,6 +51,9 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetVIPtq;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetMemys;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeUploadCefm;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeCemeteryList;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeEditCemetery;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeDelcemetery;
+
 /**
  *  弹出框自动消失
  *

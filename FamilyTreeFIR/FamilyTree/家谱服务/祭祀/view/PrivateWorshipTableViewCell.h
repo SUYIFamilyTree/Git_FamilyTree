@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CemeterialModel.h"
 #import "WorshipModel.h"
 
 @class PrivateWorshipTableViewCell;
@@ -23,20 +22,15 @@
 @property (nonatomic, strong) UIButton *editBtn;
 /** 删除按钮*/
 @property (nonatomic, strong) UIButton *deleteBtn;
-/** 是否处于编辑状态*/
-//@property (nonatomic, assign)BOOL cellEdit;
 /** 代理人*/
 @property (nonatomic, weak) id<PrivateWorshipTableViewCellDelegate> delegate;
 /** 祭陵图*/
 @property (nonatomic, strong) UIImageView *cemeterialImageView;
-///** 祭陵名字*/
-//@property (nonatomic, strong) NSString *cemeterialName;
-///** 园号*/
-//@property (nonatomic, strong) NSString *cemeterialID;
-///** 浏览人数*/
-//@property (nonatomic, strong) NSString *visitorNumber;
 
 /** 墓园列表详情模型*/
 @property (nonatomic, strong) WorshipDatalistModel *worshipDatalistModel;
+
+/** 墓园ID标签*/
+@property (nonatomic, strong) UILabel *cemeterialIDLB;
 
 @end
