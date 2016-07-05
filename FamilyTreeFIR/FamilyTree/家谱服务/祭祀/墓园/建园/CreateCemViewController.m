@@ -220,7 +220,6 @@
             [SXLoadingView showAlertHUD:@"请至少填写墓园名字" duration:0.5];
         }
         
-        
         UIImage *cemeteryImage = self.addCemBtn.imageView.image;
         NSData *imageData = UIImageJPEGRepresentation(cemeteryImage, 0.5);
         NSString *encodeimageStr =[imageData base64EncodedString];
