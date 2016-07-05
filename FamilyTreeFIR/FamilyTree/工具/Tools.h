@@ -53,7 +53,7 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodeUploadCefm;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeCemeteryList;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeEditCemetery;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeDelcemetery;
-
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeCemeterDetail;
 /**
  *  弹出框自动消失
  *

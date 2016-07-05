@@ -17,6 +17,8 @@ enum {
 #import "CemIntroViewController.h"
 #import "CemGoodsShopView.h"
 #import "InputCherishView.h"
+#import "CemeteryModel.h"
+
 #define bacheight (Screen_height-self.tabBarController.tabBar.bounds.size.height-64)
 @interface CemeteryViewController ()
 {
@@ -36,8 +38,8 @@ enum {
 @property (nonatomic,strong) InputCherishView *inputView; /*输入缅怀语*/
 
 @property (nonatomic,strong) NSMutableArray *cherishArr; /*所有缅怀语*/
-
-@property (nonatomic,strong) UIView *allCherishView; /*全部缅怀语的view*/
+/**全部缅怀语的view*/
+@property (nonatomic,strong) UIView *allCherishView;
 
 
 
@@ -51,7 +53,27 @@ enum {
     [super viewDidLoad];
     [self initData];
     [self initUI];
+    [self getCemeteryData];
+    
 }
+
+-(void)getCemeteryData{
+    NSDictionary *logDic = @{@"CeId":@(self.CeId)};
+    WK(weakSelf)
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeCemeterDetail success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        
+        if (succe) {
+            CemeteryModel *cemeteryModel = [CemeteryModel modelWithJSON:jsonDic[@"data"]];
+            weakSelf.detailView.cemeteryModel = cemeteryModel;
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+    
+}
+
+
 #pragma mark *** 初始化数据 ***
 -(void)initData{
     

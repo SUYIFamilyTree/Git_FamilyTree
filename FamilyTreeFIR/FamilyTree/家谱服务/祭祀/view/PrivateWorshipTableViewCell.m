@@ -62,9 +62,6 @@
 
 -(void)initImageView{
     self.cemeterialImageView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 120, 70)];
-//    if (self.cemeterialImageView.image == nil) {
-//       self.cemeterialImageView.image = MImage(@"mcGuanli_mudi");
-//    }
     [self addSubview:self.cemeterialImageView];
     
     CGRect frame = [self frame];

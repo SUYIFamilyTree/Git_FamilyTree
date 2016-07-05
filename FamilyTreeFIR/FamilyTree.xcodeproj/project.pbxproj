@@ -554,6 +554,7 @@
 		BC5192A11D239D9A0020480F /* NSString+valiMobile.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5192A01D239D9A0020480F /* NSString+valiMobile.m */; };
 		BC5192A41D23A0E30020480F /* NSString+valiEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5192A31D23A0E30020480F /* NSString+valiEmail.m */; };
 		BC5192A71D23A3030020480F /* NSString+valiIdentityCard.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5192A61D23A3030020480F /* NSString+valiIdentityCard.m */; };
+		BC578DBC1D2B4AC100776106 /* CemeteryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC578DBB1D2B4AC100776106 /* CemeteryModel.m */; };
 		BC5F150C1D0FF1AD004F3622 /* PersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14DE1D0FF1AD004F3622 /* PersonalCenterViewController.m */; };
 		BC5F150D1D0FF1AD004F3622 /* DrawStarsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14E11D0FF1AD004F3622 /* DrawStarsView.m */; };
 		BC5F150E1D0FF1AD004F3622 /* HeadImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14E31D0FF1AD004F3622 /* HeadImageView.m */; };
@@ -1403,6 +1404,8 @@
 		BC5192A31D23A0E30020480F /* NSString+valiEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+valiEmail.m"; sourceTree = "<group>"; };
 		BC5192A51D23A3030020480F /* NSString+valiIdentityCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+valiIdentityCard.h"; sourceTree = "<group>"; };
 		BC5192A61D23A3030020480F /* NSString+valiIdentityCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+valiIdentityCard.m"; sourceTree = "<group>"; };
+		BC578DBA1D2B4AC100776106 /* CemeteryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CemeteryModel.h; sourceTree = "<group>"; };
+		BC578DBB1D2B4AC100776106 /* CemeteryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CemeteryModel.m; sourceTree = "<group>"; };
 		BC5F14DD1D0FF1AD004F3622 /* PersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterViewController.h; sourceTree = "<group>"; };
 		BC5F14DE1D0FF1AD004F3622 /* PersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterViewController.m; sourceTree = "<group>"; };
 		BC5F14E01D0FF1AD004F3622 /* DrawStarsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawStarsView.h; sourceTree = "<group>"; };
@@ -2150,6 +2153,7 @@
 			children = (
 				AD1F3C1E1D0F92580085EDFB /* 建园 */,
 				ADA4C14C1D0E860C00CA9067 /* 墓园介绍 */,
+				BC578DB91D2B4A9500776106 /* 墓园model */,
 				ADA4C1661D0E8A1200CA9067 /* 贡品View */,
 				ADA4C1131D0E437E00CA9067 /* CemeteryViewController.h */,
 				ADA4C1141D0E437E00CA9067 /* CemeteryViewController.m */,
@@ -3170,6 +3174,15 @@
 				BC3CF3E71D01318C00437ED6 /* chongZhi_sel@3x.png */,
 			);
 			path = "充值";
+			sourceTree = "<group>";
+		};
+		BC578DB91D2B4A9500776106 /* 墓园model */ = {
+			isa = PBXGroup;
+			children = (
+				BC578DBA1D2B4AC100776106 /* CemeteryModel.h */,
+				BC578DBB1D2B4AC100776106 /* CemeteryModel.m */,
+			);
+			path = "墓园model";
 			sourceTree = "<group>";
 		};
 		BC5F14DB1D0FF1AD004F3622 /* 个人中心 */ = {
@@ -4456,6 +4469,7 @@
 				ADA7FF011D07E51500EDBEE4 /* CustonCollectionViewCell.m in Sources */,
 				ADB9734D1CFE86FF007B876B /* BackScrollAndDetailView.m in Sources */,
 				ADC4F1AF1D125410003D2B27 /* DataSelectPickView.m in Sources */,
+				BC578DBC1D2B4AC100776106 /* CemeteryModel.m in Sources */,
 				BC9C8E251D13F10B00C445D0 /* CustomPikcerDateView.m in Sources */,
 				ADA4C1151D0E437E00CA9067 /* CemeteryViewController.m in Sources */,
 				AD8E603D1CFC0BDA00355C06 /* FindPassView.m in Sources */,

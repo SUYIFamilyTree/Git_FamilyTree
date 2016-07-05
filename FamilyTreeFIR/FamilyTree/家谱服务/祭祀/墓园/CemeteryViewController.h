@@ -9,5 +9,7 @@
 #import "BaseViewController.h"
 
 @interface CemeteryViewController : BaseViewController
+/** 墓园ID*/
+@property (nonatomic, assign) NSInteger CeId;
 
 @end
