@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CreateFamModel.h"
 #import "WIDModel.h"
+#import "NSArray+WAllItemString.h"
 @interface WTools : NSObject
 
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodecreategen;
@@ -63,9 +64,9 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodecreatecemetery;
 //通知字段
 UIKIT_EXTERN NSString * _Nonnull const kNotificationCodeManagerFam;
 
-
-//UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
-//UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodegetgenalldata;
+ /**上传家谱成员的头像*/
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeuploadgenimg;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;

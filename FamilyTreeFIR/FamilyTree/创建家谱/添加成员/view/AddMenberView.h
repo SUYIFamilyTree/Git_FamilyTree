@@ -21,5 +21,8 @@
 
 @property (nonatomic,strong) InputView *gennerNum; /*第几代*/
 
+@property (nonatomic,strong) UITextField *gennerTextField; /*字辈*/
+
+
 @property (nonatomic,strong) InputView *rankingView; /*排行*/
 @end

@@ -73,13 +73,10 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
     [TCJPHTTPRequestManager POSTWithParameters:@{@"geid":@"1",@"query":@"",@"pagenum":@"1",@"pagesize":@"20"} requestID:GetUserId requestcode:kRequestCodequeryzbgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
 //            NSLog(@"--22-%@", jsonDic[@"data"]);
-//            NSLog(@"--11-%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+            NSLog(@"--11-%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
             WK(weakSelf)
             weakSelf.gennerModel = [WGennerationModel modelWithJSON:jsonDic[@"data"]];
             
-            NSLog(@"0-0--%@", self.gennerModel);
-            
-            NSLog(@"1-1--%@", self.gennerModel.datalist[0].datas[0].name);
             [_genNameArr removeAllObjects];
             [_allInfoArr removeAllObjects];
             [_detailInfo removeAllObjects];
@@ -102,9 +99,10 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
                 NSMutableArray *detailArr = [@[] mutableCopy];
                 for (int index2 = 0; index2<self.gennerModel.datalist[idx].datas.count; index2++) {
                     NSMutableArray *okuArr = [@[] mutableCopy];
-                    [okuArr addObject:@"未知"];
-                    [okuArr addObject:self.gennerModel.datalist[idx].datas[index2].mother];
+                    [okuArr addObject:@"无"];
                     [okuArr addObject:self.gennerModel.datalist[idx].datas[index2].father];
+
+                    [okuArr addObject:self.gennerModel.datalist[idx].datas[index2].mother];
                     
                     [detailArr addObject:okuArr];
                 }
@@ -156,6 +154,7 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
     cell.personNumber.text = [NSString stringWithFormat:@"%ld人",((NSArray *)_allInfoArr[indexPath.row]).count];
     
     cell.perName.text =  [NSString verticalStringWith:_genNameArr[indexPath.row]];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
@@ -188,6 +187,7 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
         [_tableView registerClass:[GennerTableViewCell class] forCellReuseIdentifier:kGennerCellIdentifier];
         _tableView.rowHeight = 334*AdaptationWidth();
         _tableView.separatorColor = [UIColor clearColor];
+        
     }
     return _tableView;
 }

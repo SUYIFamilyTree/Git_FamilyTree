@@ -36,6 +36,7 @@
 		AD2ACD821CF3FD06009D4A24 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2ACD811CF3FD06009D4A24 /* HomeViewController.m */; };
 		AD2ACD851CF3FD21009D4A24 /* ShoppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2ACD841CF3FD21009D4A24 /* ShoppingViewController.m */; };
 		AD2ACD8F1CF3FE5E009D4A24 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2ACD8E1CF3FE5E009D4A24 /* Tools.m */; };
+		AD3218961D2A604D00F9480A /* NSArray+WAllItemString.m in Sources */ = {isa = PBXBuildFile; fileRef = AD3218951D2A604D00F9480A /* NSArray+WAllItemString.m */; };
 		AD49FECE1CF69E1900DF9F7E /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = AD49FECB1CF69E1900DF9F7E /* bg.png */; };
 		AD49FEE01CF6A0ED00DF9F7E /* FamilServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD49FED71CF6A0ED00DF9F7E /* FamilServiceViewController.m */; };
 		AD49FEE11CF6A0ED00DF9F7E /* ScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD49FEDE1CF6A0ED00DF9F7E /* ScrollerView.m */; };
@@ -787,6 +788,8 @@
 		AD2ACD841CF3FD21009D4A24 /* ShoppingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingViewController.m; sourceTree = "<group>"; };
 		AD2ACD8D1CF3FE5E009D4A24 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		AD2ACD8E1CF3FE5E009D4A24 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
+		AD3218941D2A604D00F9480A /* NSArray+WAllItemString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+WAllItemString.h"; sourceTree = "<group>"; };
+		AD3218951D2A604D00F9480A /* NSArray+WAllItemString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+WAllItemString.m"; sourceTree = "<group>"; };
 		AD49FECB1CF69E1900DF9F7E /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		AD49FED61CF6A0ED00DF9F7E /* FamilServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilServiceViewController.h; sourceTree = "<group>"; };
 		AD49FED71CF6A0ED00DF9F7E /* FamilServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilServiceViewController.m; sourceTree = "<group>"; };
@@ -1755,6 +1758,8 @@
 				BC5192A31D23A0E30020480F /* NSString+valiEmail.m */,
 				BC5192A51D23A3030020480F /* NSString+valiIdentityCard.h */,
 				BC5192A61D23A3030020480F /* NSString+valiIdentityCard.m */,
+				AD3218941D2A604D00F9480A /* NSArray+WAllItemString.h */,
+				AD3218951D2A604D00F9480A /* NSArray+WAllItemString.m */,
 			);
 			path = "扩展方法";
 			sourceTree = "<group>";
@@ -4468,6 +4473,7 @@
 				BC00EA0B1D190E0A00BF1DC3 /* NSString+addLineBreakOrSpace.m in Sources */,
 				AD5F5C121D1798DE0035710F /* UseItemView.m in Sources */,
 				BC5F15111D0FF1AD004F3622 /* PersonalCenterInfoView.m in Sources */,
+				AD3218961D2A604D00F9480A /* NSArray+WAllItemString.m in Sources */,
 				BC5F150E1D0FF1AD004F3622 /* HeadImageView.m in Sources */,
 				ADC472201D1A2472000388AF /* WRollDetailView.m in Sources */,
 				AD73886A1CF6E0090076B2AD /* CollectionFamilyView.m in Sources */,

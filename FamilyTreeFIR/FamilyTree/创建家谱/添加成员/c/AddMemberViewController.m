@@ -9,7 +9,12 @@
 #import "AddMemberViewController.h"
 #import "AddMenberView.h"
 @interface AddMemberViewController ()<BackScrollAndDetailViewDelegate>
-@property (nonatomic,strong) AddMenberView *AddFameView; /*创建家谱view*/
+
+/**创建家谱view*/
+@property (nonatomic,strong) AddMenberView *AddFameView;
+
+/**添加成员的id*/
+@property (nonatomic,copy) NSString *gemeId;
 
 
 @end
@@ -21,7 +26,6 @@
     
     
     self.automaticallyAdjustsScrollViewInsets=false;
-    self.tabBarController.tabBar.hidden = YES;
     
     AddMenberView *addM = [[AddMenberView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height)];
     addM.delegate = self;
@@ -36,42 +40,17 @@
     [super viewWillDisappear:animated];
     self.tabBarController.tabBar.hidden = false;
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = true;
+
+}
 
 #pragma mark *** BackScrollAndDetailViewDelegate ***
 
 -(void)BackScrollAndDetailViewDidTapCreateButton{
     MYLog(@"add");
-    
-    NSArray *createModel = @[self.AddFameView.name.titleLabel.text,
-                             self.AddFameView.fatheView.inputLabel.text,
-                             self.AddFameView.motherView.inputLabel.text,
-                             self.AddFameView.sexInView.inputLabel.text,
-                             self.AddFameView.idView.inputLabel.text,
-                             [NSNumber numberWithBool:self.AddFameView.famousPerson.marked],
-                             self.AddFameView.gennerNum.inputLabel.text,
-                             self.AddFameView.rankingView.inputLabel.text,
-                             self.AddFameView.inputView.inputLabel.text,
-                             self.AddFameView.parnName.text,
-                             self.AddFameView.selecProtrai.image,
-                             self.AddFameView.birtime.inputLabel.text,
-                             self.AddFameView.monthLabel.inputLabel.text,
-                             self.AddFameView.dayLabel.inputLabel.text,
-                             self.AddFameView.birtime.inputLabel.text,
-                             self.AddFameView.liveNowLabel.inputLabel.text,
-                             self.AddFameView.selfYear.inputLabel.text,
-                             self.AddFameView.selfMonth.inputLabel.text,
-                             self.AddFameView.selfDay.inputLabel.text,
-                             self.AddFameView.generationLabel.inputLabel.text,
-                             self.AddFameView.gennerationNex.text,
-                             self.AddFameView.moveCity.text];
-    
-    
-    
-    
-    
-    
-    
-    
+
     //添加成员
     
     //截取代数
@@ -82,7 +61,7 @@
     NSString *fatherId = [WIDModel sharedWIDModel].fatherDic[self.AddFameView.fatheView.inputLabel.text];
     
     NSDictionary *addDic = @{@"GeId":@"1",
-                             @"Zb":@"试",
+                             @"Zb":self.AddFameView.gennerTextField.text,
                              @"Father":fatherId,
                              @"Ds":genNumberF,
                              @"Sf":shenfenId,
@@ -90,7 +69,7 @@
                              @"Grjl":self.AddFameView.selfTextView.text,
                              @"Jzd":self.AddFameView.moveCity.text,
                              @"GemeSurname":@"",
-                             @"GemeName":self.AddFameView.name.titleLabel.text,
+                             @"GemeName":self.AddFameView.name.detailLabel.text,
                              @"GemeSex":[self.AddFameView.sexInView.inputLabel.text isEqualToString:@"女"]?@"0":@"1",
                              @"GemeIsfamous":self.AddFameView.famousPerson.marked?@"1":@"0",
                              
@@ -103,19 +82,50 @@
                              @"Po":self.AddFameView.parnName.text,
                              @"Mother":self.AddFameView.motherView.inputLabel.text,
                              @"IsEnt":@"1",
+                             @"Ph":self.AddFameView.rankingView.inputLabel.text,
+                             @"IsJp":@""
                              };
-    
+    NSLog(@"添加成员的参数---%@",addDic);
+    [SXLoadingView showProgressHUD:@"正在添加..."];
     [TCJPHTTPRequestManager POSTWithParameters:addDic requestID:GetUserId requestcode:kRequestCodeaddgeme success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-            NSLog(@"？？？-----%@", jsonDic[@"data"]);
             
-        }
+//            NSLog(@"？？？-----%@", jsonDic[@"data"]);
+            
+            _gemeId = [NSString jsonDicWithDic:jsonDic[@"data"]][@"gemeid"];
+            NSLog(@"%@", _gemeId);
+            [self uploadImageWithGemeid:_gemeId];
+            
+                    }
     } failure:^(NSError *error) {
         MYLog(@"失败");
     }];
 }
-
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self.view endEditing:YES];
+/**
+ *  上传添加家谱成员的头像
+ *
+ *  @param gemeid 家谱成员id
+ */
+-(void)uploadImageWithGemeid:(NSString *)gemeid{
+    
+    if (self.AddFameView.selecProtrai.image) {
+        UIImage *cemeteryImage = self.AddFameView.selecProtrai.image;
+        NSData *imageData = UIImageJPEGRepresentation(cemeteryImage, 0.5);
+        NSString *encodeimageStr =[imageData base64EncodedString];
+        
+        [TCJPHTTPRequestManager POSTWithParameters:@{@"userid":GetUserId,@"genmemid":_gemeId,@"imgbt":encodeimageStr} requestID:GetUserId requestcode:kRequestCodeuploadgenimg success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+//            NSLog(@"%@", jsonDic[@"data"]);
+            if (succe) {
+                [SXLoadingView showProgressHUD:jsonDic[@"message"] duration:0.5];
+            }
+        } failure:^(NSError *error) {
+            MYLog(@"错误");
+        }];
+    }else{
+        [SXLoadingView showAlertHUD:@"没有头像" duration:0.5];
+    }
+    
+    
+    
 }
 @end

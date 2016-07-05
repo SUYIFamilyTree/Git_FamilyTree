@@ -8,6 +8,7 @@
 
 #import "GennerTableViewCell.h"
 @interface GennerTableViewCell()
+@property (nonatomic,strong) UIScrollView *scrollView; /*左右滚动*/
 
 @end
 
@@ -37,6 +38,7 @@
 //头像和详情
 -(void)initPorInfo{
     [self.contentView removeAllSubviews];
+    [self.scrollView removeAllSubviews];
     [self.contentView addSubview:self.generNumber];
     [self.contentView addSubview:self.personNumber];
     [self.contentView addSubview:self.perName];
@@ -64,11 +66,17 @@
     
     for (int idx = 0; idx<perArr.count; idx++) {
         
-        PortraiView *porInfo = [[PortraiView alloc] initWithFrame:AdaptationFrame(CGRectXW(self.perName)/AdaptationWidth()+24 +idx*(110+48), 43, 110, 253) portaitImageUrl:proUrl[idx] porName:perArr[idx] infoArr:infoArr[idx]];
-        [self.contentView addSubview:porInfo];
+        PortraiView *porInfo = [[PortraiView alloc] initWithFrame:AdaptationFrame(35+idx*(110+48), 43, 110, 253) portaitImageUrl:proUrl[idx] porName:perArr[idx] infoArr:infoArr[idx]];
+        [self.scrollView addSubview:porInfo];
+        self.scrollView.contentSize = AdaptationSize(35+(158)*perArr.count, 339);
+
     }
     
     
+    //根据数据计算滚动图大小
+    
+    [self.contentView addSubview:self.scrollView];
+
     
 }
 
@@ -106,6 +114,17 @@
         
     }
     return _perName;
+}
+
+-(UIScrollView *)scrollView{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] initWithFrame: AdaptationFrame(CGRectXW(self.generNumber)/AdaptationWidth()+90, 0, 35+(158)*3, 339)];
+        _scrollView.contentSize = AdaptationSize(35+(158)*_nameArr.count, 339);
+        _scrollView.showsVerticalScrollIndicator = false;
+        _scrollView.showsHorizontalScrollIndicator = false;
+        _scrollView.bounces = YES;
+    }
+    return _scrollView;
 }
 
 @end
