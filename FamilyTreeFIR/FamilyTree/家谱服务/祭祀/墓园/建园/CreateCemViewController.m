@@ -220,23 +220,7 @@
             [SXLoadingView showAlertHUD:@"请至少填写墓园名字" duration:0.5];
         }
         
-        UIImage *cemeteryImage = self.addCemBtn.imageView.image;
-        NSData *imageData = UIImageJPEGRepresentation(cemeteryImage, 0.5);
-        NSString *encodeimageStr =[imageData base64EncodedString];
-        NSDictionary *params =@{@"userid":GetUserId,@"imgbt":encodeimageStr,@"uploadtype":@"ZP",@"ceid":@1};
-        [TCJPHTTPRequestManager POSTWithParameters:params requestID:GetUserId requestcode:kRequestCodeUploadCefm success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-            if (succe) {
-                
-                MYLog(@"墓园图片上传成功%@", jsonDic[@"data"]);
-            }
-        } failure:^(NSError *error) {
-            
-        }];
-
-    }else{
-        //修改墓园信息
     }
-    
 }
 
 //上传or修改墓园图片
