@@ -228,7 +228,7 @@
     
     UIImage *cemeteryImage = self.addCemBtn.imageView.image;
     NSData *imageData = UIImageJPEGRepresentation(cemeteryImage, 0.5);
-    NSString *encodeimageStr =[imageData base64Encoding];
+    NSString *encodeimageStr =[imageData base64EncodedString];
     NSDictionary *params =@{@"userid":GetUserId,@"imgbt":encodeimageStr,@"uploadtype":@"ZP",@"ceid":@(CeId)};
     [TCJPHTTPRequestManager POSTWithParameters:params requestID:GetUserId requestcode:kRequestCodeUploadCefm success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
