@@ -31,6 +31,19 @@
     return self;
 }
 
+-(void)setCemeteryModel:(CemeteryModel *)cemeteryModel{
+    _cemeteryModel = cemeteryModel;
+    self.perName.text = [NSString verticalStringWith:[NSString stringWithFormat:@"%@之墓",cemeteryModel.CeMaster]];
+    [self.perName sizeToFit];
+    self.cherLabel.text = [NSString verticalStringWith:cemeteryModel.CeEpitaph];
+    [_cherLabel sizeToFit];
+    self.birLabel.text = [NSString stringWithFormat:@"生  %@",cemeteryModel.CeBrithday];
+    [_birLabel sizeToFit];
+    self.deadLabel.text = [NSString stringWithFormat:@"卒  %@",cemeteryModel.CeDeathday];
+    [_deadLabel sizeToFit];
+}
+
+
 -(UIImageView *)headView{
     if (!_headView) {
         _headView = [[UIImageView alloc] initWithFrame:AdaptationFrame(self.bounds.size.width/2/AdaptationWidth()-85/2, 20, 85, 85)];
@@ -42,7 +55,7 @@
 -(UILabel *)cherLabel{
     if (!_cherLabel) {
         _cherLabel = [[UILabel alloc] initWithFrame:CGRectMake(40*AdaptationWidth(), CGRectYH(self.headView)+20*AdaptationWidth(), 27*AdaptationWidth(), 280*AdaptationWidth())];
-        _cherLabel.text = [NSString verticalStringWith:@"亲恩莫失恋 离世到天庭"];
+        //_cherLabel.text = [NSString verticalStringWith:@"亲恩莫失恋 离世到天庭"];
         _cherLabel.numberOfLines = 0;
         _cherLabel.font = MFont(15*AdaptationWidth());
         _cherLabel.textColor = [UIColor whiteColor];
@@ -55,9 +68,9 @@
         _perName = [[UILabel alloc] initWithFrame:CGRectMake(self.headView.center.x-20*AdaptationWidth(), CGRectYH(self.headView)+5*AdaptationWidth(), 40*AdaptationWidth(), 300*AdaptationWidth())];
         _perName.numberOfLines = 0;
         _perName.font = MFont(27*AdaptationWidth());
-        _perName.text = [NSString verticalStringWith:@"慈父朱万成之墓"];
+        //_perName.text = [NSString verticalStringWith:@"慈父朱万成之墓"];
         _perName.textColor = self.cherLabel.textColor;
-        [_perName sizeToFit];
+        //[_perName sizeToFit];
     }
     return _perName;
 }
@@ -66,9 +79,9 @@
         _birLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.headView.frame), CGRectYH(self.headView)+20*AdaptationWidth(), 27*AdaptationWidth(), 280*AdaptationWidth())];
         _birLabel.numberOfLines = 0;
         _birLabel.font = MFont(15*AdaptationWidth());
-        _birLabel.text = [NSString verticalStringWith:@"卒 二零零六年五月二十七日"];
+        //_birLabel.text = [NSString verticalStringWith:@"卒 二零零六年五月二十七日"];
         _birLabel.textColor = self.cherLabel.textColor;
-        [_birLabel sizeToFit];
+        //[_birLabel sizeToFit];
     }
     return _birLabel;
 }
@@ -77,9 +90,9 @@
         _deadLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectXW(self.birLabel)+10*AdaptationWidth(), CGRectYH(self.headView)+20*AdaptationWidth(), 27*AdaptationWidth(), 280*AdaptationWidth())];
         _deadLabel.numberOfLines = 0;
         _deadLabel.font = MFont(15*AdaptationWidth());
-        _deadLabel.text = [NSString verticalStringWith:@"生 一九二九年九月十五日"];
+        //_deadLabel.text = [NSString verticalStringWith:@"生 一九二九年九月十五日"];
         _deadLabel.textColor = self.birLabel.textColor;
-        [_deadLabel sizeToFit];
+        //[_deadLabel sizeToFit];
     }
     return _deadLabel;
 }

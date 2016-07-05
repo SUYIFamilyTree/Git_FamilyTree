@@ -21,7 +21,13 @@
 
 
 @implementation WorshipDatalistModel
-
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+         _worshipDatalistModelEdit = NO;
+    }
+    return self;
+}
 @end
 
 

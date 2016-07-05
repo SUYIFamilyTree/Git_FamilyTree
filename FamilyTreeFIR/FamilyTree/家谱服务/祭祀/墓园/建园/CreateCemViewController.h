@@ -11,5 +11,6 @@
 @interface CreateCemViewController : BaseViewController
 /**新建或者修改墓园 */
 @property (nonatomic, assign) BOOL creatOrEditStr;
-
+/** 修改墓园的id*/
+@property (nonatomic, assign) NSInteger CeId;
 @end

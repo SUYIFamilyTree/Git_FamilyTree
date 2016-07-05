@@ -46,5 +46,7 @@
 
 @property (nonatomic, copy) NSString *Sj;
 
+/** 是否可编辑*/
+@property (nonatomic,assign)BOOL worshipDatalistModelEdit;
 @end
 

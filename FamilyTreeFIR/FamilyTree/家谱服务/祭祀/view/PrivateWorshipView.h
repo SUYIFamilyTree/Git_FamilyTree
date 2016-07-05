@@ -14,7 +14,7 @@
 
 -(void)PrivateWorshipView:(PrivateWorshipView *)privateWorshipView didSelect:(BOOL)isEditing;
 
--(void)PrivateWorshipView:(PrivateWorshipView *)privateWorshipView didSelectTableRowAtIndexPath:(NSIndexPath *)index;
+-(void)TableView:(UITableView *)tableView didSelectTableRowAtIndexPath:(NSIndexPath *)index;
 -(void)PrivateWorshipViewDidSelectedCreateCem:(PrivateWorshipView *)privateWorshipView;
 @end
 
@@ -28,8 +28,13 @@
 @property (nonatomic, assign) BOOL PrivateWorshipEdit;
 
 /** 我的墓园数组*/
-@property (nonatomic, strong) NSMutableArray *PrivateViewMyWorshipArr;
+@property (nonatomic, strong) NSMutableArray<WorshipDatalistModel *> *PrivateViewMyWorshipArr;
+
+/** 墓园排行数组*/
+@property (nonatomic, strong) NSMutableArray<WorshipDatalistModel *> *PrivateViewAllWorshipArr;
 
 /** 代理*/
 @property (nonatomic, weak) id<PrivateWorshipViewDelegate> delegate;
+
+
 @end

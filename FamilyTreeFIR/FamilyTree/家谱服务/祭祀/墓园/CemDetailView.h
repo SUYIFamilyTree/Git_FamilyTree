@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CemeteryModel.h"
 
 @interface CemDetailView : UIView
-
+/** 墓园详情模型*/
+@property (nonatomic, strong) CemeteryModel *cemeteryModel;
 @end
