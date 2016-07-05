@@ -41,13 +41,15 @@
     [_birLabel sizeToFit];
     self.deadLabel.text = [NSString stringWithFormat:@"卒  %@",cemeteryModel.CeDeathday];
     [_deadLabel sizeToFit];
+    
+    [self.headView setImageWithURL:[NSURL URLWithString:cemeteryModel.CePhoto] placeholder:MImage(@"my_name_touxiang")];
 }
 
 
 -(UIImageView *)headView{
     if (!_headView) {
         _headView = [[UIImageView alloc] initWithFrame:AdaptationFrame(self.bounds.size.width/2/AdaptationWidth()-85/2, 20, 85, 85)];
-        _headView.image = MImage(@"my_name_touxiang");
+        //_headView.image = MImage(@"my_name_touxiang");
         
     }
     return _headView;
