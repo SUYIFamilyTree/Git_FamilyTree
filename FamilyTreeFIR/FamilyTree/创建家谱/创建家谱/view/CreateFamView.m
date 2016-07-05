@@ -14,7 +14,7 @@ typedef enum : NSUInteger {
 
 #import "CreateFamView.h"
 
-@interface CreateFamView()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface CreateFamView()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,DiscAndNameViewDelegate>
 
 @property (nonatomic,assign) ImagePickType pickType; /*区别图片选择器选择的图片*/
 
@@ -94,6 +94,12 @@ typedef enum : NSUInteger {
     }
     
 }
+
+
+#pragma mark *** DiscAndNameViewDelegate ***
+-(void)DiscAndNameView:(DiscAndNameView *)view didFinishEditDetailLabel:(UITextField *)detailLabel{
+    self.famBookName.text = [NSString stringWithFormat:@"%@1-5代卷谱",detailLabel.text] ;
+}
 #pragma mark *** UIImagePickerControllerDelegate ***
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
@@ -121,6 +127,7 @@ typedef enum : NSUInteger {
 -(DiscAndNameView *)famfarName{
     if (!_famfarName) {
         _famfarName = [[DiscAndNameView alloc] initWithFrame:CGRectMake(20, CGRectYH(self.famName)+GapOfView, self.famName.bounds.size.width, InputView_height) title:@"祖宗姓名（字）:" detailCont:@"" isStar:true];
+        _famfarName.delegate = self;
         
     }
     return _famfarName;
@@ -136,6 +143,7 @@ typedef enum : NSUInteger {
         _famBookName.layer.borderColor = BorderColor;
         _famBookName.layer.borderWidth = 1.0f;
         _famBookName.textAlignment = 1;
+        [_famBookName setEnabled:false];
         
     }
     return _famBookName;

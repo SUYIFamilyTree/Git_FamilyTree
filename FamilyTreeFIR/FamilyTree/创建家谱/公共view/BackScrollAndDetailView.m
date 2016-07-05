@@ -11,12 +11,10 @@ enum{
 };
 #import "BackScrollAndDetailView.h"
 
-#define ScrollContentHeight 1150
-
-#define FirstViewFrameOfheight 315+GapOfView
 
 
-@interface BackScrollAndDetailView()<InputViewDelegate,UITextFieldDelegate,UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+
+@interface BackScrollAndDetailView()<UITextFieldDelegate,UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 
 @end
@@ -26,6 +24,9 @@ enum{
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        UIScrollView *okuBackImage = self.backView;
+        [self addSubview:okuBackImage];
         [self addSubview:self.backView];
         [self.backView addSubview:self.createBtn];
         [self.backView addSubview:self.whiteBack];
@@ -408,8 +409,13 @@ enum{
 //第一个控件是否结婚
 -(InputView *)inputView{
     if (!_inputView) {
+        UILabel *theLabel = nil;
+        if (_inputViewDown) {
+            theLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, FirstViewFrameOfheight+55, 90, InputView_height)];
+        }else{
+            theLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, FirstViewFrameOfheight, 90, InputView_height)];
+        }
         
-        UILabel *theLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, FirstViewFrameOfheight, 90, InputView_height)];
         theLabel.text = @"是否结婚:";
         theLabel.font = WFont(35);
     

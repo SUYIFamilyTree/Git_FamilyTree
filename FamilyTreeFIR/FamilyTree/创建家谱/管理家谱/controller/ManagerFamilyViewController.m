@@ -123,6 +123,7 @@
 }
 
 #pragma mark *** WswithDelegate ***
+
 -(void)WswichDetailFamViewDelegate:(WSwitchDetailFamView *)detaiView didSelectedButton:(UIButton *)sender{
 
     if ([sender.titleLabel.text isEqualToString:@"切换家谱"]) {
@@ -141,8 +142,10 @@
         [SXLoadingView showProgressHUD:@"正在加载"];
         [self postGetFamInfoWithtitle:sender.titleLabel.text callBack:^(NSArray *genIDArr) {
             
-            [self posGetDetailFamInfoWithID:genIDArr[0] callBack:^(id respondsDic) {
-                
+//            [self posGetDetailFamInfoWithID:genIDArr[0] callBack:^(id respondsDic) {
+            [self posGetDetailFamInfoWithID:@"1" callBack:^(id respondsDic) {
+
+            
                 WK(weakSelf)
                 //将点击家谱名，获取到id，再根据id获取到的家谱详情传到famModel里
                  weakSelf.famModel = [CreateFamModel modelWithJSON:respondsDic[@"data"]];
@@ -172,6 +175,7 @@
         if (succe) {
             NSMutableArray *idArr = [@[] mutableCopy];
             for (NSDictionary *dic in [NSString jsonArrWithArr:jsonDic[@"data"]]) {
+                
                 [idArr addObject:dic[@"Geid"]];
             }
             callback(idArr);

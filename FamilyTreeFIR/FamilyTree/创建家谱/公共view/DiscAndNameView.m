@@ -9,10 +9,11 @@
 #import "DiscAndNameView.h"
 
 
-@interface DiscAndNameView()
+@interface DiscAndNameView()<UITextFieldDelegate>
 {
     BOOL _isStar;
 }
+
 @property (nonatomic,strong) UILabel *starLabel; /*红点*/
 
 @end
@@ -47,6 +48,13 @@
     return self;
 }
 
+#pragma mark *** textFieldDelegate ***
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    if (_delegate && [_delegate respondsToSelector:@selector(DiscAndNameView:didFinishEditDetailLabel:)]) {
+        [_delegate DiscAndNameView:self didFinishEditDetailLabel:textField];
+    };
+}
+
 -(UILabel *)titleLabel{
     if (!_titleLabel) {
         _titleLabel = [UILabel new];
@@ -61,6 +69,7 @@
     if (!_detailLabel) {
         _detailLabel = [UITextField new];
         _detailLabel.font = WFont(35);
+        _detailLabel.delegate = self;
     }
     return _detailLabel;
 }

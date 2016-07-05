@@ -8,6 +8,8 @@
 
 #import "BackScrollAndDetailView.h"
 
+
+
 @interface CreateFamView : BackScrollAndDetailView
 
 @property (nonatomic,strong) DiscAndNameView *famName; /*家族名称*/

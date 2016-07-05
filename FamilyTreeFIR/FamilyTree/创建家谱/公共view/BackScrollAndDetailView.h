@@ -10,6 +10,8 @@
 #import "DiscAndNameView.h"
 
 #define GapOfView 15
+#define ScrollContentHeight 1150
+#define FirstViewFrameOfheight 315+GapOfView
 
 @class BackScrollAndDetailView;
 @protocol BackScrollAndDetailViewDelegate <NSObject>
@@ -18,21 +20,21 @@
 
 @end
 
-@interface BackScrollAndDetailView : UIView
+@interface BackScrollAndDetailView : UIView<InputViewDelegate>
 
 {
     UIImagePickerController *_imagePickerController;
+    BOOL _inputViewDown;//判断是否结婚的位置
 }
 
 @property (nonatomic,strong) InputView *inputView; /*是否结婚*/
 
 @property (nonatomic,strong) UITextField *parnName; /*配偶名*/
 
-
 @property (nonatomic,strong) UIImageView *selecProtrai; /*选择头像*/
 
-
 @property (nonatomic,strong) UIScrollView *backView; /*滚动背景*/
+
 @property (nonatomic,strong) UIView *whiteBack; /*半透明背景*/
 
 @property (nonatomic,strong) UIButton *createBtn; /*创建按钮*/
@@ -60,18 +62,24 @@
 @property (nonatomic,strong) UITextView *selfTextView; /*个人简介*/
 
 @property (nonatomic,strong) UIButton *uploadImageBtn; /*上传图片*/
+
 @property (nonatomic,strong) UIButton *uploadVideoBtn; /*上传影音资料*/
 
 @property (nonatomic,strong) UITextField *moveCity; /*迁移者居住地*/
 
 @property (nonatomic,strong) NSMutableArray *gennerNexArr; /*字辈arr*/
 
-
 @property (nonatomic,weak) id<BackScrollAndDetailViewDelegate> delegate; /*代理人*/
 
 
 //创建labelText
--(InputView *)creatLabelTextWithTitle:(NSString *)title TitleFrame:(CGRect)frame inputViewLength:(NSInteger)length dataArr:(NSArray *)dataArr inputViewLabel:(NSString *)labelText FinText:(NSString *)finStr withStar:(BOOL)star;
+-(InputView *)creatLabelTextWithTitle:(NSString *)title
+                           TitleFrame:(CGRect)frame
+                      inputViewLength:(NSInteger)length
+                              dataArr:(NSArray *)dataArr
+                       inputViewLabel:(NSString *)labelText
+                              FinText:(NSString *)finStr
+                             withStar:(BOOL)star;
 
 
 @end

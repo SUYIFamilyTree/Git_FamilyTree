@@ -9,29 +9,22 @@
 #import "AddMenberView.h"
 
 @interface AddMenberView()
-{
-    NSMutableDictionary *_idDic;//下拉身份
-}
+
 @end
 
 @implementation AddMenberView
 - (instancetype)initWithFrame:(CGRect)frame
 {
+    //改变某是否结婚控件的位置
+    _inputViewDown = YES;
+    self.backView.hidden = YES;
+    
     self = [super initWithFrame:frame];
     if (self) {
-        [self getIdDataCallBackArray:^(NSArray<WIDModel *> *idArray) {
-            _idDic = [NSMutableDictionary dictionary];
-            [idArray enumerateObjectsUsingBlock:^(WIDModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                //身份作value，id作key
-                [_idDic setObject:obj.syntypeval forKey:obj.syntype];
-                
-            }];
-            [WIDModel sharedWIDModel].idDic = _idDic;
-            
-            [self getFatherDataCallBack:^{
-                [self initAddUI];
-            }];
-            
+
+        [self getAllDetailDataCallBack:^{
+            [self initAddUI];
+            self.backView.hidden = false;
         }];
         
         
@@ -39,12 +32,16 @@
     return self;
 }
 -(void)initAddUI{
+    
+    
     self.generationLabel.frame = CGRectMake(-100, CGRectYH(self.selfYear), 0, 0);
     
     self.gennerationNex.frame = CGRectMake(CGRectXW(self.generationLabel)+10, CGRectYH(self.selfYear), 0, 0);
-//    self.backView.contentSize = CGSizeMake(self.backView.contentSize.width, 1150-70);
     
     [self.backView addSubview:self.name];
+    
+    
+    
     
     self.fatheView = [self creatLabelTextWithTitle:@"父亲:" TitleFrame:CGRectMake(20, CGRectYH(self.name)+GapOfView, 55, InputView_height) inputViewLength:75 dataArr:[[WIDModel sharedWIDModel].fatherDic allKeys] inputViewLabel:@"郭祖宗" FinText:nil withStar:false];
     [self.backView addSubview:self.fatheView];
@@ -56,27 +53,28 @@
     
     
     
-    self.idView = [self creatLabelTextWithTitle:@"身份:" TitleFrame:CGRectMake(CGRectXW(self.sexInView)+20*AdaptationWidth(), self.sexInView.frame.origin.y, 50, InputView_height) inputViewLength:50 dataArr:[_idDic allKeys] inputViewLabel:@"嫡出" FinText:nil withStar:NO];
+    self.idView = [self creatLabelTextWithTitle:@"身份:" TitleFrame:CGRectMake(CGRectXW(self.sexInView)+20*AdaptationWidth(), self.sexInView.frame.origin.y, 50, InputView_height) inputViewLength:50 dataArr:[[WIDModel sharedWIDModel].idDic allKeys] inputViewLabel:@"嫡出" FinText:nil withStar:NO];
     
     [self.backView addSubview:self.idView];
     [self.backView addSubview:self.famousPerson];
     
-    
-    
-    
-    
-    
+
+    //字辈代数和排行
     NSMutableArray *allGenNum = [@[] mutableCopy];
-    
-    for (int idx = 1; idx<100; idx++) {
+    NSMutableArray *allPaihang = [@[] mutableCopy];
+    for (int idx = 1; idx<[[WIDModel sharedWIDModel].ds allKeys].count+1; idx++) {
         NSString *str = [NSString stringWithFormat:@"第%d代",idx];
         [allGenNum addObject:str];
+        [allPaihang addObject:[NSString stringWithFormat:@"%d",idx]];
     }
     
     self.gennerNum   = [self creatLabelTextWithTitle:@"家族第几代:" TitleFrame:CGRectMake(20, CGRectYH(self.sexInView)+GapOfView, 0.25*Screen_width, InputView_height) inputViewLength:0.2*Screen_width dataArr:allGenNum inputViewLabel:@"第1代" FinText:nil withStar:YES];
+    self.gennerNum.delegate = self;
     [self.backView addSubview:self.gennerNum];
     
-    self.rankingView = [self creatLabelTextWithTitle:@"           排行:" TitleFrame:CGRectMake(20, CGRectYH(self.gennerNum)+GapOfView, 0.25*Screen_width, InputView_height) inputViewLength:0.2*Screen_width dataArr:allGenNum    inputViewLabel:@"第1代" FinText:nil withStar:YES];
+    [self.backView addSubview:self.gennerTextField];
+    
+    self.rankingView = [self creatLabelTextWithTitle:@"            排行:" TitleFrame:CGRectMake(20, CGRectYH(self.gennerNum)+GapOfView+55, 0.25*Screen_width, InputView_height) inputViewLength:0.2*Screen_width dataArr:allPaihang    inputViewLabel:@"1" FinText:nil withStar:YES];
     self.rankingView.inputLabel.textAlignment = 0;
     
     [self.backView addSubview:self.rankingView];
@@ -90,40 +88,62 @@
     
     
 }
--(void)getIdDataCallBackArray:(void (^)(NSArray<WIDModel *> *idArray))callBackArray{
-    //身份类型
-    //    [SXLoadingView showProgressHUD:@""];
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"typeval":@"GRSF"} requestID:GetUserId requestcode:kRequestCodeGetsyntype success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+
+//获取父亲，身份类型，代数字辈
+
+-(void)getAllDetailDataCallBack:(void (^)())back{
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"GeId":@"1"} requestID:GetUserId requestcode:kRequestCodegetgenalldata success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
+            NSLog(@"%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
             
-            NSLog(@"%@", jsonDic[@"data"]);
-            NSArray<WIDModel *> *arr = [NSArray modelArrayWithClass:[WIDModel class] json:jsonDic[@"data"]];
+            NSDictionary *dic = [NSString jsonDicWithDic:jsonDic[@"data"]];
             
-            callBackArray(arr);
+            [[WIDModel sharedWIDModel] setValue:dic[@"sf"] forKey:@"sf"];
+            [[WIDModel sharedWIDModel] setValue:dic[@"ds"] forKey:@"ds"];
+            [[WIDModel sharedWIDModel] setValue:dic[@"gemedata"] forKey:@"gemedata"];
             
+            NSLog(@"%@", [WIDModel sharedWIDModel].gemedata[0][@"GemeName"]);
+            
+            //存进单例
+            NSArray *fathArr = [WIDModel sharedWIDModel].gemedata;
+            NSMutableDictionary *fatherDic= [NSMutableDictionary dictionary];
+            [fathArr enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [fatherDic setObject:obj[@"GemeId"] forKey:obj[@"GemeName"]];
+            }];
+            
+            NSArray *sfArr = [WIDModel sharedWIDModel].sf;
+            NSMutableDictionary *sfDic = [NSMutableDictionary dictionary];
+            [sfArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [sfDic setObject:obj[@"AlId"] forKey:obj[@"AlName"]];
+            }];
+            
+            [WIDModel sharedWIDModel].fatherDic = fatherDic;
+            [WIDModel sharedWIDModel].idDic = sfDic;
+            [WIDModel sharedWIDModel].genDic = [WIDModel sharedWIDModel].ds;
+            
+            back();
         }
     } failure:^(NSError *error) {
-        
+        NSLog(@"shibai");
     }];
 }
--(void)getFatherDataCallBack:(void (^)())back{
-    //获取宗亲
-    [SXLoadingView showProgressHUD:@"正在获取"];
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"query":@"",@"geid":@"1",@"pagenum":@"1",@"pagesize":@"20",@"sex":@"1"} requestID:GetUserId requestcode:kRequestCodequerygemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        [SXLoadingView hideProgressHUD];
-        NSLog(@"--rrrrr-%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
-        NSDictionary *dic = [NSString jsonDicWithDic:jsonDic[@"data"]];
-        NSMutableDictionary *fathDic = [NSMutableDictionary dictionary];
-        for (NSDictionary *obj in dic[@"datalist"]) {
-            [fathDic setObject:obj[@"GemeId"] forKey:obj[@"GemeName"]];
-        }
-        [WIDModel sharedWIDModel].fatherDic = fathDic;
-        back();
+
+#pragma mark *** InputViewDelegate ***
+
+-(void)InputView:(InputView *)inputView didFinishSelectLabel:(UILabel *)inputLabel{
+    [super InputView:inputView didFinishSelectLabel:inputLabel];
+    
+    if (inputView == self.gennerNum) {
+        NSString *genNum = [inputLabel.text stringByReplacingOccurrencesOfString:@"第" withString:@""];
+        NSString *finStr = [genNum stringByReplacingOccurrencesOfString:@"代" withString:@""];
         
-    } failure:^(NSError *error) {
-        MYLog(@"shibai");
-    }];
+        
+        self.gennerTextField.text = [NSArray allItemsStringFromArray:[WIDModel sharedWIDModel].ds[finStr]] ;
+        
+    }
 }
+
+
 #pragma mark *** getters ***
 -(DiscAndNameView *)name{
     if (!_name) {
@@ -132,7 +152,32 @@
     }
     return _name;
 }
-
+-(UITextField *)gennerTextField{
+    if (!_gennerTextField) {
+        
+        UILabel *theLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectYH(self.gennerNum)+GapOfView, 0.25*Screen_width, 40)];
+        theLabel.text = @"字辈:";
+        theLabel.font = WFont(33);
+        theLabel.textAlignment = 2;
+        [self.backView addSubview:theLabel];
+        
+        _gennerTextField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectXW(theLabel), CGRectY(theLabel), 100, InputView_height)];
+        _gennerTextField.backgroundColor = [UIColor whiteColor];
+        _gennerTextField.layer.borderWidth = 1.0;
+        _gennerTextField.layer.borderColor = BorderColor;
+        _gennerTextField.font = WFont(33);
+        [_gennerTextField setEnabled:false];
+        NSArray *arr = [WIDModel sharedWIDModel].ds[@"1"];
+       __block NSString *firstZibei = @"";
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            firstZibei = [NSString stringWithFormat:@"%@%@",obj,firstZibei];
+        }];
+        _gennerTextField.text = firstZibei;
+        
+    }
+    return _gennerTextField;
+    
+}
 -(InputView *)sexInView{
     if (!_sexInView) {
         _sexInView = [[InputView alloc] initWithFrame:CGRectMake(20, CGRectYH(self.fatheView)+GapOfView, 50, InputView_height) Length:50 withData:@[@"男",@"女"]];

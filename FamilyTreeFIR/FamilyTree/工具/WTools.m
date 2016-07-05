@@ -52,9 +52,10 @@ NSString * _Nonnull const kRequestCodegetintogen = @"getintogen";
 
 //查询宗亲信息--只有接口没数据，传了参数就失败。
 NSString * _Nonnull const kRequestCodequeryclan = @"queryclan";
-
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//所有子数据
+NSString * _Nonnull const kRequestCodegetgenalldata = @"getgenalldata";
+/**上传家谱成员的头像*/
+NSString * _Nonnull const kRequestCodeuploadgenimg = @"uploadgenimg";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 
