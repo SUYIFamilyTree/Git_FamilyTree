@@ -69,7 +69,7 @@
     self.myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 25, Screen_width, 160) style:UITableViewStylePlain];
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
-    self.myTableView.bounces = NO;
+    //self.myTableView.bounces = NO;
     self.myTableView.tag = 1001;
     [self addSubview:self.myTableView];
 }
@@ -87,7 +87,7 @@
     self.cemeterialListTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectYH(self.myTableView)+20, Screen_width, 160)];
     self.cemeterialListTableView.dataSource = self;
     self.cemeterialListTableView.delegate = self;
-    self.cemeterialListTableView.bounces = NO;
+    //self.cemeterialListTableView.bounces = NO;
     self.cemeterialListTableView.tag = 1002;
     [self addSubview:self.cemeterialListTableView];
 }

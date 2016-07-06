@@ -36,7 +36,6 @@ enum {
 
 @property (nonatomic,copy) NSMutableArray *goodsImagesArr; /*买的祭祀商品数组*/
 
-
 @property (nonatomic,strong) InputCherishView *inputView; /*输入缅怀语*/
 
 
@@ -46,7 +45,8 @@ enum {
 @property (nonatomic, strong) BarrageListModel *barrageListModel;
 /** 弹幕数组*/
 @property (nonatomic, strong) NSMutableArray *barragesArr;
-
+/** 弹幕颜色数组*/
+@property (nonatomic, strong) NSArray *colorArray;
 @end
 
 @implementation CemeteryViewController
@@ -84,7 +84,7 @@ enum {
             for (int i = 0; i < weakSelf.barrageListModel.dm.count; i++) {
                 [weakSelf.barragesArr addObject:weakSelf.barrageListModel.dm[i].BaContent];
             }
-            [self makeBarrageListAnimation:weakSelf.barragesArr];
+            [weakSelf makeBarrageListAnimation:weakSelf.barragesArr];
         }
     } failure:^(NSError *error) {
         
@@ -116,7 +116,7 @@ enum {
 
 //弹幕动画效果
 -(void)makeBarrageListAnimation:(NSMutableArray *)barragesArray{
-    NSArray * colorArray = @[[UIColor redColor],[UIColor blackColor],[UIColor greenColor],[UIColor orangeColor],[UIColor yellowColor],[UIColor purpleColor],[UIColor magentaColor],[UIColor brownColor]];
+    self.colorArray = @[[UIColor redColor],[UIColor blackColor],[UIColor greenColor],[UIColor orangeColor],[UIColor yellowColor],[UIColor purpleColor],[UIColor magentaColor],[UIColor brownColor]];
     for(int i = 0 ; i < barragesArray.count; i++){
         float   tempNum     = 64 +arc4random()%200;//高
         int     tempI       = arc4random()%barragesArray.count;
@@ -126,14 +126,25 @@ enum {
             sleep(sleepTime);
             dispatch_async(dispatch_get_main_queue(), ^{
                 FlyBarrageTextView * flyView = [[FlyBarrageTextView alloc] initWithY:tempNum AndText:barragesArray[tempI] AndWordSize:12];
-                flyView.textColor = colorArray[colorNum];
+                flyView.textColor = self.colorArray[colorNum];
                 [self.view addSubview:flyView];
             });
         });
     }
 }
+//单条弹幕加入滚动
+-(void)makeOneBarrageAnimation:(NSString *)str{
+    float   tempNum     = 64 +arc4random()%200;
+    int     colorNum    = arc4random()%8;
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            FlyBarrageTextView * flyView = [[FlyBarrageTextView alloc] initWithY:tempNum AndText:str AndWordSize:12];
+            flyView.textColor = self.colorArray[colorNum];
+            [self.view addSubview:flyView];
+        });
+    });
 
-
+}
 
 #pragma mark *** 初始化数据 ***
 -(void)initData{
@@ -298,6 +309,7 @@ enum {
         
     }];
     
+    [self makeOneBarrageAnimation:str];
     
 }
 
