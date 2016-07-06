@@ -554,11 +554,14 @@
 		BC458A861D1CC64300AA0DDF /* JobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC458A851D1CC64300AA0DDF /* JobModel.m */; };
 		BC458A891D1D1B9200AA0DDF /* QueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC458A881D1D1B9200AA0DDF /* QueryModel.m */; };
 		BC4790631D20BD6F00BA194D /* AreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4790621D20BD6F00BA194D /* AreaModel.m */; };
+		BC499B951D2CD851007870FE /* BarrageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC499B941D2CD851007870FE /* BarrageListModel.m */; };
+		BC499B9E1D2CDFDD007870FE /* FlyBarrageTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC499B9D1D2CDFDD007870FE /* FlyBarrageTextView.m */; };
 		BC51929E1D236C2E0020480F /* VIPGrowUpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC51929D1D236C2E0020480F /* VIPGrowUpModel.m */; };
 		BC5192A11D239D9A0020480F /* NSString+valiMobile.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5192A01D239D9A0020480F /* NSString+valiMobile.m */; };
 		BC5192A41D23A0E30020480F /* NSString+valiEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5192A31D23A0E30020480F /* NSString+valiEmail.m */; };
 		BC5192A71D23A3030020480F /* NSString+valiIdentityCard.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5192A61D23A3030020480F /* NSString+valiIdentityCard.m */; };
 		BC578DBC1D2B4AC100776106 /* CemeteryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC578DBB1D2B4AC100776106 /* CemeteryModel.m */; };
+		BC578DBD1D2BBAF600776106 /* qq1_sl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD5F8C511D177B8600DA9A0C /* qq1_sl@2x.png */; };
 		BC5F150C1D0FF1AD004F3622 /* PersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14DE1D0FF1AD004F3622 /* PersonalCenterViewController.m */; };
 		BC5F150D1D0FF1AD004F3622 /* DrawStarsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14E11D0FF1AD004F3622 /* DrawStarsView.m */; };
 		BC5F150E1D0FF1AD004F3622 /* HeadImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14E31D0FF1AD004F3622 /* HeadImageView.m */; };
@@ -1408,6 +1411,10 @@
 		BC458A881D1D1B9200AA0DDF /* QueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryModel.m; sourceTree = "<group>"; };
 		BC4790611D20BD6F00BA194D /* AreaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaModel.h; sourceTree = "<group>"; };
 		BC4790621D20BD6F00BA194D /* AreaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaModel.m; sourceTree = "<group>"; };
+		BC499B931D2CD851007870FE /* BarrageListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarrageListModel.h; sourceTree = "<group>"; };
+		BC499B941D2CD851007870FE /* BarrageListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarrageListModel.m; sourceTree = "<group>"; };
+		BC499B9C1D2CDFDD007870FE /* FlyBarrageTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyBarrageTextView.h; sourceTree = "<group>"; };
+		BC499B9D1D2CDFDD007870FE /* FlyBarrageTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyBarrageTextView.m; sourceTree = "<group>"; };
 		BC51929C1D236C2E0020480F /* VIPGrowUpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIPGrowUpModel.h; sourceTree = "<group>"; };
 		BC51929D1D236C2E0020480F /* VIPGrowUpModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIPGrowUpModel.m; sourceTree = "<group>"; };
 		BC51929F1D239D9A0020480F /* NSString+valiMobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+valiMobile.h"; sourceTree = "<group>"; };
@@ -2177,6 +2184,8 @@
 				ADA4C1661D0E8A1200CA9067 /* 贡品View */,
 				ADA4C1131D0E437E00CA9067 /* CemeteryViewController.h */,
 				ADA4C1141D0E437E00CA9067 /* CemeteryViewController.m */,
+				BC499B9C1D2CDFDD007870FE /* FlyBarrageTextView.h */,
+				BC499B9D1D2CDFDD007870FE /* FlyBarrageTextView.m */,
 				ADA4C1181D0E4F3600CA9067 /* CemDetailView.h */,
 				ADA4C1191D0E4F3600CA9067 /* CemDetailView.m */,
 				ADA4C1731D0EAD7100CA9067 /* InputCherishView.h */,
@@ -3201,6 +3210,8 @@
 			children = (
 				BC578DBA1D2B4AC100776106 /* CemeteryModel.h */,
 				BC578DBB1D2B4AC100776106 /* CemeteryModel.m */,
+				BC499B931D2CD851007870FE /* BarrageListModel.h */,
+				BC499B941D2CD851007870FE /* BarrageListModel.m */,
 			);
 			path = "墓园model";
 			sourceTree = "<group>";
@@ -4509,6 +4520,7 @@
 				BC7299FF1D225C53008FEB71 /* AllLucyNum.m in Sources */,
 				BC729A041D225CAA008FEB71 /* FortuneTodayModel.m in Sources */,
 				ADA98E9C1D115898005B23EC /* MyFamilyCollectionViewCell.m in Sources */,
+				BC499B9E1D2CDFDD007870FE /* FlyBarrageTextView.m in Sources */,
 				ADA4C16F1D0E925700CA9067 /* AllGoodsView.m in Sources */,
 				ADC13BA31D1926C7000F901C /* WDetailManagerViewController.m in Sources */,
 				BC458A861D1CC64300AA0DDF /* JobModel.m in Sources */,
@@ -4565,6 +4577,7 @@
 				ADD23CFE1D0D4947008986F6 /* CreatFamilyTree.m in Sources */,
 				ADA7FF021D07E51500EDBEE4 /* NewsCell.m in Sources */,
 				ADB2D1091D1CCEE60072C022 /* CreateFamModel.m in Sources */,
+				BC499B951D2CD851007870FE /* BarrageListModel.m in Sources */,
 				BC5F151B1D0FF1AD004F3622 /* PayForFortuneView.m in Sources */,
 				ADB926201CF7DF1900AA8B6E /* TopView.m in Sources */,
 				ADB9261C1CF7DF1900AA8B6E /* LoginViewController.m in Sources */,

@@ -21,6 +21,8 @@
 
 @property (nonatomic,strong) UITextField *cemName; /*墓园名称*/
 @property (nonatomic,strong) UITextField *cemMaster; /*墓主人*/
+/** 称谓*/
+@property (nonatomic, strong) UITextField *cemTitle;
 @property (nonatomic,strong) UITextField *cemSaying; /*墓志铭*/
 @property (nonatomic,strong) UIButton *cemBir; /*生辰*/
 /** 忌日*/
@@ -87,22 +89,24 @@
     whiteView.backgroundColor = [UIColor whiteColor];
     [self.backScroView addSubview:whiteView];
     
-    NSArray *titleArr = @[@"墓园名称：",@"墓主人：",@"墓志铭：",@"生辰忌日：",@"生平简介："];
+    NSArray *titleArr = @[@"墓园名称：",@"墓主人：",@"称谓：",@"墓志铭：",@"生辰忌日：",@"生平简介："];
     
     self.cemName = [self createLabelAndTextViewWithFrame:AdaptationFrame(74, 40, 130, 50) title:titleArr[0] toView:whiteView];
-    self.cemName.text = @"";
+    //self.cemName.text = @"";
     self.cemMaster = [self createLabelAndTextViewWithFrame:AdaptationFrame(74, 40+1*75, 130, 50) title:titleArr[1] toView:whiteView];
-    self.cemMaster.text = @"";
-    self.cemSaying = [self createLabelAndTextViewWithFrame:AdaptationFrame(74, 40+2*75, 130, 50) title:titleArr[2] toView:whiteView];
-    self.cemSaying.text = @"";
+    //self.cemMaster.text = @"";
+    self.cemTitle = [self createLabelAndTextViewWithFrame:AdaptationFrame(74, 40+2*75, 130, 50) title:titleArr[2] toView:whiteView];
+    //self.cemTitle.text = @"";
+    self.cemSaying = [self createLabelAndTextViewWithFrame:AdaptationFrame(74, 40+3*75, 130, 50) title:titleArr[3] toView:whiteView];
+    //self.cemSaying.text = @"";
     //生辰忌日
-    UILabel *birDeadLabel = [[UILabel alloc]initWithFrame:AdaptationFrame(74, 40+3*75, 130, 50)];
-    birDeadLabel.text = titleArr[3];
+    UILabel *birDeadLabel = [[UILabel alloc]initWithFrame:AdaptationFrame(74, 40+4*75, 130, 50)];
+    birDeadLabel.text = titleArr[4];
     birDeadLabel.textAlignment = NSTextAlignmentRight;
     birDeadLabel.font = MFont(25*AdaptationWidth());
     [whiteView addSubview:birDeadLabel];
 
-    self.cemBir = [[UIButton alloc]initWithFrame:CGRectMake(CGRectXW(birDeadLabel), (40+3*75)*AdaptationWidth(), 170*AdaptationWidth(), 50*AdaptationWidth())];
+    self.cemBir = [[UIButton alloc]initWithFrame:CGRectMake(CGRectXW(birDeadLabel), (40+4*75)*AdaptationWidth(), 170*AdaptationWidth(), 50*AdaptationWidth())];
     self.cemBir.layer.borderColor = BorderColor;
     [self.cemBir setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.cemBir setTitle:@"" forState:UIControlStateNormal];
@@ -112,7 +116,7 @@
     [self.cemBir addTarget:self action:@selector(clickToSelectBirTime:) forControlEvents:UIControlEventTouchUpInside];
     [whiteView addSubview:self.cemBir];
     
-    self.cemDead = [[UIButton alloc]initWithFrame:CGRectMake(CGRectXW(self.cemBir)+10*AdaptationWidth(), (40+3*75)*AdaptationWidth(), 170*AdaptationWidth(), 50*AdaptationWidth())];
+    self.cemDead = [[UIButton alloc]initWithFrame:CGRectMake(CGRectXW(self.cemBir)+10*AdaptationWidth(), (40+4*75)*AdaptationWidth(), 170*AdaptationWidth(), 50*AdaptationWidth())];
     [self.cemDead setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.cemDead setTitle:@"" forState:UIControlStateNormal];
     self.cemDead.layer.borderColor = BorderColor;
@@ -121,23 +125,18 @@
     [self.cemDead addTarget:self action:@selector(clickToSelectDeadTime:) forControlEvents:UIControlEventTouchUpInside];
     [whiteView addSubview:self.cemDead];
     //生平简介
-    UILabel *infoLabel = [[UILabel alloc]initWithFrame:AdaptationFrame(74, 40+4*75, 130, 50)];
-    infoLabel.text = titleArr[4];
+    UILabel *infoLabel = [[UILabel alloc]initWithFrame:AdaptationFrame(74, 40+5*75, 130, 50)];
+    infoLabel.text = titleArr[5];
     infoLabel.textAlignment = NSTextAlignmentRight;
     infoLabel.font = MFont(25*AdaptationWidth());
     [whiteView addSubview:infoLabel];
     
-    self.cemInfoTV = [[UITextView alloc]initWithFrame:CGRectMake(CGRectXW(infoLabel), (40+4*75)*AdaptationWidth(), 350*AdaptationWidth(), 300*AdaptationWidth())];
+    self.cemInfoTV = [[UITextView alloc]initWithFrame:CGRectMake(CGRectXW(infoLabel), (40+5*75)*AdaptationWidth(), 350*AdaptationWidth(), 240*AdaptationWidth())];
     self.cemInfoTV.text = @"";
     self.cemInfoTV.layer.borderColor = BorderColor;
     self.cemInfoTV.layer.borderWidth = 1;
     self.cemInfoTV.delegate = self;
     [whiteView addSubview:self.cemInfoTV];
-    
-    
-    
-    
-    
 }
 
 -(void)createCemBtn{
@@ -156,6 +155,8 @@
     [self.backScroView addSubview:createCemBtn];
     
 }
+
+
 #pragma mark *** events ***
 -(void)respondsToCreateCemBtn:(UIButton *)sender{
     if (self.creatOrEditStr) {
@@ -167,7 +168,8 @@
                                   @"CeBrief":self.cemInfoTV.text,
                                   @"CeType":@"PRI",
                                   @"CeMeid":GetUserId,
-                                  @"CeBirthday":self.cemBir.currentTitle
+                                  @"CeBrithday":self.cemBir.currentTitle,
+                                  @"CeTitle":self.cemTitle.text
                                   };
             WK(weakSelf)
             [TCJPHTTPRequestManager POSTWithParameters:dic requestID:GetUserId requestcode:kRequestCodecreatecemetery success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
@@ -201,7 +203,8 @@
                               @"CeDeathday":self.cemDead.currentTitle,
                               @"CeBrief":self.cemInfoTV.text,
                               @"CeId":@(self.CeId),
-                              @"CeBirthday":self.cemBir.currentTitle
+                              @"CeBrithday":self.cemBir.currentTitle,
+                              @"CeTitle":self.cemTitle.text
                               };
         WK(weakSelf)
         [TCJPHTTPRequestManager POSTWithParameters:dic requestID:GetUserId requestcode:kRequestCodeEditCemetery success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
@@ -225,7 +228,6 @@
 
 //上传or修改墓园图片
 -(void)uploadWorshipImageWithID:(NSInteger)CeId{
-    
     UIImage *cemeteryImage = self.addCemBtn.imageView.image;
     NSData *imageData = UIImageJPEGRepresentation(cemeteryImage, 0.5);
     NSString *encodeimageStr =[imageData base64EncodedString];
@@ -274,15 +276,13 @@
     textField.layer.borderColor = BorderColor;
     textField.layer.borderWidth = 1.0f;
     textField.font = MFont(14);
-    if ([title isEqualToString:@"墓主人："]) {
-        textField.placeholder = @"称谓+姓名(慈父朱万成)";
-    }
     textField.text = @"";
     textField.delegate = self;
     [backView addSubview:textField];
     return textField;
 }
 
+#pragma mark - lazyLoad
 -(UIScrollView *)backScroView{
     if (!_backScroView) {
         _backScroView= [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
@@ -293,6 +293,7 @@
     }
     return _backScroView;
 }
+
 
 //关键盘
 -(void)closeKeyboard{

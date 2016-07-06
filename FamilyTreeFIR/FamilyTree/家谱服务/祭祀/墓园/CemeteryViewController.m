@@ -18,9 +18,11 @@ enum {
 #import "CemGoodsShopView.h"
 #import "InputCherishView.h"
 #import "CemeteryModel.h"
+#import "BarrageListModel.h"
+#import "FlyBarrageTextView.h"
 
 #define bacheight (Screen_height-self.tabBarController.tabBar.bounds.size.height-64)
-@interface CemeteryViewController ()
+@interface CemeteryViewController ()<InputCherishViewDelegate,UITextViewDelegate>
 {
     BOOL _selectedMianhuaiBtn;
 }
@@ -37,13 +39,13 @@ enum {
 
 @property (nonatomic,strong) InputCherishView *inputView; /*输入缅怀语*/
 
-@property (nonatomic,strong) NSMutableArray *cherishArr; /*所有缅怀语*/
-/**全部缅怀语的view*/
-@property (nonatomic,strong) UIView *allCherishView;
 
-
-
-
+/** 墓园详情模型*/
+@property (nonatomic, strong) CemeteryModel *cemeteryModel;
+/** 墓园弹幕模型(包括祭品)*/
+@property (nonatomic, strong) BarrageListModel *barrageListModel;
+/** 弹幕数组*/
+@property (nonatomic, strong) NSMutableArray *barragesArr;
 
 @end
 
@@ -54,24 +56,83 @@ enum {
     [self initData];
     [self initUI];
     [self getCemeteryData];
-    
+    [self getCemeteryBarrageList];
+    [self getCemeteryJSData];
 }
 
 -(void)getCemeteryData{
     NSDictionary *logDic = @{@"CeId":@(self.CeId)};
     WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeCemeterDetail success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        
         if (succe) {
-            CemeteryModel *cemeteryModel = [CemeteryModel modelWithJSON:jsonDic[@"data"]];
-            weakSelf.detailView.cemeteryModel = cemeteryModel;
+            weakSelf.cemeteryModel = [CemeteryModel modelWithJSON:jsonDic[@"data"]];
+            weakSelf.detailView.cemeteryModel = weakSelf.cemeteryModel;
             
         }
     } failure:^(NSError *error) {
         
     }];
-    
 }
+
+-(void)getCemeteryBarrageList{
+    NSDictionary *logDic = @{@"CeId":@(self.CeId)};
+    WK(weakSelf);
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeBarrageList success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        //MYLog(@"%@",jsonDic[@"data"]);
+        if (succe) {
+            weakSelf.barrageListModel = [BarrageListModel modelWithJSON:jsonDic[@"data"]];
+            for (int i = 0; i < weakSelf.barrageListModel.dm.count; i++) {
+                [weakSelf.barragesArr addObject:weakSelf.barrageListModel.dm[i].BaContent];
+            }
+            [self makeBarrageListAnimation:weakSelf.barragesArr];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+-(void)getCemeteryJSData{
+    NSDictionary *logDic = @{
+                             @"pagenum":@1,
+                             @"pagesize":@1999,
+                             @"type":@"",
+                             @"label":@"",
+                             @"coname":@"",
+                             @"qsj":@"",
+                             @"jwj":@"",
+                             @"shoptype":@"JS"
+                             };
+    //WK(weakSelf);
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getcomlist" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"数据%@",jsonDic[@"data"]);
+        if (succe) {
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+
+}
+
+//弹幕动画效果
+-(void)makeBarrageListAnimation:(NSMutableArray *)barragesArray{
+    NSArray * colorArray = @[[UIColor redColor],[UIColor blackColor],[UIColor greenColor],[UIColor orangeColor],[UIColor yellowColor],[UIColor purpleColor],[UIColor magentaColor],[UIColor brownColor]];
+    for(int i = 0 ; i < barragesArray.count; i++){
+        float   tempNum     = 64 +arc4random()%200;//高
+        int     tempI       = arc4random()%barragesArray.count;
+        int     sleepTime   = arc4random()%8;
+        int     colorNum    = arc4random()%8;
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            sleep(sleepTime);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                FlyBarrageTextView * flyView = [[FlyBarrageTextView alloc] initWithY:tempNum AndText:barragesArray[tempI] AndWordSize:12];
+                flyView.textColor = colorArray[colorNum];
+                [self.view addSubview:flyView];
+            });
+        });
+    }
+}
+
 
 
 #pragma mark *** 初始化数据 ***
@@ -81,16 +142,12 @@ enum {
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
     [self.view addSubview:self.scrollView];
-  
-    
     [self.scrollView addSubview:self.cemImageView];
-      [self initXiangLu];
+    [self initXiangLu];
     [self.scrollView addSubview:self.detailView];
-    
     [self allGoodsdisplay];
-    
     [self initRightBtn];
-    [self reloadCherishLabels];
+    
     
     
     
@@ -120,9 +177,7 @@ enum {
 
 //三个btn
 -(void)initRightBtn{
-    
     NSArray *imageArr = @[@"my_name_nav_1",@"my_name_nav_2",@"my_name_nav_3"];
-    
     for (int idx = 0; idx<3; idx++) {
         UIButton *btn = [[UIButton alloc] initWithFrame:AdaptationFrame(Screen_width/AdaptationWidth()-130, 750+idx*130, 114, 114)];
         [btn setImage:MImage(imageArr[idx]) forState:0];
@@ -133,67 +188,14 @@ enum {
 }
 
 
-
-
-//缅怀语言 布局
-
--(void)reloadCherishLabels{
-    
-    
-    [self.scrollView addSubview:self.allCherishView];
-    
-    for (UIView *view in self.allCherishView.subviews) {
-        [view removeFromSuperview];
-    }
-    
-    for (int idx = 0; idx<3; idx++) {
-        
-        NSInteger randX = (random()%30+180);
-        
-        UILabel *label = [[UILabel alloc] initWithFrame:AdaptationFrame(randX, 50+85*idx, 300, 35)];
-        label.font = WFont(random()%5+20);
-        label.textColor = [UIColor random];
-        
-        label.text = self.cherishArr[idx];
-        [label sizeToFit];
-        
-        [self.allCherishView addSubview:label];
-        
-    }
-    for (int idx = 0; idx<3; idx++) {
-        
-        NSInteger randX =  random()%30+40;
-        UILabel *label = [[UILabel alloc] initWithFrame:AdaptationFrame(randX, 90+82*idx, 300, 35)];
-        label.font = WFont(random()%5+20);
-        label.textColor = [UIColor random];
-        label.text = self.cherishArr[3+idx];
-        [label sizeToFit];
-        
-        [self.allCherishView addSubview:label];
-    }
-    for (int idx = 0; idx<3; idx++) {
-        
-        NSInteger randX = (random()%50+380);
-
-        UILabel *label = [[UILabel alloc] initWithFrame:AdaptationFrame(randX, 90+82*idx, 300, 35)];
-        label.font = WFont(random()%5+20);
-        label.textColor = [UIColor random];
-        label.text = self.cherishArr[6+idx];
-        [label sizeToFit];
-        
-        [self.allCherishView addSubview:label];
-    }
-    
-}
-
-
 #pragma mark *** btnEvents ***
 
 -(void)respondsToCemBtn:(UIButton *)sender{
     switch (sender.tag) {
         case BTNIntroTag:
         {
-            CemIntroViewController *cemIntro = [[CemIntroViewController alloc] initWithTitle:@"墓园名称" image:nil];
+            CemIntroViewController *cemIntro = [[CemIntroViewController alloc] initWithTitle:@"墓园介绍" image:nil];
+            cemIntro.cemeteryModel = self.cemeteryModel;
             [self.navigationController pushViewController:cemIntro animated:YES];
         }
             break;
@@ -205,7 +207,7 @@ enum {
         case BTNMianhuaiTag:
         {
             _selectedMianhuaiBtn = !_selectedMianhuaiBtn;
-            [self.view addSubview:self.inputView];
+            [self.scrollView addSubview:self.inputView];
 
             if (_selectedMianhuaiBtn) {
                 self.inputView.hidden = false;
@@ -218,12 +220,8 @@ enum {
             break;
     }
 }
-//提交btn
--(void)respondsToCommitBtn:(UIButton *)sender{
-    [self.cherishArr removeLastObject];
-    [self.cherishArr insertObject:self.inputView.textView.text atIndex:0];
-    [self reloadCherishLabels];
-}
+
+
 #pragma mark *** getters ***
 -(UIScrollView *)scrollView{
     if (!_scrollView) {
@@ -231,6 +229,8 @@ enum {
         _scrollView.contentSize = CGSizeMake(1.4*bacheight, bacheight);
         _scrollView.bounces = false;
         _scrollView.contentOffset = CGPointMake(0.7*bacheight-Screen_width/2, 0);
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeKeyboard)];
+        [_scrollView addGestureRecognizer:tap];
     }
     return _scrollView;
 }
@@ -260,25 +260,11 @@ enum {
 }
 -(InputCherishView *)inputView{
     if (!_inputView) {
-        _inputView = [[InputCherishView alloc] initWithFrame:AdaptationFrame(170, 955, 375, 162)];
-        [_inputView.commitBtn addTarget:self action:@selector(respondsToCommitBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
+        _inputView = [[InputCherishView alloc] initWithFrame:AdaptationFrame(540, 800, 375, 162)];
+        _inputView.textView.delegate = self;
+        _inputView.delegate = self;
     }
     return _inputView;
-}
--(NSMutableArray *)cherishArr{
-    if (!_cherishArr) {
-        _cherishArr = [@[@"在天堂快快乐乐，不孤单1",@"在天堂快快乐乐，不孤单2",@"在天堂快快乐乐，不孤单3",@"在天堂快快乐乐，不孤单4",@"在天堂快快乐乐，不孤单5",@"在天堂快快乐乐，不孤单6",@"在天堂快快乐乐，不孤单7",@"在天堂快快乐乐，不孤单8",@"在天堂快快乐乐，不孤单9"] mutableCopy];
-        
-    }
-    return _cherishArr;
-}
--(UIView *)allCherishView{
-    if (!_allCherishView) {
-        _allCherishView = [[UIView alloc] initWithFrame:AdaptationFrame(0.7*bacheight-Screen_width/2/AdaptationWidth()+Screen_width/2/AdaptationWidth(), 0, Screen_width/AdaptationWidth(), 300)];
-    }
-    return _allCherishView;
 }
 
 -(NSMutableArray *)goodsImagesArr{
@@ -288,4 +274,60 @@ enum {
     }
     return _goodsImagesArr;
 }
+
+-(NSMutableArray *)barragesArr{
+    if (!_barragesArr) {
+        _barragesArr = [@[] mutableCopy];
+    }
+    return _barragesArr;
+}
+
+
+#pragma mark - InputCherishViewDelegate
+-(void)inputCherishView:(InputCherishView *)inputCherishView withString:(NSString *)str{
+    //上传弹幕
+    MYLog(@"%@",str);
+    NSDictionary *logDic = @{
+                             @"BaCeid":@(self.CeId),
+                             @"BaMeid":GetUserId,
+                             @"BaContent":str
+                             };
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeCreateBarrage success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"%@",jsonDic[@"data"]);
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
+}
+
+#pragma mark - UITextViewDelegate
+-(void)textViewDidBeginEditing:(UITextView *)textView{
+    MYLog(@"将要开始编辑");
+    if (self.scrollView.frame.origin.y == 64) {
+        [UIView animateWithDuration:1 animations:^{
+            CGRect frame =  self.scrollView.frame;
+            frame.origin.y = 64-216+20;
+            self.scrollView.frame = frame;
+        }];
+    }
+    
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView{
+    MYLog(@"结束编辑");
+    if (self.scrollView.frame.origin.y !=64) {
+        [UIView animateWithDuration:1 animations:^{
+            CGRect frame =  self.scrollView.frame;
+            frame.origin.y = 64;
+            self.scrollView.frame = frame;
+        }];
+    }
+}
+
+-(void)closeKeyboard{
+    [self.view endEditing:YES];
+}
+
+
 @end

@@ -54,6 +54,8 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodeCemeteryList;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeEditCemetery;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeDelcemetery;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeCemeterDetail;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeBarrageList;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeCreateBarrage;
 /**
  *  弹出框自动消失
  *
