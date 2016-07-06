@@ -27,17 +27,11 @@ typedef enum : NSUInteger {
     self = [super initWithFrame:frame];
     
     if (self) {
-        [self initImagePicker];
         [self initCreatUI];
     }
     return self;
 }
--(void)initImagePicker{
-//    _creImagePickerController = [[UIImagePickerController alloc] init];
-//   
-//    _creImagePickerController.delegate = self;
-    
-}
+
 
 #pragma mark *** 初始化界面 ***
 -(void)initCreatUI{
@@ -98,6 +92,9 @@ typedef enum : NSUInteger {
 
 #pragma mark *** DiscAndNameViewDelegate ***
 -(void)DiscAndNameView:(DiscAndNameView *)view didFinishEditDetailLabel:(UITextField *)detailLabel{
+    if ([detailLabel.text isEqualToString:@""]) {
+        return;
+    }
     self.famBookName.text = [NSString stringWithFormat:@"%@1-5代卷谱",detailLabel.text] ;
 }
 #pragma mark *** UIImagePickerControllerDelegate ***
@@ -152,6 +149,7 @@ typedef enum : NSUInteger {
     if (!_sexInpuView) {
         _sexInpuView = [[InputView alloc] initWithFrame:CGRectMake(20, CGRectYH(self.famfarName)+GapOfView*3+InputView_height*2, 50, InputView_height) Length:50 withData:@[@"男",@"女"]];
         _sexInpuView.inputLabel.text = @"男";
+        _sexInpuView.userInteractionEnabled = false;
         
     }
     return _sexInpuView;
@@ -175,11 +173,7 @@ typedef enum : NSUInteger {
         _famTotem.backgroundColor = [UIColor grayColor];
         _famTotem.userInteractionEnabled = true;
         UITapGestureRecognizer *tapGess = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondsToSelectHeadImage:)];
-     
-        
         [_famTotem addGestureRecognizer:tapGess];
-        
-        
     }
     return _famTotem;
 }

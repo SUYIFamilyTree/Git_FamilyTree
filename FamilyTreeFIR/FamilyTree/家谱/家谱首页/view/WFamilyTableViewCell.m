@@ -70,6 +70,7 @@
     if (!_famIntroLabel) {
         _famIntroLabel = [[UITextView alloc] initWithFrame:AdaptationFrame(self.famNameLabel.frame.origin.x/AdaptationWidth(), 80, 350, 240)];
         _famIntroLabel.font = WFont(25);
+        [_famIntroLabel setEditable:false];
         
     }
     return _famIntroLabel;

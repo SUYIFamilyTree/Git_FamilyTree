@@ -127,8 +127,8 @@
 //请求上传家谱图像
 -(void)postUploadheadImageWithGeID:(NSString *)genID{
 
-    
     //祖宗头像
+    
     NSData *imageData = UIImageJPEGRepresentation(self.cFameView.selecProtrai.image, 0.5);
     NSString *encodeImageData = [imageData base64EncodedString];
     [TCJPHTTPRequestManager POSTWithParameters:@{@"userid":GetUserId,@"genid":genID,@"imgbt":encodeImageData} requestID:GetUserId requestcode:kRequestCodeuploadgenan success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
@@ -139,6 +139,10 @@
         MYLog(@"shibai");
     }];
     //家谱图腾
+    if (!self.cFameView.famTotem.image) {
+        //如果没有输入图腾
+        self.cFameView.famTotem.image = [UIImage imageWithColor:[UIColor whiteColor]];
+    }
     NSData *imageTotemData = UIImageJPEGRepresentation(self.cFameView.famTotem.image, 0.5);
     NSString *encodeImageTotemData = [imageTotemData base64EncodedString];
     [TCJPHTTPRequestManager POSTWithParameters:@{@"userid":GetUserId,@"genid":genID,@"imgbt":encodeImageTotemData} requestID:GetUserId requestcode:kRequestCodeuploadgentt success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
