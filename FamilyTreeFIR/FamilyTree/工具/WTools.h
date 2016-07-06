@@ -71,5 +71,11 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodeuploadgenimg;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
+//UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
+//UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
+//UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
+//UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
+
+
 
 @end

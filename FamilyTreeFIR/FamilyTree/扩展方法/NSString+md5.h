@@ -6,12 +6,19 @@
 //  Copyright © 2016年 yaomin. All rights reserved.
 //
 
+typedef enum : NSUInteger {
+    md5CodingTypeUploadImage,
+    md5CodingTypeOther,
+} md5CodingType;
+
+
 #import <Foundation/Foundation.h>
+
 
 @interface NSString (md5)
 +(NSString *) md5Str:(NSString *)str;
 //字典装字符串
-+(NSString *) stringWithDic:(NSDictionary *)dic;
++(NSString *) stringWithDic:(NSDictionary *)dic type:(md5CodingType)codingType;
 +(NSString *)getCurrentTimeAddNumber;
 //横向转竖向字符串
 +(NSString *)verticalStringWith:(NSString *)string;
