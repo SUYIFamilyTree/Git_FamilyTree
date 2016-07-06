@@ -43,7 +43,7 @@
     
     
     
-    self.fatheView = [self creatLabelTextWithTitle:@"父亲:" TitleFrame:CGRectMake(20, CGRectYH(self.name)+GapOfView, 55, InputView_height) inputViewLength:75 dataArr:[[WIDModel sharedWIDModel].fatherDic allKeys] inputViewLabel:@"郭祖宗" FinText:nil withStar:false];
+    self.fatheView = [self creatLabelTextWithTitle:@"父亲:" TitleFrame:CGRectMake(20, CGRectYH(self.name)+GapOfView, 55, InputView_height) inputViewLength:75 dataArr:[[WIDModel sharedWIDModel].fatherDic allKeys] inputViewLabel:@"" FinText:nil withStar:false];
     [self.backView addSubview:self.fatheView];
     
     self.motherView = [self creatLabelTextWithTitle:@"母亲:" TitleFrame:CGRectMake(Screen_width-350*AdaptationWidth(), CGRectYH(self.name)+GapOfView, 55, InputView_height) inputViewLength:75 dataArr:@[@"郭小妹",@"郭二妹",@"速度"] inputViewLabel:@"不详" FinText:nil withStar:YES];
@@ -92,7 +92,7 @@
 //获取父亲，身份类型，代数字辈
 
 -(void)getAllDetailDataCallBack:(void (^)())back{
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"GeId":@"1"} requestID:GetUserId requestcode:kRequestCodegetgenalldata success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"GeId":[WFamilyModel shareWFamilModel].myFamilyId} requestID:GetUserId requestcode:kRequestCodegetgenalldata success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             NSLog(@"%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
             
@@ -102,7 +102,7 @@
             [[WIDModel sharedWIDModel] setValue:dic[@"ds"] forKey:@"ds"];
             [[WIDModel sharedWIDModel] setValue:dic[@"gemedata"] forKey:@"gemedata"];
             
-            NSLog(@"%@", [WIDModel sharedWIDModel].gemedata[0][@"GemeName"]);
+//            NSLog(@"%@", [WIDModel sharedWIDModel].gemedata[0][@"GemeName"]);
             
             //存进单例
             NSArray *fathArr = [WIDModel sharedWIDModel].gemedata;
@@ -147,7 +147,7 @@
 #pragma mark *** getters ***
 -(DiscAndNameView *)name{
     if (!_name) {
-        _name = [[DiscAndNameView alloc] initWithFrame:CGRectMake(20,40+GapOfView, Screen_width-45, InputView_height) title:@"姓名:" detailCont:@"段正淳" isStar:YES];
+        _name = [[DiscAndNameView alloc] initWithFrame:CGRectMake(20,40+GapOfView, Screen_width-45, InputView_height) title:@"姓名:" detailCont:@"" isStar:YES];
         
     }
     return _name;

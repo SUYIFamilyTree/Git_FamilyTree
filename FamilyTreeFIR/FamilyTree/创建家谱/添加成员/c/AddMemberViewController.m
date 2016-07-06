@@ -60,7 +60,7 @@
     NSString *shenfenId = [WIDModel sharedWIDModel].idDic[self.AddFameView.idView.inputLabel.text];
     NSString *fatherId = [WIDModel sharedWIDModel].fatherDic[self.AddFameView.fatheView.inputLabel.text];
     
-    NSDictionary *addDic = @{@"GeId":@"1",
+    NSDictionary *addDic = @{@"GeId":[WFamilyModel shareWFamilModel].myFamilyId,
                              @"Zb":self.AddFameView.gennerTextField.text,
                              @"Father":fatherId,
                              @"Ds":genNumberF,

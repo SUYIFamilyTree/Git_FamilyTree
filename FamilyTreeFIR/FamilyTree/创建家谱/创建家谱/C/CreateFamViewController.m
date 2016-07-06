@@ -38,6 +38,7 @@
 
 
 #pragma mark *** BackScrollAndDetailViewDelegate ***
+/** 点击创建按钮 */
 -(void)BackScrollAndDetailViewDidTapCreateButton{
     [self postCreateFamWithBlock:^(BOOL back,NSString *genID) {
         if (back) {
@@ -46,8 +47,6 @@
             
         }
     }];
-    
-    
 }
 //请求创建家谱
 -(void)postCreateFamWithBlock:(void (^)(BOOL back,NSString *genID))callBack{

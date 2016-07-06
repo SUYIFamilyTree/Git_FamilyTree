@@ -206,6 +206,9 @@
 		AD8DAB081CFD84A5009B7958 /* HelpTableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8DAB071CFD84A5009B7958 /* HelpTableTableViewCell.m */; };
 		AD8E603D1CFC0BDA00355C06 /* FindPassView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8E603C1CFC0BDA00355C06 /* FindPassView.m */; };
 		AD9D86291D2C920900D8D8F6 /* qq1_sl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD9D86281D2C920900D8D8F6 /* qq1_sl@2x.png */; };
+		AD9D862C1D2CACC100D8D8F6 /* WFamilyTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9D862B1D2CACC100D8D8F6 /* WFamilyTableView.m */; };
+		AD9D862F1D2CB0C700D8D8F6 /* WFamilyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9D862E1D2CB0C700D8D8F6 /* WFamilyTableViewCell.m */; };
+		AD9D86321D2CB23700D8D8F6 /* WFamilyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9D86311D2CB23700D8D8F6 /* WFamilyModel.m */; };
 		AD9DACE71D1A8866003495A2 /* kuang1.png in Resources */ = {isa = PBXBuildFile; fileRef = AD9DACD81D1A8866003495A2 /* kuang1.png */; };
 		AD9DACE81D1A8866003495A2 /* kuang1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD9DACD91D1A8866003495A2 /* kuang1@2x.png */; };
 		AD9DACE91D1A8866003495A2 /* kuang1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD9DACDA1D1A8866003495A2 /* kuang1@3x.png */; };
@@ -974,6 +977,12 @@
 		AD8E603B1CFC0BDA00355C06 /* FindPassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindPassView.h; sourceTree = "<group>"; };
 		AD8E603C1CFC0BDA00355C06 /* FindPassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPassView.m; sourceTree = "<group>"; };
 		AD9D86281D2C920900D8D8F6 /* qq1_sl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qq1_sl@2x.png"; sourceTree = "<group>"; };
+		AD9D862A1D2CACC100D8D8F6 /* WFamilyTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFamilyTableView.h; sourceTree = "<group>"; };
+		AD9D862B1D2CACC100D8D8F6 /* WFamilyTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFamilyTableView.m; sourceTree = "<group>"; };
+		AD9D862D1D2CB0C700D8D8F6 /* WFamilyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFamilyTableViewCell.h; sourceTree = "<group>"; };
+		AD9D862E1D2CB0C700D8D8F6 /* WFamilyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFamilyTableViewCell.m; sourceTree = "<group>"; };
+		AD9D86301D2CB23700D8D8F6 /* WFamilyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFamilyModel.h; sourceTree = "<group>"; };
+		AD9D86311D2CB23700D8D8F6 /* WFamilyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFamilyModel.m; sourceTree = "<group>"; };
 		AD9DACD81D1A8866003495A2 /* kuang1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kuang1.png; sourceTree = "<group>"; };
 		AD9DACD91D1A8866003495A2 /* kuang1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kuang1@2x.png"; sourceTree = "<group>"; };
 		AD9DACDA1D1A8866003495A2 /* kuang1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kuang1@3x.png"; sourceTree = "<group>"; };
@@ -1678,6 +1687,8 @@
 		AD024C4B1CF68531003380E5 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				AD9D86301D2CB23700D8D8F6 /* WFamilyModel.h */,
+				AD9D86311D2CB23700D8D8F6 /* WFamilyModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1689,6 +1700,10 @@
 				BCE2AD531CF8339000EC98F5 /* FamilyTreeTopView.m */,
 				ADD23CFC1D0D4947008986F6 /* CreatFamilyTree.h */,
 				ADD23CFD1D0D4947008986F6 /* CreatFamilyTree.m */,
+				AD9D862A1D2CACC100D8D8F6 /* WFamilyTableView.h */,
+				AD9D862B1D2CACC100D8D8F6 /* WFamilyTableView.m */,
+				AD9D862D1D2CB0C700D8D8F6 /* WFamilyTableViewCell.h */,
+				AD9D862E1D2CB0C700D8D8F6 /* WFamilyTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -4427,6 +4442,7 @@
 				BCE2AD541CF8339000EC98F5 /* FamilyTreeTopView.m in Sources */,
 				BCF100051D02B11400D65E60 /* CALayer+drawborder.m in Sources */,
 				AD8C61E11D1E54A2005CDA68 /* WTools.m in Sources */,
+				AD9D862F1D2CB0C700D8D8F6 /* WFamilyTableViewCell.m in Sources */,
 				AD8DAAE01CFD7533009B7958 /* FamilyHelpViewController.m in Sources */,
 				BC7299FE1D225C53008FEB71 /* FortuneTodayViewController.m in Sources */,
 				ADE265A81D20C4C800F12FC9 /* WSelectMyFamModel.m in Sources */,
@@ -4437,6 +4453,7 @@
 				ADA7FEF31D07A82300EDBEE4 /* PortraitAndNameViews.m in Sources */,
 				BC96727E1D10E4BF00F60534 /* EditPersonalInfoView.m in Sources */,
 				ADA98E961D11584C005B23EC /* BaseViewController.m in Sources */,
+				AD9D86321D2CB23700D8D8F6 /* WFamilyModel.m in Sources */,
 				ADD23CC51D0D0085008986F6 /* PortraiView.m in Sources */,
 				BC2943A31CFE9F7B006671B9 /* LineageCellView.m in Sources */,
 				ADA4C1751D0EAD7100CA9067 /* InputCherishView.m in Sources */,
@@ -4516,6 +4533,7 @@
 				BC2B1E1F1D1BD88E004E916D /* EditPasswordViewController.m in Sources */,
 				ADA98E851D11272F005B23EC /* RollView.m in Sources */,
 				AD7388171CF6C2050076B2AD /* TopSearchView.m in Sources */,
+				AD9D862C1D2CACC100D8D8F6 /* WFamilyTableView.m in Sources */,
 				ADC059DE1D002C70001F7C1B /* CreateFamViewController.m in Sources */,
 				ADBA016E1D0115370016AB00 /* ClickRoundView.m in Sources */,
 				BC5F150F1D0FF1AD004F3622 /* PersonalCenterCliffordView.m in Sources */,
