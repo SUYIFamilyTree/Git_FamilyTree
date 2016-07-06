@@ -157,13 +157,13 @@
 }
 
 - (void)setupMyRefreshControl {
-    self.privateWorshipV.myTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreMyWorship)];
+    self.privateWorshipV.myTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreMyWorship)];
 
     
 }
 
 - (void)setupAllRefreshControl {
-    self.privateWorshipV.cemeterialListTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreAllWorship)];
+    self.privateWorshipV.cemeterialListTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreAllWorship)];
 }
 
 
