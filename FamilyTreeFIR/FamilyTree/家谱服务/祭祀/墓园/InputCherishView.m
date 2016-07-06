@@ -43,8 +43,15 @@
         _commitBtn.layer.borderWidth = 1.0f;
         _commitBtn.layer.cornerRadius = 5;
         [_commitBtn setTitleColor:[UIColor blackColor] forState:0];
-        
+        [_commitBtn addTarget:self action:@selector(clickBtnForSubmit:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _commitBtn;
 }
+
+-(void)clickBtnForSubmit:(UIButton *)sender{
+    [self.delegate inputCherishView:self withString:self.textView.text];
+    
+}
+
+
 @end

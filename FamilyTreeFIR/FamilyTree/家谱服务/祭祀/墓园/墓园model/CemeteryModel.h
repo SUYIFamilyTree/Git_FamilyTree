@@ -48,4 +48,10 @@
 
 /** 生辰*/
 @property (nonatomic, strong) NSString *CeBrithday;
+
+/** 生辰忌日小写*/
+@property (nonatomic, strong) NSString *CeScjr;
+
+/** 称谓(慈父)*/
+@property (nonatomic, strong) NSString *CeTitle ;
 @end

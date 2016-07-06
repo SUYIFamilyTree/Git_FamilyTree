@@ -7,7 +7,9 @@
 //
 
 #import "BaseViewController.h"
+#import "CemeteryModel.h"
 
 @interface CemIntroViewController : BaseViewController
-
+/** 墓园详情模型*/
+@property (nonatomic, strong) CemeteryModel *cemeteryModel;
 @end
