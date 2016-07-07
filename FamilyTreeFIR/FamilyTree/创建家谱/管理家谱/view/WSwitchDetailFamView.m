@@ -113,8 +113,25 @@
 }
 #pragma mark *** events ***
 -(void)respondsToAllBtnArs:(UIButton *)sender{
-    if (_delegate && [_delegate respondsToSelector:@selector(WswichDetailFamViewDelegate:didSelectedButton:)]) {
-        [_delegate WswichDetailFamViewDelegate:self didSelectedButton:sender];
+    
+    NSLog(@"%ld", sender.tag-1);
+    NSInteger famRepeatCount = 0;
+    
+    NSMutableArray *arrC = [@[] mutableCopy];
+    for (int idx = 0; idx<sender.tag-1; idx++) {
+        [arrC addObject:_famNamesArray[idx]];
+    }
+    
+    for (NSString *string in arrC) {
+        if ([string isEqualToString:sender.titleLabel.text]) {
+            famRepeatCount += 1;
+        }
+    }
+    NSLog(@"数量是---------%ld", famRepeatCount);
+
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(WswichDetailFamViewDelegate:didSelectedButton:repeatNameIndex:)]) {
+        [_delegate WswichDetailFamViewDelegate:self didSelectedButton:sender repeatNameIndex:famRepeatCount];
     };
 }
 #pragma mark *** getters ***

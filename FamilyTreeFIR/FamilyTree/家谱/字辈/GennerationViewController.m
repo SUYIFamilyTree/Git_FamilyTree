@@ -70,7 +70,7 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
 
 -(void)PostGennerInfomation{
 //    [SXLoadingView showProgressHUD:@"加载数据"];
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"geid":@"1",@"query":@"",@"pagenum":@"1",@"pagesize":@"20"} requestID:GetUserId requestcode:kRequestCodequeryzbgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"geid":[WFamilyModel shareWFamilModel].myFamilyId,@"query":@"",@"pagenum":@"1",@"pagesize":@"20"} requestID:GetUserId requestcode:kRequestCodequeryzbgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
 //            NSLog(@"--22-%@", jsonDic[@"data"]);
             NSLog(@"--11-%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);

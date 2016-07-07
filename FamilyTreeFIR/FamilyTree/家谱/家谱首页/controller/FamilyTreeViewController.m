@@ -7,14 +7,13 @@
 //
 
 #import "FamilyTreeViewController.h"
-#import "TCJPHTTPRequestManager.h"
-#import "NSDictionary+FromNSString.h"
 #import "FamilyTreeTopView.h"
 #import "SearchFamilyTreeViewController.h"
 #import "ImageAndTextViewController.h"
 #import "LineageViewController.h"
 #import "CreatFamilyTree.h"
 #import "ManagerFamilyViewController.h"
+#import "WFamilyTableView.h"
 @interface FamilyTreeViewController ()<FamilyTreeTopViewDelegate,CreatFamilyTreeDelegate,SelectMyFamilyViewDelegate>
 {
     BOOL _selectedCreatBtn;
@@ -22,15 +21,26 @@
     NSInteger _selectedCreateBtnType;//测试数据之后删
     
 }
+/**创建家谱Btn*/
+@property (nonatomic,strong) UIButton *creatBtn;
 
-@property (nonatomic,strong) UIButton *creatBtn; /*创建家谱Btn*/
+/**入谱人数*/
+@property (nonatomic,strong) UILabel *allFamilyNumber;
 
-@property (nonatomic,strong) CreatFamilyTree *crtFamTree; /*创建家谱view*/
+/**入谱辈数*/
+@property (nonatomic,strong) UILabel *allFamilGenNumber;
 
-@property (nonatomic,strong) CreatFamilyTree *crtFamTreeNoRight; /*没有管理权限的创建家谱*/
+/**创建家谱view*/
+@property (nonatomic,strong) CreatFamilyTree *crtFamTree;
 
-@property (nonatomic,strong) SelectMyFamilyView *selecMyFamView; /*我的家谱点出来的视图*/
+/**没有管理权限的创建家谱*/
+@property (nonatomic,strong) CreatFamilyTree *crtFamTreeNoRight;
 
+/**我的家谱点出来的视图*/
+@property (nonatomic,strong) SelectMyFamilyView *selecMyFamView;
+
+/**首页家谱Table*/
+@property (nonatomic,strong) WFamilyTableView *famTableView;
 
 
 @end
@@ -53,14 +63,13 @@
     //添加左右两个label
     [self initLeftAndRightLabel];
     
-    //图在右侧的view
-    [self initRView];
-    
-    //图在左侧的view
-    [self initLView];
+    /** 添加tableview */
+    [self.view addSubview:self.famTableView];
+
     
     //创建家谱按钮
     [self.view addSubview:self.creatBtn];
+    
     
 }
 
@@ -101,119 +110,30 @@
 -(void)initLeftAndRightLabel{
     CGFloat btnHeight = 0.2*Screen_height;
     //添加左边label
-    UILabel *leftLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 64+10+btnHeight+10, Screen_width/2-15, 30)];
-    leftLabel.text = @"已入谱人数123456789人";
+    UILabel *leftLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 84+btnHeight, Screen_width/2-15, 30)];
+    leftLabel.text = @"已入谱人数-人";
     leftLabel.textAlignment = NSTextAlignmentLeft;
     leftLabel.font = MFont(12);
-    [self.view addSubview:leftLabel];
+    self.allFamilyNumber = leftLabel;
+    [self.view addSubview:self.allFamilyNumber];
     //添加右边label
     UILabel *rightLabel = [[UILabel alloc]initWithFrame:CGRectMake(Screen_width/2, 64+10+btnHeight+10, Screen_width/2-15, 30)];
-    rightLabel.text = @"已入谱99辈";
+    rightLabel.text = @"已入谱-辈";
     rightLabel.textAlignment = NSTextAlignmentRight;
     rightLabel.font=MFont(12);
-    [self.view addSubview:rightLabel];
+    self.allFamilGenNumber = rightLabel;
+    [self.view addSubview:self.allFamilGenNumber];
 
     
 }
 
-//图在右侧的view
--(void)initRView{
-    CGFloat btnHeight = 0.2*Screen_height;
-    //view的宽高
-    CGFloat viewWidth = Screen_width - 15*2;
-    CGFloat viewHeight = (Screen_height-64-10-btnHeight-30-10-10-5-49)/2;
-    
-    UIView *RView = [[UIView alloc]initWithFrame:CGRectMake(15,64+10+btnHeight+30+10, viewWidth, viewHeight)];
-    RView.backgroundColor = [UIColor colorWithRed:255/255 green:255/255 blue:255/255 alpha:0.7];
-    
-    [self.view addSubview:RView];
-    
-    //设置阴影效果
-    UIView *shadowView = [[UIView alloc]initWithFrame:CGRectMake(CGRectX(RView)+CGRectW(RView)/3*2+2, CGRectY(RView)+5+2, CGRectW(RView)/3-5-2, CGRectH(RView)-10-2)];
-    shadowView.backgroundColor = [UIColor whiteColor];
-    shadowView.layer.shadowColor = [UIColor blackColor].CGColor;
-    shadowView.layer.shadowOpacity = 0.5;
-    shadowView.layer.shadowRadius = 2.0;
-    shadowView.layer.shadowOffset = CGSizeMake(0, 2);
-    [self.view addSubview:shadowView];
-    
-    UIImageView *imageViewR = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(RView)+CGRectW(RView)/3*2, CGRectY(RView)+5, CGRectW(RView)/3-5, CGRectH(RView)-10)];
-    imageViewR.image = MImage(@"human_1.png");
-    imageViewR.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:imageViewR];
-    
-    UILabel *LTittleLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(RView)+5, CGRectY(RView), CGRectW(RView)/3*2, 30)];
-    LTittleLabel.text = @"错公";
-    LTittleLabel.font = MFont(15);
-    LTittleLabel.textColor = LH_RGBCOLOR(227, 139, 46);
-    [self.view addSubview:LTittleLabel];
-    
-    //一条线
-    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(CGRectX(LTittleLabel), CGRectY(LTittleLabel)+CGRectH(LTittleLabel), CGRectW(LTittleLabel)-20, 1)];
-    lineView.backgroundColor = [UIColor grayColor];
-    lineView.alpha = 0.2;
-    [self.view addSubview:lineView];
-    
-    UILabel *LContentLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(RView)+5, CGRectY(LTittleLabel)+CGRectH(LTittleLabel), CGRectW(RView)/3*2-20, CGRectH(RView)-CGRectH(LTittleLabel)-5)];
-    LContentLabel.text = @"晋公第九世孙，亿公之子。约生於公园425年，殁期无考。               应魏文侯招贤纳士，举家自东都(洛阳)而迁魏都(开封)，后任大将军，大司马。魏文侯26年(公元前370年)武侯卒，二子子莹与公中绶争夺皇位。";
-    LContentLabel.numberOfLines = 0;
-    LContentLabel.font = MFont(13);
-    LContentLabel.textAlignment = NSTextAlignmentLeft;
-    [self.view addSubview:LContentLabel];
-}
 
-
-//图在左侧的view
--(void)initLView{
-    CGFloat btnHeight = 0.2*Screen_height;
-    CGFloat viewWidth = Screen_width - 15*2;
-    CGFloat viewHeight = (Screen_height-64-10-btnHeight-30-10-10-5-49)/2;
-    //图在左侧的view
-    UIView *LView = [[UIView alloc]initWithFrame:CGRectMake(15,64+10+btnHeight+30+10+viewHeight+10, viewWidth, viewHeight)];
-    LView.backgroundColor = [UIColor colorWithRed:255/255 green:255/255 blue:255/255 alpha:0.7];
-    [self.view addSubview:LView];
-    
-    //设置阴影效果
-    UIView *shadowView = [[UIView alloc]initWithFrame:CGRectMake(CGRectX(LView)+5+2, CGRectY(LView)+5+2, CGRectW(LView)/3-2, CGRectH(LView)-10-2)];
-    shadowView.backgroundColor = [UIColor whiteColor];
-    shadowView.layer.shadowColor = [UIColor blackColor].CGColor;
-    shadowView.layer.shadowOpacity = 0.5;
-    shadowView.layer.shadowRadius = 2.0;
-    shadowView.layer.shadowOffset = CGSizeMake(0, 2);
-    [self.view addSubview:shadowView];
-
-    
-    UIImageView *imageViewL = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(LView)+5, CGRectY(LView)+5, CGRectW(LView)/3, CGRectH(LView)-10)];
-    imageViewL.image = MImage(@"human_2.png");
-    imageViewL.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:imageViewL];
-    
-    UILabel *RTittleLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(LView)+CGRectW(imageViewL)+5+5, CGRectY(LView), CGRectW(LView)/3*2, 30)];
-    RTittleLabel.text = @"晋公";
-    RTittleLabel.font = MFont(15);
-    RTittleLabel.textColor = LH_RGBCOLOR(227, 139, 46);
-    [self.view addSubview:RTittleLabel];
-    
-    //一条线
-    UIView *lineView1 = [[UIView alloc]initWithFrame:CGRectMake(CGRectX(RTittleLabel), CGRectY(RTittleLabel)+CGRectH(RTittleLabel), CGRectW(RTittleLabel)-20, 1)];
-    lineView1.backgroundColor = [UIColor grayColor];
-    lineView1.alpha = 0.2;
-    [self.view addSubview:lineView1];
-    
-    UILabel *RContentLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(RTittleLabel), CGRectY(RTittleLabel)+CGRectH(RTittleLabel), CGRectW(LView)/3*2-20, CGRectH(LView)-CGRectH(RTittleLabel)-5)];
-    RContentLabel.text = @"晋公第九世孙，亿公之子。约生於公园425年，殁期无考。               应魏文侯招贤纳士，举家自东都(洛阳)而迁魏都(开封)，后任大将军，大司马。魏文侯26年(公元前370年)武侯卒，二子子莹与公中绶争夺皇位。";
-    RContentLabel.numberOfLines = 0;
-    RContentLabel.font = MFont(13);
-    RContentLabel.textAlignment = NSTextAlignmentLeft;
-    [self.view addSubview:RContentLabel];
-
-}
 
 
 #pragma mark *** 网络请求 ***
 //我的所有家谱
 -(void)getFamInfo{
-    [SXLoadingView showProgressHUD:@"正在加载"];
+    
     [TCJPHTTPRequestManager POSTWithParameters:@{@"query":@"",@"type":@"MyGen"} requestID:GetUserId requestcode:kRequestCodequerymygen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
 //            NSLog(@"？---%@", jsonDic[@"data"]);
@@ -228,20 +148,37 @@
             }
             [WSelectMyFamModel sharedWselectMyFamModel].myFamArray = allFamNams;
         }
-        [SXLoadingView hideProgressHUD];
     } failure:^(NSError *error) {
         MYLog(@"失败");
     }];
 }
+
 //家谱首页信息
 -(void)getFamDetailInfo{
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"GeId":@"1"} requestID:GetUserId requestcode:kRequestCodegetintogen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    NSString *geId = [WFamilyModel shareWFamilModel].myFamilyId;
+    
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"GeId":geId} requestID:GetUserId requestcode:kRequestCodegetintogen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-            NSLog(@"alalalalfan---%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+            NSLog(@"alalalalfan---%@", jsonDic[@"data"]);
+            
+            WFamilyModel *model = [WFamilyModel modelWithJSON:jsonDic[@"data"]];
+            
+            [WFamilyModel shareWFamilModel].ds = model.ds;
+            [WFamilyModel shareWFamilModel].rs = model.rs;
+            [WFamilyModel shareWFamilModel].datalist = model.datalist;
+            //更新数据
+            [self reloadAllData];
         }
     } failure:^(NSError *error) {
         
     }];
+}
+/** 更新数据 */
+-(void)reloadAllData{
+    [self.famTableView.tableView reloadData];
+    self.allFamilyNumber.text = [NSString stringWithFormat:@"已入谱人数%ld人",[WFamilyModel shareWFamilModel].rs];
+    self.allFamilGenNumber.text = [NSString stringWithFormat:@"已入谱%ld辈",[WFamilyModel shareWFamilModel].ds];
+
 }
 
 #pragma mark - 事件
@@ -370,8 +307,27 @@
 }
 #pragma mark *** SelectMyFamViewDelegate ***
 
--(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectItemTitle:(NSString *)title{
-    NSLog(@"%@", title);
+-(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectItemTitle:(NSString *)title forCountOfFamNameInAllNames:(NSInteger)count{
+    NSLog(@"%@--,%ld", title,count);
+    
+    //网络请求家谱详情
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"query":title,@"type":@"MyGen"} requestID:GetUserId requestcode:kRequestCodequerymygen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSMutableArray *idArr = [@[] mutableCopy];
+            for (NSDictionary *dic in [NSString jsonArrWithArr:jsonDic[@"data"]]) {
+                
+                [idArr addObject:dic[@"Geid"]];
+            }
+            NSLog(@"ididid---%@", idArr);
+            [WFamilyModel shareWFamilModel].myFamilyId = idArr[count];
+            [self getFamDetailInfo];
+            
+        }else{
+            [SXLoadingView showAlertHUD:@"???" duration:0.5];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
 }
 #pragma mark *** getters ***
 
@@ -407,6 +363,13 @@
     }
     [_selecMyFamView.collectionView reloadData];
     return _selecMyFamView;
+}
+-(WFamilyTableView *)famTableView{
+    if (!_famTableView) {
+        _famTableView = [[WFamilyTableView alloc] initWithFrame:CGRectMake(15, 74+0.2*Screen_height+40, Screen_width-30, 670*AdaptationWidth())];
+        _famTableView.backgroundColor = [UIColor clearColor];
+    }
+    return _famTableView;
 }
 
 @end

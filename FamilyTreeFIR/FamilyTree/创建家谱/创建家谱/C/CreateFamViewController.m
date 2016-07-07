@@ -23,7 +23,6 @@
     [super viewDidLoad];
  
     self.automaticallyAdjustsScrollViewInsets=false;
-    self.tabBarController.tabBar.hidden = YES;
     
     [self initUI];
 }
@@ -39,19 +38,15 @@
 
 
 #pragma mark *** BackScrollAndDetailViewDelegate ***
+/** 点击创建按钮 */
 -(void)BackScrollAndDetailViewDidTapCreateButton{
     [self postCreateFamWithBlock:^(BOOL back,NSString *genID) {
         if (back) {
+           
+            [self postUploadheadImageWithGeID:genID];
             
-            
-//            NSData *imageData = UIImageJPEGRepresentation(self.cFameView.famTotem.image, 1.0);
-//            NSString *encodeImageData = [imageData base64EncodedString];
-//            
-//            [self postUploadheadImageWithGeID:genID base64CodeStr:encodeImageData];
         }
     }];
-    
-    
 }
 //请求创建家谱
 -(void)postCreateFamWithBlock:(void (^)(BOOL back,NSString *genID))callBack{
@@ -65,15 +60,11 @@
         }
         
     }];
-    //    NSLog(@"1111---%@", genDsListDic);
+    
     //截取代数
     NSString *genNumber = [self.cFameView.gennerNum.inputLabel.text stringByReplacingOccurrencesOfString:@"第" withString:@""];
     NSString *genNumberF = [genNumber stringByReplacingOccurrencesOfString:@"代" withString:@""];
     
-    //首卷家谱空值处理
-    if ([self.cFameView.famBookName.text isEqualToString:@""]) {
-        self.cFameView.famBookName.text = @"";
-    }
     NSLog(@"famName---%@", self.cFameView.famName.detailLabel.text);
     if ([self.cFameView.famName.detailLabel.text isEqualToString:@""]||self.cFameView.famName.titleLabel.text.length == 0) {
         [SXLoadingView showAlertHUD:@"家谱名称不能为空" duration:0.5];
@@ -103,7 +94,6 @@
                           @"GemeName":self.cFameView.famfarName.detailLabel.text,
                           @"GemeSex":[self.cFameView.sexInpuView.inputLabel.text isEqualToString:@"女"]?@"0":@"1",
                           @"GemeIsfamous":self.cFameView.famousPerson.marked?@"1":@"0",
-                          
                           @"GemeYear":self.cFameView.birthLabel.inputLabel.text,
                           @"GemeMonth":self.cFameView.monthLabel.inputLabel.text,
                           @"GemeDay":self.cFameView.dayLabel.inputLabel.text,
@@ -119,11 +109,8 @@
         
         if (succe) {
             
-//            NSLog(@"%@", jsonDic[@"data"]);
-            
             NSDictionary *JTdic = [NSString jsonDicWithDic:jsonDic[@"data"]];
             
-//            NSLog(@"dididi--%@", JTdic);
             callBack(succe,JTdic[@"geid"]);
             [SXLoadingView showProgressHUD:@"创建成功！" duration:0.5];
             //通知创建完成更新页面
@@ -137,14 +124,32 @@
     }];
 }
 //请求上传家谱图像
--(void)postUploadheadImageWithGeID:(NSString *)genID base64CodeStr:(NSString *)baseCode{
+-(void)postUploadheadImageWithGeID:(NSString *)genID{
+
+    //祖宗头像
     
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"genid":genID,@"imgbt":baseCode} requestID:GetUserId requestcode:kRequestCodeuploadgenan success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    NSData *imageData = UIImageJPEGRepresentation(self.cFameView.selecProtrai.image, 0.5);
+    NSString *encodeImageData = [imageData base64EncodedString];
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"userid":GetUserId,@"genid":genID,@"imgbt":encodeImageData} requestID:GetUserId requestcode:kRequestCodeuploadgenan success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-            NSLog(@"%@", jsonDic);
+            NSLog(@"祖宗头像%@", jsonDic[@"data"]);
         }
     } failure:^(NSError *error) {
-        
+        MYLog(@"shibai");
+    }];
+    //家谱图腾
+    if (!self.cFameView.famTotem.image) {
+        //如果没有输入图腾
+        self.cFameView.famTotem.image = [UIImage imageWithColor:[UIColor whiteColor]];
+    }
+    NSData *imageTotemData = UIImageJPEGRepresentation(self.cFameView.famTotem.image, 0.5);
+    NSString *encodeImageTotemData = [imageTotemData base64EncodedString];
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"userid":GetUserId,@"genid":genID,@"imgbt":encodeImageTotemData} requestID:GetUserId requestcode:kRequestCodeuploadgentt success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSLog(@"家谱图腾%@", jsonDic[@"data"]);
+        }
+    } failure:^(NSError *error) {
+        MYLog(@"shibai");
     }];
 }
 
@@ -155,11 +160,9 @@
     creFamView.delegate = self;
     self.cFameView = creFamView;
     [self.view addSubview:self.cFameView];
-    
     [self.view bringSubviewToFront:self.comNavi];
     
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

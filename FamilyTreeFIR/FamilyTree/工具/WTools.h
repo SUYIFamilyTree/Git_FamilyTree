@@ -10,6 +10,7 @@
 #import "CreateFamModel.h"
 #import "WIDModel.h"
 #import "NSArray+WAllItemString.h"
+#import "WFamilyModel.h"
 @interface WTools : NSObject
 
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodecreategen;
@@ -71,5 +72,11 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodeuploadgenimg;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
+//UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
+//UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
+//UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
+//UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
+
+
 
 @end
