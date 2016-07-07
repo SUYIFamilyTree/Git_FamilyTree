@@ -19,7 +19,8 @@
 @property (nonatomic, strong) NSArray<WFDatalist *> *datalist;
 
 /**自己选择的家谱id*/
-@property (nonatomic,assign) NSString *myFamilyId;
+@property (nonatomic,copy) NSString *myFamilyId;
+
 
 
 +(instancetype)shareWFamilModel;

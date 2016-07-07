@@ -94,7 +94,6 @@
                           @"GemeName":self.cFameView.famfarName.detailLabel.text,
                           @"GemeSex":[self.cFameView.sexInpuView.inputLabel.text isEqualToString:@"女"]?@"0":@"1",
                           @"GemeIsfamous":self.cFameView.famousPerson.marked?@"1":@"0",
-                          
                           @"GemeYear":self.cFameView.birthLabel.inputLabel.text,
                           @"GemeMonth":self.cFameView.monthLabel.inputLabel.text,
                           @"GemeDay":self.cFameView.dayLabel.inputLabel.text,

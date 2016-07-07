@@ -52,7 +52,18 @@
     MYLog(@"add");
 
     //添加成员
-    
+    if ([self.AddFameView.name.detailLabel.text isEqualToString:@""]) {
+        [SXLoadingView showAlertHUD:@"姓名不能为空" duration:0.5];
+        return;
+    }
+    if ([self.AddFameView.fatheView.inputLabel.text isEqualToString:@""]) {
+        [SXLoadingView showAlertHUD:@"父亲不能为空" duration:0.5];
+        return;
+    }
+    //配偶
+    if ([self.AddFameView.parnName.text isEqualToString:@""]) {
+        self.AddFameView.parnName.text = @"不详";
+    }
     //截取代数
     NSString *genNumber = [self.AddFameView.gennerNum.inputLabel.text stringByReplacingOccurrencesOfString:@"第" withString:@""];
     NSString *genNumberF = [genNumber stringByReplacingOccurrencesOfString:@"代" withString:@""];
@@ -90,13 +101,11 @@
     [TCJPHTTPRequestManager POSTWithParameters:addDic requestID:GetUserId requestcode:kRequestCodeaddgeme success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             
-//            NSLog(@"？？？-----%@", jsonDic[@"data"]);
-            
             _gemeId = [NSString jsonDicWithDic:jsonDic[@"data"]][@"gemeid"];
             NSLog(@"%@", _gemeId);
             [self uploadImageWithGemeid:_gemeId];
             
-                    }
+            }
     } failure:^(NSError *error) {
         MYLog(@"失败");
     }];

@@ -155,10 +155,7 @@ typedef enum : NSUInteger {
     
     MYLog(@"登录按钮");
     [self.navigationController pushViewController:self.logVc animated:YES];
-    
-  
-  
-    
+
 }
 
 #pragma mark *** 6个btn ***

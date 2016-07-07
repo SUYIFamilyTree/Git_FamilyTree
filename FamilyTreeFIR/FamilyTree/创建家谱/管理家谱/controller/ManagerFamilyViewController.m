@@ -40,6 +40,24 @@
     [self initData];
     [self initUI];
     
+    
+    //进去请求当前id的家谱
+    [SXLoadingView showProgressHUD:@"正在加载家谱..." duration:0.5];
+    [self posGetDetailFamInfoWithID:[WFamilyModel shareWFamilModel].myFamilyId callBack:^(id respondsDic) {
+  
+        WK(weakSelf)
+        //将点击家谱名，获取到id，再根据id获取到的家谱详情传到famModel里
+        weakSelf.famModel = [CreateFamModel modelWithJSON:respondsDic[@"data"]];
+        
+        NSLog(@"???%@", respondsDic[@"data"]);
+        
+        [self reloadUI];
+        
+        [SXLoadingView hideProgressHUD];
+        
+    }];
+
+    
 }
 
 #pragma mark *** 初始化数据 ***
@@ -79,6 +97,7 @@
 
 #pragma mark *** 更新UI ***
 -(void)reloadUI{
+    
     [self.backScrollView removeAllSubviews];
     
     UIImageView *backView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _backScrollView.contentSize.width, _backScrollView.contentSize.height)];
@@ -124,26 +143,30 @@
 
 #pragma mark *** WswithDelegate ***
 
--(void)WswichDetailFamViewDelegate:(WSwitchDetailFamView *)detaiView didSelectedButton:(UIButton *)sender{
-
-    if ([sender.titleLabel.text isEqualToString:@"切换家谱"]) {
+-(void)WswichDetailFamViewDelegate:(WSwitchDetailFamView *)detaiView didSelectedButton:(UIButton *)sender repeatNameIndex:(NSInteger)repeatIndex{
+    
+    
+    NSString *searchTitle = sender.titleLabel.text;
+  
+    
+    if ([searchTitle isEqualToString:@"切换家谱"]) {
         [_switchDetailView removeFromSuperview];
         self.switchFam.hidden = false;
-    }else if ([sender.titleLabel.text isEqualToString:@"创建家谱"]){
+    }else if ([searchTitle isEqualToString:@"创建家谱"]){
         CreateFamViewController *crefa = [[CreateFamViewController alloc] initWithTitle:@"创建家谱" image:nil];
         [self.navigationController pushViewController:crefa animated:YES];
-    }else if ([sender.titleLabel.text isEqualToString:@"新增卷谱"]){
+    }else if ([searchTitle isEqualToString:@"新增卷谱"]){
         
-    }else if ([sender.titleLabel.text isEqualToString:@"删除卷谱"]){
+    }else if ([searchTitle isEqualToString:@"删除卷谱"]){
         
     }
     else{
         //网络请求家谱详情
         [SXLoadingView showProgressHUD:@"正在加载"];
-        [self postGetFamInfoWithtitle:sender.titleLabel.text callBack:^(NSArray *genIDArr) {
+        [self postGetFamInfoWithtitle:searchTitle callBack:^(NSArray *genIDArr) {
             
-//            [self posGetDetailFamInfoWithID:genIDArr[0] callBack:^(id respondsDic) {
-            [self posGetDetailFamInfoWithID:@"1" callBack:^(id respondsDic) {
+            [self posGetDetailFamInfoWithID:genIDArr[repeatIndex] callBack:^(id respondsDic) {
+//            [self posGetDetailFamInfoWithID:@"1" callBack:^(id respondsDic) {
 
             
                 WK(weakSelf)
@@ -246,8 +269,6 @@
         _switchDetailView = [[WSwitchDetailFamView alloc] initWithFrame:AdaptationFrame(self.view.bounds.size.width/AdaptationWidth()-187, 395+143, 187, 600) famNamesArr:[WSelectMyFamModel sharedWselectMyFamModel].myFamArray];
         _switchDetailView.delegate = self;
     }
-    
-    
     return _switchDetailView;
 }
 @end

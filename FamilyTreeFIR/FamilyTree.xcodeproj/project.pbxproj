@@ -561,7 +561,6 @@
 		BC5192A41D23A0E30020480F /* NSString+valiEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5192A31D23A0E30020480F /* NSString+valiEmail.m */; };
 		BC5192A71D23A3030020480F /* NSString+valiIdentityCard.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5192A61D23A3030020480F /* NSString+valiIdentityCard.m */; };
 		BC578DBC1D2B4AC100776106 /* CemeteryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC578DBB1D2B4AC100776106 /* CemeteryModel.m */; };
-		BC578DBD1D2BBAF600776106 /* qq1_sl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD5F8C511D177B8600DA9A0C /* qq1_sl@2x.png */; };
 		BC5F150C1D0FF1AD004F3622 /* PersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14DE1D0FF1AD004F3622 /* PersonalCenterViewController.m */; };
 		BC5F150D1D0FF1AD004F3622 /* DrawStarsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14E11D0FF1AD004F3622 /* DrawStarsView.m */; };
 		BC5F150E1D0FF1AD004F3622 /* HeadImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14E31D0FF1AD004F3622 /* HeadImageView.m */; };

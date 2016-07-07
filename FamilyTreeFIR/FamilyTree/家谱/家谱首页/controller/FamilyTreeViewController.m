@@ -133,7 +133,7 @@
 #pragma mark *** 网络请求 ***
 //我的所有家谱
 -(void)getFamInfo{
-    [SXLoadingView showProgressHUD:@"正在加载"];
+    
     [TCJPHTTPRequestManager POSTWithParameters:@{@"query":@"",@"type":@"MyGen"} requestID:GetUserId requestcode:kRequestCodequerymygen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
 //            NSLog(@"？---%@", jsonDic[@"data"]);
@@ -148,7 +148,6 @@
             }
             [WSelectMyFamModel sharedWselectMyFamModel].myFamArray = allFamNams;
         }
-        [SXLoadingView hideProgressHUD];
     } failure:^(NSError *error) {
         MYLog(@"失败");
     }];
@@ -308,8 +307,8 @@
 }
 #pragma mark *** SelectMyFamViewDelegate ***
 
--(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectItemTitle:(NSString *)title{
-    NSLog(@"%@", title);
+-(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectItemTitle:(NSString *)title forCountOfFamNameInAllNames:(NSInteger)count{
+    NSLog(@"%@--,%ld", title,count);
     
     //网络请求家谱详情
     [TCJPHTTPRequestManager POSTWithParameters:@{@"query":title,@"type":@"MyGen"} requestID:GetUserId requestcode:kRequestCodequerymygen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
@@ -320,7 +319,7 @@
                 [idArr addObject:dic[@"Geid"]];
             }
             NSLog(@"ididid---%@", idArr);
-            [WFamilyModel shareWFamilModel].myFamilyId = idArr[0];
+            [WFamilyModel shareWFamilModel].myFamilyId = idArr[count];
             [self getFamDetailInfo];
             
         }else{

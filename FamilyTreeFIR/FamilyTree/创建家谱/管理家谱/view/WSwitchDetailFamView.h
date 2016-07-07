@@ -12,7 +12,7 @@
 
 @protocol WswichDetailFamViewDelegate <NSObject>
 
--(void)WswichDetailFamViewDelegate:(WSwitchDetailFamView *)detaiView didSelectedButton:(UIButton *)sender;
+-(void)WswichDetailFamViewDelegate:(WSwitchDetailFamView *)detaiView didSelectedButton:(UIButton *)sender repeatNameIndex:(NSInteger)repeatIndex;
 
 @end
 
