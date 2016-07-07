@@ -9,6 +9,7 @@
 typedef enum : NSUInteger {
     md5CodingTypeUploadImage,
     md5CodingTypeOther,
+    md5CodingTypeUploadArr
 } md5CodingType;
 
 

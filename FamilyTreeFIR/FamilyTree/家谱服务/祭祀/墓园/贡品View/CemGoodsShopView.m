@@ -98,7 +98,7 @@
     MYLog(@"%@",arr);
     NSDictionary *logDic = @{@"CeId":@(self.CeId),@"JS":arr};
     WK(weakSelf);
-    [TCJPHTTPRequestManager POSTWithParametersContainArr:logDic requestID:GetUserId requestcode:kRequestCodeRitual success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeRitual success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         MYLog(@"%@",jsonDic[@"data"]);
         if (succe) {
             //刷新贡品摆放界面
