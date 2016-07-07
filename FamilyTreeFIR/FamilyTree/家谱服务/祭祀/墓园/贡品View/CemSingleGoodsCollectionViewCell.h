@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CemGoodsShopModel.h"
 
 @interface CemSingleGoodsCollectionViewCell : UICollectionViewCell
+/** 贡品模型*/
+@property (nonatomic, strong) CemGoodsShopModel *cemGoodsShopModel;
+/** 是否选中图片*/
+@property (nonatomic,assign) BOOL selectedItem;
 
 @end

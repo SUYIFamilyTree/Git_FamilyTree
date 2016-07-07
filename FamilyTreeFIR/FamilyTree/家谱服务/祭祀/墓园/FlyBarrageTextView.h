@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface FlyBarrageTextView : UILabel
-
+/** 定时器*/
+@property (nonatomic, strong) NSTimer *timer;
 -(instancetype)initWithY:(CGFloat)y AndText:(NSString*)text AndWordSize:(CGFloat)wordSize;
 @end
