@@ -13,18 +13,18 @@
 @property (nonatomic,strong) UIButton *verificationBtn; /*验证码按钮*/
 @property (nonatomic,strong) UIButton *registButton; /*注册按钮*/
 
-
-
 @end
 @implementation ToRegistView
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
         [self addSubview:self.accountView];
         [self.passwordView addSubview:self.verificationBtn];
         [self addSubview:self.passwordView];
         [self addSubview:self.registButton];
+        
     }
     return self;
 }

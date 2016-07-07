@@ -293,8 +293,7 @@
         }
     
         if (sender.tag == 1) {
-            AddMemberViewController *add = [[AddMemberViewController alloc] initWithTitle:@"添加成员" image:nil];
-            [self.navigationController pushViewController:add animated:YES];
+            
         }
         if (sender.tag == 2) {
         ManagerFamilyViewController *manager = [[ManagerFamilyViewController alloc] initWithTitle:@"管理家谱" image:nil];

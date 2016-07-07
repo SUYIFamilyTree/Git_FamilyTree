@@ -24,6 +24,10 @@
 //
 @property (nonatomic,strong) NSDictionary *genDic; /*代数字辈dic*/
 
+/**成员是否成为首卷谱*/
+@property (nonatomic,assign)  BOOL becomeFirstJP;
+
+
 +(instancetype)sharedWIDModel;
 
 

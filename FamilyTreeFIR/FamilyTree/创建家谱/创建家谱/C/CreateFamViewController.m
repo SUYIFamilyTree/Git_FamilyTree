@@ -24,6 +24,7 @@
  
     self.automaticallyAdjustsScrollViewInsets=false;
     
+    
     [self initUI];
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -148,6 +149,7 @@
         if (succe) {
             NSLog(@"家谱图腾%@", jsonDic[@"data"]);
         }
+        [self.navigationController popViewControllerAnimated:YES];
     } failure:^(NSError *error) {
         MYLog(@"shibai");
     }];

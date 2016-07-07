@@ -26,6 +26,7 @@ NSString * _Nonnull const kRequestCodequerygendeta = @"querygendeta";
 NSString * _Nonnull const kRequestCodequeryzbgemelist = @"queryzbgemelist";
 //查询家谱字辈成员详情
 NSString * _Nonnull const kRequestCodequerygemedetailbyid = @"querygemedetailbyid";
+
 //修改家谱
 NSString * _Nonnull const kRequestCodeeditgen = @"editgen";
 //修改家谱大数据字段
@@ -47,6 +48,12 @@ NSString * _Nonnull const kRequestCodeeditgemedetail = @"editgemedetail";
 
 //查询所有成员列表
 NSString * _Nonnull const kRequestCodequerygemelist = @"querygemelist";
+//查询各字辈各成员详情列表
+NSString * _Nonnull const kRequestCodequerygezblist = @"querygezblist";
+
+//查询家谱字辈成员详情列表
+NSString * _Nonnull const kRequestCodequeryzbgemedetaillist = @"queryzbgemedetaillist";
+
 //进入家谱首页的接口
 NSString * _Nonnull const kRequestCodegetintogen = @"getintogen";
 
@@ -56,8 +63,6 @@ NSString * _Nonnull const kRequestCodequeryclan = @"queryclan";
 NSString * _Nonnull const kRequestCodegetgenalldata = @"getgenalldata";
 /**上传家谱成员的头像*/
 NSString * _Nonnull const kRequestCodeuploadgenimg = @"uploadgenimg";
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 
 //上传祖先头像
 NSString * _Nonnull const kRequestCodeuploadgenan = @"uploadgenan";
@@ -69,9 +74,11 @@ NSString * _Nonnull const kRequestCodeuploadgentt = @"uploadgentt";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 
 
+/** 编辑卷谱 */
+NSString * _Nonnull const kRequestCodechangejp = @"changejp";
+/** 卷谱列表 */
+NSString * _Nonnull const kRequestCodequeryjplist = @"queryjplist";
 
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";

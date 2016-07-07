@@ -41,6 +41,7 @@
     [self initUI];
     
     
+    
     //进去请求当前id的家谱
     [SXLoadingView showProgressHUD:@"正在加载家谱..." duration:0.5];
     [self posGetDetailFamInfoWithID:[WFamilyModel shareWFamilModel].myFamilyId callBack:^(id respondsDic) {
@@ -118,6 +119,8 @@
 #pragma mark *** events ***
 //每个视图的手势事件
 -(void)respondsToRooTapGes:(UITapGestureRecognizer *)gesture{
+    
+    
     _selectedRollView = !_selectedRollView;
     if (_selectedRollView) {
         
@@ -129,6 +132,7 @@
         
        [self.detailView removeFromSuperview];
     }
+    
     
 }
 //切换家谱事件
@@ -156,9 +160,10 @@
         CreateFamViewController *crefa = [[CreateFamViewController alloc] initWithTitle:@"创建家谱" image:nil];
         [self.navigationController pushViewController:crefa animated:YES];
     }else if ([searchTitle isEqualToString:@"新增卷谱"]){
-        
+        [self getDetailMemberId];
     }else if ([searchTitle isEqualToString:@"删除卷谱"]){
-        
+        //获取全部卷谱
+        [self getAllFamJP];
     }
     else{
         //网络请求家谱详情
@@ -167,8 +172,7 @@
             
             [self posGetDetailFamInfoWithID:genIDArr[repeatIndex] callBack:^(id respondsDic) {
 //            [self posGetDetailFamInfoWithID:@"1" callBack:^(id respondsDic) {
-
-            
+      
                 WK(weakSelf)
                 //将点击家谱名，获取到id，再根据id获取到的家谱详情传到famModel里
                  weakSelf.famModel = [CreateFamModel modelWithJSON:respondsDic[@"data"]];
@@ -200,6 +204,7 @@
             for (NSDictionary *dic in [NSString jsonArrWithArr:jsonDic[@"data"]]) {
                 
                 [idArr addObject:dic[@"Geid"]];
+                
             }
             callback(idArr);
         }else{
@@ -218,6 +223,32 @@
     } failure:^(NSError *error) {
         
     }];
+}
+
+//获取卷谱
+-(void)getAllFamJP{
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"genid":[WFamilyModel shareWFamilModel].myFamilyId} requestID:GetUserId requestcode:kRequestCodequeryjplist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSLog(@"卷谱列表----%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+        }
+    } failure:^(NSError *error) {
+        MYLog(@"失败");
+    }];
+}
+//获取家谱所有成员以及id
+
+-(void)getDetailMemberId{
+
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"query":@"",@"geid":[WFamilyModel shareWFamilModel].myFamilyId,@"pagenum":@"1",@"pagesize":@"20",@"sex":@"1"} requestID:GetUserId requestcode:kRequestCodequerygemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        NSLog(@"%@",[NSString jsonDicWithDic:jsonDic[@"data"]]);
+    } failure:^(NSError *error) {
+        MYLog(@"失败");
+    }];
+}
+//查询卷谱的字辈信息
+-(void)getZBInfo{
+    [self getAllFamJP];
+    
 }
 
 #pragma mark *** getters ***
@@ -264,6 +295,7 @@
     }
     return _switchFam;
 }
+
 -(WSwitchDetailFamView *)switchDetailView{
     if (!_switchDetailView) {
         _switchDetailView = [[WSwitchDetailFamView alloc] initWithFrame:AdaptationFrame(self.view.bounds.size.width/AdaptationWidth()-187, 395+143, 187, 600) famNamesArr:[WSelectMyFamModel sharedWselectMyFamModel].myFamArray];
