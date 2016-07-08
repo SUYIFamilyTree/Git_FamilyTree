@@ -562,6 +562,9 @@
 		BC5192A41D23A0E30020480F /* NSString+valiEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5192A31D23A0E30020480F /* NSString+valiEmail.m */; };
 		BC5192A71D23A3030020480F /* NSString+valiIdentityCard.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5192A61D23A3030020480F /* NSString+valiIdentityCard.m */; };
 		BC578DBC1D2B4AC100776106 /* CemeteryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC578DBB1D2B4AC100776106 /* CemeteryModel.m */; };
+		BC59E1121D2F5595000A3AE3 /* HomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC59E1111D2F5595000A3AE3 /* HomeViewModel.m */; };
+		BC59E1151D2F7BC1000A3AE3 /* FamilyDTModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC59E1141D2F7BC1000A3AE3 /* FamilyDTModel.m */; };
+		BC59E1181D2F939F000A3AE3 /* HundredsNamesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC59E1171D2F939F000A3AE3 /* HundredsNamesModel.m */; };
 		BC5F150C1D0FF1AD004F3622 /* PersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14DE1D0FF1AD004F3622 /* PersonalCenterViewController.m */; };
 		BC5F150D1D0FF1AD004F3622 /* DrawStarsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14E11D0FF1AD004F3622 /* DrawStarsView.m */; };
 		BC5F150E1D0FF1AD004F3622 /* HeadImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5F14E31D0FF1AD004F3622 /* HeadImageView.m */; };
@@ -1427,6 +1430,12 @@
 		BC5192A61D23A3030020480F /* NSString+valiIdentityCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+valiIdentityCard.m"; sourceTree = "<group>"; };
 		BC578DBA1D2B4AC100776106 /* CemeteryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CemeteryModel.h; sourceTree = "<group>"; };
 		BC578DBB1D2B4AC100776106 /* CemeteryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CemeteryModel.m; sourceTree = "<group>"; };
+		BC59E1101D2F5595000A3AE3 /* HomeViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewModel.h; sourceTree = "<group>"; };
+		BC59E1111D2F5595000A3AE3 /* HomeViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewModel.m; sourceTree = "<group>"; };
+		BC59E1131D2F7BC1000A3AE3 /* FamilyDTModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FamilyDTModel.h; path = "FamilyTree/首页/model/FamilyDTModel.h"; sourceTree = SOURCE_ROOT; };
+		BC59E1141D2F7BC1000A3AE3 /* FamilyDTModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FamilyDTModel.m; path = "FamilyTree/首页/model/FamilyDTModel.m"; sourceTree = SOURCE_ROOT; };
+		BC59E1161D2F939F000A3AE3 /* HundredsNamesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HundredsNamesModel.h; path = "FamilyTree/首页/model/HundredsNamesModel.h"; sourceTree = SOURCE_ROOT; };
+		BC59E1171D2F939F000A3AE3 /* HundredsNamesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HundredsNamesModel.m; path = "FamilyTree/首页/model/HundredsNamesModel.m"; sourceTree = SOURCE_ROOT; };
 		BC5F14DD1D0FF1AD004F3622 /* PersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCenterViewController.h; sourceTree = "<group>"; };
 		BC5F14DE1D0FF1AD004F3622 /* PersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCenterViewController.m; sourceTree = "<group>"; };
 		BC5F14E01D0FF1AD004F3622 /* DrawStarsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawStarsView.h; sourceTree = "<group>"; };
@@ -2867,6 +2876,7 @@
 		ADC3278E1CF3FBCC00CEAE53 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				BC59E10F1D2F52BF000A3AE3 /* model */,
 				AD2ACD801CF3FD06009D4A24 /* HomeViewController.h */,
 				AD2ACD811CF3FD06009D4A24 /* HomeViewController.m */,
 			);
@@ -2885,6 +2895,10 @@
 		ADC4F1B01D12794A003D2B27 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				BC59E1131D2F7BC1000A3AE3 /* FamilyDTModel.h */,
+				BC59E1141D2F7BC1000A3AE3 /* FamilyDTModel.m */,
+				BC59E1161D2F939F000A3AE3 /* HundredsNamesModel.h */,
+				BC59E1171D2F939F000A3AE3 /* HundredsNamesModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -3218,6 +3232,15 @@
 				BC499BA01D2D06EE007870FE /* CemGoodsShopModel.m */,
 			);
 			path = "墓园model";
+			sourceTree = "<group>";
+		};
+		BC59E10F1D2F52BF000A3AE3 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				BC59E1101D2F5595000A3AE3 /* HomeViewModel.h */,
+				BC59E1111D2F5595000A3AE3 /* HomeViewModel.m */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		BC5F14DB1D0FF1AD004F3622 /* 个人中心 */ = {
@@ -4531,10 +4554,12 @@
 				ADA380661CFC299700B596B7 /* LoginModel.m in Sources */,
 				ADB973501CFEB2D7007B876B /* InputView.m in Sources */,
 				BC729A001D225C53008FEB71 /* HeadLuckView.m in Sources */,
+				BC59E1151D2F7BC1000A3AE3 /* FamilyDTModel.m in Sources */,
 				ADD23D091D0D54C2008986F6 /* TeachViewController.m in Sources */,
 				ADE3BBD31D13E795006523C4 /* DivinationViewController.m in Sources */,
 				ADB9261E1CF7DF1900AA8B6E /* LoginView.m in Sources */,
 				ADA7FF0D1D0814DF00EDBEE4 /* TopBackSearch.m in Sources */,
+				BC59E1121D2F5595000A3AE3 /* HomeViewModel.m in Sources */,
 				BC5F150D1D0FF1AD004F3622 /* DrawStarsView.m in Sources */,
 				BCDE42681D0E555700921373 /* NSString+arabicToChinese.m in Sources */,
 				AD8DAB081CFD84A5009B7958 /* HelpTableTableViewCell.m in Sources */,
@@ -4561,6 +4586,7 @@
 				BC5F151A1D0FF1AD004F3622 /* PayForForeverFortuneView.m in Sources */,
 				AD5F5C361D17D2E60035710F /* WAfterDivinationViewController.m in Sources */,
 				BC729A071D226000008FEB71 /* NSString+getStarDate.m in Sources */,
+				BC59E1181D2F939F000A3AE3 /* HundredsNamesModel.m in Sources */,
 				ADA4C11A1D0E4F3600CA9067 /* CemDetailView.m in Sources */,
 				AD195B361CF5A8D5000E32C7 /* NSDictionary+FromNSString.m in Sources */,
 				BC5F15161D0FF1AD004F3622 /* VIPSelectViewController.m in Sources */,

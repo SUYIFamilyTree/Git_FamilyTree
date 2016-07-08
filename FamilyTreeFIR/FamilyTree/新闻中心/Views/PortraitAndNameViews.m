@@ -29,20 +29,31 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
         [self initDataSource];
+        [self addSubview:self.backNesScrollView];
         [self initImageAndName];
+        
+        
     }
     return self;
 }
 
 -(void)initDataSource{
-    _imageNames = @[@"news_touxiang",@"news_touxiang",@"news_touxiang",@"news_touxiang",@"news_touxiang",@"news_touxiang",@"news_touxiang",@"news_touxiang"];
-    _imageForName = @[@"段正淳",@"段执行",@"段誉",@"段成功",@"段正淳",@"段执行",@"段誉",@"段成功"];
+//    _imageNames = @[@"news_touxiang",@"news_touxiang",@"news_touxiang",@"news_touxiang",@"news_touxiang",@"news_touxiang",@"news_touxiang",@"news_touxiang"];
+//    _imageForName = @[@"段正淳",@"段执行",@"段誉",@"段成功",@"段正淳",@"段执行",@"段誉",@"段成功"];
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(respondsTotimer) userInfo:nil repeats:YES];
     [_timer fireDate];
     _contentOffsetX = 5;
 }
+
+-(void)setMRZJArr:(NSArray<FamilyDTModel *> *)MRZJArr{
+    _MRZJArr = MRZJArr;
+    [self initImageAndName];
+     self.backNesScrollView.contentSize = AdaptationSize(self.MRZJArr.count*171-13, self.bounds.size.height);
+}
+
 #pragma mark *** ScrolleViewDelegate ***
 
 
@@ -63,25 +74,41 @@
 }
 #pragma mark *** 初始化 ***
 -(void)initImageAndName{
-    [self addSubview:self.backNesScrollView];
-    for (int idx = 0; idx<_imageNames.count; idx++) {
-        UIImageView *image = [[UIImageView alloc] initWithFrame:AdaptationFrame(idx*171, 0, 158, 172)];
-        image.image = MImage(_imageNames[idx]);
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(idx*171*AdaptationWidth(), CGRectYH(image)+15*AdaptationWidth(), image.bounds.size.width, 23*AdaptationWidth())];
-        label.font = MFont(15);
-        label.textAlignment = 1;
-        label.text = _imageForName[idx];
+//    [self addSubview:self.backNesScrollView];
+//        for (int idx = 0; idx<_imageNames.count; idx++) {
+//        UIImageView *image = [[UIImageView alloc] initWithFrame:AdaptationFrame(idx*171, 0, 158, 172)];
+//        image.image = MImage(_imageNames[idx]);
+//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(idx*171*AdaptationWidth(), CGRectYH(image)+15*AdaptationWidth(), image.bounds.size.width, 23*AdaptationWidth())];
+//        label.font = MFont(15);
+//        label.textAlignment = 1;
+//        label.text = _imageForName[idx];
+//        
+//        [self.backNesScrollView addSubview:image];
+//        [self.backNesScrollView addSubview:label];
+//    }
+    
+    for (int i = 0; i<self.MRZJArr.count; i++) {
+                UIImageView *image = [[UIImageView alloc] initWithFrame:AdaptationFrame(i*171, 0, 158, 172)];
+        [image setImageWithURL:[NSURL URLWithString:self.MRZJArr[i].ArCover] placeholder:MImage(@"news_touxiang")];
+                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(i*171*AdaptationWidth(), CGRectYH(image)+15*AdaptationWidth(), image.bounds.size.width, 23*AdaptationWidth())];
+                label.font = MFont(15);
+                label.textAlignment = 1;
+                label.text = self.MRZJArr[i].ArTitle;
         
-        [self.backNesScrollView addSubview:image];
-        [self.backNesScrollView addSubview:label];
-    }
+                [self.backNesScrollView addSubview:image];
+                [self.backNesScrollView addSubview:label];
+            }
+
+    
 }
 
 -(UIScrollView *)backNesScrollView{
     if (!_backNesScrollView) {
         _backNesScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
-        _backNesScrollView.contentSize = AdaptationSize(_imageNames.count*171-13, self.bounds.size.height);
+//        _backNesScrollView.contentSize = AdaptationSize(_imageNames.count*171-13, self.bounds.size.height);
+       
         _backNesScrollView.delegate = self;
+        MYLog(@"滚动图长%lf",_backNesScrollView.contentSize.width);
     }
     return _backNesScrollView;
 }

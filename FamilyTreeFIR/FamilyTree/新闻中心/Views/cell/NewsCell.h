@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FamilyDTModel.h"
 
 @interface NewsCell : UITableViewCell
+/** 新闻列表模型*/
+@property (nonatomic, strong) FamilyDTModel *familyDTModel;
 
 @end

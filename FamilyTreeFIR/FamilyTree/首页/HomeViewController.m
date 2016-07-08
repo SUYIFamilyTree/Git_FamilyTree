@@ -10,6 +10,7 @@
 #import "Tools.h"
 #import "DivinationViewController.h"
 #import "LineView.h"
+#import "HomeViewModel.h"
 
 typedef enum : NSUInteger {
     HomePersonal,
@@ -63,6 +64,36 @@ typedef enum : NSUInteger {
     [self initData];
     [self initUI];
     [self initBtn];
+    //获取首页数据
+    dispatch_async(dispatch_queue_create("myQueue", NULL), ^{
+       [self getData];
+    });
+    
+}
+
+-(void)getData{
+    NSDictionary *logDic = @{};
+    WK(weakSelf)
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getapiindeximg" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"%@",jsonDic[@"data"]);
+        if (succe) {
+            HomeViewModel *homeViewModel = [HomeViewModel modelWithJSON:jsonDic[@"data"]];
+            weakSelf.time_StatuLabel.text = [NSString stringWithFormat:@"%@  %@",homeViewModel.rq,homeViewModel.qj];
+            
+            _ScrImages = [@[@"http://static.freepik.com/free-photo/d-puzzles-with-the-little-picture-material_38-5480.jpg",@"http://img.mypsd.com.cn/e/d/%e7%9f%a2%e9%87%8f%e5%9b%be%e5%ba%93/%e6%a0%87%e8%af%86%e6%a0%87%e5%bf%97%e5%9b%be%e6%a0%87/%e5%b0%8f%e5%9b%be%e6%a0%87/k/jpg/39-djasdjhasuqwa%20%28542%29.jpg",@"http://img.mypsd.com.cn/e/d/%e5%9f%ba%e7%a1%80%e5%9b%be%e5%ba%93/%e4%bd%8d%e5%9b%be%e5%8d%a1%e9%80%9a/%e5%8d%a1%e9%80%9a%e5%8a%a8%e7%89%a9/d/jpg/72-d83dk8adj%20%28980%29.jpg",@"http://img.mypsd.com.cn/e/d/%e7%9f%a2%e9%87%8f%e5%9b%be%e5%ba%93/%e6%a0%87%e8%af%86%e6%a0%87%e5%bf%97%e5%9b%be%e6%a0%87/%e5%b0%8f%e5%9b%be%e6%a0%87/v/jpg/a11-uei-eps%20%281077%29.jpg"] mutableCopy];
+#warning 待服务器真正有图片载入时，开启代码
+//            _ScrImages = [@[] mutableCopy];
+//            for (int i = 0; i < homeViewModel.imgArray.count; i++) {
+//                [_ScrImages addObject:homeViewModel.imgArray[i]];
+//            }
+            
+            self.topScrollerView.imageNames = _ScrImages;
+            
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 
@@ -86,7 +117,7 @@ typedef enum : NSUInteger {
 }
 #pragma mark *** 初始化数据 ***
 -(void)initData{
-    _ScrImages = [@[@"index_lunbo",@"index_icon_fuWu",@"index_icon_human",@"index_icon_s1"] mutableCopy];
+//    _ScrImages = [@[@"index_lunbo",@"index_icon_fuWu",@"index_icon_human",@"index_icon_s1"] mutableCopy];
 }
 
 #pragma mark *** 初始化界面 ***
@@ -209,7 +240,7 @@ typedef enum : NSUInteger {
 
 -(ScrollerView *)topScrollerView{
     if (!_topScrollerView) {
-        _topScrollerView = [[ScrollerView alloc] initWithFrame:CGRectMake(0, 0, Screen_width, 0.36*Screen_height)images:_ScrImages];
+        _topScrollerView = [[ScrollerView alloc] initWithFrame:CGRectMake(0, 0, Screen_width, 0.36*Screen_height)images:nil];
         
     }
     return _topScrollerView;
@@ -238,7 +269,7 @@ typedef enum : NSUInteger {
 -(UILabel *)time_StatuLabel{
     if (!_time_StatuLabel) {
         _time_StatuLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectYH(self.topScrollerView)+6, 0.6*Screen_width, 20)];
-        _time_StatuLabel.text = @"丙申年农历十二月廿四  谷雨";
+        //_time_StatuLabel.text = @"丙申年农历十二月廿四  谷雨";
         _time_StatuLabel.font = MFont(14);
     }
     return _time_StatuLabel;

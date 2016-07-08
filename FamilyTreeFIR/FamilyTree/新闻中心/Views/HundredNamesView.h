@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HundredsNamesModel.h"
 
 @interface HundredNamesView : UIView
-
+/** 百家姓模型数组*/
+@property (nonatomic, strong) NSArray<HundredsNamesModel *> *BJXArr;
+/**集合视图*/
+@property (nonatomic,strong) UICollectionView *collectionView;
 @end
