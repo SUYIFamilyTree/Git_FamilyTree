@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FamilyDTModel.h"
 
 @interface NewsTableView : UIView
-
+/** 表*/
+@property (nonatomic,strong) UITableView *tableView;
+/** 数据数组*/
+@property (nonatomic, strong) NSArray<FamilyDTModel *> *dataSource;
 @end

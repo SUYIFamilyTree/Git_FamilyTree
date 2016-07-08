@@ -58,6 +58,8 @@
     MYLog(@"确认修改");
     if ([self.detailStr isEqualToString:@"昵称"]) {
         [USERDEFAULT setObject:self.detailTF.text forKey:MeNickName];
+        [self.delegate EditPersonalInfoDetailViewController:self withTitle:self.detailStr withDetail:self.detailTF.text];
+        [self.navigationController popViewControllerAnimated:YES];
     }else if ([self.detailStr isEqualToString:@"手机"]) {
         if ([[NSString valiMobile:self.detailTF.text] isEqualToString:@""]) {
             MYLog(@"号码正确");

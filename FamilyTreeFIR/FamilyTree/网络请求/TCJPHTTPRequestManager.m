@@ -25,7 +25,7 @@
     //MD5(requestdata+SecretKey+requestuserid+requestcode+timestamp)，SecretKey由双方约定，为可配置参数，测试环境的SecretKey暂定为：abc123。
     
     //加密类型，暂分为图片和其他
-    NSArray *codingImageArr = @[kRequestCodeuploadgenimg,kRequestCodeUploadCefm,kRequestCodeuploadgenan,kRequestCodeuploadgentt];
+    NSArray *codingImageArr = @[kRequestCodeuploadgenimg,kRequestCodeUploadCefm,kRequestCodeuploadgenan,kRequestCodeuploadgentt,kRequestCodeEditProfile];
     NSString *requestData = @"";
     if ([codingImageArr containsObject:requestcode]) {
        requestData = [NSString stringWithDic:customParams type:md5CodingTypeUploadImage];
@@ -41,9 +41,9 @@
     NSString *md5checkStr = [[[[requestData stringByAppendingString:SecretKeySend]stringByAppendingString:requestUserId] stringByAppendingString:requestcode] stringByAppendingString:timeStamp];
     //MYLog(@"requestData:%@",requestData);
     NSLog(@"md5beforeStr--%@", md5checkStr);
-    NSString *md5checkStr1 = [md5checkStr stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+//    NSString *md5checkStr1 = [md5checkStr stringByReplacingOccurrencesOfString:@"\\" withString:@""];
     
-    NSString *md5check = [NSString md5Str:md5checkStr1];
+    NSString *md5check = [NSString md5Str:md5checkStr];
     
     //NSLog(@"md5afterStr--%@", md5check);
     

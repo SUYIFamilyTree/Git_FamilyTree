@@ -16,7 +16,7 @@ static NSString *const kReusableCollecCellIdentifier = @"CollectioncellIdentifie
     NSTimer *_timer;
     NSInteger _contentOffsetX;
 }
-@property (nonatomic,strong) UICollectionView *collectionView; /*集合视图*/
+
 
 @end
 @implementation HundredNamesView
@@ -62,13 +62,14 @@ static NSString *const kReusableCollecCellIdentifier = @"CollectioncellIdentifie
 #pragma mark *** collectionViewDataSource ***
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 100;
+    return self.BJXArr.count;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     CustonCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kReusableCollecCellIdentifier forIndexPath:indexPath];
     
-    cell.displayLabel.text = @"王";
+    //cell.displayLabel.text = @"王";
     
+    cell.hundredsNamesModel = self.BJXArr[indexPath.row];
     return cell;
 }
 

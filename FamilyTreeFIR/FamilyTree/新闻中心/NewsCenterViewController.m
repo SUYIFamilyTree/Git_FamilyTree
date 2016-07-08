@@ -7,6 +7,8 @@
 //
 
 #import "NewsCenterViewController.h"
+#import "FamilyDTModel.h"
+#import "HundredsNamesModel.h"
 
 @interface NewsCenterViewController ()
 
@@ -43,17 +45,90 @@
     [self.bacScrollView addSubview:self.hundredVies];
     [self.bacScrollView addSubview:self.nameTableNews];
     
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"userid":@"0",@"query":@"郭氏家谱",@"type":@"MyGen"} requestID:@0 requestcode:@"querymygen" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    //获取家族动态
+    [self getFamilyDTData];
+    //获取名人传记
+    [self getMRZJData];
+    //获取百家姓
+    [self getBJXData];
+    //获取姓氏源流
+    [self getXSWHData];
+}
+
+#pragma mark - 网络请求数据
+-(void)getFamilyDTData{
+    NSDictionary *logDic = @{@"pagenum":@1,@"pagesize":@1999,@"type":@"JZDT",@"geid":@"",@"istop":@""};
+    WK(weakSelf)
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetNewsList success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        //MYLog(@"%@",jsonDic[@"data"]);
         if (succe) {
             NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
-            NSLog(@"news---%@", dic);
+            NSArray *JZDTArr = [NSArray modelArrayWithClass:[FamilyDTModel class] json:dic[@"datalist"]];
+            weakSelf.tableNesView.dataSource = JZDTArr;
+            [weakSelf.tableNesView.tableView reloadData];
+            
+            //MYLog(@"%@",JZDTArr);
         }
-        
-        
     } failure:^(NSError *error) {
-        MYLog(@"%@",error.description);
+        
     }];
     
+}
+
+-(void)getMRZJData{
+    NSDictionary *logDic = @{@"pagenum":@1,@"pagesize":@1999,@"type":@"MRZJ",@"geid":@"",@"istop":@""};
+    WK(weakSelf)
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetNewsList success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        //MYLog(@"%@",jsonDic[@"data"]);
+        if (succe) {
+            NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
+            NSArray *MRZJArr = [NSArray modelArrayWithClass:[FamilyDTModel class] json:dic[@"datalist"]];
+            weakSelf.proAndName.MRZJArr = MRZJArr;
+            
+            //MYLog(@"%@",MRZJArr);
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+ 
+}
+
+-(void)getBJXData{
+    NSDictionary *logDic = @{@"pagenum":@1,@"pagesize":@1999};
+    WK(weakSelf)
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetFamilyNamesList success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"%@",jsonDic[@"data"]);
+        if (succe) {
+            NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
+            NSArray *hundredsNamesArr = [NSArray modelArrayWithClass:[HundredsNamesModel class] json:dic[@"datalist"]];
+            MYLog(@"%@",hundredsNamesArr);
+            weakSelf.hundredVies.BJXArr = hundredsNamesArr;
+            [weakSelf.hundredVies.collectionView reloadData];
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+-(void)getXSWHData{
+    NSDictionary *logDic = @{@"pagenum":@1,@"pagesize":@1999,@"type":@"XSWH",@"geid":@"",@"istop":@""};
+    WK(weakSelf)
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetNewsList success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"姓氏源流%@",jsonDic[@"data"]);
+        if (succe) {
+            NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
+            NSArray *XSWHArr = [NSArray modelArrayWithClass:[FamilyDTModel class] json:dic[@"datalist"]];
+            weakSelf.nameTableNews.dataSource = XSWHArr;
+            [weakSelf.nameTableNews.tableView reloadData];
+
+            
+            MYLog(@"%@",XSWHArr);
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+
 }
 
 #pragma mark *** getters ***

@@ -48,7 +48,6 @@
 #pragma mark *** 初始化数据 ***
 -(void)initData{
     _imageNames = [@[@"icon_1",@"lunbo_bg",@"icon_2",@"icon_3"] mutableCopy];
-    
 }
 
 #pragma mark *** 初始化界面 ***
@@ -64,14 +63,28 @@
 }
 
 
-
 #pragma mark *** 轮播更新图片 ***
 -(void)updateImageView{
-    self.leftImage.image = MImage(_imageNames.lastObject);
-    self.centerImage.image = MImage(_imageNames[0]);
-    self.rightImage.image = MImage(_imageNames[1]);
+//    self.leftImage.image = MImage(_imageNames.lastObject);
+//    self.centerImage.image = MImage(_imageNames[0]);
+//    self.rightImage.image = MImage(_imageNames[1]);
+    
+    if ([self.imageNames[0] rangeOfString:@"http"].location != NSNotFound) {
+        [self.leftImage setImageWithURL:[NSURL URLWithString:self.imageNames.lastObject] placeholder:MImage(@"icon_3")];
+        
+        [self.centerImage setImageWithURL:[NSURL URLWithString:self.imageNames[0]] placeholder:MImage(@"icon_1")];
+        
+        [self.rightImage setImageWithURL:[NSURL URLWithString:self.imageNames[1]] placeholder:MImage(@"lunbo_bg")];
+    }else{
+        self.leftImage.image = MImage(_imageNames.lastObject);
+            self.centerImage.image = MImage(_imageNames[0]);
+            self.rightImage.image = MImage(_imageNames[1]);
+    }
+    
+    
     
     self.pageContro.numberOfPages = _imageNames.count;
+    
 }
 
 #pragma mark *** respondsToTimer ***
@@ -168,7 +181,7 @@
 }
 -(NSTimer *)timer{
     if (!_timer) {
-        _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(respondsToTimer) userInfo:nil repeats:YES];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(respondsToTimer) userInfo:nil repeats:YES];
         
     }
     return _timer;

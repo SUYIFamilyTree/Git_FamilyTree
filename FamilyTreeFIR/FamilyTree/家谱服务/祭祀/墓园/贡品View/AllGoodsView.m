@@ -69,10 +69,12 @@ static NSString *const kReusableCemGoodsCellIdentifier = @"cemGoodsCell";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     //NSLog(@"%ld", indexPath.row);
     CemSingleGoodsCollectionViewCell *cell = (CemSingleGoodsCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    if (cell.selectedItem) {
-        [self.isSelectedGoodsArr addObject:cell.cemGoodsShopModel];
-    }else{
-        [self.isSelectedGoodsArr removeObject:cell.cemGoodsShopModel];
+    if (cell.cemGoodsShopModel) {
+        if (cell.selectedItem) {
+            [self.isSelectedGoodsArr addObject:cell.cemGoodsShopModel];
+        }else{
+            [self.isSelectedGoodsArr removeObject:cell.cemGoodsShopModel];
+        }
     }
     
     //MYLog(@"%@",self.isSelectedGoodsArr);

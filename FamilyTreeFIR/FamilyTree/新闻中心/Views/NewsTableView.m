@@ -11,11 +11,9 @@
 static NSString *const kNesCellIdentifier = @"newscellIdentifier";
 
 @interface NewsTableView()<UITableViewDelegate,UITableViewDataSource>
-{
-    NSArray *_dataSource;
-}
 
-@property (nonatomic,strong) UITableView *tableView; /*表*/
+
+
 
 @end
 @implementation NewsTableView
@@ -31,7 +29,7 @@ static NSString *const kNesCellIdentifier = @"newscellIdentifier";
 }
 #pragma mark *** 初始化数据 ***
 -(void)initData{
-    _dataSource = @[@"湖中有太阳不断被谁打谁打开200人机组",@"湖中有太阳不断被谁打谁打开200人机",@"湖中有太阳不断被谁打谁打开200人机",@"湖中有太阳不断被谁打谁打",@"湖中有断被谁打谁打开200人机组",@"湖中有太阳不断被开200人机组"];
+//    _dataSource = @[@"湖中有太阳不断被谁打谁打开200人机组",@"湖中有太阳不断被谁打谁打开200人机",@"湖中有太阳不断被谁打谁打开200人机",@"湖中有太阳不断被谁打谁打",@"湖中有断被谁打谁打开200人机组",@"湖中有太阳不断被开200人机组"];
 }
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
@@ -40,7 +38,7 @@ static NSString *const kNesCellIdentifier = @"newscellIdentifier";
 #pragma mark *** TableView dataSource Delegate ***
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-   return  _dataSource.count;
+   return  self.dataSource.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NewsCell *cell = [tableView dequeueReusableCellWithIdentifier:kNesCellIdentifier forIndexPath:indexPath];
@@ -48,9 +46,7 @@ static NSString *const kNesCellIdentifier = @"newscellIdentifier";
     if (!cell) {
         cell = [[NewsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kNesCellIdentifier];
     }
-    cell.textLabel.text = _dataSource[indexPath.row];
-    cell.textLabel.font = MFont(13);
-    
+    cell.familyDTModel = self.dataSource[indexPath.row];
     return cell;
 }
 

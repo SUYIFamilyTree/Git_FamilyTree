@@ -21,6 +21,11 @@
     return self;
 }
 
+-(void)setHundredsNamesModel:(HundredsNamesModel *)hundredsNamesModel{
+    _hundredsNamesModel = hundredsNamesModel;
+    self.displayLabel.text = hundredsNamesModel.FaSurname;
+}
+
 -(UILabel *)displayLabel{
     if (!_displayLabel) {
         _displayLabel = [[UILabel alloc] initWithFrame:self.bounds];

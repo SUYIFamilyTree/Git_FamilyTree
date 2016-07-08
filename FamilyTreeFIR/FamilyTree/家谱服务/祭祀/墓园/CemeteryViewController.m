@@ -23,7 +23,7 @@ enum {
 #import "CemGoodsShopModel.h"
 #import "AllGoodsView.h"
 #import "UIImageView+WebCache.h"
-
+#import "QuartzCore/QuartzCore.h"
 
 #define bacheight (Screen_height-self.tabBarController.tabBar.bounds.size.height-64)
 @interface CemeteryViewController ()<InputCherishViewDelegate,UITextViewDelegate,CemGoodsShopViewDelegate>
@@ -64,16 +64,17 @@ enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initData];
     [self initUI];
     [self getCemeteryData];
     [self getCemeteryBarrageList];
     [self getCemeteryJSShopData];
     self.goodsBackView = [[UIView alloc]initWithFrame:AdaptationFrame(0, 760, 1.4*bacheight/AdaptationWidth(), 280)];
-    //goodsBackView.backgroundColor = [UIColor redColor];
     [self.scrollView addSubview:self.goodsBackView];
+    
+    
 }
 
+#pragma mark *** 初始化数据 ***
 -(void)getCemeteryData{
     NSDictionary *logDic = @{@"CeId":@(self.CeId)};
     WK(weakSelf)
@@ -103,23 +104,13 @@ enum {
             //让贡品陈列出来
             [weakSelf.currentCemGoodsArr addObjectsFromArray:weakSelf.barrageListModel.js];
             [weakSelf putCemGoodsWithArr];
+            
+            
         }
     } failure:^(NSError *error) {
         
     }];
 }
-
--(void)putCemGoodsWithArr{
-    for (int i = 0; i < self.currentCemGoodsArr.count; i++) {
-        UIImageView *goodsIV = [[UIImageView alloc]initWithFrame:AdaptationFrame((1.4*bacheight/AdaptationWidth()-105)/2+((i%2)?1:-1)*105*(([@[@(i),@(i-13),@(i-26)][i/13] intValue]+1)/2), 80*(i/13), 105, 80)];
-        goodsIV.backgroundColor = [UIColor clearColor];
-        goodsIV.image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:self.currentCemGoodsArr[i]];
-        [self.goodsBackView addSubview:goodsIV];
-    }
-    
-    
-}
-
 
 -(void)getCemeteryJSShopData{
     NSDictionary *logDic = @{
@@ -164,48 +155,20 @@ enum {
 
 }
 
-
-
-
-
-//弹幕动画效果
--(void)makeBarrageListAnimation:(NSMutableArray *)barragesArray{
-    self.colorArray = @[[UIColor redColor],[UIColor blackColor],[UIColor greenColor],[UIColor orangeColor],[UIColor yellowColor],[UIColor purpleColor],[UIColor magentaColor],[UIColor brownColor]];
-    for(int i = 0 ; i < barragesArray.count; i++){
-        float   tempNum     = 64 +arc4random()%200;//高
-        int     tempI       = arc4random()%barragesArray.count;
-        int     sleepTime   = arc4random()%8;
-        int     colorNum    = arc4random()%8;
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            sleep(sleepTime);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                FlyBarrageTextView * flyView = [[FlyBarrageTextView alloc] initWithY:tempNum AndText:barragesArray[tempI] AndWordSize:12];
-                flyView.textColor = self.colorArray[colorNum];
-                [self.view addSubview:flyView];
-                [self.timersArr addObject:flyView.timer];
-            });
-        });
-    }
-}
-//单条弹幕加入滚动
--(void)makeOneBarrageAnimation:(NSString *)str{
-    float   tempNum     = 64 +arc4random()%200;
-    int     colorNum    = arc4random()%8;
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            FlyBarrageTextView * flyView = [[FlyBarrageTextView alloc] initWithY:tempNum AndText:str AndWordSize:12];
-            flyView.textColor = self.colorArray[colorNum];
-            [self.view addSubview:flyView];
-            [self.timersArr addObject:flyView.timer];
-        });
-    });
-
-}
-
-#pragma mark *** 初始化数据 ***
--(void)initData{
+-(void)uploadCemPhoto:(UIImage *)image{
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    NSString *encodeimageStr =[imageData base64EncodedString];
+    NSDictionary *params =@{@"userid":GetUserId,@"imgbt":encodeimageStr,@"uploadtype":@"FM",@"ceid":@(self.CeId)};
+    [TCJPHTTPRequestManager POSTWithParameters:params requestID:GetUserId requestcode:kRequestCodeUploadCefm success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            MYLog(@"墓园封面图上传成功%@", jsonDic[@"data"]);
+        }
+    } failure:^(NSError *error) {
+        
+    }];
     
 }
+
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
     [self.view addSubview:self.scrollView];
@@ -243,6 +206,52 @@ enum {
     }
 }
 
+//让贡品摆放出来
+-(void)putCemGoodsWithArr{
+    for (int i = 0; (i < self.currentCemGoodsArr.count) && (i < 39); i++) {
+        UIImageView *goodsIV = [[UIImageView alloc]initWithFrame:AdaptationFrame((1.4*bacheight/AdaptationWidth()-105)/2+((i%2)?1:-1)*105*(([@[@(i),@(i-13),@(i-26)][i/13] intValue]+1)/2), 80*(i/13), 105, 80)];
+        goodsIV.backgroundColor = [UIColor clearColor];
+        goodsIV.image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:self.currentCemGoodsArr[i]];
+        [self.goodsBackView addSubview:goodsIV];
+    }
+}
+
+
+
+//弹幕动画效果
+-(void)makeBarrageListAnimation:(NSMutableArray *)barragesArray{
+    self.colorArray = @[[UIColor redColor],[UIColor blackColor],[UIColor greenColor],[UIColor orangeColor],[UIColor yellowColor],[UIColor purpleColor],[UIColor magentaColor],[UIColor brownColor]];
+    for(int i = 0 ; i < barragesArray.count; i++){
+        float   tempNum     = 64 +arc4random()%200;//高
+        int     tempI       = arc4random()%barragesArray.count;
+        int     sleepTime   = arc4random()%8;
+        int     colorNum    = arc4random()%8;
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            sleep(sleepTime);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                FlyBarrageTextView * flyView = [[FlyBarrageTextView alloc] initWithY:tempNum AndText:barragesArray[tempI] AndWordSize:12];
+                flyView.textColor = self.colorArray[colorNum];
+                [self.view addSubview:flyView];
+                [self.timersArr addObject:flyView.timer];
+            });
+        });
+    }
+}
+//单条弹幕加入滚动
+-(void)makeOneBarrageAnimation:(NSString *)str{
+    float   tempNum     = 64 +arc4random()%200;
+    int     colorNum    = arc4random()%8;
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            FlyBarrageTextView * flyView = [[FlyBarrageTextView alloc] initWithY:tempNum AndText:str AndWordSize:12];
+            flyView.textColor = self.colorArray[colorNum];
+            [self.view addSubview:flyView];
+            [self.timersArr addObject:flyView.timer];
+        });
+    });
+    
+}
+
 
 #pragma mark *** btnEvents ***
 
@@ -276,6 +285,11 @@ enum {
             break;
     }
 }
+
+-(void)closeKeyboard{
+    [self.view endEditing:YES];
+}
+
 
 
 #pragma mark *** getters ***
@@ -347,7 +361,6 @@ enum {
     return _currentCemGoodsArr;
 }
 
-
 #pragma mark - InputCherishViewDelegate
 -(void)inputCherishView:(InputCherishView *)inputCherishView withString:(NSString *)str{
     //上传弹幕
@@ -391,21 +404,45 @@ enum {
     }
 }
 
--(void)closeKeyboard{
-    [self.view endEditing:YES];
-}
-
+#pragma  mark - 生命周期
 -(void)viewWillDisappear:(BOOL)animated{
+    //上传墓园封面图片
+    UIImage *image = [self getImageFromView:self.scrollView];
+    [self uploadCemPhoto:image];
+    //停止弹幕所有的定时器
     for (NSTimer *timer in self.timersArr) {
         [timer invalidate];
     }
+}
+
+//屏幕截图
+-(UIImage *)getImageFromView:(UIScrollView *)orgView{
+    UIImage* image = nil;
+    UIGraphicsBeginImageContext(orgView.contentSize);
+    {
+        CGPoint savedContentOffset = orgView.contentOffset;
+        CGRect savedFrame = orgView.frame;
+        orgView.contentOffset = CGPointZero;
+        orgView.frame = CGRectMake(0, 0, orgView.contentSize.width, orgView.contentSize.height);
+        
+        [orgView.layer renderInContext: UIGraphicsGetCurrentContext()];
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        
+        orgView.contentOffset = savedContentOffset;
+        orgView.frame = savedFrame;
+    }
+    UIGraphicsEndImageContext();
+    if (image != nil) {
+        return image;
+    }
+    return nil;
 }
 
 #pragma mark - CemGoodsShopViewDelegate
 -(void)uploadGoodsToRefreshcemGoods:(NSArray<CemGoodsShopModel *> *)goodsArr{
     //刷新贡品摆放位置
     //MYLog(@"该刷新贡品了");
-    for (int i = 0; i < goodsArr.count; i++) {
+    for (int i = 0; i < goodsArr.count&& (self.currentCemGoodsArr.count<39); i++) {
         int j = i + (short)self.currentCemGoodsArr.count;
         UIImageView *goodsIV = [[UIImageView alloc]initWithFrame:AdaptationFrame((1.4*bacheight/AdaptationWidth()-105)/2+((j%2)?1:-1)*105*(([@[@(j),@(j-13),@(j-26)][j/13] intValue]+1)/2), 80*(j/13), 105, 80)];
         goodsIV.backgroundColor = [UIColor clearColor];
@@ -415,5 +452,7 @@ enum {
 
     
 }
+
+
 
 @end

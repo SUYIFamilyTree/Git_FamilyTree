@@ -47,7 +47,12 @@
     [noteStr addAttribute:NSForegroundColorAttributeName value:LH_RGBCOLOR(19, 154, 219) range:blueRange];
     [self.visitorNumberLB setAttributedText:noteStr];
     
-    self.cemeterialPeopleLB.text = [NSString stringWithFormat:@"%@扫墓",worshipDatalistModel.Smr];
+    if ([worshipDatalistModel.Smr isEqualToString:@""]) {
+        self.cemeterialPeopleLB.text = @"";
+    }else{
+        self.cemeterialPeopleLB.text = [NSString stringWithFormat:@"%@扫墓",worshipDatalistModel.Smr];
+    }
+    
     
     self.drinkLB.text = worshipDatalistModel.Lp;
     self.timeLB.text = worshipDatalistModel.Sj;

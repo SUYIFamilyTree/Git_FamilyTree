@@ -310,7 +310,7 @@
         }else if([self.editPersonalInfoView.personalInfoDetailArr[4] isEqualToString:@"男"]){
             sexStr = @"1";
         }else{
-            sexStr = @"保密";
+            sexStr = @"2";
         }
         //时间转换(生日)
         NSMutableString *birthdayStr = [NSMutableString stringWithString:self.editPersonalInfoView.personalInfoDetailArr[5]];

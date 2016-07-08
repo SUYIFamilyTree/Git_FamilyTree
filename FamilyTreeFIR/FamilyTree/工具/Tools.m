@@ -55,7 +55,8 @@ NSString * _Nonnull const kRequestCodeCemeterDetail = @"cemeterdetail";
 NSString * _Nonnull const kRequestCodeBarrageList = @"barragelist";
 NSString * _Nonnull const kRequestCodeCreateBarrage = @"createbarrage";
 NSString * _Nonnull const kRequestCodeRitual = @"ritual";
-
+NSString * _Nonnull const kRequestCodeGetNewsList =@"getnewslist";
+NSString * _Nonnull const kRequestCodeGetFamilyNamesList = @"getfamilynameslist";
 
 +(void)showAlertViewControllerAutoDissmissWithTarGet:(id)target Message:(NSString *)message delay:(NSInteger)time complete:(void (^)(BOOL))complete{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
