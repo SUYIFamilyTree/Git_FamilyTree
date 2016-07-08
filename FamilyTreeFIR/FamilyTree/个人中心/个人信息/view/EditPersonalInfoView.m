@@ -233,7 +233,7 @@
     [self.accountInfoDetailArr addObject:[NSString stringWithFormat:@"%ld",queryModel.memb.MeId]];
     [self.accountInfoDetailArr addObject:queryModel.memb.MeAccount];
     [self.accountInfoDetailArr addObject:@"******"];
-    [self.accountInfoDetailArr addObject: [self getLockMobileWithString:queryModel.memb.MeMobile]];
+    [self.accountInfoDetailArr addObject: queryModel.memb.MeMobile];
     MYLog(@"%@",queryModel.memb.MeMobile);
     [self.accountInfoDetailArr addObject:queryModel.memb.MeEmail];
     
@@ -249,7 +249,7 @@
     NSString *MeBirthdayStr = [NSString stringWithFormat:@"%04ld年%02ld月%02ld日%02ld时",dateModel.year,dateModel.month,dateModel.day,dateModel.hour];
     [self.personalInfoDetailArr addObject:MeBirthdayStr];
     [self.personalInfoDetailArr addObject:queryModel.memb.MeCertype];
-    [self.personalInfoDetailArr addObject:IsNilString(queryModel.memb.MeCardnum) ?@"":@"******"];
+    [self.personalInfoDetailArr addObject:IsNilString(queryModel.memb.MeCardnum) ?@"":queryModel.memb.MeCardnum];
     [self.personalInfoDetailArr addObject:queryModel.kzxx.Grzy];
     [self.personalInfoDetailArr addObject:queryModel.kzxx.Grxl];
     [self.personalInfoDetailArr addObject:queryModel.kzxx.Grah];
@@ -292,6 +292,9 @@
         accountInfoCell.customTitleLB.text = [self.accountInfoTitleArr[indexPath.row] stringByAppendingString:@":"];
         [self labelWidthToFit:accountInfoCell.customTitleLB andFrame:CGRectMake(8, 0, 100, 26)];
         accountInfoCell.customDetailLB.text = self.accountInfoDetailArr[indexPath.row];
+        if (indexPath.row == 3) {
+            accountInfoCell.customDetailLB.text =[self getLockMobileWithString:self.accountInfoDetailArr[indexPath.row]];
+        }
         if (indexPath.row == 4) {
             accountInfoCell.customDetailLB.font = MFont(14);
         }
