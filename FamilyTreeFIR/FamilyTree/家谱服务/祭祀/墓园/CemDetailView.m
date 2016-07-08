@@ -33,7 +33,12 @@
 
 -(void)setCemeteryModel:(CemeteryModel *)cemeteryModel{
     _cemeteryModel = cemeteryModel;
-    self.perName.text = [NSString verticalStringWith:[NSString stringWithFormat:@"%@%@之墓",cemeteryModel.CeTitle,cemeteryModel.CeMaster]];
+    if (![cemeteryModel.CeMaster isEqualToString:@""]) {
+       self.perName.text = [NSString verticalStringWith:[NSString stringWithFormat:@"%@%@之墓",cemeteryModel.CeTitle,cemeteryModel.CeMaster]];
+    }else{
+        self.perName.text = @"";
+    }
+    
     [self.perName sizeToFit];
     self.cherLabel.text = [NSString verticalStringWith:cemeteryModel.CeEpitaph];
     [_cherLabel sizeToFit];

@@ -59,7 +59,7 @@
 -(void)getFamilyDTData{
     NSDictionary *logDic = @{@"pagenum":@1,@"pagesize":@1999,@"type":@"JZDT",@"geid":@"",@"istop":@""};
     WK(weakSelf)
-    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getnewslist" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetNewsList success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         //MYLog(@"%@",jsonDic[@"data"]);
         if (succe) {
             NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
@@ -78,7 +78,7 @@
 -(void)getMRZJData{
     NSDictionary *logDic = @{@"pagenum":@1,@"pagesize":@1999,@"type":@"MRZJ",@"geid":@"",@"istop":@""};
     WK(weakSelf)
-    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getnewslist" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetNewsList success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         //MYLog(@"%@",jsonDic[@"data"]);
         if (succe) {
             NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
@@ -96,7 +96,7 @@
 -(void)getBJXData{
     NSDictionary *logDic = @{@"pagenum":@1,@"pagesize":@1999};
     WK(weakSelf)
-    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode: @"getfamilynameslist" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetFamilyNamesList success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         MYLog(@"%@",jsonDic[@"data"]);
         if (succe) {
             NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
@@ -114,7 +114,7 @@
 -(void)getXSWHData{
     NSDictionary *logDic = @{@"pagenum":@1,@"pagesize":@1999,@"type":@"XSWH",@"geid":@"",@"istop":@""};
     WK(weakSelf)
-    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getnewslist" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetNewsList success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         MYLog(@"姓氏源流%@",jsonDic[@"data"]);
         if (succe) {
             NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
