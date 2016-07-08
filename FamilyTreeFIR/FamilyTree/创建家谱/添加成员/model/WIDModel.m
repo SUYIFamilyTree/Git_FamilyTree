@@ -13,6 +13,7 @@ static WIDModel *widModel = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         widModel = [[WIDModel alloc] init];
+        widModel.becomeFirstJP = false;
     });
     
     return widModel;

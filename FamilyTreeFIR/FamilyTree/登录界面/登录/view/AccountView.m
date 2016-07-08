@@ -20,6 +20,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
         [self addSubview:self.headView];
         self.headView.image = image;
         [self addSubview:self.verticalLine];
@@ -42,7 +43,6 @@
     [self.inputTextView setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     [self.inputTextView setValue:[UIFont systemFontOfSize:18] forKeyPath:@"_placeholderLabel.font"];
 }
-
 
 #pragma mark *** getters ***
 

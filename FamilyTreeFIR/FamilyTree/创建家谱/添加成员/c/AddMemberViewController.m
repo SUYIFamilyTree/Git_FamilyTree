@@ -60,7 +60,7 @@
         [SXLoadingView showAlertHUD:@"父亲不能为空" duration:0.5];
         return;
     }
-    //配偶
+    
     if ([self.AddFameView.parnName.text isEqualToString:@""]) {
         self.AddFameView.parnName.text = @"不详";
     }
@@ -97,15 +97,16 @@
                              @"IsJp":@""
                              };
     NSLog(@"添加成员的参数---%@",addDic);
-    [SXLoadingView showProgressHUD:@"正在添加..."];
+//    [SXLoadingView showProgressHUD:@"正在添加..."];
     [TCJPHTTPRequestManager POSTWithParameters:addDic requestID:GetUserId requestcode:kRequestCodeaddgeme success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             
             _gemeId = [NSString jsonDicWithDic:jsonDic[@"data"]][@"gemeid"];
             NSLog(@"%@", _gemeId);
             [self uploadImageWithGemeid:_gemeId];
-            
+
             }
+         [self.navigationController popViewControllerAnimated:YES];
     } failure:^(NSError *error) {
         MYLog(@"失败");
     }];
@@ -127,14 +128,35 @@
             if (succe) {
                 [SXLoadingView showProgressHUD:jsonDic[@"message"] duration:0.5];
             }
+            
+           
+            
         } failure:^(NSError *error) {
             MYLog(@"错误");
         }];
     }else{
         [SXLoadingView showAlertHUD:@"没有头像" duration:0.5];
     }
-    
-    
-    
+
+}
+
+/**
+ *  成员添加到首卷谱
+ *
+ *  @param gemeid 成员卷谱id
+ */
+-(void)genmeMemberBecomeFirsJPWithGemeid:(NSString *)gemeid{
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"GeId":[WFamilyModel shareWFamilModel].myFamilyId,@"GemeId":gemeid,@"IsJp":@"1"} requestID:GetUserId requestcode:kRequestCodechangejp success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            
+            NSLog(@"添加卷谱-----%@", jsonDic[@"data"]);
+            
+            //完成过后将成员至为NO
+            [WIDModel sharedWIDModel].becomeFirstJP = false;
+            
+        }
+    } failure:^(NSError *error) {
+        MYLog(@"shibai");
+    }];
 }
 @end

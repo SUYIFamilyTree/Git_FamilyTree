@@ -44,18 +44,17 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodequerytreebygenid;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodequerygemedetailbyidforupdate;
 //修改家谱成员详情
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeeditgemedetail;
-
 //查询家谱所有成员
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodequerygemelist;
-
+//查询各字辈各成员详情列表
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodequerygezblist;
+//查询家谱字辈成员详情列表
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodequeryzbgemedetaillist;
 //进入家谱首页的接口
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodegetintogen;
 
-#pragma mark *** 未通接口 ***
 //查询宗亲信息
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodequeryclan;
-
-
 //墓园
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeeditcemetery;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodecemeterdetail;
@@ -68,6 +67,12 @@ UIKIT_EXTERN NSString * _Nonnull const kNotificationCodeManagerFam;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodegetgenalldata;
  /**上传家谱成员的头像*/
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeuploadgenimg;
+/** 编辑卷谱 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodechangejp;
+/** 卷谱列表 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodequeryjplist;
+
+
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;

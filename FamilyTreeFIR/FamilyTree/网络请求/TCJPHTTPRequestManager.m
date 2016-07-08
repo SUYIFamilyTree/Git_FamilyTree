@@ -16,7 +16,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"text/plain", @"text/json", @"text/javascript", @"application/json", nil];
     //请求超时时间
-    manager.requestSerializer.timeoutInterval = 30;
+    manager.requestSerializer.timeoutInterval = 15;
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     //设置请求body为json格式
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -103,7 +103,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         fail(error);
-        
+        [SXLoadingView showAlertHUD:@"网络连接故障！" duration:1.0];
     }];
 }
 
