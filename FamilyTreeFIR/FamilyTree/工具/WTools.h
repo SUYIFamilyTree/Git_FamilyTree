@@ -11,6 +11,9 @@
 #import "WIDModel.h"
 #import "NSArray+WAllItemString.h"
 #import "WFamilyModel.h"
+#import "WDetailJPInfoModel.h"
+#import "WJPPersonZBNumberModel.h"
+#import "WJPListModel.h"
 @interface WTools : NSObject
 
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodecreategen;

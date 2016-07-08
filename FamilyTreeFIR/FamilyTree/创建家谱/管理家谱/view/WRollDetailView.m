@@ -12,9 +12,11 @@ enum {
 #import "WRollDetailView.h"
 @interface WRollDetailView()
 {
-    NSArray *_leftArr;
-    NSArray *_rightArr;
+    NSMutableArray *_leftArr;
+    NSMutableArray *_rightArr;
 }
+/**背景*/
+@property (nonatomic,strong) UIView *backView;
 
 @end
 @implementation WRollDetailView
@@ -23,16 +25,35 @@ enum {
 {
     self = [super initWithFrame:frame];
     if (self) {
+        [self addSubview:self.backView];
+        
         [self initData];
         [self initUI];
     }
     return self;
 }
+
+-(void)updateUI{
+    WJPPersonZBNumberModel *model = [WJPPersonZBNumberModel sharedWJPPersonZBNumberModel];
+
+    for (int idx = 0; idx<5; idx++) {
+        _leftArr[idx+2] = [NSString stringWithFormat:@"%@：",model.datalist[idx].zb];
+        _rightArr[idx+2] = [NSString stringWithFormat:@"%ld",model.datalist[idx].cnt];
+    }
+    
+    _rightArr[0] = [NSString stringWithFormat:@"%ld",model.allcnt];
+    
+    [self removeAllSubviews];
+    [self addSubview:self.backView];
+    [self initUI];
+    
+    
+}
 #pragma mark *** 初始化数据 ***
 -(void)initData{
-    _leftArr = @[@"人数：",@"字辈：",@"正：",@"大：",@"光：",@"明：",@"恒："];
+    _leftArr = [@[@"人数：",@"字辈：",@"：",@"：",@"：",@"：",@"："] mutableCopy];
     
-    _rightArr = @[@"941",@"",@"1",@"9",@"54",@"207",@"653"];
+    _rightArr = [@[@"",@"",@"",@"",@"",@"",@""] mutableCopy];
 }
 
 #pragma mark *** events ***
@@ -56,13 +77,7 @@ enum {
 }
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
-    
-    //背景加边框
-    UIView *bakView = [[UIView alloc] initWithFrame:CGRectMake(46*AdaptationWidth(), 0, 225*AdaptationWidth(), self.bounds.size.height)];
-    bakView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.8];
-    bakView.layer.borderWidth = 1.0f;
-    bakView.layer.borderColor = LH_RGBCOLOR(234, 221, 200).CGColor;
-    [self addSubview:bakView];
+  
     
     //具体信息
     for (int idx = 0; idx<_leftArr.count; idx++) {
@@ -98,5 +113,20 @@ enum {
         [btn addTarget:self action:@selector(respondsTolefTwBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btn];
     }
+}
+
+#pragma mark *** getters ***
+-(UIView *)backView{
+    if (!_backView) {
+        //背景加边框
+        UIView *bakView = [[UIView alloc] initWithFrame:CGRectMake(46*AdaptationWidth(), 0, 225*AdaptationWidth(), self.bounds.size.height)];
+        bakView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.8];
+        bakView.layer.borderWidth = 1.0f;
+        bakView.layer.borderColor = LH_RGBCOLOR(234, 221, 200).CGColor;
+        
+        _backView = bakView;
+        
+    }
+    return _backView;
 }
 @end

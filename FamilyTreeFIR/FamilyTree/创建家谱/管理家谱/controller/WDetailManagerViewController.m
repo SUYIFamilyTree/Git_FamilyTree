@@ -19,6 +19,10 @@ enum{
 @property (nonatomic,strong) UIButton *addMemberBtn;/*新增成员*/
 @property (nonatomic,strong) UIButton *addManagerBtn; /*新增管理*/
 
+/**代数数组*/
+@property (nonatomic,strong) NSMutableArray *gennerNumberArr;
+
+
 
 @end
 
@@ -48,31 +52,58 @@ enum{
 //初始化所有具体图
 -(void)initAllDetailManagerDetailView{
     
+    
+    
+    
     NSArray *titleArr = @[@"姓名：",@"妻子：",@"养子："];
     
-    NSArray *subDetaiArr = @[@[@"段正淳",@"刀白凤",@"段誉"],
-                             @[@"段誉",@"段正淳",@"刀白凤"],
-                             @[@"段正淳",@"刀白凤",@"段誉"],
-                             @[@"段正淳",@"刀白凤",@"段誉"],
-                             @[@"段智兴",@"刀白凤",@"段誉"],
-                             @[@"段智商",@"刀白凤",@"段誉"]];
+    NSMutableArray *subDetaiArr = [@[] mutableCopy];
     
-    NSArray *genNum = @[@"第一代",@"第二代",@"第三代",@"第三代",@"第四代",@"第四代"];
+//  NSMutableArray *genNum = [@[@"第一代",@"第二代",@"第三代",@"第三代",@"第四代",@"第四代"] mutableCopy];
     
-    NSArray *frameArr = @[[NSValue valueWithCGPoint:CGPointMake(30+ZeroContentOffset, 30)],[NSValue valueWithCGPoint:CGPointMake(270, 270)],[NSValue valueWithCGPoint:CGPointMake(195, 510)],[NSValue valueWithCGPoint:CGPointMake(195, 750)],[NSValue valueWithCGPoint:CGPointMake(121, 990)],[NSValue valueWithCGPoint:CGPointMake(121, 1230)],];
+    NSMutableArray *genNum = [@[] mutableCopy];
     
-    for (int idx = 0; idx<subDetaiArr.count; idx++) {
-        CGPoint potRect = [frameArr[idx] CGPointValue];
+    NSArray <WJPInfoDatalist *>*modelArr = [WDetailJPInfoModel sharedWDetailJPInfoModel].datalist;
+    
+    
+    [modelArr enumerateObjectsUsingBlock:^(WJPInfoDatalist * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+       
+        for (int idx2 = 0; idx2<obj.datas.count; idx2++) {
+            [genNum addObject:[NSString stringWithFormat:@"第%ld代",obj.ds]];
+            //装姓名，亲子，养子的数组
+            NSMutableArray *XArr = [@[] mutableCopy];
+            //名字
+            [XArr addObject:obj.datas[idx2].name];
+            //妻子
+            [XArr addObject:@"无数据"];
+            //养子
+            [XArr addObject:@"无数据"];
+            
+            [subDetaiArr addObject:XArr];
+        }
         
-        RollDetailView *rollView = [[RollDetailView alloc] initWithFrame:AdaptationFrame(potRect.x, potRect.y, 500, 200) leftViewDataArr:titleArr rightViewDataArr:subDetaiArr[idx]];
+    }];
+    //更新滚动图大小
+    
+    _backScrollView.contentSize = AdaptationSize(1040, subDetaiArr.count*270);
+    
+    NSArray *frameArr = @[[NSNumber numberWithFloat:30+ZeroContentOffset],
+                          [NSNumber numberWithFloat:270],
+                          [NSNumber numberWithFloat:195],
+                          [NSNumber numberWithFloat:121],
+                          [NSNumber numberWithFloat:50]];
+    /** 设置5代人不同的X */
+   
+    
+    for (int idx = 0; idx<genNum.count; idx++) {
+//        CGPoint potRect = [frameArr[idx] CGPointValue];
+        NSString *numStr = [NSString stringWithFormat:@"%@",genNum[idx]];
+        NSString *finBe = [numStr stringByReplacingOccurrencesOfString:@"第" withString:@""];
+        NSInteger fin = [[finBe stringByReplacingOccurrencesOfString:@"代" withString:@""] integerValue]-1;
+        //布局
+        RollDetailView *rollView = [[RollDetailView alloc] initWithFrame:AdaptationFrame([frameArr[fin] floatValue], 30+idx*240, 500, 200) leftViewDataArr:titleArr rightViewDataArr:subDetaiArr[idx]];
         rollView.genLabel.text = [NSString verticalStringWith:genNum[idx]];
-//        rollView.tag = idx;
-        
-//        //添加手势
-//        UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondsToRooTapGes:)];
-//        
-//        [rollView addGestureRecognizer:tapGes];
-        
+
         [self.backScrollView addSubview:rollView];
         
         [self.view addSubview:self.addMemberBtn];
@@ -93,7 +124,7 @@ enum{
 -(UIScrollView *)backScrollView{
     if (!_backScrollView) {
         _backScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
-        _backScrollView.contentSize = AdaptationSize(1040, 1500);
+        _backScrollView.contentSize = AdaptationSize(1040, 3000);
         _backScrollView.contentOffset = AdaptationCenter(ZeroContentOffset, 0);
         _backScrollView.bounces = false;
         UIImageView *backView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _backScrollView.contentSize.width, _backScrollView.contentSize.height)];
