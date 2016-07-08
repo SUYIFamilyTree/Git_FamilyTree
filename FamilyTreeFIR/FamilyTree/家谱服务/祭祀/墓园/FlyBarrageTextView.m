@@ -27,10 +27,10 @@
     if(self){
         self.text = text;
         self.font = [UIFont systemFontOfSize:wordSize];
-        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:8 block:^(NSTimer * _Nonnull timer) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:8 block:^(NSTimer * _Nonnull timer) {
             [self starFly];
         } repeats:YES];
-        [timer setFireDate:[NSDate distantPast]];
+        [self.timer setFireDate:[NSDate distantPast]];
     }
     return self;
 }

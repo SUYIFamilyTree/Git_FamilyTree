@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface AllGoodsView : UIView
+/** 祭祀贡品数组*/
+@property (nonatomic, strong) NSArray *goodsArr;
 
+/** 被选定的商品数组*/
+@property (nonatomic, strong) NSMutableArray *isSelectedGoodsArr;
 @end

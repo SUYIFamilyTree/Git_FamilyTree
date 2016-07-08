@@ -16,4 +16,6 @@ typedef  void (^FailureCallBack)(NSError *error);
 //单纯的获取数据
 + (void)POSTWithParameters:(NSDictionary *)customParams requestID:(NSNumber *)requestID requestcode:(NSString *)requestcode success:(SuccessCallBack)success failure:(FailureCallBack)fail;
 
+
+
 @end

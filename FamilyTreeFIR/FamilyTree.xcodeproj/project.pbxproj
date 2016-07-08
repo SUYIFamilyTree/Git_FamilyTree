@@ -556,6 +556,7 @@
 		BC4790631D20BD6F00BA194D /* AreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4790621D20BD6F00BA194D /* AreaModel.m */; };
 		BC499B951D2CD851007870FE /* BarrageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC499B941D2CD851007870FE /* BarrageListModel.m */; };
 		BC499B9E1D2CDFDD007870FE /* FlyBarrageTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC499B9D1D2CDFDD007870FE /* FlyBarrageTextView.m */; };
+		BC499BA11D2D06EE007870FE /* CemGoodsShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC499BA01D2D06EE007870FE /* CemGoodsShopModel.m */; };
 		BC51929E1D236C2E0020480F /* VIPGrowUpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC51929D1D236C2E0020480F /* VIPGrowUpModel.m */; };
 		BC5192A11D239D9A0020480F /* NSString+valiMobile.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5192A01D239D9A0020480F /* NSString+valiMobile.m */; };
 		BC5192A41D23A0E30020480F /* NSString+valiEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5192A31D23A0E30020480F /* NSString+valiEmail.m */; };
@@ -1414,6 +1415,8 @@
 		BC499B941D2CD851007870FE /* BarrageListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarrageListModel.m; sourceTree = "<group>"; };
 		BC499B9C1D2CDFDD007870FE /* FlyBarrageTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyBarrageTextView.h; sourceTree = "<group>"; };
 		BC499B9D1D2CDFDD007870FE /* FlyBarrageTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyBarrageTextView.m; sourceTree = "<group>"; };
+		BC499B9F1D2D06EE007870FE /* CemGoodsShopModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CemGoodsShopModel.h; sourceTree = "<group>"; };
+		BC499BA01D2D06EE007870FE /* CemGoodsShopModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CemGoodsShopModel.m; sourceTree = "<group>"; };
 		BC51929C1D236C2E0020480F /* VIPGrowUpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIPGrowUpModel.h; sourceTree = "<group>"; };
 		BC51929D1D236C2E0020480F /* VIPGrowUpModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIPGrowUpModel.m; sourceTree = "<group>"; };
 		BC51929F1D239D9A0020480F /* NSString+valiMobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+valiMobile.h"; sourceTree = "<group>"; };
@@ -3211,6 +3214,8 @@
 				BC578DBB1D2B4AC100776106 /* CemeteryModel.m */,
 				BC499B931D2CD851007870FE /* BarrageListModel.h */,
 				BC499B941D2CD851007870FE /* BarrageListModel.m */,
+				BC499B9F1D2D06EE007870FE /* CemGoodsShopModel.h */,
+				BC499BA01D2D06EE007870FE /* CemGoodsShopModel.m */,
 			);
 			path = "墓园model";
 			sourceTree = "<group>";
@@ -4588,6 +4593,7 @@
 				ADE2D17B1CF6FBD3009D1ADF /* FamilyShopView.m in Sources */,
 				AD5D458A1D23BEC000396B97 /* WGennerationModel.m in Sources */,
 				ADB9266A1CF7EBAC00AA8B6E /* FamilyTreeViewController.m in Sources */,
+				BC499BA11D2D06EE007870FE /* CemGoodsShopModel.m in Sources */,
 				BC1EA60A1CFC00D8006F6454 /* SearchTableViewCell.m in Sources */,
 				BC9672921D11298800F60534 /* EditPersonalInfoTableViewCell.m in Sources */,
 			);

@@ -20,9 +20,13 @@ enum {
 #import "CemeteryModel.h"
 #import "BarrageListModel.h"
 #import "FlyBarrageTextView.h"
+#import "CemGoodsShopModel.h"
+#import "AllGoodsView.h"
+#import "UIImageView+WebCache.h"
+
 
 #define bacheight (Screen_height-self.tabBarController.tabBar.bounds.size.height-64)
-@interface CemeteryViewController ()<InputCherishViewDelegate,UITextViewDelegate>
+@interface CemeteryViewController ()<InputCherishViewDelegate,UITextViewDelegate,CemGoodsShopViewDelegate>
 {
     BOOL _selectedMianhuaiBtn;
 }
@@ -33,8 +37,6 @@ enum {
 @property (nonatomic,strong) CemDetailView *detailView; /*详细墓碑内容*/
 
 @property (nonatomic,strong) CemGoodsShopView *goodsView; /*祭祀商品*/
-
-@property (nonatomic,copy) NSMutableArray *goodsImagesArr; /*买的祭祀商品数组*/
 
 @property (nonatomic,strong) InputCherishView *inputView; /*输入缅怀语*/
 
@@ -47,6 +49,15 @@ enum {
 @property (nonatomic, strong) NSMutableArray *barragesArr;
 /** 弹幕颜色数组*/
 @property (nonatomic, strong) NSArray *colorArray;
+/** 定时器数组*/
+@property (nonatomic, strong) NSMutableArray *timersArr;
+/** 祭祀贡品商店物品数组*/
+@property (nonatomic, strong) NSArray *goodsArr;
+/** 已经购买的祭祀贡品数组*/
+@property (nonatomic, strong) NSMutableArray *currentCemGoodsArr;
+/** 用来显示已经购买的祭祀贡品视图*/
+@property (nonatomic, strong) UIView *goodsBackView;
+
 @end
 
 @implementation CemeteryViewController
@@ -57,7 +68,10 @@ enum {
     [self initUI];
     [self getCemeteryData];
     [self getCemeteryBarrageList];
-    [self getCemeteryJSData];
+    [self getCemeteryJSShopData];
+    self.goodsBackView = [[UIView alloc]initWithFrame:AdaptationFrame(0, 760, 1.4*bacheight/AdaptationWidth(), 280)];
+    //goodsBackView.backgroundColor = [UIColor redColor];
+    [self.scrollView addSubview:self.goodsBackView];
 }
 
 -(void)getCemeteryData{
@@ -78,20 +92,36 @@ enum {
     NSDictionary *logDic = @{@"CeId":@(self.CeId)};
     WK(weakSelf);
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeBarrageList success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        //MYLog(@"%@",jsonDic[@"data"]);
+        MYLog(@"%@",jsonDic[@"data"]);
         if (succe) {
             weakSelf.barrageListModel = [BarrageListModel modelWithJSON:jsonDic[@"data"]];
             for (int i = 0; i < weakSelf.barrageListModel.dm.count; i++) {
                 [weakSelf.barragesArr addObject:weakSelf.barrageListModel.dm[i].BaContent];
             }
+            //让弹幕滚动起来
             [weakSelf makeBarrageListAnimation:weakSelf.barragesArr];
+            //让贡品陈列出来
+            [weakSelf.currentCemGoodsArr addObjectsFromArray:weakSelf.barrageListModel.js];
+            [weakSelf putCemGoodsWithArr];
         }
     } failure:^(NSError *error) {
         
     }];
 }
 
--(void)getCemeteryJSData{
+-(void)putCemGoodsWithArr{
+    for (int i = 0; i < self.currentCemGoodsArr.count; i++) {
+        UIImageView *goodsIV = [[UIImageView alloc]initWithFrame:AdaptationFrame((1.4*bacheight/AdaptationWidth()-105)/2+((i%2)?1:-1)*105*(([@[@(i),@(i-13),@(i-26)][i/13] intValue]+1)/2), 80*(i/13), 105, 80)];
+        goodsIV.backgroundColor = [UIColor clearColor];
+        goodsIV.image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:self.currentCemGoodsArr[i]];
+        [self.goodsBackView addSubview:goodsIV];
+    }
+    
+    
+}
+
+
+-(void)getCemeteryJSShopData{
     NSDictionary *logDic = @{
                              @"pagenum":@1,
                              @"pagesize":@1999,
@@ -102,17 +132,41 @@ enum {
                              @"jwj":@"",
                              @"shoptype":@"JS"
                              };
-    //WK(weakSelf);
+    WK(weakSelf);
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getcomlist" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         MYLog(@"数据%@",jsonDic[@"data"]);
         if (succe) {
+            NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
+            weakSelf.goodsArr = [NSArray modelArrayWithClass:[CemGoodsShopModel class] json:dic[@"datalist"]];
             
+            //把贡品图片放到缓存中
+            for (CemGoodsShopModel *goods in weakSelf.goodsArr) {
+                SDWebImageManager *manager = [SDWebImageManager sharedManager];
+                [manager downloadImageWithURL:[NSURL URLWithString:goods.CoCover]
+                                      options:0
+                                     progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                         // progression tracking code
+                                     }
+                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                        if (image) {
+                                            [[SDImageCache sharedImageCache] storeImage:image forKey:goods.CoConame];
+                                        }
+                                    }];
+                
+            }
+            
+            
+            MYLog(@"%@",weakSelf.goodsArr);
         }
     } failure:^(NSError *error) {
         
     }];
 
 }
+
+
+
+
 
 //弹幕动画效果
 -(void)makeBarrageListAnimation:(NSMutableArray *)barragesArray{
@@ -128,6 +182,7 @@ enum {
                 FlyBarrageTextView * flyView = [[FlyBarrageTextView alloc] initWithY:tempNum AndText:barragesArray[tempI] AndWordSize:12];
                 flyView.textColor = self.colorArray[colorNum];
                 [self.view addSubview:flyView];
+                [self.timersArr addObject:flyView.timer];
             });
         });
     }
@@ -141,6 +196,7 @@ enum {
             FlyBarrageTextView * flyView = [[FlyBarrageTextView alloc] initWithY:tempNum AndText:str AndWordSize:12];
             flyView.textColor = self.colorArray[colorNum];
             [self.view addSubview:flyView];
+            [self.timersArr addObject:flyView.timer];
         });
     });
 
@@ -156,7 +212,6 @@ enum {
     [self.scrollView addSubview:self.cemImageView];
     [self initXiangLu];
     [self.scrollView addSubview:self.detailView];
-    [self allGoodsdisplay];
     [self initRightBtn];
     
     
@@ -171,16 +226,6 @@ enum {
         image.image = MImage(@"my_name_xiangLu");
         
         [self.scrollView addSubview:image];
-    }
-    
-}
-
-//所有买了的贡品
--(void)allGoodsdisplay{
-    for (int idx = 0; idx<self.goodsImagesArr.count; idx++) {
-        UIImageView *godsIma = [[UIImageView alloc] initWithFrame:AdaptationFrame(idx*105, 740, 105, 80)];
-        godsIma.image = MImage(self.goodsImagesArr[idx]);
-        [self.scrollView addSubview:godsIma];
     }
     
 }
@@ -265,7 +310,9 @@ enum {
 -(CemGoodsShopView *)goodsView{
     if (!_goodsView) {
         _goodsView = [[CemGoodsShopView alloc] initWithFrame:CGRectMake(0, 64, Screen_width,Screen_height-64-self.tabBarController.tabBar.bounds.size.height)];
-        
+        ((AllGoodsView *)(_goodsView.singleGoods)).goodsArr = _goodsArr;
+        _goodsView.CeId = _CeId;
+        _goodsView.delegate = self;
     }
     return _goodsView;
 }
@@ -278,19 +325,26 @@ enum {
     return _inputView;
 }
 
--(NSMutableArray *)goodsImagesArr{
-    if (!_goodsImagesArr) {
-        _goodsImagesArr = [@[@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour",@"my_name_flour"] mutableCopy];
-        
-    }
-    return _goodsImagesArr;
-}
 
 -(NSMutableArray *)barragesArr{
     if (!_barragesArr) {
         _barragesArr = [@[] mutableCopy];
     }
     return _barragesArr;
+}
+
+-(NSMutableArray *)timersArr{
+    if (!_timersArr) {
+        _timersArr = [@[] mutableCopy];
+    }
+    return _timersArr;
+}
+
+-(NSMutableArray *)currentCemGoodsArr{
+    if (!_currentCemGoodsArr) {
+        _currentCemGoodsArr = [@[] mutableCopy];
+    }
+    return _currentCemGoodsArr;
 }
 
 
@@ -341,5 +395,25 @@ enum {
     [self.view endEditing:YES];
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    for (NSTimer *timer in self.timersArr) {
+        [timer invalidate];
+    }
+}
+
+#pragma mark - CemGoodsShopViewDelegate
+-(void)uploadGoodsToRefreshcemGoods:(NSArray<CemGoodsShopModel *> *)goodsArr{
+    //刷新贡品摆放位置
+    //MYLog(@"该刷新贡品了");
+    for (int i = 0; i < goodsArr.count; i++) {
+        int j = i + (short)self.currentCemGoodsArr.count;
+        UIImageView *goodsIV = [[UIImageView alloc]initWithFrame:AdaptationFrame((1.4*bacheight/AdaptationWidth()-105)/2+((j%2)?1:-1)*105*(([@[@(j),@(j-13),@(j-26)][j/13] intValue]+1)/2), 80*(j/13), 105, 80)];
+        goodsIV.backgroundColor = [UIColor clearColor];
+        goodsIV.image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:goodsArr[i].CoConame];
+        [self.goodsBackView addSubview:goodsIV];
+    }
+
+    
+}
 
 @end

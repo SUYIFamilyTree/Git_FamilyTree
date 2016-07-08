@@ -33,13 +33,13 @@
 
 -(void)setCemeteryModel:(CemeteryModel *)cemeteryModel{
     _cemeteryModel = cemeteryModel;
-    self.perName.text = [NSString verticalStringWith:[NSString stringWithFormat:@"%@之墓",cemeteryModel.CeMaster]];
+    self.perName.text = [NSString verticalStringWith:[NSString stringWithFormat:@"%@%@之墓",cemeteryModel.CeTitle,cemeteryModel.CeMaster]];
     [self.perName sizeToFit];
     self.cherLabel.text = [NSString verticalStringWith:cemeteryModel.CeEpitaph];
     [_cherLabel sizeToFit];
-    self.birLabel.text = [NSString stringWithFormat:@"生  %@",cemeteryModel.CeBrithday];
+    self.birLabel.text = [NSString stringWithFormat:@"生\n%@",cemeteryModel.CeBrithday];
     [_birLabel sizeToFit];
-    self.deadLabel.text = [NSString stringWithFormat:@"卒  %@",cemeteryModel.CeDeathday];
+    self.deadLabel.text = [NSString stringWithFormat:@"卒\n%@",cemeteryModel.CeDeathday];
     [_deadLabel sizeToFit];
     
     [self.headView setImageWithURL:[NSURL URLWithString:cemeteryModel.CePhoto] placeholder:MImage(@"my_name_touxiang")];

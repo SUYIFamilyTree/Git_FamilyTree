@@ -8,6 +8,8 @@
 
 #import "CemGoodsShopView.h"
 #import "AllGoodsView.h"
+#import "CemGoodsShopModel.h"
+
 @interface CemGoodsShopView()
 
 @end
@@ -58,11 +60,8 @@
     }
     
     //贡品
-    
-   
-    
-    AllGoodsView *singleGoods = [[AllGoodsView alloc ] initWithFrame:AdaptationFrame(60, 60, 520, 618)];
-    [backImage addSubview:singleGoods];
+    self.singleGoods = [[AllGoodsView alloc ] initWithFrame:AdaptationFrame(60, 60, 520, 618)];
+    [backImage addSubview:self.singleGoods];
     
 }
 
@@ -71,6 +70,9 @@
         case 0:
         {
             [self removeFromSuperview];
+            //MYLog(@"%@",((AllGoodsView *)self.singleGoods).isSelectedGoodsArr);
+            [self uploadToBuyCemGoods:[((AllGoodsView *)self.singleGoods).isSelectedGoodsArr copy]];
+            
         }
             break;
         case 1:
@@ -81,6 +83,32 @@
         default:
             break;
     }
+}
+
+//上传购买的贡品
+-(void)uploadToBuyCemGoods:(NSArray<CemGoodsShopModel *> *)goodsArr{
+    MYLog(@"%@",goodsArr);
+    NSMutableArray *arr = [@[] mutableCopy];
+    for (CemGoodsShopModel *good in goodsArr) {
+        NSDictionary *dic = @{@"coid":@(good.CoId),
+                              @"coprid":@(good.CoprId),
+                              @"cnt":@1};
+        [arr addObject:dic];
+    }
+    MYLog(@"%@",arr);
+    NSDictionary *logDic = @{@"CeId":@(self.CeId),@"JS":arr};
+    WK(weakSelf);
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeRitual success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"%@",jsonDic[@"data"]);
+        if (succe) {
+            //刷新贡品摆放界面
+            [weakSelf.delegate uploadGoodsToRefreshcemGoods:goodsArr];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
 }
 
 

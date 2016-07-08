@@ -30,6 +30,7 @@ static NSString *const kReusableCemGoodsCellIdentifier = @"cemGoodsCell";
 
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    //MYLog(@"贡品数组%@",_goodsArr);
     return 3;
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -37,6 +38,18 @@ static NSString *const kReusableCemGoodsCellIdentifier = @"cemGoodsCell";
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     CemSingleGoodsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kReusableCemGoodsCellIdentifier forIndexPath:indexPath];
+    switch (indexPath.section) {
+        case 0:
+            cell.cemGoodsShopModel = self.goodsArr[indexPath.row];
+            break;
+        case 1:
+            cell.cemGoodsShopModel = self.goodsArr[indexPath.row+5];
+            break;
+        case 2:
+            cell.cemGoodsShopModel = self.goodsArr[indexPath.row+10];
+        default:
+            break;
+    }
     return cell;
 }
 
@@ -54,7 +67,15 @@ static NSString *const kReusableCemGoodsCellIdentifier = @"cemGoodsCell";
     
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%ld", indexPath.row);
+    //NSLog(@"%ld", indexPath.row);
+    CemSingleGoodsCollectionViewCell *cell = (CemSingleGoodsCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    if (cell.selectedItem) {
+        [self.isSelectedGoodsArr addObject:cell.cemGoodsShopModel];
+    }else{
+        [self.isSelectedGoodsArr removeObject:cell.cemGoodsShopModel];
+    }
+    
+    //MYLog(@"%@",self.isSelectedGoodsArr);
 }
 -(UICollectionView *)collectionView{
     if (!_collectionView) {
@@ -73,10 +94,15 @@ static NSString *const kReusableCemGoodsCellIdentifier = @"cemGoodsCell";
         
         [_collectionView registerClass:[CemSingleGoodsCollectionViewCell class] forCellWithReuseIdentifier:kReusableCemGoodsCellIdentifier];
         [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headLabel"];
-        
-        
-        
     }
     return _collectionView;
 }
+
+-(NSMutableArray *)isSelectedGoodsArr{
+    if (!_isSelectedGoodsArr) {
+        _isSelectedGoodsArr = [@[] mutableCopy];
+    }
+    return _isSelectedGoodsArr;
+}
+
 @end

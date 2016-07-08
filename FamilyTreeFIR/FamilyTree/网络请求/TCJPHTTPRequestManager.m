@@ -29,6 +29,8 @@
     NSString *requestData = @"";
     if ([codingImageArr containsObject:requestcode]) {
        requestData = [NSString stringWithDic:customParams type:md5CodingTypeUploadImage];
+    }else if([requestcode isEqualToString:kRequestCodeRitual]){
+        requestData = [NSString stringWithDic:customParams type:md5CodingTypeUploadArr];
     }else{
         requestData = [NSString stringWithDic:customParams type:md5CodingTypeOther];
     }
@@ -38,7 +40,7 @@
     NSString *requestUserId = [NSString stringWithFormat:@"%@",requestID];
     NSString *md5checkStr = [[[[requestData stringByAppendingString:SecretKeySend]stringByAppendingString:requestUserId] stringByAppendingString:requestcode] stringByAppendingString:timeStamp];
     //MYLog(@"requestData:%@",requestData);
-    //NSLog(@"md5beforeStr--%@", md5checkStr);
+    NSLog(@"md5beforeStr--%@", md5checkStr);
     NSString *md5checkStr1 = [md5checkStr stringByReplacingOccurrencesOfString:@"\\" withString:@""];
     
     NSString *md5check = [NSString md5Str:md5checkStr1];
@@ -70,7 +72,7 @@
         
         NSError *error;
         NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSUTF8StringEncoding error:&error];
-        NSLog(@"得到的返回---%@",jsonDic);
+        //NSLog(@"得到的返回---%@",jsonDic);
         
         NSString *jsonStr = [NSString stringWithFormat:@"%@",jsonDic];
         NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
@@ -103,9 +105,10 @@
         fail(error);
         [SXLoadingView showAlertHUD:@"网络连接故障！" duration:1.0];
     }];
-
-    
-    
 }
+
+
+
+
 
 @end
