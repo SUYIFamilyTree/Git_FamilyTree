@@ -78,6 +78,7 @@ static NSString *const kReusableCollecCellIdentifier = @"CollectioncellIdentifie
     [[self viewController].navigationController pushViewController:famName animated:YES];
 }
 
+
 #pragma mark *** getters ***
 -(UICollectionView *)collectionView{
     if (!_collectionView) {
@@ -99,4 +100,8 @@ static NSString *const kReusableCollecCellIdentifier = @"CollectioncellIdentifie
     }
     return _collectionView;
 }
+
+
+
+
 @end
