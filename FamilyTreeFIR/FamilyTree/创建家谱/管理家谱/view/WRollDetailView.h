@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface WRollDetailView : UIView
-
+-(void)updateUI;
 @end

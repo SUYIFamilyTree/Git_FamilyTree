@@ -299,6 +299,12 @@
 		ADAB221D1D26174A0047B6F0 /* WIDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADAB221C1D26174A0047B6F0 /* WIDModel.m */; };
 		ADB2D1061D1CCCA10072C022 /* LYFoundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB2D1051D1CCCA10072C022 /* LYFoundation+Log.m */; };
 		ADB2D1091D1CCEE60072C022 /* CreateFamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB2D1081D1CCEE60072C022 /* CreateFamModel.m */; };
+		ADB737D61D2F3A7F00001011 /* WAddJPPersonView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB737D51D2F3A7F00001011 /* WAddJPPersonView.m */; };
+		ADB737DA1D2F3F5200001011 /* addJP.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB737D71D2F3F5200001011 /* addJP.png */; };
+		ADB737DB1D2F3F5200001011 /* addJP@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB737D81D2F3F5200001011 /* addJP@2x.png */; };
+		ADB737DC1D2F3F5200001011 /* addJP@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB737D91D2F3F5200001011 /* addJP@3x.png */; };
+		ADB737E41D2F747500001011 /* WDetailJPInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB737E21D2F747500001011 /* WDetailJPInfoModel.m */; };
+		ADB737E71D2F749800001011 /* WJPPersonZBNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB737E61D2F749800001011 /* WJPPersonZBNumberModel.m */; };
 		ADB7F0681D0297EE001F151D /* todayYS_learn_blues.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB7F0411D0297EE001F151D /* todayYS_learn_blues.png */; };
 		ADB7F0691D0297EE001F151D /* todayYS_learn_blues@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB7F0421D0297EE001F151D /* todayYS_learn_blues@2x.png */; };
 		ADB7F06A1D0297EE001F151D /* todayYS_learn_blues@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB7F0431D0297EE001F151D /* todayYS_learn_blues@3x.png */; };
@@ -486,6 +492,7 @@
 		ADE2D17B1CF6FBD3009D1ADF /* FamilyShopView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE2D17A1CF6FBD3009D1ADF /* FamilyShopView.m */; };
 		ADE2D17E1CF7052C009D1ADF /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE2D17D1CF7052C009D1ADF /* TableView.m */; };
 		ADE3BBD31D13E795006523C4 /* DivinationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE3BBD21D13E795006523C4 /* DivinationViewController.m */; };
+		ADF1FC9F1D2FA2BF006080C8 /* WJPListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADF1FC9E1D2FA2BF006080C8 /* WJPListModel.m */; };
 		ADF854BA1CF53FF700D222B7 /* bg-1.png in Resources */ = {isa = PBXBuildFile; fileRef = ADF854B91CF53FF700D222B7 /* bg-1.png */; };
 		BC00EA051D18CFA200BF1DC3 /* MemallInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC00EA041D18CFA200BF1DC3 /* MemallInfoModel.m */; };
 		BC00EA0B1D190E0A00BF1DC3 /* NSString+addLineBreakOrSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = BC00EA0A1D190E0A00BF1DC3 /* NSString+addLineBreakOrSpace.m */; };
@@ -1112,6 +1119,15 @@
 		ADB2D1051D1CCCA10072C022 /* LYFoundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LYFoundation+Log.m"; sourceTree = "<group>"; };
 		ADB2D1071D1CCEE60072C022 /* CreateFamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFamModel.h; sourceTree = "<group>"; };
 		ADB2D1081D1CCEE60072C022 /* CreateFamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateFamModel.m; sourceTree = "<group>"; };
+		ADB737D41D2F3A7F00001011 /* WAddJPPersonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAddJPPersonView.h; sourceTree = "<group>"; };
+		ADB737D51D2F3A7F00001011 /* WAddJPPersonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAddJPPersonView.m; sourceTree = "<group>"; };
+		ADB737D71D2F3F5200001011 /* addJP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addJP.png; sourceTree = "<group>"; };
+		ADB737D81D2F3F5200001011 /* addJP@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addJP@2x.png"; sourceTree = "<group>"; };
+		ADB737D91D2F3F5200001011 /* addJP@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addJP@3x.png"; sourceTree = "<group>"; };
+		ADB737E11D2F747500001011 /* WDetailJPInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDetailJPInfoModel.h; sourceTree = "<group>"; };
+		ADB737E21D2F747500001011 /* WDetailJPInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDetailJPInfoModel.m; sourceTree = "<group>"; };
+		ADB737E51D2F749800001011 /* WJPPersonZBNumberModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJPPersonZBNumberModel.h; sourceTree = "<group>"; };
+		ADB737E61D2F749800001011 /* WJPPersonZBNumberModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJPPersonZBNumberModel.m; sourceTree = "<group>"; };
 		ADB7F0311D026E7A001F151D /* woman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = woman.png; path = ../../../woman.png; sourceTree = "<group>"; };
 		ADB7F0321D026E7A001F151D /* woman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "woman@2x.png"; path = "../../../woman@2x.png"; sourceTree = "<group>"; };
 		ADB7F0331D026E7A001F151D /* woman@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "woman@3x.png"; path = "../../../woman@3x.png"; sourceTree = "<group>"; };
@@ -1337,6 +1353,8 @@
 		ADE2D17D1CF7052C009D1ADF /* TableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableView.m; sourceTree = "<group>"; };
 		ADE3BBD11D13E795006523C4 /* DivinationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DivinationViewController.h; sourceTree = "<group>"; };
 		ADE3BBD21D13E795006523C4 /* DivinationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivinationViewController.m; sourceTree = "<group>"; };
+		ADF1FC9D1D2FA2BF006080C8 /* WJPListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJPListModel.h; sourceTree = "<group>"; };
+		ADF1FC9E1D2FA2BF006080C8 /* WJPListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJPListModel.m; sourceTree = "<group>"; };
 		ADF854B81CF53A9200D222B7 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		ADF854B91CF53FF700D222B7 /* bg-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-1.png"; sourceTree = "<group>"; };
 		BC00EA031D18CFA200BF1DC3 /* MemallInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemallInfoModel.h; sourceTree = "<group>"; };
@@ -1745,6 +1763,9 @@
 		AD024C4E1CF68655003380E5 /* 家谱 */ = {
 			isa = PBXGroup;
 			children = (
+				ADB737D71D2F3F5200001011 /* addJP.png */,
+				ADB737D81D2F3F5200001011 /* addJP@2x.png */,
+				ADB737D91D2F3F5200001011 /* addJP@3x.png */,
 				ADD23CD91D0D4000008986F6 /* 家谱-交互-没有家谱 */,
 				ADD23CE31D0D4000008986F6 /* 家谱-交互-有家谱 */,
 				AD49FECB1CF69E1900DF9F7E /* bg.png */,
@@ -2363,6 +2384,9 @@
 		ADA98E801D1126D2005B23EC /* model */ = {
 			isa = PBXGroup;
 			children = (
+				ADF1FC9C1D2FA29D006080C8 /* 所有卷谱列表 */,
+				ADB737E01D2F747500001011 /* 卷谱字辈人物详情 */,
+				ADB737E31D2F747500001011 /* 卷谱字辈详情 */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2378,6 +2402,8 @@
 				ADC4721F1D1A2472000388AF /* WRollDetailView.m */,
 				ADC472211D1A5A88000388AF /* WSwitchDetailFamView.h */,
 				ADC472221D1A5A88000388AF /* WSwitchDetailFamView.m */,
+				ADB737D41D2F3A7F00001011 /* WAddJPPersonView.h */,
+				ADB737D51D2F3A7F00001011 /* WAddJPPersonView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -2406,6 +2432,24 @@
 				ADE265A71D20C4C800F12FC9 /* WSelectMyFamModel.m */,
 			);
 			path = "我的家谱";
+			sourceTree = "<group>";
+		};
+		ADB737E01D2F747500001011 /* 卷谱字辈人物详情 */ = {
+			isa = PBXGroup;
+			children = (
+				ADB737E11D2F747500001011 /* WDetailJPInfoModel.h */,
+				ADB737E21D2F747500001011 /* WDetailJPInfoModel.m */,
+			);
+			path = "卷谱字辈人物详情";
+			sourceTree = "<group>";
+		};
+		ADB737E31D2F747500001011 /* 卷谱字辈详情 */ = {
+			isa = PBXGroup;
+			children = (
+				ADB737E51D2F749800001011 /* WJPPersonZBNumberModel.h */,
+				ADB737E61D2F749800001011 /* WJPPersonZBNumberModel.m */,
+			);
+			path = "卷谱字辈详情";
 			sourceTree = "<group>";
 		};
 		ADB7F0401D0297EE001F151D /* 今日运势 */ = {
@@ -2999,6 +3043,15 @@
 				AD5F5C351D17D2E60035710F /* WAfterDivinationViewController.m */,
 			);
 			path = "求签";
+			sourceTree = "<group>";
+		};
+		ADF1FC9C1D2FA29D006080C8 /* 所有卷谱列表 */ = {
+			isa = PBXGroup;
+			children = (
+				ADF1FC9D1D2FA2BF006080C8 /* WJPListModel.h */,
+				ADF1FC9E1D2FA2BF006080C8 /* WJPListModel.m */,
+			);
+			path = "所有卷谱列表";
 			sourceTree = "<group>";
 		};
 		ADF854BB1CF540DC00D222B7 /* 登录界面 */ = {
@@ -4270,11 +4323,13 @@
 				AD5F8C6C1D177B8600DA9A0C /* qiuQian_sm_yb@2x.png in Resources */,
 				ADD23CD51D0D0C56008986F6 /* ziBei_touxiang_man@3x.png in Resources */,
 				BC5F15B21D0FF1CA004F3622 /* gr_ct_ys_gray3@3x.png in Resources */,
+				ADB737DC1D2F3F5200001011 /* addJP@3x.png in Resources */,
 				BC5F16051D0FF224004F3622 /* vip_left@3x.png in Resources */,
 				BC5F15701D0FF1CA004F3622 /* gr_ct_0@3x.png in Resources */,
 				ADA4C1461D0E5D7700CA9067 /* my_name_touxiang.png in Resources */,
 				BC5F15951D0FF1CA004F3622 /* gr_ct_tit_wt.png in Resources */,
 				BC5F15FA1D0FF224004F3622 /* vip_bg.png in Resources */,
+				ADB737DB1D2F3F5200001011 /* addJP@2x.png in Resources */,
 				ADA4C1481D0E5D7700CA9067 /* my_name_touxiang@3x.png in Resources */,
 				ADB926591CF7E10D00AA8B6E /* yanzheng.png in Resources */,
 				AD5F8C631D177B8600DA9A0C /* qiuQian_bg@2x.png in Resources */,
@@ -4382,6 +4437,7 @@
 				AD4D31A01D055C4D0095F3F1 /* index_icon_fuWu@2x.png in Resources */,
 				AD8DAAFE1CFD76A5009B7958 /* sj_icon_3@2x.png in Resources */,
 				ADA4C13C1D0E5D7700CA9067 /* my_name_fruit@3x.png in Resources */,
+				ADB737DA1D2F3F5200001011 /* addJP.png in Resources */,
 				BC5F15861D0FF1CA004F3622 /* gr_ct_jiang_jz2.png in Resources */,
 				BC1B0F821D0D5BEB00095D5F /* zfzg_shuaXin@2x.png in Resources */,
 				BC5F157D1D0FF1CA004F3622 /* gr_ct_bg.png in Resources */,
@@ -4576,6 +4632,7 @@
 				ADB9734D1CFE86FF007B876B /* BackScrollAndDetailView.m in Sources */,
 				ADC4F1AF1D125410003D2B27 /* DataSelectPickView.m in Sources */,
 				BC578DBC1D2B4AC100776106 /* CemeteryModel.m in Sources */,
+				ADB737E41D2F747500001011 /* WDetailJPInfoModel.m in Sources */,
 				BC9C8E251D13F10B00C445D0 /* CustomPikcerDateView.m in Sources */,
 				ADA4C1151D0E437E00CA9067 /* CemeteryViewController.m in Sources */,
 				AD8E603D1CFC0BDA00355C06 /* FindPassView.m in Sources */,
@@ -4597,6 +4654,7 @@
 				BC499B9E1D2CDFDD007870FE /* FlyBarrageTextView.m in Sources */,
 				ADA4C16F1D0E925700CA9067 /* AllGoodsView.m in Sources */,
 				ADC13BA31D1926C7000F901C /* WDetailManagerViewController.m in Sources */,
+				ADB737E71D2F749800001011 /* WJPPersonZBNumberModel.m in Sources */,
 				BC458A861D1CC64300AA0DDF /* JobModel.m in Sources */,
 				ADA380661CFC299700B596B7 /* LoginModel.m in Sources */,
 				ADB973501CFEB2D7007B876B /* InputView.m in Sources */,
@@ -4627,11 +4685,13 @@
 				BC5F150F1D0FF1AD004F3622 /* PersonalCenterCliffordView.m in Sources */,
 				AD15B2751CF817EB00C0EEB7 /* FindPassViewController.m in Sources */,
 				BCDE42651D0E45CE00921373 /* UIView+getCurrentViewController.m in Sources */,
+				ADB737D61D2F3A7F00001011 /* WAddJPPersonView.m in Sources */,
 				ADBA017A1D016E0A0016AB00 /* AddMenberView.m in Sources */,
 				ADA98E821D1126D2005B23EC /* ManagerFamilyViewController.m in Sources */,
 				BCCE8A981CFFF289005A5E21 /* PrivateWorshipTableViewCell.m in Sources */,
 				BC5F151A1D0FF1AD004F3622 /* PayForForeverFortuneView.m in Sources */,
 				AD5F5C361D17D2E60035710F /* WAfterDivinationViewController.m in Sources */,
+				ADF1FC9F1D2FA2BF006080C8 /* WJPListModel.m in Sources */,
 				BC729A071D226000008FEB71 /* NSString+getStarDate.m in Sources */,
 				BC59E1181D2F939F000A3AE3 /* HundredsNamesModel.m in Sources */,
 				ADA4C11A1D0E4F3600CA9067 /* CemDetailView.m in Sources */,

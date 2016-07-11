@@ -20,8 +20,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-//        [self.contentView addSubview:self.whiteView];
-        self.backgroundColor = [UIColor redColor];
+        [self.contentView addSubview:self.whiteView];
         [self.whiteView addSubview:self.famNameLabel];
         [self.whiteView addSubview:self.famImageView];
         [self.whiteView addSubview:self.famIntroLabel];
