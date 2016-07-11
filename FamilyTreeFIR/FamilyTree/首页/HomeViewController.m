@@ -87,7 +87,7 @@ typedef enum : NSUInteger {
 //                [_ScrImages addObject:homeViewModel.imgArray[i]];
 //            }
             
-            self.topScrollerView.imageNames = _ScrImages;
+            weakSelf.topScrollerView.imageNames = _ScrImages;
             
             
         }
