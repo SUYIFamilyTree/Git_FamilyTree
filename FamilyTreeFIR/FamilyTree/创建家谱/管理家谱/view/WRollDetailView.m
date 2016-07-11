@@ -34,9 +34,10 @@ enum {
 }
 
 -(void)updateUI{
+    
     WJPPersonZBNumberModel *model = [WJPPersonZBNumberModel sharedWJPPersonZBNumberModel];
 
-    for (int idx = 0; idx<5; idx++) {
+    for (int idx = 0; idx<model.datalist.count; idx++) {
         _leftArr[idx+2] = [NSString stringWithFormat:@"%@：",model.datalist[idx].zb];
         _rightArr[idx+2] = [NSString stringWithFormat:@"%ld",model.datalist[idx].cnt];
     }
@@ -51,7 +52,7 @@ enum {
 }
 #pragma mark *** 初始化数据 ***
 -(void)initData{
-    _leftArr = [@[@"人数：",@"字辈：",@"：",@"：",@"：",@"：",@"："] mutableCopy];
+    _leftArr = [@[@"人数：",@"字辈：",@"",@"",@"",@"",@""] mutableCopy];
     
     _rightArr = [@[@"",@"",@"",@"",@"",@"",@""] mutableCopy];
 }
