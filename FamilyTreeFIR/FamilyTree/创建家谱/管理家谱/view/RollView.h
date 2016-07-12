@@ -14,6 +14,8 @@ typedef enum : NSUInteger {
 } RollViewType;
 
 @interface RollView : UIView
+/**卷谱id*/
+@property (nonatomic,strong) NSString *rollJPId;
 
 - (instancetype)initWithFrame:(CGRect)frame withTitle:(NSString *)title rollType:(RollViewType)rollType;
 

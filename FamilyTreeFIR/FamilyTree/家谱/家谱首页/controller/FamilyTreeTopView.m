@@ -19,7 +19,6 @@
 @property (nonatomic,strong) UIView *searchView; /*搜索框*/
 @property (nonatomic,strong) UILabel *searchLabel; /*输入关键词*/
 @property (nonatomic,strong) UIImageView *searchImage; /*搜索图片*/
-@property (nonatomic,strong) UIButton *menuBtn;
 
 @end
 
@@ -35,8 +34,7 @@
         [self.searchView addSubview:self.searchLabel];
         [self.searchView addSubview:self.searchImage];
         [self addSubview:self.menuBtn];
-        
-        
+ 
     }
     return self;
 }
@@ -55,12 +53,8 @@
     if (_delegate && [_delegate respondsToSelector:@selector(TopSearchView:didRespondsToMenusBtn:)]) {
         [_delegate TopSearchView:self didRespondsToMenusBtn:sender];
     }
-
     
 }
-
-
-
 #pragma mark *** tableViewDelegate ***
 
 #pragma mark *** getters ***

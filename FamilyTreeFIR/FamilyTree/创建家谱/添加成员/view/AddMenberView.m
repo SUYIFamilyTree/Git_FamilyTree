@@ -46,7 +46,10 @@
     self.fatheView = [self creatLabelTextWithTitle:@"父亲:" TitleFrame:CGRectMake(20, CGRectYH(self.name)+GapOfView, 55, InputView_height) inputViewLength:75 dataArr:[[WIDModel sharedWIDModel].fatherDic allKeys] inputViewLabel:@"" FinText:nil withStar:false];
     [self.backView addSubview:self.fatheView];
     
-    self.motherView = [self creatLabelTextWithTitle:@"母亲:" TitleFrame:CGRectMake(Screen_width-350*AdaptationWidth(), CGRectYH(self.name)+GapOfView, 55, InputView_height) inputViewLength:75 dataArr:@[@"郭小妹",@"郭二妹",@"速度"] inputViewLabel:@"不详" FinText:nil withStar:YES];
+//    self.motherView = [self creatLabelTextWithTitle:@"母亲:" TitleFrame:CGRectMake(Screen_width-350*AdaptationWidth(), CGRectYH(self.name)+GapOfView, 55, InputView_height) inputViewLength:75 dataArr:@[@"郭小妹",@"郭二妹",@"速度"] inputViewLabel:@"不详" FinText:nil withStar:YES];
+    
+    
+    
     [self.backView addSubview:self.motherView];
     [self.backView addSubview:self.sexInView];
     
@@ -167,6 +170,7 @@
         _gennerTextField.layer.borderColor = BorderColor;
         _gennerTextField.font = WFont(33);
         [_gennerTextField setEnabled:false];
+        _gennerTextField.textAlignment = 1;
         NSArray *arr = [WIDModel sharedWIDModel].ds[@"1"];
        __block NSString *firstZibei = @"";
         [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -194,5 +198,37 @@
     return _famousPerson;
 }
 
+-(UITextField *)motherView{
+    if (!_motherView) {
+        
+        UILabel *theLabel = [[UILabel alloc] initWithFrame:CGRectMake(Screen_width-350*AdaptationWidth(), CGRectYH(self.name)+GapOfView, 55, InputView_height)];
+        theLabel.text = @"母亲";
+        theLabel.font = WFont(33);
+        [self.backView addSubview:theLabel];
+        
+        UITextField *inputView = [[UITextField alloc] initWithFrame:CGRectMake(CGRectXW(theLabel), theLabel.frame.origin.y, 75+10, InputView_height)];
+        inputView.text = @"";
+        inputView.layer.borderColor = BorderColor;
+        inputView.layer.borderWidth = 1.0f;
+        inputView.textAlignment = 1;
+        
+        UILabel *finLabel = [UILabel new];
+        finLabel.text = @"";
+        [self.backView addSubview:finLabel];
+        
+        finLabel.sd_layout.leftSpaceToView(inputView,5).topEqualToView(theLabel).bottomEqualToView(theLabel).widthIs(20);
+        
+            UILabel *starLabel = [UILabel new];
+            starLabel.font = MFont(16);
+            starLabel.text = @"*";
+            starLabel.textColor = [UIColor redColor];
+            [self.backView addSubview:starLabel];
+            starLabel.sd_layout.leftSpaceToView(inputView,5).widthIs(10).heightIs(InputView_height).topEqualToView(inputView);
+        
+        
+        _motherView = inputView;
+    }
+    return _motherView;
+}
 
 @end

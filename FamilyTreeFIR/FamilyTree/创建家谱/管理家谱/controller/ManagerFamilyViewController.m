@@ -13,19 +13,32 @@
 @interface ManagerFamilyViewController ()<WswichDetailFamViewDelegate,WAddJPPersonViewDelegate>
 {
     BOOL _selectedRollView;//是否选择了某个卷谱
-//    BOOL _selectedSwithBtn;
+    BOOL _selectedADDView;//是否选择了添加按钮
+    BOOL _selectedADDBtn;//是否选择了新增卷谱俺就
+    
+    CGSize _contentSize;
+    
+    
     NSMutableArray *_titleArr;//卷谱名array
     
     NSMutableDictionary *_addJPDic;/** 添加卷谱信息里面的，名字--成员id 键值对 */
     
     /** 有多少种卷谱1-5为一种，5-9为一种，9-13为一种 */
     NSMutableArray *_JPTypeArr;
+    
     /** 每种卷 */
     NSInteger _selecetdJPDsId;
+    
+    /** 所有卷谱的frameArr */
+    NSMutableArray *_JPframeArr;
+    
+    /** 所有卷谱的id */
+    NSMutableArray *_JPAllId;
 }
 @property (nonatomic,strong) UIScrollView *backScrollView; /*背景滚动图*/
 
 @property (nonatomic,strong) UIImageView *famImage; /*家谱名字图腾*/
+
 @property (nonatomic,strong) UILabel *famName; /*家谱名*/
 
 
@@ -37,9 +50,12 @@
 
 @property (nonatomic,strong) CreateFamModel *famModel; /*家谱信息model*/
 
+/**添加卷谱的大加号按钮*/
+@property (nonatomic,strong) WAddJPPersonView *addJpPersonView;
+
+
 /**添加卷谱按钮*/
 @property (nonatomic,strong) UIButton *addJPBtn;
-
 
 @end
 
@@ -47,6 +63,10 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    if ([USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]) {
+        [WFamilyModel shareWFamilModel].myFamilyId = [USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID];
+
+    }
     [self initData];
     [self getJpTypeLayoutArrayCallback:^{
         
@@ -60,6 +80,9 @@
     _titleArr = [@[@"段正淳1|5代卷谱",@"段志兴6|9代卷谱",@"段志兴6 | 9代卷谱",@"段志兴10|15代卷谱",@"段志兴10|15代卷谱",@"段志兴10|15代卷谱"] mutableCopy];
     _addJPDic = [NSMutableDictionary dictionary];
     _JPTypeArr = [@[] mutableCopy];
+    _JPframeArr = [@[] mutableCopy];
+    _JPAllId = [@[] mutableCopy];
+    _contentSize = CGSizeMake(ZeroContentOffset, 0);
 }
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
@@ -69,18 +92,22 @@
     [self.view addSubview:self.switchFam];
     [self initAllRollView];
     [self.backScrollView addSubview:self.famImage];
-    
     [self.view bringSubviewToFront:self.switchFam];
 }
 //初始化所有家眷
 -(void)initAllRollView{
- 
+    [_JPframeArr removeAllObjects];
+    [_JPAllId removeAllObjects];
     for (int idx = 0; idx<_JPTypeArr.count; idx++) {
         NSArray *detailArr = _JPTypeArr[idx];
         for (int idx2 = 0; idx2<detailArr.count; idx2++) {
-            NSString *JPName = [NSString stringWithFormat:@"%@%@|%@代卷谱",detailArr[idx2][@"jpname"],detailArr[idx2][@"minlevel"],detailArr[idx2][@"maxlevel"]];
-            RollView *rollView = [[RollView alloc] initWithFrame:AdaptationFrame(ZeroContentOffset+383-185*idx2, 30+413*idx, 131, 358) withTitle:JPName rollType:idx>1?RollViewTypeDecade:RollViewTypeUnitsDigit];
             
+            NSString *JPName = [NSString stringWithFormat:@"%@%@|%@代卷谱",detailArr[idx2][@"jpname"],detailArr[idx2][@"minlevel"],detailArr[idx2][@"maxlevel"]];
+            
+            RollView *rollView = [[RollView alloc] initWithFrame:AdaptationFrame(_contentSize.width+383-185*idx2, 30+413*idx, 131, 358) withTitle:JPName rollType:idx>1?RollViewTypeDecade:RollViewTypeUnitsDigit];
+            
+            [_JPframeArr addObject:[NSValue valueWithCGRect:rollView.frame]];
+            [_JPAllId addObject:_JPTypeArr[idx][idx2][@"genmeid"]];
             rollView.tag = idx;
             
             //添加手势
@@ -92,6 +119,8 @@
         }
         
     }
+    
+    
 
 }
 
@@ -100,26 +129,42 @@
     
     [self.backScrollView removeAllSubviews];
     
+    NSInteger maxCount = [self maxJPArrCount];
+    
+    if (maxCount>4) {
+        self.backScrollView.contentSize = AdaptationSize(720+ZeroContentOffset+185*(maxCount-4), 1500);
+        
+        _contentSize = CGSizeMake(ZeroContentOffset+185*(maxCount-4), _contentSize.height);
+        
+    }
+    
     UIImageView *backView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _backScrollView.contentSize.width, _backScrollView.contentSize.height)];
     
     backView.image = MImage(@"gljp_bg");
+    
     [self.backScrollView addSubview:backView];
+    
     [self.backScrollView addSubview:self.famImage];
     
-    _famName.text = [NSString verticalStringWith:self.famModel.data.GeName];
-    
-    [_titleArr removeAllObjects];
-    [_titleArr addObject:self.famModel.data.GeJpname];
-    
+    self.famName.text = [NSString verticalStringWith:[WFamilyModel shareWFamilModel].myFamilyName];
+
     [self initAllRollView];
     
 }
-
+-(NSInteger)maxJPArrCount{
+    __block NSInteger maxCount = 0;
+    [_JPTypeArr enumerateObjectsUsingBlock:^(NSArray *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.count>maxCount) {
+            maxCount = obj.count;
+        }
+    }];
+    
+    return maxCount;
+}
 #pragma mark *** events ***
 /** 每个视图的手势 */
 -(void)respondsToRooTapGes:(UITapGestureRecognizer *)gesture{
     
-    NSLog(@"每个图的tag值=----%ld", gesture.view.tag);
     _selecetdJPDsId = gesture.view.tag;
     
     _selectedRollView = !_selectedRollView;
@@ -127,6 +172,7 @@
         
         WRollDetailView * detailView = [[WRollDetailView alloc] initWithFrame:AdaptationFrame(CGRectGetMinX(gesture.view.frame)/AdaptationWidth()-271, gesture.view.frame.origin.y/AdaptationWidth(), 271, 355)];
         self.detailView = detailView;
+        
         self.detailView.userInteractionEnabled = false;
         
         [self.backScrollView addSubview:self.detailView];
@@ -134,12 +180,14 @@
         [self getZBInfoWithDs:gesture.view.tag whileComplete:^{
             [detailView updateUI];
             
-            
             [self getAddJPPerWithJPId:_JPTypeArr[_selecetdJPDsId][0][@"genmeid"]  whileComplet:^{
+                
                 self.detailView.userInteractionEnabled = true;
+                
+                [WDetailJPInfoModel sharedWDetailJPInfoModel].currentJPID = _JPTypeArr[_selecetdJPDsId][0][@"genmeid"];
+                
             }];
-            
-            
+  
         }];
         
     }else{
@@ -150,40 +198,80 @@
 //切换家谱事件
 -(void)respondsToSwitchFam:(UIButton *)sender{
     
+    
         [self.view addSubview:self.switchDetailView];
         [self.view bringSubviewToFront:self.switchDetailView];
         self.switchFam.hidden = YES;
     
     
 }
-/** 点击添加按钮出现人名 */
--(void)respondsToAddJpBtn:(UIButton *)sender{
 
-    NSString *daishu = [NSString stringWithFormat:@"%ld",5+4*sender.tag];
-    [self getAddJpPossibleMemberWithDs:daishu complete:^(NSDictionary *jsonDic) {
-       
-        WGennerationModel *model = [WGennerationModel modelWithJSON:jsonDic[@"data"]];
-        //如果有值
-        if (model.datalist &&model.datalist.count!=0) {
-            NSMutableArray *fatherArr = [@[] mutableCopy];
+/** 删除家谱事件 */
+
+-(void)respondsToDeleteBtn:(UIButton *)sender{
+    //卷谱id
+    NSString *gemeId = [NSString stringWithFormat:@"%ld",sender.tag];
+    
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"GeId":[WFamilyModel shareWFamilModel].myFamilyId,@"GemeId":gemeId,@"IsJp":@""} requestID:GetUserId requestcode:kRequestCodechangejp success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
             
-            NSArray<WGeDatalist *> *arr = model.datalist;
+            [self getJpTypeLayoutArrayCallback:^{
+                [self reloadUI];
+                [SXLoadingView hideProgressHUD];
+            }];
             
-            [_addJPDic removeAllObjects];
-            for (int idx = 0; idx<arr[0].datas.count; idx++) {
-                
-                [fatherArr addObject:arr[0].datas[idx].name];
-                
-                [_addJPDic setObject:@(arr[0].datas[idx].gemeid) forKey:arr[0].datas[idx].name];
-                
-            }
-            WAddJPPersonView *addPer = [[WAddJPPersonView alloc] initWithFrame:AdaptationFrame(sender.frame.origin.x/AdaptationWidth()-162, sender.frame.origin.y/AdaptationWidth()+5, 162, 211) forPersonArr:fatherArr];
-            addPer.userInteractionEnabled = true;
-            addPer.delegate = self;
-            [self.backScrollView addSubview:addPer];
         }
+    } failure:^(NSError *error) {
         
     }];
+    
+}
+
+/** 点击添加按钮出现人名 */
+-(void)respondsToAddJpBtn:(UIButton *)sender{
+    
+    _selectedADDView = !_selectedADDView;
+    
+    if (_selectedADDView) {
+        NSString *daishu = [NSString stringWithFormat:@"%ld",5+4*sender.tag];
+        [self getAddJpPossibleMemberWithDs:daishu complete:^(NSDictionary *jsonDic) {
+            
+            WGennerationModel *model = [WGennerationModel modelWithJSON:jsonDic[@"data"]];
+            //如果有值
+            if (model.datalist &&model.datalist.count!=0) {
+                NSMutableArray *fatherArr = [@[] mutableCopy];
+                
+                NSArray<WGeDatalist *> *arr = model.datalist;
+                
+                [_addJPDic removeAllObjects];
+                for (int idx = 0; idx<arr[0].datas.count; idx++) {
+                    
+                    [fatherArr addObject:arr[0].datas[idx].name];
+                    
+                    [_addJPDic setObject:@(arr[0].datas[idx].gemeid) forKey:arr[0].datas[idx].name];
+                    
+                }
+                WAddJPPersonView *addPer = [[WAddJPPersonView alloc] initWithFrame:AdaptationFrame(sender.frame.origin.x/AdaptationWidth()-162, sender.frame.origin.y/AdaptationWidth()+5, 162, 211) forPersonArr:fatherArr];
+                addPer.userInteractionEnabled = true;
+                addPer.delegate = self;
+                self.addJpPersonView = addPer;
+                [self.backScrollView addSubview:self.addJpPersonView];
+                
+                if (fatherArr.count == 0) {
+                    
+                    [SXLoadingView showAlertHUD:@"没有可以添加的家谱" duration:1.0];
+                    
+                }
+                
+            }else{
+                [SXLoadingView showAlertHUD:@"没有可以添加的家谱" duration:1.0];
+            }
+            
+        }];
+    }else{
+        [self.addJpPersonView removeFromSuperview];
+    }
+    
 }
 
 /** 获取可以添加卷谱的成员 */
@@ -195,7 +283,9 @@
                                                  @"pagesize":@"20",
                                                  @"ds":member} requestID:GetUserId requestcode:kRequestCodequeryzbgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
                                                      if (succe) {
-                                                         NSLog(@"juanpuchengyuan---%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+                                                         
+                                                         NSLog(@"???--%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+                                                         
                                                          back(jsonDic);
                                                      }
                                                  } failure:^(NSError *error) {
@@ -247,23 +337,27 @@
                     
                     [_JPTypeArr addObject:arr];
                 }
-                
             }
         }
-        NSLog(@"看看----%@", _JPTypeArr);
-        
         back();
         [SXLoadingView hideProgressHUD];
     }];
 
 }
+
 #pragma mark *** WAddJPPersonViewDelegate ***
-//添加卷谱
+
+/** 添加卷谱 */
 -(void)WAddJPPersonViewDelegate:(WAddJPPersonView *)addView didSelectedBtn:(UIButton *)sender{
-    NSLog(@"%@", sender.titleLabel.text);
     NSString *clickName = sender.titleLabel.text;
+    
     [TCJPHTTPRequestManager POSTWithParameters:@{@"GeId":[WFamilyModel shareWFamilModel].myFamilyId,@"GemeId":_addJPDic[clickName],@"IsJp":@"1"} requestID:GetUserId requestcode:kRequestCodechangejp success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
+            
+            [self getJpTypeLayoutArrayCallback:^{
+                [self reloadUI];
+                [SXLoadingView hideProgressHUD];
+            }];
             
         }
     } failure:^(NSError *error) {
@@ -287,8 +381,8 @@
     }else if ([searchTitle isEqualToString:@"新增卷谱"]){
         
         //获取全部卷谱
-        [self getAllFamJPCallBackJPDetailArray:^(NSArray<NSDictionary *> *JPArray) {
-            
+//        [self getAllFamJPCallBackJPDetailArray:^(NSArray<NSDictionary *> *JPArray) {
+        
             [self getAddJPPerWithJPId:_JPTypeArr[0][0][@"genmeid"] whileComplet:^{
                 
                 for (int idx = 0; idx<_JPTypeArr.count; idx++) {
@@ -297,7 +391,7 @@
                     
                     NSInteger amount = _JPTypeArr.count>1?((NSArray *)(_JPTypeArr[1])).count:0;
                     
-                    jpBtnFrameX = ZeroContentOffset+383-185*amount;
+                    jpBtnFrameX = _contentSize.width+383-185*amount;
                     
                     UIButton *jpBtn = [[UIButton alloc] initWithFrame:AdaptationFrame(jpBtnFrameX, 30+413, 131, 358)];
                     jpBtn.tag = idx;
@@ -307,7 +401,7 @@
                         
                         NSInteger amountOther = _JPTypeArr.count>idx+1?((NSArray *)(_JPTypeArr[idx+1])).count:0;
                         
-                        jpBtnFrameX2 = ZeroContentOffset+383-185*amountOther;
+                        jpBtnFrameX2 = _contentSize.width+383-185*amountOther;
                         
                         jpBtn.frame = AdaptationFrame(jpBtnFrameX2, 30+413*(idx+1), 131, 358);
                     }
@@ -319,9 +413,22 @@
    
             }];
             
-        }];
+//        }];
         
     }else if ([searchTitle isEqualToString:@"删除卷谱"]){
+        
+        for (int idx = 0; idx<_JPframeArr.count; idx++) {
+            CGRect rect = [_JPframeArr[idx] CGRectValue];
+            
+            UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(rect.origin.x+rect.size.width-10, rect.origin.y-10, 20, 20)];
+            closeBtn.tag = [_JPAllId[idx] integerValue];
+            [closeBtn addTarget:self action:@selector(respondsToDeleteBtn:) forControlEvents:UIControlEventTouchUpInside];
+            [closeBtn setImage:MImage(@"close") forState:0];
+        
+            [self.backScrollView addSubview:closeBtn];
+            
+        }
+
         
     }
     else{
@@ -332,6 +439,11 @@
             [self posGetDetailFamInfoWithID:genIDArr[repeatIndex] callBack:^(id respondsDic) {
                 //设置当前家谱id
                 [WFamilyModel shareWFamilModel].myFamilyId = genIDArr[repeatIndex];
+                [WFamilyModel shareWFamilModel].myFamilyName = searchTitle;
+                
+                [USERDEFAULT setObject:genIDArr[repeatIndex] forKey:kNSUserDefaultsMyFamilyID];
+                [USERDEFAULT setObject:searchTitle forKey:kNSUserDefaultsMyFamilyName];
+
                 
                 WK(weakSelf)
                 //将点击家谱名，获取到id，再根据id获取到的家谱详情传到famModel里
@@ -384,7 +496,7 @@
     [TCJPHTTPRequestManager POSTWithParameters:@{@"genid":[WFamilyModel shareWFamilModel].myFamilyId} requestID:GetUserId requestcode:kRequestCodequeryjplist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             NSArray *sda = [NSString jsonArrWithArr:jsonDic[@"data"]];
-            NSLog(@"%@", jsonDic[@"data"]);
+            
             NSLog(@"卷谱列表----%@", sda);
             
             callBack(sda);
@@ -398,13 +510,14 @@
 /** 查询卷谱的字辈信息 */
 
 -(void)getZBInfoWithDs:(NSInteger)dsID whileComplete:(void(^)())back{
-    [self getAllFamJPCallBackJPDetailArray:^(NSArray<NSDictionary *> *JPArray) {
-        
+    
+//    [self getAllFamJPCallBackJPDetailArray:^(NSArray<NSDictionary *> *JPArray) {
+    
         [self getJPPersonNumWithJPId:_JPTypeArr[dsID][0][@"genmeid"] complete:^{
             back();
         }];
         
-    }];
+//    }];
     
 }
 
@@ -416,7 +529,6 @@
                                                  @"sex":@""} requestID:GetUserId requestcode:kRequestCodequeryzbgemedetaillist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             
-            NSLog(@"？？？？？----%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
             WDetailJPInfoModel *detailJP = [WDetailJPInfoModel modelWithJSON:jsonDic[@"data"]];
             [WDetailJPInfoModel sharedWDetailJPInfoModel].datalist = detailJP.datalist;
             
@@ -427,32 +539,36 @@
         
     }];
 }
+
 /** 根据卷谱查询卷谱总人数以及各字辈人数 */
 
 -(void)getJPPersonNumWithJPId:(NSString *)jpId complete:(void (^)())callback{
     [TCJPHTTPRequestManager POSTWithParameters:@{@"gemeid":jpId,@"geid":[WFamilyModel shareWFamilModel].myFamilyId} requestID:GetUserId requestcode:kRequestCodequerygezblist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             
-            NSLog(@"字辈人数详情--%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
-            
+            NSLog(@"字辈人数详情--%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);            
             WJPPersonZBNumberModel *theModel = [WJPPersonZBNumberModel modelWithJSON:jsonDic[@"data"]];
             [WJPPersonZBNumberModel sharedWJPPersonZBNumberModel].allcnt = theModel.allcnt;
             [WJPPersonZBNumberModel sharedWJPPersonZBNumberModel].datalist = theModel.datalist;
             callback();
+            
         }
     } failure:^(NSError *error) {
         
     }];
 }
+
+
 #pragma mark *** getters ***
 -(UIScrollView *)backScrollView{
     if (!_backScrollView) {
         _backScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
-        _backScrollView.contentSize = AdaptationSize(2*1040, 2*1500);
-        _backScrollView.contentOffset = AdaptationCenter(ZeroContentOffset, 0);
+        _backScrollView.contentSize = AdaptationSize(ZeroContentOffset+720, 1500);
+        _backScrollView.contentOffset = AdaptationCenter(_contentSize.width, 0);
         _backScrollView.bounces = false;
         UIImageView *backView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _backScrollView.contentSize.width, _backScrollView.contentSize.height)];
         backView.image = MImage(@"gljp_bg");
+        backView.contentMode = UIViewContentModeScaleAspectFill;
         [_backScrollView addSubview:backView];
         
     }
@@ -461,14 +577,14 @@
 
 -(UIImageView *)famImage{
     if (!_famImage) {
-        _famImage = [[UIImageView alloc] initWithFrame:AdaptationFrame(560+ZeroContentOffset, 30, 131, 358)];
+        _famImage = [[UIImageView alloc] initWithFrame:AdaptationFrame(560+_contentSize.width, 30, 131, 358)];
         _famImage.image = MImage(@"jp_IMG");
         
         UILabel *nameLabel = [[UILabel alloc] initWithFrame:AdaptationFrame(0, 15, 131, 325)];
-        nameLabel.text = [NSString verticalStringWith:@"云南大理段氏"];
+        nameLabel.text = [NSString verticalStringWith:[WFamilyModel shareWFamilModel].myFamilyName];
         nameLabel.textAlignment = 1;
         nameLabel.numberOfLines = 0;
-        nameLabel.font = WFont(40);
+        nameLabel.font = WFont(35);
         _famName = nameLabel;
         [_famImage addSubview:_famName];
     }
@@ -497,9 +613,10 @@
     return _switchDetailView;
 }
 
+
 -(UIButton *)addJPBtn{
     if (!_addJPBtn) {
-        _addJPBtn = [[UIButton alloc] initWithFrame:AdaptationFrame(ZeroContentOffset+50, 600, 131, 358)];
+        _addJPBtn = [[UIButton alloc] initWithFrame:AdaptationFrame(_contentSize.width+50, 600, 131, 358)];
         [_addJPBtn setImage:MImage(@"addJP") forState:0];
         [_addJPBtn addTarget:self action:@selector(respondsToAddJpBtn:) forControlEvents:UIControlEventTouchUpInside];
     }

@@ -85,6 +85,8 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodequeryjplist;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
 
+UIKIT_EXTERN NSString * _Nonnull const kNotificationCodeAddMember;
 
-
+UIKIT_EXTERN NSString * _Nonnull const kNSUserDefaultsMyFamilyID;
+UIKIT_EXTERN NSString * _Nonnull const kNSUserDefaultsMyFamilyName;
 @end

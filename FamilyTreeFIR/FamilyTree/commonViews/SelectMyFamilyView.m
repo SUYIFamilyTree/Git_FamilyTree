@@ -111,7 +111,7 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
                 famRepeatCount += 1;
             }
         }
-        NSLog(@"数量是---------%ld", famRepeatCount);
+        
         if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectItemTitle:forCountOfFamNameInAllNames:)]) {
             [_delegate SelectMyFamilyViewDelegate:self didSelectItemTitle:cell.titleLabel.text forCountOfFamNameInAllNames:famRepeatCount];
         }

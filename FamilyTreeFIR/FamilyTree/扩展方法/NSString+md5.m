@@ -73,7 +73,9 @@
 }
 
 +(NSString *)verticalStringWith:(NSString *)string{
-    
+    if (!string) {
+        return @"";
+    }
     NSMutableString *mustt = [NSMutableString stringWithString:string];
     
     NSInteger lengt = mustt.length;

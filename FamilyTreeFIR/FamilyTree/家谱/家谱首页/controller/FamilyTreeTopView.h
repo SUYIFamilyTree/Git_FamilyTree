@@ -16,6 +16,8 @@
 @end
 
 @interface FamilyTreeTopView : UIView
+@property (nonatomic,strong) UIButton *menuBtn;
+
 @property (nonatomic,weak) id<FamilyTreeTopViewDelegate> delegate; /*代理人*/
 
 @end

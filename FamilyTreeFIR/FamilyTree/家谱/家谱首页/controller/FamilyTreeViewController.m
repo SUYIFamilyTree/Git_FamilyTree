@@ -42,6 +42,10 @@
 /**首页家谱Table*/
 @property (nonatomic,strong) WFamilyTableView *famTableView;
 
+/**顶部栏*/
+@property (nonatomic,strong) FamilyTreeTopView *famTreeTopView;
+
+
 
 @end
 
@@ -49,6 +53,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //读取本地数家谱id
+    if ([USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]) {
+        [WFamilyModel shareWFamilModel].myFamilyId = [USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID];
+        [WFamilyModel shareWFamilModel].myFamilyName = [USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyName];
+    }
+    
     //设置导航栏
     self.navigationController.navigationBarHidden = YES;
     [self initNavi];
@@ -66,7 +77,6 @@
     /** 添加tableview */
     [self.view addSubview:self.famTableView];
 
-    
     //创建家谱按钮
     [self.view addSubview:self.creatBtn];
     
@@ -87,7 +97,8 @@
 
     FamilyTreeTopView *topView = [[FamilyTreeTopView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, StatusBar_Height+NavigationBar_Height)];
     topView.delegate = self;
-    [self.view addSubview:topView];
+    self.famTreeTopView = topView;
+    [self.view addSubview:self.famTreeTopView];
 }
 
 //设置5个button
@@ -136,12 +147,10 @@
     
     [TCJPHTTPRequestManager POSTWithParameters:@{@"query":@"",@"type":@"MyGen"} requestID:GetUserId requestcode:kRequestCodequerymygen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-//            NSLog(@"？---%@", jsonDic[@"data"]);
             
             NSString *jsonStr = [NSString stringWithFormat:@"%@",jsonDic[@"data"]];
             NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
             NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-//            NSLog(@"----%@", arr);
             NSMutableArray *allFamNams = [@[] mutableCopy];
             for (NSDictionary *dic in arr) {
                 [allFamNams addObject:dic[@"GeName"]];
@@ -155,7 +164,18 @@
 
 //家谱首页信息
 -(void)getFamDetailInfo{
-    NSString *geId = [WFamilyModel shareWFamilModel].myFamilyId;
+    
+    
+    NSString *geId = @"";
+    if ([USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]) {
+        
+        geId = [USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID];
+        
+    }else{
+        
+        geId = [WFamilyModel shareWFamilModel].myFamilyId;
+        
+    }
     
     [TCJPHTTPRequestManager POSTWithParameters:@{@"GeId":geId} requestID:GetUserId requestcode:kRequestCodegetintogen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
@@ -175,6 +195,7 @@
 }
 /** 更新数据 */
 -(void)reloadAllData{
+    
     [self.famTableView.tableView reloadData];
     self.allFamilyNumber.text = [NSString stringWithFormat:@"已入谱人数%ld人",[WFamilyModel shareWFamilModel].rs];
     self.allFamilGenNumber.text = [NSString stringWithFormat:@"已入谱%ld辈",[WFamilyModel shareWFamilModel].ds];
@@ -227,19 +248,8 @@
     }
     
 }
-
-
 -(void)respondsToCreatBtn:(UIButton *)sender{
     
-//    _selectedCreatBtn = !_selectedCreatBtn;
-//    
-//    if (_selectedCreatBtn) {
-//        [self.view addSubview:self.crtFamTree];
-//    }else{
-//        [_crtFamTree removeFromSuperview];
-//    }
-    
-  
     
     _selectedCreateBtnType +=1;
     if (_selectedCreateBtnType == 1) {
@@ -248,18 +258,13 @@
     }else if(_selectedCreateBtnType ==2){
         [_crtFamTree removeFromSuperview];
         
-       
         [self.view addSubview:self.crtFamTreeNoRight];
 
-       
     }else {
         [_crtFamTreeNoRight removeFromSuperview];
         
          _selectedCreateBtnType = 0;
-        
-        
     }
-   
 }
 
 #pragma mark - FamilyTreeTopViewDelegate
@@ -281,7 +286,6 @@
     
 }
 
-
 #pragma mark *** createTreeDelegate ***
 
 -(void)CreateFamilyTree:(CreatFamilyTree *)creatTree didSelectedBtn:(UIButton *)sender{
@@ -299,6 +303,8 @@
         ManagerFamilyViewController *manager = [[ManagerFamilyViewController alloc] initWithTitle:@"管理家谱" image:nil];
         [manager.comNavi.rightBtn removeFromSuperview];
         [self.navigationController pushViewController:manager animated:YES];
+            
+            [self.crtFamTree removeFromSuperview];
     }
 //    }
     
@@ -307,7 +313,6 @@
 #pragma mark *** SelectMyFamViewDelegate ***
 
 -(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectItemTitle:(NSString *)title forCountOfFamNameInAllNames:(NSInteger)count{
-    NSLog(@"%@--,%ld", title,count);
     
     //网络请求家谱详情
     [TCJPHTTPRequestManager POSTWithParameters:@{@"query":title,@"type":@"MyGen"} requestID:GetUserId requestcode:kRequestCodequerymygen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
@@ -317,9 +322,17 @@
                 
                 [idArr addObject:dic[@"Geid"]];
             }
-            NSLog(@"ididid---%@", idArr);
+            
             [WFamilyModel shareWFamilModel].myFamilyId = idArr[count];
+            [WFamilyModel shareWFamilModel].myFamilyName = title;
+            
+            [USERDEFAULT setObject:idArr[count] forKey:kNSUserDefaultsMyFamilyID];
+            [USERDEFAULT setObject:title forKey:kNSUserDefaultsMyFamilyName];
+            [USERDEFAULT synchronize];
+    
             [self getFamDetailInfo];
+            [self.selecMyFamView removeFromSuperview];
+            [self.famTreeTopView.menuBtn setSelected:false];
             
         }else{
             [SXLoadingView showAlertHUD:@"???" duration:0.5];

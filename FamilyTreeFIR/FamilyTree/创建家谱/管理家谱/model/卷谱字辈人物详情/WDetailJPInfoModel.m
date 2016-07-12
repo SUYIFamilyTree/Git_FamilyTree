@@ -7,13 +7,15 @@
 //
 
 #import "WDetailJPInfoModel.h"
-static WDetailJPInfoModel *JPInfoModel = nil;
-@implementation WDetailJPInfoModel
 
+static WDetailJPInfoModel *JPInfoModel = nil;
+
+@implementation WDetailJPInfoModel
 
 + (NSDictionary *)modelContainerPropertyGenericClass{
     return @{@"datalist" : [WJPInfoDatalist class]};
 }
+
 +(instancetype)sharedWDetailJPInfoModel{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -21,16 +23,16 @@ static WDetailJPInfoModel *JPInfoModel = nil;
     });
     return JPInfoModel;
 }
+
 @end
+
 @implementation WJPInfoDatalist
 
 + (NSDictionary *)modelContainerPropertyGenericClass{
     return @{@"datas" : [WJPInfoDatas class]};
 }
 
-
 @end
-
 
 @implementation WJPInfoDatas
 

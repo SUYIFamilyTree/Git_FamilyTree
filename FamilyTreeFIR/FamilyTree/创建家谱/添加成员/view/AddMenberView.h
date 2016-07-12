@@ -11,7 +11,7 @@
 @interface AddMenberView : BackScrollAndDetailView
 @property (nonatomic,strong) DiscAndNameView *name; /*性名*/
 @property (nonatomic,strong) InputView *fatheView; /*父亲*/
-@property (nonatomic,strong) InputView *motherView; /*母亲*/
+@property (nonatomic,strong) UITextField *motherView; /*母亲*/
 
 @property (nonatomic,strong) InputView *sexInView; /*性别*/
 

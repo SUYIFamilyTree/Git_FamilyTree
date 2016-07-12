@@ -20,6 +20,9 @@
 
 /**自己选择的家谱id*/
 @property (nonatomic,copy) NSString *myFamilyId;
+/**自己选择的家谱名称*/
+@property (nonatomic,copy) NSString *myFamilyName;
+
 
 
 
