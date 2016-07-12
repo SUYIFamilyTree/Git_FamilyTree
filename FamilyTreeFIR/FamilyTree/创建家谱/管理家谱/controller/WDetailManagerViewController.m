@@ -52,9 +52,7 @@ enum{
 //初始化所有具体图
 -(void)initAllDetailManagerDetailView{
     
-    
-    
-    
+
     NSArray *titleArr = @[@"姓名：",@"妻子：",@"养子："];
     
     NSMutableArray *subDetaiArr = [@[] mutableCopy];
@@ -92,14 +90,16 @@ enum{
                           [NSNumber numberWithFloat:195],
                           [NSNumber numberWithFloat:121],
                           [NSNumber numberWithFloat:50]];
-    /** 设置5代人不同的X */
-   
+    /** 设置5代人不同的FrameX */
+    
     
     for (int idx = 0; idx<genNum.count; idx++) {
-//        CGPoint potRect = [frameArr[idx] CGPointValue];
+  
         NSString *numStr = [NSString stringWithFormat:@"%@",genNum[idx]];
         NSString *finBe = [numStr stringByReplacingOccurrencesOfString:@"第" withString:@""];
-        NSInteger fin = [[finBe stringByReplacingOccurrencesOfString:@"代" withString:@""] integerValue]-1;
+        NSInteger fin = [[finBe stringByReplacingOccurrencesOfString:@"代" withString:@""] integerValue];
+        
+        
         //布局
         RollDetailView *rollView = [[RollDetailView alloc] initWithFrame:AdaptationFrame([frameArr[fin] floatValue], 30+idx*240, 500, 200) leftViewDataArr:titleArr rightViewDataArr:subDetaiArr[idx]];
         rollView.genLabel.text = [NSString verticalStringWith:genNum[idx]];
