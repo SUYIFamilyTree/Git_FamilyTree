@@ -562,6 +562,8 @@
 		BC2B1E1C1D1BC301004E916D /* DateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2B1E1B1D1BC301004E916D /* DateModel.m */; };
 		BC2B1E1F1D1BD88E004E916D /* EditPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2B1E1E1D1BD88E004E916D /* EditPasswordViewController.m */; };
 		BC3270001D3496CA007D6745 /* HundredNameInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC326FFF1D3496CA007D6745 /* HundredNameInfoModel.m */; };
+		BC3270071D34A232007D6745 /* NewInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3270061D34A232007D6745 /* NewInfoViewController.m */; };
+		BC32700B1D34B599007D6745 /* NewInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC32700A1D34B599007D6745 /* NewInfoModel.m */; };
 		BC3CF3E81D01318C00437ED6 /* chongZhi_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E51D01318C00437ED6 /* chongZhi_sel.png */; };
 		BC3CF3E91D01318C00437ED6 /* chongZhi_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E61D01318C00437ED6 /* chongZhi_sel@2x.png */; };
 		BC3CF3EA1D01318C00437ED6 /* chongZhi_sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E71D01318C00437ED6 /* chongZhi_sel@3x.png */; };
@@ -1440,6 +1442,10 @@
 		BC2B1E1E1D1BD88E004E916D /* EditPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPasswordViewController.m; sourceTree = "<group>"; };
 		BC326FFE1D3496CA007D6745 /* HundredNameInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HundredNameInfoModel.h; sourceTree = "<group>"; };
 		BC326FFF1D3496CA007D6745 /* HundredNameInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HundredNameInfoModel.m; sourceTree = "<group>"; };
+		BC3270051D34A232007D6745 /* NewInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewInfoViewController.h; sourceTree = "<group>"; };
+		BC3270061D34A232007D6745 /* NewInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewInfoViewController.m; sourceTree = "<group>"; };
+		BC3270091D34B599007D6745 /* NewInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewInfoModel.h; sourceTree = "<group>"; };
+		BC32700A1D34B599007D6745 /* NewInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewInfoModel.m; sourceTree = "<group>"; };
 		BC3CF3E51D01318C00437ED6 /* chongZhi_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chongZhi_sel.png; sourceTree = "<group>"; };
 		BC3CF3E61D01318C00437ED6 /* chongZhi_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chongZhi_sel@2x.png"; sourceTree = "<group>"; };
 		BC3CF3E71D01318C00437ED6 /* chongZhi_sel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chongZhi_sel@3x.png"; sourceTree = "<group>"; };
@@ -2065,6 +2071,7 @@
 			children = (
 				ADC4F1B01D12794A003D2B27 /* model */,
 				ADA98E711D10F5CD005B23EC /* 百家姓 */,
+				BC3270011D34A1EA007D6745 /* 新闻详情 */,
 				AD716D601D06D012004F422E /* Views */,
 				AD716D5D1D06C0A0004F422E /* news_lunbo.png */,
 				ADA7FEF71D07B2D600EDBEE4 /* news_touxiang.png */,
@@ -3314,6 +3321,25 @@
 			children = (
 				BC326FFE1D3496CA007D6745 /* HundredNameInfoModel.h */,
 				BC326FFF1D3496CA007D6745 /* HundredNameInfoModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		BC3270011D34A1EA007D6745 /* 新闻详情 */ = {
+			isa = PBXGroup;
+			children = (
+				BC3270081D34B586007D6745 /* model */,
+				BC3270051D34A232007D6745 /* NewInfoViewController.h */,
+				BC3270061D34A232007D6745 /* NewInfoViewController.m */,
+			);
+			path = "新闻详情";
+			sourceTree = "<group>";
+		};
+		BC3270081D34B586007D6745 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				BC3270091D34B599007D6745 /* NewInfoModel.h */,
+				BC32700A1D34B599007D6745 /* NewInfoModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -4614,6 +4640,7 @@
 				BC5F15151D0FF1AD004F3622 /* VIPView.m in Sources */,
 				BC5F15101D0FF1AD004F3622 /* PersonalCenterHeaderView.m in Sources */,
 				BC5F150C1D0FF1AD004F3622 /* PersonalCenterViewController.m in Sources */,
+				BC3270071D34A232007D6745 /* NewInfoViewController.m in Sources */,
 				BC5F15141D0FF1AD004F3622 /* PersonalCenterTodayFortuneView.m in Sources */,
 				AD49FEE01CF6A0ED00DF9F7E /* FamilServiceViewController.m in Sources */,
 				BC65210F1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.m in Sources */,
@@ -4653,6 +4680,7 @@
 				AD1F3C211D0F92770085EDFB /* CreateCemViewController.m in Sources */,
 				BC00EA0B1D190E0A00BF1DC3 /* NSString+addLineBreakOrSpace.m in Sources */,
 				AD5F5C121D1798DE0035710F /* UseItemView.m in Sources */,
+				BC32700B1D34B599007D6745 /* NewInfoModel.m in Sources */,
 				BC5F15111D0FF1AD004F3622 /* PersonalCenterInfoView.m in Sources */,
 				AD3218961D2A604D00F9480A /* NSArray+WAllItemString.m in Sources */,
 				BC5F150E1D0FF1AD004F3622 /* HeadImageView.m in Sources */,

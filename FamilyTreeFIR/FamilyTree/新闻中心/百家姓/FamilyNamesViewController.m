@@ -60,7 +60,7 @@
 -(void)getData{
     NSDictionary *logDic = @{@"FaId":@(self.FaId)};
     WK(weakSelf)
-    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getfamilynamesdetail" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetFamilyNamesDetail success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         MYLog(@"%@",jsonDic[@"data"]);
         if (succe) {
             weakSelf.hundredNameInfoModel = [HundredNameInfoModel modelWithJSON:jsonDic[@"data"]];

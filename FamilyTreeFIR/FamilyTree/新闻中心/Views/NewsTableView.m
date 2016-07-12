@@ -7,6 +7,7 @@
 //
 
 #import "NewsTableView.h"
+#import "NewInfoViewController.h"
 
 static NSString *const kNesCellIdentifier = @"newscellIdentifier";
 
@@ -48,6 +49,12 @@ static NSString *const kNesCellIdentifier = @"newscellIdentifier";
     }
     cell.familyDTModel = self.dataSource[indexPath.row];
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NewInfoViewController *newInfoVC = [[NewInfoViewController alloc]initWithTitle:@"新闻详情" image:nil];
+    newInfoVC.arId = ((NewsCell *)[tableView cellForRowAtIndexPath:indexPath]).familyDTModel.ArId;
+    [[self viewController].navigationController pushViewController:newInfoVC animated:YES];
 }
 
 #pragma mark *** getters ***

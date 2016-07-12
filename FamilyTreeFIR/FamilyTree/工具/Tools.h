@@ -58,7 +58,8 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodeBarrageList;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeCreateBarrage;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeRitual;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetNewsList;
-UIKIT_EXTERN NSString * _Nonnull const  kRequestCodeGetFamilyNamesList;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetFamilyNamesList;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetFamilyNamesDetail;
 /**
  *  弹出框自动消失
  *
