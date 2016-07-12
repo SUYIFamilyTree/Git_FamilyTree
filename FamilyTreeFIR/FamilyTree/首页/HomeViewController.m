@@ -72,28 +72,31 @@ typedef enum : NSUInteger {
 }
 
 -(void)getData{
-    NSDictionary *logDic = @{};
-    WK(weakSelf)
-    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getapiindeximg" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        MYLog(@"%@",jsonDic[@"data"]);
-        if (succe) {
-            HomeViewModel *homeViewModel = [HomeViewModel modelWithJSON:jsonDic[@"data"]];
-            weakSelf.time_StatuLabel.text = [NSString stringWithFormat:@"%@  %@",homeViewModel.rq,homeViewModel.qj];
-            
-            _ScrImages = [@[@"http://static.freepik.com/free-photo/d-puzzles-with-the-little-picture-material_38-5480.jpg",@"http://img.mypsd.com.cn/e/d/%e7%9f%a2%e9%87%8f%e5%9b%be%e5%ba%93/%e6%a0%87%e8%af%86%e6%a0%87%e5%bf%97%e5%9b%be%e6%a0%87/%e5%b0%8f%e5%9b%be%e6%a0%87/k/jpg/39-djasdjhasuqwa%20%28542%29.jpg",@"http://img.mypsd.com.cn/e/d/%e5%9f%ba%e7%a1%80%e5%9b%be%e5%ba%93/%e4%bd%8d%e5%9b%be%e5%8d%a1%e9%80%9a/%e5%8d%a1%e9%80%9a%e5%8a%a8%e7%89%a9/d/jpg/72-d83dk8adj%20%28980%29.jpg",@"http://img.mypsd.com.cn/e/d/%e7%9f%a2%e9%87%8f%e5%9b%be%e5%ba%93/%e6%a0%87%e8%af%86%e6%a0%87%e5%bf%97%e5%9b%be%e6%a0%87/%e5%b0%8f%e5%9b%be%e6%a0%87/v/jpg/a11-uei-eps%20%281077%29.jpg"] mutableCopy];
+    if (GetUserId) {
+        NSDictionary *logDic = @{};
+        WK(weakSelf)
+        [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getapiindeximg" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+            MYLog(@"%@",jsonDic[@"data"]);
+            if (succe) {
+                HomeViewModel *homeViewModel = [HomeViewModel modelWithJSON:jsonDic[@"data"]];
+                weakSelf.time_StatuLabel.text = [NSString stringWithFormat:@"%@  %@",homeViewModel.rq,homeViewModel.qj];
+                
+                _ScrImages = [@[@"http://static.freepik.com/free-photo/d-puzzles-with-the-little-picture-material_38-5480.jpg",@"http://img.mypsd.com.cn/e/d/%e7%9f%a2%e9%87%8f%e5%9b%be%e5%ba%93/%e6%a0%87%e8%af%86%e6%a0%87%e5%bf%97%e5%9b%be%e6%a0%87/%e5%b0%8f%e5%9b%be%e6%a0%87/k/jpg/39-djasdjhasuqwa%20%28542%29.jpg",@"http://img.mypsd.com.cn/e/d/%e5%9f%ba%e7%a1%80%e5%9b%be%e5%ba%93/%e4%bd%8d%e5%9b%be%e5%8d%a1%e9%80%9a/%e5%8d%a1%e9%80%9a%e5%8a%a8%e7%89%a9/d/jpg/72-d83dk8adj%20%28980%29.jpg",@"http://img.mypsd.com.cn/e/d/%e7%9f%a2%e9%87%8f%e5%9b%be%e5%ba%93/%e6%a0%87%e8%af%86%e6%a0%87%e5%bf%97%e5%9b%be%e6%a0%87/%e5%b0%8f%e5%9b%be%e6%a0%87/v/jpg/a11-uei-eps%20%281077%29.jpg"] mutableCopy];
 #warning 待服务器真正有图片载入时，开启代码
-//            _ScrImages = [@[] mutableCopy];
-//            for (int i = 0; i < homeViewModel.imgArray.count; i++) {
-//                [_ScrImages addObject:homeViewModel.imgArray[i]];
-//            }
+                //            _ScrImages = [@[] mutableCopy];
+                //            for (int i = 0; i < homeViewModel.imgArray.count; i++) {
+                //                [_ScrImages addObject:homeViewModel.imgArray[i]];
+                //            }
+                
+                weakSelf.topScrollerView.imageNames = _ScrImages;
+                
+                
+            }
+        } failure:^(NSError *error) {
             
-            weakSelf.topScrollerView.imageNames = _ScrImages;
-            
-            
-        }
-    } failure:^(NSError *error) {
-        
-    }];
+        }];
+    }
+
 }
 
 

@@ -561,6 +561,7 @@
 		BC2943D81CFEC163006671B9 /* mcGuanli_xinjian@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC2943CF1CFEC163006671B9 /* mcGuanli_xinjian@3x.png */; };
 		BC2B1E1C1D1BC301004E916D /* DateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2B1E1B1D1BC301004E916D /* DateModel.m */; };
 		BC2B1E1F1D1BD88E004E916D /* EditPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2B1E1E1D1BD88E004E916D /* EditPasswordViewController.m */; };
+		BC3270001D3496CA007D6745 /* HundredNameInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC326FFF1D3496CA007D6745 /* HundredNameInfoModel.m */; };
 		BC3CF3E81D01318C00437ED6 /* chongZhi_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E51D01318C00437ED6 /* chongZhi_sel.png */; };
 		BC3CF3E91D01318C00437ED6 /* chongZhi_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E61D01318C00437ED6 /* chongZhi_sel@2x.png */; };
 		BC3CF3EA1D01318C00437ED6 /* chongZhi_sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E71D01318C00437ED6 /* chongZhi_sel@3x.png */; };
@@ -1437,6 +1438,8 @@
 		BC2B1E1B1D1BC301004E916D /* DateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateModel.m; sourceTree = "<group>"; };
 		BC2B1E1D1D1BD88E004E916D /* EditPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPasswordViewController.h; sourceTree = "<group>"; };
 		BC2B1E1E1D1BD88E004E916D /* EditPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPasswordViewController.m; sourceTree = "<group>"; };
+		BC326FFE1D3496CA007D6745 /* HundredNameInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HundredNameInfoModel.h; sourceTree = "<group>"; };
+		BC326FFF1D3496CA007D6745 /* HundredNameInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HundredNameInfoModel.m; sourceTree = "<group>"; };
 		BC3CF3E51D01318C00437ED6 /* chongZhi_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chongZhi_sel.png; sourceTree = "<group>"; };
 		BC3CF3E61D01318C00437ED6 /* chongZhi_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chongZhi_sel@2x.png"; sourceTree = "<group>"; };
 		BC3CF3E71D01318C00437ED6 /* chongZhi_sel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chongZhi_sel@3x.png"; sourceTree = "<group>"; };
@@ -2353,6 +2356,7 @@
 		ADA98E711D10F5CD005B23EC /* 百家姓 */ = {
 			isa = PBXGroup;
 			children = (
+				BC326FFD1D34968E007D6745 /* model */,
 				BC2063231D3348C600AF0629 /* view */,
 				ADA98E721D10F5EF005B23EC /* FamilyNamesViewController.h */,
 				ADA98E731D10F5EF005B23EC /* FamilyNamesViewController.m */,
@@ -3305,6 +3309,15 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		BC326FFD1D34968E007D6745 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				BC326FFE1D3496CA007D6745 /* HundredNameInfoModel.h */,
+				BC326FFF1D3496CA007D6745 /* HundredNameInfoModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		BC3CF3E41D01318C00437ED6 /* 充值 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3867,7 +3880,7 @@
 				TargetAttributes = {
 					ADC326F41CF3E3DF00CEAE53 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = N4YN23L5MC;
+						DevelopmentTeam = PJ6JTWKSUQ;
 					};
 					ADC3270D1CF3E3E000CEAE53 = {
 						CreatedOnToolsVersion = 7.2;
@@ -4636,6 +4649,7 @@
 				BC9C8E251D13F10B00C445D0 /* CustomPikcerDateView.m in Sources */,
 				ADA4C1151D0E437E00CA9067 /* CemeteryViewController.m in Sources */,
 				AD8E603D1CFC0BDA00355C06 /* FindPassView.m in Sources */,
+				BC3270001D3496CA007D6745 /* HundredNameInfoModel.m in Sources */,
 				AD1F3C211D0F92770085EDFB /* CreateCemViewController.m in Sources */,
 				BC00EA0B1D190E0A00BF1DC3 /* NSString+addLineBreakOrSpace.m in Sources */,
 				AD5F5C121D1798DE0035710F /* UseItemView.m in Sources */,
@@ -4862,12 +4876,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FamilyTree/PrefixHeader.pch";
 				INFOPLIST_FILE = FamilyTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yisu.wzh.FamilyTree;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yisu.wzh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -4877,12 +4893,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FamilyTree/PrefixHeader.pch";
 				INFOPLIST_FILE = FamilyTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yisu.wzh.FamilyTree;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yisu.wzh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
