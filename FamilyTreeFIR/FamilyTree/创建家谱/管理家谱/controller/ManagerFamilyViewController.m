@@ -11,13 +11,13 @@
 #import "WSwitchDetailFamView.h"
 #import "WAddJPPersonView.h"
 @interface ManagerFamilyViewController ()<WswichDetailFamViewDelegate,WAddJPPersonViewDelegate>
+
 {
     BOOL _selectedRollView;//是否选择了某个卷谱
     BOOL _selectedADDView;//是否选择了添加按钮
     BOOL _selectedADDBtn;//是否选择了新增卷谱俺就
     
     CGSize _contentSize;
-    
     
     NSMutableArray *_titleArr;//卷谱名array
     
@@ -35,6 +35,7 @@
     /** 所有卷谱的id */
     NSMutableArray *_JPAllId;
 }
+
 @property (nonatomic,strong) UIScrollView *backScrollView; /*背景滚动图*/
 
 @property (nonatomic,strong) UIImageView *famImage; /*家谱名字图腾*/
@@ -53,7 +54,6 @@
 /**添加卷谱的大加号按钮*/
 @property (nonatomic,strong) WAddJPPersonView *addJpPersonView;
 
-
 /**添加卷谱按钮*/
 @property (nonatomic,strong) UIButton *addJPBtn;
 
@@ -63,6 +63,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:MImage(@"gljp_bg")];
     if ([USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]) {
         [WFamilyModel shareWFamilModel].myFamilyId = [USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID];
 
@@ -117,10 +118,7 @@
             
             [self.backScrollView addSubview:rollView];
         }
-        
     }
-    
-    
 
 }
 
@@ -129,14 +127,17 @@
     
     [self.backScrollView removeAllSubviews];
     
-    NSInteger maxCount = [self maxJPArrCount];
+    NSInteger maxCountX = [self maxJPArrCount]>4?[self maxJPArrCount]-4:0;
+    NSInteger maxCountY = _JPTypeArr.count>3?_JPTypeArr.count-3:0;
     
-    if (maxCount>4) {
-        self.backScrollView.contentSize = AdaptationSize(720+ZeroContentOffset+185*(maxCount-4), 1500);
+    //更新背景滚动图大小
+    self.backScrollView.contentSize = AdaptationSize(720+ZeroContentOffset+185*(maxCountX), 1500+maxCountY*413);
         
-        _contentSize = CGSizeMake(ZeroContentOffset+185*(maxCount-4), _contentSize.height);
-        
-    }
+    _contentSize = CGSizeMake(ZeroContentOffset+185*(maxCountX), 0);
+    
+    _backScrollView.contentOffset = AdaptationCenter(ZeroContentOffset+185*(maxCountX), 0);
+    
+    self.famImage.frame = AdaptationFrame(560+_contentSize.width, 30, 131, 358);
     
     UIImageView *backView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _backScrollView.contentSize.width, _backScrollView.contentSize.height)];
     
@@ -212,17 +213,24 @@
     //卷谱id
     NSString *gemeId = [NSString stringWithFormat:@"%ld",sender.tag];
     
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"GeId":[WFamilyModel shareWFamilModel].myFamilyId,@"GemeId":gemeId,@"IsJp":@""} requestID:GetUserId requestcode:kRequestCodechangejp success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        if (succe) {
-            
-            [self getJpTypeLayoutArrayCallback:^{
-                [self reloadUI];
-                [SXLoadingView hideProgressHUD];
+    
+    [Tools showAlertViewcontrollerWithTarGet:self Message:@"确定删除此卷谱吗？" complete:^(BOOL sure) {
+        if (sure) {
+            [TCJPHTTPRequestManager POSTWithParameters:@{@"GeId":[WFamilyModel shareWFamilModel].myFamilyId,@"GemeId":gemeId,@"IsJp":@""} requestID:GetUserId requestcode:kRequestCodechangejp success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+                if (succe) {
+                    
+                    [self getJpTypeLayoutArrayCallback:^{
+                        [self reloadUI];
+                        [SXLoadingView hideProgressHUD];
+                    }];
+                    
+                }
+            } failure:^(NSError *error) {
+                
             }];
-            
+        }else{
+            return;
         }
-    } failure:^(NSError *error) {
-        
     }];
     
 }
@@ -367,7 +375,7 @@
 }
 
 #pragma mark *** WswithDelegate ***
-
+/** 切换家谱view协议 */
 -(void)WswichDetailFamViewDelegate:(WSwitchDetailFamView *)detaiView didSelectedButton:(UIButton *)sender repeatNameIndex:(NSInteger)repeatIndex{
     
     NSString *searchTitle = sender.titleLabel.text;
@@ -563,12 +571,26 @@
 -(UIScrollView *)backScrollView{
     if (!_backScrollView) {
         _backScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
+        
         _backScrollView.contentSize = AdaptationSize(ZeroContentOffset+720, 1500);
-        _backScrollView.contentOffset = AdaptationCenter(_contentSize.width, 0);
         _backScrollView.bounces = false;
+        
+        NSInteger maxCountX  = [self maxJPArrCount]>4?[self maxJPArrCount]-4:0;
+        
+        NSInteger maxCountY = _JPTypeArr.count>3?_JPTypeArr.count-3:0;
+        
+        _backScrollView.contentSize = AdaptationSize(720+ZeroContentOffset+185*(maxCountX), 1500+maxCountY*413);
+        
+        _contentSize = CGSizeMake(ZeroContentOffset+185*(maxCountX), 0);
+        
+        _backScrollView.contentOffset = AdaptationCenter(ZeroContentOffset+185*(maxCountX), 0);
+        
+        self.famImage.frame = AdaptationFrame(560+_contentSize.width, 30, 131, 358);
+        
         UIImageView *backView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _backScrollView.contentSize.width, _backScrollView.contentSize.height)];
         backView.image = MImage(@"gljp_bg");
-        backView.contentMode = UIViewContentModeScaleAspectFill;
+        backView.contentMode = UIViewContentModeScaleToFill;
+        
         [_backScrollView addSubview:backView];
         
     }

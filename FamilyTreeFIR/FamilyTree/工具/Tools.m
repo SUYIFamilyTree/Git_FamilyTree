@@ -58,7 +58,10 @@ NSString * _Nonnull const kRequestCodeRitual = @"ritual";
 NSString * _Nonnull const kRequestCodeGetNewsList =@"getnewslist";
 NSString * _Nonnull const kRequestCodeGetFamilyNamesList = @"getfamilynameslist";
 
-+(void)showAlertViewControllerAutoDissmissWithTarGet:(id)target Message:(NSString *)message delay:(NSInteger)time complete:(void (^)(BOOL))complete{
++(void)showAlertViewControllerAutoDissmissWithTarGet:(id)target
+                                             Message:(NSString *)message
+                                               delay:(NSInteger)time
+                                            complete:(void (^)(BOOL))complete{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
     [target presentViewController:alert animated:YES completion:^{
         
@@ -69,4 +72,17 @@ NSString * _Nonnull const kRequestCodeGetFamilyNamesList = @"getfamilynameslist"
     }];
 }
 
++(void)showAlertViewcontrollerWithTarGet:(id)target Message:(NSString *)message complete:(void (^)(BOOL))complete{
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        complete(true);
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        complete(false);
+    }]];
+    
+    [target presentViewController:alert animated:YES completion:nil];
+
+}
 @end

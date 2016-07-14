@@ -74,6 +74,15 @@ UIKIT_EXTERN NSString * _Nonnull const  kRequestCodeGetFamilyNamesList;
  */
 + (void)showAlertViewControllerAutoDissmissWithTarGet:(id _Nonnull)target Message:(NSString * _Nonnull)message delay:(NSInteger)time complete:(void (^ _Nullable)(BOOL))complete;
 
+/**
+ *  弹出框带确定消失按钮
+ *
+ *  @param target   调用UIAlertController的对象一般为selfVC
+ *  @param message  提示语句
+ *  @param complete 完成点击取消确定
+ */
+
++ (void)showAlertViewcontrollerWithTarGet:(id _Nonnull)target Message:(NSString * _Nonnull)message complete:(void (^ _Nullable)(BOOL sure))complete;
 
 
 @end

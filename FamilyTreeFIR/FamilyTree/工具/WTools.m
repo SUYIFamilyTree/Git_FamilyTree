@@ -79,8 +79,8 @@ NSString * _Nonnull const kRequestCodechangejp = @"changejp";
 /** 卷谱列表 */
 NSString * _Nonnull const kRequestCodequeryjplist = @"queryjplist";
 
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+/** 搜索家谱 */
+NSString * _Nonnull const kRequestCodequerygenandgemelist = @"querygenandgemelist";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";

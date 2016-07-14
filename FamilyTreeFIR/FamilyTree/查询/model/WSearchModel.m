@@ -8,6 +8,32 @@
 
 #import "WSearchModel.h"
 
+static WSearchModel *searchModel = nil;
+
 @implementation WSearchModel
 
+
++ (NSDictionary *)modelContainerPropertyGenericClass{
+    return @{@"genlist" : [WSearchGenlist class]};
+}
+
++(instancetype)shardSearchModel{
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        searchModel = [[WSearchModel alloc] init];
+        
+    });
+    return searchModel;
+}
 @end
+@implementation WPage
+
+@end
+
+
+@implementation WSearchGenlist
+
+@end
+
+

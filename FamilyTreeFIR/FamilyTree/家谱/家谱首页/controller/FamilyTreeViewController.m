@@ -250,7 +250,6 @@
 }
 -(void)respondsToCreatBtn:(UIButton *)sender{
     
-    
     _selectedCreateBtnType +=1;
     if (_selectedCreateBtnType == 1) {
         
@@ -270,9 +269,28 @@
 #pragma mark - FamilyTreeTopViewDelegate
 -(void)TopSearchViewDidTapView:(FamilyTreeTopView *)topSearchView{
     MYLog(@"点击搜索栏");
-    SearchFamilyTreeViewController *seachVc = [[SearchFamilyTreeViewController alloc]init];
-    [self.navigationController pushViewController:seachVc animated:YES];
-    
+    [SXLoadingView showProgressHUD:@"正在搜索"];
+    /** 获取搜索信息 */
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"query":self.famTreeTopView.searchLabel.text,@"pagenum":@"1",@"pagesize":@"20"} requestID:GetUserId requestcode:kRequestCodequerygenandgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            
+            NSLog(@"sousuojieguo---%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+            
+            WSearchModel *searchModel = [WSearchModel modelWithJSON:jsonDic[@"data"]];
+            
+            [WSearchModel shardSearchModel].genlist = searchModel.genlist;
+            [WSearchModel shardSearchModel].datatype = searchModel.datatype;
+            [WSearchModel shardSearchModel].page = searchModel.page;
+            [SXLoadingView hideProgressHUD];
+            //赋值完过后跳转
+            SearchFamilyTreeViewController *seachVc = [[SearchFamilyTreeViewController alloc]init];
+            [self.navigationController pushViewController:seachVc animated:YES];
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+      
 }
 -(void)TopSearchView:(FamilyTreeTopView *)topSearchView didRespondsToMenusBtn:(UIButton *)sender{
     MYLog(@"点击我的家谱");

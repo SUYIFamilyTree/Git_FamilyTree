@@ -14,6 +14,9 @@
 @property (nonatomic,strong) UILabel *genLabel; /*代数*/
 @property (nonatomic,copy) NSArray *leftArr; /*左边数据*/
 @property (nonatomic,copy) NSArray *rightArr; /*左边数据*/
+/**成员ID*/
+@property (nonatomic,copy) NSString *myMemberID;
+
 
 - (instancetype)initWithFrame:(CGRect)frame leftViewDataArr:(NSArray *)leftArr rightViewDataArr:(NSArray *)rightArr;
 

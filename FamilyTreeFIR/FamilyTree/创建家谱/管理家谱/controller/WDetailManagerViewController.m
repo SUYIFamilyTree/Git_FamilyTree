@@ -12,9 +12,15 @@ enum{
 #import "WDetailManagerViewController.h"
 
 @interface WDetailManagerViewController ()
+
 @property (nonatomic,strong) UIScrollView *backScrollView; /*背景滚动图*/
+
+/**背景图*/
+@property (nonatomic,strong) UIImageView *bakImageView;
+
 @property (nonatomic,strong) RollView *rollView; /*多少代卷谱*/
 @property (nonatomic,strong) RollDetailView *rollDetail; /*具体某人*/
+
 
 @property (nonatomic,strong) UIButton *addMemberBtn;/*新增成员*/
 @property (nonatomic,strong) UIButton *addManagerBtn; /*新增管理*/
@@ -61,11 +67,12 @@ enum{
 
     NSArray *titleArr = @[@"姓名：",@"妻子：",@"养子："];
     
-    NSMutableArray *subDetaiArr = [@[] mutableCopy];
+    NSMutableArray *subDetaiArr = [@[] mutableCopy];//具体信息arr。设计图为三种
     
 //  NSMutableArray *genNum = [@[@"第一代",@"第二代",@"第三代",@"第三代",@"第四代",@"第四代"] mutableCopy];
     
-    NSMutableArray *genNum = [@[] mutableCopy];
+    NSMutableArray *genNum = [@[] mutableCopy];//所有代数
+    NSMutableArray *genMemberId = [@[] mutableCopy];//所有代数的成员id，用于添加管理员
     
     NSArray <WJPInfoDatalist *>*modelArr = [WDetailJPInfoModel sharedWDetailJPInfoModel].datalist;
     
@@ -86,12 +93,14 @@ enum{
             
             [subDetaiArr addObject:XArr];
             
+            [genMemberId addObject:[NSString stringWithFormat:@"%ld",obj.datas[idx2].gemeid]];
         }
         
     }];
-    //更新滚动图大小
+    //更新滚动图和大小
     
     _backScrollView.contentSize = AdaptationSize(1040, subDetaiArr.count*270);
+    self.bakImageView.frame = CGRectMake(0, 0, _backScrollView.contentSize.width, _backScrollView.contentSize.height);
     
     NSArray *frameArr = @[[NSNumber numberWithFloat:30+360],
                           [NSNumber numberWithFloat:270],
@@ -110,10 +119,10 @@ enum{
                 finCount+=1;
         }
     }
- 
         //布局
         RollDetailView *rollView = [[RollDetailView alloc] initWithFrame:AdaptationFrame([frameArr[finCount] floatValue], 30+idx*240, 500, 200) leftViewDataArr:titleArr rightViewDataArr:subDetaiArr[idx]];
         rollView.genLabel.text = [NSString verticalStringWith:genNum[idx]];
+        rollView.myMemberID = genMemberId[idx];
 
         [self.backScrollView addSubview:rollView];
         
@@ -124,13 +133,13 @@ enum{
 }
 
 -(void)reloadAllView{
+    
     [self updateMemberDataWhileComplete:^{
         
         [self.backScrollView removeAllSubviews];
         
         UIImageView *backView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.backScrollView.contentSize.width, self.backScrollView.contentSize.height)];
         backView.image = MImage(@"gljp_bg");
-        
         [self.backScrollView addSubview:backView];
         
         [self.backScrollView addSubview:self.rollView];
@@ -176,7 +185,9 @@ enum{
         _backScrollView.bounces = false;
         UIImageView *backView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _backScrollView.contentSize.width, _backScrollView.contentSize.height)];
         backView.image = MImage(@"gljp_bg");
-        [_backScrollView addSubview:backView];
+        
+        self.bakImageView = backView;
+        [_backScrollView addSubview:self.bakImageView];
         
     }
     return _backScrollView;

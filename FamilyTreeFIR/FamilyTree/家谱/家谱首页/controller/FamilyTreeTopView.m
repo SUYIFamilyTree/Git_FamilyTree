@@ -17,7 +17,7 @@
 
 @property (nonatomic,strong) UIView *backView; /*黑色背景*/
 @property (nonatomic,strong) UIView *searchView; /*搜索框*/
-@property (nonatomic,strong) UILabel *searchLabel; /*输入关键词*/
+
 @property (nonatomic,strong) UIImageView *searchImage; /*搜索图片*/
 
 @end
@@ -72,19 +72,17 @@
         _searchView.layer.cornerRadius = SearchView_Height/2.0f;
         _searchView.backgroundColor = [UIColor whiteColor];
         
-        //添加手势
-        UITapGestureRecognizer *tapGues = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapSearchView)];
-        [_searchView addGestureRecognizer:tapGues];
+        
         
     }
     return _searchView;
 }
--(UILabel *)searchLabel{
+-(UITextField *)searchLabel{
     if (!_searchLabel) {
-        _searchLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 150, SearchView_Height)];
+        _searchLabel = [[UITextField alloc] initWithFrame:CGRectMake(20, 0, 150, SearchView_Height)];
         _searchLabel.font = BFont(13);
         _searchLabel.textAlignment = NSTextAlignmentLeft;
-        _searchLabel.text = @"输入关键词";
+        _searchLabel.placeholder = @"输入关键词";
         _searchLabel.textColor = LH_RGBCOLOR(143, 143, 143);
         
     }
@@ -94,6 +92,11 @@
     if (!_searchImage) {
         _searchImage = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.searchView.frame)-3*SearchImage_Size, self.searchView.bounds.size.height/2-SearchImage_Size/2, SearchImage_Size, SearchImage_Size)];
         _searchImage.image = MImage(@"search");
+        _searchImage.userInteractionEnabled = true;
+        //添加手势
+        UITapGestureRecognizer *tapGues = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapSearchView)];
+        [_searchImage addGestureRecognizer:tapGues];
+        
     }
     return _searchImage;
 }

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WSearchDetailViewController : UIViewController
+@interface WSearchDetailViewController : BaseViewController
 
 @end

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface WSearchZBView : UIView
-
+-(void)reloadWithZBArr:(NSArray *)zbArray;
 @end

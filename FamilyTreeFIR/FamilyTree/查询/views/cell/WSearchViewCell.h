@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface WSearchViewCell : UITableViewCell
-
+/**头像*/
+@property (nonatomic,strong) UIImageView *portraitView;
+/**家谱名*/
+@property (nonatomic,strong) UILabel *famName;
+/**家谱id*/
+@property (nonatomic,copy) NSString *famId;
 @end

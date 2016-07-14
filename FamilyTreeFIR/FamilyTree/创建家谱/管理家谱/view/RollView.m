@@ -25,9 +25,13 @@
         
         
         if (rollType == RollViewTypeDecade) {
-            self.rollLabel.text = title;
+            
+            NSString *nineStr = [title stringByReplacingOccurrencesOfString:@"9" withString:@"9 "];
+
+            self.rollLabel.text = nineStr;
 
         }else if(rollType == RollViewTypeUnitsDigit){
+            
             self.rollLabel.text = [NSString verticalStringWith:title];
 
         }

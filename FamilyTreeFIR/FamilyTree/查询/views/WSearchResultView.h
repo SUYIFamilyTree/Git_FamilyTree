@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface WSearchResultView : UIView
-
+/**搜索结果表格*/
+@property (nonatomic,strong) UITableView *tableView;
 @end

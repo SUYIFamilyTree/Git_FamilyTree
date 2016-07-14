@@ -17,7 +17,7 @@
 
 @interface FamilyTreeTopView : UIView
 @property (nonatomic,strong) UIButton *menuBtn;
-
+@property (nonatomic,strong) UITextField *searchLabel; /*输入关键词*/
 @property (nonatomic,weak) id<FamilyTreeTopViewDelegate> delegate; /*代理人*/
 
 @end
