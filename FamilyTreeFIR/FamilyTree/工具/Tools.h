@@ -60,6 +60,8 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodeRitual;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetNewsList;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetFamilyNamesList;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetFamilyNamesDetail;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetNewsDetail;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeQueryClan;
 /**
  *  弹出框自动消失
  *

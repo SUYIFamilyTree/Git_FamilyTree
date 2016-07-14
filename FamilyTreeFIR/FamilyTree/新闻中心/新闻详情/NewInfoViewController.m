@@ -22,7 +22,7 @@
 @implementation NewInfoViewController
 -(void)viewDidLoad{
     [super viewDidLoad];
-    [self initUI];
+    //[self initUI];
     [self getData];
     
 }
@@ -30,7 +30,7 @@
 -(void)getData{
     NSDictionary *logDic = @{@"ArId":@(self.arId)};
     WK(weakSelf)
-    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getnewsdetail" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetNewsDetail success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         MYLog(@"%@",jsonDic[@"data"]);
         if (succe) {
             weakSelf.newsInfoModel = [NewInfoModel modelWithJSON:jsonDic[@"data"]];
@@ -47,11 +47,8 @@
     NSString *str = [self.newsInfoModel.ArContent stringByReplacingOccurrencesOfString:@"/http" withString:@"http"];
     //限定图片大小不超过屏幕宽
     NSString *str1 = [NSString stringWithFormat:@"<head><style>img{max-width:%lfpx !important;}</style></head>%@",Screen_width-20,str];
-    
     [self.webView loadHTMLString:str1 baseURL:nil];
     [self.view addSubview:self.webView];
-    
-    
 }
 
 #pragma mark - lazyLoad
