@@ -8,6 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ImageAndTextViewController : UIViewController
-
+@interface ImageAndTextViewController : BaseViewController
 @end

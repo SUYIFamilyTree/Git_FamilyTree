@@ -204,7 +204,12 @@
             break;
         case 1003:
             //跳转
+        {
             NSLog(@"阅读家谱");
+            ImageAndTextViewController *imageTextVC = [[ImageAndTextViewController alloc]initWithTitle:@"阅读家谱"];
+
+            [self.navigationController pushViewController:imageTextVC animated:YES];
+        }
             break;
         case 1004:
         {
@@ -218,7 +223,7 @@
         {
             //跳转
             NSLog(@"图文影像");
-            ImageAndTextViewController *imageTextVC = [[ImageAndTextViewController alloc]init];
+            ImageAndTextViewController *imageTextVC = [[ImageAndTextViewController alloc]initWithTitle:@"图文影音"];
             [self.navigationController pushViewController:imageTextVC animated:YES];
         }
             break;

@@ -517,6 +517,7 @@
 		BC0326DD1CFD99590089EE4C /* sss_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC0326DA1CFD99590089EE4C /* sss_bg@3x.png */; };
 		BC0CA7E11CFFFB38007B0F90 /* DetailFamHeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC0CA7E01CFFFB38007B0F90 /* DetailFamHeViewController.m */; };
 		BC1427F31D37295E0009123C /* WholeWorldAdgnatioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1427F21D37295E0009123C /* WholeWorldAdgnatioModel.m */; };
+		BC1427F71D3743770009123C /* GenealogyInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1427F61D3743770009123C /* GenealogyInfoModel.m */; };
 		BC142FEF1D053CC500F3A9AF /* xuShi_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BC142FEC1D053CC500F3A9AF /* xuShi_bg.png */; };
 		BC142FF01D053CC500F3A9AF /* xuShi_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC142FED1D053CC500F3A9AF /* xuShi_bg@2x.png */; };
 		BC142FF11D053CC500F3A9AF /* xuShi_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC142FEE1D053CC500F3A9AF /* xuShi_bg@3x.png */; };
@@ -1388,6 +1389,8 @@
 		BC0CA7E01CFFFB38007B0F90 /* DetailFamHeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailFamHeViewController.m; sourceTree = "<group>"; };
 		BC1427F11D37295E0009123C /* WholeWorldAdgnatioModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WholeWorldAdgnatioModel.h; sourceTree = "<group>"; };
 		BC1427F21D37295E0009123C /* WholeWorldAdgnatioModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WholeWorldAdgnatioModel.m; sourceTree = "<group>"; };
+		BC1427F51D3743770009123C /* GenealogyInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenealogyInfoModel.h; sourceTree = "<group>"; };
+		BC1427F61D3743770009123C /* GenealogyInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenealogyInfoModel.m; sourceTree = "<group>"; };
 		BC142FEC1D053CC500F3A9AF /* xuShi_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xuShi_bg.png; sourceTree = "<group>"; };
 		BC142FED1D053CC500F3A9AF /* xuShi_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xuShi_bg@2x.png"; sourceTree = "<group>"; };
 		BC142FEE1D053CC500F3A9AF /* xuShi_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xuShi_bg@3x.png"; sourceTree = "<group>"; };
@@ -3092,6 +3095,7 @@
 		BC03269C1CFD201C0089EE4C /* 图文影音 */ = {
 			isa = PBXGroup;
 			children = (
+				BC1427F41D3743180009123C /* model */,
 				BC03269D1CFD201C0089EE4C /* controller */,
 			);
 			path = "图文影音";
@@ -3136,6 +3140,15 @@
 			children = (
 				BC1427F11D37295E0009123C /* WholeWorldAdgnatioModel.h */,
 				BC1427F21D37295E0009123C /* WholeWorldAdgnatioModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		BC1427F41D3743180009123C /* model */ = {
+			isa = PBXGroup;
+			children = (
+				BC1427F51D3743770009123C /* GenealogyInfoModel.h */,
+				BC1427F61D3743770009123C /* GenealogyInfoModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -4758,6 +4771,7 @@
 				ADA4C14F1D0E862900CA9067 /* CemIntroViewController.m in Sources */,
 				AD195B371CF5A8D5000E32C7 /* NSString+md5.m in Sources */,
 				ADB9261F1CF7DF1900AA8B6E /* OtherLoginView.m in Sources */,
+				BC1427F71D3743770009123C /* GenealogyInfoModel.m in Sources */,
 				BC7299F41D22147D008FEB71 /* VIPInfoModel.m in Sources */,
 				BC2B1E1C1D1BC301004E916D /* DateModel.m in Sources */,
 				BC2943A01CFE9F30006671B9 /* LineageViewController.m in Sources */,
