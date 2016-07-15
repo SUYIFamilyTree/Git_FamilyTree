@@ -45,8 +45,6 @@
 /**顶部栏*/
 @property (nonatomic,strong) FamilyTreeTopView *famTreeTopView;
 
-
-
 @end
 
 @implementation FamilyTreeViewController
@@ -342,21 +340,18 @@
         if (succe) {
             NSMutableArray *idArr = [@[] mutableCopy];
             for (NSDictionary *dic in [NSString jsonArrWithArr:jsonDic[@"data"]]) {
-                
                 [idArr addObject:dic[@"Geid"]];
             }
-            
             [WFamilyModel shareWFamilModel].myFamilyId = idArr[count];
             [WFamilyModel shareWFamilModel].myFamilyName = title;
             
             [USERDEFAULT setObject:idArr[count] forKey:kNSUserDefaultsMyFamilyID];
             [USERDEFAULT setObject:title forKey:kNSUserDefaultsMyFamilyName];
             [USERDEFAULT synchronize];
-    
+            
             [self getFamDetailInfo];
             [self.selecMyFamView removeFromSuperview];
             [self.famTreeTopView.menuBtn setSelected:false];
-            
         }else{
             [SXLoadingView showAlertHUD:@"???" duration:0.5];
         }
@@ -364,6 +359,7 @@
         
     }];
 }
+
 #pragma mark *** getters ***
 
 -(UIButton *)creatBtn{

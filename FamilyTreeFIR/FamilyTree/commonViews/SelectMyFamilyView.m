@@ -93,6 +93,8 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     MyFamilyCollectionViewCell *cell = ((MyFamilyCollectionViewCell *)([collectionView cellForItemAtIndexPath:indexPath]));
+    
+#warning 待改方法
     //点击section 0的时候
     if (indexPath.section == 0) {
         /**
@@ -100,7 +102,6 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
          */
         
         NSInteger famRepeatCount = 0;
-        
         NSMutableArray *arrC = [@[] mutableCopy];
         for (int idx = 0; idx<indexPath.row; idx++) {
             [arrC addObject:self.dataSource[0][idx]];
@@ -114,6 +115,27 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
         
         if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectItemTitle:forCountOfFamNameInAllNames:)]) {
             [_delegate SelectMyFamilyViewDelegate:self didSelectItemTitle:cell.titleLabel.text forCountOfFamNameInAllNames:famRepeatCount];
+        }
+        
+
+        if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectFamID:)]) {
+            //网络请求家谱详情
+            [TCJPHTTPRequestManager POSTWithParameters:@{@"query":cell.titleLabel.text,@"type":@"MyGen"} requestID:GetUserId requestcode:kRequestCodequerymygen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+                if (succe) {
+                    NSMutableArray *idArr = [@[] mutableCopy];
+                    for (NSDictionary *dic in [NSString jsonArrWithArr:jsonDic[@"data"]]) {
+                        [idArr addObject:dic[@"Geid"]];
+                    }
+                    [_delegate SelectMyFamilyViewDelegate:self didSelectFamID:idArr[famRepeatCount]];
+                    
+                }else{
+                    [SXLoadingView showAlertHUD:@"???" duration:0.5];
+                }
+            } failure:^(NSError *error) {
+                
+            }];
+            
+            
         }
     }
     
