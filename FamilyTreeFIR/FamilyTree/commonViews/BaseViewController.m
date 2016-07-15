@@ -19,6 +19,7 @@
 {
     self = [super init];
     if (self) {
+        self.comNavi = [[CommonNavigationViews alloc] initWithFrame:CGRectMake(0, 0, Screen_width, 44+StatusBar_Height) title:@"四海同宗" image:MImage(@"chec")];
         self.comNavi.titleLabel.text = title;
         if (image) {
             [self.comNavi.rightBtn setImage:image forState:0];
@@ -27,6 +28,18 @@
     }
     return self;
 }
+
+-(instancetype)initWithTitle:(NSString *)title{
+    self = [super init];
+    if (self) {
+        self.comNavi = [[CommonNavigationViews alloc] initWithFrame:CGRectMake(0, 0, Screen_width, 44+StatusBar_Height) title:nil];
+        self.comNavi.titleLabel.text = title;
+        
+    }
+    return self;
+
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,11 +55,8 @@
 
 #pragma mark *** getters ***
 
--(CommonNavigationViews *)comNavi{
-    if (!_comNavi) {
-        _comNavi = [[CommonNavigationViews alloc] initWithFrame:CGRectMake(0, 0, Screen_width, 44+StatusBar_Height) title:@"四海同宗" image:MImage(@"chec")];
-    }
-    return _comNavi;
-}
+
+
+
 
 @end

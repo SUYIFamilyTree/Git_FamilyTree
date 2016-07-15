@@ -9,20 +9,24 @@
 #import "ImageAndTextViewController.h"
 #import "CommonNavigationViews.h"
 #import "SelectMyFamilyView.h"
+#import "GenealogyInfoModel.h"
+#import "NSString+addLineBreakOrSpace.h"
 
 @interface ImageAndTextViewController()<UITableViewDelegate,UITableViewDataSource,CommandNavigationViewsDelegate,SelectMyFamilyViewDelegate>
 /** 书视图*/
 @property (nonatomic, strong) UIImageView *bookImageView;
 /** 左侧表视图*/
 @property (nonatomic, strong) UITableView *leftTableView;
-/** 左侧表视图目录*/
-@property (nonatomic, strong) NSArray *leftListArr;
+///** 左侧表视图目录*/
+//@property (nonatomic, strong) NSArray *leftListArr;
 /** 正文底部视图*/
 @property (nonatomic, strong) UIView *contentView;
 /** 时间标签*/
 @property (nonatomic, strong) UILabel *timeLB;
 /** 正文图*/
-@property (nonatomic, strong) UIImageView *contentImageView;
+//@property (nonatomic, strong) UIImageView *contentImageView;
+/** 正文滚动图*/
+@property (nonatomic, strong) UIScrollView *contentSV;
 /** 正文图下面的标签*/
 @property (nonatomic, strong) UILabel *contentUnderImageLB;
 /** 正文右侧视图*/
@@ -37,30 +41,39 @@
 @property (nonatomic, strong) UILabel *rightViewLBD;
 /** 家谱选择视图*/
 @property (nonatomic, strong) SelectMyFamilyView *selecMyFamView;
+/** 家谱详情模型*/
+@property (nonatomic, strong) GenealogyInfoModel *genealogyInfoModel;
+/** 目录数组*/
+@property (nonatomic, strong) NSArray *menuArr;
+/** 详情数组*/
+@property (nonatomic, strong) NSArray *infoArr;
+
 @end
 
 @implementation ImageAndTextViewController
 -(void)viewDidLoad{
     [super viewDidLoad];
+    //获取数据
+    [self getData];
+//    NSString *string = @"书前关于本书体例的说明。\n凡例又称谱例，主要阐明族谱的纂修原则和体例。\n凡例是新编地方志必须要有的。所谓凡例，就是发凡起例。地方志的凡例是对志书的宗旨、内容、体裁、结构以及编写中一些基本问题的规定或说明。简言之，就是说明志书的宗旨、内容和编纂体例的文字。再通俗一点，就像我国著名语言学家王力先生所说：“凡例是作者认为应该注意的地方。”";
+//    MYLog(@"处理过的字符:%@",[self addSomeSpace:string]);
     self.view.backgroundColor = [UIColor whiteColor];
     //配置导航栏
-    CommonNavigationViews *navi = [[CommonNavigationViews alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 64) title:@"图文影音"];
-    navi.delegate = self;
-    [self.view addSubview:navi];
+    self.comNavi.delegate = self;
     //设置背景
     UIImageView *bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
     bgImageView.image = MImage(@"bg");
     [self.view addSubview:bgImageView];
     //一本书
     [self initBookImageView];
-    //左边目录
-    [self initLeftTableView];
+//    //左边目录
+//    [self initLeftTableView];
     //书正文视图
     [self initContentView];
     self.timeLB.text = @"子次公和日";
     [self.view addSubview:self.timeLB];
-    self.contentImageView.image = MImage(@"bk_ye");
-    [self.view addSubview:self.contentImageView];
+    [self.view addSubview:self.contentSV];
+    //[self initContentSV];
     self.contentUnderImageLB.text = @"王氏32族谱";
     [self.view addSubview:self.contentUnderImageLB];
     //图下两条线
@@ -73,6 +86,30 @@
     self.rightViewLBC.text = @"一\n百\n一\n十\n六\n页";
     self.rightViewLBD.text = @"白\n鹤\n堂";
 }
+
+#pragma mark - 网络请求数据
+-(void)getData{
+    NSDictionary *logDic = @{@"geid":@1};
+    WK(weakSelf)
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"querygendeta" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"%@",jsonDic[@"data"]);
+        if (succe) {
+            weakSelf.genealogyInfoModel = [GenealogyInfoModel modelWithJSON:jsonDic[@"data"]];
+            weakSelf.menuArr = [weakSelf.genealogyInfoModel getMenuArr];
+            [weakSelf initLeftTableView];
+            weakSelf.infoArr = [weakSelf.genealogyInfoModel getInfoArr];
+//            MYLog(@"%@",weakSelf.menuArr);
+//            MYLog(@"%@",weakSelf.infoArr);
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
+}
+
+
+#pragma mark - 视图初始化
 //一本书
 -(void)initBookImageView{
     _bookImageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 64+50, 0.95*Screen_width, 0.66*Screen_height)];
@@ -81,34 +118,29 @@
 }
 //左边目录
 -(void)initLeftTableView{
-    _leftTableView = [[UITableView alloc]initWithFrame:CGRectMake(CGRectX(_bookImageView)+15, CGRectY(_bookImageView)+65, 0.2*CGRectW(_bookImageView)+10, CGRectH(_bookImageView)) style:UITableViewStylePlain];
+    _leftTableView = [[UITableView alloc]initWithFrame:CGRectMake(CGRectX(_bookImageView)+10, CGRectY(_bookImageView)+35, 0.2*CGRectW(_bookImageView)+20, CGRectH(_bookImageView)-75) style:UITableViewStylePlain];
     _leftTableView.backgroundColor = [UIColor clearColor];
     _leftTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+     _leftTableView.showsVerticalScrollIndicator = NO;
+    _leftTableView.bounces = NO;
     _leftTableView.delegate = self;
     _leftTableView.dataSource = self;
    [self.view addSubview:_leftTableView];
 }
 //正文视图
 -(void)initContentView{
-    _contentView = [[UIView alloc]initWithFrame:CGRectMake(CGRectXW(_leftTableView), CGRectY(_bookImageView)+25, 0.65*CGRectW(_bookImageView), 0.88*CGRectH(_bookImageView)-5)];
+    _contentView = [[UIView alloc]initWithFrame:CGRectMake(0.3*CGRectW(_bookImageView), CGRectY(_bookImageView)+25, 0.65*CGRectW(_bookImageView), 0.88*CGRectH(_bookImageView)-5)];
     _contentView.backgroundColor = [UIColor clearColor];
     _contentView.layer.borderColor = [UIColor blackColor].CGColor;
     _contentView.layer.borderWidth = 1;
     [self.view addSubview:_contentView];
-    //添加轻扫手势
-    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGesture:)];
-    swipeGesture.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.contentView addGestureRecognizer:swipeGesture];
-    swipeGesture = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeGesture:)];
-    swipeGesture.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.contentView addGestureRecognizer:swipeGesture];
 }
 //图下两条线
 -(void)initLeftAndRightLineIV{
-    UIImageView *leftLineIV =[[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(_contentImageView),CGRectY(_contentUnderImageLB)+7, 0.33*CGRectW(_contentImageView), 5)];
+    UIImageView *leftLineIV =[[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(_contentSV),CGRectY(_contentUnderImageLB)+7, 0.33*CGRectW(_contentSV), 5)];
     leftLineIV.image = MImage(@"ht_bt");
     [self.view addSubview:leftLineIV];
-    UIImageView *rightLineIV =[[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(_contentImageView)+0.67*CGRectW(_contentImageView), CGRectY(_contentUnderImageLB)+7, 0.33*CGRectW(_contentImageView), 5)];
+    UIImageView *rightLineIV =[[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(_contentSV)+0.67*CGRectW(_contentSV), CGRectY(_contentUnderImageLB)+7, 0.33*CGRectW(_contentSV), 5)];
     rightLineIV.image = MImage(@"ht_bt");
     [self.view addSubview:rightLineIV];
 }
@@ -137,7 +169,7 @@
     _rightViewLBC.numberOfLines = 0;
     _rightViewLBC.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:_rightViewLBC];
-    _rightViewLBD = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_rightView), CGRectY(_rightView)+0.85*CGRectH(_rightView), CGRectW(_rightView), 0.15*CGRectH(_rightView))];
+    _rightViewLBD = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_rightView), CGRectY(_rightView)+0.85*CGRectH(_rightView), CGRectW(_rightView), 0.16*CGRectH(_rightView))];
     _rightViewLBD.font = MFont(11);
     //_rightViewLBD.font = [UIFont fontWithName:@"Helvetica-Bold" size:11];
     _rightViewLBD.numberOfLines = 0;
@@ -147,13 +179,57 @@
     [self.view addSubview:_rightViewLBD];
     
 }
-#pragma mark - lazyLoad
--(NSArray *)leftListArr{
-    if (!_leftListArr) {
-        _leftListArr = @[@"谱序",@"谱论",@"老宅",@"老照片",@"纪录片"];
+
+-(void)initContentSV:(id)content{
+    [self.contentSV removeFromSuperview];
+    [self.contentSV removeAllSubviews];
+    if ([content isKindOfClass:[NSString class]]) {
+        NSString *contentStr = [self addSomeSpace:(NSString *)content] ;
+        self.contentSV.contentSize = CGSizeMake(20*(int)ceilf(contentStr.length/16.0), CGRectY(self.contentSV));
+        //self.contentSV.backgroundColor = [UIColor blueColor];
+        //MYLog(@"%lf",self.contentSV.contentSize.width);
+        [self.view addSubview:self.contentSV];
+        for (int i = 0; i < (int)ceilf(contentStr.length/16.0); i++) {
+            int a = 16*i;
+            int b = 16;
+            if (contentStr.length%16 !=0 && i == (int)ceilf(contentStr.length/16.0)-1) {
+                b = contentStr.length%16;
+            }
+            NSString *subStr = [contentStr substringWithRange:NSMakeRange(a, b)];
+            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20*((int)ceilf(contentStr.length/16.0)-(i+1)), 0, 20, CGRectH(self.contentSV))];
+            label.text = [NSString addLineBreaks:subStr];
+            label.numberOfLines = 16;
+            //label.backgroundColor = [UIColor redColor];
+            label.font = WFont(26);
+            label.lineBreakMode = NSLineBreakByWordWrapping;
+            [self labelHeightToFit:label andFrame:CGRectMake(20*((int)ceilf(contentStr.length/16.0)-(i+1)), 0, 20, CGRectH(self.contentSV))];
+            [self.contentSV addSubview:label];
+        }
     }
-    return _leftListArr;
+    
+    if ([content isKindOfClass:[NSArray class]]) {
+        NSArray<NSString *> *contentArr = (NSArray *)content;
+        for (int i = 0; i < contentArr.count; i++) {
+            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectW(self.contentSV)*i, 0, CGRectW(self.contentSV), CGRectH(self.contentSV))];
+            [imageView setImageWithURL:[NSURL URLWithString:contentArr[i]] placeholder:MImage(@"bk_ye")];
+            [self.contentSV addSubview:imageView];
+        }
+        self.contentSV.contentSize = CGSizeMake(CGRectW(self.contentSV)*contentArr.count, CGRectY(self.contentSV));
+        [self.view addSubview:self.contentSV];
+    }
+    self.contentSV.contentOffset = CGPointMake(self.contentSV.contentSize.width-self.contentSV.frame.size.width, 0);
+    
 }
+
+
+
+#pragma mark - lazyLoad
+//-(NSArray *)leftListArr{
+//    if (!_leftListArr) {
+//        _leftListArr = @[@"谱序",@"谱论",@"老宅",@"老照片",@"纪录片"];
+//    }
+//    return _leftListArr;
+//}
 -(UILabel *)timeLB{
     if (!_timeLB) {
         _timeLB = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_contentView)+0.65*CGRectW(_contentView)-5, CGRectY(_contentView), 0.25*CGRectW(_contentView), 0.1*CGRectH(_contentView))];
@@ -161,17 +237,27 @@
     }
     return _timeLB;
 }
--(UIImageView *)contentImageView{
-    if (!_contentImageView) {
-        _contentImageView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(_contentView)+5, CGRectYH(_timeLB), 0.85*CGRectW(_contentView)-5, 0.78*CGRectH(_contentView))];
-        _contentImageView.contentMode = UIViewContentModeScaleToFill;
-        _contentImageView.backgroundColor = [UIColor clearColor];
+//-(UIImageView *)contentImageView{
+//    if (!_contentImageView) {
+//        _contentImageView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(_contentView)+5, CGRectYH(_timeLB), 0.85*CGRectW(_contentView)-5, 0.78*CGRectH(_contentView))];
+//        _contentImageView.contentMode = UIViewContentModeScaleToFill;
+//        _contentImageView.backgroundColor = [UIColor clearColor];
+//    }
+//    return _contentImageView;
+//}
+
+-(UIScrollView *)contentSV{
+    if (!_contentSV) {
+        _contentSV =[[UIScrollView alloc]initWithFrame:CGRectMake(CGRectX(_contentView)+5, CGRectYH(_timeLB), 0.85*CGRectW(_contentView)-5, 0.80*CGRectH(_contentView))];
+        _contentSV.bounces = NO;
     }
-    return _contentImageView;
+    return _contentSV;
 }
+
+
 -(UILabel *)contentUnderImageLB{
     if (!_contentUnderImageLB) {
-        _contentUnderImageLB = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_contentImageView)+0.33*CGRectW(_contentImageView), CGRectYH(_contentImageView)+10, 0.34*CGRectW(_contentImageView), 20)];
+        _contentUnderImageLB = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_contentSV)+0.33*CGRectW(_contentSV), CGRectYH(_contentSV)+10, 0.34*CGRectW(_contentSV), 20)];
         _contentUnderImageLB.textColor = LH_RGBCOLOR(143, 34, 106);
         _contentUnderImageLB.textAlignment = NSTextAlignmentCenter;
         _contentUnderImageLB.font = MFont(10);
@@ -197,7 +283,7 @@
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.leftListArr.count;
+    return self.menuArr.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -207,31 +293,33 @@
     }
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     cell.backgroundColor = [UIColor clearColor];
-    cell.textLabel.text = self.leftListArr[indexPath.row];
+    cell.textLabel.text = self.menuArr[indexPath.row];
     cell.textLabel.font = MFont(11);
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 30;
+    return 40;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self initContentSV:self.infoArr[indexPath.row]];
+    
 }
 
-//滑动正文手势事件
--(void)swipeGesture:(UISwipeGestureRecognizer *)swipe{
-    if (swipe.direction == UISwipeGestureRecognizerDirectionLeft){
-        MYLog(@"向左轻扫");
-        self.contentImageView.image = MImage(@"bk_ye");
-    }
-    if (swipe.direction == UISwipeGestureRecognizerDirectionRight)
-    {
-        MYLog(@"向右轻扫");
-        self.contentImageView.image = MImage(@"sss_bg");
-    }
-}
+////滑动正文手势事件
+//-(void)swipeGesture:(UISwipeGestureRecognizer *)swipe{
+//    if (swipe.direction == UISwipeGestureRecognizerDirectionLeft){
+//        MYLog(@"向左轻扫");
+//        self.contentImageView.image = MImage(@"bk_ye");
+//    }
+//    if (swipe.direction == UISwipeGestureRecognizerDirectionRight)
+//    {
+//        MYLog(@"向右轻扫");
+//        self.contentImageView.image = MImage(@"sss_bg");
+//    }
+//}
 
 #pragma mark - CommandNavigationViewsDelegate
 -(void)CommonNavigationViews:(CommonNavigationViews *)comView respondsToRightBtn:(UIButton *)sender{
@@ -251,6 +339,54 @@
 -(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectItemTitle:(NSString *)title{
     NSLog(@"%@", title);
 }
+
+
+//对文字处理方便竖行排列
+-(NSString *)addSomeSpace:(NSString *)str{
+    NSString *str1 = [str stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    NSMutableArray<NSString *> *StrArr = [@[] mutableCopy];
+    
+    for (int i = 0; i < (int)ceilf(str1.length/16.0); i++) {
+        int a = 16*i;
+        int b = 16;
+        if (str1.length%16 !=0 && i == (int)ceilf(str1.length/16.0)-1) {
+            b = str1.length%16;
+        }
+        
+        
+        NSString *subStr = [str1 substringWithRange:NSMakeRange(a, b)];
+        [StrArr addObject:subStr];
+    }
+    NSMutableString *newStr = [@"" mutableCopy];
+    for (int i = 0; i < StrArr.count; i++) {
+        if ([StrArr[i] rangeOfString:@"\n"].location != NSNotFound) {
+            MYLog(@"%ld",[StrArr[i] rangeOfString:@"\n"].location);
+            int max = (short)(16 - [StrArr[i] rangeOfString:@"\n"].location);
+            NSString *spaceStr = @"";
+            for (int j = 0; j < max; j++) {
+                spaceStr = [spaceStr stringByAppendingString:@" "];
+            }
+            StrArr[i] = [StrArr[i] stringByReplacingOccurrencesOfString:@"\n" withString:spaceStr];
+        }
+        [newStr appendString:StrArr[i]];
+    }
+    
+    return [newStr copy];
+}
+
+//高度自适应
+-(void)labelHeightToFit:(UILabel *)label andFrame:(CGRect)frame{
+    label.numberOfLines = 0;//根据最大行数需求来设置
+    label.textAlignment = NSTextAlignmentCenter;
+    label.lineBreakMode = NSLineBreakByTruncatingTail;
+    CGSize maximumLabelSize = CGSizeMake(100, 9999);//labelsize的最大值
+    //关键语句
+    CGSize expectSize = [label sizeThatFits:maximumLabelSize];
+    label.frame = CGRectMake(frame.origin.x,frame.origin.y,frame.size.width, expectSize.height);
+    
+}
+
+
 
 @end
 

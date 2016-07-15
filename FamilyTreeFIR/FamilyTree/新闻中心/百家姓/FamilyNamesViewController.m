@@ -9,6 +9,7 @@
 #import "FamilyNamesViewController.h"
 #import "NameBeginView.h"
 #import "ZSZPView.h"
+#import "HundredNameInfoModel.h"
 
 @interface FamilyNamesViewController ()<UIScrollViewDelegate>
 /** 背景滚动视图*/
@@ -43,6 +44,8 @@
 @property (nonatomic, strong) NSArray<NSString *> *ZSZPStrArr;
 /** 宗室支派视图数组*/
 @property (nonatomic, strong) NSMutableArray<ZSZPView *> *ZSZPViewArr;
+/** 百家姓详情模型*/
+@property (nonatomic, strong) HundredNameInfoModel *hundredNameInfoModel;
 
 @end
 
@@ -50,7 +53,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initUI];
+    [self getData];
+    //[self initUI];
+}
+
+-(void)getData{
+    NSDictionary *logDic = @{@"FaId":@(self.FaId)};
+    WK(weakSelf)
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetFamilyNamesDetail success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"%@",jsonDic[@"data"]);
+        if (succe) {
+            weakSelf.hundredNameInfoModel = [HundredNameInfoModel modelWithJSON:jsonDic[@"data"]];
+            [weakSelf initUI];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+
+    
 }
 
 #pragma mark - 视图初始化
@@ -68,26 +88,28 @@
     [self.whiteBackV addSubview:self.moveTitleLB];
     self.moveTitleLB.sd_layout.topSpaceToView(self.nameBeginViewArr.lastObject,20).leftSpaceToView(self.whiteBackV,0).heightIs(32*AdaptationWidth()).widthIs(166*AdaptationWidth());
     [self.whiteBackV addSubview:self.moveInfoLB];
-    self.moveInfoLB.sd_layout.topSpaceToView(self.moveTitleLB,24*AdaptationWidth()).leftEqualToView(self.totemInfoLB).rightEqualToView(self.totemInfoLB).heightIs(CGRectH(self.moveInfoLB));
+    self.moveInfoLB.sd_layout.topSpaceToView(self.moveTitleLB,24*AdaptationWidth()).leftEqualToView(self.totemInfoLB).rightSpaceToView(self.whiteBackV,0).heightIs(CGRectH(self.moveInfoLB));
     
     [self initZSZPLBs];
 
 }
 -(void)initNameBeginInfoLBs{
-    for (int i = 0; i < self.nameBeginStrArr.count; i++) {
-        NameBeginView *nameBeginView = [[NameBeginView alloc]initWithFrame:CGRectMake(34*AdaptationWidth(), CGRectYH(self.nameBeginTitleLB)+28*AdaptationWidth(), 592*AdaptationWidth(), 200) Index:i+1 text:self.nameBeginStrArr[i]];
-        if (i == self.nameBeginStrArr.count-1) {
+    for (int i = 0; i < self.hundredNameInfoModel.yl.count; i++) {
+        NameBeginView *nameBeginView = [[NameBeginView alloc]initWithFrame:CGRectMake(34*AdaptationWidth(), CGRectYH(self.nameBeginTitleLB)+28*AdaptationWidth(), 592*AdaptationWidth(), 200) Index:i+1 text:self.hundredNameInfoModel.yl[i]];
+        if (i == self.hundredNameInfoModel.yl.count-1) {
             nameBeginView.lineView.backgroundColor = [UIColor clearColor];
         }
         [self.nameBeginViewArr addObject:nameBeginView];
         [self.whiteBackV addSubview:nameBeginView];
         
         if (i == 0) {
-            nameBeginView.sd_layout.topSpaceToView(self.nameBeginTitleLB,10).leftEqualToView(self.totemInfoLB).rightEqualToView(self.totemInfoLB).heightIs(CGRectYH(nameBeginView.infoLB));
+            nameBeginView.sd_layout.topSpaceToView(self.nameBeginTitleLB,10).leftEqualToView(self.totemInfoLB).rightSpaceToView(self.whiteBackV,0).heightIs(CGRectYH(nameBeginView.infoLB));
         }else{
-            nameBeginView.sd_layout.topSpaceToView(self.nameBeginViewArr[i-1],20).leftEqualToView(self.totemInfoLB).rightEqualToView(self.totemInfoLB).heightIs(CGRectYH(nameBeginView.infoLB));
+            nameBeginView.sd_layout.topSpaceToView(self.nameBeginViewArr[i-1],20).leftEqualToView(self.totemInfoLB).rightSpaceToView(self.whiteBackV,0).heightIs(CGRectYH(nameBeginView.infoLB));
         }
     }
+
+    
 }
 
 -(void)initZSZPLBs{
@@ -144,7 +166,8 @@
 -(UIImageView *)totemIV{
     if (!_totemIV) {
         _totemIV = [[UIImageView alloc]initWithFrame:AdaptationFrame(23, 109, 128, 128)];
-        _totemIV.image = MImage(@"baijiaxing_logo");
+        //_totemIV.image = MImage(@"baijiaxing_logo");
+        [_totemIV setImageWithURL:[NSURL URLWithString:self.hundredNameInfoModel.data.FaLogo] placeholder:MImage(@"baijiaxing_logo")];
     }
     return _totemIV;
 }
@@ -161,7 +184,8 @@
 -(UILabel *)ancestorsInfoLB{
     if (!_ancestorsInfoLB) {
         _ancestorsInfoLB =[[UILabel alloc]initWithFrame:CGRectMake(CGRectX(self.ancestorsInfoTitleLB), CGRectYH(self.ancestorsInfoTitleLB), 470*AdaptationWidth(),414*AdaptationWidth())];
-        _ancestorsInfoLB.text = @"宋穆公为穆姓的得姓始祖。\n宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与";
+        //_ancestorsInfoLB.text = @"宋穆公为穆姓的得姓始祖。\n宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与宋穆公是宋宣公的胞弟，宣公去世时舍太子与";
+        _ancestorsInfoLB.text = self.hundredNameInfoModel.data.FaBrief;
         _ancestorsInfoLB.font = WFont(25);
         _ancestorsInfoLB.numberOfLines = 0;
         [_ancestorsInfoLB sizeToFit];
@@ -171,7 +195,13 @@
 
 -(UILabel *)totemTitleLB{
     if (!_totemTitleLB) {
-        _totemTitleLB = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectYH(self.ancestorsInfoLB)+45*AdaptationWidth(), 166*AdaptationWidth(), 32*AdaptationWidth())];
+        _totemTitleLB = [[UILabel alloc]init];
+        if (CGRectYH(self.totemIV) < CGRectYH(self.ancestorsInfoLB)) {
+            _totemTitleLB.frame = CGRectMake(0, CGRectYH(self.ancestorsInfoLB)+45*AdaptationWidth(), 166*AdaptationWidth(), 32*AdaptationWidth());
+        }else{
+            _totemTitleLB.frame = CGRectMake(0, CGRectYH(self.totemIV)+100*AdaptationWidth(),166*AdaptationWidth(), 32*AdaptationWidth());
+        }
+        //_totemTitleLB = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectYH(self.ancestorsInfoLB)+45*AdaptationWidth(), 166*AdaptationWidth(), 32*AdaptationWidth())];
         _totemTitleLB.text = @"图腾释义";
         _totemTitleLB.backgroundColor = LH_RGBCOLOR(56, 89, 96);
         _totemTitleLB.textAlignment = NSTextAlignmentCenter;
@@ -184,7 +214,8 @@
 -(UILabel *)totemInfoLB{
     if (!_totemInfoLB) {
         _totemInfoLB = [[UILabel alloc]initWithFrame:CGRectMake(34*AdaptationWidth(), CGRectYH(self.totemTitleLB)+24*AdaptationWidth(), 592*AdaptationWidth(), 132*AdaptationWidth())];
-        _totemInfoLB.text = @"穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。";
+        //_totemInfoLB.text = @"穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。";
+        _totemInfoLB.text = self.hundredNameInfoModel.data.FaInter;
         _totemInfoLB.font = WFont(25);
         _totemInfoLB.numberOfLines = 0;
         [_totemInfoLB sizeToFit];
@@ -210,12 +241,12 @@
     }
     return _nameBeginViewArr;
 }
--(NSArray<NSString *> *)nameBeginStrArr{
-    if (!_nameBeginStrArr) {
-        _nameBeginStrArr = @[@"穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。",@"穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。",@"穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。",@"穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。",@"穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。",@"穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。",@"穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。"];
-    }
-    return _nameBeginStrArr;
-}
+//-(NSArray<NSString *> *)nameBeginStrArr{
+//    if (!_nameBeginStrArr) {
+//        _nameBeginStrArr = @[@"穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。",@"穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。",@"穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。",@"穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。",@"穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。",@"穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。",@"穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。"];
+//    }
+//    return _nameBeginStrArr;
+//}
 -(UILabel *)moveTitleLB{
     if (!_moveTitleLB) {
         _moveTitleLB = [[UILabel alloc]init];
@@ -231,7 +262,8 @@
 -(UILabel *)moveInfoLB{
     if (!_moveInfoLB) {
         _moveInfoLB = [[UILabel alloc]initWithFrame:CGRectMake(34*AdaptationWidth(), 20*AdaptationWidth(), 592*AdaptationWidth(), 360*AdaptationWidth())];
-        _moveInfoLB.text = @"穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。本义是禾名。";
+//        _moveInfoLB.text = @"穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。穆，本义是禾名。本义是禾名。";
+        _moveInfoLB.text = self.hundredNameInfoModel.data.FaMigration;
         _moveInfoLB.font = WFont(25);
         _moveInfoLB.numberOfLines = 0;
         [_moveInfoLB sizeToFit];
@@ -248,7 +280,8 @@
 
 -(NSArray<NSString *> *)ZSZPStrArr{
     if (!_ZSZPStrArr) {
-        _ZSZPStrArr = @[@"",@"河南浚、汝南郡、河内郡。",@"河南浚、汝南郡、河内郡。",@"外书六事;内疏四千\n外书六事;内疏四千\n外书六事;内疏四千\n外书六事;内疏四千\n外书六事;内疏四千\n外书六事;内疏四千\n外书六事;内疏四千\n"];
+//        _ZSZPStrArr = @[@"",@"河南浚、汝南郡、河内郡。",@"河南浚、汝南郡、河内郡。",@"外书六事;内疏四千\n外书六事;内疏四千\n外书六事;内疏四千\n外书六事;内疏四千\n外书六事;内疏四千\n外书六事;内疏四千\n外书六事;内疏四千\n"];
+        _ZSZPStrArr = @[self.hundredNameInfoModel.data.FaClantribe,self.hundredNameInfoModel.data.FaCountyhall,self.hundredNameInfoModel.data.FaHall,self.hundredNameInfoModel.data.FaOther];
     }
     return _ZSZPStrArr;
 }

@@ -75,6 +75,7 @@ static NSString *const kReusableCollecCellIdentifier = @"CollectioncellIdentifie
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     FamilyNamesViewController *famName = [[FamilyNamesViewController alloc] initWithTitle:@"百家姓" image:nil];
+    famName.FaId = self.BJXArr[indexPath.row].FaId;
     [[self viewController].navigationController pushViewController:famName animated:YES];
 }
 
@@ -86,12 +87,11 @@ static NSString *const kReusableCollecCellIdentifier = @"CollectioncellIdentifie
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.itemSize = AdaptationSize(144, 25);
         flowLayout.minimumLineSpacing = 0*AdaptationWidth();
-        flowLayout.minimumInteritemSpacing = 30*AdaptationWidth();
+        flowLayout.minimumInteritemSpacing = 23*AdaptationWidth();
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
         
-        _collectionView = [[UICollectionView alloc] initWithFrame:AdaptationFrame(0, 32, self.bounds.size.width/AdaptationWidth(), 257) collectionViewLayout:flowLayout];
-  
+        _collectionView = [[UICollectionView alloc] initWithFrame:AdaptationFrame(0, 32, self.bounds.size.width/AdaptationWidth(), 270) collectionViewLayout:flowLayout];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
         _collectionView.backgroundColor = [UIColor whiteColor];

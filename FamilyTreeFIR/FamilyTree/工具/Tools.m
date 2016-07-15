@@ -57,6 +57,10 @@ NSString * _Nonnull const kRequestCodeCreateBarrage = @"createbarrage";
 NSString * _Nonnull const kRequestCodeRitual = @"ritual";
 NSString * _Nonnull const kRequestCodeGetNewsList =@"getnewslist";
 NSString * _Nonnull const kRequestCodeGetFamilyNamesList = @"getfamilynameslist";
+NSString * _Nonnull const kRequestCodeGetFamilyNamesDetail = @"getfamilynamesdetail";
+NSString * _Nonnull const kRequestCodeGetNewsDetail = @"getnewsdetail";
+NSString * _Nonnull const kRequestCodeQueryClan = @"queryclan";
+
 
 +(void)showAlertViewControllerAutoDissmissWithTarGet:(id)target
                                              Message:(NSString *)message

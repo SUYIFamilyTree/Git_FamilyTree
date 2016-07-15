@@ -9,5 +9,6 @@
 #import "BaseViewController.h"
 
 @interface FamilyNamesViewController : BaseViewController
-
+/** FaId*/
+@property (nonatomic, assign) NSInteger FaId;
 @end
