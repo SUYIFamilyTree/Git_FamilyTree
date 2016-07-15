@@ -60,9 +60,21 @@ enum {
     
     UIImageView *imagView = [UIImageView new];
     imagView.image = MImage(@"qiuQian_bg");
+    imagView.userInteractionEnabled = YES;
     [self.view addSubview:imagView];
     imagView.sd_layout.leftSpaceToView(self.view,0).topSpaceToView(self.view,64).rightSpaceToView(self.view,0).bottomSpaceToView(self.view,self.tabBarController.tabBar.frame.size.height);
     self.imageView = imagView;
+    
+    //摇晃提示
+    UIImageView *deVieView = [UIImageView new];
+    deVieView.image  = MImage(@"qiuQian_ft_q");
+            deVieView.userInteractionEnabled = YES;
+            UIGestureRecognizer *tap = [[UIGestureRecognizer alloc]initWithTarget:self action:@selector(clickDivinationBtn)];
+            [deVieView addGestureRecognizer:tap];
+    
+    [self.imageView addSubview:deVieView];
+    self.imageView.userInteractionEnabled = YES;
+    deVieView.sd_layout.leftSpaceToView(self.imageView,125*AdaptationWidth()).heightIs(90*AdaptationWidth()).widthIs(540*AdaptationWidth()).bottomSpaceToView(self.firBtn,40*AdaptationWidth());
     //求签动画
     [self.imageView addSubview:self.diviAnimations];
 }
@@ -105,7 +117,7 @@ enum {
             break;
     }
 }
-#pragma mark *** useritemDelefate ***
+#pragma mark *** useritemDelegate ***
 -(void)UseItemViewDidRespondsToUseBtn:(UseItemView *)useView{
     
     switch (useView.tag) {
@@ -139,6 +151,17 @@ enum {
     });
 }
 
+#warning 点击无响应
+-(void)clickDivinationBtn{
+    MYLog(@"点击求签");
+    [self.diviAnimations startAnimating];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(AnimationTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        WAfterDivinationViewController *afterVc = [[WAfterDivinationViewController alloc] initWithTitle:@"灵签" image:nil];
+        [self.navigationController pushViewController:afterVc animated:YES];
+    });
+
+}
 
 #pragma mark *** getters ***
 
@@ -148,14 +171,6 @@ enum {
         [_firBtn setImage:MImage(@"qiuQian_sm_xz") forState:0];
         _firBtn.tag = XZBtnTag;
         [_firBtn addTarget:self action:@selector(respondsToDivAllBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
-        //摇晃提示
-        UIImageView *deVieView = [UIImageView new];
-        deVieView.image  = MImage(@"qiuQian_ft_q");
-        
-        [self.imageView addSubview:deVieView];
-        self.imageView.userInteractionEnabled = YES;
-        deVieView.sd_layout.leftSpaceToView(self.imageView,125*AdaptationWidth()).heightIs(90*AdaptationWidth()).widthIs(540*AdaptationWidth()).bottomSpaceToView(self.firBtn,40*AdaptationWidth());
         
     }
     return _firBtn;

@@ -17,14 +17,10 @@
 @property (nonatomic, strong) UIImageView *bookImageView;
 /** 左侧表视图*/
 @property (nonatomic, strong) UITableView *leftTableView;
-///** 左侧表视图目录*/
-//@property (nonatomic, strong) NSArray *leftListArr;
 /** 正文底部视图*/
 @property (nonatomic, strong) UIView *contentView;
 /** 时间标签*/
 @property (nonatomic, strong) UILabel *timeLB;
-/** 正文图*/
-//@property (nonatomic, strong) UIImageView *contentImageView;
 /** 正文滚动图*/
 @property (nonatomic, strong) UIScrollView *contentSV;
 /** 正文图下面的标签*/
@@ -54,9 +50,8 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     //获取数据
-    [self getData];
-//    NSString *string = @"书前关于本书体例的说明。\n凡例又称谱例，主要阐明族谱的纂修原则和体例。\n凡例是新编地方志必须要有的。所谓凡例，就是发凡起例。地方志的凡例是对志书的宗旨、内容、体裁、结构以及编写中一些基本问题的规定或说明。简言之，就是说明志书的宗旨、内容和编纂体例的文字。再通俗一点，就像我国著名语言学家王力先生所说：“凡例是作者认为应该注意的地方。”";
-//    MYLog(@"处理过的字符:%@",[self addSomeSpace:string]);
+#warning 默认先获取geid为1的家谱详情
+    [self getData:1];
     self.view.backgroundColor = [UIColor whiteColor];
     //配置导航栏
     self.comNavi.delegate = self;
@@ -88,8 +83,8 @@
 }
 
 #pragma mark - 网络请求数据
--(void)getData{
-    NSDictionary *logDic = @{@"geid":@1};
+-(void)getData:(NSInteger)GeId{
+    NSDictionary *logDic = @{@"geid":@(GeId)};
     WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"querygendeta" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         MYLog(@"%@",jsonDic[@"data"]);
@@ -98,13 +93,13 @@
             weakSelf.menuArr = [weakSelf.genealogyInfoModel getMenuArr];
             [weakSelf initLeftTableView];
             weakSelf.infoArr = [weakSelf.genealogyInfoModel getInfoArr];
+            [weakSelf initContentSV:weakSelf.infoArr.firstObject];
 //            MYLog(@"%@",weakSelf.menuArr);
 //            MYLog(@"%@",weakSelf.infoArr);
         }
     } failure:^(NSError *error) {
         
     }];
-    
     
 }
 
@@ -184,25 +179,15 @@
     [self.contentSV removeFromSuperview];
     [self.contentSV removeAllSubviews];
     if ([content isKindOfClass:[NSString class]]) {
-        NSString *contentStr = [self addSomeSpace:(NSString *)content] ;
-        self.contentSV.contentSize = CGSizeMake(20*(int)ceilf(contentStr.length/16.0), CGRectY(self.contentSV));
-        //self.contentSV.backgroundColor = [UIColor blueColor];
-        //MYLog(@"%lf",self.contentSV.contentSize.width);
+        NSArray *vertivalStrArr = [self getVerticalStrArr:(NSString *)content];
+        self.contentSV.contentSize = CGSizeMake(20*vertivalStrArr.count, CGRectY(self.contentSV));
         [self.view addSubview:self.contentSV];
-        for (int i = 0; i < (int)ceilf(contentStr.length/16.0); i++) {
-            int a = 16*i;
-            int b = 16;
-            if (contentStr.length%16 !=0 && i == (int)ceilf(contentStr.length/16.0)-1) {
-                b = contentStr.length%16;
-            }
-            NSString *subStr = [contentStr substringWithRange:NSMakeRange(a, b)];
-            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20*((int)ceilf(contentStr.length/16.0)-(i+1)), 0, 20, CGRectH(self.contentSV))];
-            label.text = [NSString addLineBreaks:subStr];
+        for (int i = 0; i < vertivalStrArr.count; i++) {
+            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake((vertivalStrArr.count-i-1)*20, 0, 20, CGRectH(self.contentSV))];
+            label.text = [NSString addLineBreaks:vertivalStrArr[i]];
             label.numberOfLines = 16;
-            //label.backgroundColor = [UIColor redColor];
             label.font = WFont(26);
-            label.lineBreakMode = NSLineBreakByWordWrapping;
-            [self labelHeightToFit:label andFrame:CGRectMake(20*((int)ceilf(contentStr.length/16.0)-(i+1)), 0, 20, CGRectH(self.contentSV))];
+            [self labelHeightToFit:label andFrame:CGRectMake((vertivalStrArr.count-i-1)*20, 0, 20, CGRectH(self.contentSV))];
             [self.contentSV addSubview:label];
         }
     }
@@ -224,12 +209,6 @@
 
 
 #pragma mark - lazyLoad
-//-(NSArray *)leftListArr{
-//    if (!_leftListArr) {
-//        _leftListArr = @[@"谱序",@"谱论",@"老宅",@"老照片",@"纪录片"];
-//    }
-//    return _leftListArr;
-//}
 -(UILabel *)timeLB{
     if (!_timeLB) {
         _timeLB = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_contentView)+0.65*CGRectW(_contentView)-5, CGRectY(_contentView), 0.25*CGRectW(_contentView), 0.1*CGRectH(_contentView))];
@@ -237,14 +216,7 @@
     }
     return _timeLB;
 }
-//-(UIImageView *)contentImageView{
-//    if (!_contentImageView) {
-//        _contentImageView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(_contentView)+5, CGRectYH(_timeLB), 0.85*CGRectW(_contentView)-5, 0.78*CGRectH(_contentView))];
-//        _contentImageView.contentMode = UIViewContentModeScaleToFill;
-//        _contentImageView.backgroundColor = [UIColor clearColor];
-//    }
-//    return _contentImageView;
-//}
+
 
 -(UIScrollView *)contentSV{
     if (!_contentSV) {
@@ -308,18 +280,6 @@
     
 }
 
-////滑动正文手势事件
-//-(void)swipeGesture:(UISwipeGestureRecognizer *)swipe{
-//    if (swipe.direction == UISwipeGestureRecognizerDirectionLeft){
-//        MYLog(@"向左轻扫");
-//        self.contentImageView.image = MImage(@"bk_ye");
-//    }
-//    if (swipe.direction == UISwipeGestureRecognizerDirectionRight)
-//    {
-//        MYLog(@"向右轻扫");
-//        self.contentImageView.image = MImage(@"sss_bg");
-//    }
-//}
 
 #pragma mark - CommandNavigationViewsDelegate
 -(void)CommonNavigationViews:(CommonNavigationViews *)comView respondsToRightBtn:(UIButton *)sender{
@@ -342,37 +302,28 @@
 
 
 //对文字处理方便竖行排列
--(NSString *)addSomeSpace:(NSString *)str{
-    NSString *str1 = [str stringByReplacingOccurrencesOfString:@"\r" withString:@""];
-    NSMutableArray<NSString *> *StrArr = [@[] mutableCopy];
-    
-    for (int i = 0; i < (int)ceilf(str1.length/16.0); i++) {
-        int a = 16*i;
-        int b = 16;
-        if (str1.length%16 !=0 && i == (int)ceilf(str1.length/16.0)-1) {
-            b = str1.length%16;
+-(NSArray<NSString *> *)getVerticalStrArr:(NSString *)str{
+    NSMutableArray *verticalStrArr = [@[] mutableCopy];
+     NSString *str1 = [str stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    NSUInteger location = 0;
+    NSUInteger length = 16;
+    while ([str1 substringFromIndex:location].length > length) {
+        NSString *subStr = [str1 substringWithRange:NSMakeRange(location, length)];
+        if ([subStr rangeOfString:@"\n"].location != NSNotFound) {
+            NSString *subStr1 = [subStr substringWithRange:NSMakeRange(0, [subStr rangeOfString:@"\n"].location)];
+            location = location+[subStr rangeOfString:@"\n"].location+1;
+            [verticalStrArr addObject:subStr1];
+            continue;
         }
-        
-        
-        NSString *subStr = [str1 substringWithRange:NSMakeRange(a, b)];
-        [StrArr addObject:subStr];
+        location = location+length;
+        [verticalStrArr addObject:subStr];
     }
-    NSMutableString *newStr = [@"" mutableCopy];
-    for (int i = 0; i < StrArr.count; i++) {
-        if ([StrArr[i] rangeOfString:@"\n"].location != NSNotFound) {
-            MYLog(@"%ld",[StrArr[i] rangeOfString:@"\n"].location);
-            int max = (short)(16 - [StrArr[i] rangeOfString:@"\n"].location);
-            NSString *spaceStr = @"";
-            for (int j = 0; j < max; j++) {
-                spaceStr = [spaceStr stringByAppendingString:@" "];
-            }
-            StrArr[i] = [StrArr[i] stringByReplacingOccurrencesOfString:@"\n" withString:spaceStr];
-        }
-        [newStr appendString:StrArr[i]];
-    }
+    [verticalStrArr addObject:[str1 substringFromIndex:location]];
     
-    return [newStr copy];
+    return [verticalStrArr copy];
 }
+
+
 
 //高度自适应
 -(void)labelHeightToFit:(UILabel *)label andFrame:(CGRect)frame{

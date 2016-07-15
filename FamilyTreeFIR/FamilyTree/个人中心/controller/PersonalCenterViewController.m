@@ -28,6 +28,7 @@
 #import "AreaModel.h"
 #import "VIPInfoModel.h"
 #import "VIPGrowUpModel.h"
+#import "NewInfoViewController.h"
 
 @interface PersonalCenterViewController ()<PersonalCenterHeaderViewDelegate,PersonalCenterTodayFortuneViewDelegate,UITableViewDataSource,UITableViewDelegate,PersonalCenterMyPhotoAlbumsViewDelegate,PayForFortuneViewDelegate,PayForForeverFortuneViewDelegate,VIPViewDelegate>
 /** 全屏滚动*/
@@ -263,6 +264,7 @@
     [self.vipBtn setTitle:vipLevelStr forState:UIControlStateNormal];
     self.headerView.money = (double)self.queryModel.memb.MeBalance;
     self.headerView.sameCityMoney = self.queryModel.memb.MeIntegral;
+    [self.infoView.headIV.headInsideIV setImageWithURL:[NSURL URLWithString:self.queryModel.kzxx.Photo] placeholder:MImage(@"tx_1")];
 }
 //主界面数据刷新
 -(void)initMainData{
@@ -271,6 +273,7 @@
     self.headerView.sameCityMoney = [[USERDEFAULT valueForKey:@"MeIntegral"] intValue];
     //会员家谱数据
     [self.infoView reloadData:self.memallInfo.hyjp];
+
     //命理数据
     [self.numerologyView reloadData:self.memallInfo.scbz];
 //    //今日运势数据
@@ -477,6 +480,9 @@
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NewInfoViewController *newInfoVC = [[NewInfoViewController alloc]initWithTitle:@"新闻详情" image:nil];
+    newInfoVC.arId = [self.memallInfo.jzdt[indexPath.row].arid intValue];
+    [self.navigationController pushViewController:newInfoVC animated:YES];
 }
 
 
@@ -489,9 +495,6 @@
     }
     return _scrollView;
 }
-
-
-
 
 #pragma mark - PersonalCenterHeaderViewDelegate
 -(void)clickMoneyViewToPay{

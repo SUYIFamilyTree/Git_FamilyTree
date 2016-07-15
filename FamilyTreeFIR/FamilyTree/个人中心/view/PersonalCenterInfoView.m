@@ -137,7 +137,7 @@
         [self labelHeightToFit:self.currentFamilyTreeInfoLBsArr[i] andFrame:CGRectMake(0.380*Screen_width+(0.0938*Screen_width+0.0063*Screen_width)*i, 0.1530*CGRectH(self), 0.0938*Screen_width, 200)];
     }
     
-    [self.headIV.headInsideIV setImageWithURL:[USERDEFAULT valueForKey:@"MeExtension"] placeholder:[UIImage imageNamed:@"headImage.png"]];
+//    [self.headIV.headInsideIV setImageWithURL:[USERDEFAULT valueForKey:@"MeExtension"] placeholder:[UIImage imageNamed:@"headImage.png"]];
 }
 
 

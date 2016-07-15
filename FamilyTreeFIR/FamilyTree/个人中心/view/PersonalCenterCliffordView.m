@@ -7,6 +7,7 @@
 //
 
 #import "PersonalCenterCliffordView.h"
+#import "DivinationViewController.h"
 
 @interface PersonalCenterCliffordView()
 /** 签运*/
@@ -24,6 +25,7 @@
     if (self) {
         UIImageView *bgIV = [[UIImageView alloc]initWithFrame:self.bounds];
         bgIV.image = MImage(@"gr_ct_jiang_bg");
+        bgIV.userInteractionEnabled = YES;
         [self addSubview:bgIV];
         //求签
         //self.divinationsArr = @[@"三等中平策",@"规规矩矩"];
@@ -32,6 +34,8 @@
 //        self.cliffodLevel = 3;
 //        self.devoutDgree = 310;
         [self initClifford];
+        //加两个视图，区分用户是要求签还是祈福
+        [self initTwoTapView];
     }
     return self;
 }
@@ -79,6 +83,24 @@
     [self addSubview:self.devoutDgreeNumberLB];
 }
 
+-(void)initTwoTapView{
+    //点击求签部分
+    UIView *divinationView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, CGRectW(self), CGRectH(self)/2)];
+    divinationView.backgroundColor = [UIColor clearColor];
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickDivinationView)];
+    [divinationView addGestureRecognizer:tap1];
+    [self addSubview:divinationView];
+    //点击祈福部分
+    UIView *cliffordView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectH(self)/2, CGRectW(self), CGRectH(self)/2)];
+    cliffordView.backgroundColor = [UIColor clearColor];
+    UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickCliffordView)];
+    [cliffordView addGestureRecognizer:tap2];
+    [self addSubview:cliffordView];
+    
+}
+
+
+
 -(void)reloadData:(MemallInfoGrqwModel *)grqw{
     //签文
     self.divinationsArr = [NSMutableArray array];
@@ -97,4 +119,15 @@
     self.devoutDgreeNumberLB.text =[NSString stringWithFormat:@"%@",@(devout.qcdz)];
     self.cliffordLevelNumberLB.text = devout.qcdch;
 }
+
+-(void)clickDivinationView{
+    MYLog(@"求签");
+    DivinationViewController *divVc = [[DivinationViewController alloc] initWithTitle:@"灵签" image:nil];
+    [[self viewController].navigationController pushViewController:divVc animated:YES];
+}
+-(void)clickCliffordView{
+    MYLog(@"祈福");
+}
+
+
 @end
