@@ -41,11 +41,8 @@
         
         //选择头像
         self.headStrArr = [NSMutableArray array];
-        for (int i = 0; i < 3; i++) {
-            [self.headStrArr addObject:@"xiuGaitouxiang_sel1"];
-            [self.headStrArr addObject:@"xiuGaitouxiang_sel2"];
-            [self.headStrArr addObject:@"xiuGaitouxiang_sel3"];
-            [self.headStrArr addObject:@"xiuGaitouxiang_sel4"];
+        for (int i = 0; i < 12; i++) {
+            [self.headStrArr addObject:[NSString stringWithFormat:@"tx_%d",i+1]];
         }
         [self initChooseHead];
         
@@ -81,6 +78,7 @@
     for (int i = 0; i < 12; i++) {
         UIButton *headBtn = [[UIButton alloc]initWithFrame:CGRectMake(0.3630*CGRectW(self.bgIV)+0.1473*CGRectW(self.bgIV)*(i-4*[@[@0,@1,@2][i/4] intValue]), 0.0927*CGRectH(self.bgIV)+0.1506*CGRectH(self.bgIV)*[@[@0,@1,@2][i/4] intValue], 0.1164*CGRectW(self.bgIV), 0.1158*CGRectH(self.bgIV))];
         [headBtn setBackgroundImage:MImage(self.headStrArr[i]) forState:UIControlStateNormal];
+        headBtn.imageView.contentMode = UIViewContentModeScaleToFill;
         headBtn.tag = 555+i;
         [headBtn addTarget:self action:@selector(chooseHeadBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self.bgIV addSubview:headBtn];
@@ -116,7 +114,7 @@
     [self.bgIV addSubview:unlockIV];
     //文字描述
     NSArray *detailArr = @[@"普通用户",@"VIP1-5",@"VIP6-8",@"每月之星"];
-    NSArray *unlockStateArr = @[@YES,@YES,@YES,@YES];
+    NSArray *unlockStateArr = @[@NO,@NO,@NO,@NO];
     for (int i = 0; i < 4; i++) {
         //因为间距不一样，加代码做调整
         UILabel *detailLB = [[UILabel alloc]init];
