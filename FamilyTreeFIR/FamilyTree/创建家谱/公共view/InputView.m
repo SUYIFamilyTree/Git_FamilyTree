@@ -63,6 +63,10 @@
     
     if (_isSelectedBtn) {
         
+        if (_delegate && [_delegate respondsToSelector:@selector(InputViewDidStartSelectLabel:)]) {
+            [_delegate InputViewDidStartSelectLabel:self];
+        };
+        
         self.backScroView.backgroundColor = [UIColor whiteColor];
         
 //        [UIView animateWithDuration:0.3f animations:^{
@@ -91,6 +95,7 @@
                 [self addSubview:self.backScroView];
                 
             }
+        
     }else{
 //        [UIView animateWithDuration:0.3f animations:^{
             self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _length, Input_height);

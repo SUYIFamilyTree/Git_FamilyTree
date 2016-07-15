@@ -14,6 +14,7 @@
 #import "CreatFamilyTree.h"
 #import "ManagerFamilyViewController.h"
 #import "WFamilyTableView.h"
+#import "WApplyJoinView.h"
 @interface FamilyTreeViewController ()<FamilyTreeTopViewDelegate,CreatFamilyTreeDelegate,SelectMyFamilyViewDelegate>
 {
     BOOL _selectedCreatBtn;
@@ -44,6 +45,10 @@
 
 /**顶部栏*/
 @property (nonatomic,strong) FamilyTreeTopView *famTreeTopView;
+
+/**加入家谱view*/
+@property (nonatomic,strong) WApplyJoinView *joinView;
+
 
 @end
 
@@ -173,13 +178,9 @@
     
     NSString *geId = @"";
     if ([USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]) {
-        
         geId = [USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID];
-        
     }else{
-        
         geId = [WFamilyModel shareWFamilModel].myFamilyId;
-        
     }
 
     [TCJPHTTPRequestManager POSTWithParameters:@{@"GeId":geId} requestID:GetUserId requestcode:kRequestCodegetintogen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
@@ -283,8 +284,6 @@
     [TCJPHTTPRequestManager POSTWithParameters:@{@"query":self.famTreeTopView.searchLabel.text,@"pagenum":@"1",@"pagesize":@"20"} requestID:GetUserId requestcode:kRequestCodequerygenandgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             
-            NSLog(@"sousuojieguo---%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
-            
             WSearchModel *searchModel = [WSearchModel modelWithJSON:jsonDic[@"data"]];
             
             [WSearchModel shardSearchModel].genlist = searchModel.genlist;
@@ -317,25 +316,30 @@
 
 -(void)CreateFamilyTree:(CreatFamilyTree *)creatTree didSelectedBtn:(UIButton *)sender{
     
-//    if (creatTree.type == CreatefamilyTreeTypeThreeBtn) {
         if (sender.tag == 0) {
             CreateFamViewController *creVc = [[CreateFamViewController alloc] initWithTitle:@"创建家谱" image:nil];
             [self.navigationController pushViewController:creVc animated:YES];
         }
-    
         if (sender.tag == 1) {
+            
+          
+            self.joinView.alpha = 0;
+            [self.view addSubview:self.joinView];
+            
+            [UIView animateWithDuration:0.3f animations:^{
+                
+           self.joinView.alpha = 1;
+                
+            }];
             
         }
         if (sender.tag == 2) {
         ManagerFamilyViewController *manager = [[ManagerFamilyViewController alloc] initWithTitle:@"管理家谱" image:nil];
         [manager.comNavi.rightBtn removeFromSuperview];
         [self.navigationController pushViewController:manager animated:YES];
-            
-            [self.crtFamTree removeFromSuperview];
     }
-//    }
-    
-    MYLog(@"%ld",sender.tag);
+    [self.crtFamTree removeFromSuperview];
+
 }
 
 -(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectFamTitle:(NSString *)title SelectFamID:(NSString *)famId{
@@ -353,7 +357,6 @@
     [self.famTreeTopView.menuBtn setSelected:false];
 
 }
-
 
 #pragma mark *** getters ***
 
@@ -397,5 +400,11 @@
     }
     return _famTableView;
 }
-
+-(WApplyJoinView *)joinView{
+    if (!_joinView) {
+        _joinView = [[WApplyJoinView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar) checkType:WApplyJoinViewNeedlessCheck];
+        
+    }
+    return _joinView;
+}
 @end

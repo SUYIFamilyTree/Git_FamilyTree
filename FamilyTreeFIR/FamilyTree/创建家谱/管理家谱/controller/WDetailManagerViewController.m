@@ -99,7 +99,7 @@ enum{
     }];
     //更新滚动图和大小
     
-    _backScrollView.contentSize = AdaptationSize(1040, subDetaiArr.count*270);
+    _backScrollView.contentSize = AdaptationSize(1040, subDetaiArr.count>4?subDetaiArr.count*270:5*270);
     self.bakImageView.frame = CGRectMake(0, 0, _backScrollView.contentSize.width, _backScrollView.contentSize.height);
     
     NSArray *frameArr = @[[NSNumber numberWithFloat:30+360],
@@ -120,7 +120,7 @@ enum{
         }
     }
         //布局
-        RollDetailView *rollView = [[RollDetailView alloc] initWithFrame:AdaptationFrame([frameArr[finCount] floatValue], 30+idx*240, 500, 200) leftViewDataArr:titleArr rightViewDataArr:subDetaiArr[idx]];
+        RollDetailView *rollView = [[RollDetailView alloc] initWithFrame:AdaptationFrame([frameArr[finCount] floatValue]-30, 30+idx*240, 500, 200) leftViewDataArr:titleArr rightViewDataArr:subDetaiArr[idx]];
         rollView.genLabel.text = [NSString verticalStringWith:genNum[idx]];
         rollView.myMemberID = genMemberId[idx];
 
@@ -194,7 +194,9 @@ enum{
 }
 -(RollView *)rollView{
     if (!_rollView) {
-        _rollView = [[RollView alloc] initWithFrame:AdaptationFrame(558+360, 30, 135, 360) withTitle:@"段正淳1|5带卷谱" rollType:RollViewTypeUnitsDigit];
+        NSString *title = [WDetailJPInfoModel sharedWDetailJPInfoModel].currentJPName;
+        NSInteger idx = [WDetailJPInfoModel sharedWDetailJPInfoModel].currentJPIdx;
+        _rollView = [[RollView alloc] initWithFrame:AdaptationFrame(520+360, 30, 135, 360) withTitle:title rollType: idx>1?RollViewTypeDecade:RollViewTypeUnitsDigit];
         
     }
     return _rollView;

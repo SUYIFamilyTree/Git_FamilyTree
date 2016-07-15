@@ -109,7 +109,7 @@
             NSString *JPName = [NSString stringWithFormat:@"%@%@|%@代卷谱",detailArr[idx2][@"jpname"],detailArr[idx2][@"minlevel"],detailArr[idx2][@"maxlevel"]];
             
             RollView *rollView = [[RollView alloc] initWithFrame:AdaptationFrame(_contentSize.width+383-185*idx2, 30+413*idx, 131, 358) withTitle:JPName rollType:idx>1?RollViewTypeDecade:RollViewTypeUnitsDigit];
-            
+            rollView.rollJPName = JPName;
             [_JPframeArr addObject:[NSValue valueWithCGRect:rollView.frame]];
             [_JPAllId addObject:_JPTypeArr[idx][idx2][@"genmeid"]];
             rollView.tag = idx;
@@ -174,7 +174,10 @@
     _selectedRollView = !_selectedRollView;
     if (_selectedRollView) {
         
-        WRollDetailView * detailView = [[WRollDetailView alloc] initWithFrame:AdaptationFrame(CGRectGetMinX(gesture.view.frame)/AdaptationWidth()-271, gesture.view.frame.origin.y/AdaptationWidth(), 271, 355)];
+        NSString *jpName = ((RollView *)gesture.view).rollJPName;
+        [WDetailJPInfoModel sharedWDetailJPInfoModel].currentJPName = jpName;
+        [WDetailJPInfoModel sharedWDetailJPInfoModel].currentJPIdx = gesture.view.tag;
+        WRollDetailView * detailView = [[WRollDetailView alloc] initWithFrame:AdaptationFrame(CGRectGetMinX(gesture.view.frame)/AdaptationWidth()-271, gesture.view.frame.origin.y/AdaptationWidth(), 271, 355) ];
         self.detailView = detailView;
         
         self.detailView.userInteractionEnabled = false;

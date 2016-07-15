@@ -11,10 +11,11 @@
 @class InputView;
 
 @protocol InputViewDelegate <NSObject>
-
-//下拉选择结束过后
+@optional
+/** 下拉选择结束过后 */
 -(void)InputView:(InputView *)inputView didFinishSelectLabel:(UILabel *)inputLabel;
-
+/** 开始选择 */
+-(void)InputViewDidStartSelectLabel:(InputView *)inputView;
 @end
 
 @interface InputView : UIView
