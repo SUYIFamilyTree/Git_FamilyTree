@@ -11,6 +11,8 @@
 @interface WSelectMyFamModel : NSObject
 
 @property (nonatomic,copy) NSArray *myFamArray; /*我所有的家谱*/
+/**我所有家谱对应的id*/
+@property (nonatomic,copy) NSArray *myFamIdArray;
 
 +(instancetype)sharedWselectMyFamModel;
 

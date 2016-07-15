@@ -10,6 +10,9 @@
 #import "WRollDetailView.h"
 #import "WSwitchDetailFamView.h"
 #import "WAddJPPersonView.h"
+
+#define ScroHeight 1630
+
 @interface ManagerFamilyViewController ()<WswichDetailFamViewDelegate,WAddJPPersonViewDelegate>
 
 {
@@ -131,7 +134,7 @@
     NSInteger maxCountY = _JPTypeArr.count>3?_JPTypeArr.count-3:0;
     
     //更新背景滚动图大小
-    self.backScrollView.contentSize = AdaptationSize(720+ZeroContentOffset+185*(maxCountX), 1500+maxCountY*413);
+    self.backScrollView.contentSize = AdaptationSize(720+ZeroContentOffset+185*(maxCountX), ScroHeight+maxCountY*413);
         
     _contentSize = CGSizeMake(ZeroContentOffset+185*(maxCountX), 0);
     
@@ -198,13 +201,9 @@
 }
 //切换家谱事件
 -(void)respondsToSwitchFam:(UIButton *)sender{
-    
-    
         [self.view addSubview:self.switchDetailView];
         [self.view bringSubviewToFront:self.switchDetailView];
         self.switchFam.hidden = YES;
-    
-    
 }
 
 /** 删除家谱事件 */
@@ -291,9 +290,6 @@
                                                  @"pagesize":@"20",
                                                  @"ds":member} requestID:GetUserId requestcode:kRequestCodequeryzbgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
                                                      if (succe) {
-                                                         
-                                                         NSLog(@"???--%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
-                                                         
                                                          back(jsonDic);
                                                      }
                                                  } failure:^(NSError *error) {
@@ -305,7 +301,6 @@
 -(void)getJpTypeLayoutArrayCallback:(void (^)())back{
     [SXLoadingView showProgressHUD:@"正在加载.."];
     [self getAllFamJPCallBackJPDetailArray:^(NSArray<NSDictionary *> *JPArray) {
-        NSLog(@"卷谱LIST%@", JPArray);
         [_JPTypeArr removeAllObjects];
         NSMutableArray *JpTypeGenArr = [@[] mutableCopy];
         if (JPArray.count == 1) {
@@ -388,9 +383,6 @@
         [self.navigationController pushViewController:crefa animated:YES];
     }else if ([searchTitle isEqualToString:@"新增卷谱"]){
         
-        //获取全部卷谱
-//        [self getAllFamJPCallBackJPDetailArray:^(NSArray<NSDictionary *> *JPArray) {
-        
             [self getAddJPPerWithJPId:_JPTypeArr[0][0][@"genmeid"] whileComplet:^{
                 
                 for (int idx = 0; idx<_JPTypeArr.count; idx++) {
@@ -420,8 +412,6 @@
                 }
    
             }];
-            
-//        }];
         
     }else if ([searchTitle isEqualToString:@"删除卷谱"]){
         
@@ -437,33 +427,28 @@
             
         }
 
-        
     }
     else{
         //网络请求家谱详情
         [SXLoadingView showProgressHUD:@"正在加载"];
-        [self postGetFamInfoWithtitle:searchTitle callBack:^(NSArray *genIDArr) {
-            
-            [self posGetDetailFamInfoWithID:genIDArr[repeatIndex] callBack:^(id respondsDic) {
+        
+            [self posGetDetailFamInfoWithID:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[repeatIndex] callBack:^(id respondsDic) {
                 //设置当前家谱id
-                [WFamilyModel shareWFamilModel].myFamilyId = genIDArr[repeatIndex];
+                [WFamilyModel shareWFamilModel].myFamilyId = [WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[repeatIndex];
                 [WFamilyModel shareWFamilModel].myFamilyName = searchTitle;
                 
-                [USERDEFAULT setObject:genIDArr[repeatIndex] forKey:kNSUserDefaultsMyFamilyID];
+                [USERDEFAULT setObject:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[repeatIndex] forKey:kNSUserDefaultsMyFamilyID];
                 [USERDEFAULT setObject:searchTitle forKey:kNSUserDefaultsMyFamilyName];
 
-                
                 WK(weakSelf)
                 //将点击家谱名，获取到id，再根据id获取到的家谱详情传到famModel里
                  weakSelf.famModel = [CreateFamModel modelWithJSON:respondsDic[@"data"]];
                 
-                NSLog(@"管理卷谱点击按钮的详情---%@", respondsDic[@"data"]);
                 [self getJpTypeLayoutArrayCallback:^{
                      [self reloadUI];
                     [SXLoadingView hideProgressHUD];
                 }];
             }];
-        }];
     }
 }
 
@@ -519,13 +504,9 @@
 
 -(void)getZBInfoWithDs:(NSInteger)dsID whileComplete:(void(^)())back{
     
-//    [self getAllFamJPCallBackJPDetailArray:^(NSArray<NSDictionary *> *JPArray) {
-    
         [self getJPPersonNumWithJPId:_JPTypeArr[dsID][0][@"genmeid"] complete:^{
             back();
         }];
-        
-//    }];
     
 }
 
@@ -554,7 +535,6 @@
     [TCJPHTTPRequestManager POSTWithParameters:@{@"gemeid":jpId,@"geid":[WFamilyModel shareWFamilModel].myFamilyId} requestID:GetUserId requestcode:kRequestCodequerygezblist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             
-            NSLog(@"字辈人数详情--%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);            
             WJPPersonZBNumberModel *theModel = [WJPPersonZBNumberModel modelWithJSON:jsonDic[@"data"]];
             [WJPPersonZBNumberModel sharedWJPPersonZBNumberModel].allcnt = theModel.allcnt;
             [WJPPersonZBNumberModel sharedWJPPersonZBNumberModel].datalist = theModel.datalist;
@@ -572,14 +552,14 @@
     if (!_backScrollView) {
         _backScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
         
-        _backScrollView.contentSize = AdaptationSize(ZeroContentOffset+720, 1500);
+        _backScrollView.contentSize = AdaptationSize(ZeroContentOffset+720, ScroHeight);
         _backScrollView.bounces = false;
         
         NSInteger maxCountX  = [self maxJPArrCount]>4?[self maxJPArrCount]-4:0;
         
         NSInteger maxCountY = _JPTypeArr.count>3?_JPTypeArr.count-3:0;
         
-        _backScrollView.contentSize = AdaptationSize(720+ZeroContentOffset+185*(maxCountX), 1500+maxCountY*413);
+        _backScrollView.contentSize = AdaptationSize(720+ZeroContentOffset+185*(maxCountX), ScroHeight+maxCountY*413);
         
         _contentSize = CGSizeMake(ZeroContentOffset+185*(maxCountX), 0);
         

@@ -147,13 +147,21 @@
         if (succe) {
             
             NSString *jsonStr = [NSString stringWithFormat:@"%@",jsonDic[@"data"]];
+            
+            NSLog(@"--我所有的家谱%@", jsonDic[@"data"]);
+            
             NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
             NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             NSMutableArray *allFamNams = [@[] mutableCopy];
+            NSMutableArray *allFamIds = [@[] mutableCopy];
             for (NSDictionary *dic in arr) {
                 [allFamNams addObject:dic[@"GeName"]];
+                [allFamIds addObject:dic[@"Geid"]];
             }
+            
             [WSelectMyFamModel sharedWselectMyFamModel].myFamArray = allFamNams;
+            [WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray = allFamIds;
+    
         }
     } failure:^(NSError *error) {
         MYLog(@"失败");
@@ -162,7 +170,6 @@
 
 //家谱首页信息
 -(void)getFamDetailInfo{
-    
     
     NSString *geId = @"";
     if ([USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]) {
@@ -174,10 +181,9 @@
         geId = [WFamilyModel shareWFamilModel].myFamilyId;
         
     }
-    
+
     [TCJPHTTPRequestManager POSTWithParameters:@{@"GeId":geId} requestID:GetUserId requestcode:kRequestCodegetintogen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-            NSLog(@"alalalalfan---%@", jsonDic[@"data"]);
             
             WFamilyModel *model = [WFamilyModel modelWithJSON:jsonDic[@"data"]];
             
@@ -331,34 +337,23 @@
     
     MYLog(@"%ld",sender.tag);
 }
-#pragma mark *** SelectMyFamViewDelegate ***
 
--(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectItemTitle:(NSString *)title forCountOfFamNameInAllNames:(NSInteger)count{
-    
+-(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectFamTitle:(NSString *)title SelectFamID:(NSString *)famId{
     //网络请求家谱详情
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"query":title,@"type":@"MyGen"} requestID:GetUserId requestcode:kRequestCodequerymygen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        if (succe) {
-            NSMutableArray *idArr = [@[] mutableCopy];
-            for (NSDictionary *dic in [NSString jsonArrWithArr:jsonDic[@"data"]]) {
-                [idArr addObject:dic[@"Geid"]];
-            }
-            [WFamilyModel shareWFamilModel].myFamilyId = idArr[count];
-            [WFamilyModel shareWFamilModel].myFamilyName = title;
-            
-            [USERDEFAULT setObject:idArr[count] forKey:kNSUserDefaultsMyFamilyID];
-            [USERDEFAULT setObject:title forKey:kNSUserDefaultsMyFamilyName];
-            [USERDEFAULT synchronize];
-            
-            [self getFamDetailInfo];
-            [self.selecMyFamView removeFromSuperview];
-            [self.famTreeTopView.menuBtn setSelected:false];
-        }else{
-            [SXLoadingView showAlertHUD:@"???" duration:0.5];
-        }
-    } failure:^(NSError *error) {
-        
-    }];
+    
+    [WFamilyModel shareWFamilModel].myFamilyId = famId;
+    [WFamilyModel shareWFamilModel].myFamilyName = title;
+    
+    [USERDEFAULT setObject:famId forKey:kNSUserDefaultsMyFamilyID];
+    [USERDEFAULT setObject:title forKey:kNSUserDefaultsMyFamilyName];
+    [USERDEFAULT synchronize];
+    //更新
+    [self getFamDetailInfo];
+    [self.selecMyFamView removeFromSuperview];
+    [self.famTreeTopView.menuBtn setSelected:false];
+
 }
+
 
 #pragma mark *** getters ***
 

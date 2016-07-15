@@ -94,49 +94,37 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     MyFamilyCollectionViewCell *cell = ((MyFamilyCollectionViewCell *)([collectionView cellForItemAtIndexPath:indexPath]));
     
-#warning 待改方法
     //点击section 0的时候
     if (indexPath.section == 0) {
         /**
          *  在有重复名字家谱的情况下，判断点击的家谱名是第几个。因为用家谱名获取id时会得到数组
          */
         
-        NSInteger famRepeatCount = 0;
-        NSMutableArray *arrC = [@[] mutableCopy];
-        for (int idx = 0; idx<indexPath.row; idx++) {
-            [arrC addObject:self.dataSource[0][idx]];
-        }
+//        NSInteger famRepeatCount = 0;
+//        NSMutableArray *arrC = [@[] mutableCopy];
+//        for (int idx = 0; idx<indexPath.row; idx++) {
+//            [arrC addObject:self.dataSource[0][idx]];
+//        }
+//        
+//        for (NSString *string in arrC) {
+//            if ([string isEqualToString:cell.titleLabel.text]) {
+//                famRepeatCount += 1;
+//            }
+//        }
         
-        for (NSString *string in arrC) {
-            if ([string isEqualToString:cell.titleLabel.text]) {
-                famRepeatCount += 1;
-            }
-        }
-        
-        if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectItemTitle:forCountOfFamNameInAllNames:)]) {
-            [_delegate SelectMyFamilyViewDelegate:self didSelectItemTitle:cell.titleLabel.text forCountOfFamNameInAllNames:famRepeatCount];
-        }
-        
+//        if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectItemTitle:forCountOfFamNameInAllNames:)]) {
+//            [_delegate SelectMyFamilyViewDelegate:self didSelectItemTitle:cell.titleLabel.text forCountOfFamNameInAllNames:famRepeatCount];
+//        }
+//        
 
         if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectFamID:)]) {
-            //网络请求家谱详情
-            [TCJPHTTPRequestManager POSTWithParameters:@{@"query":cell.titleLabel.text,@"type":@"MyGen"} requestID:GetUserId requestcode:kRequestCodequerymygen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-                if (succe) {
-                    NSMutableArray *idArr = [@[] mutableCopy];
-                    for (NSDictionary *dic in [NSString jsonArrWithArr:jsonDic[@"data"]]) {
-                        [idArr addObject:dic[@"Geid"]];
-                    }
-                    [_delegate SelectMyFamilyViewDelegate:self didSelectFamID:idArr[famRepeatCount]];
-                    
-                }else{
-                    [SXLoadingView showAlertHUD:@"???" duration:0.5];
-                }
-            } failure:^(NSError *error) {
-                
-            }];
-            
-            
+            [_delegate SelectMyFamilyViewDelegate:self didSelectFamID:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row]];
         }
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectFamTitle:SelectFamID:)]) {
+            [_delegate SelectMyFamilyViewDelegate:self didSelectFamTitle:cell.titleLabel.text SelectFamID:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row]];
+        };
+        
     }
     
     

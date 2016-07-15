@@ -34,7 +34,6 @@
     //添加人
     [self initPerson];
     
-    
     [TCJPHTTPRequestManager POSTWithParameters:@{@"genid":[WFamilyModel shareWFamilModel].myFamilyId,@"userid":@"1001574",@"gentions":@"1"} requestID:GetUserId requestcode:kRequestCodequerytreebygenid success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             NSLog(@"tree----%@", jsonDic[@"data"]);
@@ -43,10 +42,10 @@
         
     }];
     
-    
-    
 }
-
+-(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectFamID:(NSString *)famId{
+    NSLog(@"famid--%@", famId);
+}
 -(void)initPerson{
     LineageCellView *ziji = [[LineageCellView alloc]initWithFrame:CGRectMake((Screen_width-cell_width)/2, 64+(Screen_height-49-64)/2, cell_width, cell_height)];
     [self.view addSubview:ziji];

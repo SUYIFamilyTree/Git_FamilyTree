@@ -11,6 +11,7 @@
 static WSelectMyFamModel *famModel = nil;
 
 @implementation WSelectMyFamModel
+
 +(instancetype)sharedWselectMyFamModel{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
