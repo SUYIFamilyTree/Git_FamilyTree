@@ -33,23 +33,33 @@
     [self.view addSubview:bgImageView];
     //添加人
     [self initPerson];
-    //[self drawLine];
+    
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"genid":[WFamilyModel shareWFamilModel].myFamilyId,@"userid":@"1001574",@"gentions":@"1"} requestID:GetUserId requestcode:kRequestCodequerytreebygenid success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSLog(@"tree----%@", jsonDic[@"data"]);
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+    
 }
-
+-(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectFamID:(NSString *)famId{
+    NSLog(@"famid--%@", famId);
+}
 -(void)initPerson{
     LineageCellView *ziji = [[LineageCellView alloc]initWithFrame:CGRectMake((Screen_width-cell_width)/2, 64+(Screen_height-49-64)/2, cell_width, cell_height)];
     [self.view addSubview:ziji];
 }
 
 #pragma mark - lazyLoad
--(UIView *)selecMyFamView{
+-(SelectMyFamilyView *)selecMyFamView{
     if (!_selecMyFamView) {
-        _selecMyFamView = [[SelectMyFamilyView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
+        _selecMyFamView = [[SelectMyFamilyView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
         _selecMyFamView.delegate = self;
     }
+    [_selecMyFamView updateDataSourceAndUI];
     return _selecMyFamView;
 }
-
 #pragma mark - CommandNavigationViewsDelegate
 -(void)CommonNavigationViews:(CommonNavigationViews *)comView respondsToRightBtn:(UIButton *)sender{
     MYLog(@"点击我的家谱");
@@ -57,9 +67,9 @@
     if (sender.selected) {
         [self.view addSubview:self.selecMyFamView];
     }else{
-        
         [self.selecMyFamView removeFromSuperview];
     }
+    [self.selecMyFamView updateDataSourceAndUI];
 }
 
 #pragma mark *** SelectMyFamViewDelegate ***

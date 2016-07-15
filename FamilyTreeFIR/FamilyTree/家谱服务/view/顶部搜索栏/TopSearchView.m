@@ -34,7 +34,6 @@
     return self;
 }
 
-
 #pragma mark *** 点击搜索栏 ***
 -(void)didTapSearchView{
     if (_delegate && [_delegate respondsToSelector:@selector(TopSearchViewDidTapView:)]) {
@@ -63,17 +62,13 @@
         _searchView = [[UIView alloc] initWithFrame:CGRectMake(0.05*Screen_width, SearchToTop, 0.8*Screen_width, SearchView_Height)];
         _searchView.layer.cornerRadius = SearchView_Height/2.0f;
         _searchView.backgroundColor = [UIColor whiteColor];
-        
-        //添加手势
-        UITapGestureRecognizer *tapGues = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapSearchView)];
-        [_searchView addGestureRecognizer:tapGues];
-        
+
     }
     return _searchView;
 }
--(UILabel *)searchLabel{
+-(UITextField *)searchLabel{
     if (!_searchLabel) {
-        _searchLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 150, SearchView_Height)];
+        _searchLabel = [[UITextField alloc] initWithFrame:CGRectMake(20, 0, 150, SearchView_Height)];
         _searchLabel.font = BFont(13);
         _searchLabel.textAlignment = NSTextAlignmentLeft;
         _searchLabel.text = @"输入关键词";
@@ -86,6 +81,11 @@
     if (!_searchImage) {
         _searchImage = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.searchView.frame)-3*SearchImage_Size, self.searchView.bounds.size.height/2-SearchImage_Size/2, SearchImage_Size, SearchImage_Size)];
         _searchImage.image = MImage(@"search");
+        
+        //添加手势
+        UITapGestureRecognizer *tapGues = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapSearchView)];
+        [_searchImage addGestureRecognizer:tapGues];
+        
     }
     return _searchImage;
 }

@@ -36,13 +36,18 @@ enum {
 -(void)updateUI{
     
     WJPPersonZBNumberModel *model = [WJPPersonZBNumberModel sharedWJPPersonZBNumberModel];
-
+    
+    NSInteger personNumber = 0;
+    
     for (int idx = 0; idx<model.datalist.count; idx++) {
         _leftArr[idx+2] = [NSString stringWithFormat:@"%@：",model.datalist[idx].zb];
         _rightArr[idx+2] = [NSString stringWithFormat:@"%ld",model.datalist[idx].cnt];
+        
+        personNumber += model.datalist[idx].cnt;
+        
     }
     
-    _rightArr[0] = [NSString stringWithFormat:@"%ld",model.allcnt];
+    _rightArr[0] = [NSString stringWithFormat:@"%ld",personNumber];
     
     [self removeAllSubviews];
     [self addSubview:self.backView];

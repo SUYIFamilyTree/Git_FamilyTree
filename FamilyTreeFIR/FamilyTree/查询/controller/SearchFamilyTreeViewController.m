@@ -9,9 +9,18 @@
 #import "SearchFamilyTreeViewController.h"
 #import "SearchTableViewCell.h"
 #import "CommonNavigationViews.h"
+#import "WSearchResultView.h"
+#import "WSearchDetailViewController.h"
 @interface SearchFamilyTreeViewController()<UITableViewDelegate,UITableViewDataSource>
 /** 搜索栏*/
 @property (nonatomic, strong) UIView *searchView;
+/**宗亲table*/
+@property (nonatomic,strong) UITableView *tableView;
+/**搜索textField*/
+@property (nonatomic,strong) UITextField *searchTextField;
+
+/**搜索结果view*/
+@property (nonatomic,strong) WSearchResultView *searchTable;
 
 
 @end
@@ -30,6 +39,8 @@
     [self initSearchBar];
     //添加表格
     [self initTableView];
+    //搜索结果
+    [self.view addSubview:self.searchTable];
     
 }
 //导航栏
@@ -64,9 +75,12 @@
     searchTF.backgroundColor = [UIColor whiteColor];
     searchTF.placeholder = @"输入关键词";
     searchTF.font = MFont(13);
-    [self.view addSubview:searchTF];
-    UIImageView *searchImageView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectXW(searchTF)-8, CGRectY(searchTF)+8, 15, 15)];
+    self.searchTextField = searchTF;
+    [self.view addSubview:self.searchTextField];
+    UIImageView *searchImageView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectXW(searchTF)-13, CGRectY(searchTF)+8-3, 20, 20)];
     searchImageView.image = MImage(@"search");
+    searchImageView.contentMode = UIViewContentModeScaleAspectFill;
+    searchImageView.userInteractionEnabled = true;
     [self.view addSubview:searchImageView];
     UITapGestureRecognizer *searchTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickSearch)];
     [searchImageView addGestureRecognizer:searchTap];
@@ -77,7 +91,8 @@
     UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectYH(_searchView)+10, Screen_width, 120)];
     tableView.delegate = self;
     tableView.dataSource = self;
-    [self.view addSubview:tableView];
+    self.tableView = tableView;
+    [self.view addSubview:self.tableView];
 }
 //返回按钮
 -(void)clickLeftButton{
@@ -91,7 +106,24 @@
 
 //点击搜索图标
 -(void)clickSearch{
-    MYLog(@"搜索开始");
+    
+    /** 获取搜索信息 */
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"query":self.searchTextField.text,@"pagenum":@"1",@"pagesize":@"20"} requestID:GetUserId requestcode:kRequestCodequerygenandgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            
+            WSearchModel *searchModel = [WSearchModel modelWithJSON:jsonDic[@"data"]];
+            
+            [WSearchModel shardSearchModel].genlist = searchModel.genlist;
+            [WSearchModel shardSearchModel].datatype = searchModel.datatype;
+            [WSearchModel shardSearchModel].page = searchModel.page;
+            //赋值完过后跳转
+            [self.searchTable.tableView reloadData];
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+    
 }
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
@@ -128,5 +160,20 @@
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
+}
+
+#pragma mark *** getters ***
+-(UIView *)searchView{
+    if (!_searchView) {
+        _searchView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectYH(self.tableView), Screen_width, 600*AdaptationWidth())];
+        
+    }
+    return _searchView;
+}
+-(WSearchResultView *)searchTable{
+    if (!_searchTable) {
+        _searchTable = [[WSearchResultView alloc] initWithFrame:CGRectMake(30*AdaptationWidth(), CGRectYH(self.tableView)+20*AdaptationWidth(), Screen_width, 666*AdaptationWidth())];
+    }
+    return _searchTable;
 }
 @end

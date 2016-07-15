@@ -79,8 +79,8 @@ NSString * _Nonnull const kRequestCodechangejp = @"changejp";
 /** 卷谱列表 */
 NSString * _Nonnull const kRequestCodequeryjplist = @"queryjplist";
 
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+/** 搜索家谱 */
+NSString * _Nonnull const kRequestCodequerygenandgemelist = @"querygenandgemelist";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
@@ -113,7 +113,11 @@ NSString * _Nonnull const kRequestCodecemeterylist = @"cemeterylist";
 
 NSString * _Nonnull const kNotificationCodeManagerFam = @"managerFame";
 
+NSString * _Nonnull const kNotificationCodeAddMember = 	@"kNotificationCodeAddMember";
 
+//我的家谱名字和id，存储在本地
+NSString * _Nonnull const kNSUserDefaultsMyFamilyID = @"UserDefaultsMyFamilyID";
+NSString * _Nonnull const kNSUserDefaultsMyFamilyName = @"UserDefaultsMyFamilyName";
 
 
 @end

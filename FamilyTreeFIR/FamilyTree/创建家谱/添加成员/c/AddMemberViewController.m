@@ -91,7 +91,7 @@
                              @"GemeDeathtime":[self.AddFameView.liveNowLabel.inputLabel.text isEqualToString:@"是"]?@"":[NSString stringWithFormat:@"%@-%@-%@",self.AddFameView.selfYear.inputLabel.text,self.AddFameView.selfMonth.inputLabel.text,self.AddFameView.selfDay.inputLabel.text],
                              @"GemeIslife":[self.AddFameView.liveNowLabel.inputLabel.text isEqualToString:@"是"]?@"1":@"0",
                              @"Po":self.AddFameView.parnName.text,
-                             @"Mother":self.AddFameView.motherView.inputLabel.text,
+                             @"Mother":self.AddFameView.motherView.text,
                              @"IsEnt":@"1",
                              @"Ph":self.AddFameView.rankingView.inputLabel.text,
                              @"IsJp":@""
@@ -102,11 +102,13 @@
         if (succe) {
             
             _gemeId = [NSString jsonDicWithDic:jsonDic[@"data"]][@"gemeid"];
-            NSLog(@"%@", _gemeId);
             [self uploadImageWithGemeid:_gemeId];
-
+            [self.navigationController popViewControllerAnimated:YES];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationCodeAddMember object:nil];
+            
             }
-         [self.navigationController popViewControllerAnimated:YES];
+        
     } failure:^(NSError *error) {
         MYLog(@"失败");
     }];
@@ -124,7 +126,6 @@
         NSString *encodeimageStr =[imageData base64EncodedString];
         
         [TCJPHTTPRequestManager POSTWithParameters:@{@"userid":GetUserId,@"genmemid":_gemeId,@"imgbt":encodeimageStr} requestID:GetUserId requestcode:kRequestCodeuploadgenimg success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-//            NSLog(@"%@", jsonDic[@"data"]);
             if (succe) {
                 [SXLoadingView showProgressHUD:jsonDic[@"message"] duration:0.5];
             }
@@ -140,23 +141,5 @@
 
 }
 
-/**
- *  成员添加到首卷谱
- *
- *  @param gemeid 成员卷谱id
- */
--(void)genmeMemberBecomeFirsJPWithGemeid:(NSString *)gemeid{
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"GeId":[WFamilyModel shareWFamilModel].myFamilyId,@"GemeId":gemeid,@"IsJp":@"1"} requestID:GetUserId requestcode:kRequestCodechangejp success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        if (succe) {
-            
-            NSLog(@"添加卷谱-----%@", jsonDic[@"data"]);
-            
-            //完成过后将成员至为NO
-            [WIDModel sharedWIDModel].becomeFirstJP = false;
-            
-        }
-    } failure:^(NSError *error) {
-        MYLog(@"shibai");
-    }];
-}
+
 @end

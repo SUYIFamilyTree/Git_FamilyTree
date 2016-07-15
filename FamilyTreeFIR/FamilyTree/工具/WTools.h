@@ -14,6 +14,8 @@
 #import "WDetailJPInfoModel.h"
 #import "WJPPersonZBNumberModel.h"
 #import "WJPListModel.h"
+#import "WSearchModel.h"
+
 @interface WTools : NSObject
 
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodecreategen;
@@ -75,6 +77,8 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodechangejp;
 /** 卷谱列表 */
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodequeryjplist;
 
+/** 搜索家谱 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodequerygenandgemelist;
 
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
@@ -85,6 +89,8 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodequeryjplist;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
 
+UIKIT_EXTERN NSString * _Nonnull const kNotificationCodeAddMember;
 
-
+UIKIT_EXTERN NSString * _Nonnull const kNSUserDefaultsMyFamilyID;
+UIKIT_EXTERN NSString * _Nonnull const kNSUserDefaultsMyFamilyName;
 @end

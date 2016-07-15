@@ -13,6 +13,11 @@
 
 @property (nonatomic, strong) NSArray<WJPInfoDatalist *> *datalist;
 
+/**当前卷谱id*/
+@property (nonatomic,copy) NSString *currentJPID;
+
+
+
 +(instancetype)sharedWDetailJPInfoModel;
 
 @end

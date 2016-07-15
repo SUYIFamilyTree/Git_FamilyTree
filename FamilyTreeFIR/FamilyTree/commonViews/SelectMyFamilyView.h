@@ -12,7 +12,11 @@
 
 @protocol SelectMyFamilyViewDelegate <NSObject>
 
--(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectItemTitle:(NSString *)title forCountOfFamNameInAllNames:(NSInteger)count;
+@optional
+//-(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectItemTitle:(NSString *)title forCountOfFamNameInAllNames:(NSInteger)count;
+-(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectFamID:(NSString *)famId;
+
+-(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectFamTitle:(NSString *)title SelectFamID:(NSString *)famId;
 
 @end
 

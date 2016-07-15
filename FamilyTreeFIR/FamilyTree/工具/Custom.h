@@ -71,7 +71,7 @@ __block __weak __typeof(&*self)weakSelf = self;
 //通知字段
 #define LogStatusNotifacation @"loginNotifacation"
 //管理家谱
-#define ZeroContentOffset 320
+#define ZeroContentOffset 580
 
 //提示信息显示 时间
 #define  SXLoadingTime 1.5

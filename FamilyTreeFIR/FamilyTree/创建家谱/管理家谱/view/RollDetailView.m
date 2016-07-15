@@ -10,7 +10,6 @@
 @interface RollDetailView()
 
 
-
 @end
 
 @implementation RollDetailView
@@ -24,6 +23,9 @@
         [self initData];
         [self initUIR];
         self.backgroundColor = [UIColor whiteColor];
+        
+        
+        
     }
     return self;
 }

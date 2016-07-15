@@ -39,10 +39,13 @@
             NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
             NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             NSMutableArray *allFamNams = [@[] mutableCopy];
+            NSMutableArray *allFamIds = [@[] mutableCopy];
             for (NSDictionary *dic in arr) {
                 [allFamNams addObject:dic[@"GeName"]];
+                [allFamIds addObject:dic[@"Geid"]];
             }
             [WSelectMyFamModel sharedWselectMyFamModel].myFamArray = allFamNams;
+            [WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray = allFamIds;
             _famNamesArray = [WSelectMyFamModel sharedWselectMyFamModel].myFamArray;
             //更新完数据刷新界面
             [self reloadDataForUI];
@@ -130,8 +133,10 @@
     }
     
     if (_delegate && [_delegate respondsToSelector:@selector(WswichDetailFamViewDelegate:didSelectedButton:repeatNameIndex:)]) {
-        [_delegate WswichDetailFamViewDelegate:self didSelectedButton:sender repeatNameIndex:famRepeatCount];
+        [_delegate WswichDetailFamViewDelegate:self didSelectedButton:sender repeatNameIndex:sender.tag-1];
     };
+    
+    
 }
 #pragma mark *** getters ***
 -(UIScrollView *)backScroView{

@@ -93,28 +93,38 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     MyFamilyCollectionViewCell *cell = ((MyFamilyCollectionViewCell *)([collectionView cellForItemAtIndexPath:indexPath]));
+    
     //点击section 0的时候
     if (indexPath.section == 0) {
         /**
          *  在有重复名字家谱的情况下，判断点击的家谱名是第几个。因为用家谱名获取id时会得到数组
          */
         
-        NSInteger famRepeatCount = 0;
+//        NSInteger famRepeatCount = 0;
+//        NSMutableArray *arrC = [@[] mutableCopy];
+//        for (int idx = 0; idx<indexPath.row; idx++) {
+//            [arrC addObject:self.dataSource[0][idx]];
+//        }
+//        
+//        for (NSString *string in arrC) {
+//            if ([string isEqualToString:cell.titleLabel.text]) {
+//                famRepeatCount += 1;
+//            }
+//        }
         
-        NSMutableArray *arrC = [@[] mutableCopy];
-        for (int idx = 0; idx<indexPath.row; idx++) {
-            [arrC addObject:self.dataSource[0][idx]];
+//        if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectItemTitle:forCountOfFamNameInAllNames:)]) {
+//            [_delegate SelectMyFamilyViewDelegate:self didSelectItemTitle:cell.titleLabel.text forCountOfFamNameInAllNames:famRepeatCount];
+//        }
+//        
+
+        if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectFamID:)]) {
+            [_delegate SelectMyFamilyViewDelegate:self didSelectFamID:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row]];
         }
         
-        for (NSString *string in arrC) {
-            if ([string isEqualToString:cell.titleLabel.text]) {
-                famRepeatCount += 1;
-            }
-        }
-        NSLog(@"数量是---------%ld", famRepeatCount);
-        if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectItemTitle:forCountOfFamNameInAllNames:)]) {
-            [_delegate SelectMyFamilyViewDelegate:self didSelectItemTitle:cell.titleLabel.text forCountOfFamNameInAllNames:famRepeatCount];
-        }
+        if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectFamTitle:SelectFamID:)]) {
+            [_delegate SelectMyFamilyViewDelegate:self didSelectFamTitle:cell.titleLabel.text SelectFamID:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row]];
+        };
+        
     }
     
     
