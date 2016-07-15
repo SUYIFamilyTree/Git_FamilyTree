@@ -406,6 +406,7 @@
 		ADC29A711D38D5E6004353F4 /* RollDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC29A6B1D38D5E6004353F4 /* RollDetailView.m */; };
 		ADC29A721D38D5E6004353F4 /* RollView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC29A6E1D38D5E6004353F4 /* RollView.m */; };
 		ADC29A731D38D5E6004353F4 /* WRollDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC29A701D38D5E6004353F4 /* WRollDetailView.m */; };
+		ADC29A761D38E341004353F4 /* NSString+WJudgeStringlegal.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC29A751D38E341004353F4 /* NSString+WJudgeStringlegal.m */; };
 		ADC326FA1CF3E3DF00CEAE53 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC326F91CF3E3DF00CEAE53 /* main.m */; };
 		ADC326FD1CF3E3DF00CEAE53 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC326FC1CF3E3DF00CEAE53 /* AppDelegate.m */; };
 		ADC327051CF3E3DF00CEAE53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADC327041CF3E3DF00CEAE53 /* Assets.xcassets */; };
@@ -435,7 +436,6 @@
 		ADC3278A1CF3FB8B00CEAE53 /* weixin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3275D1CF3FB8B00CEAE53 /* weixin@3x.png */; };
 		ADC3E9851D3721FE00754F63 /* cx_bg1.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3E9821D3721FE00754F63 /* cx_bg1.png */; };
 		ADC3E9861D3721FE00754F63 /* cx_bg1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3E9831D3721FE00754F63 /* cx_bg1@2x.png */; };
-		ADC3E9871D3721FE00754F63 /* cx_bg1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3E9841D3721FE00754F63 /* cx_bg1@3x.png */; };
 		ADC3E98B1D37340F00754F63 /* WSearchDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC3E98A1D37340F00754F63 /* WSearchDetailViewController.m */; };
 		ADC3E98E1D37612A00754F63 /* WSearchZBView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC3E98D1D37612A00754F63 /* WSearchZBView.m */; };
 		ADC3E9951D377A5700754F63 /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC3E9921D377A5700754F63 /* SearchTableViewCell.m */; };
@@ -443,7 +443,6 @@
 		ADC3E9991D377A6F00754F63 /* WApplyJoinView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC3E9981D377A6F00754F63 /* WApplyJoinView.m */; };
 		ADC3E99E1D377D3C00754F63 /* txxx_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3E99B1D377D3C00754F63 /* txxx_bg.png */; };
 		ADC3E99F1D377D3C00754F63 /* txxx_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3E99C1D377D3C00754F63 /* txxx_bg@2x.png */; };
-		ADC3E9A01D377D3C00754F63 /* txxx_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3E99D1D377D3C00754F63 /* txxx_bg@3x.png */; };
 		ADC472231D1A5A88000388AF /* WSwitchDetailFamView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC472221D1A5A88000388AF /* WSwitchDetailFamView.m */; };
 		ADC4F1AF1D125410003D2B27 /* DataSelectPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC4F1AE1D125410003D2B27 /* DataSelectPickView.m */; };
 		ADCD5C891CF451C000770356 /* geren_icon_a.png in Resources */ = {isa = PBXBuildFile; fileRef = ADCD5C711CF451C000770356 /* geren_icon_a.png */; };
@@ -1293,6 +1292,8 @@
 		ADC29A6E1D38D5E6004353F4 /* RollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RollView.m; sourceTree = "<group>"; };
 		ADC29A6F1D38D5E6004353F4 /* WRollDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WRollDetailView.h; sourceTree = "<group>"; };
 		ADC29A701D38D5E6004353F4 /* WRollDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WRollDetailView.m; sourceTree = "<group>"; };
+		ADC29A741D38E341004353F4 /* NSString+WJudgeStringlegal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+WJudgeStringlegal.h"; sourceTree = "<group>"; };
+		ADC29A751D38E341004353F4 /* NSString+WJudgeStringlegal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+WJudgeStringlegal.m"; sourceTree = "<group>"; };
 		ADC326F51CF3E3DF00CEAE53 /* FamilyTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FamilyTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADC326F91CF3E3DF00CEAE53 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ADC326FB1CF3E3DF00CEAE53 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1923,6 +1924,8 @@
 				BC5192A61D23A3030020480F /* NSString+valiIdentityCard.m */,
 				AD3218941D2A604D00F9480A /* NSArray+WAllItemString.h */,
 				AD3218951D2A604D00F9480A /* NSArray+WAllItemString.m */,
+				ADC29A741D38E341004353F4 /* NSString+WJudgeStringlegal.h */,
+				ADC29A751D38E341004353F4 /* NSString+WJudgeStringlegal.m */,
 			);
 			path = "扩展方法";
 			sourceTree = "<group>";
@@ -4898,6 +4901,7 @@
 				ADA7FEFB1D07C51000EDBEE4 /* HundredNamesView.m in Sources */,
 				BC51929E1D236C2E0020480F /* VIPGrowUpModel.m in Sources */,
 				ADBA01711D0132350016AB00 /* DiscAndNameView.m in Sources */,
+				ADC29A761D38E341004353F4 /* NSString+WJudgeStringlegal.m in Sources */,
 				AD716D631D06D041004F422E /* NewsTableView.m in Sources */,
 				ADA4C1691D0E8A1200CA9067 /* CemGoodsShopView.m in Sources */,
 				ADBA01771D016DD90016AB00 /* AddMemberViewController.m in Sources */,
