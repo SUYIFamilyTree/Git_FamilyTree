@@ -93,6 +93,7 @@
     [self initAllRollView];
     [self.backScrollView addSubview:self.famImage];
     [self.view addSubview:self.applyJoinBtn];
+    [self.view bringSubviewToFront:self.comNavi];
 }
 //初始化所有家眷
 -(void)initAllRollView{
@@ -167,7 +168,16 @@
 
 /** 申请加入家谱 */
 -(void)respondsToApplyJoinBtn{
+    self.joinView.alpha = 0;
     [self.view addSubview:self.joinView];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.joinView.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    
 }
 
 #pragma mark *** 请求家谱信息 ***
@@ -327,6 +337,7 @@
         _applyJoinBtn.titleLabel.font = WFont(30);
         _applyJoinBtn.backgroundColor = [UIColor blackColor];
         _applyJoinBtn.alpha = 0.8;
+        _applyJoinBtn.layer.cornerRadius = 3;
         [_applyJoinBtn addTarget:self action:@selector(respondsToApplyJoinBtn) forControlEvents:UIControlEventTouchUpInside];
         
     }

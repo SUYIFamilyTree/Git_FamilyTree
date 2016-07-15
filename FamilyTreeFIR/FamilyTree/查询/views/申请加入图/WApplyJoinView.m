@@ -8,6 +8,10 @@
 
 #import "WApplyJoinView.h"
 @interface WApplyJoinView()
+{
+    /** 是否点击了父亲生日 */
+    BOOL _clickedFatherBirthView;
+}
 /**填写背景图*/
 @property (nonatomic,strong) UIImageView *backImageView;
 /**姓名*/
@@ -22,6 +26,10 @@
 /**父亲生日*/
 @property (nonatomic,strong) UITextField *fatherBirthTF;
 
+/**生日选择器*/
+@property (nonatomic,strong) UIDatePicker *birthDatePicker;
+
+
 @end
 @implementation WApplyJoinView
 - (instancetype)initWithFrame:(CGRect)frame
@@ -31,6 +39,7 @@
         [self addSubview:self.backImageView];
         [self initFiveItem];
         [self initApplyAndCancelBtn];
+        
     }
     return self;
 }
@@ -92,28 +101,89 @@
     }];
 }
 #pragma mark *** events ***
+/** 点击父亲生日 */
 -(void)respondsFatherBirTFTapGues{
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-}
--(void)respondsToApplyAndCancelBtn:(UIButton *)sender{
-    if ([sender.titleLabel.text isEqualToString:@"申请"]) {
-        NSArray *arr = @[self.nameTF.text,
-                        self.zbTF.text,
-                        self.genNumTF.text,
-                        self.fatherTF.text,
-                        self.fatherBirthTF.text];
+   
+    
+    if (!_clickedFatherBirthView) {
+        self.birthDatePicker.frame = AdaptationFrame(0, 1010, Screen_width/AdaptationWidth(), 350);
+        [self addSubview:self.birthDatePicker];
         
-        [self joinJPWithDataArr:arr whileComplete:^(BOOL apply) {
-            if (apply) {
-                [SXLoadingView showAlertHUD:@"已申请，请耐心等待" duration:1.0];
-                [self removeFromSuperview];
+        [UIView animateWithDuration:0.3 animations:^{
+            self.backImageView.frame = AdaptationFrame(30, 0, 660, 720);
+            self.birthDatePicker.frame = AdaptationFrame(0, self.backImageView.bounds.size.height/AdaptationWidth(), Screen_width/AdaptationWidth(), 350);
+        }];
+        _clickedFatherBirthView = true;
+    }
+    
+    
+
+}
+/** 点击申请和退出 */
+-(void)respondsToApplyAndCancelBtn:(UIButton *)sender{
+    
+    if ([sender.titleLabel.text isEqualToString:@"申请"]) {
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.backImageView.frame = AdaptationFrame(30, 150, 660, 720);
+            self.birthDatePicker.frame = AdaptationFrame(0, 1010, Screen_width/AdaptationWidth(), 350);
+            [self.birthDatePicker removeFromSuperview];
+            _clickedFatherBirthView = false;
+        } completion:^(BOOL finished) {
+            if ([self.nameTF.text isEqualToString:@""]) {
+                [SXLoadingView showAlertHUD:@"姓名为空！" duration:0.5];
+                return;
             }
+            if ([self.zbTF.text isEqualToString:@""]) {
+                [SXLoadingView showAlertHUD:@"字辈为空！" duration:0.5];
+                return;
+            }
+            if ([self.fatherTF.text isEqualToString:@""]) {
+                [SXLoadingView showAlertHUD:@"父亲为空！" duration:0.5];
+                return;
+            }
+            if ([self.fatherBirthTF.text isEqualToString:@""]) {
+                [SXLoadingView showAlertHUD:@"父亲生日为空！" duration:0.5];
+                return;
+            }
+            NSArray *arr = @[self.nameTF.text,
+                             self.zbTF.text,
+                             self.genNumTF.text,
+                             self.fatherTF.text,
+                             self.fatherBirthTF.text];
+            
+            [self joinJPWithDataArr:arr whileComplete:^(BOOL apply) {
+                if (apply) {
+                    [SXLoadingView showAlertHUD:@"已申请，请耐心等待" duration:1.0];
+                    
+                    [self removeFromSuperview];
+                }
+            }];
         }];
         
-        
     }else{
-        [self removeFromSuperview];
+        [UIView animateWithDuration:0.3 animations:^{
+            self.backImageView.frame = AdaptationFrame(30, 150, 660, 720);
+            [self.birthDatePicker removeFromSuperview];
+            _clickedFatherBirthView = false;
+
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.3 animations:^{
+                self.alpha = 0;
+            } completion:^(BOOL finished) {
+                [self removeFromSuperview];
+            }];
+            
+        }];
+
+       
     }
+}
+/** pickerEvents */
+-(void)updateBirthDate{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    self.fatherBirthTF.text = [formatter stringFromDate:self.birthDatePicker.date];
 }
 #pragma mark *** 网络请求 ***
 
@@ -138,7 +208,6 @@
 #pragma mark *** getters ***
 -(UIImageView *)backImageView{
     if (!_backImageView) {
-        
         //半黑色透明
         UIView *backView = [[UIView alloc] initWithFrame:self.bounds];
         backView.backgroundColor = [UIColor blackColor];
@@ -157,5 +226,16 @@
     }
     return _backImageView;
 }
-
+-(UIDatePicker *)birthDatePicker{
+    if (!_birthDatePicker) {
+        _birthDatePicker = [[UIDatePicker alloc] initWithFrame:AdaptationFrame(0, self.backImageView.bounds.size.height/AdaptationWidth(), Screen_width/AdaptationWidth(), 350)];
+        _birthDatePicker.datePickerMode = UIDatePickerModeDate;
+        
+        [_birthDatePicker addTarget:self action:@selector(updateBirthDate) forControlEvents:UIControlEventValueChanged];
+        _birthDatePicker.backgroundColor = [UIColor whiteColor];
+        _birthDatePicker.date = [NSDate dateWithString:@"1990-01-01" format:@"yyyy-MM-dd"];
+        
+    }
+    return _birthDatePicker;
+}
 @end
