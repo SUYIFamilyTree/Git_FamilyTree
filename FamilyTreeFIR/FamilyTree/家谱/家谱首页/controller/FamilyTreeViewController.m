@@ -136,9 +136,7 @@
     rightLabel.textAlignment = NSTextAlignmentRight;
     rightLabel.font=MFont(12);
     self.allFamilGenNumber = rightLabel;
-    [self.view addSubview:self.allFamilGenNumber];
-
-    
+    [self.view addSubview:self.allFamilGenNumber];    
 }
 
 
