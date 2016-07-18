@@ -292,8 +292,6 @@
 		ADA98E761D10FA12005B23EC /* jcjs_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA98E751D10FA12005B23EC /* jcjs_bg.png */; };
 		ADA98E781D10FA28005B23EC /* jcjs_huamn.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA98E771D10FA28005B23EC /* jcjs_huamn.png */; };
 		ADA98E821D1126D2005B23EC /* ManagerFamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA98E7F1D1126D2005B23EC /* ManagerFamilyViewController.m */; };
-		ADA98E851D11272F005B23EC /* RollView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA98E841D11272F005B23EC /* RollView.m */; };
-		ADA98E8B1D11276B005B23EC /* RollDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA98E8A1D11276B005B23EC /* RollDetailView.m */; };
 		ADA98E961D11584C005B23EC /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA98E911D11584B005B23EC /* BaseViewController.m */; };
 		ADA98E971D11584C005B23EC /* CommonNavigationViews.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA98E931D11584B005B23EC /* CommonNavigationViews.m */; };
 		ADA98E981D11584C005B23EC /* SelectMyFamilyView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA98E951D11584B005B23EC /* SelectMyFamilyView.m */; };
@@ -405,6 +403,10 @@
 		ADC13BF01D19366E000F901C /* qiuQian_zt_qian7.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC13BCC1D19366E000F901C /* qiuQian_zt_qian7.png */; };
 		ADC13BF11D19366E000F901C /* qiuQian_zt_qian8.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC13BCD1D19366E000F901C /* qiuQian_zt_qian8.png */; };
 		ADC13BF21D19366E000F901C /* qiuQian_zt_qian9.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC13BCE1D19366E000F901C /* qiuQian_zt_qian9.png */; };
+		ADC29A711D38D5E6004353F4 /* RollDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC29A6B1D38D5E6004353F4 /* RollDetailView.m */; };
+		ADC29A721D38D5E6004353F4 /* RollView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC29A6E1D38D5E6004353F4 /* RollView.m */; };
+		ADC29A731D38D5E6004353F4 /* WRollDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC29A701D38D5E6004353F4 /* WRollDetailView.m */; };
+		ADC29A761D38E341004353F4 /* NSString+WJudgeStringlegal.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC29A751D38E341004353F4 /* NSString+WJudgeStringlegal.m */; };
 		ADC326FA1CF3E3DF00CEAE53 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC326F91CF3E3DF00CEAE53 /* main.m */; };
 		ADC326FD1CF3E3DF00CEAE53 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC326FC1CF3E3DF00CEAE53 /* AppDelegate.m */; };
 		ADC327051CF3E3DF00CEAE53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADC327041CF3E3DF00CEAE53 /* Assets.xcassets */; };
@@ -434,7 +436,6 @@
 		ADC3278A1CF3FB8B00CEAE53 /* weixin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3275D1CF3FB8B00CEAE53 /* weixin@3x.png */; };
 		ADC3E9851D3721FE00754F63 /* cx_bg1.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3E9821D3721FE00754F63 /* cx_bg1.png */; };
 		ADC3E9861D3721FE00754F63 /* cx_bg1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3E9831D3721FE00754F63 /* cx_bg1@2x.png */; };
-		ADC3E9871D3721FE00754F63 /* cx_bg1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3E9841D3721FE00754F63 /* cx_bg1@3x.png */; };
 		ADC3E98B1D37340F00754F63 /* WSearchDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC3E98A1D37340F00754F63 /* WSearchDetailViewController.m */; };
 		ADC3E98E1D37612A00754F63 /* WSearchZBView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC3E98D1D37612A00754F63 /* WSearchZBView.m */; };
 		ADC3E9951D377A5700754F63 /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC3E9921D377A5700754F63 /* SearchTableViewCell.m */; };
@@ -442,8 +443,6 @@
 		ADC3E9991D377A6F00754F63 /* WApplyJoinView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC3E9981D377A6F00754F63 /* WApplyJoinView.m */; };
 		ADC3E99E1D377D3C00754F63 /* txxx_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3E99B1D377D3C00754F63 /* txxx_bg.png */; };
 		ADC3E99F1D377D3C00754F63 /* txxx_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3E99C1D377D3C00754F63 /* txxx_bg@2x.png */; };
-		ADC3E9A01D377D3C00754F63 /* txxx_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADC3E99D1D377D3C00754F63 /* txxx_bg@3x.png */; };
-		ADC472201D1A2472000388AF /* WRollDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC4721F1D1A2472000388AF /* WRollDetailView.m */; };
 		ADC472231D1A5A88000388AF /* WSwitchDetailFamView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC472221D1A5A88000388AF /* WSwitchDetailFamView.m */; };
 		ADC4F1AF1D125410003D2B27 /* DataSelectPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC4F1AE1D125410003D2B27 /* DataSelectPickView.m */; };
 		ADCD5C891CF451C000770356 /* geren_icon_a.png in Resources */ = {isa = PBXBuildFile; fileRef = ADCD5C711CF451C000770356 /* geren_icon_a.png */; };
@@ -1146,10 +1145,6 @@
 		ADA98E771D10FA28005B23EC /* jcjs_huamn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jcjs_huamn.png; sourceTree = "<group>"; };
 		ADA98E7E1D1126D2005B23EC /* ManagerFamilyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagerFamilyViewController.h; sourceTree = "<group>"; };
 		ADA98E7F1D1126D2005B23EC /* ManagerFamilyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagerFamilyViewController.m; sourceTree = "<group>"; };
-		ADA98E831D11272F005B23EC /* RollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RollView.h; sourceTree = "<group>"; };
-		ADA98E841D11272F005B23EC /* RollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RollView.m; sourceTree = "<group>"; };
-		ADA98E891D11276B005B23EC /* RollDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RollDetailView.h; sourceTree = "<group>"; };
-		ADA98E8A1D11276B005B23EC /* RollDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RollDetailView.m; sourceTree = "<group>"; };
 		ADA98E901D11584B005B23EC /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		ADA98E911D11584B005B23EC /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		ADA98E921D11584B005B23EC /* CommonNavigationViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonNavigationViews.h; sourceTree = "<group>"; };
@@ -1291,6 +1286,14 @@
 		ADC13BCC1D19366E000F901C /* qiuQian_zt_qian7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qiuQian_zt_qian7.png; sourceTree = "<group>"; };
 		ADC13BCD1D19366E000F901C /* qiuQian_zt_qian8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qiuQian_zt_qian8.png; sourceTree = "<group>"; };
 		ADC13BCE1D19366E000F901C /* qiuQian_zt_qian9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qiuQian_zt_qian9.png; sourceTree = "<group>"; };
+		ADC29A6A1D38D5E6004353F4 /* RollDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RollDetailView.h; sourceTree = "<group>"; };
+		ADC29A6B1D38D5E6004353F4 /* RollDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RollDetailView.m; sourceTree = "<group>"; };
+		ADC29A6D1D38D5E6004353F4 /* RollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RollView.h; sourceTree = "<group>"; };
+		ADC29A6E1D38D5E6004353F4 /* RollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RollView.m; sourceTree = "<group>"; };
+		ADC29A6F1D38D5E6004353F4 /* WRollDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WRollDetailView.h; sourceTree = "<group>"; };
+		ADC29A701D38D5E6004353F4 /* WRollDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WRollDetailView.m; sourceTree = "<group>"; };
+		ADC29A741D38E341004353F4 /* NSString+WJudgeStringlegal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+WJudgeStringlegal.h"; sourceTree = "<group>"; };
+		ADC29A751D38E341004353F4 /* NSString+WJudgeStringlegal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+WJudgeStringlegal.m"; sourceTree = "<group>"; };
 		ADC326F51CF3E3DF00CEAE53 /* FamilyTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FamilyTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADC326F91CF3E3DF00CEAE53 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ADC326FB1CF3E3DF00CEAE53 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1341,8 +1344,6 @@
 		ADC3E99B1D377D3C00754F63 /* txxx_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = txxx_bg.png; sourceTree = "<group>"; };
 		ADC3E99C1D377D3C00754F63 /* txxx_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "txxx_bg@2x.png"; sourceTree = "<group>"; };
 		ADC3E99D1D377D3C00754F63 /* txxx_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "txxx_bg@3x.png"; sourceTree = "<group>"; };
-		ADC4721E1D1A2472000388AF /* WRollDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WRollDetailView.h; sourceTree = "<group>"; };
-		ADC4721F1D1A2472000388AF /* WRollDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WRollDetailView.m; sourceTree = "<group>"; };
 		ADC472211D1A5A88000388AF /* WSwitchDetailFamView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSwitchDetailFamView.h; sourceTree = "<group>"; };
 		ADC472221D1A5A88000388AF /* WSwitchDetailFamView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSwitchDetailFamView.m; sourceTree = "<group>"; };
 		ADC4F1AD1D125410003D2B27 /* DataSelectPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSelectPickView.h; sourceTree = "<group>"; };
@@ -1923,6 +1924,8 @@
 				BC5192A61D23A3030020480F /* NSString+valiIdentityCard.m */,
 				AD3218941D2A604D00F9480A /* NSArray+WAllItemString.h */,
 				AD3218951D2A604D00F9480A /* NSArray+WAllItemString.m */,
+				ADC29A741D38E341004353F4 /* NSString+WJudgeStringlegal.h */,
+				ADC29A751D38E341004353F4 /* NSString+WJudgeStringlegal.m */,
 			);
 			path = "扩展方法";
 			sourceTree = "<group>";
@@ -2515,12 +2518,8 @@
 		ADA98E811D1126D2005B23EC /* view */ = {
 			isa = PBXGroup;
 			children = (
-				ADA98E831D11272F005B23EC /* RollView.h */,
-				ADA98E841D11272F005B23EC /* RollView.m */,
-				ADA98E891D11276B005B23EC /* RollDetailView.h */,
-				ADA98E8A1D11276B005B23EC /* RollDetailView.m */,
-				ADC4721E1D1A2472000388AF /* WRollDetailView.h */,
-				ADC4721F1D1A2472000388AF /* WRollDetailView.m */,
+				ADC29A691D38D5E5004353F4 /* 查阅和管理的视图 */,
+				ADC29A6C1D38D5E6004353F4 /* 卷谱和字辈人数视图 */,
 				ADC472211D1A5A88000388AF /* WSwitchDetailFamView.h */,
 				ADC472221D1A5A88000388AF /* WSwitchDetailFamView.m */,
 				ADB737D41D2F3A7F00001011 /* WAddJPPersonView.h */,
@@ -2851,6 +2850,28 @@
 				ADC13BCE1D19366E000F901C /* qiuQian_zt_qian9.png */,
 			);
 			path = "求签动态图";
+			sourceTree = "<group>";
+		};
+		ADC29A691D38D5E5004353F4 /* 查阅和管理的视图 */ = {
+			isa = PBXGroup;
+			children = (
+				ADC29A6A1D38D5E6004353F4 /* RollDetailView.h */,
+				ADC29A6B1D38D5E6004353F4 /* RollDetailView.m */,
+			);
+			name = "查阅和管理的视图";
+			path = "查阅和管理";
+			sourceTree = "<group>";
+		};
+		ADC29A6C1D38D5E6004353F4 /* 卷谱和字辈人数视图 */ = {
+			isa = PBXGroup;
+			children = (
+				ADC29A6D1D38D5E6004353F4 /* RollView.h */,
+				ADC29A6E1D38D5E6004353F4 /* RollView.m */,
+				ADC29A6F1D38D5E6004353F4 /* WRollDetailView.h */,
+				ADC29A701D38D5E6004353F4 /* WRollDetailView.m */,
+			);
+			name = "卷谱和字辈人数视图";
+			path = "卷谱和字辈人数";
 			sourceTree = "<group>";
 		};
 		ADC326EC1CF3E3DF00CEAE53 = {
@@ -4846,6 +4867,7 @@
 				BC5192A41D23A0E30020480F /* NSString+valiEmail.m in Sources */,
 				ADAB221D1D26174A0047B6F0 /* WIDModel.m in Sources */,
 				ADC3E9951D377A5700754F63 /* SearchTableViewCell.m in Sources */,
+				ADC29A711D38D5E6004353F4 /* RollDetailView.m in Sources */,
 				ADA98E741D10F5EF005B23EC /* FamilyNamesViewController.m in Sources */,
 				ADA7FEF31D07A82300EDBEE4 /* PortraitAndNameViews.m in Sources */,
 				BC96727E1D10E4BF00F60534 /* EditPersonalInfoView.m in Sources */,
@@ -4861,6 +4883,7 @@
 				BC5F15141D0FF1AD004F3622 /* PersonalCenterTodayFortuneView.m in Sources */,
 				AD49FEE01CF6A0ED00DF9F7E /* FamilServiceViewController.m in Sources */,
 				BC65210F1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.m in Sources */,
+				ADC29A721D38D5E6004353F4 /* RollView.m in Sources */,
 				BC0326A01CFD22070089EE4C /* ImageAndTextViewController.m in Sources */,
 				BC29439D1CFE8D87006671B9 /* PersonModel.m in Sources */,
 				ADE2D17E1CF7052C009D1ADF /* TableView.m in Sources */,
@@ -4880,6 +4903,7 @@
 				ADA7FEFB1D07C51000EDBEE4 /* HundredNamesView.m in Sources */,
 				BC51929E1D236C2E0020480F /* VIPGrowUpModel.m in Sources */,
 				ADBA01711D0132350016AB00 /* DiscAndNameView.m in Sources */,
+				ADC29A761D38E341004353F4 /* NSString+WJudgeStringlegal.m in Sources */,
 				AD716D631D06D041004F422E /* NewsTableView.m in Sources */,
 				ADA4C1691D0E8A1200CA9067 /* CemGoodsShopView.m in Sources */,
 				ADBA01771D016DD90016AB00 /* AddMemberViewController.m in Sources */,
@@ -4902,10 +4926,8 @@
 				BC5F15111D0FF1AD004F3622 /* PersonalCenterInfoView.m in Sources */,
 				AD3218961D2A604D00F9480A /* NSArray+WAllItemString.m in Sources */,
 				BC5F150E1D0FF1AD004F3622 /* HeadImageView.m in Sources */,
-				ADC472201D1A2472000388AF /* WRollDetailView.m in Sources */,
 				AD73886A1CF6E0090076B2AD /* CollectionFamilyView.m in Sources */,
 				ADB926641CF7E28600AA8B6E /* LineView.m in Sources */,
-				ADA98E8B1D11276B005B23EC /* RollDetailView.m in Sources */,
 				AD900B5B1D362CFB007492AD /* WSearchModel.m in Sources */,
 				ADA98E971D11584C005B23EC /* CommonNavigationViews.m in Sources */,
 				AD2ACD8F1CF3FE5E009D4A24 /* Tools.m in Sources */,
@@ -4940,7 +4962,6 @@
 				AD195B381CF5A8D5000E32C7 /* TCJPHTTPRequestManager.m in Sources */,
 				BC5192A71D23A3030020480F /* NSString+valiIdentityCard.m in Sources */,
 				BC2B1E1F1D1BD88E004E916D /* EditPasswordViewController.m in Sources */,
-				ADA98E851D11272F005B23EC /* RollView.m in Sources */,
 				AD7388171CF6C2050076B2AD /* TopSearchView.m in Sources */,
 				AD9D862C1D2CACC100D8D8F6 /* WFamilyTableView.m in Sources */,
 				ADC059DE1D002C70001F7C1B /* CreateFamViewController.m in Sources */,
@@ -4980,6 +5001,7 @@
 				ADA7FF021D07E51500EDBEE4 /* NewsCell.m in Sources */,
 				BC2063261D3348D300AF0629 /* NameBeginView.m in Sources */,
 				ADB2D1091D1CCEE60072C022 /* CreateFamModel.m in Sources */,
+				ADC29A731D38D5E6004353F4 /* WRollDetailView.m in Sources */,
 				BC499B951D2CD851007870FE /* BarrageListModel.m in Sources */,
 				BC5F151B1D0FF1AD004F3622 /* PayForFortuneView.m in Sources */,
 				ADB926201CF7DF1900AA8B6E /* TopView.m in Sources */,

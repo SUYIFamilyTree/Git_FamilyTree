@@ -10,12 +10,9 @@ enum{
     UPloadVideoTag
 };
 #import "BackScrollAndDetailView.h"
-
-
-
+#define AnimatTime 0.3f
 
 @interface BackScrollAndDetailView()<UITextFieldDelegate,UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
-
 
 @end
 
@@ -149,7 +146,7 @@ enum{
     UITextField *textF = [UITextField new];
     textF.layer.borderWidth = 1.0f;
     textF.layer.borderColor = BorderColor;
-    textF.placeholder = @"迁移者填居住地";
+    textF.placeholder = @"迁徙者居住地：             ";
     textF.textAlignment  = 1;
     textF.delegate = self;
     self.moveCity = textF;
@@ -246,12 +243,18 @@ enum{
     }
     
 }
+/** 开始下拉 */
+-(void)InputViewDidStartSelectLabel:(InputView *)inputView{
+    if (inputView == self.generationLabel) {
+        [self textFieldDidEndEditing:self.gennerationNex];
+    }
+}
 
 #pragma mark *** UITextFieldDelegate ***
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     if (textField == self.moveCity) {
-        [UIView animateWithDuration:0.5f animations:^{
+        [UIView animateWithDuration:AnimatTime animations:^{
             self.backView.frame = CGRectMake(0, -300*AdaptationWidth(), Screen_width, Screen_height);
         }];
     }
@@ -260,27 +263,32 @@ enum{
 //结束编辑 将字辈str放入数组
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     if (textField == self.gennerationNex) {
+        //判断字辈格式
+        [NSString judgeWithString:textField.text];
+        
         NSString *str2=[self.generationLabel.inputLabel.text substringFromIndex:0];
         NSUInteger index =  [self.generationLabel.dataArr indexOfObject:str2];
         [self.gennerNexArr replaceObjectAtIndex:index withObject:self.gennerationNex.text];
 
     }else if (textField == self.moveCity){
-        [UIView animateWithDuration:0.5f animations:^{
+        [UIView animateWithDuration:AnimatTime animations:^{
             self.backView.frame = CGRectMake(0, 0, Screen_width, Screen_height);
             
         }];
     }
     
 }
+
+
 #pragma mark *** UITextViewDelegate ***
 
 -(void)textViewDidBeginEditing:(UITextView *)textView{
-    [UIView animateWithDuration:0.5f animations:^{
+    [UIView animateWithDuration:AnimatTime animations:^{
         self.backView.frame = CGRectMake(0, -200*AdaptationWidth(), Screen_width, Screen_height);
     }];
 }
 -(void)textViewDidEndEditing:(UITextView *)textView{
-    [UIView animateWithDuration:0.5f animations:^{
+    [UIView animateWithDuration:AnimatTime animations:^{
         self.backView.frame = CGRectMake(0, 0, Screen_width, Screen_height);
         
     }];
@@ -469,7 +477,6 @@ enum{
 -(UITextField *)gennerationNex{
     if (!_gennerationNex) {
         _gennerationNex = [[UITextField alloc] initWithFrame:CGRectMake(CGRectXW(self.generationLabel)+10, CGRectYH(self.selfYear)+GapOfView, 0.45*Screen_width, InputView_height)];
-
         _gennerationNex.text = @"";
         _gennerationNex.font = WFont(35);
         _gennerationNex.backgroundColor = [UIColor whiteColor];
@@ -477,7 +484,7 @@ enum{
         _gennerationNex.textAlignment = 1;
         _gennerationNex.layer.borderColor = BorderColor;
         _gennerationNex.delegate = self;
-        
+        _gennerationNex.placeholder = @"多字辈用','隔开";
         
     }
     return _gennerationNex;
@@ -489,7 +496,7 @@ enum{
         _selfTextView.layer.borderColor = BorderColor;
         _selfTextView.layer.borderWidth = 1.0f;
         _selfTextView.backgroundColor = [UIColor whiteColor];
-        _selfTextView.text = @"个人简介（生平经历传记）";
+        _selfTextView.text = @"个人介绍（生平经历传记）：";
         _selfTextView.delegate = self;
         
     }

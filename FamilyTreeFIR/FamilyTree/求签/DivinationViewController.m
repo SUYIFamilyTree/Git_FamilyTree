@@ -58,19 +58,21 @@ enum {
 //背景图
 -(void)initBackGround{
     
-    UIImageView *imagView = [UIImageView new];
+    UIImageView *imagView = [[UIImageView alloc] init];
     imagView.image = MImage(@"qiuQian_bg");
     imagView.userInteractionEnabled = YES;
     [self.view addSubview:imagView];
     imagView.sd_layout.leftSpaceToView(self.view,0).topSpaceToView(self.view,64).rightSpaceToView(self.view,0).bottomSpaceToView(self.view,self.tabBarController.tabBar.frame.size.height);
     self.imageView = imagView;
     self.imageView.userInteractionEnabled = YES;
+    
     //摇晃提示
-    UIImageView *deVieView = [UIImageView new];
+    UIImageView *deVieView = [[UIImageView alloc] init];
     deVieView.image  = MImage(@"qiuQian_ft_q");
-            deVieView.userInteractionEnabled = YES;
-            UIGestureRecognizer *tap = [[UIGestureRecognizer alloc]initWithTarget:self action:@selector(clickDivinationBtn)];
-            [deVieView addGestureRecognizer:tap];
+    deVieView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickDivinationBtn)];
+    
+    [deVieView addGestureRecognizer:tap];
     
     [self.imageView addSubview:deVieView];
     
@@ -208,7 +210,6 @@ enum {
         _diviAnimations = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 300*AdaptationWidth(), 350*AdaptationWidth())];
         _diviAnimations.contentMode = UIViewContentModeScaleAspectFit;
         _diviAnimations.image = MImage(@"qiuQian_zt_qian21");
-        
         _diviAnimations.center = CGPointMake(self.view.center.x+20*AdaptationWidth(), self.view.center.y-130*AdaptationWidth());
         
         NSMutableArray *imageArrs = [@[] mutableCopy];

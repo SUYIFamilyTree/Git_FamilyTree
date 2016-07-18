@@ -345,7 +345,7 @@
 }
 -(WApplyJoinView *)joinView{
     if (!_joinView) {
-        _joinView = [[WApplyJoinView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
+        _joinView = [[WApplyJoinView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar) checkType:WApplyJoinViewNeedCheck];
     }
     return _joinView;
 }

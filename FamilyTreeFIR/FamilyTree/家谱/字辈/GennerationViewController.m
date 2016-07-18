@@ -17,6 +17,7 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
     NSMutableArray *_detailInfo; //字辈array
     NSMutableArray *_genNameArr; //详情array
     NSMutableArray *_imageUrlArr; //图片url
+    NSMutableArray *_dsArr;/** 代数arr */
 }
 
 
@@ -57,6 +58,7 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
     _genNameArr = [@[@"",@"",@"",@""]mutableCopy];
     
     _imageUrlArr = [@[@[@"",@""],@[@"",@"",@""],@[@"",@"",@""],@[@"",@"",@""]] mutableCopy];
+    _dsArr = [@[@"",@"",@"",@""] mutableCopy];
     
 }
 #pragma mark *** 初始化界面 ***
@@ -84,12 +86,14 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
             [_allInfoArr removeAllObjects];
             [_detailInfo removeAllObjects];
             [_imageUrlArr removeAllObjects];
-            
+            [_dsArr removeAllObjects];
             //更新所有数据源取model里面的数据
             for (int idx = 0; idx<self.gennerModel.datalist.count; idx++) {
                 NSString *ziBei = [self.gennerModel.datalist[idx].zb stringByReplacingOccurrencesOfString:@"," withString:@""];
                 [_genNameArr addObject:ziBei];
                 
+                NSString *genNum = [NSString stringWithFormat:@"第%ld代",self.gennerModel.datalist[idx].ds];
+                [_dsArr addObject:genNum];
                 NSMutableArray *nameArr = [@[] mutableCopy];
                 NSMutableArray *urlArr = [@[] mutableCopy];
                 for (int ij = 0; ij<self.gennerModel.datalist[idx].datas.count; ij++) {
@@ -153,7 +157,7 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
     cell.proImageUrlArr = _imageUrlArr[indexPath.row];
 
     [cell initPorInfo];
-    cell.generNumber.text = [NSString stringWithFormat:@"第%ld代",indexPath.row+1];
+    cell.generNumber.text = _dsArr[indexPath.row];
     cell.personNumber.text = [NSString stringWithFormat:@"%ld人",((NSArray *)_allInfoArr[indexPath.row]).count];
     
     cell.perName.text =  [NSString verticalStringWith:_genNameArr[indexPath.row]];

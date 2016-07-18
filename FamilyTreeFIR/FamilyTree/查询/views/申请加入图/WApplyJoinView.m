@@ -32,10 +32,11 @@
 
 @end
 @implementation WApplyJoinView
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame checkType:(WApplyJoinViewNeedCheckType)checktype
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.checkType = checktype;
         [self addSubview:self.backImageView];
         [self initFiveItem];
         [self initApplyAndCancelBtn];
@@ -108,7 +109,9 @@
     if (!_clickedFatherBirthView) {
         self.birthDatePicker.frame = AdaptationFrame(0, 1010, Screen_width/AdaptationWidth(), 350);
         [self addSubview:self.birthDatePicker];
-        
+        if ([self.fatherBirthTF.text isEqualToString:@""]) {
+            self.fatherBirthTF.text = @"1990-01-01";
+        }
         [UIView animateWithDuration:0.3 animations:^{
             self.backImageView.frame = AdaptationFrame(30, 0, 660, 720);
             self.birthDatePicker.frame = AdaptationFrame(0, self.backImageView.bounds.size.height/AdaptationWidth(), Screen_width/AdaptationWidth(), 350);
@@ -188,20 +191,43 @@
 #pragma mark *** 网络请求 ***
 
 -(void)joinJPWithDataArr:(NSArray *)dataArr whileComplete:(void (^)(BOOL apply))back{
+    if (self.checkType == WApplyJoinViewNeedCheck) {
+        [TCJPHTTPRequestManager POSTWithParameters:@{@"geid":[WSearchModel shardSearchModel].selectedFamilyID,
+                                                     @"name":dataArr[0],
+                                                     @"father":dataArr[3],
+                                                     @"zb":dataArr[1],
+                                                     @"ds":dataArr[2],
+                                                     @"sr":dataArr[4]
+                                                     } requestID:GetUserId requestcode:kRequestCodeapplyjoingen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+                                                         if (succe) {
+                                                             back(true);
+                                                         }else{
+                                                             [SXLoadingView showAlertHUD:jsonDic[@"message"] duration:0.5];
+                                                         }
+                                                     } failure:^(NSError *error) {
+                                                         back(false);
+                                                     }];
+    }else{
+        [TCJPHTTPRequestManager POSTWithParameters:@{@"geid":[WFamilyModel shareWFamilModel].myFamilyId,
+                                                    @"name":dataArr[0],
+                                                    @"father":dataArr[3],
+                                                    @"zb":dataArr[1],
+                                                    @"ds":dataArr[2],
+                                                    @"sr":dataArr[4]
+                                                    } requestID:GetUserId requestcode:kRequestCodejoingen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+                                                        if (succe) {
+                                                            back(true);
+                                                        }else{
+                                                            if ([jsonDic[@"message"] isEqualToString:@"系统错误"]) {
+                                                                [SXLoadingView showAlertHUD:@"信息填写有误！" duration:0.5];
+                                                            }
+                                                            
+                                                        }
+                                                    } failure:^(NSError *error) {
+                                                        back(false);
+                                                    }];
+    }
     
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"geid":[WSearchModel shardSearchModel].selectedFamilyID,
-                                                 @"name":dataArr[0],
-                                                 @"father":dataArr[3],
-                                                 @"zb":dataArr[1],
-                                                 @"ds":dataArr[2],
-                                                 @"sr":dataArr[4]
-                                                 } requestID:GetUserId requestcode:kRequestCodeapplyjoingen success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        if (succe) {
-            back(true);
-        }
-    } failure:^(NSError *error) {
-        back(false);
-    }];
     
 }
 

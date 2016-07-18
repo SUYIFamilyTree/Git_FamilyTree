@@ -15,6 +15,10 @@
 
 /**当前卷谱id*/
 @property (nonatomic,copy) NSString *currentJPID;
+/**当前卷谱名*/
+@property (nonatomic,copy) NSString *currentJPName;
+
+@property (nonatomic,assign) NSInteger currentJPIdx; /*多少层*/
 
 
 
