@@ -60,7 +60,8 @@ NSString * _Nonnull const kRequestCodeGetFamilyNamesList = @"getfamilynameslist"
 NSString * _Nonnull const kRequestCodeGetFamilyNamesDetail = @"getfamilynamesdetail";
 NSString * _Nonnull const kRequestCodeGetNewsDetail = @"getnewsdetail";
 NSString * _Nonnull const kRequestCodeQueryClan = @"queryclan";
-
+NSString * _Nonnull const kRequestCodeUploadMemimg = @"uploadmemimg";
+NSString * _Nonnull const kRequestCodeGetImgTxk = @"getimgtxk";
 
 +(void)showAlertViewControllerAutoDissmissWithTarGet:(id)target
                                              Message:(NSString *)message

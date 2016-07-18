@@ -90,10 +90,15 @@
         MYLog(@"%@",jsonDic[@"data"]);
         if (succe) {
             weakSelf.genealogyInfoModel = [GenealogyInfoModel modelWithJSON:jsonDic[@"data"]];
-            weakSelf.menuArr = [weakSelf.genealogyInfoModel getMenuArr];
-            [weakSelf initLeftTableView];
-            weakSelf.infoArr = [weakSelf.genealogyInfoModel getInfoArr];
-            [weakSelf initContentSV:weakSelf.infoArr.firstObject];
+            if ([self.comNavi.titleLabel.text isEqualToString:@"阅读家谱"]) {
+                weakSelf.menuArr = [weakSelf.genealogyInfoModel getTextMenuArr];
+                weakSelf.infoArr = [weakSelf.genealogyInfoModel getTextInfoArr];
+            }else{
+                weakSelf.menuArr = [weakSelf.genealogyInfoModel getImageMenuArr];
+                weakSelf.infoArr = [weakSelf.genealogyInfoModel getImageInfoArr];
+            }
+           [weakSelf initLeftTableView];
+           [weakSelf initContentSV:weakSelf.infoArr.firstObject];
 //            MYLog(@"%@",weakSelf.menuArr);
 //            MYLog(@"%@",weakSelf.infoArr);
         }

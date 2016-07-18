@@ -42,20 +42,6 @@
     
 }
 
--(void)Ceshi{
-    UIImage *list =[UIImage imageNamed:@"ci_sm@3x"];
-    NSData *imageData = UIImageJPEGRepresentation(list, 0.5);
-    NSString *encodeimageStr =[imageData base64EncodedString];
-    NSDictionary *params =@{@"userid":GetUserId,@"imgbt":encodeimageStr};
-    [TCJPHTTPRequestManager POSTWithParameters:params requestID:GetUserId requestcode:@"uploadmemimg" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        if (succe) {
-            NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
-            NSLog(@"%@", dic);
-        }
-    } failure:^(NSError *error) {
-        
-    }];
-}
 
 -(void)ceshiMuyuanList{
 //    NSDictionary *logDic = @{@"pagenum":@2,@"pagesize":@2,@"meid":@"15",@"type":@"PRI"};

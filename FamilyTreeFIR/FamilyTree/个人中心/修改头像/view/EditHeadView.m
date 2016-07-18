@@ -140,6 +140,18 @@
 -(void)clickBackBtn:(UIButton *)sender{
     //保存设置
     [self.delegate editHeadView:self HeadInsideImage:self.headIV.headInsideIV.image];
+        UIImage *list = self.headIV.headInsideIV.image;
+        NSData *imageData = UIImageJPEGRepresentation(list, 0.5);
+        NSString *encodeimageStr =[imageData base64EncodedString];
+        NSDictionary *params =@{@"userid":GetUserId,@"imgbt":encodeimageStr};
+        [TCJPHTTPRequestManager POSTWithParameters:params requestID:GetUserId requestcode:kRequestCodeUploadMemimg success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+            if (succe) {
+                MYLog(@"图片上传成功");
+                
+            }
+        } failure:^(NSError *error) {
+            
+        }];
     //保存图片进入沙盒中
     [self saveImage:self.headIV.headInsideIV.image withName:@"headImage"];
     [self removeFromSuperview];

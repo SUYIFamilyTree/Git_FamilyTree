@@ -12,22 +12,28 @@
 @interface GenealogyInfoModel : NSObject
 
 @property (nonatomic, strong) GenealogyInfoDataModel *data;
-
+/** 老宅*/
 @property (nonatomic, strong) NSArray<NSString *> *Lz;
-
+/** 谱序*/
 @property (nonatomic, strong) NSArray<NSString *> *Px;
-
+/** 坟茔*/
 @property (nonatomic, strong) NSArray<NSString *> *Fy;
-
+/** 祠堂*/
 @property (nonatomic, strong) NSArray<NSString *> *Ct;
-
+/** 目录*/
 @property (nonatomic, strong) NSArray<NSString *> *Ml;
-
+/** 封面*/
 @property (nonatomic, strong) NSArray<NSString *> *Fm;
-
+/** 祖先赞像*/
 @property (nonatomic, strong) NSArray<NSString *> *Zx;
--(NSArray *)getMenuArr;
--(NSArray *)getInfoArr;
+/** 恩荣录*/
+@property (nonatomic, strong) NSArray<NSString *> *Erl;
+/** 图腾*/
+@property (nonatomic, strong) NSArray<NSString *> *Tt;
+-(NSArray *)getTextMenuArr;
+-(NSArray *)getTextInfoArr;
+-(NSArray *)getImageMenuArr;
+-(NSArray *)getImageInfoArr;
 @end
 @interface GenealogyInfoDataModel : NSObject
 
