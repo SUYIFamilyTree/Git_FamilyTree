@@ -64,7 +64,7 @@ enum {
     [self.view addSubview:imagView];
     imagView.sd_layout.leftSpaceToView(self.view,0).topSpaceToView(self.view,64).rightSpaceToView(self.view,0).bottomSpaceToView(self.view,self.tabBarController.tabBar.frame.size.height);
     self.imageView = imagView;
-    
+    self.imageView.userInteractionEnabled = YES;
     //摇晃提示
     UIImageView *deVieView = [UIImageView new];
     deVieView.image  = MImage(@"qiuQian_ft_q");
@@ -73,7 +73,7 @@ enum {
             [deVieView addGestureRecognizer:tap];
     
     [self.imageView addSubview:deVieView];
-    self.imageView.userInteractionEnabled = YES;
+    
     deVieView.sd_layout.leftSpaceToView(self.imageView,125*AdaptationWidth()).heightIs(90*AdaptationWidth()).widthIs(540*AdaptationWidth()).bottomSpaceToView(self.firBtn,40*AdaptationWidth());
     //求签动画
     [self.imageView addSubview:self.diviAnimations];

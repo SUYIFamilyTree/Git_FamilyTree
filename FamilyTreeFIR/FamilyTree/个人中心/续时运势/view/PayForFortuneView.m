@@ -43,32 +43,44 @@
         [cancelBtn addTarget:self action:@selector(clickPayForFortuneCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
         [payForFortuneIV addSubview:cancelBtn];
         
-        //续时永久按钮
-        UIButton *PayForforeverFortuneBtn = [[UIButton alloc]initWithFrame:CGRectMake(0.6497*CGRectW(payForFortuneIV), 0.7071*CGRectH(payForFortuneIV), 0.2313*CGRectW(payForFortuneIV), 0.1092*CGRectH(payForFortuneIV))];
-        PayForforeverFortuneBtn.backgroundColor = [UIColor clearColor];
-        [PayForforeverFortuneBtn setTitle:@"续时永久？" forState:UIControlStateNormal];
-        PayForforeverFortuneBtn.titleLabel.font = MFont(13);
-        [PayForforeverFortuneBtn setTitleColor:LH_RGBCOLOR(115, 115, 115) forState:UIControlStateNormal];
-        [PayForforeverFortuneBtn addTarget:self action:@selector(clickToPayForForeverFortuneBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
-        CALayer *border = [CALayer layer];
-        float height=PayForforeverFortuneBtn.frame.size.height-1.0f;
-        float width=PayForforeverFortuneBtn.frame.size.width;
-        border.frame = CGRectMake(0, height, width, 1.0f);
-        border.backgroundColor = LH_RGBCOLOR(115, 115, 115).CGColor;
-        [PayForforeverFortuneBtn.layer addSublayer:border];
-        [payForFortuneIV addSubview:PayForforeverFortuneBtn];
+//        //续时永久按钮
+//        UIButton *PayForforeverFortuneBtn = [[UIButton alloc]initWithFrame:CGRectMake(0.6497*CGRectW(payForFortuneIV), 0.7071*CGRectH(payForFortuneIV), 0.2313*CGRectW(payForFortuneIV), 0.1092*CGRectH(payForFortuneIV))];
+//        PayForforeverFortuneBtn.backgroundColor = [UIColor clearColor];
+//        [PayForforeverFortuneBtn setTitle:@"续时永久？" forState:UIControlStateNormal];
+//        PayForforeverFortuneBtn.titleLabel.font = MFont(13);
+//        [PayForforeverFortuneBtn setTitleColor:LH_RGBCOLOR(115, 115, 115) forState:UIControlStateNormal];
+//        [PayForforeverFortuneBtn addTarget:self action:@selector(clickToPayForForeverFortuneBtn:) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        CALayer *border = [CALayer layer];
+//        float height=PayForforeverFortuneBtn.frame.size.height-1.0f;
+//        float width=PayForforeverFortuneBtn.frame.size.width;
+//        border.frame = CGRectMake(0, height, width, 1.0f);
+//        border.backgroundColor = LH_RGBCOLOR(115, 115, 115).CGColor;
+//        [PayForforeverFortuneBtn.layer addSublayer:border];
+//        [payForFortuneIV addSubview:PayForforeverFortuneBtn];
     }
     return self;
 }
 
 -(void)clickPayForFortuneSureBtn:(UIButton *)sender{
-    MYLog(@"确定充值");
+    MYLog(@"确定续时运势");
+    NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId],@"daynum":@1};
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetImgTxk success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"%@",jsonDic[@"data"]);
+        if (succe) {
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
+    
     [self removeFromSuperview];
 }
 
 -(void)clickPayForFortuneCancelBtn:(UIButton *)sender{
-    MYLog(@"取消充值");
+    MYLog(@"取消");
     [self removeFromSuperview];
 }
 

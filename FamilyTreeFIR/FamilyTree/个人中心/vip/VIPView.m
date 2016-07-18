@@ -45,7 +45,7 @@
         self.bgIV.userInteractionEnabled = YES;
         [self addSubview:self.bgIV];
         //加入会员按钮
-        [self initAddToVIPBtn];
+        //[self initAddToVIPBtn];
         //会员等级标签及进度视图
         self.currentVIPLevel = [[USERDEFAULT valueForKey:VIPLevel] intValue];
         //self.progressStr = @"400/500";
