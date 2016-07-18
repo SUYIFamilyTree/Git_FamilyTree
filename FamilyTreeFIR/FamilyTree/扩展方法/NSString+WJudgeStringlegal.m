@@ -18,41 +18,54 @@
     NSInteger letterCount = 0;
     for(int i=0; i< [string length];i++){
         int a = [string characterAtIndex:i];
+        //首字符为汉字
+        if (i==0&&!( a > 0x4e00 && a < 0x9fff)) {
+            [self showAlterWithTitle:@"请输入正确的格式"];
+            return false;
+        }
+        
+        //是汉字
         if( a > 0x4e00 && a < 0x9fff){
             if (letterCount==1) {
                 letterCount-=1;
             }
             continuousCount+=1;
         }else{
+            //不是逗号
+            if (!(a==44||a==65292)) {
+                [self showAlterWithTitle:@"请用','隔开"];
+                return false;
+            }
+            //不是汉字，是逗号
             letterCount+=1;
             if (continuousCount==1) {
                  continuousCount-=1;
             }
+            
         }
+        //连续两个汉字
         if (continuousCount==2) {
-            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"" message:@"字辈只能为一个字" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-            [alertView show];
+            [self showAlterWithTitle:@"字辈只能为一个字"];
             continuousCount = 0;
             return false;
         }
+        //连续两个letter
         if (letterCount==2) {
-            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"" message:@"输入格式有误" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-            [alertView show];
+            [self showAlterWithTitle:@"输入格式有误"];
             letterCount = 0;
             return false;
         }
-        
-        if (i>2&&i<string.length-2) {
-            if ([string characterAtIndex:i]==[string characterAtIndex:i+2]) {
-                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"" message:@"重复的字辈" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-                [alertView show];
-                return false;
-            }
-        }
-        
-        
+  
     }
     return YES;
+    
+}
+
++(void)showAlterWithTitle:(NSString *)title{
+    
+    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"" message:title preferredStyle:UIAlertControllerStyleAlert];
+    [alertVc addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertVc animated:YES completion:nil];
     
 }
 @end

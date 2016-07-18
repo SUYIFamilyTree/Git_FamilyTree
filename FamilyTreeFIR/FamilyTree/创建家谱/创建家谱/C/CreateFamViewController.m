@@ -43,9 +43,7 @@
 -(void)BackScrollAndDetailViewDidTapCreateButton{
     [self postCreateFamWithBlock:^(BOOL back,NSString *genID) {
         if (back) {
-           
             [self postUploadheadImageWithGeID:genID];
-            
         }
     }];
 }
@@ -54,6 +52,8 @@
     //创建家谱
     NSMutableDictionary *genDsListDic = [NSMutableDictionary dictionary];
     
+    //字辈处理
+    NSLog(@"字辈--%@", self.cFameView.gennerNexArr);
     [self.cFameView.gennerNexArr enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         if (![obj isEqualToString:@""]) {
@@ -61,12 +61,14 @@
         }
         
     }];
+    NSLog(@"字辈dic--%@", genDsListDic);
     
     //截取代数
     NSString *genNumber = [self.cFameView.gennerNum.inputLabel.text stringByReplacingOccurrencesOfString:@"第" withString:@""];
     NSString *genNumberF = [genNumber stringByReplacingOccurrencesOfString:@"代" withString:@""];
     
-    NSLog(@"famName---%@", self.cFameView.famName.detailLabel.text);
+    
+    
     if ([self.cFameView.famName.detailLabel.text isEqualToString:@""]||self.cFameView.famName.titleLabel.text.length == 0) {
         [SXLoadingView showAlertHUD:@"家谱名称不能为空" duration:0.5];
         return;
@@ -76,10 +78,11 @@
         return;
     }
     
-    //结婚对象空处理
-    if ([self.cFameView.parnName.text isEqualToString:@""]) {
-        self.cFameView.parnName.text = @"";
-    }
+//    //结婚对象空处理
+//    if ([self.cFameView.parnName.text isEqualToString:@""]) {
+//        self.cFameView.parnName.text = @"";
+//    }
+    
     
     NSString *parName = [self.cFameView.inputView.inputLabel.text isEqualToString:@""]?self.cFameView.parnName.text:@"";
     
@@ -126,9 +129,7 @@
 }
 //请求上传家谱图像
 -(void)postUploadheadImageWithGeID:(NSString *)genID{
-
     //祖宗头像
-    
     NSData *imageData = UIImageJPEGRepresentation(self.cFameView.selecProtrai.image, 0.5);
     NSString *encodeImageData = [imageData base64EncodedString];
     [TCJPHTTPRequestManager POSTWithParameters:@{@"userid":GetUserId,@"genid":genID,@"imgbt":encodeImageData} requestID:GetUserId requestcode:kRequestCodeuploadgenan success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {

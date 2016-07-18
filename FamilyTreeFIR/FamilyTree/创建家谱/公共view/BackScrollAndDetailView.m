@@ -263,7 +263,9 @@ enum{
 //结束编辑 将字辈str放入数组
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     if (textField == self.gennerationNex) {
+        //判断字辈格式
         [NSString judgeWithString:textField.text];
+        
         NSString *str2=[self.generationLabel.inputLabel.text substringFromIndex:0];
         NSUInteger index =  [self.generationLabel.dataArr indexOfObject:str2];
         [self.gennerNexArr replaceObjectAtIndex:index withObject:self.gennerationNex.text];
