@@ -26,4 +26,5 @@
 @property (nonatomic,weak) id<InputViewDelegate> delegate; /*代理人*/
 
 - (instancetype)initWithFrame:(CGRect)frame Length:(NSInteger)length withData:(NSArray *)dataArr;
+- (void)reloadInputViewData;
 @end

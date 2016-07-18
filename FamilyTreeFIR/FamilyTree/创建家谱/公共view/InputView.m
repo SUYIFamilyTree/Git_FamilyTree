@@ -68,6 +68,7 @@
         };
         
         self.backScroView.backgroundColor = [UIColor whiteColor];
+        self.backScroView.frame = CGRectMake(0, (Input_height-10), _length, (Input_height-10)*(_dataArr.count>2?3:_dataArr.count));
         
 //        [UIView animateWithDuration:0.3f animations:^{
         self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _length, ((1+_dataArr.count)>4?4:(1+_dataArr.count))*(Input_height-10));
@@ -87,10 +88,8 @@
                 
                 UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondsToExtendLabelGes:)];
                 
-                
                 [seleclabel addGestureRecognizer:tapGes];
      
-                
                 [self.backScroView addSubview:seleclabel];
                 [self addSubview:self.backScroView];
                 
@@ -101,7 +100,7 @@
             self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _length, Input_height);
             
             [self.backScroView.subviews enumerateObjectsUsingBlock:^(UILabel* obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    [obj removeFromSuperview];
+               [obj removeFromSuperview];
             }];
         
         self.backScroView.backgroundColor = [UIColor clearColor];
@@ -114,7 +113,13 @@
  
 }
 
-
+#pragma mark *** 更新数据 ***
+-(void)reloadInputViewData{
+    if (_isSelectedBtn) {
+        [self extendTheLabel];
+        [self extendTheLabel];
+    }
+}
 #pragma mark *** getters ***
 
 -(UILabel *)inputLabel{

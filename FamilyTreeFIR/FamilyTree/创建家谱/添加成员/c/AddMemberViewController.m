@@ -22,18 +22,14 @@
 @implementation AddMemberViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    
-    
     self.automaticallyAdjustsScrollViewInsets=false;
-    
     AddMenberView *addM = [[AddMenberView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height)];
     addM.delegate = self;
     self.AddFameView = addM;
     [self.view addSubview:addM];
-    
     [self.view bringSubviewToFront:self.comNavi];
-    
   
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -72,7 +68,7 @@
     NSString *fatherId = [WIDModel sharedWIDModel].fatherDic[self.AddFameView.fatheView.inputLabel.text];
     
     NSDictionary *addDic = @{@"GeId":[WFamilyModel shareWFamilModel].myFamilyId,
-                             @"Zb":self.AddFameView.gennerTextField.text,
+                             @"Zb":self.AddFameView.gennerZB.inputLabel.text,
                              @"Father":fatherId,
                              @"Ds":genNumberF,
                              @"Sf":shenfenId,
@@ -126,11 +122,10 @@
         NSString *encodeimageStr =[imageData base64EncodedString];
         
         [TCJPHTTPRequestManager POSTWithParameters:@{@"userid":GetUserId,@"genmemid":_gemeId,@"imgbt":encodeimageStr} requestID:GetUserId requestcode:kRequestCodeuploadgenimg success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+            
             if (succe) {
                 [SXLoadingView showProgressHUD:jsonDic[@"message"] duration:0.5];
             }
-            
-           
             
         } failure:^(NSError *error) {
             MYLog(@"错误");

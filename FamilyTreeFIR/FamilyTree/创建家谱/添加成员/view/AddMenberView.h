@@ -23,6 +23,9 @@
 
 @property (nonatomic,strong) UITextField *gennerTextField; /*字辈*/
 
+/**字辈*/
+@property (nonatomic,strong) InputView *gennerZB;
+
 
 @property (nonatomic,strong) InputView *rankingView; /*排行*/
 @end

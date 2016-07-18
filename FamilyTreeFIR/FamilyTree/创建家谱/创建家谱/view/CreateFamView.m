@@ -100,9 +100,7 @@ typedef enum : NSUInteger {
 #pragma mark *** UIImagePickerControllerDelegate ***
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-    
-    NSLog(@"%@", info);
-    
+        
     if (_pickType == SelectedFamTotem) {
         self.famTotem.image = info[UIImagePickerControllerEditedImage];
     }else if (_pickType == SelectFamHeadView){

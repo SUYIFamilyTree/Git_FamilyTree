@@ -49,24 +49,48 @@
 }
 //请求创建家谱
 -(void)postCreateFamWithBlock:(void (^)(BOOL back,NSString *genID))callBack{
+    //如果编辑状态未结束，强行结束
+    if ([self.cFameView.gennerationNex isEditing]) {
+        [self.cFameView textFieldDidEndEditing:self.cFameView.gennerationNex];
+        if (!self.cFameView.zbLegal) {
+            return;
+        }
+    }else{
+        
+    }
+   
     //创建家谱
     NSMutableDictionary *genDsListDic = [NSMutableDictionary dictionary];
     
     //字辈处理
     NSLog(@"字辈--%@", self.cFameView.gennerNexArr);
+    
+    if (!self.cFameView.zbLegal) {
+        [SXLoadingView showAlertHUD:@"请输入正确的字辈格式" duration:0.5];
+        return;
+    }
+    
     [self.cFameView.gennerNexArr enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         if (![obj isEqualToString:@""]) {
-            [genDsListDic setValue:@[obj] forKey:[NSString stringWithFormat:@"%ld",idx+1]];
+            //去掉逗号,将字辈转成数组形式
+            NSString *objStr = [obj stringByReplacingOccurrencesOfString:@"," withString:@""];
+            NSString *tagStr = [objStr stringByReplacingOccurrencesOfString:@"，" withString:@""];
+            NSMutableArray *zbArr = [@[] mutableCopy];
+            for (int idx = 0; idx<tagStr.length; idx++) {
+                NSRange range = NSMakeRange(idx, 1);
+                NSString *singleZb = [tagStr substringWithRange:range];
+                [zbArr addObject:singleZb];
+            }
+            
+            [genDsListDic setValue:zbArr forKey:[NSString stringWithFormat:@"%ld",idx+1]];
         }
         
     }];
     NSLog(@"字辈dic--%@", genDsListDic);
-    
     //截取代数
     NSString *genNumber = [self.cFameView.gennerNum.inputLabel.text stringByReplacingOccurrencesOfString:@"第" withString:@""];
     NSString *genNumberF = [genNumber stringByReplacingOccurrencesOfString:@"代" withString:@""];
-    
     
     
     if ([self.cFameView.famName.detailLabel.text isEqualToString:@""]||self.cFameView.famName.titleLabel.text.length == 0) {

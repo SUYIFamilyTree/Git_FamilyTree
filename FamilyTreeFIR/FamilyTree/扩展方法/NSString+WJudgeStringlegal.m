@@ -31,15 +31,26 @@
             }
             continuousCount+=1;
         }else{
-            //不是逗号
-            if (!(a==44||a==65292)) {
-                [self showAlterWithTitle:@"请用','隔开"];
-                return false;
-            }
+            
             //不是汉字，是逗号
             letterCount+=1;
             if (continuousCount==1) {
                  continuousCount-=1;
+            }
+            
+            
+            //连续两个letter
+            if (letterCount==2) {
+                
+                [self showAlterWithTitle:@"输入格式有误"];
+                letterCount = 0;
+                return false;
+            }
+            
+            //不是逗号
+            if (!(a==44||a==65292)) {
+                [self showAlterWithTitle:@"请用','隔开"];
+                return false;
             }
             
         }
@@ -51,6 +62,7 @@
         }
         //连续两个letter
         if (letterCount==2) {
+            
             [self showAlterWithTitle:@"输入格式有误"];
             letterCount = 0;
             return false;

@@ -76,27 +76,27 @@ enum{
     
     NSArray <WJPInfoDatalist *>*modelArr = [WDetailJPInfoModel sharedWDetailJPInfoModel].datalist;
     
-    
-    [modelArr enumerateObjectsUsingBlock:^(WJPInfoDatalist * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-       
-        for (int idx2 = 0; idx2<obj.datas.count; idx2++) {
+        [modelArr enumerateObjectsUsingBlock:^(WJPInfoDatalist * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             
-            [genNum addObject:[NSString stringWithFormat:@"第%ld代",obj.ds]];
-            //装姓名，亲子，养子的数组
-            NSMutableArray *XArr = [@[] mutableCopy];
-            //名字
-            [XArr addObject:obj.datas[idx2].name];
-            //妻子
-            [XArr addObject:@"无数据"];
-            //养子
-            [XArr addObject:@"无数据"];
+            for (int idx2 = 0; idx2<obj.datas.count; idx2++) {
+                
+                [genNum addObject:[NSString stringWithFormat:@"第%ld代",obj.ds]];
+                //装姓名，亲子，养子的数组
+                NSMutableArray *XArr = [@[] mutableCopy];
+                //名字
+                [XArr addObject:obj.datas[idx2].name];
+                //妻子
+                [XArr addObject:@"无数据"];
+                //养子
+                [XArr addObject:@"无数据"];
+                
+                [subDetaiArr addObject:XArr];
+                
+                [genMemberId addObject:[NSString stringWithFormat:@"%ld",obj.datas[idx2].gemeid]];
+            }
             
-            [subDetaiArr addObject:XArr];
-            
-            [genMemberId addObject:[NSString stringWithFormat:@"%ld",obj.datas[idx2].gemeid]];
-        }
-        
-    }];
+        }];
+   
     //更新滚动图和大小
     
     _backScrollView.contentSize = AdaptationSize(1040, subDetaiArr.count>4?subDetaiArr.count*270:5*270);

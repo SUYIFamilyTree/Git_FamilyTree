@@ -16,6 +16,7 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
 
 @interface SelectMyFamilyView()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,UICollectionViewDelegate>
 
+@property (nonatomic,assign) NSInteger selectedItemNumber; /*选择了多少个*/
 
 @end
 
@@ -36,7 +37,7 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
 -(void)initData{
     
     NSArray *arr = @[@""];
-    NSArray *arr2 = @[@"修谱名目",@"家训家风",@"世系图",@"字辈",@"恩荣录",@"名人传记",@"图文影音",@"家族互助",@"风俗礼仪",@"祠堂",@"坟茔",@"契约"];
+    NSArray *arr2 = @[@"四海同宗",@"世系图",@"阅读家谱",@"字辈",@"图文影音"];
     _dataSource = [@[arr,arr2] mutableCopy];
 
 }
@@ -74,49 +75,38 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     
     UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kReusableMyheaderIdentifier forIndexPath:indexPath];
+    view.backgroundColor = [UIColor whiteColor];
     [view removeAllSubviews];
     if (indexPath.section == 0) {
         UILabel *label = [[UILabel alloc] initWithFrame:AdaptationFrame(0, 0, 200, 84)];
         label.text = @"我的家谱";
         label.textAlignment = 0;
-        label.font = MFont(30*AdaptationWidth());
+        label.font = WFont(30);
         [view addSubview:label];
+        
+        UIButton *HeadBtn = [[UIButton alloc] initWithFrame:AdaptationFrame(550, 0, 100, 84)];
+        [HeadBtn setTitle:@"确定" forState:0];
+        [HeadBtn setTitleColor:[UIColor redColor] forState:0];
+        HeadBtn.titleLabel.font = WFont(30);
+        [HeadBtn addTarget:self action:@selector(respondsToHeadBtn) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:HeadBtn];
+        
     }else {
         UIView *lineView = [[UIView alloc] initWithFrame:AdaptationFrame(0, 43, 658, 1)];
         lineView.backgroundColor = LH_RGBCOLOR(240, 240, 240);
         [view addSubview:lineView];
     }
     
-    
     return view;
 }
+#pragma mark *** UICollectionViewDelegate ***
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"%@", NSStringFromSelector(_cmd));
     MyFamilyCollectionViewCell *cell = ((MyFamilyCollectionViewCell *)([collectionView cellForItemAtIndexPath:indexPath]));
-    
     //点击section 0的时候
     if (indexPath.section == 0) {
-        /**
-         *  在有重复名字家谱的情况下，判断点击的家谱名是第几个。因为用家谱名获取id时会得到数组
-         */
         
-//        NSInteger famRepeatCount = 0;
-//        NSMutableArray *arrC = [@[] mutableCopy];
-//        for (int idx = 0; idx<indexPath.row; idx++) {
-//            [arrC addObject:self.dataSource[0][idx]];
-//        }
-//        
-//        for (NSString *string in arrC) {
-//            if ([string isEqualToString:cell.titleLabel.text]) {
-//                famRepeatCount += 1;
-//            }
-//        }
-        
-//        if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectItemTitle:forCountOfFamNameInAllNames:)]) {
-//            [_delegate SelectMyFamilyViewDelegate:self didSelectItemTitle:cell.titleLabel.text forCountOfFamNameInAllNames:famRepeatCount];
-//        }
-//        
-
         if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectFamID:)]) {
             [_delegate SelectMyFamilyViewDelegate:self didSelectFamID:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row]];
         }
@@ -127,9 +117,21 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
         
     }
     
+//    if (indexPath.section == 0) {
+//        [collectionView setAllowsMultipleSelection:false];
+//    }else{
+//        
+//    }
     
 }
 
+-(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
+   
+}
+#pragma mark *** btnEvents ***
+-(void)respondsToHeadBtn{
+    MYLog(@"确定按钮");
+}
 #pragma mark *** respondsToBlackArea ***
 //点击黑色背景移除视图
 -(void)respondsToBlackArea{
@@ -143,12 +145,16 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
         flowLayout.minimumInteritemSpacing = 28*AdaptationWidth();
         flowLayout.itemSize = AdaptationSize(200, 73);
         flowLayout.headerReferenceSize = AdaptationSize(200, 84);
+        flowLayout.sectionHeadersPinToVisibleBounds = true;
         _collectionView = [[UICollectionView alloc] initWithFrame:AdaptationFrame(30, 0, self.bounds.size.width/AdaptationWidth()-60, 634) collectionViewLayout:flowLayout];;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
         [_collectionView registerClass:[MyFamilyCollectionViewCell class] forCellWithReuseIdentifier:kReusableMyFamCellIdentifier];
         [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kReusableMyheaderIdentifier];
+        [_collectionView setAllowsMultipleSelection:YES];
+        
+        
         //背景
         UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,Screen_width, _collectionView.bounds.size.height)];
         whiteView.backgroundColor = [UIColor whiteColor];

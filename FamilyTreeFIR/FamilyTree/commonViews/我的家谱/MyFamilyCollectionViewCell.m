@@ -36,12 +36,14 @@
 }
 
 -(void)setSelected:(BOOL)selected{
+    [super setSelected:selected];
+
     if (selected) {
         self.titleLabel.textColor = LH_RGBCOLOR(228, 65, 83);
         self.layer.borderColor = LH_RGBCOLOR(228, 65, 83).CGColor;
     }else{
         self.titleLabel.textColor = [UIColor blackColor];
-        self.layer.borderColor = LH_RGBCOLOR(228, 228, 228).CGColor;;
+        self.layer.borderColor = LH_RGBCOLOR(228, 228, 228).CGColor;
     }
 }
 

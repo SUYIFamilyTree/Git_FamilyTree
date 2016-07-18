@@ -537,7 +537,7 @@
 -(void)getJPPersonNumWithJPId:(NSString *)jpId complete:(void (^)())callback{
     [TCJPHTTPRequestManager POSTWithParameters:@{@"gemeid":jpId,@"geid":[WFamilyModel shareWFamilModel].myFamilyId} requestID:GetUserId requestcode:kRequestCodequerygezblist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-            
+            NSLog(@"---字辈详情%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
             WJPPersonZBNumberModel *theModel = [WJPPersonZBNumberModel modelWithJSON:jsonDic[@"data"]];
             [WJPPersonZBNumberModel sharedWJPPersonZBNumberModel].allcnt = theModel.allcnt;
             [WJPPersonZBNumberModel sharedWJPPersonZBNumberModel].datalist = theModel.datalist;

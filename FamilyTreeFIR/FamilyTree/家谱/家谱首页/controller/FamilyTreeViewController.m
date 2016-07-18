@@ -353,8 +353,8 @@
     [USERDEFAULT synchronize];
     //更新
     [self getFamDetailInfo];
-    [self.selecMyFamView removeFromSuperview];
-    [self.famTreeTopView.menuBtn setSelected:false];
+//    [self.selecMyFamView removeFromSuperview];
+//    [self.famTreeTopView.menuBtn setSelected:false];
 
 }
 
