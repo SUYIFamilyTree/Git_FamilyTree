@@ -64,6 +64,7 @@
 
 -(void)clickPayForFortuneSureBtn:(UIButton *)sender{
     MYLog(@"确定续时运势");
+#warning 接口系统错误，待修改
     NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId],@"daynum":@1};
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetImgTxk success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         MYLog(@"%@",jsonDic[@"data"]);

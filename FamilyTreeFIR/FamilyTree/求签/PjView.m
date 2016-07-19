@@ -8,6 +8,8 @@
 
 #import "PjView.h"
 
+
+
 @implementation PjView
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -50,6 +52,8 @@
 
 -(void)clickSureBtn{
     MYLog(@"是");
+    [self.delegate clickBtnToPjZcVC];
+    
 }
 
 -(void)clickCancelBtn{

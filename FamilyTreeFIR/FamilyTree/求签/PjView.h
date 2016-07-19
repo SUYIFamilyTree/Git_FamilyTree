@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PjView : UIView
+@class PjView;
+@protocol PjViewDelegate <NSObject>
 
+-(void)clickBtnToPjZcVC;
+
+@end
+
+@interface PjView : UIView
+/** 代理人*/
+@property (nonatomic, weak) id<PjViewDelegate> delegate;
 @end

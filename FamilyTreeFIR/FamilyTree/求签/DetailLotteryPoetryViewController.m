@@ -8,8 +8,9 @@
 
 #import "DetailLotteryPoetryViewController.h"
 #import "PjView.h"
+#import "PjZcViewController.h"
 
-@interface DetailLotteryPoetryViewController()
+@interface DetailLotteryPoetryViewController()<PjViewDelegate>
 /** 背景图*/
 @property (nonatomic, strong) UIImageView *backIV;
 /** 初解背景图*/
@@ -105,7 +106,18 @@
 -(void)clickPjBtn{
     MYLog(@"破解之法");
     PjView *pjView = [[PjView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
+    pjView.delegate = self;
     [self.view addSubview:pjView];
 }
+
+#pragma mark - PjViewDelegate
+-(void)clickBtnToPjZcVC{
+    PjZcViewController *pjZcVC = [[PjZcViewController alloc]initWithTitle:@"招财秘方" image:nil];
+    pjZcVC.lotteryPoetryModel = self.lotteryPoetryModel;
+#warning 破解方法需要用户购买，接口缺失
+    [self.navigationController pushViewController:pjZcVC animated:YES];
+
+}
+
 
 @end
