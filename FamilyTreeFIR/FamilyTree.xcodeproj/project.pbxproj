@@ -718,6 +718,7 @@
 		BC6094E91D3DB8A20056DD9C /* zcmf_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = BC6094E31D3DB8A20056DD9C /* zcmf_btn.png */; };
 		BC6094EA1D3DB8A20056DD9C /* zcmf_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC6094E41D3DB8A20056DD9C /* zcmf_btn@2x.png */; };
 		BC6094EB1D3DB8A20056DD9C /* zcmf_btn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC6094E51D3DB8A20056DD9C /* zcmf_btn@3x.png */; };
+		BC6094F11D3DED210056DD9C /* CliffordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC6094F01D3DED210056DD9C /* CliffordViewController.m */; };
 		BC65210F1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC65210E1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.m */; };
 		BC7299F41D22147D008FEB71 /* VIPInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC7299F31D22147D008FEB71 /* VIPInfoModel.m */; };
 		BC7299FE1D225C53008FEB71 /* FortuneTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC7299F81D225C53008FEB71 /* FortuneTodayViewController.m */; };
@@ -1715,6 +1716,8 @@
 		BC6094E31D3DB8A20056DD9C /* zcmf_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zcmf_btn.png; sourceTree = "<group>"; };
 		BC6094E41D3DB8A20056DD9C /* zcmf_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zcmf_btn@2x.png"; sourceTree = "<group>"; };
 		BC6094E51D3DB8A20056DD9C /* zcmf_btn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zcmf_btn@3x.png"; sourceTree = "<group>"; };
+		BC6094EF1D3DED210056DD9C /* CliffordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CliffordViewController.h; sourceTree = "<group>"; };
+		BC6094F01D3DED210056DD9C /* CliffordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CliffordViewController.m; sourceTree = "<group>"; };
 		BC65210D1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPersonalInfoDetailViewController.h; sourceTree = "<group>"; };
 		BC65210E1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPersonalInfoDetailViewController.m; sourceTree = "<group>"; };
 		BC7299F21D22147D008FEB71 /* VIPInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIPInfoModel.h; path = ../../model/VIPInfoModel.h; sourceTree = "<group>"; };
@@ -2973,6 +2976,7 @@
 				AD2ACD7D1CF3FC9C009D4A24 /* RootTabBarViewController.h */,
 				AD2ACD7E1CF3FC9C009D4A24 /* RootTabBarViewController.m */,
 				ADE3BBD01D13E70F006523C4 /* 求签 */,
+				BC6094EC1D3DECD90056DD9C /* 祈福 */,
 				AD6788991D06AA9D00D6CF52 /* 新闻中心 */,
 				ADB9733E1CFE8309007B876B /* 创建家谱 */,
 				AD195B2E1CF5A8D5000E32C7 /* 扩展方法 */,
@@ -3984,6 +3988,31 @@
 				BC6094E51D3DB8A20056DD9C /* zcmf_btn@3x.png */,
 			);
 			path = "招财秘方";
+			sourceTree = "<group>";
+		};
+		BC6094EC1D3DECD90056DD9C /* 祈福 */ = {
+			isa = PBXGroup;
+			children = (
+				BC6094ED1D3DECD90056DD9C /* controller */,
+				BC6094EE1D3DECD90056DD9C /* model */,
+			);
+			path = "祈福";
+			sourceTree = "<group>";
+		};
+		BC6094ED1D3DECD90056DD9C /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				BC6094EF1D3DED210056DD9C /* CliffordViewController.h */,
+				BC6094F01D3DED210056DD9C /* CliffordViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		BC6094EE1D3DECD90056DD9C /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		BC7299F51D2214D3008FEB71 /* model */ = {
@@ -5184,6 +5213,7 @@
 				AD5D458A1D23BEC000396B97 /* WGennerationModel.m in Sources */,
 				ADB9266A1CF7EBAC00AA8B6E /* FamilyTreeViewController.m in Sources */,
 				BC499BA11D2D06EE007870FE /* CemGoodsShopModel.m in Sources */,
+				BC6094F11D3DED210056DD9C /* CliffordViewController.m in Sources */,
 				BC9672921D11298800F60534 /* EditPersonalInfoTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

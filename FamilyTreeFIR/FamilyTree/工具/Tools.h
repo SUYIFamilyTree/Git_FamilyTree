@@ -63,7 +63,7 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetFamilyNamesDetail;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetNewsDetail;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeQueryClan;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeUploadMemimg;
-UIKIT_EXTERN NSString * _Nonnull const kRequestCodeGetImgTxk;
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeMemySadd;
 
 /**
  *  弹出框自动消失

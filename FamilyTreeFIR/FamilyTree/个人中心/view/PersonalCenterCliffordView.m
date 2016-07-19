@@ -8,6 +8,7 @@
 
 #import "PersonalCenterCliffordView.h"
 #import "DivinationViewController.h"
+#import "CliffordViewController.h"
 
 @interface PersonalCenterCliffordView()
 /** 签运*/
@@ -127,6 +128,8 @@
 }
 -(void)clickCliffordView{
     MYLog(@"祈福");
+    CliffordViewController *cliVC = [[CliffordViewController alloc]initWithTitle:@"祈福" image:nil];
+    [[self viewController].navigationController pushViewController:cliVC animated:YES];
 }
 
 
