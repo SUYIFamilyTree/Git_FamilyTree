@@ -7,8 +7,13 @@
 //
 
 #import "TopSearchView.h"
-
-@interface TopBackSearch : TopSearchView
+#import "SelectMyFamilyView.h"
+@interface TopBackSearch : TopSearchView<SelectMyFamilyViewDelegate>
 @property (nonatomic,strong) UIButton *backBtn; /*返回按钮*/
+/**我的家谱↓*/
+@property (nonatomic,strong) SelectMyFamilyView *selecMyFamView;
+/**我的家谱btn*/
+@property (nonatomic,strong) UIButton *MyFamilyRightBtn;
+
 
 @end

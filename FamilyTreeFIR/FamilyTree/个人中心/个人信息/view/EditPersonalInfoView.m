@@ -230,7 +230,7 @@
 #pragma mark - 数据加载
 -(void)reloadEditPersonalInfoData:(QueryModel *)queryModel{
     self.accountInfoDetailArr = [NSMutableArray array];
-    [self.accountInfoDetailArr addObject:[NSString stringWithFormat:@"%ld",queryModel.memb.MeId]];
+    [self.accountInfoDetailArr addObject:[NSString stringWithFormat:@"%ld",(long)queryModel.memb.MeId]];
     [self.accountInfoDetailArr addObject:queryModel.memb.MeAccount];
     [self.accountInfoDetailArr addObject:@"******"];
     [self.accountInfoDetailArr addObject: queryModel.memb.MeMobile];
@@ -246,7 +246,7 @@
     [self.personalInfoDetailArr addObject:[NSString stringWithFormat:@"%@-%@",queryModel.area.AreaProvince,queryModel.area.AreaCity]];
     [self.personalInfoDetailArr addObject:@[@"女",@"男",@"保密"][[queryModel.memb.MeSex intValue]]];
     DateModel *dateModel = [[DateModel alloc]initWithDateStr:queryModel.memb.MeBirthday];
-    NSString *MeBirthdayStr = [NSString stringWithFormat:@"%04ld年%02ld月%02ld日%02ld时",dateModel.year,dateModel.month,dateModel.day,dateModel.hour];
+    NSString *MeBirthdayStr = [NSString stringWithFormat:@"%04ld年%02ld月%02ld日%02ld时",(long)dateModel.year,dateModel.month,dateModel.day,dateModel.hour];
     [self.personalInfoDetailArr addObject:MeBirthdayStr];
     [self.personalInfoDetailArr addObject:queryModel.memb.MeCertype];
     [self.personalInfoDetailArr addObject:IsNilString(queryModel.memb.MeCardnum) ?@"":queryModel.memb.MeCardnum];
@@ -379,6 +379,7 @@
 #pragma mark - UITextViewDelegate
 -(void)textViewDidBeginEditing:(UITextView *)textView{
     MYLog(@"将要开始编辑");
+    
     if (self.frame.origin.y == 64) {
         [UIView animateWithDuration:1 animations:^{
             CGRect frame =  self.frame;
@@ -662,7 +663,7 @@
 
 #pragma mark - CustomPickerDateViewDelegate
 -(void)getCustomPickerDateViewYear:(NSInteger)year andMonth:(NSInteger)month andDay:(NSInteger)day andHour:(NSInteger)hour{
-    self.personalInfoDetailArr[5] = [NSString stringWithFormat:@"%ld年%.2ld月%.2ld日%.2ld时",year,month,day,hour];
+    self.personalInfoDetailArr[5] = [NSString stringWithFormat:@"%ld年%.2ld月%.2ld日%.2ld时",(long)year,month,day,hour];
     UITableView *tableView = (UITableView *)[self viewWithTag:1002];
     [tableView reloadData];
     

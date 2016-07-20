@@ -65,13 +65,13 @@ static NSString *const kReusableSearchCellIdentifier = @"SearchCellIdentifier";
     }else{
         cell.portraitView.image = MImage(@"news_touxiang.png");
     }
-    cell.famId = [NSString stringWithFormat:@"%ld",self.searchModel.genlist[indexPath.row].GeId];
+    cell.famId = [NSString stringWithFormat:@"%ld",(long)self.searchModel.genlist[indexPath.row].GeId];
     
     return cell;
 }
 #pragma mark *** TableViewDelegate ***
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"%ld", indexPath.row);
+    NSLog(@"%ld", (long)indexPath.row);
     
     WSearchViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     //将点击的cell的家谱id存入model

@@ -18,6 +18,8 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
     NSMutableArray *_genNameArr; //详情array
     NSMutableArray *_imageUrlArr; //图片url
     NSMutableArray *_dsArr;/** 代数arr */
+    
+    NSString *_queryZbStr;/** 查询字辈的字段 */
 }
 
 
@@ -34,51 +36,45 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
     [super viewDidLoad];
     
     [self initData];
-    [self initUI];
-    [self PostGennerInfomation];
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.topView];
+    [self PostGennerInfomationWhileComplete:^{
+        [self initUI];
+        
+    }];
 
     
 }
 #pragma mark *** 初始化数据 ***
 -(void)initData{
-//    _allInfoArr = [@[@[@"杨未一",@"杨未二"],@[@"杨琚一",@"杨琚二",@"杨琚三"],@[@"杨新军",@"杨春华",@"杨春梅"],@[@"杨新军",@"杨春华",@"杨春梅"]] mutableCopy];
-//    
-//    _detailInfo = [@[@[@[@"屠夫",@"位置",@"杨拘役"],@[@"屠夫",@"侍郎",@"屠夫"]],
-//                    @[@[@"宰相",@"杨未一",@"未知"],@[@"侍郎",@"杨未一",@"未知"],@[@"屠夫",@"杨伟二",@"未知"]],
-//                    @[@[@"中侍郎",@"扬剧二",@"未知"],@[@"屠夫",@"杨军三",@"未知"],@[@"屠夫",@"杨伟三",@"未知"]],
-//                    @[@[@"中侍郎",@"扬剧二",@"未知"],@[@"屠夫",@"杨军三",@"未知"],@[@"屠夫",@"杨伟三",@"未知"]]]mutableCopy];
-//    _genNameArr = [@[@"未",@"琚吴",@"新弦春品",@"??"]mutableCopy];
-    _allInfoArr = [@[@[@"",@""],@[@"",@"",@""],@[@"",@"",@""],@[@"",@"",@""]] mutableCopy];
+
+    _allInfoArr = [@[] mutableCopy];
     
-    _detailInfo = [@[@[@[@"",@"",@""],@[@"",@"",@""]],
-                     @[@[@"",@"",@""],@[@"",@"",@""],@[@"",@"",@""]],
-                     @[@[@"",@"",@""],@[@"",@"",@""],@[@"",@"",@""]],
-                     @[@[@"",@"",@""],@[@"",@"",@""],@[@"",@"",@""]]]mutableCopy];
+    _detailInfo = [@[]mutableCopy];
     
-    _genNameArr = [@[@"",@"",@"",@""]mutableCopy];
+    _genNameArr = [@[]mutableCopy];
     
-    _imageUrlArr = [@[@[@"",@""],@[@"",@"",@""],@[@"",@"",@""],@[@"",@"",@""]] mutableCopy];
-    _dsArr = [@[@"",@"",@"",@""] mutableCopy];
+    _imageUrlArr = [@[] mutableCopy];
+    
+    _dsArr = [@[] mutableCopy];
+    
+    _queryZbStr = @"";
     
 }
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
-    [self.view addSubview:self.topView];
     [self.view addSubview:self.tableView];
-    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 #pragma mark *** 网络请求字辈列表 ***
 
--(void)PostGennerInfomation{
-//    [SXLoadingView showProgressHUD:@"加载数据"];
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"geid":[WFamilyModel shareWFamilModel].myFamilyId,@"query":@"",
+-(void)PostGennerInfomationWhileComplete:(void (^)())back{
+    
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"geid":[WFamilyModel shareWFamilModel].myFamilyId,@"query":_queryZbStr,
                                                  @"pagenum":@"1",
                                                  @"pagesize":@"20",
                                                  @"ds":@""} requestID:GetUserId requestcode:kRequestCodequeryzbgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-//            NSLog(@"--22-%@", jsonDic[@"data"]);
-            NSLog(@"--11-%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
             WK(weakSelf)
             weakSelf.gennerModel = [WGennerationModel modelWithJSON:jsonDic[@"data"]];
             
@@ -92,7 +88,7 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
                 NSString *ziBei = [self.gennerModel.datalist[idx].zb stringByReplacingOccurrencesOfString:@"," withString:@""];
                 [_genNameArr addObject:ziBei];
                 
-                NSString *genNum = [NSString stringWithFormat:@"第%ld代",self.gennerModel.datalist[idx].ds];
+                NSString *genNum = [NSString stringWithFormat:@"第%ld代",(long)self.gennerModel.datalist[idx].ds];
                 [_dsArr addObject:genNum];
                 NSMutableArray *nameArr = [@[] mutableCopy];
                 NSMutableArray *urlArr = [@[] mutableCopy];
@@ -116,10 +112,9 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
                 [_detailInfo addObject:detailArr];
                 
             }
-            [SXLoadingView showAlertHUD:@"加载完毕" duration:0.5];
-            [self.tableView reloadData];
             
-            
+            back();
+           
         }
     } failure:^(NSError *error) {
         
@@ -130,7 +125,7 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
 
 -(void)respondsToTopSearchView:(UIButton *)sender{
     MYLog(@"返回");
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark *** tableViewDataSource,Delegate ***
@@ -158,7 +153,7 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
 
     [cell initPorInfo];
     cell.generNumber.text = _dsArr[indexPath.row];
-    cell.personNumber.text = [NSString stringWithFormat:@"%ld人",((NSArray *)_allInfoArr[indexPath.row]).count];
+    cell.personNumber.text = [NSString stringWithFormat:@"%ld人",(unsigned long)((NSArray *)_allInfoArr[indexPath.row]).count];
     
     cell.perName.text =  [NSString verticalStringWith:_genNameArr[indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -168,12 +163,15 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
 #pragma mark *** TopDelegate ***
 
 -(void)TopSearchViewDidTapView:(TopSearchView *)topSearchView{
+    
     MYLog(@"查询字辈");
+    _queryZbStr = topSearchView.searchLabel.text;
+    [self PostGennerInfomationWhileComplete:^{
+        [self.tableView reloadData];
+    }];
 }
 
--(void)TopSearchView:(TopSearchView *)topSearchView didRespondsToMenusBtn:(UIButton *)sender{
-    MYLog(@"右菜单");
-}
+
 #pragma mark *** getters ***
 -(TopBackSearch *)topView{
     if (!_topView) {

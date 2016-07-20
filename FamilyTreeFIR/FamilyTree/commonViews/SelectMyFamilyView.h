@@ -13,7 +13,7 @@
 @protocol SelectMyFamilyViewDelegate <NSObject>
 
 @optional
-//-(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectItemTitle:(NSString *)title forCountOfFamNameInAllNames:(NSInteger)count;
+
 -(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectFamID:(NSString *)famId;
 
 -(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectFamTitle:(NSString *)title SelectFamID:(NSString *)famId;
@@ -23,7 +23,9 @@
 @interface SelectMyFamilyView : UIView
 
 @property (nonatomic,strong) UICollectionView *collectionView; /*集合*/
-@property (nonatomic,copy) NSMutableArray *dataSource; /*家谱数据*/
+@property (nonatomic,copy) NSMutableArray <NSArray *>*dataSource; /*家谱数据*/
+
+@property (nonatomic,assign) BOOL didSelectedItem; /*选中状态*/
 
 @property (nonatomic,weak) id<SelectMyFamilyViewDelegate> delegate; /*代理人*/
 -(void)updateDataSourceAndUI;

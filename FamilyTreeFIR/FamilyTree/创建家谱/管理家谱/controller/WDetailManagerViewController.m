@@ -80,19 +80,20 @@ enum{
             
             for (int idx2 = 0; idx2<obj.datas.count; idx2++) {
                 
-                [genNum addObject:[NSString stringWithFormat:@"第%ld代",obj.ds]];
+                [genNum addObject:[NSString stringWithFormat:@"第%ld代",(long)obj.ds]];
                 //装姓名，亲子，养子的数组
                 NSMutableArray *XArr = [@[] mutableCopy];
                 //名字
                 [XArr addObject:obj.datas[idx2].name];
                 //妻子
-                [XArr addObject:@"无数据"];
+                
+                [XArr addObject:obj.datas[idx2].mother&&obj.datas[idx2].mother.length!=0?obj.datas[idx2].mother:@"无"];
                 //养子
                 [XArr addObject:@"无数据"];
                 
                 [subDetaiArr addObject:XArr];
                 
-                [genMemberId addObject:[NSString stringWithFormat:@"%ld",obj.datas[idx2].gemeid]];
+                [genMemberId addObject:[NSString stringWithFormat:@"%ld",(long)obj.datas[idx2].gemeid]];
             }
             
         }];

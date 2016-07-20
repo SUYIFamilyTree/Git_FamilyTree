@@ -54,7 +54,7 @@
     [self getData:1];
     self.view.backgroundColor = [UIColor whiteColor];
     //配置导航栏
-    self.comNavi.delegate = self;
+//    self.comNavi.delegate = self;
     //设置背景
     UIImageView *bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
     bgImageView.image = MImage(@"bg");
@@ -250,13 +250,13 @@
     return _rightView;
 }
 
--(UIView *)selecMyFamView{
-    if (!_selecMyFamView) {
-        _selecMyFamView = [[SelectMyFamilyView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
-        _selecMyFamView.delegate = self;
-    }
-    return _selecMyFamView;
-}
+//-(UIView *)selecMyFamView{
+//    if (!_selecMyFamView) {
+//        _selecMyFamView = [[SelectMyFamilyView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
+//        _selecMyFamView.delegate = self;
+//    }
+//    return _selecMyFamView;
+//}
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -286,18 +286,18 @@
 }
 
 
-#pragma mark - CommandNavigationViewsDelegate
--(void)CommonNavigationViews:(CommonNavigationViews *)comView respondsToRightBtn:(UIButton *)sender{
-    MYLog(@"点击我的家谱");
-    sender.selected = !sender.selected;
-    if (sender.selected) {
-        [self.view addSubview:self.selecMyFamView];
-    }else{
-        
-        [self.selecMyFamView removeFromSuperview];
-    }
-
-}
+//#pragma mark - CommandNavigationViewsDelegate
+//-(void)CommonNavigationViews:(CommonNavigationViews *)comView respondsToRightBtn:(UIButton *)sender{
+//    MYLog(@"点击我的家谱");
+//    sender.selected = !sender.selected;
+//    if (sender.selected) {
+//        [self.view addSubview:self.selecMyFamView];
+//    }else{
+//        
+//        [self.selecMyFamView removeFromSuperview];
+//    }
+//
+//}
 
 #pragma mark *** SelectMyFamViewDelegate ***
 

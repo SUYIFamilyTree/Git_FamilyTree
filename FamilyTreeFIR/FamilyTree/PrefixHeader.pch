@@ -45,6 +45,8 @@
 #import "RollDetailView.h"
 #import "WDetailManagerViewController.h"
 #import "WSelectMyFamModel.h"
+#import "LineageViewController.h"
+#import "ImageAndTextViewController.h"
 
 //扩展方法
 #import <UIView+SDAutoLayout.h>

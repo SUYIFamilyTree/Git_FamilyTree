@@ -215,7 +215,6 @@
     //卷谱id
     NSString *gemeId = [NSString stringWithFormat:@"%ld",sender.tag];
     
-    
     [Tools showAlertViewcontrollerWithTarGet:self Message:@"确定删除此卷谱吗？" complete:^(BOOL sure) {
         if (sure) {
             [TCJPHTTPRequestManager POSTWithParameters:@{@"GeId":[WFamilyModel shareWFamilModel].myFamilyId,@"GemeId":gemeId,@"IsJp":@""} requestID:GetUserId requestcode:kRequestCodechangejp success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {

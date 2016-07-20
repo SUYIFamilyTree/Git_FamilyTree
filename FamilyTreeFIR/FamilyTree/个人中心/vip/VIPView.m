@@ -192,7 +192,7 @@
 
 -(void)reloadVIPGrowUpData:(VIPGrowUpModel *)vipGrowUpModel{
     [USERDEFAULT setObject:@(vipGrowUpModel.lv) forKey:VIPLevel];
-    self.VIPProgressLB.text = [NSString stringWithFormat:@"%ld/%ld",vipGrowUpModel.val1,vipGrowUpModel.val2];
+    self.VIPProgressLB.text = [NSString stringWithFormat:@"%ld/%ld",(long)vipGrowUpModel.val1,vipGrowUpModel.val2];
     CGRect frame = self.VIPProgressRedIV.frame;
     if (vipGrowUpModel.val2 != 0) {
       frame.size.width =vipGrowUpModel.val1/vipGrowUpModel.val2*0.3072*CGRectW(self.bgIV)-1;

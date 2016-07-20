@@ -92,7 +92,6 @@
                              @"Ph":self.AddFameView.rankingView.inputLabel.text,
                              @"IsJp":@""
                              };
-    NSLog(@"添加成员的参数---%@",addDic);
 //    [SXLoadingView showProgressHUD:@"正在添加..."];
     [TCJPHTTPRequestManager POSTWithParameters:addDic requestID:GetUserId requestcode:kRequestCodeaddgeme success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
