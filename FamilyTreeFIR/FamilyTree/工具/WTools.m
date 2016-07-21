@@ -114,6 +114,7 @@ NSString * _Nonnull const kRequestCodecemeterylist = @"cemeterylist";
 NSString * _Nonnull const kNotificationCodeManagerFam = @"managerFame";
 
 NSString * _Nonnull const kNotificationCodeAddMember = 	@"kNotificationCodeAddMember";
+NSString * _Nonnull const KNotificationCodeSeletedMyFamilItem = @"SeletedMyFamilItem";
 
 //我的家谱名字和id，存储在本地
 NSString * _Nonnull const kNSUserDefaultsMyFamilyID = @"UserDefaultsMyFamilyID";

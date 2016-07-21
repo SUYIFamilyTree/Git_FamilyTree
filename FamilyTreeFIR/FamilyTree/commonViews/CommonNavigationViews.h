@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class CommonNavigationViews;
 @protocol CommandNavigationViewsDelegate <NSObject>
-
+@optional
 -(void)CommonNavigationViews:(CommonNavigationViews *)comView respondsToRightBtn:(UIButton *)sender;
 
 @end

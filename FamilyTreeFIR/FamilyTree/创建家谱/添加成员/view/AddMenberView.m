@@ -58,6 +58,7 @@
     
     self.idView = [self creatLabelTextWithTitle:@"身份:" TitleFrame:CGRectMake(CGRectXW(self.sexInView)+20*AdaptationWidth(), self.sexInView.frame.origin.y, 50, InputView_height) inputViewLength:50 dataArr:[[WIDModel sharedWIDModel].idDic allKeys] inputViewLabel:@"嫡出" FinText:nil withStar:NO];
     
+    
     [self.backView addSubview:self.idView];
     [self.backView addSubview:self.famousPerson];
     
@@ -65,31 +66,49 @@
     //字辈代数和排行
     NSMutableArray *allGenNum = [@[] mutableCopy];
     NSMutableArray *allPaihang = [@[] mutableCopy];
-    for (int idx = 1; idx<[[WIDModel sharedWIDModel].ds allKeys].count+1; idx++) {
-        NSString *str = [NSString stringWithFormat:@"第%d代",idx];
+    for (int idx = 0; idx<[[WIDModel sharedWIDModel].ds allKeys].count; idx++) {
+        NSArray *dsArr = [[[WIDModel sharedWIDModel].ds allKeys] sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+             return [obj1 compare:obj2 options:NSNumericSearch];
+        }];
+        
+        NSString *str = [NSString stringWithFormat:@"第%@代",dsArr[idx]];
         [allGenNum addObject:str];
-        [allPaihang addObject:[NSString stringWithFormat:@"%d",idx]];
+        [allPaihang addObject:[NSString stringWithFormat:@"%d",idx+1]];
+        
     }
+    
     
     self.gennerNum   = [self creatLabelTextWithTitle:@"家族第几代:" TitleFrame:CGRectMake(20, CGRectYH(self.sexInView)+GapOfView, 0.25*Screen_width, InputView_height) inputViewLength:0.2*Screen_width dataArr:allGenNum inputViewLabel:@"第1代" FinText:nil withStar:YES];
     self.gennerNum.delegate = self;
     [self.backView addSubview:self.gennerNum];
     
-    [self.backView addSubview:self.gennerTextField];
+    //字辈
+    NSString *genNumber = [self.gennerNum.inputLabel.text stringByReplacingOccurrencesOfString:@"第" withString:@""];
+    NSString *finStr = [genNumber stringByReplacingOccurrencesOfString:@"代" withString:@""];
+    NSArray *zbArr = [WIDModel sharedWIDModel].ds[finStr];
+    self.gennerZB = [self creatLabelTextWithTitle:@"            字辈:" TitleFrame:CGRectMake(20, CGRectYH(self.gennerNum)+GapOfView, 0.25*Screen_width, 40) inputViewLength:50 dataArr:zbArr inputViewLabel:zbArr[0] FinText:nil withStar:NO];
     
-    self.rankingView = [self creatLabelTextWithTitle:@"            排行:" TitleFrame:CGRectMake(20, CGRectYH(self.gennerNum)+GapOfView+55, 0.25*Screen_width, InputView_height) inputViewLength:0.2*Screen_width dataArr:allPaihang    inputViewLabel:@"1" FinText:nil withStar:YES];
+    [self.backView addSubview:self.gennerZB];
+    
+    self.rankingView = [self creatLabelTextWithTitle:@"            排行:" TitleFrame:CGRectMake(20, CGRectYH(self.gennerZB)+GapOfView, 0.25*Screen_width, 40) inputViewLength:50 dataArr:allPaihang    inputViewLabel:@"1" FinText:nil withStar:YES];
     self.rankingView.inputLabel.textAlignment = 0;
     
     [self.backView addSubview:self.rankingView];
     
-    //改变层级关系
-    [self.backView bringSubviewToFront:self.gennerNum];
+    [self updateBackViewSubViewsLayout];
+    
+    
+}
+/** 设置层级关系 */
+-(void)updateBackViewSubViewsLayout{
+    
     [self.backView bringSubviewToFront:self.sexInView];
+    [self.backView bringSubviewToFront:self.rankingView];
+    [self.backView bringSubviewToFront:self.gennerZB];
+    [self.backView bringSubviewToFront:self.gennerNum];
     [self.backView bringSubviewToFront:self.idView];
     [self.backView bringSubviewToFront:self.fatheView];
     [self.backView bringSubviewToFront:self.motherView];
-    
-    
 }
 
 //获取父亲，身份类型，代数字辈
@@ -97,7 +116,7 @@
 -(void)getAllDetailDataCallBack:(void (^)())back{
     [TCJPHTTPRequestManager POSTWithParameters:@{@"GeId":[WFamilyModel shareWFamilModel].myFamilyId} requestID:GetUserId requestcode:kRequestCodegetgenalldata success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-            NSLog(@"%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+//            NSLog(@"%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
             
             NSDictionary *dic = [NSString jsonDicWithDic:jsonDic[@"data"]];
             
@@ -122,12 +141,17 @@
             
             [WIDModel sharedWIDModel].fatherDic = fatherDic;
             [WIDModel sharedWIDModel].idDic = sfDic;
+            //拿到的字典是乱序，排序一下
+            NSArray *arr = [[WIDModel sharedWIDModel].ds allKeys];
+            NSArray *finArr = [arr sortedArrayUsingSelector:@selector(compare:)];
+            
             [WIDModel sharedWIDModel].genDic = [WIDModel sharedWIDModel].ds;
+            
             
             back();
         }
     } failure:^(NSError *error) {
-        NSLog(@"shibai");
+//        NSLog(@"shibai");
     }];
 }
 
@@ -137,12 +161,14 @@
     [super InputView:inputView didFinishSelectLabel:inputLabel];
     
     if (inputView == self.gennerNum) {
-        NSString *genNum = [inputLabel.text stringByReplacingOccurrencesOfString:@"第" withString:@""];
-        NSString *finStr = [genNum stringByReplacingOccurrencesOfString:@"代" withString:@""];
+        //字辈
+        NSString *genNumber = [self.gennerNum.inputLabel.text stringByReplacingOccurrencesOfString:@"第" withString:@""];
+        NSString *finStr = [genNumber stringByReplacingOccurrencesOfString:@"代" withString:@""];
+        NSArray *zbArr = [WIDModel sharedWIDModel].ds[finStr];
+        self.gennerZB.dataArr = zbArr;
+        self.gennerZB.inputLabel.text = zbArr[0];
         
-        
-        self.gennerTextField.text = [NSArray allItemsStringFromArray:[WIDModel sharedWIDModel].ds[finStr]] ;
-        
+        [self.gennerZB reloadInputViewData];
     }
 }
 
@@ -155,33 +181,7 @@
     }
     return _name;
 }
--(UITextField *)gennerTextField{
-    if (!_gennerTextField) {
-        
-        UILabel *theLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectYH(self.gennerNum)+GapOfView, 0.25*Screen_width, 40)];
-        theLabel.text = @"字辈:";
-        theLabel.font = WFont(33);
-        theLabel.textAlignment = 2;
-        [self.backView addSubview:theLabel];
-        
-        _gennerTextField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectXW(theLabel), CGRectY(theLabel), 100, InputView_height)];
-        _gennerTextField.backgroundColor = [UIColor whiteColor];
-        _gennerTextField.layer.borderWidth = 1.0;
-        _gennerTextField.layer.borderColor = BorderColor;
-        _gennerTextField.font = WFont(33);
-        [_gennerTextField setEnabled:false];
-        _gennerTextField.textAlignment = 1;
-        NSArray *arr = [WIDModel sharedWIDModel].ds[@"1"];
-       __block NSString *firstZibei = @"";
-        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            firstZibei = [NSString stringWithFormat:@"%@%@",obj,firstZibei];
-        }];
-        _gennerTextField.text = firstZibei;
-        
-    }
-    return _gennerTextField;
-    
-}
+
 -(InputView *)sexInView{
     if (!_sexInView) {
         _sexInView = [[InputView alloc] initWithFrame:CGRectMake(20, CGRectYH(self.fatheView)+GapOfView, 50, InputView_height) Length:50 withData:@[@"男",@"女"]];
@@ -224,7 +224,6 @@
             starLabel.textColor = [UIColor redColor];
             [self.backView addSubview:starLabel];
             starLabel.sd_layout.leftSpaceToView(inputView,5).widthIs(10).heightIs(InputView_height).topEqualToView(inputView);
-        
         
         _motherView = inputView;
     }

@@ -39,8 +39,8 @@
     NSString *timeStamp = [NSString getCurrentTimeAddNumber];
     NSString *requestUserId = [NSString stringWithFormat:@"%@",requestID];
     NSString *md5checkStr = [[[[requestData stringByAppendingString:SecretKeySend]stringByAppendingString:requestUserId] stringByAppendingString:requestcode] stringByAppendingString:timeStamp];
-    //MYLog(@"requestData:%@",requestData);
-    NSLog(@"md5beforeStr--%@", md5checkStr);
+//    MYLog(@"requestData:%@",requestData);
+//    NSLog(@"md5beforeStr--%@", md5checkStr);
 //    NSString *md5checkStr1 = [md5checkStr stringByReplacingOccurrencesOfString:@"\\" withString:@""];
     
     NSString *md5check = [NSString md5Str:md5checkStr];
@@ -66,13 +66,13 @@
                              @"reserved":@""
                              };
     
-    NSLog(@"请求的参数----:%@", params);
+//    NSLog(@"请求的参数----:%@", params);
     
     [manager POST:RootURL parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSError *error;
         NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSUTF8StringEncoding error:&error];
-        NSLog(@"得到的返回---%@",jsonDic);
+//        NSLog(@"得到的返回---%@",jsonDic);
         
         NSString *jsonStr = [NSString stringWithFormat:@"%@",jsonDic];
         NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];

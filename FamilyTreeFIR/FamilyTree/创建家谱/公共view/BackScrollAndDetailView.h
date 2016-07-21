@@ -20,7 +20,7 @@
 
 @end
 
-@interface BackScrollAndDetailView : UIView<InputViewDelegate>
+@interface BackScrollAndDetailView : UIView<UITextFieldDelegate,InputViewDelegate>
 
 {
     UIImagePickerController *_imagePickerController;
@@ -70,6 +70,9 @@
 @property (nonatomic,strong) NSMutableArray *gennerNexArr; /*字辈arr*/
 
 @property (nonatomic,weak) id<BackScrollAndDetailViewDelegate> delegate; /*代理人*/
+
+@property (nonatomic,assign) BOOL zbLegal; /*字辈格式是否合法*/
+
 
 
 //创建labelText

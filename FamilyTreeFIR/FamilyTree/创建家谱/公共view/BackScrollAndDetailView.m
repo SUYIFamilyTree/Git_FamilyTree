@@ -12,7 +12,7 @@ enum{
 #import "BackScrollAndDetailView.h"
 #define AnimatTime 0.3f
 
-@interface BackScrollAndDetailView()<UITextFieldDelegate,UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface BackScrollAndDetailView()<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 @end
 
@@ -264,7 +264,8 @@ enum{
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     if (textField == self.gennerationNex) {
         //判断字辈格式
-        [NSString judgeWithString:textField.text];
+        
+       self.zbLegal = [NSString judgeWithString:textField.text];
         
         NSString *str2=[self.generationLabel.inputLabel.text substringFromIndex:0];
         NSUInteger index =  [self.generationLabel.dataArr indexOfObject:str2];

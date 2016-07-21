@@ -8,8 +8,10 @@
 
 #import "CommonNavigationViews.h"
 
-@interface CommonNavigationViews()
+@interface CommonNavigationViews()<SelectMyFamilyViewDelegate>
 
+/**我的家谱↓*/
+@property (nonatomic,strong) SelectMyFamilyView *selecMyFamView;
 
 @end
 @implementation CommonNavigationViews
@@ -38,20 +40,31 @@
     return self;
 }
 
-
 #pragma mark *** Events ***
 
 -(void)respondsToReturnBtn{
     
     MYLog(@"返回按钮");
-    
+    NSArray *titleArr = @[@"四海同宗",@"世系图",@"阅读家谱",@"字辈",@"图文影音"];
+    if ([titleArr containsObject:self.titleLabel.text]) {
+        
+        [[self getNaiViewController] popToRootViewControllerAnimated:YES];
+
+    }
     [[self getNaiViewController] popViewControllerAnimated:YES];
     
 }
 
 -(void)respondsToRightBtn:(UIButton *)sender{
-    //sender.selected = !sender.selected;
+    sender.selected = !sender.selected;
     MYLog(@"右按钮");
+    if (sender.selected) {
+        [self.viewController.view addSubview:self.selecMyFamView];
+    }else{
+        [self.selecMyFamView removeFromSuperview];
+    }
+    [self.selecMyFamView updateDataSourceAndUI];
+    
     if (_delegate && [_delegate respondsToSelector:@selector(CommonNavigationViews:respondsToRightBtn:)]) {
         [_delegate CommonNavigationViews:self respondsToRightBtn:sender];
     }
@@ -73,6 +86,8 @@
     return nil;
     
 }
+
+
 #pragma mark *** getters ***
 -(UIView *)backView{
     if (!_backView) {
@@ -126,5 +141,14 @@
 
     }
     return _MyFamilyRightBtn;
+}
+-(SelectMyFamilyView *)selecMyFamView{
+    if (!_selecMyFamView) {
+        _selecMyFamView = [[SelectMyFamilyView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
+        _selecMyFamView.delegate = self;
+    }
+    [_selecMyFamView updateDataSourceAndUI];
+    _selecMyFamView.didSelectedItem = false;
+    return _selecMyFamView;
 }
 @end

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LineageViewController : UIViewController
+@interface LineageViewController : BaseViewController
 
 @end

@@ -11,9 +11,6 @@
 
 @interface TopSearchView ()
 
-
-
-
 @end
 
 @implementation TopSearchView
@@ -71,7 +68,7 @@
         _searchLabel = [[UITextField alloc] initWithFrame:CGRectMake(20, 0, 150, SearchView_Height)];
         _searchLabel.font = BFont(13);
         _searchLabel.textAlignment = NSTextAlignmentLeft;
-        _searchLabel.text = @"输入关键词";
+       
         _searchLabel.textColor = LH_RGBCOLOR(143, 143, 143);
         
     }
@@ -81,7 +78,7 @@
     if (!_searchImage) {
         _searchImage = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.searchView.frame)-3*SearchImage_Size, self.searchView.bounds.size.height/2-SearchImage_Size/2, SearchImage_Size, SearchImage_Size)];
         _searchImage.image = MImage(@"search");
-        
+        _searchImage.userInteractionEnabled = true;
         //添加手势
         UITapGestureRecognizer *tapGues = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapSearchView)];
         [_searchImage addGestureRecognizer:tapGues];

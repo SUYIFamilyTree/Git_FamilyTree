@@ -17,6 +17,8 @@ enum {
 }
 /**背景*/
 @property (nonatomic,strong) UIView *backView;
+/**背景滚动*/
+@property (nonatomic,strong) UIScrollView *backScrollView;
 
 @end
 @implementation WRollDetailView
@@ -25,7 +27,10 @@ enum {
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
         [self addSubview:self.backView];
+        self.userInteractionEnabled = true;
+        [self addSubview:self.backScrollView];
         
         [self initData];
         [self initUI];
@@ -44,15 +49,16 @@ enum {
         _rightArr[idx+2] = [NSString stringWithFormat:@"%ld",model.datalist[idx].cnt];
         
         personNumber += model.datalist[idx].cnt;
-        
     }
-    
     _rightArr[0] = [NSString stringWithFormat:@"%ld",personNumber];
     
     [self removeAllSubviews];
+    [self.backScrollView removeAllSubviews];
     [self addSubview:self.backView];
+    [self addSubview:self.backScrollView];
+    CGFloat sizeHeight = _leftArr.count>7?16+_leftArr.count*45:self.bounds.size.height/AdaptationWidth();
+    self.backScrollView.contentSize = AdaptationSize(225, sizeHeight);
     [self initUI];
-    
     
 }
 #pragma mark *** 初始化数据 ***
@@ -83,23 +89,20 @@ enum {
 }
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
-  
     
     //具体信息
     for (int idx = 0; idx<_leftArr.count; idx++) {
         NSInteger length = ((NSString *)_leftArr[idx]).length;
-        UILabel *leftLB = [[UILabel alloc] initWithFrame:AdaptationFrame(16+46, 16, length*27, 45+idx*90)];
+        UILabel *leftLB = [[UILabel alloc] initWithFrame:AdaptationFrame(16, 16+idx*45, length*27, 45)];
         leftLB.font = MFont(26*AdaptationWidth());
         leftLB.text = _leftArr[idx];
-        
-        
         NSInteger length2 = ((NSString *)_rightArr[idx]).length;
-        UILabel *rightLb = [[UILabel alloc] initWithFrame:AdaptationFrame(CGRectXW(leftLB)/AdaptationWidth(), 16, length2*50, leftLB.frame.size.height/AdaptationWidth())];
+        UILabel *rightLb = [[UILabel alloc] initWithFrame:AdaptationFrame(CGRectXW(leftLB)/AdaptationWidth(), 16+idx*45, length2*50, leftLB.frame.size.height/AdaptationWidth())];
         rightLb.text = [NSString stringWithFormat:@"%@人",_rightArr[idx]];
         rightLb.font = leftLB.font;
         
-        [self addSubview:leftLB];
-        [self addSubview:rightLb];
+        [self.backScrollView addSubview:leftLB];
+        [self.backScrollView addSubview:rightLb];
         
     }
     
@@ -134,5 +137,16 @@ enum {
         
     }
     return _backView;
+}
+-(UIScrollView *)backScrollView{
+    if (!_backScrollView) {
+        _backScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(46*AdaptationWidth(), 0, 225*AdaptationWidth(), self.bounds.size.height)];
+        _backScrollView.showsVerticalScrollIndicator = false;
+        _backScrollView.showsHorizontalScrollIndicator = false;
+        _backScrollView.backgroundColor = [UIColor clearColor];
+//        CGFloat sizeHeight = _leftArr.count>5?_leftArr.count:45+5*90;
+//        _backScrollView.contentSize = AdaptationSize(225, 1500);
+    }
+    return _backScrollView;
 }
 @end

@@ -215,7 +215,6 @@
     //卷谱id
     NSString *gemeId = [NSString stringWithFormat:@"%ld",sender.tag];
     
-    
     [Tools showAlertViewcontrollerWithTarGet:self Message:@"确定删除此卷谱吗？" complete:^(BOOL sure) {
         if (sure) {
             [TCJPHTTPRequestManager POSTWithParameters:@{@"GeId":[WFamilyModel shareWFamilModel].myFamilyId,@"GemeId":gemeId,@"IsJp":@""} requestID:GetUserId requestcode:kRequestCodechangejp success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
@@ -537,7 +536,7 @@
 -(void)getJPPersonNumWithJPId:(NSString *)jpId complete:(void (^)())callback{
     [TCJPHTTPRequestManager POSTWithParameters:@{@"gemeid":jpId,@"geid":[WFamilyModel shareWFamilModel].myFamilyId} requestID:GetUserId requestcode:kRequestCodequerygezblist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-            
+            NSLog(@"---字辈详情%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
             WJPPersonZBNumberModel *theModel = [WJPPersonZBNumberModel modelWithJSON:jsonDic[@"data"]];
             [WJPPersonZBNumberModel sharedWJPPersonZBNumberModel].allcnt = theModel.allcnt;
             [WJPPersonZBNumberModel sharedWJPPersonZBNumberModel].datalist = theModel.datalist;

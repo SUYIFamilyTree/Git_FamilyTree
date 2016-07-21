@@ -90,6 +90,8 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodequerygenandgemelist;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
 
 UIKIT_EXTERN NSString * _Nonnull const kNotificationCodeAddMember;
+UIKIT_EXTERN NSString * _Nonnull const KNotificationCodeSeletedMyFamilItem;
+
 
 UIKIT_EXTERN NSString * _Nonnull const kNSUserDefaultsMyFamilyID;
 UIKIT_EXTERN NSString * _Nonnull const kNSUserDefaultsMyFamilyName;

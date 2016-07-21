@@ -72,7 +72,7 @@
     
     //中间金钱
     UILabel *moneyLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(addIV), 0, CGRectW(self.moneyView)-2*CGRectW(addIV)-8, CGRectH(self.moneyView))];
-    moneyLabel.text = [NSString stringWithFormat:@"%ld",self.sameCityMoney];
+    moneyLabel.text = [NSString stringWithFormat:@"%ld",(long)self.sameCityMoney];
     moneyLabel.font = MFont(13);
     moneyLabel.textAlignment = NSTextAlignmentCenter;
     [self.sameCityMoneyView addSubview:moneyLabel];

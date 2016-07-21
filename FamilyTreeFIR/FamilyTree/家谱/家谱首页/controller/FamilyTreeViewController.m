@@ -6,11 +6,18 @@
 //  Copyright © 2016年 王子豪. All rights reserved.
 //
 
+
+enum{
+    ItemSelectedSeaIndex = 1,
+    ItemSelectedGemImageIndex,
+    ItemSelectedReadGemIndex,
+    ItemSelectedZBIndex,
+    ItemSelectedVideoIndex
+};
+
 #import "FamilyTreeViewController.h"
 #import "FamilyTreeTopView.h"
 #import "SearchFamilyTreeViewController.h"
-#import "ImageAndTextViewController.h"
-#import "LineageViewController.h"
 #import "CreatFamilyTree.h"
 #import "ManagerFamilyViewController.h"
 #import "WFamilyTableView.h"
@@ -53,7 +60,9 @@
 @end
 
 @implementation FamilyTreeViewController
-
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -82,6 +91,8 @@
 
     //创建家谱按钮
     [self.view addSubview:self.creatBtn];
+    /** 注册通知 */
+    [self registNotification];
     
     
 }
@@ -94,6 +105,76 @@
     
     [self getFamDetailInfo];
     
+}
+#pragma mark *** 注册通知 ***
+-(void)registNotification{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(respondsToNotification:) name:KNotificationCodeSeletedMyFamilItem object:nil];
+}
+/** 通知实现方法 */
+-(void)respondsToNotification:(NSNotification *)info{
+    NSDictionary *dic = info.userInfo;
+    NSInteger itemIndex = [dic[@"itemName"] integerValue];
+    //获取所有VC
+    NSArray *vcArr = [self.navigationController viewControllers];
+
+    switch (itemIndex) {
+        case ItemSelectedSeaIndex:
+        {
+            if ([vcArr.lastObject isKindOfClass:[WholeWorldViewController class]]) {
+                return;
+            }
+            WholeWorldViewController *wholeVc = [[WholeWorldViewController alloc] initWithTitle:@"四海同宗"];
+            [self.navigationController pushViewController:wholeVc animated:YES];
+        
+        }
+            break;
+        case ItemSelectedGemImageIndex:
+        {
+            if ([vcArr.lastObject isKindOfClass:[LineageViewController class]]) {
+                return;
+            }
+            LineageViewController *lineVc = [[LineageViewController alloc] initWithTitle:@"世系图"];
+            [self.navigationController pushViewController:lineVc animated:YES];
+        }
+            break;
+        case ItemSelectedReadGemIndex:
+        {
+            
+            ImageAndTextViewController *readVc = [[ImageAndTextViewController alloc] initWithTitle:@"阅读家谱"];
+            NSLog(@"%@", readVc.comNavi.titleLabel.text);
+            BaseViewController *lastVc = vcArr.lastObject;
+            if ([lastVc isKindOfClass:[ImageAndTextViewController class]]&&[lastVc.comNavi.titleLabel.text isEqualToString:@"阅读家谱"]) {
+                return;
+            }
+            
+            [self.navigationController pushViewController:readVc animated:YES];
+            
+        }
+            break;
+        case ItemSelectedZBIndex:
+        {
+            if ([vcArr.lastObject isKindOfClass:[GennerationViewController class]]) {
+                return;
+            }
+            GennerationViewController *zbVc = [[GennerationViewController alloc] init];
+            [self.navigationController pushViewController:zbVc animated:YES];
+        }
+            break;
+        case ItemSelectedVideoIndex:
+        {
+            
+            ImageAndTextViewController *imageVc = [[ImageAndTextViewController alloc] initWithTitle:@"图文影音"];
+             BaseViewController *lastVc = vcArr.lastObject;
+            if ([lastVc isKindOfClass:[ImageAndTextViewController class]]&&[lastVc.comNavi.titleLabel.text isEqualToString:@"图文影音"]) {
+                return;
+            }
+            [self.navigationController pushViewController:imageVc animated:YES];
+        }
+            break;
+
+        default:
+            break;
+    }
 }
 #pragma mark - 视图搭建
 //设置导航栏
@@ -152,7 +233,7 @@
             
             NSString *jsonStr = [NSString stringWithFormat:@"%@",jsonDic[@"data"]];
             
-            NSLog(@"--我所有的家谱%@", jsonDic[@"data"]);
+//            NSLog(@"--我所有的家谱%@", jsonDic[@"data"]);
             
             NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
             NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
@@ -215,7 +296,7 @@
             //跳转
         {
             NSLog(@"四海同宗");
-            WholeWorldViewController *wholeVc = [[WholeWorldViewController alloc] initWithTitle:@"四海同宗" image:nil];
+            WholeWorldViewController *wholeVc = [[WholeWorldViewController alloc] initWithTitle:@"四海同宗"];
             [self.navigationController pushViewController:wholeVc animated:YES];
             break;
         }
@@ -223,7 +304,7 @@
         {
             //跳转
             NSLog(@"世系图");
-            LineageViewController *lineageVC = [[LineageViewController alloc]init];
+            LineageViewController *lineageVC = [[LineageViewController alloc]initWithTitle:@"世系图"];
             [self.navigationController pushViewController:lineageVC animated:YES];
         }
             break;
@@ -303,6 +384,7 @@
     MYLog(@"点击我的家谱");
     
     if (sender.selected) {
+        
         [self.view addSubview:self.selecMyFamView];
     }else{
          [self.selecMyFamView removeFromSuperview];
@@ -321,10 +403,8 @@
         }
         if (sender.tag == 1) {
             
-          
             self.joinView.alpha = 0;
             [self.view addSubview:self.joinView];
-            
             [UIView animateWithDuration:0.3f animations:^{
                 
            self.joinView.alpha = 1;
@@ -342,18 +422,9 @@
 }
 
 -(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectFamTitle:(NSString *)title SelectFamID:(NSString *)famId{
-    //网络请求家谱详情
     
-    [WFamilyModel shareWFamilModel].myFamilyId = famId;
-    [WFamilyModel shareWFamilModel].myFamilyName = title;
-    
-    [USERDEFAULT setObject:famId forKey:kNSUserDefaultsMyFamilyID];
-    [USERDEFAULT setObject:title forKey:kNSUserDefaultsMyFamilyName];
-    [USERDEFAULT synchronize];
-    //更新
+    //更新界面
     [self getFamDetailInfo];
-    [self.selecMyFamView removeFromSuperview];
-    [self.famTreeTopView.menuBtn setSelected:false];
 
 }
 
@@ -390,6 +461,7 @@
         
     }
     [_selecMyFamView.collectionView reloadData];
+    _selecMyFamView.didSelectedItem = false;
     return _selecMyFamView;
 }
 -(WFamilyTableView *)famTableView{
