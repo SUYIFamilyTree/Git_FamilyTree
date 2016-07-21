@@ -287,6 +287,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
     //界面出现就重新加载数据
     [self getMainData];

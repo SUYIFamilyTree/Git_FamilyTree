@@ -87,6 +87,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
     //更新数据
     [self getFamInfo];
