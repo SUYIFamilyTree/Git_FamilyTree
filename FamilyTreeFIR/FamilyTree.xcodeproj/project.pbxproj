@@ -344,6 +344,7 @@
 		ADB7F08C1D0297EE001F151D /* todayYS_ZH_whiteXing.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB7F0651D0297EE001F151D /* todayYS_ZH_whiteXing.png */; };
 		ADB7F08D1D0297EE001F151D /* todayYS_ZH_whiteXing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB7F0661D0297EE001F151D /* todayYS_ZH_whiteXing@2x.png */; };
 		ADB7F08E1D0297EE001F151D /* todayYS_ZH_whiteXing@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB7F0671D0297EE001F151D /* todayYS_ZH_whiteXing@3x.png */; };
+		ADB8A2361D3F64D8007617A4 /* WMenuBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB8A2351D3F64D8007617A4 /* WMenuBtn.m */; };
 		ADB9261C1CF7DF1900AA8B6E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB9260F1CF7DF1900AA8B6E /* LoginViewController.m */; };
 		ADB9261D1CF7DF1900AA8B6E /* AccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB926131CF7DF1900AA8B6E /* AccountView.m */; };
 		ADB9261E1CF7DF1900AA8B6E /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB926151CF7DF1900AA8B6E /* LoginView.m */; };
@@ -1243,6 +1244,8 @@
 		ADB7F0651D0297EE001F151D /* todayYS_ZH_whiteXing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = todayYS_ZH_whiteXing.png; sourceTree = "<group>"; };
 		ADB7F0661D0297EE001F151D /* todayYS_ZH_whiteXing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "todayYS_ZH_whiteXing@2x.png"; sourceTree = "<group>"; };
 		ADB7F0671D0297EE001F151D /* todayYS_ZH_whiteXing@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "todayYS_ZH_whiteXing@3x.png"; sourceTree = "<group>"; };
+		ADB8A2341D3F64D8007617A4 /* WMenuBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMenuBtn.h; sourceTree = "<group>"; };
+		ADB8A2351D3F64D8007617A4 /* WMenuBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMenuBtn.m; sourceTree = "<group>"; };
 		ADB9260E1CF7DF1900AA8B6E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		ADB9260F1CF7DF1900AA8B6E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		ADB926121CF7DF1900AA8B6E /* AccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountView.h; sourceTree = "<group>"; };
@@ -2622,6 +2625,8 @@
 				ADA98E951D11584B005B23EC /* SelectMyFamilyView.m */,
 				ADE265A61D20C4C800F12FC9 /* WSelectMyFamModel.h */,
 				ADE265A71D20C4C800F12FC9 /* WSelectMyFamModel.m */,
+				ADB8A2341D3F64D8007617A4 /* WMenuBtn.h */,
+				ADB8A2351D3F64D8007617A4 /* WMenuBtn.m */,
 			);
 			path = "我的家谱";
 			sourceTree = "<group>";
@@ -5133,6 +5138,7 @@
 				ADC3E9991D377A6F00754F63 /* WApplyJoinView.m in Sources */,
 				BC6094DE1D3DB7190056DD9C /* PjZcViewController.m in Sources */,
 				ADA4C16F1D0E925700CA9067 /* AllGoodsView.m in Sources */,
+				ADB8A2361D3F64D8007617A4 /* WMenuBtn.m in Sources */,
 				ADC13BA31D1926C7000F901C /* WDetailManagerViewController.m in Sources */,
 				ADB737E71D2F749800001011 /* WJPPersonZBNumberModel.m in Sources */,
 				BC458A861D1CC64300AA0DDF /* JobModel.m in Sources */,

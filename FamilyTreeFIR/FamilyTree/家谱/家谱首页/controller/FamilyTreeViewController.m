@@ -104,6 +104,8 @@ enum{
     
     [self getFamDetailInfo];
     
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
 }
 #pragma mark *** 注册通知 ***
 -(void)registNotification{
@@ -360,7 +362,7 @@ enum{
     MYLog(@"点击搜索栏");
     [SXLoadingView showProgressHUD:@"正在搜索"];
     /** 获取搜索信息 */
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"query":self.famTreeTopView.searchLabel.text,@"pagenum":@"1",@"pagesize":@"20"} requestID:GetUserId requestcode:kRequestCodequerygenandgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"query":self.famTreeTopView.searchLabel.text,@"pagenum":@"1",@"pagesize":@"20",@"ismygen":@"0"} requestID:GetUserId requestcode:kRequestCodequerygenandgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             
             WSearchModel *searchModel = [WSearchModel modelWithJSON:jsonDic[@"data"]];

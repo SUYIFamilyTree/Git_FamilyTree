@@ -115,6 +115,8 @@ NSString * _Nonnull const kNotificationCodeManagerFam = @"managerFame";
 
 NSString * _Nonnull const kNotificationCodeAddMember = 	@"kNotificationCodeAddMember";
 NSString * _Nonnull const KNotificationCodeSeletedMyFamilItem = @"SeletedMyFamilItem";
+NSString * _Nonnull const KNotificationCodeIntoFamSevice = @"IntoFamSevice";
+
 
 //我的家谱名字和id，存储在本地
 NSString * _Nonnull const kNSUserDefaultsMyFamilyID = @"UserDefaultsMyFamilyID";

@@ -16,6 +16,7 @@
 static NSString *const kReusableIdentifier = @"PinAnnotation";
 
 @interface WholeWorldViewController ()<HeaderSelectViewDelegate,MKMapViewDelegate,CLLocationManagerDelegate>
+
 @property (nonatomic,strong) HeaderSelectView *headerView; /*选择视图*/
 
 @property (nonatomic,strong) MKMapView *mapView; /*地图*/
@@ -35,6 +36,9 @@ static NSString *const kReusableIdentifier = @"PinAnnotation";
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    //默认为空
+    self.queryString = @"";
+    
     [self initUI];
     //打开定位
     [self startLocation];
@@ -121,10 +125,13 @@ static NSString *const kReusableIdentifier = @"PinAnnotation";
 
 
 -(void)getData:(CLLocation *)location{
-    NSDictionary *logDic = @{@"userid":GetUserId,@"query":@"",@"type":@"Near",@"lat":[NSString stringWithFormat:@"%lf",location.coordinate.latitude],@"lng":[NSString stringWithFormat:@"%lf",location.coordinate.longitude]};
+    NSDictionary *logDic = @{@"query":self.queryString,
+                             @"type":@"Near",
+                             @"lat":[NSString stringWithFormat:@"%lf",location.coordinate.latitude],
+                             @"lng":[NSString stringWithFormat:@"%lf",location.coordinate.longitude]};
     WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeQueryClan success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        MYLog(@"%@",jsonDic[@"data"]);
+        MYLog(@"附近--%@",[NSString jsonDicWithDic:jsonDic[@"data"]]);
         if (succe) {
             weakSelf.WholeWorldAdganatioModelArr = [NSArray modelArrayWithClass:[WholeWorldAdgnatioModel class] json:jsonDic[@"data"]];
             
@@ -267,7 +274,6 @@ static NSString *const kReusableIdentifier = @"PinAnnotation";
         
         annotation.coordinate = corrdinate;
         
-       
         annotation.subtitle = @"elpsycongroo";
         
         [self.mapView addAnnotation:annotation];
