@@ -64,15 +64,13 @@ enum{
 //初始化所有具体图
 -(void)initAllDetailManagerDetailView{
     
-
     NSArray *titleArr = @[@"姓名：",@"妻子：",@"养子："];
     
     NSMutableArray *subDetaiArr = [@[] mutableCopy];//具体信息arr。设计图为三种
     
-//  NSMutableArray *genNum = [@[@"第一代",@"第二代",@"第三代",@"第三代",@"第四代",@"第四代"] mutableCopy];
-    
     NSMutableArray *genNum = [@[] mutableCopy];//所有代数
     NSMutableArray *genMemberId = [@[] mutableCopy];//所有代数的成员id，用于添加管理员
+    NSMutableArray *headImageArr = [@[] mutableCopy];//所有头像
     
     NSArray <WJPInfoDatalist *>*modelArr = [WDetailJPInfoModel sharedWDetailJPInfoModel].datalist;
     
@@ -94,6 +92,7 @@ enum{
                 [subDetaiArr addObject:XArr];
                 
                 [genMemberId addObject:[NSString stringWithFormat:@"%ld",(long)obj.datas[idx2].gemeid]];
+                [headImageArr addObject:obj.datas[idx2].photo];
             }
             
         }];
@@ -118,13 +117,20 @@ enum{
                 
             }else{
                 finCount+=1;
+            }
         }
-    }
         //布局
         RollDetailView *rollView = [[RollDetailView alloc] initWithFrame:AdaptationFrame([frameArr[finCount] floatValue]-30, 30+idx*240, 500, 200) leftViewDataArr:titleArr rightViewDataArr:subDetaiArr[idx]];
         rollView.genLabel.text = [NSString verticalStringWith:genNum[idx]];
         rollView.myMemberID = genMemberId[idx];
-
+        NSString *imageUrlStr = headImageArr[idx];
+        if (imageUrlStr && imageUrlStr.length!=0) {
+            rollView.headImageView.imageURL = [NSURL URLWithString:imageUrlStr];
+        }
+        //每个添加手势
+        UITapGestureRecognizer *tapGues = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondsToRollViewGesture:)];
+        [rollView addGestureRecognizer:tapGues];
+    
         [self.backScrollView addSubview:rollView];
         
         [self.view addSubview:self.addMemberBtn];
@@ -176,6 +182,28 @@ enum{
         AddMemberViewController *addMenVc = [[AddMemberViewController alloc] initWithTitle:@"添加成员" image:nil];
         [self.navigationController pushViewController:addMenVc animated:YES];
     }
+    
+    
+    
+}
+/** 点击视图加载详情 */
+-(void)respondsToRollViewGesture:(UIGestureRecognizer *)guesture{
+    
+    RollDetailView *rollView = (RollDetailView *)guesture.view;
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"gemeid":rollView.myMemberID} requestID:GetUserId requestcode:kRequestCodequerygemedetailbyid success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            WpersonInfoModel *model = [WpersonInfoModel modelWithJSON:jsonDic[@"data"]];
+            
+            WPersonInfoViewController *personVc = [[WPersonInfoViewController alloc] initWithTitle:@"个人信息" image:nil];
+            personVc.infoModel = model;
+            [self.navigationController pushViewController:personVc animated:YES];
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
 }
 #pragma mark *** getters ***
 -(UIScrollView *)backScrollView{

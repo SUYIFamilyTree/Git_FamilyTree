@@ -18,10 +18,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
-        
-        
-        
+          
     }
     return self;
 }
@@ -67,6 +64,7 @@
     for (int idx = 0; idx<perArr.count; idx++) {
         
         PortraiView *porInfo = [[PortraiView alloc] initWithFrame:AdaptationFrame(35+idx*(110+48), 43, 110, 253) portaitImageUrl:proUrl[idx] porName:perArr[idx] infoArr:infoArr[idx]];
+        porInfo.mygemId = _genIdArr[idx];
         [self.scrollView addSubview:porInfo];
         self.scrollView.contentSize = AdaptationSize(35+(158)*perArr.count, 339);
 
@@ -104,9 +102,6 @@
 }
 -(UILabel *)perName{
     if (!_perName) {
-        
-       
-        
         _perName = [[UILabel alloc] initWithFrame:CGRectMake(CGRectXW(self.generNumber), 20*AdaptationWidth(), 95*AdaptationWidth(), 90)];
         _perName.textAlignment = 1;
         _perName.numberOfLines = 0;

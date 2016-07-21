@@ -15,6 +15,7 @@
 #import "WJPPersonZBNumberModel.h"
 #import "WJPListModel.h"
 #import "WSearchModel.h"
+#import "WpersonInfoModel.h"
 
 @interface WTools : NSObject
 

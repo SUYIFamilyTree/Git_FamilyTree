@@ -26,6 +26,10 @@
     if (self) {
         
         UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.width)];;
+        UITapGestureRecognizer *tapGues = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondsToMemberhead)];
+        headImage.userInteractionEnabled = YES;
+        [headImage addGestureRecognizer:tapGues];
+        
         if (pImageUrl) {
             headImage.imageURL = [NSURL URLWithString:pImageUrl];
         }else{
@@ -49,6 +53,21 @@
         }
     }
     return self;
+}
+-(void)respondsToMemberhead{
+    
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"gemeid":self.mygemId} requestID:GetUserId requestcode:kRequestCodequerygemedetailbyid success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            WpersonInfoModel *model = [WpersonInfoModel modelWithJSON:jsonDic[@"data"]];
+            
+            WPersonInfoViewController *personVc = [[WPersonInfoViewController alloc] initWithTitle:@"个人信息" image:nil];
+            personVc.infoModel = model;
+            [self.viewController.navigationController pushViewController:personVc animated:YES];
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
 }
 #pragma mark *** getters ***
 

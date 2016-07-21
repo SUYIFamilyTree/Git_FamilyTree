@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface PortraiView : UIView
+/**成员id*/
+@property (nonatomic,copy) NSString *mygemId;
+
+
 - (instancetype)initWithFrame:(CGRect)frame portaitImageUrl:(NSString *)pImageUrl porName:(NSString *)name infoArr:(NSArray *)infoArr;
 @end

@@ -18,7 +18,8 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
     NSMutableArray *_genNameArr; //详情array
     NSMutableArray *_imageUrlArr; //图片url
     NSMutableArray *_dsArr;/** 代数arr */
-    
+    /** 成员idArr */
+    NSMutableArray *_genIdArr;
     NSString *_queryZbStr;/** 查询字辈的字段 */
 }
 
@@ -60,6 +61,7 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
     
     _queryZbStr = @"";
     
+    _genIdArr = [@[] mutableCopy];
 }
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
@@ -83,6 +85,7 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
             [_detailInfo removeAllObjects];
             [_imageUrlArr removeAllObjects];
             [_dsArr removeAllObjects];
+            [_genIdArr removeAllObjects];
             //更新所有数据源取model里面的数据
             for (int idx = 0; idx<self.gennerModel.datalist.count; idx++) {
                 NSString *ziBei = [self.gennerModel.datalist[idx].zb stringByReplacingOccurrencesOfString:@"," withString:@""];
@@ -92,12 +95,16 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
                 [_dsArr addObject:genNum];
                 NSMutableArray *nameArr = [@[] mutableCopy];
                 NSMutableArray *urlArr = [@[] mutableCopy];
+                NSMutableArray *cyIDArr = [@[] mutableCopy];
                 for (int ij = 0; ij<self.gennerModel.datalist[idx].datas.count; ij++) {
                     [nameArr addObject:self.gennerModel.datalist[idx].datas[ij].name];
                     [urlArr addObject:self.gennerModel.datalist[idx].datas[ij].photo];
+                    [cyIDArr addObject:[NSString stringWithFormat:@"%ld",self.gennerModel.datalist[idx].datas[ij].gemeid]];
                 }
                 [_allInfoArr addObject:nameArr];
                 [_imageUrlArr addObject:urlArr];
+                [_genIdArr addObject:cyIDArr];
+                
                 
                 NSMutableArray *detailArr = [@[] mutableCopy];
                 for (int index2 = 0; index2<self.gennerModel.datalist[idx].datas.count; index2++) {
@@ -150,6 +157,7 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
     cell.idArr = _detailInfo[indexPath.row];
     
     cell.proImageUrlArr = _imageUrlArr[indexPath.row];
+    cell.genIdArr = _genIdArr[indexPath.row];
 
     [cell initPorInfo];
     cell.generNumber.text = _dsArr[indexPath.row];

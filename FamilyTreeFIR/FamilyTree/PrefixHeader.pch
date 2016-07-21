@@ -47,6 +47,7 @@
 #import "WSelectMyFamModel.h"
 #import "LineageViewController.h"
 #import "ImageAndTextViewController.h"
+#import "WPersonInfoViewController.h"
 
 //扩展方法
 #import <UIView+SDAutoLayout.h>
