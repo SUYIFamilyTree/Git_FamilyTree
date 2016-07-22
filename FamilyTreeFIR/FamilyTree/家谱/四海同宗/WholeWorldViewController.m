@@ -41,7 +41,7 @@ static NSString *const kReusableIdentifier = @"PinAnnotation";
     
     [self initUI];
     //打开定位
-    [self startLocation];
+    //[self startLocation];
     //[self getData];
     //[self initLocation];
     
@@ -72,7 +72,6 @@ static NSString *const kReusableIdentifier = @"PinAnnotation";
     // 注意：要想使用此方法，必须在代理中添加locationManager:didFailWithError:方法
     // 否则系统崩溃
     [self.clLocationManager requestLocation];
-
 }
 
 
@@ -324,6 +323,14 @@ static NSString *const kReusableIdentifier = @"PinAnnotation";
     return _clLocationManager;
 }
 
-
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    _mapView = nil;
+    _mapView.delegate = nil;
+    _mapView.showsUserLocation = NO;
+    _clLocationManager.delegate = nil;
+    [_clLocationManager stopUpdatingLocation];
+    _clLocationManager = nil;
+}
 
 @end

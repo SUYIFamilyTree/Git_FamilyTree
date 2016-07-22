@@ -406,6 +406,7 @@ enum {
 
 #pragma  mark - 生命周期
 -(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     //上传墓园封面图片
     UIImage *image = [self getImageFromView:self.scrollView];
     [self uploadCemPhoto:image];
