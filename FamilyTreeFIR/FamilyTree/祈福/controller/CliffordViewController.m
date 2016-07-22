@@ -13,7 +13,7 @@
 #import "CliffordTributeModel.h"
 #import "JossSelectViewController.h"
 
-@interface CliffordViewController()<TributeSelectViewDelegate>
+@interface CliffordViewController()<TributeSelectViewDelegate,JossSelectViewControllerDelegate>
 /** 背景视图*/
 @property (nonatomic, strong) UIImageView *backIV;
 /** 帘子视图*/
@@ -151,6 +151,7 @@
 
 -(void)clickBtnToSelectJoss{
     JossSelectViewController *jossSelectVC = [[JossSelectViewController alloc]initWithTitle:@"请佛" image:nil];
+    jossSelectVC.delegate = self;
     [self.navigationController pushViewController:jossSelectVC animated:YES];
 }
 
@@ -199,6 +200,7 @@
         });
         
         CliffordEndViewController *cliffordEndVC = [[CliffordEndViewController alloc]initWithTitle:@"祈福" image:nil];
+        cliffordEndVC.jossIV.image = self.jossIV.image;
         [self.navigationController pushViewController:cliffordEndVC animated:YES];
     });
 }
@@ -254,6 +256,11 @@
         default:
             break;
     }
+}
+
+#pragma mark - JossSelectViewControllerDelegate
+-(void)chooseJossImage:(UIImage *)image{
+    self.jossIV.image = image;
 }
 
 #pragma mark - lazyLoad

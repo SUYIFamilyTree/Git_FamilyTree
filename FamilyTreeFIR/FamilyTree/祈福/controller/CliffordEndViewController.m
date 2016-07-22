@@ -25,6 +25,7 @@
     [self.view addSubview:self.backIV];
     [self.backIV addSubview:self.cliffordStrIV];
     [self.cliffordStrIV addSubview:self.cliffordStrTX];
+    [self.backIV addSubview:self.jossIV];
     [self getCliffordStr];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (!self.endCliffordIV) {
@@ -63,6 +64,13 @@
         _cliffordStrTX.editable = NO;
     }
     return _cliffordStrTX;
+}
+
+-(UIImageView *)jossIV{
+    if (!_jossIV) {
+        _jossIV = [[UIImageView alloc]initWithFrame:CGRectMake(0.28125*CGRectW(self.backIV), 0.1099*CGRectH(self.backIV), 0.4531*CGRectW(self.backIV), 0.4945*CGRectH(self.backIV))];
+    }
+    return _jossIV;
 }
 
 #pragma mark - 网络请求

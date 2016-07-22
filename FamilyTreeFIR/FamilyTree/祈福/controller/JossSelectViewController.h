@@ -8,6 +8,15 @@
 
 #import "BaseViewController.h"
 
-@interface JossSelectViewController : BaseViewController
+@class JossSelectViewController;
 
+@protocol  JossSelectViewControllerDelegate<NSObject>
+
+-(void)chooseJossImage:(UIImage *)image;
+
+@end
+
+@interface JossSelectViewController : BaseViewController
+/** 代理人*/
+@property (nonatomic, weak) id<JossSelectViewControllerDelegate> delegate;
 @end

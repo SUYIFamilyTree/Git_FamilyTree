@@ -9,5 +9,6 @@
 #import "BaseViewController.h"
 
 @interface CliffordEndViewController : BaseViewController
-
+/** 佛像视图*/
+@property (nonatomic, strong) UIImageView *jossIV;
 @end
