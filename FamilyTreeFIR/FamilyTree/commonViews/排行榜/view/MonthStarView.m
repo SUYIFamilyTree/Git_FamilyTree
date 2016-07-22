@@ -90,7 +90,7 @@
 
 #pragma mark -UITableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return self.dataArr.count;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -99,10 +99,10 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"Cell"];
     }
     cell.textLabel.textColor = LH_RGBCOLOR(100, 100, 100);
-    cell.textLabel.text = @"2015-5";
+    cell.textLabel.text = self.dataArr[indexPath.row].yf;
     cell.textLabel.font = MFont(12);
     cell.detailTextLabel.textColor = LH_RGBCOLOR(100, 100, 100);
-    cell.detailTextLabel.text = @"孙二";
+    cell.detailTextLabel.text = self.dataArr[indexPath.row].xm;
     cell.detailTextLabel.font = MFont(12);
     NSLog(@"%ld",indexPath.row%2);
     if ((indexPath.row+1)%2) {

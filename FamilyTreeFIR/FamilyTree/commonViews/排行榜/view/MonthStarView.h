@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "RankingModel.h"
 @interface MonthStarView : UIView
 /**
  *  头像
@@ -40,5 +40,5 @@
 /**
  *  往期数据数组
  */
-@property (strong,nonatomic) NSMutableArray *dataArr;
+@property (strong,nonatomic) NSArray <Lsmyzxr *>*dataArr;
 @end

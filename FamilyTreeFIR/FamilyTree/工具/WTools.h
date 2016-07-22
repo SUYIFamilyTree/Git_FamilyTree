@@ -83,6 +83,48 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodequerygenandgemelist;
 //排行-获取每日之星
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodegetmyzxphb;
 
+
+//商场
+/** 商品列表 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodegetcomlist;
+/** 商品详情 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodegetcomdetail;
+/** 获取购物车 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodegetshopcar;
+/** 添加购物车 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeaddshopcar;
+/** 修改购物车 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeeditshopcar;
+/** 删除购物车 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodedelshopcar;
+/** 获取收货地址列表 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodegetrecaddlist;
+/** 添加收货地址 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodegetaddtrecadd;
+
+/** 修改收货地址 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeeditrecadd;
+/** 删除收货地址 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodedelrecadd;
+/** 确认订单信息 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodegetconorder;
+/** 改变订单状态 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodechangeshoporder;
+/** 获取订单详情 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodegetshoporderdetail;
+/** 订单列表 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodegetshoporderlist;
+/** 生成订单 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodecreateshoporder;
+/** 支付结果 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodepayresult;
+/** 求签祈福消费 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeqiuqianqifupay;
+/** 添加订单评价 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeevaluateadd;
+/** 查看订单评价 */
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodegetevaluate;
+
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;

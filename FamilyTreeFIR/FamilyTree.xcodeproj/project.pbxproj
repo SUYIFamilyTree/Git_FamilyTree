@@ -181,6 +181,12 @@
 		AD8514611D41F0BA007FB495 /* silver.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8514551D41F0BA007FB495 /* silver.png */; };
 		AD8514621D41F0BA007FB495 /* silver@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8514561D41F0BA007FB495 /* silver@2x.png */; };
 		AD8514631D41F0BA007FB495 /* silver@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8514571D41F0BA007FB495 /* silver@3x.png */; };
+		AD85146F1D420885007FB495 /* ChooseCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8514661D420885007FB495 /* ChooseCommentView.m */; };
+		AD8514701D420885007FB495 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8514681D420885007FB495 /* CommentCell.m */; };
+		AD8514711D420885007FB495 /* CommentPersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD85146A1D420885007FB495 /* CommentPersonModel.m */; };
+		AD8514721D420885007FB495 /* GoodsCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD85146C1D420885007FB495 /* GoodsCommentViewController.m */; };
+		AD8514731D420885007FB495 /* TotalCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD85146E1D420885007FB495 /* TotalCommentView.m */; };
+		AD8514771D42185E007FB495 /* RankingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8514761D42185E007FB495 /* RankingModel.m */; };
 		AD8C61E11D1E54A2005CDA68 /* WTools.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8C61E01D1E54A2005CDA68 /* WTools.m */; };
 		AD8DAAC81CFD6492009B7958 /* ci.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8DAAB31CFD6492009B7958 /* ci.png */; };
 		AD8DAAC91CFD6492009B7958 /* ci@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8DAAB41CFD6492009B7958 /* ci@2x.png */; };
@@ -1212,6 +1218,18 @@
 		AD8514551D41F0BA007FB495 /* silver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = silver.png; sourceTree = "<group>"; };
 		AD8514561D41F0BA007FB495 /* silver@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "silver@2x.png"; sourceTree = "<group>"; };
 		AD8514571D41F0BA007FB495 /* silver@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "silver@3x.png"; sourceTree = "<group>"; };
+		AD8514651D420885007FB495 /* ChooseCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseCommentView.h; sourceTree = "<group>"; };
+		AD8514661D420885007FB495 /* ChooseCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseCommentView.m; sourceTree = "<group>"; };
+		AD8514671D420885007FB495 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
+		AD8514681D420885007FB495 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
+		AD8514691D420885007FB495 /* CommentPersonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentPersonModel.h; sourceTree = "<group>"; };
+		AD85146A1D420885007FB495 /* CommentPersonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentPersonModel.m; sourceTree = "<group>"; };
+		AD85146B1D420885007FB495 /* GoodsCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsCommentViewController.h; sourceTree = "<group>"; };
+		AD85146C1D420885007FB495 /* GoodsCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsCommentViewController.m; sourceTree = "<group>"; };
+		AD85146D1D420885007FB495 /* TotalCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TotalCommentView.h; sourceTree = "<group>"; };
+		AD85146E1D420885007FB495 /* TotalCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TotalCommentView.m; sourceTree = "<group>"; };
+		AD8514751D42185E007FB495 /* RankingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingModel.h; sourceTree = "<group>"; };
+		AD8514761D42185E007FB495 /* RankingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingModel.m; sourceTree = "<group>"; };
 		AD8C61DF1D1E54A2005CDA68 /* WTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTools.h; sourceTree = "<group>"; };
 		AD8C61E01D1E54A2005CDA68 /* WTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTools.m; sourceTree = "<group>"; };
 		AD8DAAB31CFD6492009B7958 /* ci.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ci.png; sourceTree = "<group>"; };
@@ -2671,6 +2689,8 @@
 		AD85143A1D41C961007FB495 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				AD8514751D42185E007FB495 /* RankingModel.h */,
+				AD8514761D42185E007FB495 /* RankingModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2709,6 +2729,30 @@
 				AD8514571D41F0BA007FB495 /* silver@3x.png */,
 			);
 			path = "排行";
+			sourceTree = "<group>";
+		};
+		AD8514641D420885007FB495 /* 商场评价页面 */ = {
+			isa = PBXGroup;
+			children = (
+				AD8514651D420885007FB495 /* ChooseCommentView.h */,
+				AD8514661D420885007FB495 /* ChooseCommentView.m */,
+				AD8514671D420885007FB495 /* CommentCell.h */,
+				AD8514681D420885007FB495 /* CommentCell.m */,
+				AD8514691D420885007FB495 /* CommentPersonModel.h */,
+				AD85146A1D420885007FB495 /* CommentPersonModel.m */,
+				AD85146B1D420885007FB495 /* GoodsCommentViewController.h */,
+				AD85146C1D420885007FB495 /* GoodsCommentViewController.m */,
+				AD85146D1D420885007FB495 /* TotalCommentView.h */,
+				AD85146E1D420885007FB495 /* TotalCommentView.m */,
+			);
+			path = "商场评价页面";
+			sourceTree = "<group>";
+		};
+		AD8514741D421481007FB495 /* 搜索页面 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "搜索页面";
 			sourceTree = "<group>";
 		};
 		AD8DAAB21CFD6492009B7958 /* 四海同宗 */ = {
@@ -3620,6 +3664,8 @@
 		ADC3278D1CF3FBCC00CEAE53 /* 商城 */ = {
 			isa = PBXGroup;
 			children = (
+				AD8514741D421481007FB495 /* 搜索页面 */,
+				AD8514641D420885007FB495 /* 商场评价页面 */,
 				AD2ACD831CF3FD21009D4A24 /* ShoppingViewController.h */,
 				AD2ACD841CF3FD21009D4A24 /* ShoppingViewController.m */,
 			);
@@ -5812,6 +5858,7 @@
 				ADB9D3C11D40B469005A6AB2 /* WPersonInfoHeaderView.m in Sources */,
 				BC5F15191D0FF1AD004F3622 /* SettlementCenterViewController.m in Sources */,
 				BC5F15131D0FF1AD004F3622 /* PersonalCenterNumerologyView.m in Sources */,
+				AD8514701D420885007FB495 /* CommentCell.m in Sources */,
 				BCE2AD541CF8339000EC98F5 /* FamilyTreeTopView.m in Sources */,
 				BCF100051D02B11400D65E60 /* CALayer+drawborder.m in Sources */,
 				AD8C61E11D1E54A2005CDA68 /* WTools.m in Sources */,
@@ -5851,6 +5898,7 @@
 				AD2ACD851CF3FD21009D4A24 /* ShoppingViewController.m in Sources */,
 				BC72D0481D40995C00A799DB /* CliffordTributeModel.m in Sources */,
 				ADB9D3CA1D40CAA3005A6AB2 /* WpersonInfoModel.m in Sources */,
+				AD8514731D420885007FB495 /* TotalCommentView.m in Sources */,
 				AD49FEE11CF6A0ED00DF9F7E /* ScrollerView.m in Sources */,
 				BC0CA7E11CFFFB38007B0F90 /* DetailFamHeViewController.m in Sources */,
 				BC1427F31D37295E0009123C /* WholeWorldAdgnatioModel.m in Sources */,
@@ -5877,6 +5925,7 @@
 				BCF97C591D17B46D004D46AB /* SXLoadingView.m in Sources */,
 				BC5F15171D0FF1AD004F3622 /* EditHeadView.m in Sources */,
 				ADA7FF011D07E51500EDBEE4 /* CustonCollectionViewCell.m in Sources */,
+				AD8514721D420885007FB495 /* GoodsCommentViewController.m in Sources */,
 				ADB9734D1CFE86FF007B876B /* BackScrollAndDetailView.m in Sources */,
 				BC941B051D3F20CA00571EE2 /* JossSelectViewController.m in Sources */,
 				ADC4F1AF1D125410003D2B27 /* DataSelectPickView.m in Sources */,
@@ -5884,6 +5933,7 @@
 				ADB737E41D2F747500001011 /* WDetailJPInfoModel.m in Sources */,
 				BC9C8E251D13F10B00C445D0 /* CustomPikcerDateView.m in Sources */,
 				BC2FD0301D41B4C50078A951 /* NSString+getLineSpaceStr.m in Sources */,
+				AD85146F1D420885007FB495 /* ChooseCommentView.m in Sources */,
 				ADA4C1151D0E437E00CA9067 /* CemeteryViewController.m in Sources */,
 				AD8E603D1CFC0BDA00355C06 /* FindPassView.m in Sources */,
 				BC3270001D3496CA007D6745 /* HundredNameInfoModel.m in Sources */,
@@ -5922,6 +5972,7 @@
 				ADA7FF0D1D0814DF00EDBEE4 /* TopBackSearch.m in Sources */,
 				BC59E1121D2F5595000A3AE3 /* HomeViewModel.m in Sources */,
 				BC941B201D3F54DF00571EE2 /* CliffordEndViewController.m in Sources */,
+				AD8514711D420885007FB495 /* CommentPersonModel.m in Sources */,
 				BC5F150D1D0FF1AD004F3622 /* DrawStarsView.m in Sources */,
 				BCDE42681D0E555700921373 /* NSString+arabicToChinese.m in Sources */,
 				AD8DAB081CFD84A5009B7958 /* HelpTableTableViewCell.m in Sources */,
@@ -5964,6 +6015,7 @@
 				ADB9261F1CF7DF1900AA8B6E /* OtherLoginView.m in Sources */,
 				BC1427F71D3743770009123C /* GenealogyInfoModel.m in Sources */,
 				BC7299F41D22147D008FEB71 /* VIPInfoModel.m in Sources */,
+				AD8514771D42185E007FB495 /* RankingModel.m in Sources */,
 				BC2B1E1C1D1BC301004E916D /* DateModel.m in Sources */,
 				BC2943A01CFE9F30006671B9 /* LineageViewController.m in Sources */,
 				ADA4C1721D0E92DF00CA9067 /* CemSingleGoodsCollectionViewCell.m in Sources */,

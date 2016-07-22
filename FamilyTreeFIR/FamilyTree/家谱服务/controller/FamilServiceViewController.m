@@ -61,8 +61,8 @@
 #pragma mark *** 协议方法 ***
 -(void)TopSearchViewDidTapView:(TopSearchView *)topSearchView{
     MYLog(@"点击搜索栏");
-    SearchFamilyTreeViewController *searchFamilyTreeVC = [[SearchFamilyTreeViewController alloc]init];
-    [self.navigationController pushViewController:searchFamilyTreeVC animated:YES];
+//    SearchFamilyTreeViewController *searchFamilyTreeVC = [[SearchFamilyTreeViewController alloc]init];
+//    [self.navigationController pushViewController:searchFamilyTreeVC animated:YES];
 }
 -(void)TopSearchView:(TopSearchView *)topSearchView didRespondsToMenusBtn:(UIButton *)sender{
     MYLog(@"点击右上角菜单");
@@ -155,7 +155,6 @@
 -(ScrollerView *)scrollerView{
     if (!_scrollerView) {
         _scrollerView = [[ScrollerView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topSearchView.frame), Screen_width, ScrollerView_Height) images:nil];
-        
         
     }
     return _scrollerView;

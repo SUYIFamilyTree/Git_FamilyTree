@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
+#import "RankingModel.h"
 @interface RankingViewController : BaseViewController
-
+-(instancetype)initWithTitle:(NSString *)title image:(UIImage *)image model:(RankingModel *)rankModel;
 @end

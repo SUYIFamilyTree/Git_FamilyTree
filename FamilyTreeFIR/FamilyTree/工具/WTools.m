@@ -101,23 +101,55 @@ NSString * _Nonnull const kRequestCodecemeterylist = @"cemeterylist";
 //排行-获取每日之星
 NSString * _Nonnull const kRequestCodegetmyzxphb = @"getmyzxphb";
 
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+//商场
+/** 商品列表 */
+NSString * _Nonnull const kRequestCodegetcomlist = @"getcomlist";
+/** 商品详情 */
+NSString * _Nonnull const kRequestCodegetcomdetail = @"getcomdetail";
+/** 获取购物车 */
+NSString * _Nonnull const kRequestCodegetshopcar = @"getshopcar";
+/** 添加购物车 */
+NSString * _Nonnull const kRequestCodeaddshopcar = @"addshopcar";
+/** 修改购物车 */
+NSString * _Nonnull const kRequestCodeeditshopcar = @"editshopcar";
+/** 删除购物车 */
+NSString * _Nonnull const kRequestCodedelshopcar = @"delshopcar";
+/** 获取收货地址列表 */
+NSString * _Nonnull const kRequestCodegetrecaddlist = @"getrecaddlist";
+/** 添加收货地址 */
+NSString * _Nonnull const kRequestCodegetaddtrecadd = @"addtrecadd";
+
+
+/** 修改收货地址 */
+NSString * _Nonnull const kRequestCodeeditrecadd = @"editrecadd";
+/** 删除收货地址 */
+NSString * _Nonnull const kRequestCodedelrecadd = @"delrecadd";
+/** 确认订单信息 */
+NSString * _Nonnull const kRequestCodegetconorder = @"getconorder";
+/** 改变订单状态 */
+NSString * _Nonnull const kRequestCodechangeshoporder = @"changeshoporder";
+/** 获取订单详情 */
+NSString * _Nonnull const kRequestCodegetshoporderdetail = @"getshoporderdetail";
+/** 订单列表 */
+NSString * _Nonnull const kRequestCodegetshoporderlist = @"getshoporderlist";
+/** 生成订单 */
+NSString * _Nonnull const kRequestCodecreateshoporder = @"createshoporder";
+/** 支付结果 */
+NSString * _Nonnull const kRequestCodepayresult = @"payresult";
+/** 求签祈福消费 */
+NSString * _Nonnull const kRequestCodeqiuqianqifupay = @"qiuqianqifupay";
+/** 添加订单评价 */
+NSString * _Nonnull const kRequestCodeevaluateadd = @"evaluateadd";
+/** 查看订单评价 */
+NSString * _Nonnull const kRequestCodegetevaluate = @"getevaluate";
+
 
 //管理家谱通知字段
 
 NSString * _Nonnull const kNotificationCodeManagerFam = @"managerFame";
-
 NSString * _Nonnull const kNotificationCodeAddMember = 	@"kNotificationCodeAddMember";
 NSString * _Nonnull const KNotificationCodeSeletedMyFamilItem = @"SeletedMyFamilItem";
 NSString * _Nonnull const KNotificationCodeIntoFamSevice = @"IntoFamSevice";
-
 
 //我的家谱名字和id，存储在本地
 NSString * _Nonnull const kNSUserDefaultsMyFamilyID = @"UserDefaultsMyFamilyID";
