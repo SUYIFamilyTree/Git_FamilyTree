@@ -234,7 +234,6 @@ enum{
             
             NSString *jsonStr = [NSString stringWithFormat:@"%@",jsonDic[@"data"]];
             
-//            NSLog(@"--我所有的家谱%@", jsonDic[@"data"]);
             
             NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
             NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];

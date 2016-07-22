@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface WphotosView : UIView
-
+- (instancetype)initWithFrame:(CGRect)frame photosUrlStringArray:(NSArray *)Urlarray;
 @end

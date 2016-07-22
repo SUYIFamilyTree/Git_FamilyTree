@@ -98,8 +98,9 @@ NSString * _Nonnull const kRequestCodeeditcemetery = @"editcemetery";
 NSString * _Nonnull const kRequestCodecemeterdetail = @"cemeterdetail";
 //墓园列表
 NSString * _Nonnull const kRequestCodecemeterylist = @"cemeterylist";
+//排行-获取每日之星
+NSString * _Nonnull const kRequestCodegetmyzxphb = @"getmyzxphb";
 
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";

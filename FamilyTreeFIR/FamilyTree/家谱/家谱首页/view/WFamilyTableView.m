@@ -59,10 +59,28 @@ static NSString *const kReusableWFamCellIdentifier = @"kReusableWFamCellIdentifi
     cell.famIntroLabel.text = self.famModel.datalist[indexPath.row].Grjl;
     cell.famImageView.imageURL = [NSURL URLWithString:self.famModel.datalist[indexPath.row].GemePhoto];
     cell.famCellType = indexPath.row%2==1?FamilyCellImageTypeLeft:FamilyCellImageTypeRight;
+    
     [cell changeCellStyle];
     return cell;
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+       NSInteger gemeId =  self.famModel.datalist[indexPath.row].GemeId;
+    
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"gemeid":@(gemeId)} requestID:GetUserId requestcode:kRequestCodequerygemedetailbyid success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            WpersonInfoModel *model = [WpersonInfoModel modelWithJSON:jsonDic[@"data"]];
+            
+            WPersonInfoViewController *personVc = [[WPersonInfoViewController alloc] initWithTitle:@"个人信息" image:nil];
+            personVc.infoModel = model;
+            [self.viewController.navigationController pushViewController:personVc animated:YES];
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+    
+        
+}
 
 #pragma mark *** getters ***
 

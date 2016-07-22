@@ -17,6 +17,9 @@
 @property (nonatomic,strong) WphotosView *photosView;
 /**所有家谱*/
 @property (nonatomic,strong) WAllGenView *allGenView;
+/**专属家谱按钮*/
+@property (nonatomic,strong) UIButton *priBtn;
+
 
 
 @end
@@ -25,9 +28,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:MImage(@"gr_bg")];
     [self initData];
     [self initUI];
+    
     
 }
 #pragma mark *** 初始化数据 ***
@@ -36,7 +39,13 @@
 }
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
-    [self.view sd_addSubviews:@[self.headView,self.photosView,self.allGenView]];
+    
+    UIImageView *backGroundImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar-135*AdaptationWidth())];
+    backGroundImage.image = MImage(@"gr_bg");
+    [self.view addSubview:backGroundImage];
+    
+    [self.view sd_addSubviews:@[self.headView,self.photosView,self.allGenView,self.priBtn]];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -46,8 +55,7 @@
 #pragma mark *** getters ***
 -(WPersonInfoHeaderView *)headView{
     if (!_headView) {
-        _headView = [[WPersonInfoHeaderView alloc] initWithFrame:AdaptationFrame(0, 64/AdaptationWidth(), Screen_width/AdaptationWidth(), 270)];
-        _headView.backgroundColor = [UIColor whiteColor];
+        _headView = [[WPersonInfoHeaderView alloc] initWithFrame:AdaptationFrame(0, 64/AdaptationWidth(), Screen_width/AdaptationWidth(), 295)];
         
         //赋值
         if (self.infoModel.photo && self.infoModel.photo.length!=0) {
@@ -69,15 +77,37 @@
 }
 -(WphotosView *)photosView{
     if (!_photosView) {
-        _photosView = [[WphotosView alloc] initWithFrame:AdaptationFrame(0, CGRectYH(self.headView)/AdaptationWidth(), Screen_width/AdaptationWidth(), 171)];
+        NSArray *urlArr = @[];
+        if (self.infoModel.pic && self.infoModel.pic.count!=0) {
+            urlArr = self.infoModel.pic;
+        }else{
+            urlArr = @[@"http://59.53.92.160:1080/upload/image/201607/20160721_150808_108318.jpg",@"http://59.53.92.160:1080/upload/image/201607/20160721_150808_108318.jpg",@"http://59.53.92.160:1080/upload/image/201607/20160721_150808_108318.jpg",@"http://59.53.92.160:1080/upload/image/201607/20160721_150808_108318.jpg"];
+        }
+        _photosView = [[WphotosView alloc] initWithFrame:AdaptationFrame(0, CGRectYH(self.headView)/AdaptationWidth(), Screen_width/AdaptationWidth(), 190) photosUrlStringArray:urlArr];
         _photosView.backgroundColor = LH_RGBCOLOR(224, 224, 224);
     }
     return _photosView;
 }
 -(WAllGenView *)allGenView{
     if (!_allGenView) {
-        _allGenView = [[WAllGenView alloc] initWithFrame:CGRectMake(0, CGRectYH(self.photosView), Screen_width, 316*AdaptationWidth())];
+        
+        _allGenView = [[WAllGenView alloc] initWithFrame:CGRectMake(0, CGRectYH(self.photosView), Screen_width, 316*AdaptationWidth()) model:self.infoModel];
+        _allGenView.sex = [self.infoModel.sex isEqualToString:@"1"]?true:false;
     }
     return _allGenView;
+}
+-(UIButton *)priBtn{
+    if (!_priBtn) {
+        UIView *greView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectYH(self.allGenView), Screen_width, 20*AdaptationWidth())];
+        greView.backgroundColor = LH_RGBCOLOR(228, 228, 228);
+        greView.alpha = 0.6;
+        [self.view addSubview:greView];
+        UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectYH(greView), Screen_width, 50*AdaptationWidth())];
+        whiteView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.6];
+        [self.view addSubview:whiteView];
+        _priBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectYH(whiteView), Screen_width, 200*AdaptationWidth())];
+        [_priBtn setBackgroundImage:MImage(@"gr_dis") forState:0];
+    }
+    return _priBtn;
 }
 @end

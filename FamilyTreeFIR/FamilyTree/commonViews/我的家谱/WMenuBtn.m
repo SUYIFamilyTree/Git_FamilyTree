@@ -11,6 +11,8 @@ enum{
     MenuBtnRankingTag
 };
 #import "WMenuBtn.h"
+#import "RankingViewController.h"
+
 @interface WMenuBtn()
 @end
 @implementation WMenuBtn
@@ -84,6 +86,30 @@ enum{
         case MenuBtnRankingTag:
         {
             
+            [TCJPHTTPRequestManager POSTWithParameters:@{} requestID:GetUserId requestcode:kRequestCodegetmyzxphb success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+                
+                if (succe) {
+                    NSLog(@"%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+                }
+                
+            } failure:^(NSError *error) {
+                
+            }];
+            
+            
+            
+            __block BOOL hasfamVC = false;
+            [vcsArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj isKindOfClass:[RankingViewController class]]) {
+                    [self.viewController.navigationController popToViewController:vcsArr[idx] animated:YES];
+                    hasfamVC = true;
+                }
+            }];
+            if (!hasfamVC) {
+                RankingViewController *rankVc = [[RankingViewController alloc] initWithTitle:@"排行榜" image:nil];
+                [self.viewController.navigationController pushViewController:rankVc animated:YES];
+            }
+           
         }
             break;
             

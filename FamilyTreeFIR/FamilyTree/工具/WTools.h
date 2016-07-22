@@ -80,6 +80,8 @@ UIKIT_EXTERN NSString * _Nonnull const kRequestCodequeryjplist;
 
 /** 搜索家谱 */
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodequerygenandgemelist;
+//排行-获取每日之星
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodegetmyzxphb;
 
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;
 //UIKIT_EXTERN NSString * _Nonnull const kRequestCode<#uploadgentt#>;

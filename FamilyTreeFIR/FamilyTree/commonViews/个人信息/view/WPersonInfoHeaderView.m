@@ -41,13 +41,14 @@
         
         _headImage = [[UIImageView alloc] initWithFrame:AdaptationFrame(51, 35, 140, 140)];
         _headImage.layer.cornerRadius = 70*AdaptationWidth();
+        _headImage.clipsToBounds = true;
     }
     return _headImage;
 }
 -(UILabel *)nameLabel{
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] initWithFrame:AdaptationFrame(CGRectXW(self.headImage)/AdaptationWidth()+30, 50, 165, 50)];
-        _nameLabel.text = @"助手";
+        _nameLabel.text = @"无";
         _nameLabel.font = WFont(38);
         _nameLabel.textAlignment = 0;
     }

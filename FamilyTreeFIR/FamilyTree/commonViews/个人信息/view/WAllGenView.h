@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface WAllGenView : UIView
+/**sex*/
+@property (nonatomic,assign) BOOL sex;
+/**model*/
+- (instancetype)initWithFrame:(CGRect)frame model:(WpersonInfoModel *)infoModel;
 
 @end
