@@ -7,7 +7,7 @@
 //
 
 #import "ShoppingViewController.h"
-
+#import "WShopSearchViewController.h"
 #import "GoodsCommentViewController.h"
 @interface ShoppingViewController ()<TopSearchViewDelegate>
 
@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = LH_RGBCOLOR(236, 236, 236);
     self.navigationController.navigationBarHidden = YES;
     
     [self.view addSubview:self.topSearchView];
@@ -32,6 +32,8 @@
 
 -(void)TopSearchViewDidTapView:(TopSearchView *)topSearchView{
     MYLog(@"商城搜索栏");
+    WShopSearchViewController *searchVc = [[WShopSearchViewController alloc] init];
+    [self.navigationController pushViewController:searchVc animated:YES];
 }
 -(void)TopSearchView:(TopSearchView *)topSearchView didRespondsToMenusBtn:(UIButton *)sender{
     MYLog(@"商城右菜单");

@@ -321,6 +321,11 @@
 		ADA98E971D11584C005B23EC /* CommonNavigationViews.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA98E931D11584B005B23EC /* CommonNavigationViews.m */; };
 		ADA98E981D11584C005B23EC /* SelectMyFamilyView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA98E951D11584B005B23EC /* SelectMyFamilyView.m */; };
 		ADA98E9C1D115898005B23EC /* MyFamilyCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA98E9B1D115898005B23EC /* MyFamilyCollectionViewCell.m */; };
+		ADAAB41B1D45E14300E6D8D9 /* WShopSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADAAB41A1D45E14300E6D8D9 /* WShopSearchViewController.m */; };
+		ADAAB41F1D45EAEA00E6D8D9 /* WTypeBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADAAB41E1D45EAEA00E6D8D9 /* WTypeBtnView.m */; };
+		ADAAB4261D45ED5800E6D8D9 /* WSearchGoodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADAAB4251D45ED5800E6D8D9 /* WSearchGoodModel.m */; };
+		ADAAB4291D45EDA100E6D8D9 /* WSearchGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADAAB4281D45EDA100E6D8D9 /* WSearchGoodsCell.m */; };
+		ADAAB42C1D45F6A100E6D8D9 /* WFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADAAB42B1D45F6A100E6D8D9 /* WFilterView.m */; };
 		ADAB221D1D26174A0047B6F0 /* WIDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADAB221C1D26174A0047B6F0 /* WIDModel.m */; };
 		ADB2D1061D1CCCA10072C022 /* LYFoundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB2D1051D1CCCA10072C022 /* LYFoundation+Log.m */; };
 		ADB2D1091D1CCEE60072C022 /* CreateFamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB2D1081D1CCEE60072C022 /* CreateFamModel.m */; };
@@ -1394,6 +1399,16 @@
 		ADA98E951D11584B005B23EC /* SelectMyFamilyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectMyFamilyView.m; path = ../SelectMyFamilyView.m; sourceTree = "<group>"; };
 		ADA98E9A1D115898005B23EC /* MyFamilyCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFamilyCollectionViewCell.h; sourceTree = "<group>"; };
 		ADA98E9B1D115898005B23EC /* MyFamilyCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFamilyCollectionViewCell.m; sourceTree = "<group>"; };
+		ADAAB4191D45E14300E6D8D9 /* WShopSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WShopSearchViewController.h; sourceTree = "<group>"; };
+		ADAAB41A1D45E14300E6D8D9 /* WShopSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WShopSearchViewController.m; sourceTree = "<group>"; };
+		ADAAB41D1D45EAEA00E6D8D9 /* WTypeBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTypeBtnView.h; sourceTree = "<group>"; };
+		ADAAB41E1D45EAEA00E6D8D9 /* WTypeBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTypeBtnView.m; sourceTree = "<group>"; };
+		ADAAB4241D45ED5800E6D8D9 /* WSearchGoodModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSearchGoodModel.h; sourceTree = "<group>"; };
+		ADAAB4251D45ED5800E6D8D9 /* WSearchGoodModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSearchGoodModel.m; sourceTree = "<group>"; };
+		ADAAB4271D45EDA100E6D8D9 /* WSearchGoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSearchGoodsCell.h; sourceTree = "<group>"; };
+		ADAAB4281D45EDA100E6D8D9 /* WSearchGoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSearchGoodsCell.m; sourceTree = "<group>"; };
+		ADAAB42A1D45F6A100E6D8D9 /* WFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WFilterView.h; sourceTree = "<group>"; };
+		ADAAB42B1D45F6A100E6D8D9 /* WFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WFilterView.m; sourceTree = "<group>"; };
 		ADAB221B1D26174A0047B6F0 /* WIDModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIDModel.h; sourceTree = "<group>"; };
 		ADAB221C1D26174A0047B6F0 /* WIDModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIDModel.m; sourceTree = "<group>"; };
 		ADAB7E101CF4050B00C3C143 /* DefineHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefineHeader.h; sourceTree = "<group>"; };
@@ -2751,6 +2766,10 @@
 		AD8514741D421481007FB495 /* 搜索页面 */ = {
 			isa = PBXGroup;
 			children = (
+				ADAAB4201D45ED0200E6D8D9 /* model */,
+				ADAAB41C1D45EAAB00E6D8D9 /* view */,
+				ADAAB4191D45E14300E6D8D9 /* WShopSearchViewController.h */,
+				ADAAB41A1D45E14300E6D8D9 /* WShopSearchViewController.m */,
 			);
 			path = "搜索页面";
 			sourceTree = "<group>";
@@ -3075,6 +3094,28 @@
 				ADB8A2351D3F64D8007617A4 /* WMenuBtn.m */,
 			);
 			path = "我的家谱";
+			sourceTree = "<group>";
+		};
+		ADAAB41C1D45EAAB00E6D8D9 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				ADAAB41D1D45EAEA00E6D8D9 /* WTypeBtnView.h */,
+				ADAAB41E1D45EAEA00E6D8D9 /* WTypeBtnView.m */,
+				ADAAB4271D45EDA100E6D8D9 /* WSearchGoodsCell.h */,
+				ADAAB4281D45EDA100E6D8D9 /* WSearchGoodsCell.m */,
+				ADAAB42A1D45F6A100E6D8D9 /* WFilterView.h */,
+				ADAAB42B1D45F6A100E6D8D9 /* WFilterView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		ADAAB4201D45ED0200E6D8D9 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				ADAAB4241D45ED5800E6D8D9 /* WSearchGoodModel.h */,
+				ADAAB4251D45ED5800E6D8D9 /* WSearchGoodModel.m */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		ADB737E01D2F747500001011 /* 卷谱字辈人物详情 */ = {
@@ -5874,11 +5915,13 @@
 				AD8514391D41C8CD007FB495 /* RankingViewController.m in Sources */,
 				ADC3E9951D377A5700754F63 /* SearchTableViewCell.m in Sources */,
 				ADC29A711D38D5E6004353F4 /* RollDetailView.m in Sources */,
+				ADAAB4261D45ED5800E6D8D9 /* WSearchGoodModel.m in Sources */,
 				ADA98E741D10F5EF005B23EC /* FamilyNamesViewController.m in Sources */,
 				ADA7FEF31D07A82300EDBEE4 /* PortraitAndNameViews.m in Sources */,
 				BC96727E1D10E4BF00F60534 /* EditPersonalInfoView.m in Sources */,
 				ADA98E961D11584C005B23EC /* BaseViewController.m in Sources */,
 				AD9D86321D2CB23700D8D8F6 /* WFamilyModel.m in Sources */,
+				ADAAB42C1D45F6A100E6D8D9 /* WFilterView.m in Sources */,
 				ADD23CC51D0D0085008986F6 /* PortraiView.m in Sources */,
 				BC2943A31CFE9F7B006671B9 /* LineageCellView.m in Sources */,
 				ADA4C1751D0EAD7100CA9067 /* InputCherishView.m in Sources */,
@@ -5990,9 +6033,11 @@
 				ADC059DE1D002C70001F7C1B /* CreateFamViewController.m in Sources */,
 				ADBA016E1D0115370016AB00 /* ClickRoundView.m in Sources */,
 				BC5F150F1D0FF1AD004F3622 /* PersonalCenterCliffordView.m in Sources */,
+				ADAAB4291D45EDA100E6D8D9 /* WSearchGoodsCell.m in Sources */,
 				ADC3E98E1D37612A00754F63 /* WSearchZBView.m in Sources */,
 				AD15B2751CF817EB00C0EEB7 /* FindPassViewController.m in Sources */,
 				BCDE42651D0E45CE00921373 /* UIView+getCurrentViewController.m in Sources */,
+				ADAAB41B1D45E14300E6D8D9 /* WShopSearchViewController.m in Sources */,
 				ADB737D61D2F3A7F00001011 /* WAddJPPersonView.m in Sources */,
 				ADBA017A1D016E0A0016AB00 /* AddMenberView.m in Sources */,
 				ADA98E821D1126D2005B23EC /* ManagerFamilyViewController.m in Sources */,
@@ -6047,6 +6092,7 @@
 				AD5D458A1D23BEC000396B97 /* WGennerationModel.m in Sources */,
 				ADB9266A1CF7EBAC00AA8B6E /* FamilyTreeViewController.m in Sources */,
 				BC499BA11D2D06EE007870FE /* CemGoodsShopModel.m in Sources */,
+				ADAAB41F1D45EAEA00E6D8D9 /* WTypeBtnView.m in Sources */,
 				BC6094F11D3DED210056DD9C /* CliffordViewController.m in Sources */,
 				BC9672921D11298800F60534 /* EditPersonalInfoTableViewCell.m in Sources */,
 			);
