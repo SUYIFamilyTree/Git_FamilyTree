@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "RankingModel.h"
 @interface TypeRankingView : UIView
 
 /**
  *  数据数组
  */
-@property (strong,nonatomic) NSMutableArray *dataArr;
-
+@property (strong,nonatomic) RankingModel *dataRank;
+-(instancetype)initWithFrame:(CGRect)frame data:(RankingModel *)rankData;
 @end

@@ -30,4 +30,8 @@
  */
 @property (strong,nonatomic) UILabel *rewardLb;
 
+@property (nonatomic,assign) UITableViewCellStyle cellStyle; /*style*/
+
+-(void)initView;
+
 @end

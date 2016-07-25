@@ -101,8 +101,9 @@ enum{
                     NSLog(@"%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
                     
                     if (!hasfamVC) {
-                        RankingViewController *rankVc = [[RankingViewController alloc] initWithTitle:@"" image:nil model:[RankingModel modelWithJSON:jsonDic[@"data"]]];
+                        RankingViewController *rankVc = [[RankingViewController alloc] initWithTitle:@"排行榜" image:nil model:[RankingModel modelWithJSON:jsonDic[@"data"]]];
                         [self.viewController.navigationController pushViewController:rankVc animated:YES];
+                        [self removeFromSuperview];
                     }
                 }
                 
@@ -116,6 +117,7 @@ enum{
         default:
             break;
     }
+    
 }
 
 @end

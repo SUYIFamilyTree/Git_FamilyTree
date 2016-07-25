@@ -9,9 +9,24 @@
 #import "TypeRankingView.h"
 #import "RankingTableViewCell.h"
 #import "ChooseBtnView.h"
+#import "RankingModel.h"
+typedef enum : NSUInteger {
+    /** 活跃榜 */
+    SelectedHYRankBTN,
+    /** 人数榜 */
+    SelectedRSRankBTN,
+    /** 众筹榜 */
+    SelectedZCRankBTN
+   
+} SelectedAruBTN;
 
 @interface TypeRankingView()<UITableViewDelegate,UITableViewDataSource,ChooseBtnViewDelegate>
-
+{
+    SelectedAruBTN _selectedBtnType;
+    NSArray *_headerArr;//榜单对应数据
+    NSArray * _dataSource;
+    
+}
 @property (strong,nonatomic) UITableView *listtableView;
 
 @property (strong,nonatomic) ChooseBtnView *chooseBtnV;
@@ -20,8 +35,11 @@
 
 @implementation TypeRankingView
 
--(instancetype)initWithFrame:(CGRect)frame{
+-(instancetype)initWithFrame:(CGRect)frame data:(RankingModel *)rankData{
     if (self = [super initWithFrame:frame]) {
+        _headerArr = @[@"排名",@"用户",@"家族",@"活跃度",@"奖励"];
+        _dataSource = rankData.hybr;
+        _selectedBtnType = SelectedHYRankBTN;
         [self initView];
     }
     return self;
@@ -48,45 +66,94 @@
     switch (sender.tag) {
         case 1:
         {
-            NSLog(@"活跃榜");
+            _selectedBtnType = SelectedHYRankBTN;
+            _headerArr = @[@"排名",@"用户",@"家族",@"活跃度",@"奖励"];
+            _dataSource = self.dataRank.hybr;
+            
         }
             break;
         case 2:
         {
-            NSLog(@"人数榜");
+            _selectedBtnType = SelectedRSRankBTN;
+            _headerArr = @[@"排名",@"家族",@"人数",@"奖励"];
+            _dataSource = self.dataRank.rsbr;
         }
             break;
         case 3:
         {
-            NSLog(@"众筹榜");
+            _selectedBtnType = SelectedZCRankBTN;
+            _headerArr = @[@"排名",@"家族",@"金额",@"奖励"];
+            _dataSource = self.dataRank.zcbr;
+
         }
             break;
-        case 4:
-        {
-            NSLog(@"基金榜");
-        }
+        
             break;
         default:
             break;
     }
+    
+    [self.listtableView reloadData];
+    
+
 
 }
 
 
 #pragma mark -UITableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 6;
+    if (_dataSource && _dataSource.count!=0) {
+      return _dataSource.count;
+    }
+    return 0;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     RankingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RankingTableViewCell"];
     if (!cell) {
-        cell = [[RankingTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RankingTableViewCell"];
+            cell = [[RankingTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RankingTableViewCell"];
     }
+    
+    switch (_selectedBtnType) {
+        case SelectedHYRankBTN:
+        {
+            cell.cellStyle = UITableViewCellStyleDefault;
+            [cell initView];
+            Hybr *hyItem = (Hybr *)_dataSource[indexPath.row];
+            cell.nameLb.text = hyItem.mz;
+            cell.familyLb.text = hyItem.jpm;
+            cell.activenessLb.text = [NSString stringWithFormat:@"%ld",hyItem.hyd];
+           
+            
+        }
+            break;
+        case SelectedRSRankBTN:
+        {
+            cell.cellStyle = UITableViewCellStyleValue1;
+            [cell initView];
+            Rsbr *rsItem = (Rsbr *)_dataSource[indexPath.row];
+            cell.familyLb.text =  rsItem.jpm;
+            cell.activenessLb.text = [NSString stringWithFormat:@"%ld",rsItem.rs];
+            
+        }
+            break;
+        case SelectedZCRankBTN:
+        {
+            
+            cell.cellStyle = UITableViewCellStyleValue1;
+            [cell initView];
+            Zcbr *zcItem = (Zcbr *)_dataSource[indexPath.row];
+            cell.familyLb.text = zcItem.jpm;
+            cell.activenessLb.text = [NSString stringWithFormat:@"%ld",zcItem.je];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
     cell.numberLb.text = [NSString stringWithFormat:@"%ld",indexPath.row+1];
-    cell.nameLb.text = @"陈一";
-    cell.familyLb.text = @"怀宁陈氏";
-    cell.activenessLb.text = [NSString stringWithFormat:@"%ld",(100-indexPath.row)];
+
     cell.rewardLb.text = @"20券";
     return cell;
 }
@@ -94,14 +161,16 @@
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *sectionV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, 38)];
     sectionV.backgroundColor = LH_RGBCOLOR(230, 230, 230);
-    NSArray *ListArr = @[@"排名",@"用户",@"家族",@"活跃度",@"奖励"];
-    for (int i =0; i<5; i++) {
-        UILabel *titleLb = [[UILabel alloc]initWithFrame:CGRectMake(0+self.frame.size.width/5*i, 12, self.frame.size.width/5, 20)];
+    
+    NSInteger dataCount = _headerArr.count;
+    
+    for (int i =0; i<dataCount; i++) {
+        UILabel *titleLb = [[UILabel alloc]initWithFrame:CGRectMake(0+self.frame.size.width/dataCount*i, 12, self.frame.size.width/dataCount, 20)];
         [sectionV addSubview:titleLb];
         titleLb.backgroundColor = [UIColor clearColor];
         titleLb.font = MFont(14);
         titleLb.textAlignment = NSTextAlignmentCenter;
-        titleLb.text = ListArr[i];
+        titleLb.text = _headerArr[i];
     }
 
     return sectionV;
