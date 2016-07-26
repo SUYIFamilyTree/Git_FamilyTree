@@ -7,11 +7,14 @@
 //
 
 #import "CommonNavigationViews.h"
-
+#import "WMenuBtn.h"
 @interface CommonNavigationViews()<SelectMyFamilyViewDelegate>
 
 /**我的家谱↓*/
 @property (nonatomic,strong) SelectMyFamilyView *selecMyFamView;
+/**右上角图标*/
+@property (nonatomic,strong) WMenuBtn *rightMenuBtn;
+
 
 @end
 @implementation CommonNavigationViews
@@ -70,6 +73,18 @@
     }
     
 }
+-(void)respondsToRightRankingBtn:(UIButton *)sender{
+    
+    sender.selected = !sender.selected;
+    MYLog(@"右按钮");
+    if (sender.selected) {
+        [self.viewController.view addSubview:self.rightMenuBtn];
+    }else{
+        [self.rightMenuBtn removeFromSuperview];
+    }
+    
+}
+
 //获取当前view导航控制器
 - (UINavigationController*)getNaiViewController {
     
@@ -121,7 +136,7 @@
         _rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.frame)-44+5, CGRectGetHeight(_backView.bounds)/2-30+StatusBar_Height+10, 25, 25)];
         _rightBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
         
-        [_rightBtn addTarget:self action:@selector(respondsToRightBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [_rightBtn addTarget:self action:@selector(respondsToRightRankingBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _rightBtn;
 }
@@ -150,5 +165,11 @@
     [_selecMyFamView updateDataSourceAndUI];
     _selecMyFamView.didSelectedItem = false;
     return _selecMyFamView;
+}
+-(WMenuBtn *)rightMenuBtn{
+    if (!_rightMenuBtn) {
+        _rightMenuBtn = [[WMenuBtn alloc] initWithFrame:AdaptationFrame(Screen_width/AdaptationWidth()-135, 64/AdaptationWidth(), 135, 190)];
+    }
+    return _rightMenuBtn;
 }
 @end

@@ -144,7 +144,6 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
         [USERDEFAULT setObject:cell.titleLabel.text forKey:kNSUserDefaultsMyFamilyName];
         [USERDEFAULT synchronize];
         
-        NSLog(@"家谱名:%@---id:%@", cell.titleLabel.text,[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row]);
         
     }else{
         _selectedItemNumber = indexPath.row+1;
@@ -157,7 +156,6 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
 }
 #pragma mark *** btnEvents ***
 -(void)respondsToHeadBtn{
-    MYLog(@"确定按钮");
     
     if (!_selectedItemNumber||!_didSelectedItem) {
         return;

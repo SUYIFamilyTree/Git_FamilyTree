@@ -11,7 +11,7 @@
 #import "WSwitchDetailFamView.h"
 #import "WAddJPPersonView.h"
 
-#define ScroHeight 1630
+#define ScroHeight 1700
 
 @interface ManagerFamilyViewController ()<WswichDetailFamViewDelegate,WAddJPPersonViewDelegate>
 
@@ -138,13 +138,13 @@
         
     _contentSize = CGSizeMake(ZeroContentOffset+185*(maxCountX), 0);
     
-    _backScrollView.contentOffset = AdaptationCenter(ZeroContentOffset+185*(maxCountX), 0);
+//    _backScrollView.contentOffset = AdaptationCenter(ZeroContentOffset+185*(maxCountX), 0);
     
     self.famImage.frame = AdaptationFrame(560+_contentSize.width, 30, 131, 358);
     
     UIImageView *backView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _backScrollView.contentSize.width, _backScrollView.contentSize.height)];
     
-    backView.image = MImage(@"gljp_bg");
+    backView.backgroundColor = [UIColor colorWithPatternImage:MImage(@"gljp_bg")];
     
     [self.backScrollView addSubview:backView];
     

@@ -7,10 +7,12 @@
 //
 
 #import "ShoppingViewController.h"
-#import "NSString+md5.h"
+#import "WShopSearchViewController.h"
+#import "GoodsCommentViewController.h"
+@interface ShoppingViewController ()<TopSearchViewDelegate>
 
-@interface ShoppingViewController ()
-@property (nonatomic,strong) UITextField *texfield; /*<#desc#>*/
+@property (nonatomic,strong) TopSearchView *topSearchView; /*顶部搜索*/
+@property (nonatomic,strong) ScrollerView *scrollerView; /*滚动图*/
 
 @end
 
@@ -18,93 +20,42 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //测试上传图片
-    //[self Ceshi];
-    //测试墓园列表
-    //[self ceshiMuyuanList];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.view.backgroundColor = LH_RGBCOLOR(236, 236, 236);
+    self.navigationController.navigationBarHidden = YES;
     
-    //测试墓园详情
-    //[self ceshiMuyuanInfo];
-    
-    //测试添加墓园
-    //[self ceshiTianjiamuyuan];
-    //MYLog(@"%@",[NSString md5Str:@"/abc"]);
-    
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(100, 200, 200, 200)];
-    btn.backgroundColor = [UIColor redColor];
-    [btn addTarget:self  action:@selector(getpost) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
-    
-    _texfield = [[UITextField alloc] initWithFrame:CGRectMake(100, 400, 100, 50)];
-    _texfield.backgroundColor = [UIColor orangeColor];
-    
-    [self.view addSubview:_texfield];
-    
+    [self.view addSubview:self.topSearchView];
+    [self.view addSubview:self.scrollerView];
 }
 
+#pragma mark *** TopSearchViewDelegate ***
 
--(void)ceshiMuyuanList{
-//    NSDictionary *logDic = @{@"pagenum":@2,@"pagesize":@2,@"meid":@"15",@"type":@"PRI"};
-    NSDictionary *logDic = @{@"pagenum":@2,@"pagesize":@2,@"meid":@"",@"type":@"PRI"};
+-(void)TopSearchViewDidTapView:(TopSearchView *)topSearchView{
+    MYLog(@"商城搜索栏");
+    WShopSearchViewController *searchVc = [[WShopSearchViewController alloc] init];
+    [self.navigationController pushViewController:searchVc animated:YES];
+}
+-(void)TopSearchView:(TopSearchView *)topSearchView didRespondsToMenusBtn:(UIButton *)sender{
+    MYLog(@"商城右菜单");
+    GoodsCommentViewController *pingjia = [[GoodsCommentViewController alloc] init];
+    [self.navigationController pushViewController:pingjia animated:YES];
     
-    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"cemeterylist" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        MYLog(@"墓园列表%@",jsonDic[@"message"]);
-        MYLog(@"墓园列表%@",jsonDic[@"data"]);
-        if (succe) {
-            
-        }
-    } failure:^(NSError *error) {
+}
+#pragma mark *** getters ***
+-(TopSearchView *)topSearchView{
+    if (!_topSearchView) {
+        _topSearchView = [[TopSearchView alloc] initWithFrame:CGRectMake(0, 0, Screen_width, StatusBar_Height+NavigationBar_Height)];
+        _topSearchView.searchLabel.placeholder = @"输入关键词";
+        _topSearchView.delegate = self;
         
-    }];
-
+    }
+    return _topSearchView;
 }
-
--(void)ceshiMuyuanInfo{
-    NSDictionary *logDic = @{@"CeId":@"1"};
-    
-    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"cemeterdetail" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        MYLog(@"墓园详情%@",jsonDic[@"message"]);
-        MYLog(@"墓园详情%@",jsonDic[@"data"]);
-        if (succe) {
-            
-        }
-    } failure:^(NSError *error) {
+-(ScrollerView *)scrollerView{
+    if (!_scrollerView) {
+        _scrollerView = [[ScrollerView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topSearchView.frame), Screen_width, 210) images:nil];
         
-    }];
-
+    }
+    return _scrollerView;
 }
-
--(void)ceshiTianjiamuyuan{
-    NSDictionary *logDic = @{@"CeId":@"1"};
-    
-    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"cemeterdetail" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        MYLog(@"墓园详情%@",jsonDic[@"message"]);
-        MYLog(@"墓园详情%@",jsonDic[@"data"]);
-        if (succe) {
-            
-        }
-    } failure:^(NSError *error) {
-        
-    }];
-
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
--(void)getpost{
-    
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"geid":_texfield.text} requestID:GetUserId requestcode:kRequestCodequerygeneration success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        if (succe) {
-            NSLog(@"根据id获取家族信息%@", [NSString jsonArrWithArr:jsonDic[@"data"]]);
-        }
-    } failure:^(NSError *error) {
-        
-    }];
-    
-    
-}
-
-
 @end

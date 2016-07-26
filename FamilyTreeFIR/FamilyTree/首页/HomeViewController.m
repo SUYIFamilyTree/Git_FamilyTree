@@ -39,9 +39,7 @@ typedef enum : NSUInteger {
 @implementation HomeViewController
 
 
-
 #pragma mark *** 生命周期 ***
-
 -(void)dealloc{
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -70,7 +68,11 @@ typedef enum : NSUInteger {
     });
     
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController popToRootViewControllerAnimated:true];
+    self.tabBarController.tabBar.hidden = false;
+}
 -(void)getData{
     if (GetUserId) {
         NSDictionary *logDic = @{};
@@ -101,14 +103,10 @@ typedef enum : NSUInteger {
 
 
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = false;
-}
 
 -(void)registerNotifacation{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(respondsToNotifacation) name:LogStatusNotifacation object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(respondsToNotifacationFamService:) name:KNotificationCodeIntoFamSevice object:nil];
 }
 -(void)respondsToNotifacation{
     if ([[USERDEFAULT objectForKey:LoginStates] boolValue]) {
@@ -117,6 +115,23 @@ typedef enum : NSUInteger {
         [_naviBar.rightBtn setTitle:@"登录" forState:0];
         
     }
+}
+-(void)respondsToNotifacationFamService:(NSNotification *)info{
+    NSDictionary *dic = info.userInfo;
+    NSString *title = dic[@"title"];
+    
+    if ([title isEqualToString:@"家谱服务"]) {
+        FamilServiceViewController *fam = [[FamilServiceViewController alloc] init];
+        [self.navigationController pushViewController:fam animated:YES];
+        self.tabBarController.selectedIndex = 0;
+    }else if ([title isEqualToString:@"新闻中心"]){
+        
+        NewsCenterViewController *newCenter = [[NewsCenterViewController alloc] initWithTitle:@"新闻中心" image:nil];
+        [self.navigationController pushViewController:newCenter animated:true];
+        
+         self.tabBarController.selectedIndex = 0;
+    }
+    
 }
 #pragma mark *** 初始化数据 ***
 -(void)initData{
@@ -185,7 +200,7 @@ typedef enum : NSUInteger {
     }
 }
 //导航栏按钮
--(void)CommonNavigationViews:(CommonNavigationViews *)comView respondsToRightBtn:(UIButton *)sender{
+-(void)respondsToLoginInStateButton{
     
     MYLog(@"登录按钮");
     //[self.navigationController pushViewController:self.logVc animated:YES];
@@ -255,6 +270,7 @@ typedef enum : NSUInteger {
         _naviBar = [[CommonNavigationViews alloc] initWithFrame:CGRectMake(0, 0, Screen_width, 64) title:@"同城家谱" image:nil];
         [_naviBar.leftBtn setImage:MImage(@"index_logo") forState:0];
         _naviBar.backView.backgroundColor = [UIColor clearColor];
+        
         if ([[USERDEFAULT objectForKey:LoginStates] boolValue]) {
             [_naviBar.rightBtn setTitle:@"切换账号" forState:0];
         }else{
@@ -264,6 +280,8 @@ typedef enum : NSUInteger {
         _naviBar.rightBtn.titleLabel.font = MFont(13);
         _naviBar.rightBtn.frame = CGRectMake(CGRectGetMaxX(_naviBar.backView.frame)-70, CGRectGetHeight(_naviBar.backView.bounds)/2-30+StatusBar_Height+10, 60, 25);
         _naviBar.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+        [_naviBar.rightBtn removeAllTargets];
+        [_naviBar.rightBtn addTarget:self action:@selector(respondsToLoginInStateButton) forControlEvents:UIControlEventTouchUpInside];
         _naviBar.delegate = self;
         
     }
@@ -282,7 +300,6 @@ typedef enum : NSUInteger {
 -(LoginViewController *)logVc{
     if (!_logVc) {
         _logVc = [[LoginViewController alloc] init];
-        
     }
     return _logVc;
 }

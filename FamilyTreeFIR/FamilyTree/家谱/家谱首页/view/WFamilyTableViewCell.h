@@ -20,9 +20,10 @@ typedef enum : NSUInteger {
 @property (nonatomic,strong) UIImageView *famImageView;
 /**cell简介*/
 @property (nonatomic,strong) UITextView *famIntroLabel;
+/**自己的genmeID*/
+@property (nonatomic,copy) NSString *myGemid;
 
 @property (nonatomic,assign) FamilyCellImageType famCellType; /*左右类型*/
-
 
 -(void)changeCellStyle;
 

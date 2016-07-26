@@ -9,5 +9,7 @@
 #import "BaseViewController.h"
 
 @interface WholeWorldViewController : BaseViewController
+/**查询的字符串，默认为@""*/
+@property (nonatomic,copy) NSString *queryString;
 
 @end

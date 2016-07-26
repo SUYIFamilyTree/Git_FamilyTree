@@ -19,6 +19,18 @@
 //weakSelf
 #define WK(weakSelf) \
 __block __weak __typeof(&*self)weakSelf = self;
+//ranking..
+#define __kWidth [[UIScreen mainScreen]bounds].size.width
+#define __kHeight [[UIScreen mainScreen]bounds].size.height
+#define __k4Height         480
+#define __k5Height         568
+#define __k6Height         667
+#define __k6pHeigt         736
+//button
+# define BtnNormal            UIControlStateNormal
+# define BtnTouchUpInside     UIControlEventTouchUpInside
+# define BtnStateSelected     UIControlStateSelected
+# define BtnHighlighted       UIControlStateHighlighted
 
 //屏幕宽高
 

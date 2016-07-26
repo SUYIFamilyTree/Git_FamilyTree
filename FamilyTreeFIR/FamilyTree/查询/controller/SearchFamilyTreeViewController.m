@@ -12,6 +12,9 @@
 #import "WSearchResultView.h"
 #import "WSearchDetailViewController.h"
 @interface SearchFamilyTreeViewController()<UITableViewDelegate,UITableViewDataSource>
+{
+    BOOL _isMyGen;
+}
 /** 搜索栏*/
 @property (nonatomic, strong) UIView *searchView;
 /**宗亲table*/
@@ -106,9 +109,19 @@
 
 //点击搜索图标
 -(void)clickSearch{
+    [self searchGemIsMyGen:false];
+  
     
+}
+#pragma mark *** 网络请求 ***
+/** 搜索信息 */
+-(void)searchGemIsMyGen:(BOOL)mygen{
     /** 获取搜索信息 */
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"query":self.searchTextField.text,@"pagenum":@"1",@"pagesize":@"20"} requestID:GetUserId requestcode:kRequestCodequerygenandgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"query":self.searchTextField.text,
+                                                 @"pagenum":@"1",
+                                                 @"pagesize":@"20",
+                                                 @"ismygen":mygen?@"1":@"0"
+                                                 } requestID:GetUserId requestcode:kRequestCodequerygenandgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             
             WSearchModel *searchModel = [WSearchModel modelWithJSON:jsonDic[@"data"]];
@@ -123,9 +136,13 @@
     } failure:^(NSError *error) {
         
     }];
-    
 }
-
+/** 附近宗亲 */
+-(void)getNearGemPersonPositon{
+    WholeWorldViewController *who = [[WholeWorldViewController alloc] initWithTitle:@"四海同宗"];
+    who.queryString = self.searchTextField.text;
+    [self.navigationController pushViewController:who animated:YES];
+}
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 2;
@@ -156,6 +173,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 0) {
+        [self searchGemIsMyGen:true];
+    }else{
+        [self getNearGemPersonPositon];
+    }
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

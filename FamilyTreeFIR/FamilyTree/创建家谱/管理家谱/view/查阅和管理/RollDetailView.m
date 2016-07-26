@@ -58,7 +58,6 @@
 
     [self addSubview:self.nameLabel];
     
-   
     [self addSubview:self.genLabel];
     
 }
@@ -67,6 +66,7 @@
         //右边头像和代数
         UIImageView *headView = [[UIImageView alloc] initWithFrame:AdaptationFrame(272, 15, 134, 149)];
         headView.image = MImage(@"news_touxiang");
+        headView.contentMode = UIViewContentModeScaleAspectFit;
         _headImageView = headView;
         
         
