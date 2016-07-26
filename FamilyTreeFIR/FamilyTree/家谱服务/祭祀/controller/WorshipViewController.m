@@ -63,15 +63,15 @@
         NSDictionary *logDic = @{@"pagenum":@(self.myPage),@"pagesize":@2,@"meid":[NSString stringWithFormat:@"%@",GetUserId],@"type":@"PRI"};
         WK(weakSelf);
         [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeCemeteryList success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-            
             if (succe) {
+                MYLog(@"个人的墓园数据%@",jsonDic[@"data"]);
                 weakSelf.myWorshipModel = [WorshipModel modelWithJSON:jsonDic[@"data"]];
                 if (weakSelf.myWorshipModel.datalist.count != 0) {
-                    
                     for (int i = 0; i < weakSelf.myWorshipModel.datalist.count; i++) {
                         weakSelf.myWorshipModel.datalist[i].worshipDatalistModelEdit = weakSelf.privateWorshipV.PrivateWorshipEdit;
                     }
                     [weakSelf.myWorshipArr addObjectsFromArray:weakSelf.myWorshipModel.datalist];
+                    MYLog(@"我的墓园%@",weakSelf.myWorshipArr);
                     weakSelf.privateWorshipV.PrivateViewMyWorshipArr = weakSelf.myWorshipArr;
                     [weakSelf.privateWorshipV.myTableView reloadData];
                 }

@@ -9,6 +9,7 @@
 #import "NewsCenterViewController.h"
 #import "FamilyDTModel.h"
 #import "HundredsNamesModel.h"
+#import <MJRefresh.h>
 
 @interface NewsCenterViewController ()
 
@@ -25,7 +26,8 @@
 
 @property (nonatomic,strong) NewsTableView *nameTableNews; /*百家姓新闻*/
 
-
+/** 我请求的家族动态的页数*/
+@property (nonatomic, assign) int jzdtPage;
 
 
 @end
@@ -46,6 +48,7 @@
     [self.bacScrollView addSubview:self.nameTableNews];
     
     //获取家族动态
+    self.jzdtPage = 1;
     [self getFamilyDTData];
     //获取名人传记
     [self getMRZJData];
@@ -57,10 +60,11 @@
 
 #pragma mark - 网络请求数据
 -(void)getFamilyDTData{
-    NSDictionary *logDic = @{@"pagenum":@1,@"pagesize":@1999,@"type":@"JZDT",@"geid":@"",@"istop":@""};
+//    NSDictionary *logDic = @{@"pagenum":@1,@"pagesize":@1999,@"type":@"JZDT",@"geid":@"",@"istop":@""};
+    NSDictionary *logDic = @{@"pagenum":@(self.jzdtPage),@"pagesize":@5,@"type":@"JZDT",@"geid":@"",@"istop":@""};
     WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetNewsList success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        //MYLog(@"%@",jsonDic[@"data"]);
+        MYLog(@"%@",jsonDic[@"data"]);
         if (succe) {
             NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
             NSArray *JZDTArr = [NSArray modelArrayWithClass:[FamilyDTModel class] json:dic[@"datalist"]];
@@ -131,7 +135,13 @@
 
 }
 
-#pragma mark *** getters ***
+-(void)loadMoreJzdt{
+    self.jzdtPage++;
+    [self getFamilyDTData];
+}
+
+
+#pragma mark - lazyLoad
 
 -(UIScrollView *)bacScrollView{
     if (!_bacScrollView) {
@@ -170,7 +180,7 @@
 -(NewsTableView *)tableNesView{
     if (!_tableNesView) {
         _tableNesView = [[NewsTableView alloc] initWithFrame:CGRectMake(0, CGRectYH(self.scroView)+20*AdaptationWidth(), Screen_width, 416*AdaptationWidth())];
-        
+        _tableNesView.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreJzdt)];
     }
     return _tableNesView;
 }

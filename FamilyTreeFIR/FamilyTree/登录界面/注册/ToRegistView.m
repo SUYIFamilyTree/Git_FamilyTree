@@ -8,11 +8,17 @@
 
 #import "ToRegistView.h"
 #import "AccountView.h"
+#import "NSString+valiMobile.h"
+
+
 @interface ToRegistView()
-
-@property (nonatomic,strong) UIButton *verificationBtn; /*验证码按钮*/
+/** 验证码按钮*/
+@property (nonatomic,strong) UIButton *verificationBtn;
 @property (nonatomic,strong) UIButton *registButton; /*注册按钮*/
-
+/** 倒计时起始秒数*/
+@property (nonatomic, assign) NSInteger secondsCountDown;
+/** 倒计时计时器*/
+@property (nonatomic, strong) NSTimer *downTimer;
 @end
 @implementation ToRegistView
 - (instancetype)initWithFrame:(CGRect)frame
@@ -32,10 +38,30 @@
 #pragma mark *** Events ***
 //点击验证码
 -(void)respondsToVerficationBtn:(UIButton *)sender{
-    if (_delegate && [_delegate respondsToSelector:@selector(ToRegisViewDidSelectedVerfication:)]) {
-        [_delegate ToRegisViewDidSelectedVerfication:self];
+    if (IsNilString([NSString valiMobile:self.accountView.inputTextView.text])) {
+        self.secondsCountDown = 60;
+        self.downTimer = [NSTimer scheduledTimerWithTimeInterval:1 target: self selector:@selector(timeFireMethod) userInfo:nil repeats:YES];
+        self.verificationBtn.userInteractionEnabled = NO;
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(ToRegisViewDidSelectedVerfication:)]) {
+            [_delegate ToRegisViewDidSelectedVerfication:self];
+        }
+
+    }else{
+        [SXLoadingView showAlertHUD:[NSString valiMobile:self.accountView.inputTextView.text] duration:0.5];
     }
 }
+
+-(void)timeFireMethod{
+    self.secondsCountDown--;
+    [self.verificationBtn setTitle:[NSString stringWithFormat:@"%ld",self.secondsCountDown] forState:UIControlStateNormal];
+    if (self.secondsCountDown == 0) {
+        [self.downTimer invalidate];
+        self.verificationBtn.userInteractionEnabled = YES;
+        [self.verificationBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+    }
+}
+
 //点击注册
 -(void)respondsToRegistBtn:(UIButton *)sender{
     if (_delegate && [_delegate respondsToSelector:@selector(ToRegisViewDidSelectedRegistBtn:)]) {

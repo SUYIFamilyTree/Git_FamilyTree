@@ -13,6 +13,7 @@
 
 -(void)clickMoneyViewToPay;
 -(void)clickSameCityMoneyViewToPay;
+-(void)clickVipBtn:(UIButton *)sender;
 @end
 
 @interface PersonalCenterHeaderView : UIView
@@ -20,6 +21,8 @@
 @property (nonatomic, assign) double money;
 /** 同城币数量*/
 @property (nonatomic, assign) NSInteger sameCityMoney;
+/** 导航栏vip按钮*/
+@property (nonatomic, strong) UIButton *vipBtn;
 /** 代理人*/
 @property (nonatomic, weak) id<PersonalCenterHeaderViewDelegate> delegate;
 @end

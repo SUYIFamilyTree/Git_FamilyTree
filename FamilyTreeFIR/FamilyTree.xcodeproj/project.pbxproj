@@ -4670,7 +4670,7 @@
 				TargetAttributes = {
 					ADC326F41CF3E3DF00CEAE53 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = N4YN23L5MC;
+						DevelopmentTeam = PJ6JTWKSUQ;
 					};
 					ADC3270D1CF3E3E000CEAE53 = {
 						CreatedOnToolsVersion = 7.2;
@@ -5862,7 +5862,7 @@
 				INFOPLIST_FILE = FamilyTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yisu.wzhh;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yisu.ym;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -5879,7 +5879,7 @@
 				INFOPLIST_FILE = FamilyTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yisu.wzhh;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yisu.ym;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

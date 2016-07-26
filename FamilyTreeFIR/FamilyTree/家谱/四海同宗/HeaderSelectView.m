@@ -21,8 +21,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
-        [self initUI];
+        //self.backgroundColor = [UIColor whiteColor];
+        //[self initUI];
     }
     return self;
 }

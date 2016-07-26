@@ -94,6 +94,7 @@
     WK(weakSelf);
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getcomlist" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         MYLog(@"数据%@",jsonDic[@"data"]);
+        MYLog(@"%@",jsonDic[@"message"]);
         if (succe) {
             NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
             weakSelf.tributeArr = [NSArray modelArrayWithClass:[CliffordTributeModel class] json:dic[@"datalist"]];
@@ -138,7 +139,7 @@
 }
 
 -(void)clickToPushTributeView{
-    if (self.tributePlateIVArr.firstObject.image) {
+   if (self.tributePlateIVArr.firstObject.image) {
         [SXLoadingView showAlertHUD:@"一天只允许购买一次贡品" duration:0.5];
         return;
     }
@@ -164,45 +165,50 @@
 
 -(void)worshipJossAnimation{
     MYLog(@"叩拜动画");
-    [self.worshipJossBtn removeFromSuperview];
-    UIImageView *handIV = [[UIImageView alloc]initWithFrame:CGRectMake(0.3125*CGRectW(self.backIV), 0.7473*CGRectH(self.backIV), 0.375*CGRectW(self.backIV), 0.1648*CGRectH(self.backIV))];
-    handIV.image = MImage(@"qf_bf");
-    handIV.contentMode = UIViewContentModeScaleToFill;
-    
-
-    
-    [self.backIV addSubview:handIV];
-    
-    CAAnimationGroup *group = [CAAnimationGroup animation];
-    //添加移动
-    CABasicAnimation *moveAnimation = [CABasicAnimation animation];
-    moveAnimation.keyPath = @"position.y";
-    moveAnimation.toValue = @(0.7473*CGRectH(self.backIV)+0.1648*CGRectH(self.backIV));
-   
-    //添加缩放
-    CABasicAnimation *scaleAnimation = [CABasicAnimation animation];
-    scaleAnimation.keyPath = @"transform.scale.y";
-    scaleAnimation.toValue = @(0.5);
-    
-    group.animations = @[moveAnimation,scaleAnimation];
-    group.removedOnCompletion = NO;
-    group.fillMode = @"forwards";
-    group.duration = 2;
-    group.repeatCount = MAXFLOAT;
-    [handIV.layer addAnimation:group forKey:nil];
-    
-    
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [handIV removeFromSuperview];
-            [self.backIV addSubview:self.worshipJossBtn];
+    NSData *data1 = UIImagePNGRepresentation(self.jossIV.image);
+    NSData *data2 = UIImagePNGRepresentation(MImage(@"qf_gy"));
+    if ([data1 isEqual:data2]) {
+        [SXLoadingView showAlertHUD:@"请先请佛" duration:0.5];
+    }else{
+        [self.worshipJossBtn removeFromSuperview];
+        UIImageView *handIV = [[UIImageView alloc]initWithFrame:CGRectMake(0.3125*CGRectW(self.backIV), 0.7473*CGRectH(self.backIV), 0.375*CGRectW(self.backIV), 0.1648*CGRectH(self.backIV))];
+        handIV.image = MImage(@"qf_bf");
+        handIV.contentMode = UIViewContentModeScaleToFill;
+        
+        
+        
+        [self.backIV addSubview:handIV];
+        
+        CAAnimationGroup *group = [CAAnimationGroup animation];
+        //添加移动
+        CABasicAnimation *moveAnimation = [CABasicAnimation animation];
+        moveAnimation.keyPath = @"position.y";
+        moveAnimation.toValue = @(0.7473*CGRectH(self.backIV)+0.1648*CGRectH(self.backIV));
+        
+        //添加缩放
+        CABasicAnimation *scaleAnimation = [CABasicAnimation animation];
+        scaleAnimation.keyPath = @"transform.scale.y";
+        scaleAnimation.toValue = @(0.5);
+        
+        group.animations = @[moveAnimation,scaleAnimation];
+        group.removedOnCompletion = NO;
+        group.fillMode = @"forwards";
+        group.duration = 2;
+        group.repeatCount = MAXFLOAT;
+        [handIV.layer addAnimation:group forKey:nil];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [handIV removeFromSuperview];
+                [self.backIV addSubview:self.worshipJossBtn];
+            });
+            
+            CliffordEndViewController *cliffordEndVC = [[CliffordEndViewController alloc]initWithTitle:@"祈福" image:nil];
+            cliffordEndVC.jossIV.image = self.jossIV.image;
+            [self.navigationController pushViewController:cliffordEndVC animated:YES];
         });
         
-        CliffordEndViewController *cliffordEndVC = [[CliffordEndViewController alloc]initWithTitle:@"祈福" image:nil];
-        cliffordEndVC.jossIV.image = self.jossIV.image;
-        [self.navigationController pushViewController:cliffordEndVC animated:YES];
-    });
+    }
 }
 
 

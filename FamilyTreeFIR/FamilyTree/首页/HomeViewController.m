@@ -53,8 +53,8 @@ typedef enum : NSUInteger {
     
     //先跳转到登录页面
     
-    [self.navigationController pushViewController:self.logVc animated:false];
-    
+    //[self.navigationController pushViewController:self.logVc animated:false];
+    [self presentViewController:self.logVc animated:NO completion:nil];
     //注册通知
     [self registerNotifacation];
     
@@ -188,7 +188,8 @@ typedef enum : NSUInteger {
 -(void)CommonNavigationViews:(CommonNavigationViews *)comView respondsToRightBtn:(UIButton *)sender{
     
     MYLog(@"登录按钮");
-    [self.navigationController pushViewController:self.logVc animated:YES];
+    //[self.navigationController pushViewController:self.logVc animated:YES];
+    [self presentViewController:self.logVc animated:NO completion:nil];
 
 }
 

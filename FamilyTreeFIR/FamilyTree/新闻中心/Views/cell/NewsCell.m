@@ -25,10 +25,10 @@
     if (self) {
        
         self.textLabel.font = MFont(13);
-        self.moreLB = [[UILabel alloc]initWithFrame:CGRectMake(0.9*Screen_width, 5, 0.1*Screen_width, 20)];
-        self.moreLB.font = MFont(12);
-        self.moreLB.text = @"更多";
-        [self addSubview:self.moreLB];
+//        self.moreLB = [[UILabel alloc]initWithFrame:CGRectMake(0.9*Screen_width, 5, 0.1*Screen_width, 20)];
+//        self.moreLB.font = MFont(12);
+//        self.moreLB.text = @"更多";
+//        [self addSubview:self.moreLB];
 //        [self addSubview:self.dashLine];
         
     }

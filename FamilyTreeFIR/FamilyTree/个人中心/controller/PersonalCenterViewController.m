@@ -62,8 +62,8 @@
 @property (nonatomic, strong) NSArray *familyTreeNewsArr;
 /** vip视图*/
 @property (nonatomic, strong) VIPView *vipView;
-/** 导航栏vip按钮*/
-@property (nonatomic, strong) UIButton *vipBtn;
+///** 导航栏vip按钮*/
+//@property (nonatomic, strong) UIButton *vipBtn;
 
 /** 个人信息编辑页面*/
 @property (nonatomic, strong) EditPersonalInfoView *editPersonalInfoView;
@@ -202,11 +202,11 @@
     [personalInfoEditBtn setBackgroundImage:MImage(@"gr_ct_tit_wt") forState:UIControlStateNormal];
     [personalInfoEditBtn addTarget:self action:@selector(clickPersonalInfoBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.navi addSubview:personalInfoEditBtn];
-    self.vipBtn = [[UIButton alloc]init];
-    self.vipBtn.titleLabel.font = MFont(15);
-    [self.vipBtn addTarget:self action:@selector(clickVipBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [self.navi addSubview:self.vipBtn];
-    self.vipBtn.sd_layout.leftSpaceToView(personalInfoEditBtn,5).bottomSpaceToView(self.navi,15).widthIs(35).heightIs(15);
+//    self.vipBtn = [[UIButton alloc]init];
+//    self.vipBtn.titleLabel.font = MFont(15);
+//    [self.vipBtn addTarget:self action:@selector(clickVipBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.navi addSubview:self.vipBtn];
+//    self.vipBtn.sd_layout.leftSpaceToView(personalInfoEditBtn,5).bottomSpaceToView(self.navi,15).widthIs(35).heightIs(15);
     [self.view addSubview:self.navi];
 }
 
@@ -261,7 +261,7 @@
     self.navi.titleLabel.text = self.queryModel.memb.MeNickname;
     NSString *vipLevelStr = [NSString stringWithFormat:@"VIP%@",@(self.queryModel.memb.MeViplevel)];
     [USERDEFAULT setObject:vipLevelStr forKey:VIPLevel];
-    [self.vipBtn setTitle:vipLevelStr forState:UIControlStateNormal];
+    [self.headerView.vipBtn setTitle:vipLevelStr forState:UIControlStateNormal];
     self.headerView.money = (double)self.queryModel.memb.MeBalance;
     self.headerView.sameCityMoney = self.queryModel.memb.MeIntegral;
     [self.infoView.headIV.headInsideIV setImageWithURL:[NSURL URLWithString:self.queryModel.kzxx.Photo] placeholder:MImage(@"tx_1")];
@@ -443,18 +443,6 @@
     
 }
 
-//点击vip按钮
--(void)clickVipBtn:(UIButton *)sender{
-    MYLog(@"点击vip");
-    sender.selected = !sender.selected;
-    if (sender.selected == YES) {
-        [self getVIPInfoData];
-    }else{
-        [self.vipView removeFromSuperview];
-    }
-}
-
-
 
 #pragma mark - UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -509,8 +497,17 @@
     MYLog(@"跳转同城币支付页面");
 }
 
+-(void)clickVipBtn:(UIButton *)sender{
+    sender.selected = !sender.selected;
+        if (sender.selected == YES) {
+            [self getVIPInfoData];
+        }else{
+            [self.vipView removeFromSuperview];
+        }
+}
+
 -(void)ToFortuneTodayView{
-    FortuneTodayViewController *fortuneTodayVC = [[FortuneTodayViewController alloc]init];
+    FortuneTodayViewController *fortuneTodayVC = [[FortuneTodayViewController alloc]initWithTitle:@"今日运势" image:nil];
     [self.navigationController pushViewController:fortuneTodayVC animated:YES];
 }
 
@@ -544,7 +541,7 @@
 
 #pragma mark - VIPViewDelegate
 -(void)clickVipBackBtn{
-    self.vipBtn.selected = NO;
+    self.headerView.vipBtn.selected = NO;
 }
 
 
