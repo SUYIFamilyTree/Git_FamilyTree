@@ -153,7 +153,6 @@ enum {
     });
 }
 
-#warning 点击无响应
 -(void)clickDivinationBtn{
     MYLog(@"点击求签");
     [self.diviAnimations startAnimating];

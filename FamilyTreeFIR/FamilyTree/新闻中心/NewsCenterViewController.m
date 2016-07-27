@@ -43,6 +43,7 @@
     [self.bacScrollView addSubview:self.segmentContl];
     [self.bacScrollView addSubview:self.scroView];
     [self.bacScrollView addSubview:self.tableNesView];
+    self.tableNesView.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreJzdt)];
     [self.bacScrollView addSubview:self.proAndName];
     [self.bacScrollView addSubview:self.hundredVies];
     [self.bacScrollView addSubview:self.nameTableNews];
@@ -180,7 +181,6 @@
 -(NewsTableView *)tableNesView{
     if (!_tableNesView) {
         _tableNesView = [[NewsTableView alloc] initWithFrame:CGRectMake(0, CGRectYH(self.scroView)+20*AdaptationWidth(), Screen_width, 416*AdaptationWidth())];
-        _tableNesView.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreJzdt)];
     }
     return _tableNesView;
 }

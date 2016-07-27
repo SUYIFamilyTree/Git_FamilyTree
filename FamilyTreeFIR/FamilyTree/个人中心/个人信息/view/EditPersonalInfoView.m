@@ -243,7 +243,12 @@
     [self.personalInfoDetailArr addObject:queryModel.memb.MeNickname];
     //[self.personalInfoDetailArr addObject:queryModel.area.AreaCountry];
     [self.personalInfoDetailArr addObject:@"中国"];
-    [self.personalInfoDetailArr addObject:[NSString stringWithFormat:@"%@-%@",queryModel.area.AreaProvince,queryModel.area.AreaCity]];
+    if (IsNilString(queryModel.area.AreaProvince) ) {
+        [self.personalInfoDetailArr addObject:@"-"];
+    }else{
+       [self.personalInfoDetailArr addObject:[NSString stringWithFormat:@"%@-%@",queryModel.area.AreaProvince,queryModel.area.AreaCity]];
+    }
+    
     [self.personalInfoDetailArr addObject:@[@"女",@"男",@"保密"][[queryModel.memb.MeSex intValue]]];
     DateModel *dateModel = [[DateModel alloc]initWithDateStr:queryModel.memb.MeBirthday];
     NSString *MeBirthdayStr = [NSString stringWithFormat:@"%04ld年%02ld月%02ld日%02ld时",(long)dateModel.year,dateModel.month,dateModel.day,dateModel.hour];
@@ -355,6 +360,9 @@
         }
         if (indexPath.row == 7) {
             personalInfoCell.customDetailLB.text = self.personalInfoDetailArr[indexPath.row]?@"******":@"";
+        }
+        if (indexPath.row == 3) {
+            personalInfoCell.customDetailLB.text = [self.personalInfoDetailArr[indexPath.row] isEqualToString:@"-"]?@"":self.personalInfoDetailArr[indexPath.row];
         }
     }
     personalInfoCell.delegate = self;

@@ -197,9 +197,10 @@
     self.navigationController.navigationBarHidden = YES;
     self.navi = [[CommonNavigationViews alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 64) title:@"" image:MImage(@"chec")];
     self.navi.leftBtn.hidden = YES;
-    UIButton *personalInfoEditBtn = [[UIButton alloc]initWithFrame:CGRectMake(10, 30, 20, 20)];
+    UIButton *personalInfoEditBtn = [[UIButton alloc]initWithFrame:CGRectMake(10, 20, 40, 50)];
     
-    [personalInfoEditBtn setBackgroundImage:MImage(@"gr_ct_tit_wt") forState:UIControlStateNormal];
+    [personalInfoEditBtn setImage:MImage(@"gr_ct_tit_wt") forState:UIControlStateNormal];
+    personalInfoEditBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
     [personalInfoEditBtn addTarget:self action:@selector(clickPersonalInfoBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.navi addSubview:personalInfoEditBtn];
 //    self.vipBtn = [[UIButton alloc]init];
@@ -373,29 +374,30 @@
     
     
     if (sender.selected) {
-        NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
-
-        [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeQueryMem success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-            if (succe) {
-                weakSelf.queryModel = [QueryModel modelWithJSON:jsonDic[@"data"]];
-                weakSelf.editPersonalInfoView = [[EditPersonalInfoView alloc]initWithFrame:CGRectMake(0, 64, 0, Screen_height-49-64)];
-                [self.view addSubview:self.editPersonalInfoView];
-                
-                [weakSelf.editPersonalInfoView reloadEditPersonalInfoData:weakSelf.queryModel];
-                
-                [UIView animateWithDuration:0.5 animations:^{
-                    weakSelf.editPersonalInfoView.frame = CGRectMake(0, 64, Screen_width, Screen_height-49-64);
-                }];
-            }else{
-            }
-        } failure:^(NSError *error) {
-            MYLog(@"失败---%@",error.description);
-        }];
-        
-        //生成职业plist文件
-        NSDictionary *logDic1 = @{@"typeval":@"GRZY"};
-        
-       [TCJPHTTPRequestManager POSTWithParameters:logDic1 requestID:GetUserId requestcode:kRequestCodeGetsyntype success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        dispatch_async(dispatch_queue_create("myQueue", NULL), ^{
+            NSDictionary *logDic = @{@"userid":[NSString stringWithFormat:@"%@",GetUserId]};
+            
+            [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeQueryMem success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+                if (succe) {
+                    weakSelf.queryModel = [QueryModel modelWithJSON:jsonDic[@"data"]];
+                    weakSelf.editPersonalInfoView = [[EditPersonalInfoView alloc]initWithFrame:CGRectMake(0, 64, 0, Screen_height-49-64)];
+                    [self.view addSubview:self.editPersonalInfoView];
+                    
+                    [weakSelf.editPersonalInfoView reloadEditPersonalInfoData:weakSelf.queryModel];
+                    
+                    [UIView animateWithDuration:0.5 animations:^{
+                        weakSelf.editPersonalInfoView.frame = CGRectMake(0, 64, Screen_width, Screen_height-49-64);
+                    }];
+                }else{
+                }
+            } failure:^(NSError *error) {
+                MYLog(@"失败---%@",error.description);
+            }];
+            
+            //生成职业plist文件
+            NSDictionary *logDic1 = @{@"typeval":@"GRZY"};
+            
+            [TCJPHTTPRequestManager POSTWithParameters:logDic1 requestID:GetUserId requestcode:kRequestCodeGetsyntype success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
                 MYLog(@"%@",jsonDic[@"message"]);
                 if (succe) {
                     NSArray<JobModel *> *arr = [NSArray modelArrayWithClass:[JobModel class] json:jsonDic[@"data"]];
@@ -411,31 +413,34 @@
             } failure:^(NSError *error) {
                 MYLog(@"失败---%@",error.description);
             }];
-
-    
-    
-        //生成地区plist文件
-        NSDictionary *logDic2 = @{@"country":@"中国"};
-        [TCJPHTTPRequestManager POSTWithParameters:logDic2 requestID:GetUserId requestcode:kRequestCodeGetprovince success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
             
-            if (succe) {
-                NSArray<AreaModel *> *arr = [NSArray modelArrayWithClass:[AreaModel class] json:jsonDic[@"data"]];
-                NSMutableArray *mutableArr = [NSMutableArray array];
-                AreaModel *areaModel = [[AreaModel alloc]init];
-                for (areaModel in arr) {
-                    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-                    [dic setObject:areaModel.proname forKey:@"proname"];
-                    [dic setObject:areaModel.cityname forKey:@"cityname"];
-                    [mutableArr addObject:dic];
-                }
-                NSString *filePath = [UserDocumentD stringByAppendingPathComponent:@"area.plist"];
+            
+            
+            //生成地区plist文件
+            NSDictionary *logDic2 = @{@"country":@"中国"};
+            [TCJPHTTPRequestManager POSTWithParameters:logDic2 requestID:GetUserId requestcode:kRequestCodeGetprovince success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
                 
-                [mutableArr writeToFile:filePath atomically:YES];
-            }else{
-            }
-        } failure:^(NSError *error) {
-            MYLog(@"失败---%@",error.description);
-        }];
+                if (succe) {
+                    NSArray<AreaModel *> *arr = [NSArray modelArrayWithClass:[AreaModel class] json:jsonDic[@"data"]];
+                    NSMutableArray *mutableArr = [NSMutableArray array];
+                    AreaModel *areaModel = [[AreaModel alloc]init];
+                    for (areaModel in arr) {
+                        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+                        [dic setObject:areaModel.proname forKey:@"proname"];
+                        [dic setObject:areaModel.cityname forKey:@"cityname"];
+                        [mutableArr addObject:dic];
+                    }
+                    NSString *filePath = [UserDocumentD stringByAppendingPathComponent:@"area.plist"];
+                    
+                    [mutableArr writeToFile:filePath atomically:YES];
+                }else{
+                }
+            } failure:^(NSError *error) {
+                MYLog(@"失败---%@",error.description);
+            }];
+            
+
+        });
 
         
     }

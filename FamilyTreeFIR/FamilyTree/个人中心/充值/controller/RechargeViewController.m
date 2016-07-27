@@ -16,6 +16,8 @@
 @property (nonatomic, strong) UIView *bgView;
 /** 选中钱数组*/
 @property (nonatomic, strong) NSArray *moneyArr;
+/** 选中钱的按钮数组*/
+@property (nonatomic, strong) NSMutableArray<UIButton *> *moneyBtnArr;
 /** 额外金钱文本*/
 @property (nonatomic, strong) UITextField *textField;
 /** 圆形选择按钮*/
@@ -73,6 +75,7 @@
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         button.tag = 1+i;
+        [self.moneyBtnArr addObject:button];
         [self.view addSubview:button];
         
     }
@@ -91,7 +94,7 @@
     [self.view addSubview:label2];
     
     self.textField = [[UITextField alloc]initWithFrame:CGRectMake(CGRectXW(label2), CGRectY(label2)-5, 60, 30)];
-    //textField.keyboardType = UIKeyboardTypePhonePad;
+    self.textField.keyboardType = UIKeyboardTypePhonePad;
     self.textField.delegate = self;
     [self.view addSubview:self.textField];
     //画单边边框
@@ -143,6 +146,13 @@
     sender.selected = !sender.selected;
     MYLog(@"选择其他金额");
     sender.backgroundColor = sender.selected?[UIColor blackColor]:[UIColor whiteColor];
+    for (int i = 0; i < self.moneyBtnArr.count; i++) {
+        self.moneyBtnArr[i].userInteractionEnabled = !sender.selected;
+        if (self.moneyBtnArr[i].selected == YES) {
+            self.moneyBtnArr[i].selected = NO;
+            self.moneyBtnArr[i].backgroundColor = LH_RGBCOLOR(219, 220, 220);
+        }
+    }
 }
 
 -(void)clickToPay:(UIButton *)sender{
@@ -180,5 +190,32 @@
     
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    return [self validateNumber:string];
+}
 
+//判断只能输入数字
+- (BOOL)validateNumber:(NSString*)number {
+    BOOL res = YES;
+    NSCharacterSet* tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    int i = 0;
+    while (i < number.length) {
+        NSString * string = [number substringWithRange:NSMakeRange(i, 1)];
+        NSRange range = [string rangeOfCharacterFromSet:tmpSet];
+        if (range.length == 0) {
+            res = NO;
+            break;
+        }
+        i++;
+    }
+    return res;
+}
+
+#pragma mark - lazyLoad
+-(NSMutableArray<UIButton *> *)moneyBtnArr{
+    if (!_moneyBtnArr) {
+        _moneyBtnArr = [@[] mutableCopy];
+    }
+    return _moneyBtnArr;
+}
 @end

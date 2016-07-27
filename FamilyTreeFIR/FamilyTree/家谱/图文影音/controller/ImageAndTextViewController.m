@@ -65,21 +65,21 @@
 //    [self initLeftTableView];
     //书正文视图
     [self initContentView];
-    self.timeLB.text = @"子次公和日";
+    //self.timeLB.text = @"子次公和日";
     [self.view addSubview:self.timeLB];
     [self.view addSubview:self.contentSV];
     //[self initContentSV];
-    self.contentUnderImageLB.text = @"王氏32族谱";
+    //self.contentUnderImageLB.text = @"王氏32族谱";
     [self.view addSubview:self.contentUnderImageLB];
     //图下两条线
     [self initLeftAndRightLineIV];
     [self.view addSubview:self.rightView];
     //右侧四个标签
     [self initRightLBs];
-    self.rightViewLBA.text = @"曾\n氏\n族\n谱";
+    //self.rightViewLBA.text = @"曾\n氏\n族\n谱";
     self.rightViewLBB.text = @"卷一";
-    self.rightViewLBC.text = @"一\n百\n一\n十\n六\n页";
-    self.rightViewLBD.text = @"白\n鹤\n堂";
+    self.rightViewLBC.text = @"一\n百\n一\n十\n二\n页";
+    //self.rightViewLBD.text = @"白\n鹤\n堂";
 }
 
 #pragma mark - 网络请求数据
@@ -97,6 +97,8 @@
                 weakSelf.menuArr = [weakSelf.genealogyInfoModel getImageMenuArr];
                 weakSelf.infoArr = [weakSelf.genealogyInfoModel getImageInfoArr];
             }
+            weakSelf.rightViewLBD.text = [NSString addLineBreaks:weakSelf.genealogyInfoModel.data.GeDisbut];
+            weakSelf.rightViewLBA.text = [NSString addLineBreaks:weakSelf.genealogyInfoModel.data.GeName];
            [weakSelf initLeftTableView];
            [weakSelf initContentSV:weakSelf.infoArr.firstObject];
 //            MYLog(@"%@",weakSelf.menuArr);
@@ -150,6 +152,7 @@
     _rightViewLBA.font = MFont(12);
     _rightViewLBA.numberOfLines = 0;
     _rightViewLBA.textAlignment = NSTextAlignmentCenter;
+    _rightViewLBA.lineBreakMode = NSLineBreakByWordWrapping;
     _rightViewLBA.layer.borderWidth = 1;
     [self.view addSubview:_rightViewLBA];
     UIImageView *angelIV = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(_rightView), CGRectYH(_rightViewLBA)+1, CGRectW(_rightView), 7)];
@@ -169,7 +172,7 @@
     _rightViewLBC.numberOfLines = 0;
     _rightViewLBC.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:_rightViewLBC];
-    _rightViewLBD = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_rightView), CGRectY(_rightView)+0.85*CGRectH(_rightView), CGRectW(_rightView), 0.16*CGRectH(_rightView))];
+    _rightViewLBD = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_rightView), CGRectY(_rightView)+0.85*CGRectH(_rightView), CGRectW(_rightView), 0.15*CGRectH(_rightView))];
     _rightViewLBD.font = MFont(11);
     //_rightViewLBD.font = [UIFont fontWithName:@"Helvetica-Bold" size:11];
     _rightViewLBD.numberOfLines = 0;

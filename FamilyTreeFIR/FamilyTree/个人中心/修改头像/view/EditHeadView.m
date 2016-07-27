@@ -31,8 +31,8 @@
         self.bgIV.userInteractionEnabled = YES;
         [self addSubview:self.bgIV];
         //返回按钮
-        UIButton *backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0.93*CGRectW(self), 0.285*CGRectH(self), 0.05*CGRectW(self), 0.05*CGRectW(self))];
-        [backBtn setBackgroundImage:MImage(@"close") forState:UIControlStateNormal];
+        UIButton *backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0.90*CGRectW(self), 0.275*CGRectH(self), 0.1*CGRectW(self), 0.1*CGRectW(self))];
+        [backBtn setImage:MImage(@"close") forState:UIControlStateNormal];
         [backBtn addTarget:self action:@selector(clickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:backBtn];
         
@@ -78,7 +78,7 @@
     for (int i = 0; i < 12; i++) {
         UIButton *headBtn = [[UIButton alloc]initWithFrame:CGRectMake(0.3630*CGRectW(self.bgIV)+0.1473*CGRectW(self.bgIV)*(i-4*[@[@0,@1,@2][i/4] intValue]), 0.0927*CGRectH(self.bgIV)+0.1506*CGRectH(self.bgIV)*[@[@0,@1,@2][i/4] intValue], 0.1164*CGRectW(self.bgIV), 0.1158*CGRectH(self.bgIV))];
         [headBtn setBackgroundImage:MImage(self.headStrArr[i]) forState:UIControlStateNormal];
-        headBtn.imageView.contentMode = UIViewContentModeScaleToFill;
+        headBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
         headBtn.tag = 555+i;
         [headBtn addTarget:self action:@selector(chooseHeadBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self.bgIV addSubview:headBtn];

@@ -49,8 +49,7 @@
 
 }
 
-//生肖图
-#warning 12生肖图没有给
+//星座图
 -(void)initHeadProtriaits{
  
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectYH(self.todayDate)-20, PortraitsSize, PortraitsSize)];
@@ -58,15 +57,14 @@
     headView.layer.borderWidth = 1.0f;
     headView.layer.borderColor = BorderColor;
     headView.layer.masksToBounds = YES;
-//    headView.image = MImage(@"todayYS_touxiang");
-//    self.headPortraits = headView;
     [self addSubview:headView];
     UIImageView *imageview = [UIImageView new];
+    imageview.backgroundColor = [UIColor redColor];
+    imageview.contentMode = UIViewContentModeScaleAspectFill;
     imageview.image = MImage(@"todayYS_touxiang");
     self.headPortraits = imageview;
     [headView addSubview:self.headPortraits];
-    self.headPortraits.sd_layout.leftSpaceToView(headView,PortraitsSize/8).rightSpaceToView(headView,PortraitsSize/8).topSpaceToView(headView,PortraitsSize/4).bottomSpaceToView(headView,0);
-    
+    self.headPortraits.sd_layout.centerXEqualToView(headView).centerYEqualToView(headView).topEqualToView(headView).bottomEqualToView(headView);
     //时间范围
     self.headPorTime = [[UILabel alloc] initWithFrame:CGRectMake(CGRectX(headView)-5, CGRectYH(headView)+10, PortraitsSize+5, 12)];;
      //self.headPorTime.text = @"3.21-4.19";
