@@ -25,6 +25,8 @@
 @property (nonatomic, strong) NSArray<NSString *> *jossNameArr;
 /** 佛像图片名字数组*/
 @property (nonatomic, strong) NSArray<NSString *> *jossImageNameArr;
+/** 佛像说明数组*/
+@property (nonatomic, strong) NSMutableArray<NSString *> *jossInfoArr;
 /** 佛像选择滚动视图*/
 @property (nonatomic, strong) UIScrollView *jossSelectSV;
 @end
@@ -89,7 +91,10 @@
         if (index == 9) {
             indexTrue = 2;
         }
+        //图
         self.jossIV.image = [UIImage imageNamed:[NSString stringWithFormat:@"qf_f%d",indexTrue]];
+        //说明
+        self.jossInfoTX.text = self.jossInfoArr[indexTrue-1];
     }
     
 }
@@ -108,6 +113,7 @@
         indexTrue = 2;
     }
     self.jossIV.image = [UIImage imageNamed:[NSString stringWithFormat:@"qf_f%d",indexTrue]];
+    self.jossInfoTX.text = self.jossInfoArr[indexTrue-1];
 }
 
 
@@ -156,7 +162,7 @@
     if (!_jossInfoTX) {
         _jossInfoTX = [[UITextView alloc]initWithFrame:CGRectMake(0.4966*CGRectW(self.whiteBackIV), 0.0385*CGRectH(self.whiteBackIV), 0.4897*CGRectW(self.whiteBackIV), 0.7077*CGRectH(self.whiteBackIV))];
         _jossInfoTX.editable = NO;
-        NSString *str = @"啦啦啦啦啦啦啦啦发来附件拉法基甲方发按理房间爱龙卷风的垃圾堆法拉克剪短发了按甲方了啊就的分类安静了开发及案例及阿里积分辣的减肥拉开积分垃圾离开房间爱看的发咖啡垃圾费垃圾垃圾费阿发达的安抚阿发啊阿发发呆啊发发发呆阿道夫a";
+        NSString *str = self.jossInfoArr[1];
         _jossInfoTX.attributedText = [NSString getLineSpaceStr:str];
         _jossInfoTX.backgroundColor = [UIColor clearColor];
     }
@@ -187,6 +193,17 @@
         _jossImageNameArr = @[@"qf_f7",@"qf_f8",@"qf_f1",@"qf_f2",@"qf_f3",@"qf_f4",@"qf_f5",@"qf_f6",@"qf_f7",@"qf_f8",@"qf_f1",@"qf_f2"];
     }
     return _jossImageNameArr;
+}
+
+-(NSMutableArray<NSString *> *)jossInfoArr{
+    if (!_jossInfoArr) {
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"JossInfo.plist" ofType:nil];
+        NSArray *arr = [NSArray arrayWithContentsOfFile:filePath];
+        _jossInfoArr = [@[] mutableCopy];
+        [_jossInfoArr addObjectsFromArray:arr];
+
+    }
+    return _jossInfoArr;
 }
 
 -(UIScrollView *)jossSelectSV{

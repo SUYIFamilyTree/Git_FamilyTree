@@ -36,7 +36,7 @@
         if (isMatch1 || isMatch2 || isMatch3) {
             return @"";
         }else{
-            return @"请输入正确的*****号码";
+            return @"请输入正确的手机号码";
         }
     }
     return @"";

@@ -73,7 +73,6 @@
         _searchView.backgroundColor = [UIColor whiteColor];
         
         
-        
     }
     return _searchView;
 }

@@ -7,13 +7,12 @@
 //
 
 #import "CommonNavigationViews.h"
-#import "WMenuBtn.h"
+
 @interface CommonNavigationViews()<SelectMyFamilyViewDelegate>
 
 /**我的家谱↓*/
 @property (nonatomic,strong) SelectMyFamilyView *selecMyFamView;
-/**右上角图标*/
-@property (nonatomic,strong) WMenuBtn *rightMenuBtn;
+
 
 
 @end

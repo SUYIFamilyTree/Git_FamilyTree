@@ -44,8 +44,8 @@
         self.bgIV.image = MImage(@"vip_bg");
         self.bgIV.userInteractionEnabled = YES;
         [self addSubview:self.bgIV];
-        //加入会员按钮
-        //[self initAddToVIPBtn];
+        //会员特权按钮
+        [self initAddToVIPBtn];
         //会员等级标签及进度视图
         self.currentVIPLevel = [[USERDEFAULT valueForKey:VIPLevel] intValue];
         //self.progressStr = @"400/500";
@@ -67,8 +67,8 @@
         [self.bgIV addSubview:rightBtn];
         
         //关闭按钮
-        UIButton *backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0.935*CGRectW(self), 0.015*CGRectH(self), 0.05*CGRectW(self), 0.05*CGRectW(self))];
-        [backBtn setBackgroundImage:MImage(@"close") forState:UIControlStateNormal];
+        UIButton *backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0.905*CGRectW(self), 0.007*CGRectH(self), 0.1*CGRectW(self), 0.1*CGRectW(self))];
+        [backBtn setImage:MImage(@"close") forState:UIControlStateNormal];
         [backBtn addTarget:self action:@selector(clickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:backBtn];
         
@@ -79,10 +79,10 @@
 -(void)initAddToVIPBtn{
     UIButton *addToVipBtn = [[UIButton alloc]initWithFrame:CGRectMake(0.1024*CGRectW(self.bgIV), 0.0820*CGRectH(self.bgIV), 0.2526*CGRectW(self.bgIV), 0.0679*CGRectH(self.bgIV))];
     addToVipBtn.backgroundColor = LH_RGBCOLOR(226, 0, 37);
-    [addToVipBtn setTitle:@"加入会员" forState:UIControlStateNormal];
+    [addToVipBtn setTitle:@"会员特权" forState:UIControlStateNormal];
     addToVipBtn.layer.cornerRadius = 3.0;
     addToVipBtn.titleLabel.font = MFont(15);
-    [addToVipBtn addTarget:self action:@selector(clickAddToVipBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    [addToVipBtn addTarget:self action:@selector(clickAddToVipBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.bgIV addSubview:addToVipBtn];
 }
 

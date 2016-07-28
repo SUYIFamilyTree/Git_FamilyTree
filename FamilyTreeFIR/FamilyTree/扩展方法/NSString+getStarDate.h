@@ -10,4 +10,5 @@
 
 @interface NSString (getStarDate)
 +(NSString *)getStarDateWithStar:(NSString *)starStr;
++(NSString *)getStarImageName:(NSString *)starStr;
 @end

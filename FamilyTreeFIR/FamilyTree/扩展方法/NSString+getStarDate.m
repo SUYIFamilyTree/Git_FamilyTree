@@ -50,4 +50,46 @@
         return @"";
     }
 }
+
++(NSString *)getStarImageName:(NSString *)starStr{
+    if ([starStr isEqualToString:@"白羊座"]) {
+        return @"jrys_star8";
+    }
+    if ([starStr isEqualToString:@"金牛座"]) {
+        return @"jrys_star11";
+    }
+    if ([starStr isEqualToString:@"双子座"]) {
+        return @"jrys_star2";
+    }
+    if ([starStr isEqualToString:@"巨蟹座"]) {
+        return @"jrys_star4";
+    }
+    if ([starStr isEqualToString:@"狮子座"]) {
+        return @"jrys_star6";
+    }
+    if ([starStr isEqualToString:@"处女座"]) {
+        return @"jrys_star5";
+    }
+    if ([starStr isEqualToString:@"天秤座"]) {
+        return @"jrys_star3";
+    }
+    if ([starStr isEqualToString:@"天蝎座"]) {
+        return @"1jrys_star1";
+    }
+    if ([starStr isEqualToString:@"射手座"]) {
+        return @"jrys_star9";
+    }
+    if ([starStr isEqualToString:@"摩羯座"]) {
+        return @"jrys_star12";
+    }
+    if ([starStr isEqualToString:@"水瓶座"]) {
+        return @"jrys_star10";
+    }
+    if ([starStr isEqualToString:@"双鱼座"]) {
+        return @"jrys_star7";
+    }
+    else{
+        return @"";
+    }
+}
 @end

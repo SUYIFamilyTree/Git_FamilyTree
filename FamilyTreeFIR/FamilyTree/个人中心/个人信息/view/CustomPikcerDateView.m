@@ -160,8 +160,9 @@
             break;
     }
     
-    [self.delegate getCustomPickerDateViewYear:self.selectedYear andMonth:self.selectedMonth andDay:self.selectedDay andHour:self.selectedHour];
+//    [self.delegate getCustomPickerDateViewYear:self.selectedYear andMonth:self.selectedMonth andDay:self.selectedDay andHour:self.selectedHour];
     
+    [self.delegate getCustomPickerDateViewYear:self.startYear +[pickerView selectedRowInComponent:0] andMonth:[pickerView selectedRowInComponent:1]+1 andDay:[pickerView selectedRowInComponent:2]+1 andHour:[pickerView selectedRowInComponent:3]];
 }
 
 

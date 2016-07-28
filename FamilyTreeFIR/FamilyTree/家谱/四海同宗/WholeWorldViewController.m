@@ -41,7 +41,7 @@ static NSString *const kReusableIdentifier = @"PinAnnotation";
     
     [self initUI];
     //打开定位
-    //[self startLocation];
+    [self startLocation];
     //[self getData];
     //[self initLocation];
     
@@ -203,7 +203,7 @@ static NSString *const kReusableIdentifier = @"PinAnnotation";
     self.mapView.sd_layout
     .leftSpaceToView(self.view,0)
     .rightSpaceToView(self.view,0)
-    .topSpaceToView(self.headerView,0)
+    .topSpaceToView(self.view,64)
     .bottomSpaceToView(self.view,0);
     
     //左下角图

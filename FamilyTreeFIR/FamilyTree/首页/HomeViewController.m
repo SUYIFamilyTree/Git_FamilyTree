@@ -51,8 +51,8 @@ typedef enum : NSUInteger {
     
     //先跳转到登录页面
     
-    [self.navigationController pushViewController:self.logVc animated:false];
-    
+    //[self.navigationController pushViewController:self.logVc animated:false];
+    [self presentViewController:self.logVc animated:NO completion:nil];
     //注册通知
     [self registerNotifacation];
     
@@ -126,7 +126,7 @@ typedef enum : NSUInteger {
         self.tabBarController.selectedIndex = 0;
     }else if ([title isEqualToString:@"新闻中心"]){
         
-        NewsCenterViewController *newCenter = [[NewsCenterViewController alloc] initWithTitle:@"新闻中心" image:nil];
+        NewsCenterViewController *newCenter = [[NewsCenterViewController alloc] initWithTitle:@"新闻中心" image:MImage(@"chec")];
         [self.navigationController pushViewController:newCenter animated:true];
         
          self.tabBarController.selectedIndex = 0;
@@ -148,7 +148,6 @@ typedef enum : NSUInteger {
     baImg.image = MImage(@"index_bg");
     [self.view addSubview:baImg];
     baImg.sd_layout.topSpaceToView(self.topScrollerView,0).rightSpaceToView(self.view,0).bottomSpaceToView(self.tabBarController.tabBar,0).leftSpaceToView(self.view,0);
-    
     [self.view addSubview:self.time_StatuLabel];
 }
 
@@ -189,7 +188,7 @@ typedef enum : NSUInteger {
         case HomeNameSource:
         {
             MYLog(@"姓氏起源");
-            NewsCenterViewController *newCenter = [[NewsCenterViewController alloc] initWithTitle:@"新闻中心" image:nil];
+            NewsCenterViewController *newCenter = [[NewsCenterViewController alloc] initWithTitle:@"新闻中心" image:MImage(@"chec")];
             newCenter.bacScrollView.contentOffset = CGPointMake(0, newCenter.hundredVies.frame.origin.y-375*AdaptationWidth());
             [self.navigationController pushViewController:newCenter animated:true];
         }
@@ -203,7 +202,8 @@ typedef enum : NSUInteger {
 -(void)respondsToLoginInStateButton{
     
     MYLog(@"登录按钮");
-    [self.navigationController pushViewController:self.logVc animated:YES];
+    //[self.navigationController pushViewController:self.logVc animated:YES];
+    [self presentViewController:self.logVc animated:NO completion:nil];
 
 }
 

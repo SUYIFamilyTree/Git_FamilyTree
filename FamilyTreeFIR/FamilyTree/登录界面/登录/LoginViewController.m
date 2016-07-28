@@ -22,7 +22,8 @@
 @property (nonatomic,strong) ToRegistView *regisView; /*注册view*/
 
 @property (nonatomic,strong) RootTabBarViewController *tabBarVc; /*标签控制器*/
-
+/** 验证码*/
+@property (nonatomic, assign) NSInteger verificationCode;
 
 
 @end
@@ -67,13 +68,16 @@
 -(void)ToRegisViewDidSelectedVerfication:(ToRegistView *)registView{
     MYLog(@"获取验证码");
      NSLog(@"%@", registView.accountView.inputTextView.text);
-    
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"mobile":registView.accountView.inputTextView.text,@"content":@"123456"} requestID:@0 requestcode:@"sendsms" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    self.verificationCode = arc4random() % 10000 + (arc4random()%9+1)*100000;
+    MYLog(@"%ld",self.verificationCode);
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"mobile":registView.accountView.inputTextView.text,@"content":[NSString stringWithFormat:@"%ld",self.verificationCode]} requestID:@0 requestcode:@"sendsms" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"%@", jsonDic[@"message"]);
         if (succe) {
-            NSLog(@"%@", responseObject);
+            
+            
         }
     } failure:^(NSError *error) {
-        NSLog(@"%@", error.description);
+        //NSLog(@"%@", error.description);
     }];
     
 }
@@ -88,25 +92,40 @@
 //    NSNumber *lng = @0;
 //    NSNumber *lat = @0;
  
-    NSLog(@"acc-%@pas-%@", accStr,pasStr);
+    MYLog(@"acc-%@pas-%@", accStr,pasStr);
     
-    NSDictionary *dic = @{@"MeAccount":accStr,@"MePassword":pasStr,@"MeLng":@"0",@"MeLat":@"0"};
-//    NSDictionary *dic = @{@"MeAccount":accStr,@"MePassword":pasStr};
+    if ([pasStr isEqualToString:[NSString stringWithFormat:@"%ld",self.verificationCode]]) {
+        NSDictionary *dic = @{@"MeAccount":accStr,@"MePassword":pasStr,@"MeLng":@"0",@"MeLat":@"0"};
+        //    NSDictionary *dic = @{@"MeAccount":accStr,@"MePassword":pasStr};
+        
+        
+        [TCJPHTTPRequestManager POSTWithParameters:dic requestID:@0 requestcode:kRequestCodeRegister success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+            MYLog(@"%@",jsonDic);
+            if ([jsonDic[@"resultcode"] isEqualToString:@"00000003"]) {
+               [SXLoadingView showAlertHUD:jsonDic[@"message"] duration:0.5];
+            }
+            if (succe) {
+                if (![jsonDic[@"message"] isEqualToString:@"注册成功"]) {
+                    [SXLoadingView showAlertHUD:jsonDic[@"message"] duration:0.5];
+                }else{
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"注册成功" message:[NSString stringWithFormat:@"您的初始密码是%ld", self.verificationCode] preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        [self dismissViewControllerAnimated:NO completion:nil];
+                    }];
+                    [alert addAction:sureAction];
+                    [self presentViewController:alert animated:YES completion:nil];
+                    
+                }
+            }
+        } failure:^(NSError *error) {
+            NSLog(@"%@", error.description);
+        }];
+        
+        MYLog(@"立即注册");
 
-    
-    [TCJPHTTPRequestManager POSTWithParameters:dic requestID:@0 requestcode:kRequestCodeRegister success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        if (succe) {
-            
-            NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
-            NSLog(@"%@", dic);
-            MYLog(@"%@",jsonDic[@"message"]);
-            
-        }
-    } failure:^(NSError *error) {
-        NSLog(@"%@", error.description);
-    }];
-    
-    MYLog(@"立即注册");
+    }else{
+        [SXLoadingView showAlertHUD:@"验证码不正确" duration:0.5];
+    }
 }
 
 #pragma mark *** LoginViewDelegate ***
@@ -115,7 +134,8 @@
     switch (sender.tag) {
         case 0:
             //返回按钮
-            [self.navigationController popViewControllerAnimated:YES];
+            //[self.navigationController popViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:NO completion:nil];
             break;
         case 1:
         {
@@ -208,24 +228,31 @@
     NSDictionary *logDic = @{@"user":self.loginView.accountView.inputTextView.text,@"pass":self.loginView.passwordView.inputTextView.text};
     
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:kRequestCodeLogin success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"登录%@",jsonDic);
         if (succe) {
             //登录成功
-            [SXLoadingView showAlertHUD:@"登录成功" duration:0.5];
-            LoginModel *loginModel = [LoginModel modelWithJSON:jsonDic[@"data"]];
-            //存储用户信息
-            //id
-            [USERDEFAULT setObject:@(loginModel.userId) forKey:@"userid"];
-            //登录授权认证码
-            [USERDEFAULT setObject:loginModel.auth
-                            forKey:@"authcode"];
-            
-            [USERDEFAULT setObject:@true forKey:LoginStates];
-            //头像路径
-//            [USERDEFAULT setObject:loginModel.kzxx.Photo forKey:@"Photo"];
-            [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserAccount];
-            [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:UserPassword];
-            [self.navigationController popViewControllerAnimated:YES];
+            if ([jsonDic[@"message"] isEqualToString:@"登录成功"]) {
+                [SXLoadingView showAlertHUD:@"登录成功" duration:0.5];
+                LoginModel *loginModel = [LoginModel modelWithJSON:jsonDic[@"data"]];
+                //存储用户信息
+                //id
+                [USERDEFAULT setObject:@(loginModel.userId) forKey:@"userid"];
+                //登录授权认证码
+                [USERDEFAULT setObject:loginModel.auth
+                                forKey:@"authcode"];
+                
+                [USERDEFAULT setObject:@true forKey:LoginStates];
+                //头像路径
+                //            [USERDEFAULT setObject:loginModel.kzxx.Photo forKey:@"Photo"];
+                [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserAccount];
+                [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:UserPassword];
+                //[self.navigationController popViewControllerAnimated:YES];
+                [self dismissViewControllerAnimated:NO completion:nil];
+            }else{
+                [SXLoadingView showAlertHUD:jsonDic[@"message"] duration:0.5];
             }
+            
+        }
         
     } failure:^(NSError *error) {
         MYLog(@"失败---%@",error.description);
@@ -260,8 +287,8 @@
 //            [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:UserPassword];
             
             
-            [self.navigationController popViewControllerAnimated:YES];
-            
+            //[self.navigationController popViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:NO completion:nil];
             
             
         }
@@ -273,8 +300,8 @@
     
     
     [USERDEFAULT setObject:@1 forKey:@"userid"];
-    [self.navigationController popViewControllerAnimated:YES];
-    
+    //[self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 #pragma mark *** touch ***

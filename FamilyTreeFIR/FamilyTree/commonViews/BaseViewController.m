@@ -19,10 +19,10 @@
 {
     self = [super init];
     if (self) {
-        self.comNavi = [[CommonNavigationViews alloc] initWithFrame:CGRectMake(0, 0, Screen_width, 44+StatusBar_Height) title:@"四海同宗" image:MImage(@"chec")];
+        self.comNavi = [[CommonNavigationViews alloc] initWithFrame:CGRectMake(0, 0, Screen_width, 44+StatusBar_Height) title:@"四海同宗" image:image];
         self.comNavi.titleLabel.text = title;
-        if (image) {
-            [self.comNavi.rightBtn setImage:image forState:0];
+        if (image == nil) {
+            self.comNavi.rightBtn.userInteractionEnabled = NO;
         }
         
     }

@@ -23,6 +23,7 @@
     if (self) {
         [self initMoneyView];
         [self initSameCityMoneyView];
+        [self initVipBtn];
     }
     return self;
 }
@@ -84,6 +85,16 @@
  
 }
 
+-(void)initVipBtn{
+    self.vipBtn = [[UIButton alloc]init];
+    self.vipBtn.titleLabel.font = MFont(15);
+    [self.vipBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [self.vipBtn addTarget:self action:@selector(clickVipBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.vipBtn];
+    self.vipBtn.sd_layout.leftSpaceToView(self,5).bottomSpaceToView(self,5).topSpaceToView(self, 5).widthIs(35);
+}
+
+
 -(void)clickMoneyView:(UIButton *)sender{
     MYLog(@"点击了金钱视图");
     [self.delegate clickMoneyViewToPay];
@@ -93,5 +104,10 @@
 -(void)clickSameCityMoneyView:(UIButton *)sender{
     MYLog(@"点击了同城币视图");
     [self.delegate clickSameCityMoneyViewToPay];
+}
+
+-(void)clickVipBtn:(UIButton *)sender{
+    MYLog(@"点击了Vip");
+    [self.delegate clickVipBtn:sender];
 }
 @end
