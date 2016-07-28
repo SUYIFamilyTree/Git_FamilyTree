@@ -13,8 +13,6 @@
 @property (nonatomic,strong) UIImageView *divinView; /*具体道具详情*/
 
 
-
-
 @end
 
 @implementation UseItemView
@@ -28,6 +26,7 @@
         
         [self.divinView addSubview:self.useBtn];
         [self.divinView addSubview:self.priceLabel];
+        [self.divinView addSubview:self.goodsImage];
         
     }
     return self;
@@ -38,7 +37,7 @@
     [self removeFromSuperview];
     
 }
-
+/** 点击了试用 */
 -(void)respondsToUseBtn:(UIButton *)sender{
     MYLog(@"试用");
     [self removeFromSuperview];
@@ -89,5 +88,12 @@
         
     }
     return _priceLabel;
+}
+-(UIImageView *)goodsImage{
+    if (!_goodsImage) {
+        _goodsImage = [[UIImageView alloc] initWithFrame:AdaptationFrame(120, 123, 105, 75)];
+//        _goodsImage.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    return _goodsImage;
 }
 @end

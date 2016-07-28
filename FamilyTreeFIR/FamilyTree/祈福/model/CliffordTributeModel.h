@@ -26,4 +26,7 @@
 
 @property (nonatomic, assign) NSInteger CoId;
 
+/**数组*/
+@property (nonatomic,copy) NSArray *cliffordArr;
++(instancetype)shareClifordArr;
 @end

@@ -16,7 +16,8 @@
 #import "WJPListModel.h"
 #import "WSearchModel.h"
 #import "WpersonInfoModel.h"
-
+#import "WShopCommonModel.h"
+#import "WShopCartView.h"
 @interface WTools : NSObject
 
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodecreategen;
@@ -138,6 +139,7 @@ UIKIT_EXTERN NSString * _Nonnull const kNotificationCodeAddMember;
 UIKIT_EXTERN NSString * _Nonnull const KNotificationCodeSeletedMyFamilItem;
 UIKIT_EXTERN NSString * _Nonnull const KNotificationCodeIntoFamSevice;
 
+UIKIT_EXTERN NSString * _Nonnull const KNotificationCodeRankingPorChange;
 
 UIKIT_EXTERN NSString * _Nonnull const kNSUserDefaultsMyFamilyID;
 UIKIT_EXTERN NSString * _Nonnull const kNSUserDefaultsMyFamilyName;

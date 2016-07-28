@@ -159,7 +159,7 @@
 }
 -(SelectMyFamilyView *)selecMyFamView{
     if (!_selecMyFamView) {
-        _selecMyFamView = [[SelectMyFamilyView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
+        _selecMyFamView = [[SelectMyFamilyView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-self.viewController.tabBarController.tabBar.bounds.size.height)];
         _selecMyFamView.delegate = self;
     }
     [_selecMyFamView updateDataSourceAndUI];

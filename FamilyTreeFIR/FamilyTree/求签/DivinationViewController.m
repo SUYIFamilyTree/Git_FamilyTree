@@ -9,11 +9,12 @@
 #import "DivinationViewController.h"
 #import "UseItemView.h"
 #import "WAfterDivinationViewController.h"
+#import "CliffordTributeModel.h"
 #define AnimationTime 1.5f
 enum {
     //本身btntag
     XZBtnTag = 10,
-    XLBtnTag = 11,
+    XLBtnTag,
     YBBtnTag,
     //点击详情道具的tag
     XZUseItemClick,
@@ -32,6 +33,10 @@ enum {
 @property (nonatomic,strong) UseItemView *userItem; /*详细道具图*/
 
 @property (nonatomic,strong) UIImageView *diviAnimations; /*求签动画*/
+
+/**祈福商品modelArr*/
+@property (nonatomic,strong) NSArray *cliModelArr;
+
 
 @end
 
@@ -91,51 +96,121 @@ enum {
     
     self.thrBtn.sd_layout.leftSpaceToView(self.senBtn,25*AdaptationWidth()).heightIs(150*AdaptationWidth()).widthIs(200*AdaptationWidth()).bottomEqualToView(self.firBtn);
 }
-
+#pragma mark *** 请求 ***
+/**
+ *  搜索商品
+ *
+ *  @param name 商品名
+ *  @param back 结束搜索
+ */
+-(void)postGoodsListWithGoodsName:(NSString *)name WhileComplete:(void (^)())back{
+    NSDictionary *dic = [WShopCommonModel shareWShopCommonModel].typeIdDic;
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"pagenum":@"1",
+                                                 @"pagesize":@"20",
+                                                 @"type":dic[@"祈福虚拟"],
+                                                 @"label":@"",
+                                                 @"coname":name,
+                                                 @"shoptype":@"QF",
+                                                 @"qsj":@"",
+                                                 @"jwj":@"",
+                                                 @"px":@"ZH",
+                                                 @"issx":@"1",
+                                                 } requestID:GetUserId requestcode:kRequestCodegetcomlist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+                                                     if (succe) {
+                                                         NSLog(@"--goods--%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+                                                         NSDictionary *dic = [NSString jsonDicWithDic:jsonDic[@"data"]];
+//                                                         NSArray <CliffordTributeModel *>*arr = [NSArray modelWithJSON:dic[@"datalist"]];
+                                                         [CliffordTributeModel shareClifordArr].cliffordArr = dic[@"datalist"];
+                                                         back();
+                                                     }
+                                                 } failure:^(NSError *error) {
+                                                     
+                                                 }];
+}
+/** 获取所有商品类型以及id */
+-(void)postGetSyntypeWhileComplete:(void (^)())back{
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"typeval":@"SPFL"} requestID:GetUserId requestcode:kRequestCodeGetsyntype success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSLog(@"--%@",[NSString jsonArrWithArr:jsonDic[@"data"]]);
+            
+            NSArray *arr = [NSString jsonArrWithArr:jsonDic[@"data"]];
+            NSMutableDictionary *alldic = [NSMutableDictionary dictionary];
+            [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSDictionary *dic = arr[idx];
+                [alldic setObject:dic[@"syntypeval"] forKey:dic[@"syntype"]];
+            }];
+            [WShopCommonModel shareWShopCommonModel].typeIdDic = alldic;
+            back();
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
 #pragma mark *** Events ***
 -(void)respondsToDivAllBtn:(UIButton *)sender{
-    switch (sender.tag) {
-        case XZBtnTag:
-        {
-            self.userItem.tag = XZUseItemClick;
-            [self.imageView addSubview:self.userItem];
+   
+    [self postGetSyntypeWhileComplete:^{
+        [self postGoodsListWithGoodsName:@"" WhileComplete:^{
             
-        }
-            break;
-        case XLBtnTag:
-        {
-            self.userItem.tag = XLUseItemClick;
-            [self.imageView addSubview:self.userItem];
-        }
-            break;
-        case YBBtnTag:
-        {
-            self.userItem.tag = YBUseItemClick;
-            [self.imageView addSubview:self.userItem];
-        }
-            break;
+            NSArray *arr = [CliffordTributeModel shareClifordArr].cliffordArr;
+            NSString *urlStr = arr[sender.tag-10][@"CoCover"];
+            NSString *price =  arr[sender.tag-10][@"CoprMoney"];
+            self.userItem.goodsImage.imageURL = [NSURL URLWithString:urlStr];
+            self.userItem.priceLabel.text = [NSString stringWithFormat:@"%@元每天",price];
             
-        default:
-            break;
-    }
+            switch (sender.tag) {
+                case XZBtnTag:
+                {
+                    self.userItem.tag = XZUseItemClick;
+                    [self.imageView addSubview:self.userItem];
+                    
+                    
+                }
+                    break;
+                case XLBtnTag:
+                {
+                    self.userItem.tag = XLUseItemClick;
+                    [self.imageView addSubview:self.userItem];
+                    
+                }
+                    break;
+                case YBBtnTag:
+                {
+                    self.userItem.tag = YBUseItemClick;
+                    [self.imageView addSubview:self.userItem];
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+   
+        }];
+    }];
+    
+    
 }
 #pragma mark *** useritemDelegate ***
 -(void)UseItemViewDidRespondsToUseBtn:(UseItemView *)useView{
     
+    UIImageView *addView = [self.userItem.goodsImage deepCopy];
+    addView.frame = AdaptationFrame(65, 50, 75, 52);
     switch (useView.tag) {
         case XZUseItemClick:
         {
-            [self.firBtn setImage:MImage(@"qq1_sl") forState:0];
+            [self.firBtn addSubview:addView];
         }
             break;
         case XLUseItemClick:
         {
-            [self.senBtn setImage:MImage(@"qq1_xz") forState:0];
+            [self.senBtn addSubview:addView];
+
         }
             break;
         case YBUseItemClick:
         {
-            [self.thrBtn setImage:MImage(@"qq1_yb") forState:0];
+            [self.thrBtn addSubview:addView];
+
         }
             break;
             
@@ -153,7 +228,6 @@ enum {
     });
 }
 
-#warning 点击无响应
 -(void)clickDivinationBtn{
     MYLog(@"点击求签");
     [self.diviAnimations startAnimating];

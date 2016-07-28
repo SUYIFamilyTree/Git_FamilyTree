@@ -23,7 +23,7 @@
     };
 }
 -(void)initAllFilterBtn{
-    NSArray *titleArr = @[@"综合",@"价格",@"销量",@"人气"];
+    NSArray *titleArr = @[@"综合",@"价格",@"销量"];
     CGFloat width = self.frame.size.width/titleArr.count;
     for (int idx = 0; idx<titleArr.count; idx++) {
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(width*idx, 0, width, self.bounds.size.height)];
