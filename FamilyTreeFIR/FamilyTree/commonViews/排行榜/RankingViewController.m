@@ -138,6 +138,12 @@
     
 }
 
+#pragma mark - 生命周期
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.comNavi.rightMenuBtn removeFromSuperview];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

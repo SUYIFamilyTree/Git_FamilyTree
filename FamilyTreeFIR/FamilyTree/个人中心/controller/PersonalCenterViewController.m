@@ -287,12 +287,20 @@
     [self.myPhotoAlbumsView reloadData:self.memallInfo.grxc];
 }
 
+#pragma mark - 生命周期
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    //右侧导航栏按钮隐藏
+    [self.navi.rightMenuBtn removeFromSuperview];
     self.navigationController.navigationBarHidden = YES;
     //界面出现就重新加载数据
     [self getMainData];
     [self getNaviData];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.navi.rightBtn.selected = NO;
 }
 
 #pragma mark - 点击事件

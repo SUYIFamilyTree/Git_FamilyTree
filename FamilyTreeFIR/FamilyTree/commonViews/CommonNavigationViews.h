@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WMenuBtn.h"
+
 @class CommonNavigationViews;
 @protocol CommandNavigationViewsDelegate <NSObject>
 @optional
@@ -20,6 +22,8 @@
 @property (nonatomic,strong) UIButton *rightBtn; /*右边按钮*/
 @property (nonatomic,strong) UIButton *MyFamilyRightBtn;
 @property (nonatomic,strong) UIButton *leftBtn;
+/**右上角图标*/
+@property (nonatomic,strong) WMenuBtn *rightMenuBtn;
 
 - (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title image:(UIImage *)imageName;
 

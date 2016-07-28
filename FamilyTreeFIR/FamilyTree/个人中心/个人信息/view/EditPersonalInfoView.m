@@ -56,6 +56,8 @@
 @property (nonatomic, copy) NSArray *pickerViewTitleArr;
 /** pickerView出来的灰色背景*/
 @property (nonatomic, strong) UIView *pickerViewGrayBgView;
+/** pickerView确定那妞*/
+@property (nonatomic, strong) UIButton *sureBtn;
 @end
 
 @implementation EditPersonalInfoView
@@ -457,14 +459,14 @@
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, Screen_width, CGRectH(pickerViewTitleView))];
     label.textColor = [UIColor redColor];
     [pickerViewTitleView addSubview:label];
-    UIButton *sureBtn = [[UIButton alloc]initWithFrame:CGRectMake(0.8*Screen_width, 0, 0.2*Screen_width, CGRectH(pickerViewTitleView))];
+    self.sureBtn = [[UIButton alloc]initWithFrame:CGRectMake(0.8*Screen_width, 0, 0.2*Screen_width, CGRectH(pickerViewTitleView))];
     //sureBtn.backgroundColor = [UIColor redColor];
     
-    [sureBtn addTarget:self action:@selector(clickPickerViewSureBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [sureBtn setTitle:@"确定" forState:UIControlStateNormal];
-    [sureBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    sureBtn.tag = 666+(sender.tag-444);
-    [pickerViewTitleView addSubview:sureBtn];
+    [self.sureBtn addTarget:self action:@selector(clickPickerViewSureBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [self.sureBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [self.sureBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    self.sureBtn.tag = 666+(sender.tag-444);
+    [pickerViewTitleView addSubview:self.sureBtn];
     //pickerView and datepick
     if (sender.tag-444 != 5) {
         //pickerView
@@ -671,7 +673,7 @@
 
 #pragma mark - CustomPickerDateViewDelegate
 -(void)getCustomPickerDateViewYear:(NSInteger)year andMonth:(NSInteger)month andDay:(NSInteger)day andHour:(NSInteger)hour{
-    self.personalInfoDetailArr[5] = [NSString stringWithFormat:@"%ld年%.2ld月%.2ld日%.2ld时",(long)year,month,day,hour];
+    self.personalInfoDetailArr[5] = [NSString stringWithFormat:@"%04ld年%.2ld月%.2ld日%.2ld时",(long)year,month,day,hour];
     UITableView *tableView = (UITableView *)[self viewWithTag:1002];
     [tableView reloadData];
     
@@ -723,6 +725,7 @@
 //pickerView确定按钮
 -(void)clickPickerViewSureBtn:(UIButton *)sender{
     MYLog(@"%ld",sender.tag - 666);
+    
     [self.pickerViewGrayBgView removeFromSuperview];
     [self viewController].tabBarController.tabBar.hidden = NO;
 }
