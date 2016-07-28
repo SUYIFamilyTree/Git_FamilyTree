@@ -38,8 +38,93 @@
     self.title = @"排行榜";
     self.automaticallyAdjustsScrollViewInsets = false;
     [self initView];
+    [self registNotification];
 }
+#pragma mark *** 通知 ***
+-(void)registNotification{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(respondsToNotifacation:) name:KNotificationCodeRankingPorChange object:nil];
+}
+/** 点击了某个榜单，变换头像 */
+-(void)respondsToNotifacation:(NSNotification *)info{
+    NSDictionary *dic = info.userInfo;
+    
+    NSInteger seletedNumber = [dic[@"tag"] integerValue];
+    
+    NSMutableArray *porArr = [@[] mutableCopy];//头像
+    NSMutableArray *nameArr = [@[] mutableCopy];//名字
+    NSMutableArray *dataArr = [@[] mutableCopy];//活跃度
 
+    NSArray *modelArr = @[];
+    if (seletedNumber == 1) {
+        modelArr = self.model.hybr;
+    }else if (seletedNumber == 2){
+        modelArr = self.model.rsbr;
+    }else{
+        modelArr = self.model.zcbr;
+    }
+    [modelArr enumerateObjectsUsingBlock:^(Hybr * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [porArr addObject:[modelArr[idx] valueForKey:@"tx"]];
+        
+        if (seletedNumber ==1) {
+            [nameArr addObject:[modelArr[idx] valueForKey:@"mz"]];
+        }else if (seletedNumber == 2){
+            [nameArr addObject:[modelArr[idx] valueForKey:@"jpm"]];
+        }else{
+            [nameArr addObject:[modelArr[idx] valueForKey:@"jpm"]];
+        }
+        
+        if (seletedNumber ==1) {
+            [dataArr addObject:[modelArr[idx] valueForKey:@"hyd"]];
+        }else if (seletedNumber == 2){
+            [dataArr addObject:[modelArr[idx] valueForKey:@"rs"]];
+        }else{
+            [dataArr addObject:[modelArr[idx] valueForKey:@"je"]];
+        }
+    }];
+    
+//    NSLog(@"count-%ld--touxiang-%@-mingzi-%@-huo-%@-",modelArr.count, porArr,nameArr,dataArr);
+    
+    if (modelArr && modelArr.count!=0) {
+        NSInteger hyCount = modelArr.count;
+        
+        if (hyCount==1) {
+            
+            _rankingV.topNameLb.text = nameArr[0];
+            _rankingV.topScoreLb.text = [NSString stringWithFormat:@"%@",dataArr[0]];
+            _rankingV.topIV.imageURL = [NSURL URLWithString:porArr[0]];
+           
+            
+        }else if (hyCount == 2){
+           
+            _rankingV.topNameLb.text = nameArr[0];
+            _rankingV.topScoreLb.text = [NSString stringWithFormat:@"%@",dataArr[0]];
+            _rankingV.topIV.imageURL = [NSURL URLWithString:porArr[0]];
+          
+            _rankingV.secondNameLb.text = nameArr[1];
+            _rankingV.secondScoreLb.text = [NSString stringWithFormat:@"%@",dataArr[1]];
+   
+            _rankingV.secondIV.imageURL = [NSURL URLWithString:porArr[1]];
+          
+        }else{
+            _rankingV.topNameLb.text = nameArr[0];
+            _rankingV.topScoreLb.text = [NSString stringWithFormat:@"%@",dataArr[0]];
+            _rankingV.topIV.imageURL = [NSURL URLWithString:porArr[0]];
+            
+            _rankingV.secondNameLb.text = nameArr[1];
+            _rankingV.secondScoreLb.text = [NSString stringWithFormat:@"%@",dataArr[1]];
+            
+            _rankingV.secondIV.imageURL = [NSURL URLWithString:porArr[1]];
+            
+            _rankingV.secondNameLb.text = nameArr[2];
+            _rankingV.secondScoreLb.text = [NSString stringWithFormat:@"%@",dataArr[2]];
+            
+            _rankingV.secondIV.imageURL = [NSURL URLWithString:porArr[2]];
+        }
+    }
+
+    
+    
+}
 /** 初始化 */
 - (void)initView{
     UIScrollView *backV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, __kWidth, __kHeight-114)];

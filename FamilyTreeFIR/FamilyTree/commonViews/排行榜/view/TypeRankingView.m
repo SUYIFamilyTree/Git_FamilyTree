@@ -84,7 +84,6 @@ typedef enum : NSUInteger {
             _selectedBtnType = SelectedZCRankBTN;
             _headerArr = @[@"排名",@"家族",@"金额",@"奖励"];
             _dataSource = self.dataRank.zcbr;
-
         }
             break;
         
@@ -95,7 +94,7 @@ typedef enum : NSUInteger {
     
     [self.listtableView reloadData];
     
-
+    [[NSNotificationCenter defaultCenter] postNotificationName:KNotificationCodeRankingPorChange object:nil userInfo:@{@"tag":@(sender.tag)}];
 
 }
 

@@ -10,4 +10,7 @@
 
 @interface WSearchGoodModel : NSObject
 
+
 @end
+
+

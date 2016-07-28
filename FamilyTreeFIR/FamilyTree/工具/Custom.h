@@ -38,7 +38,7 @@ __block __weak __typeof(&*self)weakSelf = self;
 #define Screen_height CGRectGetHeight([UIScreen mainScreen].bounds)
 #define StatusBar_Height [[UIApplication sharedApplication] statusBarFrame].size.height
 #define NavigationBar_Height self.navigationController.navigationBar.frame.size.height
-#define HeightExceptNaviAndTabbar (Screen_height-64-[[UIApplication sharedApplication] statusBarFrame].size.height)
+#define HeightExceptNaviAndTabbar (Screen_height-64-self.tabBarController.tabBar.bounds.size.height)
 //view自身宽高
 #define SelfView_width self.bounds.size.width
 #define SelfView_height self.bounds.size.height
@@ -61,6 +61,7 @@ __block __weak __typeof(&*self)weakSelf = self;
 //RGB
 #define LH_RGBCOLOR(R, G, B)    [UIColor colorWithRed:(R)/255.0 green:(G)/255.0 blue:(B)/255.0 alpha:1.0]
 #define BorderColor LH_RGBCOLOR(215, 215, 215).CGColor
+#define LH_RandomColor          LH_RGBCOLOR(arc4random_uniform(255),arc4random_uniform(255),arc4random_uniform(255))
 //addmethod
 #define CGRectOrigin(v)    v.frame.origin
 #define CGRectSize(v)      v.frame.size

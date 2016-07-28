@@ -18,6 +18,9 @@
 @interface UseItemView : UIView
 @property (nonatomic,strong) UIButton *useBtn; /*试用按钮*/
 @property (nonatomic,strong) UILabel *priceLabel; /*价格*/
+/**图片*/
+@property (nonatomic,strong) UIImageView *goodsImage;
+
 
 @property (nonatomic,weak) id<UseItemViewDelegate> delegate; /*代理人*/
 

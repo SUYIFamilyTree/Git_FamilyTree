@@ -31,7 +31,6 @@ static NSString *const kReusableSearchcellIdentifier = @"SearchcellIdentifier";
 @property (nonatomic,strong) WFilterView *filterView;
 
 
-
 @end
 
 @implementation WShopSearchViewController
@@ -60,11 +59,44 @@ static NSString *const kReusableSearchcellIdentifier = @"SearchcellIdentifier";
     
     return cell;
 }
+#pragma mark *** 网络请求 ***
+/**
+ *  搜索商品
+ *
+ *  @param name 商品名
+ *  @param back 结束搜索
+ */
+-(void)postGoodsListWithGoodsName:(NSString *)name WhileComplete:(void (^)())back{
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"pagenum":@"1",
+                                                @"pagesize":@"20",
+                                                @"type":@"",
+                                                @"label":@"",
+                                                @"coname":name,
+                                                @"shoptype":@"GEN",
+                                                @"qsj":@"",
+                                                @"jwj":@"",
+                                                @"px":@"ZH",
+                                                @"issx":@"1",
+                                                } requestID:GetUserId requestcode:kRequestCodegetcomlist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+                                                    if (succe) {
+                                                        NSLog(@"--goods--%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+                                                    }
+                                                } failure:^(NSError *error) {
+                                                    
+                                                }];
+}
+
+
 
 #pragma mark *** TopSearchViewDelegate ***
 
 -(void)TopSearchViewDidTapView:(TopSearchView *)topSearchView{
+    
     MYLog(@"点击搜索");
+//    [self postGoodsListWithGoodsName:self.topSearchView.searchLabel.text WhileComplete:^{
+//        
+//    }];
+    
 }
 #pragma mark *** WtypeBtnDelegate ***
 -(void)typeBtnView:(WTypeBtnView *)btnView didSelectedTitle:(NSString *)title{
@@ -81,11 +113,10 @@ static NSString *const kReusableSearchcellIdentifier = @"SearchcellIdentifier";
     }else{
         [self.filterView removeFromSuperview];
     }
-    
-   
 }
 -(void)respondsToReturnBtn{
     MYLog(@"返回按钮");
+    [self.navigationController popViewControllerAnimated:YES];
 }
 #pragma mark *** getters ***
 -(TopSearchView *)topSearchView{
@@ -148,7 +179,7 @@ static NSString *const kReusableSearchcellIdentifier = @"SearchcellIdentifier";
 }
 -(WFilterView *)filterView{
     if (!_filterView) {
-        _filterView = [[WFilterView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar-30)];
+        _filterView = [[WFilterView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
     }
     return _filterView;
 }

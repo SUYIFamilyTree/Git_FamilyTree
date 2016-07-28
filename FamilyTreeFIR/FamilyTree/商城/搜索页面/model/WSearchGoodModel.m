@@ -10,4 +10,8 @@
 
 @implementation WSearchGoodModel
 
+
 @end
+
+
+

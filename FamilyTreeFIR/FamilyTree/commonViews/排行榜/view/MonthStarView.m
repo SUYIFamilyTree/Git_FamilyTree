@@ -32,44 +32,44 @@
     _headIV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, (w-50)/14*5, (w-50)/14*5)];
     [self addSubview:_headIV];
     _headIV.backgroundColor = [UIColor redColor];
-
+    
     _surnameLb = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(_headIV)+10, 8, (w-50)/14*3, (w-50)/14)];
     [self addSubview:_surnameLb];
     _surnameLb.font = MFont(f);
     _surnameLb.textAlignment = NSTextAlignmentLeft;
-
+    
     _generationLb = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(_headIV)+10, CGRectYH(_surnameLb), (w-50)/14*3, (w-50)/14)];
     [self addSubview:_generationLb];
     _generationLb.font = MFont(f);
     _generationLb.textAlignment = NSTextAlignmentLeft;
-
+    
     _nameLb = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(_headIV)+10, CGRectYH(_generationLb), (w-50)/14*3, (w-50)/14)];
     [self addSubview:_nameLb];
     _nameLb.font = MFont(f);
     _nameLb.textAlignment = NSTextAlignmentLeft;
-
+    
     _characterLb = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(_headIV)+10, CGRectYH(_nameLb), (w-50)/14*3, (w-50)/14)];
     [self addSubview:_characterLb];
     _characterLb.font = MFont(f);
     _characterLb.textAlignment = NSTextAlignmentLeft;
-
+    
     _rankingLb = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(_headIV)+10, CGRectYH(_characterLb), (w-50)/14*3, (w-50)/14)];
     [self addSubview:_rankingLb];
     _rankingLb.font = MFont(f);
     _rankingLb.textAlignment = NSTextAlignmentLeft;
-
+    
     UIImageView *lineV = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectXW(_rankingLb)+11, 8, 2, (w-50)/14*5+4)];
     [self addSubview:lineV];
     lineV.backgroundColor = LH_RGBCOLOR(200, 200, 200);
-
+    
     _pastTableView = [[UITableView alloc]initWithFrame:CGRectMake(CGRectXW(lineV)+12, 10, (w-50)/14*6, 100)];
     [self addSubview:_pastTableView];
     _pastTableView.delegate = self;
     _pastTableView.dataSource = self;
     _pastTableView.scrollEnabled = NO;
     _pastTableView.backgroundColor = [UIColor clearColor];
-
-
+    
+    
     UILabel *ruleLb = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectYH(_headIV)+10, w-40, 30)];
     [self addSubview:ruleLb];
     ruleLb.font = MFont(15);
@@ -85,7 +85,7 @@
         titleLb.textAlignment = NSTextAlignmentLeft;
         titleLb.text = ruleArr[i];
     }
-
+    
 }
 
 #pragma mark -UITableViewDelegate
