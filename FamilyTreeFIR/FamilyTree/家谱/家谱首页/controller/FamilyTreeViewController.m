@@ -463,7 +463,6 @@ enum{
     if (!_selecMyFamView) {
         _selecMyFamView = [[SelectMyFamilyView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
         _selecMyFamView.delegate = self;
-        
     }
     [_selecMyFamView.collectionView reloadData];
     _selecMyFamView.didSelectedItem = false;
