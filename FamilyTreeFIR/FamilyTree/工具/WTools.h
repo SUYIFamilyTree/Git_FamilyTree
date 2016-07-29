@@ -74,6 +74,8 @@ UIKIT_EXTERN NSString * _Nonnull const kNotificationCodeManagerFam;
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodegetgenalldata;
  /**上传家谱成员的头像*/
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodeuploadgenimg;
+//上传家谱共享图片
+UIKIT_EXTERN NSString * _Nonnull const kRequestCodeuploadgensha;
 /** 编辑卷谱 */
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodechangejp;
 /** 卷谱列表 */

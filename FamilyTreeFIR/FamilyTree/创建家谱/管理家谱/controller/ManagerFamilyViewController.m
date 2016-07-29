@@ -69,8 +69,8 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:MImage(@"gljp_bg")];
     if ([USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]) {
         [WFamilyModel shareWFamilModel].myFamilyId = [USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID];
-
     }
+    
     [self initData];
     [self getJpTypeLayoutArrayCallback:^{
         
@@ -292,6 +292,7 @@
                                                  @"pagesize":@"20",
                                                  @"ds":member} requestID:GetUserId requestcode:kRequestCodequeryzbgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
                                                      if (succe) {
+                                                         NSLog(@"asdasd---%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
                                                          back(jsonDic);
                                                      }
                                                  } failure:^(NSError *error) {
@@ -384,7 +385,10 @@
         CreateFamViewController *crefa = [[CreateFamViewController alloc] initWithTitle:@"创建家谱" image:nil];
         [self.navigationController pushViewController:crefa animated:YES];
     }else if ([searchTitle isEqualToString:@"新增卷谱"]){
-        
+        if (!_JPTypeArr.count||_JPTypeArr.count==0) {
+            [SXLoadingView showAlertHUD:@"没有家谱，请先新建家谱" duration:0.5];
+            return;
+        }
             [self getAddJPPerWithJPId:_JPTypeArr[0][0][@"genmeid"] whileComplet:^{
                 
                 for (int idx = 0; idx<_JPTypeArr.count; idx++) {

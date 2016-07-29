@@ -107,7 +107,10 @@ enum {
     }
     
     //左边两个btn
-    NSArray *btnTitle = @[@"查阅",@"管理"];
+#warning 去掉了管理
+//    NSArray *btnTitle = @[@"查阅",@"管理"];
+        NSArray *btnTitle = @[@"查阅"];
+
     NSArray *colorArr = @[LH_RGBCOLOR(217, 169, 129),LH_RGBCOLOR(90, 110, 115)];
     for (int idx = 0; idx<btnTitle.count; idx++) {
         UIButton *btn = [[UIButton alloc] initWithFrame:AdaptationFrame(0, 24+167*idx, 47, 134)];

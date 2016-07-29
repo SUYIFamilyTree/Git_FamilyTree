@@ -43,10 +43,21 @@
         leftLB.font = MFont(22*AdaptationWidth());
         leftLB.text = _leftArr[idx];
         
+        NSInteger length2 = 0;
+        UILabel *rightLb = [[UILabel alloc] init];
+//        if (idx==1&&![((NSString *)(_rightArr[idx][0])) isEqualToString:@"无数据"]) {
+//            length2 = ((NSString *)_rightArr[idx][0]).length;
+//            rightLb = [[UILabel alloc] initWithFrame:AdaptationFrame(CGRectXW(leftLB), 16, length2*50, leftLB.bounds.size.height/AdaptationWidth())];
+//            rightLb.text = _rightArr[idx][0];
+//        }else{
         
-        NSInteger length2 = ((NSString *)_rightArr[idx]).length;
-        UILabel *rightLb = [[UILabel alloc] initWithFrame:AdaptationFrame(CGRectXW(leftLB), 16, length2*50, leftLB.bounds.size.height/AdaptationWidth())];
+        length2 = ((NSString *)_rightArr[idx]).length;
+        rightLb = [[UILabel alloc] initWithFrame:AdaptationFrame(CGRectXW(leftLB), 16, length2*50, leftLB.bounds.size.height/AdaptationWidth())];
         rightLb.text = _rightArr[idx];
+            
+     
+        
+        
         rightLb.font = leftLB.font;
         
         [self addSubview:leftLB];

@@ -9,6 +9,7 @@
 typedef enum : NSUInteger {
     SelectedFamTotem,
     SelectFamHeadView,
+    SelectMultipleBtn,
     
 } ImagePickType;
 
@@ -74,10 +75,21 @@ typedef enum : NSUInteger {
         
     }
     if ([sender class] == [UIButton class]) {
-        _pickType = SelectFamHeadView;
+        UIButton *btn = sender;
+        if ([btn.titleLabel.text isEqualToString:@"选择头像"]) {
+            _pickType = SelectFamHeadView;
+        }
+        if (!btn.titleLabel.text) {
+            NSLog(@"上传多图");
+             _pickType = SelectMultipleBtn;
+        }
+       
+        
     }
+    
 
     NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         _imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         _imagePickerController.mediaTypes = @[mediaTypes[0]];
@@ -105,6 +117,9 @@ typedef enum : NSUInteger {
         self.famTotem.image = info[UIImagePickerControllerEditedImage];
     }else if (_pickType == SelectFamHeadView){
         self.selecProtrai.image = info[UIImagePickerControllerEditedImage];
+    }else{
+        //上传图片
+        self.mutilpleImage = info[UIImagePickerControllerEditedImage];
     }
     
     [[self viewController] dismissViewControllerAnimated:YES completion:nil];
@@ -172,6 +187,9 @@ typedef enum : NSUInteger {
         _famTotem.userInteractionEnabled = true;
         UITapGestureRecognizer *tapGess = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondsToSelectHeadImage:)];
         [_famTotem addGestureRecognizer:tapGess];
+        
+        [self.uploadImageBtn removeAllTargets];
+        [self.uploadImageBtn addTarget:self action:@selector(respondsToSelectHeadImage:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _famTotem;
 }
