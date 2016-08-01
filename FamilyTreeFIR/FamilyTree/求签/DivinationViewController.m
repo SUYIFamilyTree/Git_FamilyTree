@@ -156,22 +156,19 @@ enum {
             NSString *urlStr = arr[sender.tag-10][@"CoCover"];
             NSString *price =  arr[sender.tag-10][@"CoprMoney"];
             self.userItem.goodsImage.imageURL = [NSURL URLWithString:urlStr];
-            self.userItem.priceLabel.text = [NSString stringWithFormat:@"%@元每天",price];
+            self.userItem.priceLabel.text = [NSString stringWithFormat:@"%@元/天",price];
             
             switch (sender.tag) {
                 case XZBtnTag:
                 {
                     self.userItem.tag = XZUseItemClick;
                     [self.imageView addSubview:self.userItem];
-                    
-                    
                 }
                     break;
                 case XLBtnTag:
                 {
                     self.userItem.tag = XLUseItemClick;
                     [self.imageView addSubview:self.userItem];
-                    
                 }
                     break;
                 case YBBtnTag:

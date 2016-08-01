@@ -127,14 +127,6 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
     if (collectionView == self.collectionView) {
         
         _didSelectedItem = true;
- 
-        if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectFamID:)]) {
-            [_delegate SelectMyFamilyViewDelegate:self didSelectFamID:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row]];
-        }
-        
-        if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectFamTitle:SelectFamID:)]) {
-            [_delegate SelectMyFamilyViewDelegate:self didSelectFamTitle:cell.titleLabel.text SelectFamID:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row]];
-        };
         
         //点过后存起来
         [WFamilyModel shareWFamilModel].myFamilyId = [WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row];
@@ -143,6 +135,17 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
         [USERDEFAULT setObject:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row] forKey:kNSUserDefaultsMyFamilyID];
         [USERDEFAULT setObject:cell.titleLabel.text forKey:kNSUserDefaultsMyFamilyName];
         [USERDEFAULT synchronize];
+        NSLog(@"%@", [USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]);
+        
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectFamID:)]) {
+            [_delegate SelectMyFamilyViewDelegate:self didSelectFamID:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row]];
+        }
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectFamTitle:SelectFamID:)]) {
+            [_delegate SelectMyFamilyViewDelegate:self didSelectFamTitle:cell.titleLabel.text SelectFamID:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row]];
+        };
+        
         
         
     }else{

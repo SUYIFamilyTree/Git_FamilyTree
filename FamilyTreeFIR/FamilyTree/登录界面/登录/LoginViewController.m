@@ -234,6 +234,27 @@
             if ([jsonDic[@"message"] isEqualToString:@"登录成功"]) {
                 [SXLoadingView showAlertHUD:@"登录成功" duration:0.5];
                 LoginModel *loginModel = [LoginModel modelWithJSON:jsonDic[@"data"]];
+                
+                if ([USERDEFAULT objectForKey:@"userid"]&&[[USERDEFAULT objectForKey:@"userid"] integerValue]!=loginModel.userId) {
+                    //登录成功移除userdefault的id
+                    if ([USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]) {
+                        [USERDEFAULT removeObjectForKey:kNSUserDefaultsMyFamilyID];
+                        if ([WFamilyModel shareWFamilModel]) {
+                            [WFamilyModel  shareWFamilModel].ds = 0;
+                            [WFamilyModel  shareWFamilModel].rs = 0;
+                            WFamilyModel *model = [[WFamilyModel alloc] init];
+                            [WFamilyModel  shareWFamilModel].datalist = model.datalist;
+                            
+//                            WSelectMyFamModel *selModel = [[WSelectMyFamModel alloc] init];
+//                            [WSelectMyFamModel sharedWselectMyFamModel].myFamArray = selModel.myFamArray;
+//                            [WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray = selModel.myFamIdArray;
+                           
+                        }
+                    }
+                }
+                
+                
+                
                 //存储用户信息
                 //id
                 [USERDEFAULT setObject:@(loginModel.userId) forKey:@"userid"];
@@ -247,7 +268,9 @@
                 [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserAccount];
                 [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:UserPassword];
                 //[self.navigationController popViewControllerAnimated:YES];
+               
                 [self dismissViewControllerAnimated:NO completion:nil];
+                
             }else{
                 [SXLoadingView showAlertHUD:jsonDic[@"message"] duration:0.5];
             }

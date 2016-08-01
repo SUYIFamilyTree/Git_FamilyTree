@@ -158,7 +158,7 @@
     NSString *encodeImageData = [imageData base64EncodedString];
     [TCJPHTTPRequestManager POSTWithParameters:@{@"userid":GetUserId,@"genid":genID,@"imgbt":encodeImageData} requestID:GetUserId requestcode:kRequestCodeuploadgenan success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-            NSLog(@"祖宗头像%@", jsonDic[@"data"]);
+//            NSLog(@"祖宗头像%@", jsonDic[@"data"]);
         }
     } failure:^(NSError *error) {
         MYLog(@"shibai");
@@ -172,12 +172,28 @@
     NSString *encodeImageTotemData = [imageTotemData base64EncodedString];
     [TCJPHTTPRequestManager POSTWithParameters:@{@"userid":GetUserId,@"genid":genID,@"imgbt":encodeImageTotemData} requestID:GetUserId requestcode:kRequestCodeuploadgentt success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-            NSLog(@"家谱图腾%@", jsonDic[@"data"]);
+//            NSLog(@"家谱图腾%@", jsonDic[@"data"]);
         }
         [self.navigationController popViewControllerAnimated:YES];
     } failure:^(NSError *error) {
         MYLog(@"shibai");
     }];
+    
+    //多次分享的图片
+    if (!self.cFameView.mutilpleImage) {
+        self.cFameView.mutilpleImage = [UIImage imageWithColor:[UIColor whiteColor]];
+    }
+    
+    NSData *imageMutipleData = UIImageJPEGRepresentation(self.cFameView.mutilpleImage, 0.5);
+    NSString *encodeImageMutipleData = [imageMutipleData base64EncodedString];
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"userid":GetUserId,@"genid":genID,@"imgbt":encodeImageMutipleData} requestID:GetUserId requestcode:kRequestCodeuploadgensha success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSLog(@"共享%@", jsonDic[@"data"]);
+        }
+    } failure:^(NSError *error) {
+        MYLog(@"shibai");
+    }];
+
 }
 
 #pragma mark *** 初始化界面 ***

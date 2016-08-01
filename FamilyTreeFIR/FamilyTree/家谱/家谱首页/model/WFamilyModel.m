@@ -21,7 +21,7 @@ static WFamilyModel *familModel = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         familModel = [[WFamilyModel alloc] init];
-        familModel.myFamilyId = @"1";
+        familModel.myFamilyId = @"";
     });
     return familModel;
 }

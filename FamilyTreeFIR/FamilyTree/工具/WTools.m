@@ -69,7 +69,7 @@ NSString * _Nonnull const kRequestCodeuploadgenan = @"uploadgenan";
 //上传家谱图腾头像
 NSString * _Nonnull const kRequestCodeuploadgentt = @"uploadgentt";
 //上传家谱共享图片
-//NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
+NSString * _Nonnull const kRequestCodeuploadgensha = @"uploadgensha";
 //上传家谱共享视频
 //NSString * _Nonnull const kRequestCode<#querymygen#> = @"<#querymygen#>";
 

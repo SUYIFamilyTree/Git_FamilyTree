@@ -64,7 +64,7 @@ enum{
 //初始化所有具体图
 -(void)initAllDetailManagerDetailView{
     
-    NSArray *titleArr = @[@"姓名：",@"妻子：",@"养子："];
+    NSArray *titleArr = @[@"姓名：",@"养子："];
     
     NSMutableArray *subDetaiArr = [@[] mutableCopy];//具体信息arr。设计图为三种
     
@@ -84,10 +84,15 @@ enum{
                 //名字
                 [XArr addObject:obj.datas[idx2].name];
                 //妻子
+//                [XArr addObject:obj.datas[idx2].mother&&obj.datas[idx2].mother.length!=0?obj.datas[idx2].mother:@"无"];
                 
-                [XArr addObject:obj.datas[idx2].mother&&obj.datas[idx2].mother.length!=0?obj.datas[idx2].mother:@"无"];
                 //养子
-                [XArr addObject:@"无数据"];
+                NSArray *chArr = obj.datas[idx2].chl;
+                if (chArr&&chArr.count!=0) {
+                    [XArr addObject:obj.datas[idx2].chl[0]];
+                }else{
+                    [XArr addObject:@"无"];
+                }
                 
                 [subDetaiArr addObject:XArr];
                 
@@ -134,7 +139,8 @@ enum{
         [self.backScrollView addSubview:rollView];
         
         [self.view addSubview:self.addMemberBtn];
-        [self.view addSubview:self.addManagerBtn];
+#warning 删掉了新增管理按钮
+//        [self.view addSubview:self.addManagerBtn];
         
     }
 }

@@ -60,6 +60,10 @@
     if ([self.AddFameView.parnName.text isEqualToString:@""]) {
         self.AddFameView.parnName.text = @"不详";
     }
+    if ([self.AddFameView.motherView.text isEqualToString:@""]) {
+        [SXLoadingView showAlertHUD:@"母亲不能为空" duration:0.5];
+        return;
+    }
     //截取代数
     NSString *genNumber = [self.AddFameView.gennerNum.inputLabel.text stringByReplacingOccurrencesOfString:@"第" withString:@""];
     NSString *genNumberF = [genNumber stringByReplacingOccurrencesOfString:@"代" withString:@""];

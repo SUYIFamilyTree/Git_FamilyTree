@@ -139,7 +139,7 @@ enum{
     videoBtn.tag = UPloadVideoTag;
     [videoBtn addTarget:self action:@selector(respondsToUploadbtn:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.backView addSubview:videoBtn];
+//    [self.backView addSubview:videoBtn];
     videoBtn.sd_layout.leftSpaceToView(self.uploadImageBtn,10).rightSpaceToView(self.backView,20).heightIs(InputView_height).topSpaceToView(self.selfTextView,GapOfView);
     
     //迁移着居住地
@@ -518,7 +518,7 @@ enum{
         
         UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(CGRectXW(label1), 0, _uploadImageBtn.bounds.size.width/2, 40)];
         label2.font = MFont(13);
-        label2.text = @"(可为多张)";
+        label2.text = @"(可传多次)";
         [_uploadImageBtn addSubview:label2];
     }
     return _uploadImageBtn;

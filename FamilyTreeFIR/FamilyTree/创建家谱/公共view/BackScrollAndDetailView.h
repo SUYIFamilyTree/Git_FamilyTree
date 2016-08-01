@@ -73,7 +73,8 @@
 
 @property (nonatomic,assign) BOOL zbLegal; /*字辈格式是否合法*/
 
-
+/**上传的图片*/
+@property (nonatomic,strong) UIImage *mutilpleImage;
 
 //创建labelText
 -(InputView *)creatLabelTextWithTitle:(NSString *)title

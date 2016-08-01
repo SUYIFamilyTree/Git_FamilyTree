@@ -102,8 +102,12 @@ enum{
     self.navigationController.navigationBarHidden = YES;
     //更新数据
     [self getFamInfo];
-    
-    [self getFamDetailInfo];
+    if ([USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]) {
+        [self getFamDetailInfo];
+
+    }else{
+        [self reloadAllData];
+    }
     
     [self.navigationController popToRootViewControllerAnimated:YES];
     
@@ -341,19 +345,25 @@ enum{
 }
 -(void)respondsToCreatBtn:(UIButton *)sender{
     
-    _selectedCreateBtnType +=1;
-    if (_selectedCreateBtnType == 1) {
-        
+//    _selectedCreateBtnType +=1;
+//    if (_selectedCreateBtnType == 1) {
+//        
+//        [self.view addSubview:self.crtFamTree];
+//    }else if(_selectedCreateBtnType ==2){
+//        [_crtFamTree removeFromSuperview];
+//        
+//        [self.view addSubview:self.crtFamTreeNoRight];
+//
+//    }else {
+//        [_crtFamTreeNoRight removeFromSuperview];
+//        
+//         _selectedCreateBtnType = 0;
+//    }
+    sender.selected = !sender.selected;
+    if (sender.selected) {
         [self.view addSubview:self.crtFamTree];
-    }else if(_selectedCreateBtnType ==2){
-        [_crtFamTree removeFromSuperview];
-        
-        [self.view addSubview:self.crtFamTreeNoRight];
-
-    }else {
-        [_crtFamTreeNoRight removeFromSuperview];
-        
-         _selectedCreateBtnType = 0;
+    }else{
+        [self.crtFamTree removeFromSuperview];
     }
 }
 
@@ -414,6 +424,12 @@ enum{
             
         }
         if (sender.tag == 2) {
+            
+            if (![USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]) {
+                [SXLoadingView showAlertHUD:@"请先选择一个家谱" duration:0.5];
+                return;
+            }
+            
         ManagerFamilyViewController *manager = [[ManagerFamilyViewController alloc] initWithTitle:@"管理家谱" image:nil];
         [manager.comNavi.rightBtn removeFromSuperview];
         [self.navigationController pushViewController:manager animated:YES];

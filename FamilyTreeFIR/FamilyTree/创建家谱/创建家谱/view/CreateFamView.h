@@ -29,4 +29,5 @@
 @property (nonatomic,strong) UIImageView *famTotem; /*家族图腾图*/
 
 
+
 @end
