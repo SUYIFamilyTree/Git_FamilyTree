@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "StarView.h"
 
 @interface CommentCell : UITableViewCell
 /**
@@ -19,8 +19,7 @@
  */
 @property (strong,nonatomic) UILabel *nameLb;
 
-#warning mark ==替换成封装的评价星级视图==
-@property (strong,nonatomic) UIView *StarV;
+@property (strong,nonatomic) StarView *StarV;
 /**
  *  日期
  */

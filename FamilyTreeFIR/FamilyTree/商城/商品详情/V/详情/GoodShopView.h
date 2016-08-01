@@ -1,5 +1,5 @@
 //
-//  GuessLikeCell.h
+//  GoodShopView.h
 //  ListV
 //
 //  Created by imac on 16/7/26.
@@ -7,14 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GoodPayModel.h"
+#import "GoodDetailModel.h"
 
-@interface GuessLikeCell : UICollectionViewCell
+@interface GoodShopView : UIView
 /**
- *  商品图片
- */
-@property (strong,nonatomic) UIImageView *goodIV;
-/**
- *  商品名称
+ *  商品名
  */
 @property (strong,nonatomic) UILabel *goodNameLb;
 /**
@@ -25,11 +23,17 @@
  *  报价
  */
 @property (strong,nonatomic) UILabel *quoteLb;
-/**
- *  购物车按钮
- */
-@property (strong,nonatomic) UIButton *shoppingBtn;
-/**商品id*/
-@property (nonatomic,strong) NSString *goodId;
 
+/**
+ *  选中的商品
+ */
+@property (strong,nonatomic) GoodPayModel *goodPayModel;
+/**
+ *  视图赋值
+ */
+- (void)getGoodData:(GoodDetailModel *)sender;
+
+@property (nonatomic) CGFloat height;
+
+- (void)updateFrame;
 @end

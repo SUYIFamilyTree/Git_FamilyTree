@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface WShopSearchViewController : UIViewController
+- (instancetype)initWithText:(NSString *)sarchText;
 
 @end

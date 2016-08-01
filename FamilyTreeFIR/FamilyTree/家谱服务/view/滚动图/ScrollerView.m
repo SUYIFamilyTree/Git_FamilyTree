@@ -77,8 +77,8 @@
         [self.rightImage setImageWithURL:[NSURL URLWithString:self.imageNames[1]] placeholder:MImage(@"lunbo_bg")];
     }else{
         self.leftImage.image = MImage(_imageNames.lastObject);
-            self.centerImage.image = MImage(_imageNames[0]);
-            self.rightImage.image = MImage(_imageNames[1]);
+        self.centerImage.image = MImage(_imageNames[0]);
+        self.rightImage.image = MImage(_imageNames[1]);
     }
     
     

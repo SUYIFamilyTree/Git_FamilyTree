@@ -38,9 +38,9 @@
     _nameLb.font = MFont(11);
     _nameLb.textColor = LH_RGBCOLOR(130, 130, 130);
 
-    _StarV = [[UIView alloc]init];
+    _StarV = [[StarView alloc]initWithFrame:CGRectMake(CGRectXW(_nameLb)+5, 24, 60, 12)];
     [self.contentView addSubview:_StarV];
-    _StarV.backgroundColor = [UIColor redColor];
+    _StarV.backgroundColor = [UIColor clearColor];
 
     _timeLb = [[UILabel alloc]initWithFrame:CGRectMake(__kWidth-75, 23, 65, 15)];
     [self.contentView addSubview:_timeLb];
@@ -61,10 +61,12 @@
     _infoLb.textColor = LH_RGBCOLOR(100, 100, 100);
 
 }
-
+/**
+ *  更新约束
+ */
 -(void)updateFrame{
     [self widthWithLabel:_nameLb];
-    _StarV.frame = CGRectMake(CGRectXW(_nameLb)+5, 24, 65, 10);
+    _StarV.frame = CGRectMake(CGRectXW(_nameLb)+5, 24, 50, 10);
     _descLb.frame = CGRectMake(10, CGRectYH(_headIV)+10, __kWidth-20, [self heightWithLabel:_descLb]);
     _infoLb.frame = CGRectMake(10, CGRectYH(_descLb)+5, __kWidth-20, 20);
    

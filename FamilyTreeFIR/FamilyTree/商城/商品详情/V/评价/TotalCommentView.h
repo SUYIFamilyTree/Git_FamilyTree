@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StarView.h"
 
 @protocol TotalCommentViewDelegate <NSObject>
 
@@ -19,6 +20,8 @@
  *  好评百分比显示
  */
 @property (strong,nonatomic) UILabel *commentNumberLb;
+
+@property (strong,nonatomic) StarView *starV;
 
 @property (weak,nonatomic) id<TotalCommentViewDelegate>delegate;
 
