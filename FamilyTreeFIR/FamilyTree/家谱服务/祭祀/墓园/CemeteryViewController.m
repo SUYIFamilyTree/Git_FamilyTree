@@ -125,7 +125,7 @@ enum {
                              };
     WK(weakSelf);
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getcomlist" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        MYLog(@"数据%@",jsonDic[@"data"]);
+        MYLog(@"数据%@",jsonDic);
         if (succe) {
             NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
             weakSelf.goodsArr = [NSArray modelArrayWithClass:[CemGoodsShopModel class] json:dic[@"datalist"]];

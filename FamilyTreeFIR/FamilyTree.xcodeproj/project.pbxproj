@@ -750,8 +750,11 @@
 		BC3CF3E81D01318C00437ED6 /* chongZhi_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E51D01318C00437ED6 /* chongZhi_sel.png */; };
 		BC3CF3E91D01318C00437ED6 /* chongZhi_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E61D01318C00437ED6 /* chongZhi_sel@2x.png */; };
 		BC3CF3EA1D01318C00437ED6 /* chongZhi_sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC3CF3E71D01318C00437ED6 /* chongZhi_sel@3x.png */; };
+		BC4558621D4EFBFA000B8B87 /* NSString+YJudgeValidateNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4558611D4EFBFA000B8B87 /* NSString+YJudgeValidateNumber.m */; };
 		BC458A861D1CC64300AA0DDF /* JobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC458A851D1CC64300AA0DDF /* JobModel.m */; };
 		BC458A891D1D1B9200AA0DDF /* QueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC458A881D1D1B9200AA0DDF /* QueryModel.m */; };
+		BC45DE181D4A0722005A0447 /* MyHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC45DE171D4A0722005A0447 /* MyHelpViewController.m */; };
+		BC45DE1D1D4A0778005A0447 /* MyHelpOrAttentionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC45DE1C1D4A0778005A0447 /* MyHelpOrAttentionTableViewCell.m */; };
 		BC4790631D20BD6F00BA194D /* AreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC4790621D20BD6F00BA194D /* AreaModel.m */; };
 		BC499B951D2CD851007870FE /* BarrageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC499B941D2CD851007870FE /* BarrageListModel.m */; };
 		BC499B9E1D2CDFDD007870FE /* FlyBarrageTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC499B9D1D2CDFDD007870FE /* FlyBarrageTextView.m */; };
@@ -890,6 +893,7 @@
 		BC6094EB1D3DB8A20056DD9C /* zcmf_btn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC6094E51D3DB8A20056DD9C /* zcmf_btn@3x.png */; };
 		BC6094F11D3DED210056DD9C /* CliffordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC6094F01D3DED210056DD9C /* CliffordViewController.m */; };
 		BC65210F1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC65210E1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.m */; };
+		BC6771A31D4B4B0000F33621 /* AddPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC6771A21D4B4B0000F33621 /* AddPostViewController.m */; };
 		BC7299F41D22147D008FEB71 /* VIPInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC7299F31D22147D008FEB71 /* VIPInfoModel.m */; };
 		BC7299FE1D225C53008FEB71 /* FortuneTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC7299F81D225C53008FEB71 /* FortuneTodayViewController.m */; };
 		BC7299FF1D225C53008FEB71 /* AllLucyNum.m in Sources */ = {isa = PBXBuildFile; fileRef = BC7299FB1D225C53008FEB71 /* AllLucyNum.m */; };
@@ -2013,10 +2017,16 @@
 		BC3CF3E51D01318C00437ED6 /* chongZhi_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chongZhi_sel.png; sourceTree = "<group>"; };
 		BC3CF3E61D01318C00437ED6 /* chongZhi_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chongZhi_sel@2x.png"; sourceTree = "<group>"; };
 		BC3CF3E71D01318C00437ED6 /* chongZhi_sel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chongZhi_sel@3x.png"; sourceTree = "<group>"; };
+		BC4558601D4EFBFA000B8B87 /* NSString+YJudgeValidateNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+YJudgeValidateNumber.h"; sourceTree = "<group>"; };
+		BC4558611D4EFBFA000B8B87 /* NSString+YJudgeValidateNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+YJudgeValidateNumber.m"; sourceTree = "<group>"; };
 		BC458A841D1CC64300AA0DDF /* JobModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobModel.h; sourceTree = "<group>"; };
 		BC458A851D1CC64300AA0DDF /* JobModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobModel.m; sourceTree = "<group>"; };
 		BC458A871D1D1B9200AA0DDF /* QueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryModel.h; sourceTree = "<group>"; };
 		BC458A881D1D1B9200AA0DDF /* QueryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryModel.m; sourceTree = "<group>"; };
+		BC45DE161D4A0722005A0447 /* MyHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyHelpViewController.h; path = "我的互助/MyHelpViewController.h"; sourceTree = "<group>"; };
+		BC45DE171D4A0722005A0447 /* MyHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyHelpViewController.m; path = "我的互助/MyHelpViewController.m"; sourceTree = "<group>"; };
+		BC45DE1B1D4A0778005A0447 /* MyHelpOrAttentionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHelpOrAttentionTableViewCell.h; sourceTree = "<group>"; };
+		BC45DE1C1D4A0778005A0447 /* MyHelpOrAttentionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHelpOrAttentionTableViewCell.m; sourceTree = "<group>"; };
 		BC4790611D20BD6F00BA194D /* AreaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaModel.h; sourceTree = "<group>"; };
 		BC4790621D20BD6F00BA194D /* AreaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaModel.m; sourceTree = "<group>"; };
 		BC499B931D2CD851007870FE /* BarrageListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarrageListModel.h; sourceTree = "<group>"; };
@@ -2190,6 +2200,8 @@
 		BC6094F01D3DED210056DD9C /* CliffordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CliffordViewController.m; sourceTree = "<group>"; };
 		BC65210D1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPersonalInfoDetailViewController.h; sourceTree = "<group>"; };
 		BC65210E1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPersonalInfoDetailViewController.m; sourceTree = "<group>"; };
+		BC6771A11D4B4B0000F33621 /* AddPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPostViewController.h; sourceTree = "<group>"; };
+		BC6771A21D4B4B0000F33621 /* AddPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPostViewController.m; sourceTree = "<group>"; };
 		BC7299F21D22147D008FEB71 /* VIPInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VIPInfoModel.h; path = ../../model/VIPInfoModel.h; sourceTree = "<group>"; };
 		BC7299F31D22147D008FEB71 /* VIPInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VIPInfoModel.m; path = ../../model/VIPInfoModel.m; sourceTree = "<group>"; };
 		BC7299F71D225C53008FEB71 /* FortuneTodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FortuneTodayViewController.h; sourceTree = "<group>"; };
@@ -2565,6 +2577,8 @@
 				ADC29A751D38E341004353F4 /* NSString+WJudgeStringlegal.m */,
 				BC2FD02E1D41B4C50078A951 /* NSString+getLineSpaceStr.h */,
 				BC2FD02F1D41B4C50078A951 /* NSString+getLineSpaceStr.m */,
+				BC4558601D4EFBFA000B8B87 /* NSString+YJudgeValidateNumber.h */,
+				BC4558611D4EFBFA000B8B87 /* NSString+YJudgeValidateNumber.m */,
 			);
 			path = "扩展方法";
 			sourceTree = "<group>";
@@ -2617,6 +2631,8 @@
 		AD49FED11CF6A02C00DF9F7E /* 家谱服务 */ = {
 			isa = PBXGroup;
 			children = (
+				BC67719C1D4B4ACD00F33621 /* 新增发布 */,
+				BC45DE0F1D49FBAA005A0447 /* 我的互助 */,
 				ADD23CFF1D0D5454008986F6 /* 教你修谱 */,
 				BC2943A41CFEA4E1006671B9 /* 祭祀 */,
 				AD8DAADD1CFD750C009B7958 /* 宗亲互助 */,
@@ -4535,6 +4551,35 @@
 			path = "充值";
 			sourceTree = "<group>";
 		};
+		BC45DE0F1D49FBAA005A0447 /* 我的互助 */ = {
+			isa = PBXGroup;
+			children = (
+				BC45DE191D4A0749005A0447 /* model */,
+				BC45DE1A1D4A0749005A0447 /* view */,
+				BC45DE161D4A0722005A0447 /* MyHelpViewController.h */,
+				BC45DE171D4A0722005A0447 /* MyHelpViewController.m */,
+			);
+			name = "我的互助";
+			sourceTree = "<group>";
+		};
+		BC45DE191D4A0749005A0447 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = model;
+			path = "我的互助/model";
+			sourceTree = "<group>";
+		};
+		BC45DE1A1D4A0749005A0447 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				BC45DE1B1D4A0778005A0447 /* MyHelpOrAttentionTableViewCell.h */,
+				BC45DE1C1D4A0778005A0447 /* MyHelpOrAttentionTableViewCell.m */,
+			);
+			name = view;
+			path = "我的互助/view";
+			sourceTree = "<group>";
+		};
 		BC578DB91D2B4A9500776106 /* 墓园model */ = {
 			isa = PBXGroup;
 			children = (
@@ -4939,6 +4984,23 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		BC67719C1D4B4ACD00F33621 /* 新增发布 */ = {
+			isa = PBXGroup;
+			children = (
+				BC6771A11D4B4B0000F33621 /* AddPostViewController.h */,
+				BC6771A21D4B4B0000F33621 /* AddPostViewController.m */,
+				BC67719D1D4B4ACD00F33621 /* view */,
+			);
+			path = "新增发布";
+			sourceTree = "<group>";
+		};
+		BC67719D1D4B4ACD00F33621 /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		BC7299F51D2214D3008FEB71 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -5340,7 +5402,7 @@
 				TargetAttributes = {
 					ADC326F41CF3E3DF00CEAE53 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = PJ6JTWKSUQ;
+						DevelopmentTeam = 27FQAQ29WK;
 					};
 					ADC3270D1CF3E3E000CEAE53 = {
 						CreatedOnToolsVersion = 7.2;
@@ -6329,6 +6391,7 @@
 				AD8514701D420885007FB495 /* CommentCell.m in Sources */,
 				BCE2AD541CF8339000EC98F5 /* FamilyTreeTopView.m in Sources */,
 				BCF100051D02B11400D65E60 /* CALayer+drawborder.m in Sources */,
+				BC45DE181D4A0722005A0447 /* MyHelpViewController.m in Sources */,
 				AD8C61E11D1E54A2005CDA68 /* WTools.m in Sources */,
 				AD9D862F1D2CB0C700D8D8F6 /* WFamilyTableViewCell.m in Sources */,
 				AD8DAAE01CFD7533009B7958 /* FamilyHelpViewController.m in Sources */,
@@ -6336,6 +6399,7 @@
 				BCAEF3011D337B0F006DE1A5 /* ZSZPView.m in Sources */,
 				BC7299FE1D225C53008FEB71 /* FortuneTodayViewController.m in Sources */,
 				ADE265A81D20C4C800F12FC9 /* WSelectMyFamModel.m in Sources */,
+				BC6771A31D4B4B0000F33621 /* AddPostViewController.m in Sources */,
 				BC5F15181D0FF1AD004F3622 /* RechargeViewController.m in Sources */,
 				BC5192A41D23A0E30020480F /* NSString+valiEmail.m in Sources */,
 				ADAB221D1D26174A0047B6F0 /* WIDModel.m in Sources */,
@@ -6429,6 +6493,7 @@
 				ADA98E971D11584C005B23EC /* CommonNavigationViews.m in Sources */,
 				AD2ACD8F1CF3FE5E009D4A24 /* Tools.m in Sources */,
 				BC7299FF1D225C53008FEB71 /* AllLucyNum.m in Sources */,
+				BC4558621D4EFBFA000B8B87 /* NSString+YJudgeValidateNumber.m in Sources */,
 				BC729A041D225CAA008FEB71 /* FortuneTodayModel.m in Sources */,
 				ADA98E9C1D115898005B23EC /* MyFamilyCollectionViewCell.m in Sources */,
 				BC499B9E1D2CDFDD007870FE /* FlyBarrageTextView.m in Sources */,
@@ -6450,6 +6515,7 @@
 				ADE3BBD31D13E795006523C4 /* DivinationViewController.m in Sources */,
 				ADB9261E1CF7DF1900AA8B6E /* LoginView.m in Sources */,
 				ADA7FF0D1D0814DF00EDBEE4 /* TopBackSearch.m in Sources */,
+				BC45DE1D1D4A0778005A0447 /* MyHelpOrAttentionTableViewCell.m in Sources */,
 				BC59E1121D2F5595000A3AE3 /* HomeViewModel.m in Sources */,
 				BC941B201D3F54DF00571EE2 /* CliffordEndViewController.m in Sources */,
 				AD8514711D420885007FB495 /* CommentPersonModel.m in Sources */,
@@ -6600,7 +6666,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -6622,6 +6689,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = com.tongchengjiapu;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -6643,7 +6711,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6658,6 +6727,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = com.tongchengjiapu;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -6674,7 +6744,7 @@
 				INFOPLIST_FILE = FamilyTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yisu.ym;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tongchengjiapu.jihua;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -6691,7 +6761,7 @@
 				INFOPLIST_FILE = FamilyTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yisu.ym;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tongchengjiapu.jihua;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

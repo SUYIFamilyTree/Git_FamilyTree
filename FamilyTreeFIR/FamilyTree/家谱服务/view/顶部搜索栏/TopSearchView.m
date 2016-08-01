@@ -7,7 +7,7 @@
 //
 
 #import "TopSearchView.h"
-
+#import "MyHelpViewController.h"
 
 @interface TopSearchView ()
 
@@ -25,7 +25,7 @@
         [self.searchView addSubview:self.searchLabel];
         [self.searchView addSubview:self.searchImage];
         [self addSubview:self.menuBtn];
-        
+        self.menuBtn.sd_layout.leftSpaceToView(self.searchView,0).rightSpaceToView(self,0).heightIs(30).topSpaceToView(self,27);
        
     }
     return self;
@@ -40,6 +40,8 @@
 
 #pragma mark *** 点击菜单栏 ***
 -(void)respondsToMenuBtn:(UIButton *)sender{
+    MyHelpViewController *myHelpVC = [[MyHelpViewController alloc]initWithTitle:@"我的互助" image:nil];
+    [[self viewController].navigationController pushViewController:myHelpVC animated:YES];
     if (_delegate && [_delegate respondsToSelector:@selector(TopSearchView:didRespondsToMenusBtn:)]) {
         [_delegate TopSearchView:self didRespondsToMenusBtn:sender];
     }
@@ -88,10 +90,10 @@
 }
 -(UIButton *)menuBtn{
     if (!_menuBtn) {
-        _menuBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.frame)-0.07*Screen_width-MenusBtn_size/2, SearchToTop+(SearchView_Height-MenusBtn_size), MenusBtn_size, MenusBtn_size*0.8)];
-        [_menuBtn setBackgroundImage:MImage(@"chec") forState:UIControlStateNormal];
+        _menuBtn = [[UIButton alloc]init];
+        [_menuBtn setTitle:@"我的互助" forState:UIControlStateNormal];
+        _menuBtn.titleLabel.font = MFont(12);
         [_menuBtn addTarget:self action:@selector(respondsToMenuBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
     }
     return _menuBtn;
 }

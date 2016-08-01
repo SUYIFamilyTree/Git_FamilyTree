@@ -20,7 +20,7 @@
         titleLB.text = title;
         titleLB.font = WFont(25);
         [self addSubview:titleLB];
-        self.textLB = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(titleLB), 5, 480*AdaptationWidth(), self.frame.size.height*AdaptationWidth())];
+        self.textLB = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(titleLB), 5, 440*AdaptationWidth(), self.frame.size.height*AdaptationWidth())];
         self.textLB.text = text;
         self.textLB.font = WFont(25);
         self.textLB.numberOfLines = 0;

@@ -61,6 +61,7 @@
 #import "NSString+arabicToChinese.h"
 #import "NSString+WJudgeStringlegal.h"
 #import "NSString+getLineSpaceStr.h"
+#import "NSString+YJudgeValidateNumber.h"
 //网络请求
 #import "TCJPHTTPRequestManager.h"
 #import "SXLoadingView.h"

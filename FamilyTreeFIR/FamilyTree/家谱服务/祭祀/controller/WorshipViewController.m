@@ -219,15 +219,15 @@
 
 #pragma mark - PrivateWorshipViewDelegate
 -(void)PrivateWorshipView:(PrivateWorshipView *)privateWorshipView didSelect:(BOOL)isEditing{
-    
-    
 }
 
 -(void)TableView:(UITableView *)tableView didSelectTableRowAtIndexPath:(NSIndexPath *)index{
-    CemeteryViewController *cemeVc = [[CemeteryViewController alloc] initWithTitle:@"在线祭祀" image:nil];
-    cemeVc.CeId = ((PrivateWorshipTableViewCell *)[tableView cellForRowAtIndexPath:index]).worshipDatalistModel.CeId;
-    
-    [self.navigationController pushViewController:cemeVc animated:YES];
+    MYLog(@"到这了");
+        CemeteryViewController *cemeVc = [[CemeteryViewController alloc] initWithTitle:@"在线祭祀" image:nil];
+        cemeVc.CeId = ((PrivateWorshipTableViewCell *)[tableView cellForRowAtIndexPath:index]).worshipDatalistModel.CeId;
+        
+        [self.navigationController pushViewController:cemeVc animated:YES];
+   
 }
 
 -(void)PrivateWorshipViewDidSelectedCreateCem:(PrivateWorshipView *)privateWorshipView{

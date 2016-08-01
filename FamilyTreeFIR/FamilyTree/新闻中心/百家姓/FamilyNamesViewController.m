@@ -88,7 +88,7 @@
     [self.whiteBackV addSubview:self.moveTitleLB];
     self.moveTitleLB.sd_layout.topSpaceToView(self.nameBeginViewArr.lastObject,20).leftSpaceToView(self.whiteBackV,0).heightIs(32*AdaptationWidth()).widthIs(166*AdaptationWidth());
     [self.whiteBackV addSubview:self.moveInfoLB];
-    self.moveInfoLB.sd_layout.topSpaceToView(self.moveTitleLB,24*AdaptationWidth()).leftEqualToView(self.totemInfoLB).rightSpaceToView(self.whiteBackV,0).heightIs(CGRectH(self.moveInfoLB));
+    self.moveInfoLB.sd_layout.topSpaceToView(self.moveTitleLB,24*AdaptationWidth()).leftEqualToView(self.totemInfoLB).rightSpaceToView(self.whiteBackV,10).heightIs(CGRectH(self.moveInfoLB));
     
     [self initZSZPLBs];
 
@@ -134,6 +134,7 @@
     CGSize size = self.backSV.contentSize;
     size.height = CGRectYH(self.whiteBackV)+10;
     self.backSV.contentSize = size;
+    self.backIV.frame = CGRectMake(0, 0, Screen_width, self.backSV.contentSize.height);
 }
 
 #pragma mark - lazyLoad
