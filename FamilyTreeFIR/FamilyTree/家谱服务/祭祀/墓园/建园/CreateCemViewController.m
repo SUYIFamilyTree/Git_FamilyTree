@@ -8,6 +8,7 @@
 //
 
 #import "CreateCemViewController.h"
+#import "CemeteryModel.h"
 
 @interface CreateCemViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UITextViewDelegate>
 {
@@ -54,7 +55,10 @@
     [self addCemImage];
     [self addFiveLabelTextView];
     [self createCemBtn];
-    
+    //如果是修改墓园，显示信息
+    if (!self.creatOrEditStr) {
+        [self getCemeteryData];
+    }
 }
 
 //添加墓园照片
@@ -158,6 +162,29 @@
 
 
 #pragma mark *** events ***
+//修改墓园把信息显示出来   
+-(void)getCemeteryData{
+    NSDictionary *logDic = @{@"CeId":@(self.CeId)};
+    WK(weakSelf)
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeCemeterDetail success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            CemeteryModel *cemeteryModel = [CemeteryModel modelWithJSON:jsonDic[@"data"]];
+            weakSelf.cemName.text = cemeteryModel.CeName;
+            weakSelf.cemMaster.text = cemeteryModel.CeMaster;
+            weakSelf.cemTitle.text = cemeteryModel.CeTitle;
+            weakSelf.cemSaying.text = cemeteryModel.CeEpitaph;
+            [weakSelf.cemBir setTitle:[cemeteryModel.CeScjr substringToIndex:10] forState:UIControlStateNormal];
+            [weakSelf.cemDead setTitle:[cemeteryModel.CeScjr substringFromIndex:14] forState:UIControlStateNormal];
+            weakSelf.cemInfoTV.text = cemeteryModel.CeBrief;
+            [weakSelf.addCemBtn setBackgroundImageWithURL:[NSURL URLWithString:cemeteryModel.CePhoto] forState:UIControlStateNormal placeholder:MImage(@"xinJianMuYuan_add")];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+
+
 -(void)respondsToCreateCemBtn:(UIButton *)sender{
     if (self.creatOrEditStr) {
         if (!IsNilString(self.cemName.text)) {

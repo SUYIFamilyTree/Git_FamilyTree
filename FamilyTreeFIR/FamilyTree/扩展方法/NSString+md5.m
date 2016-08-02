@@ -41,7 +41,8 @@
         NSString *jsonStr5 = [jsonStr4 stringByReplacingOccurrencesOfString:@"  " withString:@""];
         NSString *jsonStr6 = [jsonStr5 stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         NSString *jsonStr7 = [jsonStr6 stringByReplacingOccurrencesOfString:@"\t" withString:@""];
-        return jsonStr7;
+        NSString *jsonStr8 = [jsonStr7 stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+        return jsonStr8;
     }
    
     NSString *jsonStr1 = [jsonStr stringByReplacingOccurrencesOfString:@"{\n" withString:@"{"];

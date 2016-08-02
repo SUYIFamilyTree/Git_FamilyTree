@@ -27,8 +27,8 @@
 @property (nonatomic,strong) UIView *searchView; /*搜索框*/
 @property (nonatomic,strong) UITextField *searchLabel; /*输入关键词*/
 @property (nonatomic,strong) UIImageView *searchImage; /*搜索图片*/
-
-@property (nonatomic,strong) UIButton *menuBtn; /*右边菜单栏*/
+/** 我的互助*/
+@property (nonatomic,strong) UIButton *menuBtn;
 
 @property (nonatomic,weak) id<TopSearchViewDelegate> delegate; /*代理人*/
 

@@ -158,7 +158,10 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self.delegate TableView:tableView didSelectTableRowAtIndexPath:indexPath];
+    if (!self.PrivateWorshipEdit) {
+        [self.delegate TableView:tableView didSelectTableRowAtIndexPath:indexPath];
+    }
+    
     
 }
 
