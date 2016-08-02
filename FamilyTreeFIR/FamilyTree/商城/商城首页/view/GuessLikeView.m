@@ -85,6 +85,7 @@
         cell.payMoneyLb.text = [NSString stringWithFormat:@"%ld",goods.CoprActpri];;
         cell.quoteLb.text = [NSString stringWithFormat:@"%ld",goods.CoprMoney];
         cell.goodId = [NSString stringWithFormat:@"%ld",goods.CoId];
+        cell.goodTypeId = [NSString stringWithFormat:@"%ld",goods.CoprId];
     }
     
     NSMutableAttributedString *quoteStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"¥%@",cell.quoteLb.text]];
@@ -122,8 +123,21 @@
 - (void)addInto:(UIButton*)sender{
 //    NSLog(@"商品%ld加入购物车",(long)sender.tag);
     GuessLikeCell *cell = (GuessLikeCell *)[self.collectionV cellForItemAtIndexPath:[NSIndexPath indexPathForItem:sender.tag inSection:0]];
-    NSLog(@"商品%@加到购物车", cell.goodId);
+    NSLog(@"商品%@,类型%@,加到购物车", cell.goodId,cell.goodTypeId);
+    
+    [self requestPostAddtoCartWithGoodNumber:cell.goodId goodsTypeId:cell.goodTypeId];
+    
 }
-
+#pragma mark *** 请求添加到购物车 ***
+-(void)requestPostAddtoCartWithGoodNumber:(NSString *)goodsId goodsTypeId:(NSString *)typeID{
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"ShCoid":goodsId,
+                                                 @"ShMeid":GetUserId,
+                                                 @"ShCoprid":typeID,
+                                                 @"ShCount":@"1"} requestID:GetUserId requestcode:kRequestCodeaddshopcar success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
 
 @end

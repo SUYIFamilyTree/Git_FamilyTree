@@ -501,6 +501,7 @@
 		ADBA01711D0132350016AB00 /* DiscAndNameView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBA01701D0132350016AB00 /* DiscAndNameView.m */; };
 		ADBA01771D016DD90016AB00 /* AddMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBA01741D016DD90016AB00 /* AddMemberViewController.m */; };
 		ADBA017A1D016E0A0016AB00 /* AddMenberView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBA01791D016E0A0016AB00 /* AddMenberView.m */; };
+		ADBA18271D504A6F006C8B29 /* WCartMode.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBA18261D504A6F006C8B29 /* WCartMode.m */; };
 		ADC059DE1D002C70001F7C1B /* CreateFamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC059DB1D002C70001F7C1B /* CreateFamViewController.m */; };
 		ADC059E11D002CB0001F7C1B /* CreateFamView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC059E01D002CB0001F7C1B /* CreateFamView.m */; };
 		ADC13BA31D1926C7000F901C /* WDetailManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC13BA21D1926C7000F901C /* WDetailManagerViewController.m */; };
@@ -1746,6 +1747,8 @@
 		ADBA01741D016DD90016AB00 /* AddMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMemberViewController.m; sourceTree = "<group>"; };
 		ADBA01781D016E0A0016AB00 /* AddMenberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMenberView.h; sourceTree = "<group>"; };
 		ADBA01791D016E0A0016AB00 /* AddMenberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMenberView.m; sourceTree = "<group>"; };
+		ADBA18251D504A6F006C8B29 /* WCartMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCartMode.h; sourceTree = "<group>"; };
+		ADBA18261D504A6F006C8B29 /* WCartMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCartMode.m; sourceTree = "<group>"; };
 		ADC059DA1D002C70001F7C1B /* CreateFamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFamViewController.h; sourceTree = "<group>"; };
 		ADC059DB1D002C70001F7C1B /* CreateFamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateFamViewController.m; sourceTree = "<group>"; };
 		ADC059DF1D002CB0001F7C1B /* CreateFamView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFamView.h; sourceTree = "<group>"; };
@@ -3393,6 +3396,8 @@
 		ADA87DAC1D48A9C200DE9BD0 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				ADBA18251D504A6F006C8B29 /* WCartMode.h */,
+				ADBA18261D504A6F006C8B29 /* WCartMode.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -6668,6 +6673,7 @@
 				BC2943A01CFE9F30006671B9 /* LineageViewController.m in Sources */,
 				ADA4C1721D0E92DF00CA9067 /* CemSingleGoodsCollectionViewCell.m in Sources */,
 				ADA98E981D11584C005B23EC /* SelectMyFamilyView.m in Sources */,
+				ADBA18271D504A6F006C8B29 /* WCartMode.m in Sources */,
 				ADC472231D1A5A88000388AF /* WSwitchDetailFamView.m in Sources */,
 				ADB696431D4757C0006E752F /* ShoppingViewController.m in Sources */,
 				ADC059E11D002CB0001F7C1B /* CreateFamView.m in Sources */,

@@ -27,6 +27,18 @@
 
     // Configure the view for the selected state
 }
+#pragma mark *** cellNumberDelegate ***
+-(void)changeCountLb:(UILabel *)text action:(UIButton *)sender{
+    NSInteger count = [text.text integerValue];
+    if (sender.tag -90) {
+        count ++;
+    }else{
+        if (count>1) {
+            count--;
+        }
+    }
+    text.text = [NSString stringWithFormat:@"%ld",count];
+}
 #pragma mark *** getters ***
 -(UIImageView *)cellImage{
     if (!_cellImage) {
@@ -47,13 +59,14 @@
 }
 -(UILabel *)cellType{
     if (!_cellType) {
-        UILabel *theLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectX(self.cellName), CGRectYH(self.cellName), 100*AdaptationWidth(), 45*AdaptationWidth())];
+        UILabel *theLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectX(self.cellName), CGRectYH(self.cellName)+10*AdaptationWidth(), 90*AdaptationWidth(), 45*AdaptationWidth())];
         theLabel.font = WFont(27);
         theLabel.text = @"颜色：";
         [self.contentView addSubview:theLabel];
         
         _cellType = [[UILabel alloc] initWithFrame:CGRectMake(CGRectXW(theLabel), CGRectY(theLabel), 100*AdaptationWidth(), 45*AdaptationWidth())];
         _cellType.text = @"黑色";
+        _cellType.textAlignment = 1;
         _cellType.font = theLabel.font;
         _cellType.layer.borderColor = BorderColor;
         _cellType.layer.borderWidth = 1;
@@ -63,7 +76,7 @@
 }
 -(GoodNumberView *)cellNumber{
     if (!_cellNumber) {
-        _cellNumber = [[GoodNumberView alloc] initWithFrame:CGRectMake(CGRectX(self.cellName)-30*AdaptationWidth(), CGRectYH(self.cellType)+5, 175, 50)];
+        _cellNumber = [[GoodNumberView alloc] initWithFrame:CGRectMake(CGRectX(self.cellName)-30*AdaptationWidth(), CGRectYH(self.cellType)+5, 175, 50*AdaptationWidth())];
         _cellNumber.numLabel.font = WFont(27);
         _cellNumber.numLabel.frame = CGRectMake(15, 5, 50, 15);
         _cellNumber.numLabel.text = @"数量：";
@@ -72,15 +85,18 @@
     }
     return _cellNumber;
 }
--(void)changeCountLb:(UILabel *)text action:(UIButton *)sender{
-    NSInteger count = [text.text integerValue];
-    if (sender.tag -90) {
-        count ++;
-    }else{
-        if (count>1) {
-            count--;
-        }
+-(UILabel *)cellPrice{
+    if (!_cellPrice) {
+        UILabel *theLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectX(self.cellName), CGRectYH(self.cellNumber), 90*AdaptationWidth(), 45*AdaptationWidth())];
+        theLabel.font = WFont(27);
+        theLabel.text = @"单价：";
+        [self.contentView addSubview:theLabel];
+        
+        _cellPrice = [[UILabel alloc] initWithFrame:CGRectMake(CGRectXW(theLabel), CGRectYH(self.cellNumber), 175*AdaptationWidth(), 45*AdaptationWidth())];
+        _cellPrice.textColor = [UIColor redColor];
+        _cellPrice.font = theLabel.font;
+        _cellPrice.text = @"¥88.0";
     }
-    text.text = [NSString stringWithFormat:@"%ld",count];
+    return _cellPrice;
 }
 @end

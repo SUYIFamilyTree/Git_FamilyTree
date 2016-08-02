@@ -64,7 +64,7 @@
     _totalCommentV.delegate = self;
     [_totalCommentV.starV setStar:5];
 
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, __kWidth, __kHeight-110)];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, __kWidth, __kHeight-110-46)];
     [self addSubview:_tableView];
     _tableView.delegate = self;
     _tableView.dataSource = self;

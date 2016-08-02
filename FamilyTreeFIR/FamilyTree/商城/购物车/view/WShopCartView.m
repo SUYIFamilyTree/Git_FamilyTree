@@ -10,6 +10,7 @@
 #import "WCartTableViewCell.h"
 #import "WCartTableHeaderView.h"
 #import "WCartTableFooterView.h"
+#import "WCartMode.h"
 static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
 
 @interface WShopCartView()<UITableViewDataSource,UITableViewDelegate,WCartTableHeaderDelegate>
@@ -23,6 +24,10 @@ static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
 /**table*/
 @property (nonatomic,strong) UITableView *tableView;
 
+/**tableModel*/
+@property (nonatomic,strong)NSArray <WCararray *>*carModel;
+
+
 @end
 @implementation WShopCartView
 - (instancetype)initWithFrame:(CGRect)frame
@@ -31,8 +36,13 @@ static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
     if (self) {
         [self initData];
         [self initUI];
+        [self getCartData];
     }
     return self;
+}
+
+-(void)reloadallData{
+    [self.tableView reloadData];
 }
 #pragma mark *** 初始化数据 ***
 -(void)initData{
@@ -44,17 +54,55 @@ static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
     backView.backgroundColor = [UIColor blackColor];
     backView.alpha = 0.5;
     [self addSubview:backView];
+    UITapGestureRecognizer *tapGus = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondsToBackViewGes)];
+    [backView addGestureRecognizer:tapGus];
+    
     [self addSubview:self.tableView];
+}
+
+#pragma mark *** post购物车数据 ***
+-(void)getCartData{
+    __weak typeof(self)wkSelf = self;
+    [TCJPHTTPRequestManager POSTWithParameters:@{} requestID:GetUserId requestcode:kRequestCodegetshopcar success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSLog(@"购物车--%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+            
+            WCartMode *model = [WCartMode modelWithJSON:jsonDic[@"data"]];
+//            model.CarArray = [NSArray modelWithJSON:jsonDic[@"data"]];
+            
+            wkSelf.carModel = model.CarArray;
+            [wkSelf.tableView reloadData];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+#pragma mark *** gestureEvents ***
+-(void)respondsToBackViewGes{
+    [self removeFromSuperview];
 }
 #pragma mark *** UITableViewDelegate ***
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    if (self.carModel && self.carModel.count!=0) {
+        return self.carModel.count;
+    }
+    return 0;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     WCartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kReusableCartCellIdentifier forIndexPath:indexPath];
     if (!cell) {
         cell = [[WCartTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kReusableCartCellIdentifier];
     }
+    WCararray *car = self.carModel[indexPath.row];
+    
+    cell.cellName.text = car.CoName;
+    cell.cellImage.imageURL = [NSURL URLWithString:car.Cover];
+    cell.cellType.text = car.CoprData;
+    cell.cellPrice.text = [NSString stringWithFormat:@"%ld",car.CoprActpri];
+    cell.cellCarId = [NSString stringWithFormat:@"%ld",car.ShId];
+    cell.cellGoodsId = [NSString stringWithFormat:@"%ld",car.CoId];
+    cell.cellNumber.numLabel.text = [NSString stringWithFormat:@"%ld",car.CoprCount];
+    
     return  cell;
     
 }
@@ -106,6 +154,7 @@ static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
         _tableView.editing = true;
     }
 }
+
 #pragma mark *** getters ***
 -(UIView *)whiteView{
     if (!_whiteView) {

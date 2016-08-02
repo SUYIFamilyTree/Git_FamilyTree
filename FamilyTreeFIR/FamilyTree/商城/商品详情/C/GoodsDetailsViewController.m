@@ -149,19 +149,20 @@
 
 -(void)initView{
     //商品视图
-    _backV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, __kWidth, __kHeight-46)];
+    _backV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, __kWidth, __kHeight-46-46)];
     [self.view addSubview:_backV];
     _backV.scrollEnabled = YES;
     _backV.delegate = self;
     self.automaticallyAdjustsScrollViewInsets = NO;
     _backV.contentSize = CGSizeMake(__kWidth*3, __kHeight-46);
+    _backV.bounces = false;
     //开启滚动分页功能，如果不需要这个功能关闭即可
     [_backV setPagingEnabled:YES];
     _backV.showsHorizontalScrollIndicator=NO; //不显示水平滑动线
     _backV.showsVerticalScrollIndicator=NO;//不显示垂直滑动线
     _backV.contentOffset = CGPointMake(0, 0);
 
-    _goodOneV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, __kWidth, __kHeight-46)];
+    _goodOneV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, __kWidth, __kHeight-46-46)];
     [_backV addSubview:_goodOneV];
     _goodOneV.scrollEnabled = YES;
 
@@ -176,7 +177,7 @@
     _goodOneV.contentSize = CGSizeMake(__kWidth, _goodDetailV.detailH+__kWidth*5/9+64);
 
     //商品详情
-    _goodTwoV = [[UIScrollView alloc]initWithFrame:CGRectMake(__kWidth, 0, __kWidth, __kHeight-110)];
+    _goodTwoV = [[UIScrollView alloc]initWithFrame:CGRectMake(__kWidth, 0, __kWidth, __kHeight-110-46)];
     [_backV addSubview:_goodTwoV];
     _goodTwoV.scrollEnabled = YES;
 
@@ -190,10 +191,10 @@
         _goodTwoV.contentSize = CGSizeMake(__kWidth, __kHeight-110);
     }
 
-    _goodCommentV = [[GoodCommentView alloc]initWithFrame:CGRectMake(__kWidth*2, 0, __kWidth, __kWidth-110)];
+    _goodCommentV = [[GoodCommentView alloc]initWithFrame:CGRectMake(__kWidth*2, 0, __kWidth, __kWidth-110-46)];
     [_backV addSubview:_goodCommentV];
 
-    _goodBottomV = [[GoodBottomView alloc]initWithFrame:CGRectMake(0, __kHeight-46, __kWidth, 46)];
+    _goodBottomV = [[GoodBottomView alloc]initWithFrame:CGRectMake(0, __kHeight-46-46, __kWidth, 46)];
     [self.view addSubview:_goodBottomV];
     _goodBottomV.delegate = self;
 }

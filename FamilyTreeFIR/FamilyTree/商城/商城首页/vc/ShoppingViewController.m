@@ -301,6 +301,7 @@
         _shopCartView = [[WShopCartView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
         
     }
+    
     return _shopCartView;
 }
 

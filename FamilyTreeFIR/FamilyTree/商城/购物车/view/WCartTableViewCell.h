@@ -19,6 +19,11 @@
 @property (nonatomic,strong) GoodNumberView *cellNumber;
 /**单价*/
 @property (nonatomic,strong) UILabel *cellPrice;
+/**购物车id*/
+@property (nonatomic,strong) NSString *cellCarId;
+/**商品id*/
+@property (nonatomic,strong) NSString *cellGoodsId;
+
 
 
 

@@ -110,8 +110,6 @@
 //点击搜索图标
 -(void)clickSearch{
     [self searchGemIsMyGen:false];
-  
-    
 }
 #pragma mark *** 网络请求 ***
 /** 搜索信息 */
@@ -131,7 +129,6 @@
             [WSearchModel shardSearchModel].page = searchModel.page;
             //赋值完过后跳转
             [self.searchTable.tableView reloadData];
-            
         }
     } failure:^(NSError *error) {
         
