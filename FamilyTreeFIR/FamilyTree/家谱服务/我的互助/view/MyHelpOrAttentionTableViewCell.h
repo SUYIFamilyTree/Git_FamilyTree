@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyHelpModel.h"
 
 @interface MyHelpOrAttentionTableViewCell : UITableViewCell
-
+/** 我的互助模型*/
+@property (nonatomic, strong) MyHelpModel *myHelpModel;
 @end

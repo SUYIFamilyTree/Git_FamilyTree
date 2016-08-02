@@ -37,12 +37,26 @@
     return self;
 }
 
+-(void)setMyHelpModel:(MyHelpModel *)myHelpModel{
+    _myHelpModel = myHelpModel;
+    _customTitleLB.text = myHelpModel.ZqTitle;
+    _typeLB.text = myHelpModel.ZqType;
+    [_infoIV setImageWithURL:[NSURL URLWithString:myHelpModel.ZqCover] placeholder:MImage(@"")];
+    _alreadyAttentionNumLB.text = [NSString stringWithFormat:@"%ld",myHelpModel.ZqFollowcnt];
+    [_alreadyAttentionNumLB sizeToFit];
+    _purposeConnectNumLB.text = [NSString stringWithFormat:@"%ld",myHelpModel.ZqIntencnt];
+    [_purposeConnectNumLB sizeToFit];
+    _deadLineDayNumLB.text = [NSString stringWithFormat:@"%ld",myHelpModel.Syts];
+    [_deadLineDayNumLB sizeToFit];
+    _isGoingIV.image = [_myHelpModel.ZqState isEqualToString:@"进行中"]?MImage(@"wdhz_jinxingzhong"):MImage(@"wdhz_yiwancheng");
+}
+
 #pragma mark - 视图初始化
 -(void)initUI{
     [self addSubview:self.grayBackV];
     self.grayBackV.sd_layout.leftSpaceToView(self,0).rightSpaceToView(self,0).topSpaceToView(self,0).heightIs(30);
     [self.grayBackV addSubview:self.customTitleLB];
-    self.customTitleLB.sd_layout.leftSpaceToView(self.grayBackV,0).rightSpaceToView(self.typeLB,5).heightIs(30).topSpaceToView(self.grayBackV,0);
+    self.customTitleLB.sd_layout.leftSpaceToView(self.grayBackV,5).rightSpaceToView(self.typeLB,5).heightIs(30).topSpaceToView(self.grayBackV,0);
     [self.grayBackV addSubview:self.typeLB];
     self.typeLB.sd_layout.widthIs(50).heightIs(20).rightSpaceToView(self.grayBackV,10).leftSpaceToView(self.customTitleLB,5).topSpaceToView(self.grayBackV,5);
     [self addSubview:self.infoIV];
@@ -55,17 +69,13 @@
     alreadyAttentionLB.sd_layout.leftSpaceToView(self.infoIV,10).topSpaceToView(self.grayBackV,10).widthIs(65).heightIs(20);
     
     UIImageView *alreadAttentionIV = [[UIImageView alloc]init];
-    alreadAttentionIV.image = MImage(@"");
-    alreadAttentionIV.backgroundColor = [UIColor redColor];
+    alreadAttentionIV.image = MImage(@"wdhz_guanzhu");
     [self addSubview:alreadAttentionIV];
     alreadAttentionIV.sd_layout.leftSpaceToView(alreadyAttentionLB,0).topSpaceToView(self.grayBackV,15).heightIs(12).widthIs(12);
     
     self.alreadyAttentionNumLB = [[UILabel alloc]initWithFrame:CGRectMake(168, 43, 100, 12)];
     self.alreadyAttentionNumLB.font = MFont(12);
     self.alreadyAttentionNumLB.textColor = LH_RGBCOLOR(251, 59, 56);
-    self.alreadyAttentionNumLB.text = @"12512123";
-    [self.alreadyAttentionNumLB sizeToFit];
-    self.alreadyAttentionNumLB.backgroundColor = [UIColor blueColor];
     [self addSubview:self.alreadyAttentionNumLB];
     
     UILabel *personLB1 = [[UILabel alloc]init];
@@ -82,17 +92,13 @@
     purposeConnectLB.sd_layout.leftEqualToView(alreadyAttentionLB).topSpaceToView(alreadyAttentionLB,5).widthIs(55).heightIs(20);
     
     UIImageView *purposeConnectIV = [[UIImageView alloc]init];
-    purposeConnectIV.image = MImage(@"");
-    purposeConnectIV.backgroundColor = [UIColor redColor];
+    purposeConnectIV.image = MImage(@"wdhz_yixianglianxi");
     [self addSubview:purposeConnectIV];
     purposeConnectIV.sd_layout.leftSpaceToView(purposeConnectLB,0).topSpaceToView(alreadyAttentionLB,10).heightIs(12).widthIs(12);
     
     self.purposeConnectNumLB = [[UILabel alloc]initWithFrame:CGRectMake(160, 68, 100, 12)];
     self.purposeConnectNumLB.font = MFont(12);
     self.purposeConnectNumLB.textColor = LH_RGBCOLOR(251, 59, 56);
-    self.purposeConnectNumLB.text = @"12512";
-    [self.purposeConnectNumLB sizeToFit];
-    self.purposeConnectNumLB.backgroundColor = [UIColor blueColor];
     [self addSubview:self.purposeConnectNumLB];
     
     UILabel *personLB2 = [[UILabel alloc]init];
@@ -109,17 +115,13 @@
     deadLineDayLB.sd_layout.leftEqualToView(alreadyAttentionLB).topSpaceToView(purposeConnectLB,5).widthIs(55).heightIs(20);
     
     UIImageView * deadLineDayIV = [[UIImageView alloc]init];
-    deadLineDayIV.image = MImage(@"");
-    deadLineDayIV.backgroundColor = [UIColor redColor];
+    deadLineDayIV.image = MImage(@"wdhz_shixian");
     [self addSubview: deadLineDayIV];
      deadLineDayIV.sd_layout.leftSpaceToView(deadLineDayLB,0).topSpaceToView(purposeConnectLB,10).heightIs(12).widthIs(12);
     
     self.deadLineDayNumLB = [[UILabel alloc]initWithFrame:CGRectMake(160, 93, 100, 12)];
     self.deadLineDayNumLB.font = MFont(12);
     self.deadLineDayNumLB.textColor = LH_RGBCOLOR(251, 59, 56);
-    self.deadLineDayNumLB.text = @"1251212313";
-    [self.deadLineDayNumLB sizeToFit];
-    self.deadLineDayNumLB.backgroundColor = [UIColor blueColor];
     [self addSubview:self.deadLineDayNumLB];
     
     UILabel *personLB3 = [[UILabel alloc]init];
@@ -130,8 +132,7 @@
     
     //进行中图
     self.isGoingIV = [[UIImageView alloc]init];
-    self.isGoingIV.image = MImage(@"");
-    self.isGoingIV.backgroundColor = [UIColor redColor];
+    //self.isGoingIV.backgroundColor = [UIColor redColor];
     [self addSubview:self.isGoingIV];
     self.isGoingIV.sd_layout.rightSpaceToView(self,20).topSpaceToView(self.grayBackV,20).widthIs(45).heightIs(45);
 }
@@ -152,7 +153,6 @@
 -(UILabel *)customTitleLB{
     if (!_customTitleLB) {
         _customTitleLB = [[UILabel alloc]init];
-        _customTitleLB.text = @"我家孩子三年级，暑假需要四年级的课本";
         _customTitleLB.font = MFont(12);
         _customTitleLB.textAlignment = NSTextAlignmentLeft;
     }
@@ -162,7 +162,6 @@
 -(UILabel *)typeLB{
     if (!_typeLB) {
         _typeLB = [[UILabel alloc]init];
-        _typeLB.text = @"我需要";
         _typeLB.font = MFont(11);
         _typeLB.textColor = [UIColor redColor];
         _typeLB.textAlignment = NSTextAlignmentCenter;
@@ -177,7 +176,6 @@
 -(UIImageView *)infoIV{
     if (!_infoIV) {
         _infoIV = [[UIImageView alloc]init];
-        _infoIV.backgroundColor = [UIColor redColor];
     }
     return _infoIV;
 }
