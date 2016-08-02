@@ -5552,7 +5552,7 @@
 				TargetAttributes = {
 					ADC326F41CF3E3DF00CEAE53 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = N4YN23L5MC;
+						DevelopmentTeam = 27FQAQ29WK;
 					};
 					ADC3270D1CF3E3E000CEAE53 = {
 						CreatedOnToolsVersion = 7.2;
@@ -6557,6 +6557,7 @@
 				BCAEF3011D337B0F006DE1A5 /* ZSZPView.m in Sources */,
 				BC7299FE1D225C53008FEB71 /* FortuneTodayViewController.m in Sources */,
 				ADE265A81D20C4C800F12FC9 /* WSelectMyFamModel.m in Sources */,
+				BC6771A31D4B4B0000F33621 /* AddPostViewController.m in Sources */,
 				AD61DB571D4F211400BA3EB0 /* TotalCommentView.m in Sources */,
 				BC5F15181D0FF1AD004F3622 /* RechargeViewController.m in Sources */,
 				BC5192A41D23A0E30020480F /* NSString+valiEmail.m in Sources */,
