@@ -271,12 +271,19 @@
         [self.view addSubview:self.shopCartView];
     }
 }
+-(void)respondsTorightBookingBtn:(UIButton *)sender{
+    MyOrdersViewController *myOdVc = [[MyOrdersViewController alloc] init];
+    [self.navigationController pushViewController:myOdVc animated:YES];
+}
 #pragma mark *** getters ***
 -(TopSearchView *)topSearchView{
     if (!_topSearchView) {
         _topSearchView = [[TopSearchView alloc] initWithFrame:CGRectMake(0, 0, Screen_width, StatusBar_Height+NavigationBar_Height)];
         _topSearchView.searchLabel.placeholder = @"输入关键词";
         _topSearchView.delegate = self;
+        [_topSearchView.menuBtn removeFromSuperview];
+        BookingBtn *btn = [[BookingBtn alloc] initWithFrame:CGRectMake(CGRectXW(_topSearchView.searchView)+15, CGRectGetHeight(_topSearchView.backView.bounds)/2-23+StatusBar_Height, 25, 25)];
+        [_topSearchView addSubview:btn];
         
     }
     return _topSearchView;
@@ -299,9 +306,8 @@
 -(WShopCartView *)shopCartView{
     if (!_shopCartView) {
         _shopCartView = [[WShopCartView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
-        
     }
-    
+    [_shopCartView reloadallData];
     return _shopCartView;
 }
 

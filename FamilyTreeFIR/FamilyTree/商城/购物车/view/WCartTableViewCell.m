@@ -37,7 +37,11 @@
             count--;
         }
     }
+    
     text.text = [NSString stringWithFormat:@"%ld",count];
+    if (_delegate && [_delegate respondsToSelector:@selector(WCartTableViewCell:atIndexPath:changedCellNumber:)]) {
+        [_delegate WCartTableViewCell:self atIndexPath:self.indexPath changedCellNumber:text.text];
+    };
 }
 #pragma mark *** getters ***
 -(UIImageView *)cellImage{

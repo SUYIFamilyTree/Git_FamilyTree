@@ -11,12 +11,7 @@
 @implementation WCartMode
 
 
-+ (NSDictionary *)modelContainerPropertyGenericClass{
-    return @{@"CarArray" : [WCararray class]};
-}
 @end
-@implementation WCararray
 
-@end
 
 

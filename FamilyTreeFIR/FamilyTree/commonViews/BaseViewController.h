@@ -16,4 +16,6 @@
 
 -(instancetype)initWithTitle:(NSString *)title;
 
+- (instancetype)initWithShopTitle:(NSString *)title image:(UIImage *)image;
+
 @end

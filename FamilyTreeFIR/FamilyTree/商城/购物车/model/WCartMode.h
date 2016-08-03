@@ -8,13 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class WCararray;
 @interface WCartMode : NSObject
-
-@property (nonatomic, strong) NSArray<WCararray *> *CarArray;
-
-@end
-@interface WCararray : NSObject
 
 @property (nonatomic, copy) NSString *CoName;
 
@@ -36,5 +30,9 @@
 
 @property (nonatomic, assign) NSInteger CoId;
 
+@property (nonatomic, assign) NSInteger CoprId;
 @end
+
+
+
 

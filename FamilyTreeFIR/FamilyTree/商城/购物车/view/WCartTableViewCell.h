@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "GoodNumberView.h"
+
+@class WCartTableViewCell;
+@protocol WCartTableViewCellDelegate <NSObject>
+-(void)WCartTableViewCell:(WCartTableViewCell *)cartCell atIndexPath:(NSIndexPath *)indexPath changedCellNumber:(NSString *)number;
+@end
+
 @interface WCartTableViewCell : UITableViewCell<GoodNumberViewDelegate>
 /**图片*/
 @property (nonatomic,strong) UIImageView *cellImage;
@@ -23,8 +29,15 @@
 @property (nonatomic,strong) NSString *cellCarId;
 /**商品id*/
 @property (nonatomic,strong) NSString *cellGoodsId;
+/**坐标*/
+@property (nonatomic,strong) NSIndexPath *indexPath;
+/**商品类型id*/
+@property (nonatomic,strong) NSString *cellTypeId;
 
 
+
+
+@property (nonatomic,weak) id<WCartTableViewCellDelegate> delegate; /*代理人*/
 
 
 

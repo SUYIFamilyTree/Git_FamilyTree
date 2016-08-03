@@ -31,7 +31,7 @@
     NSDictionary *logDic = @{@"ArId":@(self.arId)};
     WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetNewsDetail success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        MYLog(@"%@",jsonDic[@"data"]);
+        MYLog(@"----------%@",[NSString jsonDicWithDic:jsonDic[@"data"]]);
         if (succe) {
             weakSelf.newsInfoModel = [NewInfoModel modelWithJSON:jsonDic[@"data"]];
             [weakSelf initUI];
