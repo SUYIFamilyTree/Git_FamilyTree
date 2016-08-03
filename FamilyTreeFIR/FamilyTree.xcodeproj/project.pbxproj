@@ -363,8 +363,6 @@
 		ADAAB4291D45EDA100E6D8D9 /* WSearchGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADAAB4281D45EDA100E6D8D9 /* WSearchGoodsCell.m */; };
 		ADAAB42C1D45F6A100E6D8D9 /* WFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADAAB42B1D45F6A100E6D8D9 /* WFilterView.m */; };
 		ADAB221D1D26174A0047B6F0 /* WIDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADAB221C1D26174A0047B6F0 /* WIDModel.m */; };
-		ADAED6831D49FCBB0079977D /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADAED6811D49FCBB0079977D /* icon@2x.png */; };
-		ADAED6841D49FCBB0079977D /* icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADAED6821D49FCBB0079977D /* icon@3x.png */; };
 		ADB2D1061D1CCCA10072C022 /* LYFoundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB2D1051D1CCCA10072C022 /* LYFoundation+Log.m */; };
 		ADB2D1091D1CCEE60072C022 /* CreateFamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB2D1081D1CCEE60072C022 /* CreateFamModel.m */; };
 		ADB696431D4757C0006E752F /* ShoppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB696411D4757C0006E752F /* ShoppingViewController.m */; };
@@ -1023,6 +1021,8 @@
 		BC78533B1D3897A500208179 /* tx_12.png in Resources */ = {isa = PBXBuildFile; fileRef = BC7853171D3897A500208179 /* tx_12.png */; };
 		BC78533C1D3897A500208179 /* tx_12@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC7853181D3897A500208179 /* tx_12@2x.png */; };
 		BC78533D1D3897A500208179 /* tx_12@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC7853191D3897A500208179 /* tx_12@3x.png */; };
+		BC7DFF971D509D3200492DC1 /* GuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC7DFF961D509D3200492DC1 /* GuideViewController.m */; };
+		BC7DFF991D50A4AA00492DC1 /* yindaoye.png in Resources */ = {isa = PBXBuildFile; fileRef = BC7DFF981D50A4AA00492DC1 /* yindaoye.png */; };
 		BC941AFD1D3F1D5800571EE2 /* qf_lian.png in Resources */ = {isa = PBXBuildFile; fileRef = BC941AF71D3F1D5800571EE2 /* qf_lian.png */; };
 		BC941AFE1D3F1D5800571EE2 /* qf_lian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC941AF81D3F1D5800571EE2 /* qf_lian@2x.png */; };
 		BC941AFF1D3F1D5800571EE2 /* qf_lian@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC941AF91D3F1D5800571EE2 /* qf_lian@3x.png */; };
@@ -1565,8 +1565,6 @@
 		ADAB221B1D26174A0047B6F0 /* WIDModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIDModel.h; sourceTree = "<group>"; };
 		ADAB221C1D26174A0047B6F0 /* WIDModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIDModel.m; sourceTree = "<group>"; };
 		ADAB7E101CF4050B00C3C143 /* DefineHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefineHeader.h; sourceTree = "<group>"; };
-		ADAED6811D49FCBB0079977D /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
-		ADAED6821D49FCBB0079977D /* icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@3x.png"; sourceTree = "<group>"; };
 		ADB2D1051D1CCCA10072C022 /* LYFoundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LYFoundation+Log.m"; sourceTree = "<group>"; };
 		ADB2D1071D1CCEE60072C022 /* CreateFamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFamModel.h; sourceTree = "<group>"; };
 		ADB2D1081D1CCEE60072C022 /* CreateFamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateFamModel.m; sourceTree = "<group>"; };
@@ -2366,6 +2364,9 @@
 		BC7853171D3897A500208179 /* tx_12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tx_12.png; sourceTree = "<group>"; };
 		BC7853181D3897A500208179 /* tx_12@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tx_12@2x.png"; sourceTree = "<group>"; };
 		BC7853191D3897A500208179 /* tx_12@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tx_12@3x.png"; sourceTree = "<group>"; };
+		BC7DFF951D509D3200492DC1 /* GuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideViewController.h; sourceTree = "<group>"; };
+		BC7DFF961D509D3200492DC1 /* GuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideViewController.m; sourceTree = "<group>"; };
+		BC7DFF981D50A4AA00492DC1 /* yindaoye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yindaoye.png; sourceTree = "<group>"; };
 		BC941AF71D3F1D5800571EE2 /* qf_lian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qf_lian.png; sourceTree = "<group>"; };
 		BC941AF81D3F1D5800571EE2 /* qf_lian@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qf_lian@2x.png"; sourceTree = "<group>"; };
 		BC941AF91D3F1D5800571EE2 /* qf_lian@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qf_lian@3x.png"; sourceTree = "<group>"; };
@@ -3949,6 +3950,9 @@
 				ADC326FC1CF3E3DF00CEAE53 /* AppDelegate.m */,
 				AD2ACD7D1CF3FC9C009D4A24 /* RootTabBarViewController.h */,
 				AD2ACD7E1CF3FC9C009D4A24 /* RootTabBarViewController.m */,
+				BC7DFF951D509D3200492DC1 /* GuideViewController.h */,
+				BC7DFF961D509D3200492DC1 /* GuideViewController.m */,
+				BC7DFF981D50A4AA00492DC1 /* yindaoye.png */,
 				ADE3BBD01D13E70F006523C4 /* 求签 */,
 				BC6094EC1D3DECD90056DD9C /* 祈福 */,
 				AD6788991D06AA9D00D6CF52 /* 新闻中心 */,
@@ -4004,8 +4008,6 @@
 		ADC3272E1CF3FB8B00CEAE53 /* 素材图 */ = {
 			isa = PBXGroup;
 			children = (
-				ADAED6811D49FCBB0079977D /* icon@2x.png */,
-				ADAED6821D49FCBB0079977D /* icon@3x.png */,
 				BC504EBE1D504D8A0033BB6D /* 我的互助 */,
 				ADA87D681D48953600DE9BD0 /* 商城首页 */,
 				BC72D0791D40C8FB00A799DB /* 请佛 */,
@@ -5557,6 +5559,7 @@
 				BC6094E81D3DB8A20056DD9C /* zcmf_bg@3x.png in Resources */,
 				BC0D47981D4862A500A8336D /* jrys_star4@3x.png in Resources */,
 				AD49FECE1CF69E1900DF9F7E /* bg.png in Resources */,
+				BC7DFF991D50A4AA00492DC1 /* yindaoye.png in Resources */,
 				AD8DAAD81CFD6492009B7958 /* yel@2x.png in Resources */,
 				AD85145B1D41F0BA007FB495 /* gold.png in Resources */,
 				BC5F15731D0FF1CA004F3622 /* gr_ct_1@3x.png in Resources */,
@@ -5724,7 +5727,6 @@
 				AD4D31A91D055C4D0095F3F1 /* index_icon_linQian@2x.png in Resources */,
 				BCEB84281D3CC9EA002B44D3 /* xj_fh@2x.png in Resources */,
 				ADA4C1171D0E492900CA9067 /* my_name_bg.png in Resources */,
-				ADAED6831D49FCBB0079977D /* icon@2x.png in Resources */,
 				BC5F15801D0FF1CA004F3622 /* gr_ct_jiang_bg.png in Resources */,
 				ADA380561CFC256100B596B7 /* adress@2x.png in Resources */,
 				AD4D31B71D055C4D0095F3F1 /* index_lunbo.png in Resources */,
@@ -5799,7 +5801,6 @@
 				BCEB84381D3CCA2C002B44D3 /* cq_bg_ct@3x.png in Resources */,
 				BC504F3C1D5062B70033BB6D /* wdhz_yixianglianxi@3x.png in Resources */,
 				BC0D47971D4862A500A8336D /* jrys_star4@2x.png in Resources */,
-				ADAED6841D49FCBB0079977D /* icon@3x.png in Resources */,
 				ADB9D3B21D40AEBC005A6AB2 /* gr_girl@2x.png in Resources */,
 				BC5F15901D0FF1CA004F3622 /* gr_ct_qieHuanJiaPu_bg@2x.png in Resources */,
 				ADB7F06D1D0297EE001F151D /* todayYS_learn_TitIMG@3x.png in Resources */,
@@ -6617,6 +6618,7 @@
 				BC499B9E1D2CDFDD007870FE /* FlyBarrageTextView.m in Sources */,
 				ADC3E9991D377A6F00754F63 /* WApplyJoinView.m in Sources */,
 				BC6094DE1D3DB7190056DD9C /* PjZcViewController.m in Sources */,
+				BC7DFF971D509D3200492DC1 /* GuideViewController.m in Sources */,
 				ADA4C16F1D0E925700CA9067 /* AllGoodsView.m in Sources */,
 				ADB8A2361D3F64D8007617A4 /* WMenuBtn.m in Sources */,
 				ADC13BA31D1926C7000F901C /* WDetailManagerViewController.m in Sources */,
@@ -6786,8 +6788,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: zhang lei (27FQAQ29WK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: zhang lei (27FQAQ29WK)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -6806,10 +6808,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = com.tongchengjiapu;
+				ONLY_ACTIVE_ARCH = NO;
+				PROVISIONING_PROFILE = "4dc50570-7a63-441b-8cfc-9f002c9bc351";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -6831,8 +6833,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: zhang lei (27FQAQ29WK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: zhang lei (27FQAQ29WK)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6845,9 +6847,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = com.tongchengjiapu;
+				PROVISIONING_PROFILE = "4dc50570-7a63-441b-8cfc-9f002c9bc351";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -6858,13 +6860,15 @@
 			baseConfigurationReference = 9B08E1D9A90C3918BBC8BFE5 /* Pods-FamilyTree.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FamilyTree/PrefixHeader.pch";
 				INFOPLIST_FILE = FamilyTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tongchengjiapu.jihua;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tongchengjiapu.FamilyTree;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -6875,13 +6879,15 @@
 			baseConfigurationReference = 30E071E86691C50DA5617A52 /* Pods-FamilyTree.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FamilyTree/PrefixHeader.pch";
 				INFOPLIST_FILE = FamilyTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tongchengjiapu.jihua;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tongchengjiapu.FamilyTree;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -6945,7 +6951,7 @@
 				ADC327211CF3E3E000CEAE53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		ADC327221CF3E3E000CEAE53 /* Build configuration list for PBXNativeTarget "FamilyTree" */ = {
 			isa = XCConfigurationList;
@@ -6954,7 +6960,7 @@
 				ADC327241CF3E3E000CEAE53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		ADC327251CF3E3E000CEAE53 /* Build configuration list for PBXNativeTarget "FamilyTreeTests" */ = {
 			isa = XCConfigurationList;
@@ -6963,7 +6969,7 @@
 				ADC327271CF3E3E000CEAE53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		ADC327281CF3E3E000CEAE53 /* Build configuration list for PBXNativeTarget "FamilyTreeUITests" */ = {
 			isa = XCConfigurationList;
@@ -6972,7 +6978,7 @@
 				ADC3272A1CF3E3E000CEAE53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

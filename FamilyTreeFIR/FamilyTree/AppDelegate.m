@@ -10,7 +10,7 @@
 #import "RootTabBarViewController.h"
 #import "LoginViewController.h"
 #import "TCJPHTTPRequestManager.h"
-
+#import "GuideViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,23 +20,38 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+    [NSThread sleepForTimeInterval:1];
     
         //状态栏
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     //初始化window
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    RootTabBarViewController *rootVc = [[RootTabBarViewController alloc] init];
     
-    _window.backgroundColor = [UIColor grayColor];
     
-    _window.rootViewController = rootVc;
+//    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstStart"]){
+//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstStart"];
+//        NSLog(@"第一次启动");
+        GuideViewController *guideVC = [[GuideViewController alloc]init];
+        _window.rootViewController = guideVC;
+//    }else{
+//        NSLog(@"不是第一次启动");
+//        RootTabBarViewController *rootVc = [[RootTabBarViewController alloc] init];
+//
+//        _window.backgroundColor = [UIColor grayColor];
+//        
+//        _window.rootViewController = rootVc;
+//
+//    }
+    
+
     
     [_window makeKeyAndVisible];
       
     return YES;
 }
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
