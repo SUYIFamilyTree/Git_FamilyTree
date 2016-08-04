@@ -67,7 +67,7 @@
     
     NSInteger randomFour = 1000+random()%(9000);
     
-    NSString *currentKey = [NSString stringWithFormat:@"%@%ld",currentDate,randomFour];
+    NSString *currentKey = [NSString stringWithFormat:@"%@%ld",currentDate,(long)randomFour];
         
     return currentKey;
   

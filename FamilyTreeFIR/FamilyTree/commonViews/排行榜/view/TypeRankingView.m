@@ -121,7 +121,7 @@ typedef enum : NSUInteger {
             Hybr *hyItem = (Hybr *)_dataSource[indexPath.row];
             cell.nameLb.text = hyItem.mz;
             cell.familyLb.text = hyItem.jpm;
-            cell.activenessLb.text = [NSString stringWithFormat:@"%ld",hyItem.hyd];
+            cell.activenessLb.text = [NSString stringWithFormat:@"%ld",(long)hyItem.hyd];
            
             
         }
@@ -132,7 +132,7 @@ typedef enum : NSUInteger {
             [cell initView];
             Rsbr *rsItem = (Rsbr *)_dataSource[indexPath.row];
             cell.familyLb.text =  rsItem.jpm;
-            cell.activenessLb.text = [NSString stringWithFormat:@"%ld",rsItem.rs];
+            cell.activenessLb.text = [NSString stringWithFormat:@"%ld",(long)rsItem.rs];
             
         }
             break;
@@ -143,7 +143,7 @@ typedef enum : NSUInteger {
             [cell initView];
             Zcbr *zcItem = (Zcbr *)_dataSource[indexPath.row];
             cell.familyLb.text = zcItem.jpm;
-            cell.activenessLb.text = [NSString stringWithFormat:@"%ld",zcItem.je];
+            cell.activenessLb.text = [NSString stringWithFormat:@"%ld",(long)zcItem.je];
         }
             break;
             
@@ -151,7 +151,7 @@ typedef enum : NSUInteger {
             break;
     }
     
-    cell.numberLb.text = [NSString stringWithFormat:@"%ld",indexPath.row+1];
+    cell.numberLb.text = [NSString stringWithFormat:@"%ld",(long)indexPath.row+1];
 
     cell.rewardLb.text = @"20券";
     return cell;

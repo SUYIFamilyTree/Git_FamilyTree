@@ -10,6 +10,8 @@
 #import "UseItemView.h"
 #import "WAfterDivinationViewController.h"
 #import "CliffordTributeModel.h"
+//#import <CoreMotion/CoreMotion.h>
+
 #define AnimationTime 1.5f
 enum {
     //本身btntag
@@ -37,6 +39,8 @@ enum {
 /**祈福商品modelArr*/
 @property (nonatomic,strong) NSArray *cliModelArr;
 
+///** 重力感应*/
+//@property (nonatomic, strong) CMMotionManager *cmMotionManager;
 
 @end
 
@@ -279,8 +283,12 @@ enum {
 -(UIImageView *)diviAnimations{
     if (!_diviAnimations) {
         _diviAnimations = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 300*AdaptationWidth(), 350*AdaptationWidth())];
+        //_diviAnimations.backgroundColor = [UIColor redColor];
         _diviAnimations.contentMode = UIViewContentModeScaleAspectFit;
+        //_diviAnimations.contentMode = UIViewContentModeScaleAspectFill;
         _diviAnimations.image = MImage(@"qiuQian_zt_qian21");
+        //_diviAnimations.image = MImage(@"qj_right1");
+//        _diviAnimations.center = CGPointMake(self.view.center.x+20*AdaptationWidth()-120*AdaptationWidth(), self.view.center.y-130*AdaptationWidth()-120*AdaptationWidth());
         _diviAnimations.center = CGPointMake(self.view.center.x+20*AdaptationWidth(), self.view.center.y-130*AdaptationWidth());
         
         NSMutableArray *imageArrs = [@[] mutableCopy];
@@ -289,6 +297,32 @@ enum {
             NSString *imStr = [NSString stringWithFormat:@"qiuQian_zt_qian%d",idx];
             [imageArrs addObject:MImage(imStr)];
         }
+//        for (int j = 0; j < 2; j++) {
+//            for (int idx = 1; idx < 6; idx++) {
+//                NSString *imStr = [NSString stringWithFormat:@"qj_right%d",idx];
+//                [imageArrs addObject:MImage(imStr)];
+//            }
+//            for (int idx = 5; idx > 0; idx--) {
+//                NSString *imStr = [NSString stringWithFormat:@"qj_right%d",idx];
+//                [imageArrs addObject:MImage(imStr)];
+//                
+//            }
+//            for (int idx = 1; idx < 6; idx++) {
+//                NSString *imStr = [NSString stringWithFormat:@"qj_left%d",idx];
+//                [imageArrs addObject:MImage(imStr)];
+//            }
+//            for (int idx = 5; idx > 0; idx--) {
+//                NSString *imStr = [NSString stringWithFormat:@"qj_left%d",idx];
+//                [imageArrs addObject:MImage(imStr)];
+//            }
+//        }
+//        
+//        for (int i = 1; i < 15; i++) {
+//            NSString *imStr = [NSString stringWithFormat:@"qj_chuqian%d",i];
+//            [imageArrs addObject:MImage(imStr)];
+//        }
+        
+        
         _diviAnimations.animationImages = imageArrs;
         _diviAnimations.animationDuration = AnimationTime;
         _diviAnimations.animationRepeatCount = 1;
@@ -296,6 +330,7 @@ enum {
     }
     return _diviAnimations;
 }
+
 
 
 @end

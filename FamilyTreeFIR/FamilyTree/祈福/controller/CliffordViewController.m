@@ -228,7 +228,7 @@
 -(void)buyOneTribute:(CliffordTributeModel *)tributeModel{
     NSUInteger index =[self.tributeArr indexOfObject:tributeModel];
     
-    MYLog(@"%ld",index);
+    MYLog(@"%ld",(unsigned long)index);
     [self setPlateTribute:index];
    
 }

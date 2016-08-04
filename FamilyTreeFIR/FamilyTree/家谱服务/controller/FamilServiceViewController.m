@@ -70,7 +70,7 @@
 
 -(void)tableView:(TableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    MYLog(@"点击table-- %ld 行 ",indexPath.row);
+    MYLog(@"点击table-- %ld 行 ",(long)indexPath.row);
 }
 
 -(void)familyShopViewDidTapView:(FamilyShopView *)famShop{
@@ -79,7 +79,7 @@
 }
 
 -(void)CollevtionFamily:(CollectionFamilyView *)collecView didSelectedItemAtIndexPath:(NSIndexPath *)indexPath{
-    MYLog(@"点击collection -- %ld",indexPath.row);
+    MYLog(@"点击collection -- %ld",(long)indexPath.row);
     switch (indexPath.row) {
         case 0:
         {

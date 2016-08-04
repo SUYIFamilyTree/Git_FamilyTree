@@ -40,8 +40,8 @@
 -(void)setWorshipDatalistModel:(WorshipDatalistModel *)worshipDatalistModel{
     _worshipDatalistModel = worshipDatalistModel;
     self.cemeterialNameLB.text = [NSString stringWithFormat:@"%@之祭陵",worshipDatalistModel.CeName];
-    self.cemeterialIDLB.text =[NSString stringWithFormat:@"园号%ld",worshipDatalistModel.CeId];
-    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld人浏览",worshipDatalistModel.CeReadcount]];
+    self.cemeterialIDLB.text =[NSString stringWithFormat:@"园号%ld",(long)worshipDatalistModel.CeId];
+    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld人浏览",(long)worshipDatalistModel.CeReadcount]];
     
     NSRange blueRange = NSMakeRange(0, [[noteStr string] rangeOfString:@"人"].location);
     [noteStr addAttribute:NSForegroundColorAttributeName value:LH_RGBCOLOR(19, 154, 219) range:blueRange];

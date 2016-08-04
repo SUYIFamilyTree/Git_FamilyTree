@@ -195,10 +195,10 @@
         
         UIView *whiteV = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectYH(self.proAndName)+8*AdaptationWidth(), Screen_width, 312*AdaptationWidth())];
         whiteV.backgroundColor = [UIColor whiteColor];
+        whiteV.userInteractionEnabled = YES;
         [self.bacScrollView addSubview:whiteV];
         
-        _hundredVies = [[HundredNamesView alloc] initWithFrame:CGRectMake(0, CGRectYH(self.proAndName), Screen_width, 257*AdaptationWidth())];
-        
+        _hundredVies = [[HundredNamesView alloc] initWithFrame:CGRectMake(0, CGRectYH(self.proAndName), Screen_width, 290*AdaptationWidth())];
     }
     return _hundredVies;
 }

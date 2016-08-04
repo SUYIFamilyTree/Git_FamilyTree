@@ -106,7 +106,7 @@
     //签文
     self.divinationsArr = [NSMutableArray array];
     if (grqw.qh) {
-        [self.divinationsArr addObject:[NSString stringWithFormat:@"%ld",grqw.qh]];
+        [self.divinationsArr addObject:[NSString stringWithFormat:@"%ld",(long)grqw.qh]];
         [self.divinationsArr addObject:grqw.qwhh];
     }else{
             [self.divinationsArr addObject:@""];

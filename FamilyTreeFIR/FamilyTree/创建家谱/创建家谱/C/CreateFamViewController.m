@@ -83,7 +83,7 @@
                 [zbArr addObject:singleZb];
             }
             
-            [genDsListDic setValue:zbArr forKey:[NSString stringWithFormat:@"%ld",idx+1]];
+            [genDsListDic setValue:zbArr forKey:[NSString stringWithFormat:@"%u",(unsigned)(idx+1)]];
         }
         
     }];

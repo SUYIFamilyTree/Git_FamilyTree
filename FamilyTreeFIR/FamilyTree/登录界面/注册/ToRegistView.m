@@ -54,7 +54,7 @@
 
 -(void)timeFireMethod{
     self.secondsCountDown--;
-    [self.verificationBtn setTitle:[NSString stringWithFormat:@"%ld",self.secondsCountDown] forState:UIControlStateNormal];
+    [self.verificationBtn setTitle:[NSString stringWithFormat:@"%ld",(long)self.secondsCountDown] forState:UIControlStateNormal];
     if (self.secondsCountDown == 0) {
         [self.downTimer invalidate];
         self.verificationBtn.userInteractionEnabled = YES;

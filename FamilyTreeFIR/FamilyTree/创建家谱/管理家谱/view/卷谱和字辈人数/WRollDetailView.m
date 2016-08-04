@@ -46,11 +46,11 @@ enum {
     
     for (int idx = 0; idx<model.datalist.count; idx++) {
         _leftArr[idx+2] = [NSString stringWithFormat:@"%@：",model.datalist[idx].zb];
-        _rightArr[idx+2] = [NSString stringWithFormat:@"%ld",model.datalist[idx].cnt];
+        _rightArr[idx+2] = [NSString stringWithFormat:@"%ld",(long)model.datalist[idx].cnt];
         
         personNumber += model.datalist[idx].cnt;
     }
-    _rightArr[0] = [NSString stringWithFormat:@"%ld",personNumber];
+    _rightArr[0] = [NSString stringWithFormat:@"%ld",(long)personNumber];
     
     [self removeAllSubviews];
     [self.backScrollView removeAllSubviews];

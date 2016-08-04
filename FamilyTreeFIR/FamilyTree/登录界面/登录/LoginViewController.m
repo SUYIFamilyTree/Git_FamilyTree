@@ -33,29 +33,11 @@
     [super viewDidLoad];
 
     [self.view addSubview:self.loginView];
-//    //如果登录
-//    if ([[USERDEFAULT objectForKey:LoginStates] isEqual:@true]) {
-//        
-//        [self.navigationController popViewControllerAnimated:false];
-//        
-//    }
-    
-    
-}
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-//    self.navigationController.navigationBarHidden = YES;
-//    self.tabBarController.tabBar.hidden = YES;
-    
-}
--(void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    
-    //self.tabBarController.tabBar.hidden = false;
-    //通知改变登录状态，切换账号/登录
-    [[NSNotificationCenter defaultCenter] postNotificationName:LogStatusNotifacation object:nil];
 
+    
+    
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -67,8 +49,8 @@
     MYLog(@"获取验证码");
      NSLog(@"%@", registView.accountView.inputTextView.text);
     self.verificationCode = arc4random() % 10000 + (arc4random()%9+1)*100000;
-    MYLog(@"%ld",self.verificationCode);
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"mobile":registView.accountView.inputTextView.text,@"content":[NSString stringWithFormat:@"%ld",self.verificationCode]} requestID:@0 requestcode:@"sendsms" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    MYLog(@"%ld",(long)self.verificationCode);
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"mobile":registView.accountView.inputTextView.text,@"content":[NSString stringWithFormat:@"%ld",(long)self.verificationCode]} requestID:@0 requestcode:@"sendsms" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         MYLog(@"%@", jsonDic[@"message"]);
         if (succe) {
             
@@ -92,7 +74,7 @@
  
     MYLog(@"acc-%@pas-%@", accStr,pasStr);
     
-    if ([pasStr isEqualToString:[NSString stringWithFormat:@"%ld",self.verificationCode]]) {
+    if ([pasStr isEqualToString:[NSString stringWithFormat:@"%ld",(long)self.verificationCode]]) {
         NSDictionary *dic = @{@"MeAccount":accStr,@"MePassword":pasStr,@"MeLng":@"0",@"MeLat":@"0"};
         //    NSDictionary *dic = @{@"MeAccount":accStr,@"MePassword":pasStr};
         
@@ -106,7 +88,7 @@
                 if (![jsonDic[@"message"] isEqualToString:@"注册成功"]) {
                     [SXLoadingView showAlertHUD:jsonDic[@"message"] duration:0.5];
                 }else{
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"注册成功" message:[NSString stringWithFormat:@"您的初始密码是%ld", self.verificationCode] preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"注册成功" message:[NSString stringWithFormat:@"您的初始密码是%ld", (long)self.verificationCode] preferredStyle:UIAlertControllerStyleAlert];
                     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                         [self dismissViewControllerAnimated:NO completion:nil];
                     }];
@@ -131,11 +113,6 @@
 -(void)loginView:(LoginView *)loginView didSelectedTopViewBtn:(UIButton *)sender{
     switch (sender.tag) {
         case 0:
-            //返回按钮
-            //[self.navigationController popViewControllerAnimated:YES];
-            [self dismissViewControllerAnimated:NO completion:nil];
-            break;
-        case 1:
         {
      
             //注册和登录动态切换
@@ -178,7 +155,7 @@
         }
             
             break;
-        case 2:
+        case 1:
         {
             //找回密码
             FindPassViewController *finPassVc = [FindPassViewController new];
@@ -219,7 +196,7 @@
 
 //登录按钮
 -(void)loginView:(LoginView *)loginView didSelectedLoginBtn:(UIButton *)sender{
-    [SXLoadingView showProgressHUD:@"正在登录"];
+    //[SXLoadingView showProgressHUD:@"正在登录"];
     
     MYLog(@"登录");
 
@@ -254,10 +231,6 @@
                 //登录授权认证码
                 [USERDEFAULT setObject:loginModel.auth
                                 forKey:@"authcode"];
-                
-                [USERDEFAULT setObject:@true forKey:LoginStates];
-                //头像路径
-                //            [USERDEFAULT setObject:loginModel.kzxx.Photo forKey:@"Photo"];
                 [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserAccount];
                 [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:UserPassword];
                 
@@ -267,6 +240,8 @@
                 [SXLoadingView showAlertHUD:jsonDic[@"message"] duration:0.5];
             }
             
+        }else{
+            [SXLoadingView showAlertHUD:jsonDic[@"message"] duration:0.5];
         }
         
     } failure:^(NSError *error) {
@@ -305,8 +280,8 @@
     
     
     [USERDEFAULT setObject:@1 forKey:@"userid"];
-    //[self.navigationController popViewControllerAnimated:YES];
-    //[self dismissViewControllerAnimated:NO completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 #pragma mark *** touch ***

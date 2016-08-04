@@ -29,20 +29,20 @@
     
     
     
-//    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstStart"]){
-//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstStart"];
-//        NSLog(@"第一次启动");
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstStart"]){
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstStart"];
+        NSLog(@"第一次启动");
         GuideViewController *guideVC = [[GuideViewController alloc]init];
         _window.rootViewController = guideVC;
-//    }else{
-//        NSLog(@"不是第一次启动");
-//        RootTabBarViewController *rootVc = [[RootTabBarViewController alloc] init];
-//
-//        _window.backgroundColor = [UIColor grayColor];
-//        
-//        _window.rootViewController = rootVc;
-//
-//    }
+    }else{
+        NSLog(@"不是第一次启动");
+        LoginViewController *loginVC = [[LoginViewController alloc]init];
+
+        _window.backgroundColor = [UIColor grayColor];
+        
+        _window.rootViewController = loginVC;
+
+    }
     
 
     

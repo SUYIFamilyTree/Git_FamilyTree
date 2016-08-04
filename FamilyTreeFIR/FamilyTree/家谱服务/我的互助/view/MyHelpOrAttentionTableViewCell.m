@@ -42,11 +42,11 @@
     _customTitleLB.text = myHelpModel.ZqTitle;
     _typeLB.text = myHelpModel.ZqType;
     [_infoIV setImageWithURL:[NSURL URLWithString:myHelpModel.ZqCover] placeholder:MImage(@"")];
-    _alreadyAttentionNumLB.text = [NSString stringWithFormat:@"%ld",myHelpModel.ZqFollowcnt];
+    _alreadyAttentionNumLB.text = [NSString stringWithFormat:@"%ld",(long)myHelpModel.ZqFollowcnt];
     [_alreadyAttentionNumLB sizeToFit];
-    _purposeConnectNumLB.text = [NSString stringWithFormat:@"%ld",myHelpModel.ZqIntencnt];
+    _purposeConnectNumLB.text = [NSString stringWithFormat:@"%ld",(long)myHelpModel.ZqIntencnt];
     [_purposeConnectNumLB sizeToFit];
-    _deadLineDayNumLB.text = [NSString stringWithFormat:@"%ld",myHelpModel.Syts];
+    _deadLineDayNumLB.text = [NSString stringWithFormat:@"%ld",(long)myHelpModel.Syts];
     [_deadLineDayNumLB sizeToFit];
     _isGoingIV.image = [_myHelpModel.ZqState isEqualToString:@"进行中"]?MImage(@"wdhz_jinxingzhong"):MImage(@"wdhz_yiwancheng");
 }

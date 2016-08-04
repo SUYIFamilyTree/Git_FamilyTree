@@ -186,7 +186,7 @@
             _rankingV.topScoreLb.text = [NSString stringWithFormat:@"%ld",(long)br.hyd];
             Hybr *br1 = self.model.hybr[1];
             _rankingV.secondNameLb.text = br1.mz;
-            _rankingV.secondScoreLb.text = [NSString stringWithFormat:@"%ld",br1.hyd];
+            _rankingV.secondScoreLb.text = [NSString stringWithFormat:@"%ld",(long)br1.hyd];
             if (br.tx&&br.tx.length!=0) {
                 _rankingV.topIV.imageURL = [NSURL URLWithString:br.tx];
             }
@@ -196,13 +196,13 @@
         }else{
             Hybr *br = self.model.hybr[0];
             _rankingV.topNameLb.text = br.mz;
-            _rankingV.topScoreLb.text = [NSString stringWithFormat:@"%ld",br.hyd];
+            _rankingV.topScoreLb.text = [NSString stringWithFormat:@"%ld",(long)br.hyd];
             Hybr *br1 = self.model.hybr[1];
             _rankingV.secondNameLb.text = br1.mz;
-            _rankingV.secondScoreLb.text = [NSString stringWithFormat:@"%ld",br1.hyd];
+            _rankingV.secondScoreLb.text = [NSString stringWithFormat:@"%ld",(long)br1.hyd];
             Hybr *br2 = self.model.hybr[2];
             _rankingV.thirdNameLb.text = br2.mz;
-            _rankingV.thirdScoreLb.text = [NSString stringWithFormat:@"%ld",br2.hyd];
+            _rankingV.thirdScoreLb.text = [NSString stringWithFormat:@"%ld",(long)br2.hyd];
             
             if (br.tx&&br.tx.length!=0) {
                 _rankingV.topIV.imageURL = [NSURL URLWithString:br.tx];

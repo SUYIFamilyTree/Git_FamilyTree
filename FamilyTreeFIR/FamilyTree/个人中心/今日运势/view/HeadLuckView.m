@@ -42,7 +42,7 @@
     
     UILabel *monLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.22*Screen_width, 0.02*Screen_height, 0.4*Screen_width, 30)];
     monLabel.font = MFont(0.05*Screen_width);
-    monLabel.text = [NSString stringWithFormat:@"%ld.%ld      星期%@",(long)[dateComs month] ,[dateComs day],[self changeWithComsdateWeek:[dateComs weekday]]];
+    monLabel.text = [NSString stringWithFormat:@"%ld.%ld      星期%@",(long)[dateComs month] ,(long)[dateComs day],[self changeWithComsdateWeek:[dateComs weekday]]];
     self.todayDate = monLabel;
     [self addSubview:monLabel];
     
