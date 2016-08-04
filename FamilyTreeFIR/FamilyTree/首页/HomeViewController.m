@@ -65,11 +65,13 @@ typedef enum : NSUInteger {
     });
     
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController popToRootViewControllerAnimated:true];
     self.tabBarController.tabBar.hidden = false;
 }
+
 -(void)getData{
     if (GetUserId) {
         NSDictionary *logDic = @{};
@@ -104,6 +106,7 @@ typedef enum : NSUInteger {
 -(void)registerNotifacation{
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(respondsToNotifacation) name:LogStatusNotifacation object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(respondsToNotifacationFamService:) name:KNotificationCodeIntoFamSevice object:nil];
+    
 }
 -(void)respondsToNotifacation{
 //    if ([[USERDEFAULT objectForKey:LoginStates] boolValue]) {

@@ -10,5 +10,5 @@
 
 @interface WShopCartView : UIView
 
-
+-(void)reloadallData;
 @end

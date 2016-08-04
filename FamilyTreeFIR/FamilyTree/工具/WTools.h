@@ -18,6 +18,10 @@
 #import "WpersonInfoModel.h"
 #import "WShopCommonModel.h"
 #import "WShopCartView.h"
+#import "GoodsDetailsViewController.h"
+#import "WGoodsDetailModel.h"
+#import "MyOrdersViewController.h"
+#import "BookingBtn.h"
 @interface WTools : NSObject
 
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodecreategen;

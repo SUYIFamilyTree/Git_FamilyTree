@@ -117,7 +117,7 @@ NSString * _Nonnull const kRequestCodedelshopcar = @"delshopcar";
 /** 获取收货地址列表 */
 NSString * _Nonnull const kRequestCodegetrecaddlist = @"getrecaddlist";
 /** 添加收货地址 */
-NSString * _Nonnull const kRequestCodegetaddtrecadd = @"addtrecadd";
+NSString * _Nonnull const kRequestCodegetaddtrecadd = @"addrecadd";
 
 
 /** 修改收货地址 */

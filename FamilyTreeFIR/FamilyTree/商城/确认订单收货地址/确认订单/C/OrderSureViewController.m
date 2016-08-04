@@ -1,0 +1,224 @@
+//
+//  OrderSureViewController.m
+//  ListV
+//
+//  Created by imac on 16/8/2.
+//  Copyright © 2016年 imac. All rights reserved.
+//
+
+#import "OrderSureViewController.h"
+#import "OrderAddressView.h"
+#import "OrderGoodCell.h"
+#import "OrderTwoCell.h"
+#import "OrderBottomView.h"
+#import "ReceiveAddressViewController.h"
+#import "ReceiveAddressModel.h"
+#import "WOrderSureModel.h"
+@interface OrderSureViewController ()<UITableViewDelegate,UITableViewDataSource,ReceiveAddressViewControllerDelegate>
+
+@property (strong,nonatomic) UITableView *tableView;
+
+@property (strong,nonatomic) OrderBottomView *orderBottomV;
+/** 上个界面购物车数据 */
+@property (strong,nonatomic) NSArray <WCartTableViewCell *>*dataArr;
+
+@property (strong,nonatomic) ReceiveAddressModel *receiveData;
+
+@property (strong,nonatomic) OrderAddressView *orderAddV;
+
+/**确认订单model*/
+@property (nonatomic,strong) WOrderSureModel *sureModel;
+
+
+
+@end
+
+@implementation OrderSureViewController
+- (instancetype)initWithShopTitle:(NSString *)title image:(UIImage *)image selectedArr:(NSArray <WCartTableViewCell *>*)selectArr
+{
+    self = [super initWithShopTitle:title image:image];
+    if (self) {
+        
+        _dataArr = selectArr;
+        
+    }
+    return self;
+}
+-(void)getdata{
+    _orderAddV = [[OrderAddressView alloc]init];
+    _receiveData = [[ReceiveAddressModel alloc]init];
+//    _dataArr = @[];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"确认订单信息";
+    [self getdata];
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+  
+    [self postDataWithArr:_dataArr whileComplete:^{
+        [self initView];
+    }];
+}
+
+
+#pragma mark *** 请求 ***
+-(void)postDataWithArr:(NSArray<WCartTableViewCell *> *)array whileComplete:(void (^)())back{
+    NSMutableArray *dicArr = [@[] mutableCopy];
+    for (WCartTableViewCell *cell in array) {
+        NSDictionary *dic = @{@"coid":cell.cellGoodsId,
+                              @"coprid":cell.cellTypeId,
+                              @"cnt":cell.cellNumber.countLb.text};
+        [dicArr addObject:dic];
+        
+    }
+    __weak typeof(self)wkSelf = self;
+    
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"Sz":dicArr} requestID:GetUserId requestcode:kRequestCodegetconorder success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSLog(@"???????-%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+            
+            wkSelf.sureModel = [WOrderSureModel modelWithJSON:jsonDic[@"data"]];
+            
+            NSLog(@"---3333-- %ld", wkSelf.sureModel.shopmoney[0].money);
+            
+            back();
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+    
+}
+
+
+
+- (void)initView{
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, __kWidth, __kHeight-110-140)];
+    [self.view addSubview:_tableView];
+    _tableView.backgroundColor = LH_RGBCOLOR(230, 230, 230);
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+
+    _orderBottomV = [[OrderBottomView alloc]initWithFrame:CGRectMake(0, CGRectYH(_tableView), __kWidth, 140)];
+    [self.view addSubview:_orderBottomV];
+    _orderBottomV.orderQuoteLb.text = [NSString stringWithFormat:@"¥%ld",self.sureModel.shopmoney[0].money];;
+    _orderBottomV.orderFreightLb.text = @"¥0.0";
+    _orderBottomV.concessionsLb.text = @"¥0.0";
+    _orderBottomV.orderPayLb.text = [NSString stringWithFormat:@"应付:¥:%ld",self.sureModel.shopmoney[0].prepri];
+
+}
+
+#pragma mark - Delegate
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return _dataArr.count+5;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSArray *titleArr = @[@"配送方式",@"支付方式",@"发票信息",@"优惠信息"];
+    if (indexPath.row == 0) {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        if (!cell) {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+
+        [cell.contentView addSubview:_orderAddV];
+        if (IsNilString(_receiveData.address)) {
+          _orderAddV.addressLb.text = @"无默认收货地址请添加地址";//无地址数据
+        }else{
+        _orderAddV.nameLb.text = _receiveData.realname;
+        _orderAddV.mobileLb.text = _receiveData.mobile;
+        _orderAddV.addressLb.text = [NSString stringWithFormat:@"%@%@%@%@",_receiveData.Province,_receiveData.city,_receiveData.area,_receiveData.address];
+        }
+        _orderAddV.defaultLb.hidden = YES;//加默认判断
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        return cell;
+    }else if (indexPath.row>0&&indexPath.row<=_dataArr.count){
+        OrderGoodCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OrderGoodCell"];
+        if (!cell) {
+            cell = [[OrderGoodCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"OrderGoodCell"];
+        }
+        WCartTableViewCell *data = self.dataArr[indexPath.row-1];
+        cell.goodIV.image = data.cellImage.image;
+        cell.goodNameLb.text = data.cellName.text;
+        cell.goodMoneyLb.text = data.cellPrice.text;
+        cell.goodCountLb.text = [NSString stringWithFormat:@"x %@",data.cellNumber.countLb.text];
+        return cell;
+    }else if (indexPath.row>_dataArr.count&&indexPath.row<=_dataArr.count+2){
+         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        if (!cell) {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"Cell"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        cell.textLabel.text = titleArr[indexPath.row-_dataArr.count-1];
+        cell.textLabel.font = MFont(15);
+        cell.detailTextLabel.font =MFont(15);
+        cell.detailTextLabel.textColor = [UIColor blackColor];
+        if (indexPath.row-_dataArr.count-1) {
+         cell.detailTextLabel.text = @"顺丰快递";
+        }else{
+          cell.detailTextLabel.text = @"在线支付";
+        }
+        return cell;
+    }else{
+        OrderTwoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OrderTwoCell"];
+        if (!cell) {
+            cell = [[OrderTwoCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"OrderTwoCell"];
+        }
+        cell.titleLb.text = titleArr[indexPath.row-_dataArr.count-1];
+        if (indexPath.row-_dataArr.count-3) {
+          cell.detailOneLb.text = @"抵用券-无";
+          cell.detailTwoLb.text = @"优惠券-无";
+        }else{
+        cell.detailOneLb.textAlignment = NSTextAlignmentLeft;
+         cell.detailTwoLb.textAlignment = NSTextAlignmentLeft;
+         cell.detailOneLb.text = @"纸质发票—个人";
+         cell.detailTwoLb.text = @"费图书商品—不开发票";
+        }
+        return cell;
+    }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row ==0) {
+        return 95;
+    }else if (indexPath.row>0&&indexPath.row<=_dataArr.count){
+        return __kWidth*3/8*17/27+20;
+    }else{
+        return 40;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 0) {
+        ReceiveAddressViewController *vc = [[ReceiveAddressViewController alloc]initWithShopTitle:@"收货地址" image:MImage(@"chec")];
+        vc.delegate = self;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+#pragma mark -ReceiveAddressViewControllerDelegate
+-(void)didSelectAddress:(ReceiveAddressModel *)sender{
+    _receiveData =sender;
+    [_tableView reloadData];
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

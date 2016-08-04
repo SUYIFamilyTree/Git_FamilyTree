@@ -29,4 +29,10 @@
  *  购物车按钮
  */
 @property (strong,nonatomic) UIButton *shoppingBtn;
+/**商品id*/
+@property (nonatomic,strong) NSString *goodId;
+/**商品类型id*/
+@property (nonatomic,strong) NSString *goodTypeId;
+
+
 @end

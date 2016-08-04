@@ -21,7 +21,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         [self initView];
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
@@ -35,9 +35,9 @@
     float value = 97.5;
     _commentNumberLb.text = [NSString stringWithFormat:@"%.1f%%好评",value];
    //评价星级视图。。可以用封装好的替换
-    UIView *starV = [[UIView alloc]initWithFrame:CGRectMake(CGRectXW(_commentNumberLb)+5, 15, 85, 15)];
-    [self addSubview:starV];
-    starV.backgroundColor = [UIColor redColor];
+    _starV = [[StarView alloc]initWithFrame:CGRectMake(CGRectXW(_commentNumberLb)+5, 14, 85, 17)];
+    [self addSubview:_starV];
+
 
     _chooseCommentV = [[ChooseCommentView alloc]initWithFrame:CGRectMake(0, CGRectYH(_commentNumberLb), __kWidth, 85)];
     [self addSubview:_chooseCommentV];

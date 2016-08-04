@@ -19,7 +19,7 @@
 {
     self = [super init];
     if (self) {
-        self.comNavi = [[CommonNavigationViews alloc] initWithFrame:CGRectMake(0, 0, Screen_width, 44+StatusBar_Height) title:@"四海同宗" image:image];
+        self.comNavi = [[CommonNavigationViews alloc] initWithFrame:CGRectMake(0, 0, Screen_width, 44+StatusBar_Height) title:@"" image:image];
         self.comNavi.titleLabel.text = title;
         if (image == nil) {
             self.comNavi.rightBtn.userInteractionEnabled = NO;
@@ -39,7 +39,21 @@
     return self;
 
 }
-
+- (instancetype)initWithShopTitle:(NSString *)title image:(UIImage *)image{
+    self = [super init];
+    if (self) {
+        self.comNavi = [[CommonNavigationViews alloc] initWithFrame:CGRectMake(0, 0, Screen_width, 44+StatusBar_Height) title:@"" image:image];
+        self.comNavi.titleLabel.text = title;
+        if (image == nil) {
+            self.comNavi.rightBtn.userInteractionEnabled = NO;
+        }
+//        CGRectMake(CGRectGetMaxX(self.frame)-44+5, CGRectGetHeight(_backView.bounds)/2-30+StatusBar_Height+10, 25, 25)
+        BookingBtn *bookingBtn = [[BookingBtn alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.comNavi.frame)-39, CGRectGetHeight(self.comNavi.backView.bounds)/2-30+StatusBar_Height+10, 25, 25)];
+        [self.comNavi addSubview:bookingBtn];
+        
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

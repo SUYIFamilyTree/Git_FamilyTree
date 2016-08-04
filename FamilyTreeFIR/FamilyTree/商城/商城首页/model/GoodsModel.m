@@ -10,4 +10,18 @@
 
 @implementation GoodsModel
 
+
++ (NSDictionary *)modelContainerPropertyGenericClass{
+    return @{@"datalist" : [GoodsDatalist class]};
+}
 @end
+@implementation GPage
+
+@end
+
+
+@implementation GoodsDatalist
+
+@end
+
+

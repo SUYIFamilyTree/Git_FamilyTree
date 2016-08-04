@@ -220,16 +220,11 @@
                             WFamilyModel *model = [[WFamilyModel alloc] init];
                             [WFamilyModel  shareWFamilModel].datalist = model.datalist;
                             
-//                            WSelectMyFamModel *selModel = [[WSelectMyFamModel alloc] init];
-//                            [WSelectMyFamModel sharedWselectMyFamModel].myFamArray = selModel.myFamArray;
-//                            [WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray = selModel.myFamIdArray;
                            
                         }
                     }
                 }
-                
-                
-                
+                                
                 //存储用户信息
                 //id
                 [USERDEFAULT setObject:@(loginModel.userId) forKey:@"userid"];

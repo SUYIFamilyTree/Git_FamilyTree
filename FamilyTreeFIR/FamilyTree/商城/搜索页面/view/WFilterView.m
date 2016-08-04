@@ -105,11 +105,15 @@
         
         [_condDic setObject:self.minPrice.text forKey:@"min"];
         [_condDic setObject:self.maxPrice.text forKey:@"max"];
-        NSLog(@"筛选条件---%@", _condDic);
+        
         if ([self.maxPrice.text integerValue] < [self.minPrice.text integerValue]) {
             [SXLoadingView showAlertHUD:@"筛选条件有误" duration:0.6];
         }else{
-           
+            NSLog(@"筛选条件---%@", _condDic);
+            if (_delegate && [_delegate respondsToSelector:@selector(WfilterView:completeFilterDictionary:)]) {
+                [_delegate WfilterView:self completeFilterDictionary:_condDic];
+            };
+            [self removeFromSuperview];
         }
     }else{
         //重置

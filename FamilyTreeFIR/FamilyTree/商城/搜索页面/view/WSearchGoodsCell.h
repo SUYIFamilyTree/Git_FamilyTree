@@ -15,7 +15,8 @@
 @property (nonatomic,strong) UILabel *cellLabel;
 /**价格*/
 @property (nonatomic,strong) UILabel *cellPrice;
-
+/**商品id*/
+@property (nonatomic,strong) NSString *goodsId;
 
 
 @end

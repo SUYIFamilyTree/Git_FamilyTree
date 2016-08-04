@@ -8,7 +8,6 @@
 
 #import "ShoppingViewController.h"
 #import "WShopSearchViewController.h"
-#import "GoodsCommentViewController.h"
 
 #import "ShoppingTypeView.h"
 #import "HotActiveView.h"
@@ -18,6 +17,8 @@
 
 @property (nonatomic,strong) TopSearchView *topSearchView; /*顶部搜索*/
 @property (nonatomic,strong) ScrollerView *scrollerView; /*滚动图*/
+/**背景滚动图*/
+@property (nonatomic,strong) UIScrollView *backView;
 
 /**
  *  商城种类视图
@@ -41,6 +42,10 @@
 /**购物车界面*/
 @property (nonatomic,strong) WShopCartView *shopCartView;
 
+/**分类商品mode*/
+@property (nonatomic,strong) GoodsModel *typeModel;
+
+
 @end
 
 @implementation ShoppingViewController
@@ -53,7 +58,7 @@
     
     [self postGetSyntypeWhileComplete:^() {
         [self initView];
-        [self postGoodsListWithGoodsName:@"" WhileComplete:^{
+        [self postGoodsListWithGoodsName:@"" type:@"" WhileComplete:^{
             
         }];
     }];
@@ -61,6 +66,7 @@
 }
 - (void)initView{
     UIScrollView *backV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, __kWidth, __kHeight-50)];
+   
     [self.view addSubview:backV];
     backV.backgroundColor = LH_RGBCOLOR(220, 220, 220);
     backV.scrollEnabled = YES;
@@ -97,7 +103,8 @@
     
     //购物车btn
     [self.view addSubview:self.cartButton];
-
+    
+    self.backView = backV;
     
 }
 
@@ -119,25 +126,56 @@
 
 #pragma mark -ShoppingTypeView Delegate
 -(void)pushView:(NSInteger)sender{
+    
+    [self.backView removeAllSubviews];
+    [self.backView addSubview:self.scrollerView];
+    [self.backView addSubview:_shoppingTypeV];
+    [self.backView addSubview:_guessLikeV];
+    [_guessLikeV.headView removeFromSuperview];
+    _guessLikeV.frame = CGRectMake(0, CGRectYH(_shoppingTypeV)+4, __kWidth, __kWidth*5/9+190);
+//
+    
+     __weak typeof (self) weakSelf = self;
     switch (sender) {
         case 0:
         {
             NSLog(@"实物物品");
+            [self postGoodsListWithGoodsName:@"" type:@"实物物品" WhileComplete:^{
+                _guessLikeV.dataSource = weakSelf.typeModel.datalist;
+                [_guessLikeV.collectionV reloadData];
+                _guessLikeV.collectionV.frame = CGRectMake(_guessLikeV.collectionV.frame.origin.x, 0, Screen_width,  __kWidth*5/9+520);
+            }];
+            
         }
             break;
         case 1:
         {
             NSLog(@"虚拟物品");
+            [self postGoodsListWithGoodsName:@"" type:@"虚拟物品" WhileComplete:^{
+                _guessLikeV.dataSource = weakSelf.typeModel.datalist;
+                [_guessLikeV.collectionV reloadData];
+                _guessLikeV.collectionV.frame = CGRectMake(_guessLikeV.collectionV.frame.origin.x, 0, Screen_width,  __kWidth*5/9+520);
+            }];
         }
             break;
         case 2:
         {
             NSLog(@"同城热卖");
+            [self postGoodsListWithGoodsName:@"" type:@"同城热卖" WhileComplete:^{
+                _guessLikeV.dataSource = weakSelf.typeModel.datalist;
+                [_guessLikeV.collectionV reloadData];
+                _guessLikeV.collectionV.frame = CGRectMake(_guessLikeV.collectionV.frame.origin.x, 0, Screen_width,  __kWidth*5/9+520);
+            }];
         }
             break;
         case 3:
         {
             NSLog(@"优惠专区");
+            [self postGoodsListWithGoodsName:@"" type:@"优惠专区" WhileComplete:^{
+                _guessLikeV.dataSource = weakSelf.typeModel.datalist;
+                [_guessLikeV.collectionV reloadData];
+                _guessLikeV.collectionV.frame = CGRectMake(_guessLikeV.collectionV.frame.origin.x, 0, Screen_width,  __kWidth*5/9+520);
+            }];
         }
             break;
         default:
@@ -149,13 +187,18 @@
 
 -(void)TopSearchViewDidTapView:(TopSearchView *)topSearchView{
     MYLog(@"商城搜索栏");
-    WShopSearchViewController *searchVc = [[WShopSearchViewController alloc] init];
-    [self.navigationController pushViewController:searchVc animated:YES];
+    __weak typeof(self)wkSelf = self;
+    
+            WShopSearchViewController *searchVc = [[WShopSearchViewController alloc] initWithText:self.topSearchView.searchLabel.text];
+        [wkSelf.navigationController pushViewController:searchVc animated:YES];
+  
+    
+    
+    
 }
 -(void)TopSearchView:(TopSearchView *)topSearchView didRespondsToMenusBtn:(UIButton *)sender{
     MYLog(@"商城右菜单");
-    GoodsCommentViewController *pingjia = [[GoodsCommentViewController alloc] init];
-    [self.navigationController pushViewController:pingjia animated:YES];
+    
     
 }
 
@@ -184,10 +227,12 @@
  *  @param name 商品名
  *  @param back 结束搜索
  */
--(void)postGoodsListWithGoodsName:(NSString *)name WhileComplete:(void (^)())back{
+-(void)postGoodsListWithGoodsName:(NSString *)name type:(NSString *)type WhileComplete:(void (^)())back{
+    NSDictionary *dic = [WShopCommonModel shareWShopCommonModel].typeIdDic;
+    __weak typeof(self)wkSelf = self;
     [TCJPHTTPRequestManager POSTWithParameters:@{@"pagenum":@"1",
                                                  @"pagesize":@"20",
-                                                 @"type":@"",
+                                                 @"type":dic[type]?dic[type]:@"",
                                                  @"label":@"",
                                                  @"coname":name,
                                                  @"shoptype":@"GEN",
@@ -198,6 +243,7 @@
                                                  } requestID:GetUserId requestcode:kRequestCodegetcomlist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
                                                      if (succe) {
                                                          NSLog(@"--goods--%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+                                                         wkSelf.typeModel = [GoodsModel modelWithJSON:jsonDic[@"data"]];
                                                          back();
                                                      }
                                                  } failure:^(NSError *error) {
@@ -211,12 +257,19 @@
         [self.view addSubview:self.shopCartView];
     }
 }
+-(void)respondsTorightBookingBtn:(UIButton *)sender{
+    MyOrdersViewController *myOdVc = [[MyOrdersViewController alloc] init];
+    [self.navigationController pushViewController:myOdVc animated:YES];
+}
 #pragma mark *** getters ***
 -(TopSearchView *)topSearchView{
     if (!_topSearchView) {
         _topSearchView = [[TopSearchView alloc] initWithFrame:CGRectMake(0, 0, Screen_width, StatusBar_Height+NavigationBar_Height)];
         _topSearchView.searchLabel.placeholder = @"输入关键词";
         _topSearchView.delegate = self;
+        [_topSearchView.menuBtn removeFromSuperview];
+        BookingBtn *btn = [[BookingBtn alloc] initWithFrame:CGRectMake(CGRectXW(_topSearchView.searchView)+15, CGRectGetHeight(_topSearchView.backView.bounds)/2-23+StatusBar_Height, 25, 25)];
+        [_topSearchView addSubview:btn];
         
     }
     return _topSearchView;
@@ -239,8 +292,8 @@
 -(WShopCartView *)shopCartView{
     if (!_shopCartView) {
         _shopCartView = [[WShopCartView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
-        
     }
+    [_shopCartView reloadallData];
     return _shopCartView;
 }
 

@@ -73,7 +73,7 @@
         
         NSError *error;
         NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSUTF8StringEncoding error:&error];
-        //MYLog(@"得到的返回---%@",jsonDic);
+        MYLog(@"得到的返回---%@",jsonDic);
         
         NSString *jsonStr = [NSString stringWithFormat:@"%@",jsonDic];
         NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
