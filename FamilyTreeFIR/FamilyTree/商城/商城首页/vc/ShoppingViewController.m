@@ -109,8 +109,6 @@
 }
 
 #pragma mark -GuessLikeViewDelegate
-- (void)selectCellLike:(NSIndexPath *)index{
-    NSLog(@"跳转到猜你喜欢商品%ld详情页",(long)index.row);
 - (void)selectCellLike:(NSString *)goodsId{
     NSLog(@"跳转到猜你喜欢商品%@详情页",goodsId);
     __weak typeof(self)weakSelf = self;
