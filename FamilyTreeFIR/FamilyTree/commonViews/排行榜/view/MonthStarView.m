@@ -104,7 +104,7 @@
     cell.detailTextLabel.textColor = LH_RGBCOLOR(100, 100, 100);
     cell.detailTextLabel.text = self.dataArr[indexPath.row].xm;
     cell.detailTextLabel.font = MFont(12);
-    NSLog(@"%ld",indexPath.row%2);
+    NSLog(@"%ld",(long)indexPath.row%2);
     if ((indexPath.row+1)%2) {
         cell.contentView.backgroundColor = LH_RGBCOLOR(200, 200, 200);
     }else{

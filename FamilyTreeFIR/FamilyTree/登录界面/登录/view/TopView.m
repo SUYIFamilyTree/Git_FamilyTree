@@ -25,7 +25,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self addSubview:self.backBtn];
         [self addSubview:self.regisBtn];
         [self addSubview:self.verticalLine];
         [self addSubview:self.findPassBtn];
@@ -36,16 +35,6 @@
 
 
 #pragma mark *** getters ***
-
--(UIButton *)backBtn{
-    
-    if (!_backBtn) {
-        _backBtn = [[UIButton alloc] initWithFrame:CGRectMake(BackBtn_toleft, Frame_height, BackBtn_size, BackBtn_size)];
-        [_backBtn setImage:[UIImage imageNamed:@"return"] forState:UIControlStateNormal];
-    }
-    return _backBtn;
-    
-}
 
 -(UIButton *)regisBtn{
     if (!_regisBtn) {

@@ -107,7 +107,7 @@
 }
 #pragma mark -TotalCommentViewDelegate Delegate
 -(void)selectCommentType:(UIButton *)sender{
-    NSLog(@"%ld",sender.tag);
+    NSLog(@"%ld",(long)sender.tag);
     NSLog(@"切换数据");
 }
 

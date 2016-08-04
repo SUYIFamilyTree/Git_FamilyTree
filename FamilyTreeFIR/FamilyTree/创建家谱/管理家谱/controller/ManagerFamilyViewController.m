@@ -213,7 +213,7 @@
 
 -(void)respondsToDeleteBtn:(UIButton *)sender{
     //卷谱id
-    NSString *gemeId = [NSString stringWithFormat:@"%ld",sender.tag];
+    NSString *gemeId = [NSString stringWithFormat:@"%ld",(long)sender.tag];
     
     [Tools showAlertViewcontrollerWithTarGet:self Message:@"确定删除此卷谱吗？" complete:^(BOOL sure) {
         if (sure) {
@@ -242,7 +242,7 @@
     _selectedADDView = !_selectedADDView;
     
     if (_selectedADDView) {
-        NSString *daishu = [NSString stringWithFormat:@"%ld",5+4*sender.tag];
+        NSString *daishu = [NSString stringWithFormat:@"%ld",(long)5+4*sender.tag];
         [self getAddJpPossibleMemberWithDs:daishu complete:^(NSDictionary *jsonDic) {
             
             WGennerationModel *model = [WGennerationModel modelWithJSON:jsonDic[@"data"]];

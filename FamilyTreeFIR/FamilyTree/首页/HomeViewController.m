@@ -50,9 +50,6 @@ typedef enum : NSUInteger {
     [super viewDidLoad];
     
     //先跳转到登录页面
-    
-    //[self.navigationController pushViewController:self.logVc animated:false];
-    [self presentViewController:self.logVc animated:NO completion:nil];
     //注册通知
     [self registerNotifacation];
     
@@ -105,16 +102,16 @@ typedef enum : NSUInteger {
 
 
 -(void)registerNotifacation{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(respondsToNotifacation) name:LogStatusNotifacation object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(respondsToNotifacation) name:LogStatusNotifacation object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(respondsToNotifacationFamService:) name:KNotificationCodeIntoFamSevice object:nil];
 }
 -(void)respondsToNotifacation{
-    if ([[USERDEFAULT objectForKey:LoginStates] boolValue]) {
-        [_naviBar.rightBtn setTitle:@"切换账号" forState:0];
-    }else{
-        [_naviBar.rightBtn setTitle:@"登录" forState:0];
-        
-    }
+//    if ([[USERDEFAULT objectForKey:LoginStates] boolValue]) {
+//        [_naviBar.rightBtn setTitle:@"切换账号" forState:0];
+//    }else{
+//        [_naviBar.rightBtn setTitle:@"登录" forState:0];
+//        
+//    }
 }
 -(void)respondsToNotifacationFamService:(NSNotification *)info{
     NSDictionary *dic = info.userInfo;
@@ -270,12 +267,14 @@ typedef enum : NSUInteger {
         [_naviBar.leftBtn setImage:MImage(@"index_logo") forState:0];
         _naviBar.backView.backgroundColor = [UIColor clearColor];
         
-        if ([[USERDEFAULT objectForKey:LoginStates] boolValue]) {
-            [_naviBar.rightBtn setTitle:@"切换账号" forState:0];
-        }else{
-            [_naviBar.rightBtn setTitle:@"登录" forState:0];
-
-        }
+//        if ([[USERDEFAULT objectForKey:LoginStates] boolValue]) {
+//            [_naviBar.rightBtn setTitle:@"切换账号" forState:0];
+//        }else{
+//            [_naviBar.rightBtn setTitle:@"登录" forState:0];
+//
+//        }
+        
+        [_naviBar.rightBtn setTitle:@"切换账号" forState:0];
         _naviBar.rightBtn.titleLabel.font = MFont(13);
         _naviBar.rightBtn.frame = CGRectMake(CGRectGetMaxX(_naviBar.backView.frame)-70, CGRectGetHeight(_naviBar.backView.bounds)/2-30+StatusBar_Height+10, 60, 25);
         _naviBar.titleLabel.font = [UIFont boldSystemFontOfSize:16];

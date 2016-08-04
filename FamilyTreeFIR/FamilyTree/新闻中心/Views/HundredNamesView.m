@@ -66,7 +66,6 @@ static NSString *const kReusableCollecCellIdentifier = @"CollectioncellIdentifie
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     CustonCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kReusableCollecCellIdentifier forIndexPath:indexPath];
-    
     //cell.displayLabel.text = @"王";
     
     cell.hundredsNamesModel = self.BJXArr[indexPath.row];
@@ -85,13 +84,13 @@ static NSString *const kReusableCollecCellIdentifier = @"CollectioncellIdentifie
     if (!_collectionView) {
         
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.itemSize = AdaptationSize(144, 25);
+        flowLayout.itemSize = CGSizeMake(50, 30);
         flowLayout.minimumLineSpacing = 0*AdaptationWidth();
-        flowLayout.minimumInteritemSpacing = 23*AdaptationWidth();
+        flowLayout.minimumInteritemSpacing = 0*AdaptationWidth();
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        _collectionView.showsHorizontalScrollIndicator = NO;
         
-        
-        _collectionView = [[UICollectionView alloc] initWithFrame:AdaptationFrame(0, 32, self.bounds.size.width/AdaptationWidth(), 270) collectionViewLayout:flowLayout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:AdaptationFrame(0, 32, self.bounds.size.width/AdaptationWidth(), 257) collectionViewLayout:flowLayout];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
         _collectionView.backgroundColor = [UIColor whiteColor];

@@ -40,7 +40,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    MYLog(@"%ld",self.CeId);
+    MYLog(@"%ld",(long)self.CeId);
     [self initData];
     [self initUI];
 }

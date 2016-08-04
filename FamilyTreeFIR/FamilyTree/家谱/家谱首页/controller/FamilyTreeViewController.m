@@ -287,8 +287,8 @@ enum{
 -(void)reloadAllData{
     
     [self.famTableView.tableView reloadData];
-    self.allFamilyNumber.text = [NSString stringWithFormat:@"已入谱人数%ld人",[WFamilyModel shareWFamilModel].rs];
-    self.allFamilGenNumber.text = [NSString stringWithFormat:@"已入谱%ld辈",[WFamilyModel shareWFamilModel].ds];
+    self.allFamilyNumber.text = [NSString stringWithFormat:@"已入谱人数%ld人",(long)[WFamilyModel shareWFamilModel].rs];
+    self.allFamilGenNumber.text = [NSString stringWithFormat:@"已入谱%ld辈",(long)[WFamilyModel shareWFamilModel].ds];
 
 }
 

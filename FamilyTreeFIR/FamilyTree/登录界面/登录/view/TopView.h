@@ -10,7 +10,6 @@
 
 @interface TopView : UIView
 
-@property (nonatomic,strong) UIButton *backBtn; /*返回按钮*/
 @property (nonatomic,strong) UIButton *regisBtn; /*注册*/
 @property (nonatomic,strong) UIButton *findPassBtn; /*找回密码*/
 

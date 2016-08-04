@@ -103,17 +103,17 @@
 
 #pragma mark -GuessLikeViewDelegate
 - (void)selectCellLike:(NSIndexPath *)index{
-    NSLog(@"跳转到猜你喜欢商品%ld详情页",index.row);
+    NSLog(@"跳转到猜你喜欢商品%ld详情页",(long)index.row);
 }
 
 #pragma mark -NeedRushView Delegate
 -(void)selectCellRush:(NSIndexPath *)index{
-    NSLog(@"跳转到商品%ld详情页",index.row);
+    NSLog(@"跳转到商品%ld详情页",(long)index.row);
 }
 
 #pragma mark -HotActiveViewDelegate
 -(void)selectCellIndexPath:(NSIndexPath *)index{
-    NSLog(@"跳转到热门商品详情页%ld",index.row);
+    NSLog(@"跳转到热门商品详情页%ld",(long)index.row);
 }
 
 

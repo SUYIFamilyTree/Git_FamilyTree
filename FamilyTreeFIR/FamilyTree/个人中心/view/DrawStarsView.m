@@ -24,6 +24,7 @@
         for (int i = redNumber ; i < 5; i++) {
             UIImageView *normalIV = [[UIImageView alloc]initWithFrame:CGRectMake((redIVWidth+3)*redNumber+(redIVWidth+3)*(i-redNumber), 0, redIVWidth, CGRectH(self))];
             normalIV.image = normalImage;
+            normalIV.contentMode = UIViewContentModeScaleAspectFit;
             [self addSubview:normalIV];
         }
     }

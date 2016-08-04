@@ -42,9 +42,9 @@
     [self.headImage setImageWithURL:[NSURL URLWithString:cemGoodsShopModel.CoCover] placeholder:MImage(@"my_name_flour")];
     self.nameLabel.text = cemGoodsShopModel.CoConame;
     if ([cemGoodsShopModel.CoConstype isEqualToString:@"JF"]) {
-        self.priceLabel.text = [NSString stringWithFormat:@"%ld同城币/天",cemGoodsShopModel.CoprMoney];
+        self.priceLabel.text = [NSString stringWithFormat:@"%ld同城币/天",(long)cemGoodsShopModel.CoprMoney];
     }else{
-        self.priceLabel.text = [NSString stringWithFormat:@"%ld分/天",cemGoodsShopModel.CoprMoney];
+        self.priceLabel.text = [NSString stringWithFormat:@"%ld分/天",(long)cemGoodsShopModel.CoprMoney];
     }
 }
 

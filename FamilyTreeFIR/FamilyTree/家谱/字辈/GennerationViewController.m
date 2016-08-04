@@ -99,7 +99,7 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
                 for (int ij = 0; ij<self.gennerModel.datalist[idx].datas.count; ij++) {
                     [nameArr addObject:self.gennerModel.datalist[idx].datas[ij].name];
                     [urlArr addObject:self.gennerModel.datalist[idx].datas[ij].photo];
-                    [cyIDArr addObject:[NSString stringWithFormat:@"%ld",self.gennerModel.datalist[idx].datas[ij].gemeid]];
+                    [cyIDArr addObject:[NSString stringWithFormat:@"%ld",(long)self.gennerModel.datalist[idx].datas[ij].gemeid]];
                 }
                 [_allInfoArr addObject:nameArr];
                 [_imageUrlArr addObject:urlArr];

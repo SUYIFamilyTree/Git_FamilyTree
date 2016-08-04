@@ -253,7 +253,7 @@
     
     [self.personalInfoDetailArr addObject:@[@"女",@"男",@"保密"][[queryModel.memb.MeSex intValue]]];
     DateModel *dateModel = [[DateModel alloc]initWithDateStr:queryModel.memb.MeBirthday];
-    NSString *MeBirthdayStr = [NSString stringWithFormat:@"%04ld年%02ld月%02ld日%02ld时",(long)dateModel.year,dateModel.month,dateModel.day,dateModel.hour];
+    NSString *MeBirthdayStr = [NSString stringWithFormat:@"%04ld年%02ld月%02ld日%02ld时",(long)dateModel.year,(long)dateModel.month,(long)dateModel.day,(long)dateModel.hour];
     [self.personalInfoDetailArr addObject:MeBirthdayStr];
     [self.personalInfoDetailArr addObject:queryModel.memb.MeCertype];
     [self.personalInfoDetailArr addObject:IsNilString(queryModel.memb.MeCardnum) ?@"":queryModel.memb.MeCardnum];
@@ -420,13 +420,13 @@
         //editPasswordVC.TFStr = self.accountInfoDetailArr[sender.tag-333];
         [[self viewController].navigationController pushViewController:editPasswordVC animated:NO];
     }else if(sender.tag < 444){
-        MYLog(@"%ld",sender.tag-333);
+        MYLog(@"%ld",(long)sender.tag-333);
         editDetaiVC.detailStr = self.accountInfoTitleArr[sender.tag-333];
         editDetaiVC.TFStr = self.accountInfoDetailArr[sender.tag-333];
         editDetaiVC.delegate = self;
         [[self viewController].navigationController pushViewController:editDetaiVC animated:NO];
     }else{
-        MYLog(@"%ld",sender.tag-444);
+        MYLog(@"%ld",(long)sender.tag-444);
         editDetaiVC.detailStr = self.personalInfoTitleArr[sender.tag-444];
         editDetaiVC.TFStr = self.personalInfoDetailArr[sender.tag-444];
         editDetaiVC.delegate = self;
@@ -673,7 +673,7 @@
 
 #pragma mark - CustomPickerDateViewDelegate
 -(void)getCustomPickerDateViewYear:(NSInteger)year andMonth:(NSInteger)month andDay:(NSInteger)day andHour:(NSInteger)hour{
-    self.personalInfoDetailArr[5] = [NSString stringWithFormat:@"%04ld年%.2ld月%.2ld日%.2ld时",(long)year,month,day,hour];
+    self.personalInfoDetailArr[5] = [NSString stringWithFormat:@"%04ld年%.2ld月%.2ld日%.2ld时",(long)year,(long)month,(long)day,(long)hour];
     UITableView *tableView = (UITableView *)[self viewWithTag:1002];
     [tableView reloadData];
     
@@ -724,7 +724,7 @@
 
 //pickerView确定按钮
 -(void)clickPickerViewSureBtn:(UIButton *)sender{
-    MYLog(@"%ld",sender.tag - 666);
+    MYLog(@"%ld",(long)sender.tag - 666);
     
     [self.pickerViewGrayBgView removeFromSuperview];
     [self viewController].tabBarController.tabBar.hidden = NO;

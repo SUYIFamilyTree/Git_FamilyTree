@@ -13,7 +13,6 @@
 #define TopView_height 30
 
 typedef enum : NSUInteger {
-    TopViewBackBtn,
     TopViewRegisBtn,
     TopViewPassBtn,
 } TopViewTag;
@@ -87,10 +86,8 @@ typedef enum : NSUInteger {
 -(TopView *)topView{
     if (!_topView) {
         _topView = [[TopView alloc] initWithFrame:CGRectMake(0, 0.05*Screen_height, Screen_width, TopView_height)];
-        _topView.backBtn.tag = TopViewBackBtn;
         _topView.regisBtn.tag = TopViewRegisBtn;
         _topView.findPassBtn.tag = TopViewPassBtn;
-        [_topView.backBtn addTarget:self action:@selector(respondsToTopViewBtn:) forControlEvents:UIControlEventTouchUpInside];
         [_topView.regisBtn addTarget:self action:@selector(respondsToTopViewBtn:) forControlEvents:UIControlEventTouchUpInside];
         [_topView.findPassBtn addTarget:self action:@selector(respondsToTopViewBtn:) forControlEvents:UIControlEventTouchUpInside];
         

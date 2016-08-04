@@ -140,6 +140,7 @@
 -(void)clickBackBtn:(UIButton *)sender{
     //保存设置
     [self.delegate editHeadView:self HeadInsideImage:self.headIV.headInsideIV.image];
+    if (self.headIV.headInsideIV.image) {
         UIImage *list = self.headIV.headInsideIV.image;
         NSData *imageData = UIImageJPEGRepresentation(list, 0.5);
         NSString *encodeimageStr =[imageData base64EncodedString];
@@ -152,8 +153,11 @@
         } failure:^(NSError *error) {
             
         }];
-    //保存图片进入沙盒中
-    [self saveImage:self.headIV.headInsideIV.image withName:@"headImage"];
+        //保存图片进入沙盒中
+        [self saveImage:self.headIV.headInsideIV.image withName:@"headImage"];
+        
+
+    }
     [self removeFromSuperview];
 }
 
