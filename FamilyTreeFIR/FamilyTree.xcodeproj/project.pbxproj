@@ -1074,6 +1074,8 @@
 		BC78533B1D3897A500208179 /* tx_12.png in Resources */ = {isa = PBXBuildFile; fileRef = BC7853171D3897A500208179 /* tx_12.png */; };
 		BC78533C1D3897A500208179 /* tx_12@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC7853181D3897A500208179 /* tx_12@2x.png */; };
 		BC78533D1D3897A500208179 /* tx_12@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC7853191D3897A500208179 /* tx_12@3x.png */; };
+		BC7DFF971D509D3200492DC1 /* GuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC7DFF961D509D3200492DC1 /* GuideViewController.m */; };
+		BC7DFF991D50A4AA00492DC1 /* yindaoye.png in Resources */ = {isa = PBXBuildFile; fileRef = BC7DFF981D50A4AA00492DC1 /* yindaoye.png */; };
 		BC941AFD1D3F1D5800571EE2 /* qf_lian.png in Resources */ = {isa = PBXBuildFile; fileRef = BC941AF71D3F1D5800571EE2 /* qf_lian.png */; };
 		BC941AFE1D3F1D5800571EE2 /* qf_lian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC941AF81D3F1D5800571EE2 /* qf_lian@2x.png */; };
 		BC941AFF1D3F1D5800571EE2 /* qf_lian@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC941AF91D3F1D5800571EE2 /* qf_lian@3x.png */; };
@@ -2504,6 +2506,9 @@
 		BC7853171D3897A500208179 /* tx_12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tx_12.png; sourceTree = "<group>"; };
 		BC7853181D3897A500208179 /* tx_12@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tx_12@2x.png"; sourceTree = "<group>"; };
 		BC7853191D3897A500208179 /* tx_12@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tx_12@3x.png"; sourceTree = "<group>"; };
+		BC7DFF951D509D3200492DC1 /* GuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideViewController.h; sourceTree = "<group>"; };
+		BC7DFF961D509D3200492DC1 /* GuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideViewController.m; sourceTree = "<group>"; };
+		BC7DFF981D50A4AA00492DC1 /* yindaoye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yindaoye.png; sourceTree = "<group>"; };
 		BC941AF71D3F1D5800571EE2 /* qf_lian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qf_lian.png; sourceTree = "<group>"; };
 		BC941AF81D3F1D5800571EE2 /* qf_lian@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qf_lian@2x.png"; sourceTree = "<group>"; };
 		BC941AF91D3F1D5800571EE2 /* qf_lian@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qf_lian@3x.png"; sourceTree = "<group>"; };
@@ -4179,6 +4184,9 @@
 				ADC326FC1CF3E3DF00CEAE53 /* AppDelegate.m */,
 				AD2ACD7D1CF3FC9C009D4A24 /* RootTabBarViewController.h */,
 				AD2ACD7E1CF3FC9C009D4A24 /* RootTabBarViewController.m */,
+				BC7DFF951D509D3200492DC1 /* GuideViewController.h */,
+				BC7DFF961D509D3200492DC1 /* GuideViewController.m */,
+				BC7DFF981D50A4AA00492DC1 /* yindaoye.png */,
 				ADE3BBD01D13E70F006523C4 /* 求签 */,
 				BC6094EC1D3DECD90056DD9C /* 祈福 */,
 				AD6788991D06AA9D00D6CF52 /* 新闻中心 */,
@@ -5998,6 +6006,7 @@
 				BC6094E81D3DB8A20056DD9C /* zcmf_bg@3x.png in Resources */,
 				BC0D47981D4862A500A8336D /* jrys_star4@3x.png in Resources */,
 				AD49FECE1CF69E1900DF9F7E /* bg.png in Resources */,
+				BC7DFF991D50A4AA00492DC1 /* yindaoye.png in Resources */,
 				AD8DAAD81CFD6492009B7958 /* yel@2x.png in Resources */,
 				AD85145B1D41F0BA007FB495 /* gold.png in Resources */,
 				BC5F15731D0FF1CA004F3622 /* gr_ct_1@3x.png in Resources */,
@@ -7097,6 +7106,7 @@
 				BC499B9E1D2CDFDD007870FE /* FlyBarrageTextView.m in Sources */,
 				ADC3E9991D377A6F00754F63 /* WApplyJoinView.m in Sources */,
 				BC6094DE1D3DB7190056DD9C /* PjZcViewController.m in Sources */,
+				BC7DFF971D509D3200492DC1 /* GuideViewController.m in Sources */,
 				ADA4C16F1D0E925700CA9067 /* AllGoodsView.m in Sources */,
 				ADB8A2361D3F64D8007617A4 /* WMenuBtn.m in Sources */,
 				ADC13BA31D1926C7000F901C /* WDetailManagerViewController.m in Sources */,
@@ -7278,8 +7288,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: zhang lei (27FQAQ29WK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: zhang lei (27FQAQ29WK)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -7298,10 +7308,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = com.tongchengjiapu;
+				ONLY_ACTIVE_ARCH = NO;
+				PROVISIONING_PROFILE = "4dc50570-7a63-441b-8cfc-9f002c9bc351";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -7323,8 +7333,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: zhang lei (27FQAQ29WK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: zhang lei (27FQAQ29WK)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -7337,9 +7347,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = com.tongchengjiapu;
+				PROVISIONING_PROFILE = "4dc50570-7a63-441b-8cfc-9f002c9bc351";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -7350,13 +7360,15 @@
 			baseConfigurationReference = 9B08E1D9A90C3918BBC8BFE5 /* Pods-FamilyTree.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FamilyTree/PrefixHeader.pch";
 				INFOPLIST_FILE = FamilyTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tongchengjiapu.jihua;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tongchengjiapu.FamilyTree;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -7367,13 +7379,15 @@
 			baseConfigurationReference = 30E071E86691C50DA5617A52 /* Pods-FamilyTree.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/FamilyTree/PrefixHeader.pch";
 				INFOPLIST_FILE = FamilyTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tongchengjiapu.jihua;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tongchengjiapu.FamilyTree;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -7437,7 +7451,7 @@
 				ADC327211CF3E3E000CEAE53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		ADC327221CF3E3E000CEAE53 /* Build configuration list for PBXNativeTarget "FamilyTree" */ = {
 			isa = XCConfigurationList;
@@ -7446,7 +7460,7 @@
 				ADC327241CF3E3E000CEAE53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		ADC327251CF3E3E000CEAE53 /* Build configuration list for PBXNativeTarget "FamilyTreeTests" */ = {
 			isa = XCConfigurationList;
@@ -7455,7 +7469,7 @@
 				ADC327271CF3E3E000CEAE53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		ADC327281CF3E3E000CEAE53 /* Build configuration list for PBXNativeTarget "FamilyTreeUITests" */ = {
 			isa = XCConfigurationList;
@@ -7464,7 +7478,7 @@
 				ADC3272A1CF3E3E000CEAE53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

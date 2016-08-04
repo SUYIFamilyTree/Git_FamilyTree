@@ -7,11 +7,9 @@
 //
 
 #import "LoginViewController.h"
-
 #import "ToRegistView.h"
 #import "LoginModel.h"
-
-#import "RechargeViewController.h"
+#import "RootTabBarViewController.h"
 
 #define ReGistView_height 180
 #define AnimationsTime 0.4f
@@ -46,14 +44,14 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
-    self.tabBarController.tabBar.hidden = YES;
+//    self.navigationController.navigationBarHidden = YES;
+//    self.tabBarController.tabBar.hidden = YES;
     
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     
-    self.tabBarController.tabBar.hidden = false;
+    //self.tabBarController.tabBar.hidden = false;
     //通知改变登录状态，切换账号/登录
     [[NSNotificationCenter defaultCenter] postNotificationName:LogStatusNotifacation object:nil];
 
@@ -226,7 +224,7 @@
     MYLog(@"登录");
 
     NSDictionary *logDic = @{@"user":self.loginView.accountView.inputTextView.text,@"pass":self.loginView.passwordView.inputTextView.text};
-    
+    WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:kRequestCodeLogin success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         MYLog(@"登录%@",jsonDic);
         if (succe) {
@@ -262,10 +260,9 @@
                 //            [USERDEFAULT setObject:loginModel.kzxx.Photo forKey:@"Photo"];
                 [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserAccount];
                 [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:UserPassword];
-                //[self.navigationController popViewControllerAnimated:YES];
-               
-                [self dismissViewControllerAnimated:NO completion:nil];
                 
+                RootTabBarViewController *rootVC = [[RootTabBarViewController alloc]init];
+                [weakSelf presentViewController:rootVC animated:YES completion:nil];
             }else{
                 [SXLoadingView showAlertHUD:jsonDic[@"message"] duration:0.5];
             }
@@ -289,8 +286,6 @@
         if (succe) {
             //登录成功
             LoginModel *loginModel = [LoginModel modelWithJSON:jsonDic[@"data"]];
-            
-            
             //存储用户信息
             //id
             [USERDEFAULT setObject:@(loginModel.userId) forKey:@"userid"];
@@ -298,15 +293,7 @@
             [USERDEFAULT setObject:loginModel.auth
                             forKey:@"authcode"];
             
-//            [USERDEFAULT setObject:@true forKey:LoginStates];
-            //头像路径
-            //            [USERDEFAULT setObject:loginModel.kzxx.Photo forKey:@"Photo"];
-//            [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserAccount];
-//            [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:UserPassword];
-            
-            
-            //[self.navigationController popViewControllerAnimated:YES];
-            [self dismissViewControllerAnimated:NO completion:nil];
+            //[self dismissViewControllerAnimated:NO completion:nil];
             
             
         }
@@ -319,7 +306,7 @@
     
     [USERDEFAULT setObject:@1 forKey:@"userid"];
     //[self.navigationController popViewControllerAnimated:YES];
-    [self dismissViewControllerAnimated:NO completion:nil];
+    //[self dismissViewControllerAnimated:NO completion:nil];
 }
 
 #pragma mark *** touch ***
