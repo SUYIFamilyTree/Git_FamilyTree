@@ -95,12 +95,10 @@ typedef enum : NSUInteger {
     NSInteger index = seg.selectedSegmentIndex;
     switch (index) {
         case 0:
-            MYLog(@"%ld",index);
             self.isMyPost = YES;
             [self.infoTB reloadData];
             break;
         case 1:
-            MYLog(@"%ld",index);
             self.isMyPost = NO;
             if (self.myAttentionArr.count == 0) {
                 [self getMYAttentionData];

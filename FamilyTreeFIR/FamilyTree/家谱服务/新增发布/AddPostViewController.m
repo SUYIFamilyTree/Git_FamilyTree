@@ -234,7 +234,6 @@
 
 
 -(void)clickToSelectProjectImage:(UIButton *)sender{
-    MYLog(@"%ld",sender.tag);
     self.imageTag = sender.tag;
     [self projectImageAction];
     

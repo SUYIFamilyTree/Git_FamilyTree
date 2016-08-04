@@ -91,7 +91,7 @@ static NSString *const kReuserableUITableViewCell = @"UITableViewCell";
 
 #pragma mark *** Events ***
 -(void)respondsToAllBtn:(UIButton *)sender{
-    MYLog(@"%ld",sender.tag);
+    MYLog(@"%ld",(long)sender.tag);
     _selectedBtnNum = sender.tag;
    
     [self.tableView reloadData];

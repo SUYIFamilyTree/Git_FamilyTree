@@ -150,7 +150,7 @@
         _monthStarV.generationLb.text = [NSString stringWithFormat:@"第%@代",[NSString translation:(int)myZhi.ds]];
         _monthStarV.nameLb.text = myZhi.mz;
         _monthStarV.characterLb.text = [NSString stringWithFormat:@"字辈 %@",myZhi.zb];
-        _monthStarV.rankingLb.text = [NSString stringWithFormat:@"排行 %ld.",myZhi.ph];
+        _monthStarV.rankingLb.text = [NSString stringWithFormat:@"排行 %ld.",(long)myZhi.ph];
 #warning 头像路径有问题
         if (myZhi.tx&&myZhi.tx.length!=0) {
             _monthStarV.headIV.imageURL = [NSURL URLWithString:myZhi.tx];
@@ -175,7 +175,7 @@
         if (hyCount==1) {
             Hybr *br = self.model.hybr[0];
             _rankingV.topNameLb.text = br.mz;
-            _rankingV.topScoreLb.text = [NSString stringWithFormat:@"%ld",br.hyd];
+            _rankingV.topScoreLb.text = [NSString stringWithFormat:@"%ld",(long)br.hyd];
             if (br.tx&&br.tx.length!=0) {
                 _rankingV.topIV.imageURL = [NSURL URLWithString:br.tx];
             }
@@ -183,7 +183,7 @@
         }else if (hyCount == 2){
             Hybr *br = self.model.hybr[0];
             _rankingV.topNameLb.text = br.mz;
-            _rankingV.topScoreLb.text = [NSString stringWithFormat:@"%ld",br.hyd];
+            _rankingV.topScoreLb.text = [NSString stringWithFormat:@"%ld",(long)br.hyd];
             Hybr *br1 = self.model.hybr[1];
             _rankingV.secondNameLb.text = br1.mz;
             _rankingV.secondScoreLb.text = [NSString stringWithFormat:@"%ld",br1.hyd];

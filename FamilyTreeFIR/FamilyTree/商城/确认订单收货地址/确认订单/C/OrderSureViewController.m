@@ -14,7 +14,10 @@
 #import "ReceiveAddressViewController.h"
 #import "ReceiveAddressModel.h"
 #import "WOrderSureModel.h"
-@interface OrderSureViewController ()<UITableViewDelegate,UITableViewDataSource,ReceiveAddressViewControllerDelegate>
+//运费
+#define FreightPrice @"10"
+
+@interface OrderSureViewController ()<UITableViewDelegate,UITableViewDataSource,ReceiveAddressViewControllerDelegate,OrderBottomViewDelegate>
 
 @property (strong,nonatomic) UITableView *tableView;
 
@@ -73,6 +76,7 @@
         [dicArr addObject:dic];
         
     }
+    NSLog(@"这些商品--%@", dicArr);
     __weak typeof(self)wkSelf = self;
     
     [TCJPHTTPRequestManager POSTWithParameters:@{@"Sz":dicArr} requestID:GetUserId requestcode:kRequestCodegetconorder success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
@@ -81,10 +85,10 @@
             
             wkSelf.sureModel = [WOrderSureModel modelWithJSON:jsonDic[@"data"]];
             
-            NSLog(@"---3333-- %ld", wkSelf.sureModel.shopmoney[0].money);
             
             back();
         }
+        
     } failure:^(NSError *error) {
         
     }];
@@ -102,13 +106,73 @@
 
     _orderBottomV = [[OrderBottomView alloc]initWithFrame:CGRectMake(0, CGRectYH(_tableView), __kWidth, 140)];
     [self.view addSubview:_orderBottomV];
-    _orderBottomV.orderQuoteLb.text = [NSString stringWithFormat:@"¥%ld",self.sureModel.shopmoney[0].money];;
-    _orderBottomV.orderFreightLb.text = @"¥0.0";
-    _orderBottomV.concessionsLb.text = @"¥0.0";
-    _orderBottomV.orderPayLb.text = [NSString stringWithFormat:@"应付:¥:%ld",self.sureModel.shopmoney[0].prepri];
+    
+    NSArray *moneyArr = self.sureModel.shopmoney;
+    NSInteger moneyYJ = 0; //原价
+    NSInteger moneyDZ = 0; //打折
+    NSInteger moneyYF = 0; //运费
+    for (WShopmoney *obj in moneyArr) {
+        moneyYJ+=obj.money;
+        moneyDZ+=obj.prepri;
+    }
+    moneyYF = [self.sureModel.kd[0].AllValue integerValue];
+    
+    _orderBottomV.orderQuoteLb.text = [NSString stringWithFormat:@"¥%ld",(long)moneyYJ];;
+    _orderBottomV.orderFreightLb.text = [NSString stringWithFormat:@"¥%ld",(long)moneyYF];
+    _orderBottomV.concessionsLb.text = [NSString stringWithFormat:@"¥%ld",(long)moneyYJ-(long)moneyDZ];
+    _orderBottomV.orderPayLb.text = [NSString stringWithFormat:@"应付:¥%ld",(long)moneyDZ];
+    
+    _orderBottomV.delegate = self;
 
 }
 
+#pragma mark *** 结算 ***
+-(void)OrderBottonView:(OrderBottomView *)orderView didTapClearButton:(UIButton *)sender{
+    if (IsNilString(_receiveData.address)) {
+        [SXLoadingView showAlertHUD:@"无默认收货地址请添加地址" duration:0.5];
+        return;
+//        _orderAddV.addressLb.text = @"无默认收货地址请添加地址";//无地址数据
+    }
+    NSString *address = [NSString stringWithFormat:@"%@,%@,%@",_orderAddV.addressLb.text,_orderAddV.nameLb.text,_orderAddV.mobileLb.text];
+    NSMutableArray *dicArr = [@[] mutableCopy];
+   
+    
+    for (WCartTableViewCell *cell in _dataArr) {
+        
+        //打折价格
+        NSString *Actprice = [cell.cellPrice.text stringByReplacingOccurrencesOfString:@"¥" withString:@""];
+        
+        NSDictionary *dic = @{@"OrdeCoid":cell.cellGoodsId,
+                              @"OrdeCoprid":cell.cellTypeId,
+                              @"OrdeMoney":cell.cellDisPrice,
+                              @"OrdeCount":cell.cellNumber.countLb.text,
+                              @"OrdeActpri":Actprice,
+                              @"OrdePrepri":[NSString stringWithFormat:@"%d",[cell.cellDisPrice intValue]-[cell.cellPrice.text intValue]],
+                              @"OrdeCoprname":cell.cellType.text};
+        
+        [dicArr addObject:dic];
+        
+    }
+    NSLog(@"这些商品--%@", dicArr);
+    
+    
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"ShorOrdnum":@"",
+                                                 @"ShorMeid":GetUserId,
+                                                 @"ShorFreight":FreightPrice,
+                                                 @"ShorMoney":[_orderBottomV.orderPayLb.text stringByReplacingOccurrencesOfString:@"应付:¥" withString:@""],
+                                                 @"ShorPaytype":@"OFFLINE",
+                                                 @"ShorAddress":address,
+                                                 @"ShorType":@"PTSC",
+                                                 @"ShorInvoice":@"发票",
+                                                 @"Sz":dicArr} requestID:GetUserId requestcode:kRequestCodecreateshoporder success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+                                                     if (succe) {
+                                                         NSLog(@"%@", jsonDic[@"data"]);
+                                                     }
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
 #pragma mark - Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _dataArr.count+5;
