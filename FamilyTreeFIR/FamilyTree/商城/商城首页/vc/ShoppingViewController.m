@@ -111,6 +111,22 @@
 #pragma mark -GuessLikeViewDelegate
 - (void)selectCellLike:(NSIndexPath *)index{
     NSLog(@"跳转到猜你喜欢商品%ld详情页",(long)index.row);
+- (void)selectCellLike:(NSString *)goodsId{
+    NSLog(@"跳转到猜你喜欢商品%@详情页",goodsId);
+    __weak typeof(self)weakSelf = self;
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"CoId":goodsId} requestID:GetUserId requestcode:kRequestCodegetcomdetail success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSLog(@"详情----%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+            
+            WGoodsDetailModel *deModel = [WGoodsDetailModel modelWithJSON:jsonDic[@"data"]];
+            GoodsDetailsViewController *detaiVc = [[GoodsDetailsViewController alloc] initWithTitle:@"" image:MImage(@"chec") detailGoodsModel:deModel];
+            
+            [weakSelf.navigationController pushViewController:detaiVc animated:YES];
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark -NeedRushView Delegate

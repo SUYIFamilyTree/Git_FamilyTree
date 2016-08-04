@@ -6690,6 +6690,7 @@
 				BC9672881D10E8D500F60534 /* geran_background_s.png in Resources */,
 				BC2943D71CFEC163006671B9 /* mcGuanli_xinjian@2x.png in Resources */,
 				BCE70DF51D51F3FB00A8A4F4 /* qj_chuqian2.png in Resources */,
+				ADF00F641D50749F00AA13FE /* wdhz_jiahao@3x.png in Resources */,
 				BC0D47AC1D4862A500A8336D /* jrys_star11@2x.png in Resources */,
 				ADC13BA91D192B5A000F901C /* gljp_bg@3x.png in Resources */,
 				ADF00F731D50749F00AA13FE /* wdhz_yixianglianxi@3x.png in Resources */,
