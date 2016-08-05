@@ -81,7 +81,6 @@
     
     [TCJPHTTPRequestManager POSTWithParameters:@{@"Sz":dicArr} requestID:GetUserId requestcode:kRequestCodegetconorder success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-            NSLog(@"???????-%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
             
             wkSelf.sureModel = [WOrderSureModel modelWithJSON:jsonDic[@"data"]];
             

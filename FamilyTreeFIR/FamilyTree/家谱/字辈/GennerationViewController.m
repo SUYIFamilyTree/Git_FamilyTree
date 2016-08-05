@@ -10,7 +10,7 @@
 #import "GennerTableViewCell.h"
 static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
 
-@interface GennerationViewController ()<TopSearchViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface GennerationViewController ()<TopBackSearchDelegate,UITableViewDelegate,UITableViewDataSource,TopSearchViewDelegate>
 
 {
     NSMutableArray *_allInfoArr; //名字array
@@ -71,13 +71,13 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
 #pragma mark *** 网络请求字辈列表 ***
 
 -(void)PostGennerInfomationWhileComplete:(void (^)())back{
-    
+    WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:@{@"geid":[WFamilyModel shareWFamilModel].myFamilyId,@"query":_queryZbStr,
                                                  @"pagenum":@"1",
                                                  @"pagesize":@"20",
                                                  @"ds":@""} requestID:GetUserId requestcode:kRequestCodequeryzbgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-            WK(weakSelf)
+            
             weakSelf.gennerModel = [WGennerationModel modelWithJSON:jsonDic[@"data"]];
             
             [_genNameArr removeAllObjects];
@@ -127,7 +127,15 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
         
     }];
 }
+//点击我的家谱的处理
+#pragma mark *** TopDelegate ***
 
+-(void)didTapMySeletedFamWithNumber:(NSString *)sender{
+    WK(Wkself)
+    [self PostGennerInfomationWhileComplete:^{
+        [Wkself.tableView reloadData];
+    }];
+}
 #pragma mark *** events ***
 
 -(void)respondsToTopSearchView:(UIButton *)sender{
@@ -174,8 +182,9 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
     
     MYLog(@"查询字辈");
     _queryZbStr = topSearchView.searchLabel.text;
+    WK(Wkself)
     [self PostGennerInfomationWhileComplete:^{
-        [self.tableView reloadData];
+        [Wkself.tableView reloadData];
     }];
 }
 
@@ -186,6 +195,7 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
         
         _topView = [[TopBackSearch alloc] initWithFrame:CGRectMake(0, 0, Screen_width, StatusBar_Height+NavigationBar_Height)];
         _topView.delegate = self;
+        _topView.delegateBak = self;
         [_topView.backBtn addTarget:self action:@selector(respondsToTopSearchView:) forControlEvents:UIControlEventTouchUpInside];
         
     }

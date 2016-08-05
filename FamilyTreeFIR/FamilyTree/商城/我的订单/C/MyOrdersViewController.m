@@ -11,7 +11,7 @@
 #import "ShopOrdersCell.h"
 #import "ShopGoodModel.h"
 #import "WBookingModel.h"
-
+#import "GoodEvaluateViewController.h"
 @interface MyOrdersViewController ()<OrderStatusViewDelegate,UITableViewDelegate,UITableViewDataSource,ShopOrdersCellDelegate>
 {
     NSString *_currentSelectedTitle;//当前选择的状态栏title
@@ -66,6 +66,8 @@
             good.goodQuote = [NSString stringWithFormat:@"%ld",(long)goodDetail.OrdeMoney];
             good.goodcount = [NSString stringWithFormat:@"%ld",(long)goodDetail.OrdeCount];
             good.goodImg = goodDetail.OrdeCocover;
+            good.goodId = [NSString stringWithFormat:@"%ld",(long)bookOrder.ShorId];
+
             order.totalCount = [NSString stringWithFormat:@"%ld",(long)[good.goodcount integerValue]+(long)[order.totalCount integerValue]];
             [order.goodArr addObject:good];
             
@@ -120,16 +122,19 @@
     NSDictionary *dic = @{};
     if ([status isEqualToString:@"CANCEL"]) {
         dic = @{@"ShorId":orderNumber,
-                @"ShorState":status};
+                @"ShorState":status,
+                @"ShorIsdel":@""};
     }else if ([status isEqualToString:@"1"]){
         dic = @{@"ShorId":orderNumber,
-                @"ShorIsdel":status};
+                @"ShorIsdel":status,
+                @"ShorState":@""};
     }
-    
-    
+    __weak typeof(self)wkSelf = self;
     [TCJPHTTPRequestManager POSTWithParameters:dic requestID:GetUserId requestcode:kRequestCodechangeshoporder success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             NSLog(@"%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+            
+            [wkSelf getAllbookingInfomation];
         }
     } failure:^(NSError *error) {
         
@@ -197,18 +202,36 @@
     NSString *status = @"";
     if ([sender.titleLabel.text isEqualToString:@"取消订单"]) {
         status = @"CANCEL";
+        [Tools showAlertViewcontrollerWithTarGet:self Message:@"确认取消订单吗？" complete:^(BOOL sure) {
+            if (sure) {
+                [self editBookingToStatus:status withBookingNumber:order];
+                
+            }
+        }];
+        
     }else if([sender.titleLabel.text isEqualToString:@"删除订单"]){
         status = @"1";
+        [Tools showAlertViewcontrollerWithTarGet:self Message:@"确认删除订单吗？" complete:^(BOOL sure) {
+            if (sure) {
+                [self editBookingToStatus:status withBookingNumber:order];
+                
+            }
+        }];
+        
+    }else if([sender.titleLabel.text isEqualToString:@"评价"]){
+        GoodEvaluateViewController *evaVc = [[GoodEvaluateViewController alloc] initWithShopTitle:@"评价" image:MImage(@"chec")];
+        [self.navigationController pushViewController:evaVc animated:YES];
+        return;
+    }else{
+        
     }
-    [self editBookingToStatus:status withBookingNumber:order];
     
 }
 
 #pragma mark ==更换订单数据==
 -(void)orderTypeChoose:(UIButton *)sender{
-    [self getDataWithTitle:sender.titleLabel.text];
-    _currentSelectedTitle = sender.titleLabel.text;
-    
+        [self getDataWithTitle:sender.titleLabel.text];
+        _currentSelectedTitle = sender.titleLabel.text;
     NSLog(@"%@",sender.titleLabel.text);
 }
 

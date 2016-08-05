@@ -90,7 +90,7 @@
         shoporderV.quoteLb.attributedText = quoteStr;//加横线
         shoporderV.orderNOLb.text = [NSString stringWithFormat:@"订单号：%@",good.orderNo];
         shoporderV.countLb.text = [NSString stringWithFormat:@"x%@",good.goodcount];
-        _orderId = good.orderNo;
+        _orderId = good.goodId;
     }
     
     _totalLb.frame = CGRectMake(__kWidth/4-5,__kWidth/4*data.goodArr.count+40+10, 50, 20);

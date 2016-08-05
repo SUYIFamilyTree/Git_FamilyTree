@@ -58,7 +58,7 @@
     
     [self postGetSyntypeWhileComplete:^() {
         [self initView];
-        [self postGoodsListWithGoodsName:@"" type:@"" WhileComplete:^{
+        [self postGoodsListWithGoodsName:@"" type:@"" label:@"热卖" WhileComplete:^{
             
         }];
     }];
@@ -137,7 +137,6 @@
     NSLog(@"跳转到热门商品详情页%ld",(long)index.row);
 }
 
-
 #pragma mark -ShoppingTypeView Delegate
 -(void)pushView:(NSInteger)sender{
     
@@ -154,7 +153,7 @@
         case 0:
         {
             NSLog(@"实物物品");
-            [self postGoodsListWithGoodsName:@"" type:@"实物物品" WhileComplete:^{
+            [self postGoodsListWithGoodsName:@"" type:@"实物物品" label:@"" WhileComplete:^{
                 _guessLikeV.dataSource = weakSelf.typeModel.datalist;
                 [_guessLikeV.collectionV reloadData];
                 _guessLikeV.collectionV.frame = CGRectMake(_guessLikeV.collectionV.frame.origin.x, 0, Screen_width,  __kWidth*5/9+520);
@@ -165,7 +164,7 @@
         case 1:
         {
             NSLog(@"虚拟物品");
-            [self postGoodsListWithGoodsName:@"" type:@"虚拟物品" WhileComplete:^{
+            [self postGoodsListWithGoodsName:@"" type:@"虚拟物品" label:@"" WhileComplete:^{
                 _guessLikeV.dataSource = weakSelf.typeModel.datalist;
                 [_guessLikeV.collectionV reloadData];
                 _guessLikeV.collectionV.frame = CGRectMake(_guessLikeV.collectionV.frame.origin.x, 0, Screen_width,  __kWidth*5/9+520);
@@ -175,7 +174,7 @@
         case 2:
         {
             NSLog(@"同城热卖");
-            [self postGoodsListWithGoodsName:@"" type:@"同城热卖" WhileComplete:^{
+            [self postGoodsListWithGoodsName:@"" type:@"同城热卖" label:@"" WhileComplete:^{
                 _guessLikeV.dataSource = weakSelf.typeModel.datalist;
                 [_guessLikeV.collectionV reloadData];
                 _guessLikeV.collectionV.frame = CGRectMake(_guessLikeV.collectionV.frame.origin.x, 0, Screen_width,  __kWidth*5/9+520);
@@ -185,7 +184,7 @@
         case 3:
         {
             NSLog(@"优惠专区");
-            [self postGoodsListWithGoodsName:@"" type:@"优惠专区" WhileComplete:^{
+            [self postGoodsListWithGoodsName:@"" type:@"优惠专区" label:@"" WhileComplete:^{
                 _guessLikeV.dataSource = weakSelf.typeModel.datalist;
                 [_guessLikeV.collectionV reloadData];
                 _guessLikeV.collectionV.frame = CGRectMake(_guessLikeV.collectionV.frame.origin.x, 0, Screen_width,  __kWidth*5/9+520);
@@ -202,18 +201,12 @@
 -(void)TopSearchViewDidTapView:(TopSearchView *)topSearchView{
     MYLog(@"商城搜索栏");
     __weak typeof(self)wkSelf = self;
-    
-            WShopSearchViewController *searchVc = [[WShopSearchViewController alloc] initWithText:self.topSearchView.searchLabel.text];
-        [wkSelf.navigationController pushViewController:searchVc animated:YES];
-  
-    
-    
-    
+    WShopSearchViewController *searchVc = [[WShopSearchViewController alloc] initWithText:self.topSearchView.searchLabel.text];
+    [wkSelf.navigationController pushViewController:searchVc animated:YES];
 }
+
 -(void)TopSearchView:(TopSearchView *)topSearchView didRespondsToMenusBtn:(UIButton *)sender{
     MYLog(@"商城右菜单");
-    
-    
 }
 
 #pragma mark *** 网络请求 ***
@@ -221,7 +214,6 @@
     [TCJPHTTPRequestManager POSTWithParameters:@{@"typeval":@"SPFL"} requestID:GetUserId requestcode:kRequestCodeGetsyntype success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             NSLog(@"--%@",[NSString jsonArrWithArr:jsonDic[@"data"]]);
-            
             NSArray *arr = [NSString jsonArrWithArr:jsonDic[@"data"]];
             NSMutableDictionary *alldic = [NSMutableDictionary dictionary];
             [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -241,7 +233,7 @@
  *  @param name 商品名
  *  @param back 结束搜索
  */
--(void)postGoodsListWithGoodsName:(NSString *)name type:(NSString *)type WhileComplete:(void (^)())back{
+-(void)postGoodsListWithGoodsName:(NSString *)name type:(NSString *)type label:(NSString *)label WhileComplete:(void (^)())back{
     NSDictionary *dic = [WShopCommonModel shareWShopCommonModel].typeIdDic;
     __weak typeof(self)wkSelf = self;
     [TCJPHTTPRequestManager POSTWithParameters:@{@"pagenum":@"1",
@@ -256,7 +248,7 @@
                                                  @"issx":@"1",
                                                  } requestID:GetUserId requestcode:kRequestCodegetcomlist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
                                                      if (succe) {
-                                                         NSLog(@"--goods--%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+                                                         NSLog(@"--%@-goods--%@", label,[NSString jsonDicWithDic:jsonDic[@"data"]]);
                                                          wkSelf.typeModel = [GoodsModel modelWithJSON:jsonDic[@"data"]];
                                                          back();
                                                      }

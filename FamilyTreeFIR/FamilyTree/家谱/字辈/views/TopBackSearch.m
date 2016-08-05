@@ -28,6 +28,15 @@
     return self;
 }
 
+-(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectFamID:(NSString *)famId{
+    [seleMyFam removeFromSuperview];
+    _MyFamilyRightBtn.selected = false;
+    
+    if (_delegateBak && [_delegateBak respondsToSelector:@selector(didTapMySeletedFamWithNumber:)]) {
+        [_delegateBak didTapMySeletedFamWithNumber:famId];
+    };
+    
+}
 #pragma mark *** events ***
 -(void)respondsToToBackRightBtn:(UIButton *)sender{
     sender.selected = !sender.selected;
@@ -72,7 +81,7 @@
         _selecMyFamView.delegate = self;
     }
     [_selecMyFamView updateDataSourceAndUI];
-    _selecMyFamView.didSelectedItem = false;
+//    _selecMyFamView.didSelectedItem = false;
     return _selecMyFamView;
 }
 @end

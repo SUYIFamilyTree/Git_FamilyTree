@@ -162,7 +162,7 @@
         _selecMyFamView.delegate = self;
     }
     [_selecMyFamView updateDataSourceAndUI];
-    _selecMyFamView.didSelectedItem = false;
+//    _selecMyFamView.didSelectedItem = false;
     return _selecMyFamView;
 }
 -(WMenuBtn *)rightMenuBtn{

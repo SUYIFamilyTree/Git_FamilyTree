@@ -42,7 +42,7 @@
     _quoteLb.textColor = [UIColor grayColor];
     _quoteLb.textAlignment = NSTextAlignmentRight;
 
-    _orderNOLb = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(_goodIV)+10, CGRectYH(_goodNameLb), __kWidth*19/36+5, 30)];
+    _orderNOLb = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(_goodIV)+10, CGRectYH(_goodNameLb), __kWidth*19/36+50, 30)];
     [self addSubview:_orderNOLb];
     _orderNOLb.font = MFont(11);
     _orderNOLb.textAlignment = NSTextAlignmentLeft;

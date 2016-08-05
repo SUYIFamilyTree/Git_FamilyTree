@@ -82,10 +82,10 @@
         
         cell.goodIV.imageURL = [NSURL URLWithString:goods.CoCover];
         cell.goodNameLb.text = goods.CoConame;
-        cell.payMoneyLb.text = [NSString stringWithFormat:@"%ld",goods.CoprActpri];;
-        cell.quoteLb.text = [NSString stringWithFormat:@"%ld",goods.CoprMoney];
-        cell.goodId = [NSString stringWithFormat:@"%ld",goods.CoId];
-        cell.goodTypeId = [NSString stringWithFormat:@"%ld",goods.CoprId];
+        cell.payMoneyLb.text = [NSString stringWithFormat:@"%ld",(long)goods.CoprActpri];;
+        cell.quoteLb.text = [NSString stringWithFormat:@"%ld",(long)goods.CoprMoney];
+        cell.goodId = [NSString stringWithFormat:@"%ld",(long)goods.CoId];
+        cell.goodTypeId = [NSString stringWithFormat:@"%ld",(long)goods.CoprId];
     }
     
     NSMutableAttributedString *quoteStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"¥%@",cell.quoteLb.text]];
