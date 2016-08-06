@@ -61,7 +61,7 @@ typedef enum : NSUInteger {
     [self initBtn];
     //获取首页数据
     dispatch_async(dispatch_queue_create("myQueue", NULL), ^{
-       [self getData];
+       //[self getData];
     });
     
 }

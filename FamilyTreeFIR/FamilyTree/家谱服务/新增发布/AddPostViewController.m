@@ -422,24 +422,29 @@
     }
     cell.textLabel.font = MFont(12);
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithActionBlock:^(id  _Nonnull sender) {
+        {
+            if ([tableView isEqual:self.projectTypeSelectTB]) {
+                [self.projectTypeBtn setTitle:cell.textLabel.text forState:UIControlStateNormal];
+                self.projectTypeBtn.selected = NO;
+            }else{
+                [self.projectDeadlineBtn setTitle:cell.textLabel.text forState:UIControlStateNormal];
+                self.projectDeadlineBtn.selected = NO;
+            }
+            
+            [tableView removeFromSuperview];
+
+        }
+    }];
+    [cell addGestureRecognizer:tap];
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 25;
+    return 40;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if ([tableView isEqual:self.projectTypeSelectTB]) {
-        [self.projectTypeBtn setTitle:cell.textLabel.text forState:UIControlStateNormal];
-        self.projectTypeBtn.selected = NO;
-    }else{
-        [self.projectDeadlineBtn setTitle:cell.textLabel.text forState:UIControlStateNormal];
-        self.projectDeadlineBtn.selected = NO;
-    }
-    
-    [tableView removeFromSuperview];
     
 }
 
@@ -509,6 +514,8 @@
         _projectTypeBtn.layer.borderColor = LH_RGBCOLOR(215, 215, 215).CGColor;
         _projectTypeBtn.layer.borderWidth = 1;
         [_projectTypeBtn setTitle:@"赏金寻亲" forState:UIControlStateNormal];
+        [_projectTypeBtn setImage:MImage(@"wdhz_jiantou") forState:UIControlStateNormal];
+        _projectTypeBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 65, 0, 0);
         _projectTypeBtn.titleLabel.font = MFont(12);
         _projectTypeBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);
         [_projectTypeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -561,6 +568,8 @@
         _projectDeadlineBtn.layer.borderColor = LH_RGBCOLOR(215, 215, 215).CGColor;
         _projectDeadlineBtn.layer.borderWidth = 1;
         [_projectDeadlineBtn setTitle:@"1" forState:UIControlStateNormal];
+        [_projectDeadlineBtn setImage:MImage(@"wdhz_jiantou") forState:UIControlStateNormal];
+        _projectDeadlineBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 30, 0, 0);
         _projectDeadlineBtn.titleLabel.font = MFont(12);
         _projectDeadlineBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
         [_projectDeadlineBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];

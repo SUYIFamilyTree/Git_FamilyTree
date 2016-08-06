@@ -151,6 +151,7 @@ typedef enum : NSUInteger {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSString *title = self.isMyPost?self.myPostArr[indexPath.row].ZqType:self.myAttentionArr[indexPath.row].ZqType;
     AdgnatioHelpInfoViewController *adgnatioHelpInfoVC = [[AdgnatioHelpInfoViewController alloc]initWithTitle:title image:nil];
+    adgnatioHelpInfoVC.myHelpModel = self.isMyPost?self.myPostArr[indexPath.row]:self.myAttentionArr[indexPath.row];
     [self.navigationController pushViewController:adgnatioHelpInfoVC animated:YES];
 }
 

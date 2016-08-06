@@ -41,7 +41,7 @@ static NSString *const kReusableCellIdentifier = @"cellIdentifier";
 #pragma mark *** 初始化数据 ***
 -(void)initData{
     _imageNames = @[@"icon_1",@"icon_2",@"icon_3",@"icon_4",@"icon_5",@"icon_6",@"icon_7",@"icon_8"];
-    _cellNames = @[@"传统家谱",@"数字家谱",@"教你修谱",@"赏金寻亲",@"婚庆嫁娶",@"生日寿辰",@"白事丧葬",@"祭祀法事"];
+    _cellNames = @[@"传统家谱",@"数字家谱",@"教你修谱",@"赏金寻亲",@"婚庆嫁娶",@"增值服务",@"风水鉴定",@"祭祀法事"];
     
 }
 #pragma mark *** 初始化界面 ***

@@ -15,6 +15,8 @@
 #import "SearchFamilyTreeViewController.h"
 #import "WorshipViewController.h"
 #import "TeachViewController.h"
+#import "GeomancyIdentificationViewController.h"
+#import "AppendServiceViewController.h"
 
 #define ScrollerView_Height 210
 @interface FamilServiceViewController ()<TopSearchViewDelegate,TableViewDelegate,FamilyShopViewDelegate,CollectionFamilyDelegate>
@@ -110,11 +112,15 @@
             break;
         case 5:
         {
-            
+            AppendServiceViewController *appendServiceVC = [[AppendServiceViewController alloc]initWithTitle:@"增值服务" image:nil];
+            [self.navigationController pushViewController:appendServiceVC animated:YES];
         }
             break;
         case 6:
         {
+            MYLog(@"风水鉴定");
+            GeomancyIdentificationViewController *geoVC = [[GeomancyIdentificationViewController alloc]initWithTitle:@"风水鉴定" image:nil];
+            [self.navigationController pushViewController:geoVC animated:YES];
             
         }
             break;
