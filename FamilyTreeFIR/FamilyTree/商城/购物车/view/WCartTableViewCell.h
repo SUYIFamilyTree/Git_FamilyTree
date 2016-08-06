@@ -23,8 +23,11 @@
 @property (nonatomic,strong) UILabel *cellType;
 /**数量*/
 @property (nonatomic,strong) GoodNumberView *cellNumber;
-/**单价*/
+/**活动单价*/
 @property (nonatomic,strong) UILabel *cellPrice;
+/**原单价*/
+@property (nonatomic,strong) NSString *cellDisPrice;
+
 /**购物车id*/
 @property (nonatomic,strong) NSString *cellCarId;
 /**商品id*/

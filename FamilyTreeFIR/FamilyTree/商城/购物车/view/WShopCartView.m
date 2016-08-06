@@ -146,6 +146,7 @@ static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
     cell.delegate = self;
     cell.indexPath = indexPath;
     cell.cellTypeId = [NSString stringWithFormat:@"%ld",car.CoprId];
+    cell.cellDisPrice = [NSString stringWithFormat:@"%ld",car.CoprMoney];
     
     
     

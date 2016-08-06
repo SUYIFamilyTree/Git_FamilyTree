@@ -10,9 +10,12 @@
 #import "OrderStatusView.h"
 #import "ShopOrdersCell.h"
 #import "ShopGoodModel.h"
-
+#import "WBookingModel.h"
 
 @interface MyOrdersViewController ()<OrderStatusViewDelegate,UITableViewDelegate,UITableViewDataSource,ShopOrdersCellDelegate>
+{
+    NSString *_currentSelectedTitle;//当前选择的状态栏title
+}
 /**
  *  订单状态
  */
@@ -22,120 +25,115 @@
 
 @property (strong,nonatomic) NSMutableArray *dataArr;
 
+/**订单Arr*/
+@property (nonatomic,strong) WBookingModel *bookingModel;
+
+
 @end
 
 @implementation MyOrdersViewController
 
-- (void)getData{
-    _dataArr = [NSMutableArray array];
-    NSArray *statusArr = @[@"待付款",@"交易关闭",@"买家已付款",@"卖家已发货",@"交易成功"];
-    for (int i= 0; i<5; i++) {
-        switch (i) {
-            case 0:{
-                ShopGoodModel *order = [[ShopGoodModel alloc]init];
-                order.date = @"2016-03-05";
-                order.status = statusArr[i];
-                order.goodArr = [NSMutableArray array];
-                GoodCarModel *good = [[GoodCarModel alloc]init];
-                good.goodName = @"黑曜石手链阿弥陀佛虚空藏文殊大日如来菩萨女男手串";
-                good.orderNo = @"20160221156";
-                good.goodMoney = @"589";
-                good.goodQuote = @"889";
-                good.goodcount = @"1";
-                [order.goodArr addObject:good];
-                order.totalCount = @"1";
-                order.totalMoney = @"589.00";
-                order.freight = @"0.0";
-                [_dataArr addObject:order];
-            }
-                break;
-            case 1:{
-                ShopGoodModel *order = [[ShopGoodModel alloc]init];
-                order.date = @"2016-03-05";
-                order.status = statusArr[i];
-                order.goodArr = [NSMutableArray array];
-                GoodCarModel *good = [[GoodCarModel alloc]init];
-                good.goodName = @"黑曜石手链阿弥陀佛虚空藏文殊大日如来菩萨女男手串";
-                good.orderNo = @"20160221156";
-                good.goodMoney = @"88";
-                good.goodQuote = @"128";
-                good.goodcount = @"2";
-                [order.goodArr addObject:good];
-                order.totalCount = @"2";
-                order.totalMoney = @"176.00";
-                order.freight = @"0.0";
-                [_dataArr addObject:order];
-            }
-                break;
-            case 2:{
-                ShopGoodModel *order = [[ShopGoodModel alloc]init];
-                order.date = @"2016-03-05";
-                order.status = statusArr[i];
-                order.goodArr = [NSMutableArray array];
-                GoodCarModel *good = [[GoodCarModel alloc]init];
-                good.goodName = @"黑曜石手链阿弥陀佛虚空藏文殊大日如来菩萨女男手串";
-                good.orderNo = @"20160221156";
-                good.goodMoney = @"278";
-                good.goodQuote = @"328";
-                good.goodcount = @"1";
-                [order.goodArr addObject:good];
-                order.totalCount = @"1";
-                order.totalMoney = @"278.00";
-                order.freight = @"0.0";
-                [_dataArr addObject:order];
-            }
-                break;
-            case 3:{
-                ShopGoodModel *order = [[ShopGoodModel alloc]init];
-                order.date = @"2016-03-05";
-                order.status = statusArr[i];
-                order.goodArr = [NSMutableArray array];
-                for ( int i=0; i<2; i++) {
-                    GoodCarModel *good = [[GoodCarModel alloc]init];
-                    good.goodName = @"黑曜石手链阿弥陀佛虚空藏文殊大日如来菩萨女男手串";
-                    good.orderNo = @"20160221156";
-                    good.goodMoney = @"278";
-                    good.goodQuote = @"328";
-                    good.goodcount = @"1";
-                    [order.goodArr addObject:good];
-                }
-                 order.totalCount = @"2";
-                 order.totalMoney = @"556.00";
-                 order.freight = @"0.0";
-                  [_dataArr addObject:order];
-            }
-                break;
-            case 4:{
-                ShopGoodModel *order = [[ShopGoodModel alloc]init];
-                order.date = @"2016-03-05";
-                order.status = statusArr[i];
-                order.goodArr = [NSMutableArray array];
-                GoodCarModel *good = [[GoodCarModel alloc]init];
-                good.goodName = @"黑曜石手链阿弥陀佛虚空藏文殊大日如来菩萨女男手串";
-                good.orderNo = @"20160221156";
-                good.goodMoney = @"278";
-                good.goodQuote = @"328";
-                good.goodcount = @"1";
-                [order.goodArr addObject:good];
-                order.totalCount = @"1";
-                order.totalMoney = @"278.00";
-                order.freight = @"0.0";
-                [_dataArr addObject:order];
-            }
-                break;
-            default:
-                break;
-        }
+- (void)getDataWithTitle:(NSString *)title{
+    NSString *statuTitle = @"全部";
+    if ([title isEqualToString:@"待收货"]) {
+        statuTitle = @"已发货";
+    }else if ([title isEqualToString:@"待评价"]){
+        statuTitle = @"已收货";
+    }else if ([title isEqualToString:@"待付款"]){
+        statuTitle = @"待付款";
     }
+
+    _dataArr = [NSMutableArray array];
+
+    for (int idx = 0; idx<self.bookingModel.datalist.count; idx++) {
+        WbOrder *bookOrder = self.bookingModel.datalist[idx].order;
+       NSArray <WbDetail *>*detailArr = self.bookingModel.datalist[idx].detail;
+        
+        ShopGoodModel *order = [[ShopGoodModel alloc] init];
+        order.date = [bookOrder.ShorCreatetime substringToIndex:10];
+        order.status = bookOrder.ShorState;
+        order.totalCount = @"0";
+        order.totalMoney = [NSString stringWithFormat:@"%ld",(long)bookOrder.ShorMoney];
+        order.freight = [NSString stringWithFormat:@"%ld",(long)bookOrder.ShorFreight];
+        order.goodArr = [NSMutableArray array];
+
+        for ( int i=0; i<detailArr.count; i++) {
+            GoodCarModel *good = [[GoodCarModel alloc]init];
+            WbDetail *goodDetail = detailArr[i];
+            good.goodName = goodDetail.OrdeConame;
+            good.orderNo = bookOrder.ShorOrdnum;
+            good.goodMoney = [NSString stringWithFormat:@"%ld",(long)goodDetail.OrdeActpri];
+            good.goodQuote = [NSString stringWithFormat:@"%ld",(long)goodDetail.OrdeMoney];
+            good.goodcount = [NSString stringWithFormat:@"%ld",(long)goodDetail.OrdeCount];
+            good.goodImg = goodDetail.OrdeCocover;
+            order.totalCount = [NSString stringWithFormat:@"%ld",(long)[good.goodcount integerValue]+(long)[order.totalCount integerValue]];
+            [order.goodArr addObject:good];
+            
+        }
+        
+        if ([statuTitle isEqualToString:@"全部"]) {
+            [_dataArr addObject:order];
+        }else{
+            if ([order.status isEqualToString:statuTitle]) {
+                [_dataArr addObject:order];
+            }
+        }
+        
+    }
+    [self.tableView reloadData];
+
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我的订单";
-    [self getData];
+    _currentSelectedTitle = @"全部";
     [self initView];
     self.view.backgroundColor = LH_RGBCOLOR(230, 230, 230);
+    
+    [self getAllbookingInfomation];
 
+}
+#pragma mark *** 订单网络请求 ***
+-(void)getAllbookingInfomation{
+    
+    __weak typeof(self)wkSelf = self;
+    
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"pagenum":@"1",@"pagesize":@"20"} requestID:GetUserId requestcode:kRequestCodegetshoporderlist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            
+            NSLog(@"订单--%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+            NSLog(@"订单--%@", jsonDic[@"data"]);
+            
+            wkSelf.bookingModel = [WBookingModel modelWithJSON:jsonDic[@"data"]];
+
+            [wkSelf getDataWithTitle:_currentSelectedTitle];
+
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+-(void)editBookingToStatus:(NSString *)status withBookingNumber:(NSString *)orderNumber{
+    NSDictionary *dic = @{};
+    if ([status isEqualToString:@"CANCEL"]) {
+        dic = @{@"ShorId":orderNumber,
+                @"ShorState":status};
+    }else if ([status isEqualToString:@"1"]){
+        dic = @{@"ShorId":orderNumber,
+                @"ShorIsdel":status};
+    }
+    
+    
+    [TCJPHTTPRequestManager POSTWithParameters:dic requestID:GetUserId requestcode:kRequestCodechangeshoporder success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        if (succe) {
+            NSLog(@"%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+        }
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)initView{
@@ -145,12 +143,12 @@
     [_orderStatusV initTypeArr:typeArr];
     _orderStatusV.delegate = self;
 
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectYH(_orderStatusV), __kWidth, __kHeight-104)];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, CGRectYH(_orderStatusV), __kWidth, __kHeight-104-64)];
     [self.view addSubview:_tableView];
     _tableView.backgroundColor = LH_RGBCOLOR(230, 230, 230);
     _tableView.delegate = self;
     _tableView.dataSource = self;
-
+    
 }
 
 #pragma mark -UITableView Delegate
@@ -179,10 +177,10 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ShopGoodModel *order = _dataArr[indexPath.row];
     CGFloat height = __kWidth/4*order.goodArr.count+120;
-    NSLog(@"%f",height);
+    
     return height;
 }
 #pragma mark ==点击cell==
@@ -194,11 +192,23 @@
 
 }
 - (void)orderAction:(NSString *)order action:(UIButton *)sender{
-    NSLog(@"%@订单%@",sender.titleLabel.text,order);
+    
+    NSLog(@"%@--%@",sender.titleLabel.text,order);
+    NSString *status = @"";
+    if ([sender.titleLabel.text isEqualToString:@"取消订单"]) {
+        status = @"CANCEL";
+    }else if([sender.titleLabel.text isEqualToString:@"删除订单"]){
+        status = @"1";
+    }
+    [self editBookingToStatus:status withBookingNumber:order];
+    
 }
 
 #pragma mark ==更换订单数据==
 -(void)orderTypeChoose:(UIButton *)sender{
+    [self getDataWithTitle:sender.titleLabel.text];
+    _currentSelectedTitle = sender.titleLabel.text;
+    
     NSLog(@"%@",sender.titleLabel.text);
 }
 
@@ -206,15 +216,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

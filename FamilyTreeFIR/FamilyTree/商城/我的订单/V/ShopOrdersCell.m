@@ -43,7 +43,7 @@
     [self addSubview:headV];
     headV.backgroundColor = LH_RGBCOLOR(230, 230, 230);
 
-    _dateLb = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectYH(headV)+10, 70, 15)];
+    _dateLb = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectYH(headV)+10, 100, 15)];
     [self addSubview:_dateLb];
     _dateLb.font = MFont(11);
     _dateLb.textAlignment = NSTextAlignmentLeft;
@@ -77,7 +77,11 @@
         GoodCarModel *good = data.goodArr[i];
         ShopOrderView *shoporderV = [[ShopOrderView alloc]initWithFrame:CGRectMake(0, CGRectYH(_dateLb)+5+__kWidth/4*i, __kWidth, __kWidth/4)];
         [self addSubview:shoporderV];
+        if (good.goodImg&&good.goodImg.length!=0) {
+            shoporderV.goodIV.imageURL = [NSURL URLWithString:good.goodImg];
+        }else{
         shoporderV.goodIV.backgroundColor = LH_RandomColor;
+        }
         shoporderV.goodNameLb.text =  good.goodName;
         shoporderV.moneyLb.text = [NSString stringWithFormat:@"¥%@",good.goodMoney];
         shoporderV.quoteLb.text = good.goodQuote;
@@ -89,18 +93,18 @@
         _orderId = good.orderNo;
     }
     
-    _totalLb.frame = CGRectMake(__kWidth/4-5,__kWidth/4*data.goodArr.count+40+10, 35, 20);
+    _totalLb.frame = CGRectMake(__kWidth/4-5,__kWidth/4*data.goodArr.count+40+10, 50, 20);
 
     _allPayLb.frame = CGRectMake(CGRectXW(_totalLb), __kWidth/4*data.goodArr.count+40+10, __kWidth-40-15-__kWidth/4, 20);
 
     _shopActionV.frame = CGRectMake(0, CGRectYH(_allPayLb)+10, __kWidth, 40);
     if ([data.status isEqualToString:@"待付款"]) {
         [_shopActionV initWith:0];
-    }else if([data.status isEqualToString:@"交易关闭"]){
+    }else if([data.status isEqualToString:@"已取消"]){
         [_shopActionV initWith:1];
-    }else if ([data.status isEqualToString:@"买家已付款"]){
+    }else if ([data.status isEqualToString:@"已付款"]){
         [_shopActionV initWith:2];
-    }else if ([data.status isEqualToString:@"卖家已发货"]){
+    }else if ([data.status isEqualToString:@"已发货"]){
         [_shopActionV initWith:3];
     }else{
         [_shopActionV initWith:4];

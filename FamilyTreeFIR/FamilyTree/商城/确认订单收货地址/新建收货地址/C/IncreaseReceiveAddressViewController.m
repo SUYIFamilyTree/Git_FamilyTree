@@ -13,6 +13,7 @@
 
 
 @interface IncreaseReceiveAddressViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UITextViewDelegate>
+
 /** 表格*/
 @property (nonatomic, strong) UITableView *tableView;
 

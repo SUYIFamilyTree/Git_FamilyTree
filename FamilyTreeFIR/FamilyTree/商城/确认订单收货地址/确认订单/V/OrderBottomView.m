@@ -63,10 +63,13 @@
     clearBtn.titleLabel.font = MFont(15);
     [clearBtn setTitle:@"结算" forState:BtnNormal];
     [clearBtn setTitleColor:[UIColor whiteColor] forState:BtnNormal];
-    [clearBtn addTarget:self action:@selector(clearAction) forControlEvents:BtnTouchUpInside];
+    [clearBtn addTarget:self action:@selector(clearAction:) forControlEvents:BtnTouchUpInside];
 }
 
-- (void)clearAction{
+- (void)clearAction:(UIButton *)sender{
+    if (_delegate && [_delegate respondsToSelector:@selector(OrderBottonView:didTapClearButton:)]) {
+        [_delegate OrderBottonView:self didTapClearButton:sender];
+    };
     NSLog(@"结算");
 }
 

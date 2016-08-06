@@ -38,7 +38,7 @@
         }
     }
     
-    text.text = [NSString stringWithFormat:@"%ld",count];
+    text.text = [NSString stringWithFormat:@"%ld",(long)count];
     if (_delegate && [_delegate respondsToSelector:@selector(WCartTableViewCell:atIndexPath:changedCellNumber:)]) {
         [_delegate WCartTableViewCell:self atIndexPath:self.indexPath changedCellNumber:text.text];
     };
@@ -54,7 +54,7 @@
 -(UILabel *)cellName{
     if (!_cellName) {
         _cellName = [[UILabel alloc] initWithFrame:AdaptationFrame(CGRectXW(self.cellImage)/AdaptationWidth()+30, 24, 350, 70)];
-        _cellName.text = @"这一切一起诶思琪魏思思这一切一起诶思琪魏思思这一切一起诶思琪魏思思";
+        _cellName.text = @"";
         _cellName.font = WFont(27);
         _cellName.numberOfLines = 0;
         [_cellName sizeToFit];
