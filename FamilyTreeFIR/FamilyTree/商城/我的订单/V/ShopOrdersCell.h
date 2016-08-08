@@ -15,6 +15,8 @@
 
 - (void)orderAction:(NSString *)order action:(UIButton *)sender;
 
+- (void)orderActionWithNumber:(NSString *)orderNumber action:(UIButton *)sender;
+
 @end
 
 @interface ShopOrdersCell : UITableViewCell
@@ -41,6 +43,9 @@
  *  支付总额
  */
 @property (strong,nonatomic) UILabel *allPayLb;
+/**订单号*/
+@property (nonatomic,strong) NSString *orderNumber;
+
 
 /**
  *  根据获取订单商品类型数量改变布局

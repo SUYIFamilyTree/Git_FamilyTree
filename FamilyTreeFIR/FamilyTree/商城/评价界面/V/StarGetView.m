@@ -40,7 +40,6 @@
         UIButton *starBtn = [[UIButton alloc]initWithFrame:CGRectMake(CGRectXW(titleLb)+i*(__kWidth/10), 15, __kWidth/50*4, 25)];
         [self addSubview:starBtn];
         starBtn.tag = i+1;
-        starBtn.backgroundColor = [UIColor orangeColor];
         starBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [starBtn setImage:[UIImage imageNamed:@"redLineStar"] forState:BtnNormal];
         [starBtn addTarget:self  action:@selector(evaluate:) forControlEvents:BtnTouchUpInside];

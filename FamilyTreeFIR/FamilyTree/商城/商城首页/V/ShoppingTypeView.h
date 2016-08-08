@@ -10,7 +10,7 @@
 
 @protocol ShoppingTypeViewDelegate <NSObject>
 
-- (void)pushView:(NSInteger)sender;
+- (void)pushViewTitle:(NSString *)title;
 
 @end
 

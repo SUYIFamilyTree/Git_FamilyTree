@@ -26,4 +26,10 @@
  */
 @property (strong,nonatomic) UIImageView *goodIV;
 
+/**商品id*/
+@property (nonatomic,strong) NSString *goodId;
+/**商品类型id*/
+@property (nonatomic,strong) NSString *goodTypeId;
+
+
 @end

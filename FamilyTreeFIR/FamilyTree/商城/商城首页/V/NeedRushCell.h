@@ -1,5 +1,5 @@
 //
-//  GuessLikeCell.h
+//  NeedRushCell.h
 //  ListV
 //
 //  Created by imac on 16/7/26.
@@ -8,31 +8,28 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GuessLikeCell : UICollectionViewCell
+@interface NeedRushCell : UICollectionViewCell
 /**
- *  商品图片
- */
-@property (strong,nonatomic) UIImageView *goodIV;
-/**
- *  商品名称
+ *  商品名
  */
 @property (strong,nonatomic) UILabel *goodNameLb;
+/**
+ *  商品图标
+ */
+@property (strong,nonatomic) UIImageView *goodIV;
 /**
  *  实付价格
  */
 @property (strong,nonatomic) UILabel *payMoneyLb;
 /**
- *  报价
+ *  商品报价
  */
 @property (strong,nonatomic) UILabel *quoteLb;
-/**
- *  购物车按钮
- */
-@property (strong,nonatomic) UIButton *shoppingBtn;
+
+
 /**商品id*/
 @property (nonatomic,strong) NSString *goodId;
 /**商品类型id*/
 @property (nonatomic,strong) NSString *goodTypeId;
-
 
 @end

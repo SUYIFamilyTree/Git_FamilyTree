@@ -21,7 +21,6 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         [self initView];
-        
     }
     return self;
 }
@@ -31,12 +30,12 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
     flowLayout.headerReferenceSize = CGSizeMake(0, 0);
     _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, __kWidth, __kWidth/4) collectionViewLayout:flowLayout];
-    _collectionView.backgroundColor = LH_RGBCOLOR(236, 236, 236);
     [self addSubview:_collectionView];
     flowLayout.itemSize = CGSizeMake(w/4, w/4);
     flowLayout.minimumLineSpacing =0;
     flowLayout.minimumInteritemSpacing = 0;
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    _collectionView.backgroundColor = LH_RGBCOLOR(236, 236, 236);
     _collectionView.delegate =self;
     _collectionView.dataSource = self;
     [_collectionView registerClass:[ShoppingTypeCell class] forCellWithReuseIdentifier:@"ShoppingTypeCell"];
@@ -61,7 +60,8 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    [self.delegate pushView:indexPath.row];
+    ShoppingTypeCell *cell = (ShoppingTypeCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [self.delegate pushViewTitle:cell.typeLb.text];
 }
 
 

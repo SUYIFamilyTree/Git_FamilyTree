@@ -10,18 +10,14 @@
 #import "GoodsModel.h"
 @protocol  GuessLikeViewDelegate<NSObject>
 
-- (void)selectCellLike:(NSString*)goodsId;
+- (void)selectCellLikeGoodsid:(NSString *)goodsId;
 
 @end
 
 @interface GuessLikeView : UIView
-/**头部*/
-@property (nonatomic,strong) UIView *headView;
-@property (strong,nonatomic) UICollectionView *collectionV;
-
-/**modelArr*/
-@property (nonatomic,strong) NSArray <GoodsDatalist *>*dataSource;
 
 @property (weak,nonatomic) id<GuessLikeViewDelegate>delegate;
+
+- (void)setLikeView:(NSArray<GoodsDatalist*> *)LikeArr;
 
 @end

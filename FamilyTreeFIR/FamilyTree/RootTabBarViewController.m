@@ -30,8 +30,6 @@
     [super viewDidLoad];
     [self initData];
     [self configTabBarViewController];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,7 +50,7 @@
     //初始化控制器
     HomeViewController *homeVc = [[HomeViewController alloc] init];
     FamilyTreeViewController *familyVc = [[FamilyTreeViewController alloc] init];
-    ShoppingViewController *shopVc = [[ShoppingViewController alloc] init];
+    ShoppingFirestViewController *shopVc = [[ShoppingFirestViewController alloc] init];
     
     PersonalCenterViewController *personCen = [[PersonalCenterViewController alloc] init];
     

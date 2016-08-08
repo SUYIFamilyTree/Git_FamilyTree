@@ -19,7 +19,6 @@
 
 -(void)initView{
     CGFloat w =self.frame.size.width;
-    
     _typeIV = [[UIImageView alloc]initWithFrame:CGRectMake(24, 15, w-48, w-48)];
     [self addSubview:_typeIV];
     _typeIV.layer.cornerRadius = 2;

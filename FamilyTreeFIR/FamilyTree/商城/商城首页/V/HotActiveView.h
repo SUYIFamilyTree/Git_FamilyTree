@@ -13,7 +13,7 @@
 /**
  *  点击cell 跳转到详情页面
  */
-- (void)selectCellIndexPath:(NSIndexPath *)index;
+- (void)selectCellGoodsId:(NSString *)goodsId;
 
 @end
 
@@ -21,5 +21,11 @@
 
 @property (weak,nonatomic) id<HotActiveViewDelegate>delegate;
 
-@property (strong,nonatomic) NSMutableArray<GoodsModel *> *hotArr;
+@property (strong,nonatomic) UICollectionView *collectionV;
+
+@property (strong,nonatomic) NSArray<GoodsDatalist *> *hotArr;
+
+- (void)setinitValue:(NSArray<GoodsDatalist *>*)hotArr;
+
+
 @end

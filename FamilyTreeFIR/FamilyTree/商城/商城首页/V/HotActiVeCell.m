@@ -49,6 +49,7 @@
 
     _goodIV = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectXW(_goodNameLb)+10, 10, imgW, imgW)];
     [self.contentView addSubview:_goodIV];
+    _goodIV.contentMode = UIViewContentModeScaleAspectFit;
 
 }
 

@@ -139,14 +139,14 @@ static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
     cell.cellName.text = car.CoName;
     cell.cellImage.imageURL = [NSURL URLWithString:car.Cover];
     cell.cellType.text = car.CoprData;
-    cell.cellPrice.text = [NSString stringWithFormat:@"¥%ld",car.CoprActpri];
-    cell.cellCarId = [NSString stringWithFormat:@"%ld",car.ShId];
-    cell.cellGoodsId = [NSString stringWithFormat:@"%ld",car.CoId];
-    cell.cellNumber.countLb.text = [NSString stringWithFormat:@"%ld",car.CoprCount];
+    cell.cellPrice.text = [NSString stringWithFormat:@"¥%ld",(long)car.CoprActpri];
+    cell.cellCarId = [NSString stringWithFormat:@"%ld",(long)car.ShId];
+    cell.cellGoodsId = [NSString stringWithFormat:@"%ld",(long)car.CoId];
+    cell.cellNumber.countLb.text = [NSString stringWithFormat:@"%ld",(long)car.CoprCount];
     cell.delegate = self;
     cell.indexPath = indexPath;
-    cell.cellTypeId = [NSString stringWithFormat:@"%ld",car.CoprId];
-    cell.cellDisPrice = [NSString stringWithFormat:@"%ld",car.CoprMoney];
+    cell.cellTypeId = [NSString stringWithFormat:@"%ld",(long)car.CoprId];
+    cell.cellDisPrice = [NSString stringWithFormat:@"%ld",(long)car.CoprMoney];
     
     
     

@@ -253,6 +253,17 @@
 		AD8DAB041CFD76A5009B7958 /* sj_icon_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8DAAF21CFD76A5009B7958 /* sj_icon_5@2x.png */; };
 		AD8DAB051CFD76A5009B7958 /* sj_icon_5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8DAAF31CFD76A5009B7958 /* sj_icon_5@3x.png */; };
 		AD8DAB081CFD84A5009B7958 /* HelpTableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8DAB071CFD84A5009B7958 /* HelpTableTableViewCell.m */; };
+		AD8E15C81D5816A000A5E8B1 /* GuessLikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8E15B61D5816A000A5E8B1 /* GuessLikeCell.m */; };
+		AD8E15C91D5816A000A5E8B1 /* GuessLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8E15B81D5816A000A5E8B1 /* GuessLikeView.m */; };
+		AD8E15CA1D5816A000A5E8B1 /* HotActiVeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8E15BA1D5816A000A5E8B1 /* HotActiVeCell.m */; };
+		AD8E15CB1D5816A000A5E8B1 /* HotActiveView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8E15BC1D5816A000A5E8B1 /* HotActiveView.m */; };
+		AD8E15CC1D5816A000A5E8B1 /* NeedRushCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8E15BE1D5816A000A5E8B1 /* NeedRushCell.m */; };
+		AD8E15CD1D5816A000A5E8B1 /* NeedRushView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8E15C01D5816A000A5E8B1 /* NeedRushView.m */; };
+		AD8E15CE1D5816A000A5E8B1 /* ShoppingTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8E15C21D5816A000A5E8B1 /* ShoppingTypeCell.m */; };
+		AD8E15CF1D5816A000A5E8B1 /* ShoppingTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8E15C41D5816A000A5E8B1 /* ShoppingTypeView.m */; };
+		AD8E15D01D5816A000A5E8B1 /* TypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8E15C61D5816A000A5E8B1 /* TypeView.m */; };
+		AD8E15D81D5817D500A5E8B1 /* GoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8E15D71D5817D500A5E8B1 /* GoodsModel.m */; };
+		AD8E15DC1D58668600A5E8B1 /* ShoppingFirestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8E15DB1D58668600A5E8B1 /* ShoppingFirestViewController.m */; };
 		AD8E603D1CFC0BDA00355C06 /* FindPassView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8E603C1CFC0BDA00355C06 /* FindPassView.m */; };
 		AD900B5B1D362CFB007492AD /* WSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD900B5A1D362CFB007492AD /* WSearchModel.m */; };
 		AD900B621D3640BC007492AD /* WSearchResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD900B611D3640BC007492AD /* WSearchResultView.m */; };
@@ -390,16 +401,6 @@
 		ADAB221D1D26174A0047B6F0 /* WIDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADAB221C1D26174A0047B6F0 /* WIDModel.m */; };
 		ADB2D1061D1CCCA10072C022 /* LYFoundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB2D1051D1CCCA10072C022 /* LYFoundation+Log.m */; };
 		ADB2D1091D1CCEE60072C022 /* CreateFamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB2D1081D1CCEE60072C022 /* CreateFamModel.m */; };
-		ADB696431D4757C0006E752F /* ShoppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB696411D4757C0006E752F /* ShoppingViewController.m */; };
-		ADB696541D4757F5006E752F /* GuessLikeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB696451D4757F5006E752F /* GuessLikeCell.m */; };
-		ADB696551D4757F5006E752F /* GuessLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB696471D4757F5006E752F /* GuessLikeView.m */; };
-		ADB696561D4757F5006E752F /* HotActiVeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB696491D4757F5006E752F /* HotActiVeCell.m */; };
-		ADB696571D4757F5006E752F /* HotActiveView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB6964B1D4757F5006E752F /* HotActiveView.m */; };
-		ADB696581D4757F5006E752F /* NeedRushCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB6964D1D4757F5006E752F /* NeedRushCell.m */; };
-		ADB696591D4757F5006E752F /* NeedRushView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB6964F1D4757F5006E752F /* NeedRushView.m */; };
-		ADB6965A1D4757F5006E752F /* ShoppingTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB696511D4757F5006E752F /* ShoppingTypeCell.m */; };
-		ADB6965B1D4757F5006E752F /* ShoppingTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB696531D4757F5006E752F /* ShoppingTypeView.m */; };
-		ADB6965E1D475957006E752F /* GoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB6965D1D475957006E752F /* GoodsModel.m */; };
 		ADB696611D475CAE006E752F /* WShopCommonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB696601D475CAE006E752F /* WShopCommonModel.m */; };
 		ADB737D61D2F3A7F00001011 /* WAddJPPersonView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADB737D51D2F3A7F00001011 /* WAddJPPersonView.m */; };
 		ADB737DA1D2F3F5200001011 /* addJP.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB737D71D2F3F5200001011 /* addJP.png */; };
@@ -1514,6 +1515,28 @@
 		AD8DAAF31CFD76A5009B7958 /* sj_icon_5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sj_icon_5@3x.png"; sourceTree = "<group>"; };
 		AD8DAB061CFD84A5009B7958 /* HelpTableTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpTableTableViewCell.h; sourceTree = "<group>"; };
 		AD8DAB071CFD84A5009B7958 /* HelpTableTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpTableTableViewCell.m; sourceTree = "<group>"; };
+		AD8E15B51D5816A000A5E8B1 /* GuessLikeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessLikeCell.h; sourceTree = "<group>"; };
+		AD8E15B61D5816A000A5E8B1 /* GuessLikeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessLikeCell.m; sourceTree = "<group>"; };
+		AD8E15B71D5816A000A5E8B1 /* GuessLikeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessLikeView.h; sourceTree = "<group>"; };
+		AD8E15B81D5816A000A5E8B1 /* GuessLikeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessLikeView.m; sourceTree = "<group>"; };
+		AD8E15B91D5816A000A5E8B1 /* HotActiVeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotActiVeCell.h; sourceTree = "<group>"; };
+		AD8E15BA1D5816A000A5E8B1 /* HotActiVeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotActiVeCell.m; sourceTree = "<group>"; };
+		AD8E15BB1D5816A000A5E8B1 /* HotActiveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotActiveView.h; sourceTree = "<group>"; };
+		AD8E15BC1D5816A000A5E8B1 /* HotActiveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotActiveView.m; sourceTree = "<group>"; };
+		AD8E15BD1D5816A000A5E8B1 /* NeedRushCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeedRushCell.h; sourceTree = "<group>"; };
+		AD8E15BE1D5816A000A5E8B1 /* NeedRushCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeedRushCell.m; sourceTree = "<group>"; };
+		AD8E15BF1D5816A000A5E8B1 /* NeedRushView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeedRushView.h; sourceTree = "<group>"; };
+		AD8E15C01D5816A000A5E8B1 /* NeedRushView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeedRushView.m; sourceTree = "<group>"; };
+		AD8E15C11D5816A000A5E8B1 /* ShoppingTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingTypeCell.h; sourceTree = "<group>"; };
+		AD8E15C21D5816A000A5E8B1 /* ShoppingTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingTypeCell.m; sourceTree = "<group>"; };
+		AD8E15C31D5816A000A5E8B1 /* ShoppingTypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingTypeView.h; sourceTree = "<group>"; };
+		AD8E15C41D5816A000A5E8B1 /* ShoppingTypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingTypeView.m; sourceTree = "<group>"; };
+		AD8E15C51D5816A000A5E8B1 /* TypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeView.h; sourceTree = "<group>"; };
+		AD8E15C61D5816A000A5E8B1 /* TypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypeView.m; sourceTree = "<group>"; };
+		AD8E15D61D5817D500A5E8B1 /* GoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsModel.h; sourceTree = "<group>"; };
+		AD8E15D71D5817D500A5E8B1 /* GoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsModel.m; sourceTree = "<group>"; };
+		AD8E15DA1D58668600A5E8B1 /* ShoppingFirestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingFirestViewController.h; sourceTree = "<group>"; };
+		AD8E15DB1D58668600A5E8B1 /* ShoppingFirestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingFirestViewController.m; sourceTree = "<group>"; };
 		AD8E603B1CFC0BDA00355C06 /* FindPassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindPassView.h; sourceTree = "<group>"; };
 		AD8E603C1CFC0BDA00355C06 /* FindPassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindPassView.m; sourceTree = "<group>"; };
 		AD900B591D362CFB007492AD /* WSearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSearchModel.h; sourceTree = "<group>"; };
@@ -1690,26 +1713,6 @@
 		ADB2D1051D1CCCA10072C022 /* LYFoundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LYFoundation+Log.m"; sourceTree = "<group>"; };
 		ADB2D1071D1CCEE60072C022 /* CreateFamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFamModel.h; sourceTree = "<group>"; };
 		ADB2D1081D1CCEE60072C022 /* CreateFamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateFamModel.m; sourceTree = "<group>"; };
-		ADB696401D4757C0006E752F /* ShoppingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingViewController.h; sourceTree = "<group>"; };
-		ADB696411D4757C0006E752F /* ShoppingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingViewController.m; sourceTree = "<group>"; };
-		ADB696441D4757F5006E752F /* GuessLikeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessLikeCell.h; sourceTree = "<group>"; };
-		ADB696451D4757F5006E752F /* GuessLikeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessLikeCell.m; sourceTree = "<group>"; };
-		ADB696461D4757F5006E752F /* GuessLikeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessLikeView.h; sourceTree = "<group>"; };
-		ADB696471D4757F5006E752F /* GuessLikeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessLikeView.m; sourceTree = "<group>"; };
-		ADB696481D4757F5006E752F /* HotActiVeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotActiVeCell.h; sourceTree = "<group>"; };
-		ADB696491D4757F5006E752F /* HotActiVeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotActiVeCell.m; sourceTree = "<group>"; };
-		ADB6964A1D4757F5006E752F /* HotActiveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotActiveView.h; sourceTree = "<group>"; };
-		ADB6964B1D4757F5006E752F /* HotActiveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotActiveView.m; sourceTree = "<group>"; };
-		ADB6964C1D4757F5006E752F /* NeedRushCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeedRushCell.h; sourceTree = "<group>"; };
-		ADB6964D1D4757F5006E752F /* NeedRushCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeedRushCell.m; sourceTree = "<group>"; };
-		ADB6964E1D4757F5006E752F /* NeedRushView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeedRushView.h; sourceTree = "<group>"; };
-		ADB6964F1D4757F5006E752F /* NeedRushView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeedRushView.m; sourceTree = "<group>"; };
-		ADB696501D4757F5006E752F /* ShoppingTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingTypeCell.h; sourceTree = "<group>"; };
-		ADB696511D4757F5006E752F /* ShoppingTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingTypeCell.m; sourceTree = "<group>"; };
-		ADB696521D4757F5006E752F /* ShoppingTypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingTypeView.h; sourceTree = "<group>"; };
-		ADB696531D4757F5006E752F /* ShoppingTypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingTypeView.m; sourceTree = "<group>"; };
-		ADB6965C1D475957006E752F /* GoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsModel.h; sourceTree = "<group>"; };
-		ADB6965D1D475957006E752F /* GoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsModel.m; sourceTree = "<group>"; };
 		ADB6965F1D475CAE006E752F /* WShopCommonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WShopCommonModel.h; path = "商城首页/WShopCommonModel.h"; sourceTree = "<group>"; };
 		ADB696601D475CAE006E752F /* WShopCommonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WShopCommonModel.m; path = "商城首页/WShopCommonModel.m"; sourceTree = "<group>"; };
 		ADB737D41D2F3A7F00001011 /* WAddJPPersonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAddJPPersonView.h; sourceTree = "<group>"; };
@@ -3423,6 +3426,49 @@
 			path = "赏金寻亲";
 			sourceTree = "<group>";
 		};
+		AD8E15B41D5816A000A5E8B1 /* V */ = {
+			isa = PBXGroup;
+			children = (
+				AD8E15B51D5816A000A5E8B1 /* GuessLikeCell.h */,
+				AD8E15B61D5816A000A5E8B1 /* GuessLikeCell.m */,
+				AD8E15B71D5816A000A5E8B1 /* GuessLikeView.h */,
+				AD8E15B81D5816A000A5E8B1 /* GuessLikeView.m */,
+				AD8E15B91D5816A000A5E8B1 /* HotActiVeCell.h */,
+				AD8E15BA1D5816A000A5E8B1 /* HotActiVeCell.m */,
+				AD8E15BB1D5816A000A5E8B1 /* HotActiveView.h */,
+				AD8E15BC1D5816A000A5E8B1 /* HotActiveView.m */,
+				AD8E15BD1D5816A000A5E8B1 /* NeedRushCell.h */,
+				AD8E15BE1D5816A000A5E8B1 /* NeedRushCell.m */,
+				AD8E15BF1D5816A000A5E8B1 /* NeedRushView.h */,
+				AD8E15C01D5816A000A5E8B1 /* NeedRushView.m */,
+				AD8E15C11D5816A000A5E8B1 /* ShoppingTypeCell.h */,
+				AD8E15C21D5816A000A5E8B1 /* ShoppingTypeCell.m */,
+				AD8E15C31D5816A000A5E8B1 /* ShoppingTypeView.h */,
+				AD8E15C41D5816A000A5E8B1 /* ShoppingTypeView.m */,
+				AD8E15C51D5816A000A5E8B1 /* TypeView.h */,
+				AD8E15C61D5816A000A5E8B1 /* TypeView.m */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		AD8E15D51D5817D500A5E8B1 /* M */ = {
+			isa = PBXGroup;
+			children = (
+				AD8E15D61D5817D500A5E8B1 /* GoodsModel.h */,
+				AD8E15D71D5817D500A5E8B1 /* GoodsModel.m */,
+			);
+			path = M;
+			sourceTree = "<group>";
+		};
+		AD8E15D91D58668600A5E8B1 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				AD8E15DA1D58668600A5E8B1 /* ShoppingFirestViewController.h */,
+				AD8E15DB1D58668600A5E8B1 /* ShoppingFirestViewController.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
 		AD900B581D362CEC007492AD /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -3787,52 +3833,11 @@
 		ADB6963A1D475737006E752F /* 商城首页 */ = {
 			isa = PBXGroup;
 			children = (
-				ADB6963E1D4757C0006E752F /* model */,
-				ADB6963F1D4757C0006E752F /* vc */,
-				ADB696421D4757C0006E752F /* view */,
+				AD8E15D91D58668600A5E8B1 /* C */,
+				AD8E15D51D5817D500A5E8B1 /* M */,
+				AD8E15B41D5816A000A5E8B1 /* V */,
 			);
 			path = "商城首页";
-			sourceTree = "<group>";
-		};
-		ADB6963E1D4757C0006E752F /* model */ = {
-			isa = PBXGroup;
-			children = (
-				ADB6965C1D475957006E752F /* GoodsModel.h */,
-				ADB6965D1D475957006E752F /* GoodsModel.m */,
-			);
-			path = model;
-			sourceTree = "<group>";
-		};
-		ADB6963F1D4757C0006E752F /* vc */ = {
-			isa = PBXGroup;
-			children = (
-				ADB696401D4757C0006E752F /* ShoppingViewController.h */,
-				ADB696411D4757C0006E752F /* ShoppingViewController.m */,
-			);
-			path = vc;
-			sourceTree = "<group>";
-		};
-		ADB696421D4757C0006E752F /* view */ = {
-			isa = PBXGroup;
-			children = (
-				ADB696441D4757F5006E752F /* GuessLikeCell.h */,
-				ADB696451D4757F5006E752F /* GuessLikeCell.m */,
-				ADB696461D4757F5006E752F /* GuessLikeView.h */,
-				ADB696471D4757F5006E752F /* GuessLikeView.m */,
-				ADB696481D4757F5006E752F /* HotActiVeCell.h */,
-				ADB696491D4757F5006E752F /* HotActiVeCell.m */,
-				ADB6964A1D4757F5006E752F /* HotActiveView.h */,
-				ADB6964B1D4757F5006E752F /* HotActiveView.m */,
-				ADB6964C1D4757F5006E752F /* NeedRushCell.h */,
-				ADB6964D1D4757F5006E752F /* NeedRushCell.m */,
-				ADB6964E1D4757F5006E752F /* NeedRushView.h */,
-				ADB6964F1D4757F5006E752F /* NeedRushView.m */,
-				ADB696501D4757F5006E752F /* ShoppingTypeCell.h */,
-				ADB696511D4757F5006E752F /* ShoppingTypeCell.m */,
-				ADB696521D4757F5006E752F /* ShoppingTypeView.h */,
-				ADB696531D4757F5006E752F /* ShoppingTypeView.m */,
-			);
-			path = view;
 			sourceTree = "<group>";
 		};
 		ADB737E01D2F747500001011 /* 卷谱字辈人物详情 */ = {
@@ -7144,9 +7149,9 @@
 				ADAB221D1D26174A0047B6F0 /* WIDModel.m in Sources */,
 				AD8514391D41C8CD007FB495 /* RankingViewController.m in Sources */,
 				ADC3E9951D377A5700754F63 /* SearchTableViewCell.m in Sources */,
+				AD8E15CA1D5816A000A5E8B1 /* HotActiVeCell.m in Sources */,
 				ADC29A711D38D5E6004353F4 /* RollDetailView.m in Sources */,
 				AD61DB5C1D4F211400BA3EB0 /* GoodStyleView.m in Sources */,
-				ADB6965A1D4757F5006E752F /* ShoppingTypeCell.m in Sources */,
 				ADAAB4261D45ED5800E6D8D9 /* WSearchGoodModel.m in Sources */,
 				ADA98E741D10F5EF005B23EC /* FamilyNamesViewController.m in Sources */,
 				ADA7FEF31D07A82300EDBEE4 /* PortraitAndNameViews.m in Sources */,
@@ -7169,8 +7174,8 @@
 				ADC29A721D38D5E6004353F4 /* RollView.m in Sources */,
 				BC0326A01CFD22070089EE4C /* ImageAndTextViewController.m in Sources */,
 				BC29439D1CFE8D87006671B9 /* PersonModel.m in Sources */,
+				AD8E15CB1D5816A000A5E8B1 /* HotActiveView.m in Sources */,
 				BCEB84001D3C7FA6002B44D3 /* LotteryPoetryModel.m in Sources */,
-				ADB696591D4757F5006E752F /* NeedRushView.m in Sources */,
 				ADE2D17E1CF7052C009D1ADF /* TableView.m in Sources */,
 				BCCE8A991CFFF289005A5E21 /* PrivateWorshipView.m in Sources */,
 				AD61DB581D4F211400BA3EB0 /* GoodColorView.m in Sources */,
@@ -7179,6 +7184,7 @@
 				ADE2CA811D5196D7000EFD0A /* OrderTwoCell.m in Sources */,
 				AD49FEE11CF6A0ED00DF9F7E /* ScrollerView.m in Sources */,
 				BC0CA7E11CFFFB38007B0F90 /* DetailFamHeViewController.m in Sources */,
+				AD8E15C81D5816A000A5E8B1 /* GuessLikeCell.m in Sources */,
 				ADF00F891D509F7C00AA13FE /* ShopOrdersCell.m in Sources */,
 				BC1427F31D37295E0009123C /* WholeWorldAdgnatioModel.m in Sources */,
 				AD61DB4A1D4F211400BA3EB0 /* GoodsDetailsViewController.m in Sources */,
@@ -7194,12 +7200,13 @@
 				AD8514471D41C9FC007FB495 /* MonthStarView.m in Sources */,
 				ADA7FF061D08115700EDBEE4 /* GennerationViewController.m in Sources */,
 				ADB696611D475CAE006E752F /* WShopCommonModel.m in Sources */,
+				AD8E15DC1D58668600A5E8B1 /* ShoppingFirestViewController.m in Sources */,
 				AD15B28D1CF8555600C0EEB7 /* ToRegistView.m in Sources */,
+				AD8E15D81D5817D500A5E8B1 /* GoodsModel.m in Sources */,
 				BCEB84031D3CB4BB002B44D3 /* InitialLotteryPoetryViewController.m in Sources */,
 				ADA87DB41D48BA5400DE9BD0 /* WCartTableViewCell.m in Sources */,
 				ADB9261D1CF7DF1900AA8B6E /* AccountView.m in Sources */,
 				ADC326FD1CF3E3DF00CEAE53 /* AppDelegate.m in Sources */,
-				ADB696571D4757F5006E752F /* HotActiveView.m in Sources */,
 				ADA7FEFB1D07C51000EDBEE4 /* HundredNamesView.m in Sources */,
 				BC51929E1D236C2E0020480F /* VIPGrowUpModel.m in Sources */,
 				ADE2CA621D519625000EFD0A /* AreaChooseView.m in Sources */,
@@ -7211,15 +7218,14 @@
 				ADE2CA7F1D5196D7000EFD0A /* OrderBottomView.m in Sources */,
 				ADBA01771D016DD90016AB00 /* AddMemberViewController.m in Sources */,
 				ADC326FA1CF3E3DF00CEAE53 /* main.m in Sources */,
-				ADB696561D4757F5006E752F /* HotActiVeCell.m in Sources */,
 				BCEB84411D3CD310002B44D3 /* PjView.m in Sources */,
 				BCF97C591D17B46D004D46AB /* SXLoadingView.m in Sources */,
 				BC5F15171D0FF1AD004F3622 /* EditHeadView.m in Sources */,
 				BC0D47681D485A6700A8336D /* LineageModel.m in Sources */,
-				ADB696551D4757F5006E752F /* GuessLikeView.m in Sources */,
 				ADE2CA5E1D519625000EFD0A /* ModifyAddresstableViewCell.m in Sources */,
 				ADA7FF011D07E51500EDBEE4 /* CustonCollectionViewCell.m in Sources */,
 				ADB9734D1CFE86FF007B876B /* BackScrollAndDetailView.m in Sources */,
+				AD8E15C91D5816A000A5E8B1 /* GuessLikeView.m in Sources */,
 				BC941B051D3F20CA00571EE2 /* JossSelectViewController.m in Sources */,
 				ADA87DB11D48AD5500DE9BD0 /* WShopCartView.m in Sources */,
 				ADF00F881D509F7C00AA13FE /* ShopActionView.m in Sources */,
@@ -7244,6 +7250,7 @@
 				BC5F150E1D0FF1AD004F3622 /* HeadImageView.m in Sources */,
 				AD73886A1CF6E0090076B2AD /* CollectionFamilyView.m in Sources */,
 				ADB926641CF7E28600AA8B6E /* LineView.m in Sources */,
+				AD8E15D01D5816A000A5E8B1 /* TypeView.m in Sources */,
 				AD900B5B1D362CFB007492AD /* WSearchModel.m in Sources */,
 				ADA98E971D11584C005B23EC /* CommonNavigationViews.m in Sources */,
 				ADE2CA801D5196D7000EFD0A /* OrderGoodCell.m in Sources */,
@@ -7269,7 +7276,6 @@
 				ADB973501CFEB2D7007B876B /* InputView.m in Sources */,
 				BC729A001D225C53008FEB71 /* HeadLuckView.m in Sources */,
 				BC59E1151D2F7BC1000A3AE3 /* FamilyDTModel.m in Sources */,
-				ADB6965E1D475957006E752F /* GoodsModel.m in Sources */,
 				ADC3E98B1D37340F00754F63 /* WSearchDetailViewController.m in Sources */,
 				ADA87DC31D48BBF500DE9BD0 /* WCartTableFooterView.m in Sources */,
 				ADD23D091D0D54C2008986F6 /* TeachViewController.m in Sources */,
@@ -7285,7 +7291,6 @@
 				AD8DAB081CFD84A5009B7958 /* HelpTableTableViewCell.m in Sources */,
 				BC29438D1CFE81D9006671B9 /* WholeWorldViewController.m in Sources */,
 				BC458A891D1D1B9200AA0DDF /* QueryModel.m in Sources */,
-				ADB696581D4757F5006E752F /* NeedRushCell.m in Sources */,
 				BCF97C5A1D17B46D004D46AB /* MBProgressHUD+Add.m in Sources */,
 				BCCE8A9A1CFFF289005A5E21 /* PublicWorshipView.m in Sources */,
 				ADF00F851D509F7C00AA13FE /* MyOrdersViewController.m in Sources */,
@@ -7303,8 +7308,10 @@
 				BC5F150F1D0FF1AD004F3622 /* PersonalCenterCliffordView.m in Sources */,
 				ADAAB4291D45EDA100E6D8D9 /* WSearchGoodsCell.m in Sources */,
 				ADC3E98E1D37612A00754F63 /* WSearchZBView.m in Sources */,
+				AD8E15CF1D5816A000A5E8B1 /* ShoppingTypeView.m in Sources */,
 				AD15B2751CF817EB00C0EEB7 /* FindPassViewController.m in Sources */,
 				BCDE42651D0E45CE00921373 /* UIView+getCurrentViewController.m in Sources */,
+				AD8E15CC1D5816A000A5E8B1 /* NeedRushCell.m in Sources */,
 				ADAAB41B1D45E14300E6D8D9 /* WShopSearchViewController.m in Sources */,
 				ADA87DC01D48BBDF00DE9BD0 /* WCartTableHeaderView.m in Sources */,
 				ADB737D61D2F3A7F00001011 /* WAddJPPersonView.m in Sources */,
@@ -7316,9 +7323,9 @@
 				AD5F5C361D17D2E60035710F /* WAfterDivinationViewController.m in Sources */,
 				ADBC99661D52E9E200D708FD /* WBookingModel.m in Sources */,
 				ADE2CA601D519625000EFD0A /* IncreaseReceiveAddressTableCell.m in Sources */,
+				AD8E15CE1D5816A000A5E8B1 /* ShoppingTypeCell.m in Sources */,
 				AD8514461D41C9FC007FB495 /* ChooseBtnView.m in Sources */,
 				BCEB84191D3CC7B6002B44D3 /* DetailLotteryPoetryViewController.m in Sources */,
-				ADB696541D4757F5006E752F /* GuessLikeCell.m in Sources */,
 				ADF1FC9F1D2FA2BF006080C8 /* WJPListModel.m in Sources */,
 				BC729A071D226000008FEB71 /* NSString+getStarDate.m in Sources */,
 				BC59E1181D2F939F000A3AE3 /* HundredsNamesModel.m in Sources */,
@@ -7342,11 +7349,9 @@
 				ADA98E981D11584C005B23EC /* SelectMyFamilyView.m in Sources */,
 				ADBA18271D504A6F006C8B29 /* WCartMode.m in Sources */,
 				ADC472231D1A5A88000388AF /* WSwitchDetailFamView.m in Sources */,
-				ADB696431D4757C0006E752F /* ShoppingViewController.m in Sources */,
 				ADC059E11D002CB0001F7C1B /* CreateFamView.m in Sources */,
 				BCE2AD5B1CF83FC700EC98F5 /* SearchFamilyTreeViewController.m in Sources */,
 				BC4790631D20BD6F00BA194D /* AreaModel.m in Sources */,
-				ADB6965B1D4757F5006E752F /* ShoppingTypeView.m in Sources */,
 				ADD23CFE1D0D4947008986F6 /* CreatFamilyTree.m in Sources */,
 				ADB9D3911D40ADBB005A6AB2 /* WPersonInfoViewController.m in Sources */,
 				ADA7FF021D07E51500EDBEE4 /* NewsCell.m in Sources */,
@@ -7360,6 +7365,7 @@
 				BC499B951D2CD851007870FE /* BarrageListModel.m in Sources */,
 				BC5F151B1D0FF1AD004F3622 /* PayForFortuneView.m in Sources */,
 				ADB926201CF7DF1900AA8B6E /* TopView.m in Sources */,
+				AD8E15CD1D5816A000A5E8B1 /* NeedRushView.m in Sources */,
 				ADB9261C1CF7DF1900AA8B6E /* LoginViewController.m in Sources */,
 				ADC3E9961D377A5700754F63 /* WSearchViewCell.m in Sources */,
 				AD8514491D41C9FC007FB495 /* RankingView.m in Sources */,

@@ -90,6 +90,7 @@
         shoporderV.quoteLb.attributedText = quoteStr;//加横线
         shoporderV.orderNOLb.text = [NSString stringWithFormat:@"订单号：%@",good.orderNo];
         shoporderV.countLb.text = [NSString stringWithFormat:@"x%@",good.goodcount];
+        self.orderNumber = good.orderNo;
         _orderId = good.goodId;
     }
     
@@ -114,6 +115,7 @@
 -(void)shopAction:(UIButton *)sender{
     NSLog(@"%@",sender.titleLabel.text);
     [self.delegate orderAction:_orderId action:sender];
+    [self.delegate orderActionWithNumber:_orderId action:sender];
 }
 
 

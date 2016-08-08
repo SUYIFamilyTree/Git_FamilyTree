@@ -414,6 +414,11 @@ enum{
         }
         if (sender.tag == 1) {
             
+            if (![USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]) {
+                [SXLoadingView showAlertHUD:@"请先选择一个家谱" duration:0.5];
+                return;
+            }
+            
             self.joinView.alpha = 0;
             [self.view addSubview:self.joinView];
             [UIView animateWithDuration:0.3f animations:^{

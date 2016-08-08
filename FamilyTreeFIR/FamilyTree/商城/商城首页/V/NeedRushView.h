@@ -12,7 +12,7 @@
 /**
  *  点击cell 跳转到详情页
  */
-- (void)selectCellRush:(NSIndexPath*)index;
+- (void)selectCellRushGoodsId:(NSString *)goodsId;
 
 @end
 
@@ -20,6 +20,8 @@
 
 @property (weak,nonatomic) id<NeedRushViewDelegate>delegate;
 
-@property (strong,nonatomic) NSMutableArray<GoodsModel*> *rushArr;
+
+
+- (void)setNeedView:(NSArray<GoodsDatalist*> *)rushArr;
 
 @end

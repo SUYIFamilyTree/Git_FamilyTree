@@ -13,6 +13,7 @@
 
 @property (strong,nonatomic) UICollectionView *collectionV;
 
+@property (strong,nonatomic) NSArray<GoodsDatalist*> *rushArr;
 @end
 
 @implementation NeedRushView
@@ -20,9 +21,14 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
-        [self initView];
     }
     return self;
+}
+
+-(void)setNeedView:(NSArray<GoodsDatalist *> *)rushArr{
+    _rushArr = rushArr;
+    
+    [self initView];
 }
 
 -(void)initView{
@@ -50,8 +56,9 @@
 
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
     flowLayout.headerReferenceSize = CGSizeMake(0, 0);
-    _collectionV = [[UICollectionView alloc]initWithFrame:CGRectMake(0, CGRectYH(headV), __kWidth, __kWidth*13/36) collectionViewLayout:flowLayout];
+    _collectionV = [[UICollectionView alloc]initWithFrame:CGRectMake(0, CGRectYH(headV), __kWidth, self.frame.size.height-30) collectionViewLayout:flowLayout];
     [self addSubview:_collectionV];
+      _collectionV.scrollEnabled = NO;
     [_collectionV registerClass:[NeedRushCell class] forCellWithReuseIdentifier:@"NeedRushCell"];
     _collectionV.backgroundColor = [UIColor whiteColor];
     _collectionV.delegate = self;
@@ -60,7 +67,7 @@
 }
 #pragma mark -UICollectionView Delegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 4;
+    return _rushArr.count;
 }
 
 -(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -68,21 +75,27 @@
     if (!cell) {
         cell = [[NeedRushCell alloc]initWithFrame:CGRectMake(0, 0, __kWidth/4, __kWidth/36*13)];
     }
-    NSArray *nameArr = @[@"貔貅手链",@"文房四宝",@"黄虎眼石",@"好运道"];
-    cell.goodNameLb.text = nameArr[indexPath.row];
-    cell.goodIV.backgroundColor = [UIColor random];//替换成image赋值
-    NSString *money = @"89.0";
-    cell.payMoneyLb.text = [NSString stringWithFormat:@"¥%@",money];
-    cell.quoteLb.text = @"109.0";
+
+    
+    GoodsDatalist *goods = _rushArr[indexPath.row];
+    cell.goodNameLb.text = goods.CoConame;
+    CGFloat money = goods.CoprActpri;
+    cell.payMoneyLb.text = [NSString stringWithFormat:@"¥%.1f",money];
+    CGFloat moneyYJ = goods.CoprMoney;
+    cell.quoteLb.text = [NSString stringWithFormat:@"¥%.1f",moneyYJ];
     NSMutableAttributedString *quoteStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"¥%@",cell.quoteLb.text]];
     [quoteStr addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid|NSUnderlineStyleSingle) range:NSMakeRange(0, quoteStr.length)];
     cell.quoteLb.attributedText = quoteStr;//加横线
+    cell.goodIV.imageURL = [NSURL URLWithString:goods.CoCover];
+    cell.goodId = [NSString stringWithFormat:@"%ld",(long)goods.CoId];
+    cell.goodTypeId = [NSString stringWithFormat:@"%ld",(long)goods.CoprId];
 
     return cell;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    [self.delegate selectCellRush:indexPath];
+    NeedRushCell *cell = (NeedRushCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [self.delegate selectCellRushGoodsId:cell.goodId];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{

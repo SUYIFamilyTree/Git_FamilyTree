@@ -74,7 +74,23 @@
 #pragma mark ==提交评价==
 - (void)evaluateAction{
     NSLog(@"%@",_starGetV.star);
+    WK(weakSelf);
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"userid":GetUserId,
+                                                @"did":_orderNumber,
+                                                @"pf":_starGetV.star,
+                                                 @"pl":self.evaluateTV.text} requestID:GetUserId requestcode:kRequestCodeevaluateadd success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+                                                    if (succe) {
+                                                        [SXLoadingView showAlertHUD:@"评价成功" duration:0.5];
+                                                        [weakSelf.navigationController popViewControllerAnimated:YES];
+                                                    }else{
+                                                        [SXLoadingView showAlertHUD:@"评论失败" duration:0.5];
+                                                    }
+                                                } failure:^(NSError *error) {
+                                                    
+                                                }];
+    
 }
+
 
 #pragma mark -UITextViewDelegate
 -(void)textViewDidChange:(UITextView *)textView{

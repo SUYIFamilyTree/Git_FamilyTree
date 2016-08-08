@@ -7,25 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
-
 @class GPage,GoodsDatalist;
+
 @interface GoodsModel : NSObject
 /**
  *  商品名
  */
-//@property (strong,nonatomic) NSString *goodName;
-///**
-// *  商品实付价格
-// */
-//@property (strong,nonatomic) NSString *goodMoney;
-///**
-// *  商品报价
-// */
-//@property (strong,nonatomic) NSString *goodQuote;
-///**
-// *  商品图片
-// */
-//@property (strong,nonatomic) NSString *goodImage;
+@property (strong,nonatomic) NSString *goodName;
+/**
+ *  商品实付价格
+ */
+@property (strong,nonatomic) NSString *goodMoney;
+/**
+ *  商品报价
+ */
+@property (strong,nonatomic) NSString *goodQuote;
+/**
+ *  商品图片
+ */
+@property (strong,nonatomic) NSString *goodImage;
 
 
 @property (nonatomic, strong) NSArray<GoodsDatalist *> *datalist;
@@ -65,4 +65,5 @@
 @property (nonatomic, assign) NSInteger CoId;
 
 @end
+
 

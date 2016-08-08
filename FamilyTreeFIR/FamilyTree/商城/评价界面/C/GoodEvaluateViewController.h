@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface GoodEvaluateViewController : BaseViewController
+/**订单号*/
+@property (nonatomic,strong) NSString *orderNumber;
 
 @end

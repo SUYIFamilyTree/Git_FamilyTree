@@ -8,6 +8,7 @@
 
 #import "GoodsModel.h"
 
+
 @implementation GoodsModel
 
 
@@ -23,5 +24,4 @@
 @implementation GoodsDatalist
 
 @end
-
 

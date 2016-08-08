@@ -93,6 +93,12 @@
     [self initView];
     self.view.backgroundColor = LH_RGBCOLOR(230, 230, 230);
     
+    
+
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self getAllbookingInfomation];
 
 }
@@ -218,16 +224,18 @@
             }
         }];
         
-    }else if([sender.titleLabel.text isEqualToString:@"评价"]){
-        GoodEvaluateViewController *evaVc = [[GoodEvaluateViewController alloc] initWithShopTitle:@"评价" image:MImage(@"chec")];
-        [self.navigationController pushViewController:evaVc animated:YES];
-        return;
     }else{
         
     }
     
 }
-
+-(void)orderActionWithNumber:(NSString *)orderNumber action:(UIButton *)sender{
+    if([sender.titleLabel.text isEqualToString:@"评价"]){
+        GoodEvaluateViewController *evaVc = [[GoodEvaluateViewController alloc] initWithShopTitle:@"评价" image:MImage(@"chec")];
+        evaVc.orderNumber = orderNumber;
+        [self.navigationController pushViewController:evaVc animated:YES];
+    }
+}
 #pragma mark ==更换订单数据==
 -(void)orderTypeChoose:(UIButton *)sender{
         [self getDataWithTitle:sender.titleLabel.text];
