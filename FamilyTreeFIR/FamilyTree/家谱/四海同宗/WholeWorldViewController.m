@@ -15,7 +15,7 @@
 
 static NSString *const kReusableIdentifier = @"PinAnnotation";
 
-@interface WholeWorldViewController ()<HeaderSelectViewDelegate,MKMapViewDelegate,CLLocationManagerDelegate>
+@interface WholeWorldViewController ()<HeaderSelectViewDelegate,MKMapViewDelegate,CLLocationManagerDelegate,CommandNavigationViewsDelegate>
 
 @property (nonatomic,strong) HeaderSelectView *headerView; /*选择视图*/
 
@@ -197,7 +197,7 @@ static NSString *const kReusableIdentifier = @"PinAnnotation";
     [self.view addSubview:headView];
     self.headerView = headView;
     headView.sd_layout.heightIs(50).rightSpaceToView(self.view,0).topSpaceToView(self.view,64).rightSpaceToView(self.view,0);
-    
+    self.comNavi.delegate = self;
     //地图
     [self.view addSubview:self.mapView];
     self.mapView.sd_layout

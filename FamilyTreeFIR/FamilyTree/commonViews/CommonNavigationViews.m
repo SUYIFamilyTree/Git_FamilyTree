@@ -60,6 +60,7 @@
 -(void)respondsToRightBtn:(UIButton *)sender{
     sender.selected = !sender.selected;
     MYLog(@"右按钮");
+    
     if (sender.selected) {
         [self.viewController.view addSubview:self.selecMyFamView];
     }else{
