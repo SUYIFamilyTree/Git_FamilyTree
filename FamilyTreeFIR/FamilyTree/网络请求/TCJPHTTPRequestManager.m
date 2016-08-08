@@ -97,7 +97,7 @@
             if ([dic[@"md5check"]isEqualToString:md5ReceiveStr]) {
                 succe = YES;
             }else{
-                
+                [SXLoadingView showAlertHUD:dic[@"message"] duration:0.5];
             }
             success(responseObject,succe,dic);
         }

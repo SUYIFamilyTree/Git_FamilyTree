@@ -196,7 +196,7 @@
 
 //登录按钮
 -(void)loginView:(LoginView *)loginView didSelectedLoginBtn:(UIButton *)sender{
-    //[SXLoadingView showProgressHUD:@"正在登录"];
+    [SXLoadingView showProgressHUD:@"正在登录"];
     
     MYLog(@"登录");
 
@@ -236,6 +236,7 @@
                 
                 RootTabBarViewController *rootVC = [[RootTabBarViewController alloc]init];
                 [weakSelf presentViewController:rootVC animated:YES completion:nil];
+                
             }else{
                 [SXLoadingView showAlertHUD:jsonDic[@"message"] duration:0.5];
             }

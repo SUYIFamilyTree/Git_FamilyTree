@@ -10,5 +10,6 @@
 #import "MyHelpModel.h"
 
 @interface AdgnatioHelpInfoViewController : BaseViewController
-
+/** 我的互助模型*/
+@property (nonatomic, strong) MyHelpModel *myHelpModel;
 @end
