@@ -54,6 +54,8 @@
 
 /**滚动视图*/
 @property (nonatomic,strong) ScrollerView *scrollerView;
+/**详情滚动*/
+@property (nonatomic,strong) ScrollerView *detaiScroller;
 
 
 @end
@@ -104,31 +106,13 @@
    _titleView = [[GoodsDetailsNaviView alloc]initWithFrame:CGRectMake(__kWidth/6, 20, __kWidth*2/3, 44)];
     [self.comNavi addSubview:_titleView];
     _titleView.delegate = self;
+    [self.comNavi.rightBtn removeFromSuperview];
 }
 
 -(void)changeView:(UIButton *)sender{
-    switch (sender.tag) {
-        case 0:
-        {
-            NSLog(@"商品");
-            [_backV setContentOffset:CGPointMake(0, 0) animated:YES];
-        }
-            break;
-        case 1:
-        {
-            NSLog(@"详情");
-           [_backV setContentOffset:CGPointMake(__kWidth, 0) animated:YES];
-        }
-            break;
-        case 2:
-        {
-            NSLog(@"评价");
-            [_backV setContentOffset:CGPointMake(__kWidth*2, 0) animated:YES];
-        }
-            break;
-        default:
-            break;
-    }
+    
+    [_backV setContentOffset:CGPointMake(sender.tag*Screen_width, 0) animated:YES];
+    
 }
 
 #pragma mark -GoodBottomViewDelegate
@@ -177,13 +161,15 @@
     _goodOneV.contentSize = CGSizeMake(__kWidth, _goodDetailV.detailH+__kWidth*5/9+64);
 
     //商品详情
-    _goodTwoV = [[UIScrollView alloc]initWithFrame:CGRectMake(__kWidth, 0, __kWidth, __kHeight-110-46)];
+    _goodTwoV = [[UIScrollView alloc]initWithFrame:CGRectMake(__kWidth, CGRectYH(self.scrollerView), __kWidth, __kHeight-110-46)];
     [_backV addSubview:_goodTwoV];
+    [_backV addSubview:self.detaiScroller];
+    
     _goodTwoV.scrollEnabled = YES;
 
     _goodLabelV = [[GoodLabelView alloc]initWithFrame:CGRectMake(0, 0, __kWidth, 120)];
     [_goodTwoV addSubview:_goodLabelV];
-    _goodLabelV.detaiLb.text = @"文化（culture）是一个非常广泛和最具人文意味的概念，给文化下一个准确或精确的定义，的确是一件非常困难的事情。对文化这个概念的解读，人类也一直众说不一。但东西方的辞书或百科中却有一个较为共同的的解释和理解：文化是人类所创造的物质财富与精神财富的总和。文化（culture）是一个非常广泛和最具人文意味的概念，给文化下一个准确或精确的定义，的确是一件非常困难的事情。对文化这个概念的解读，人类也一直众说不一。但东西方的辞书或百科中却有一个较为共同的的解释和理解：文化是人类所创造的物质财富与精神财富的总和。有文化（culture）是一个非常广泛和最具人文意味的概念，给文化下一个准确或精确的定义，的确是一件非常困难的事情。对文化这个概念的解读，人类也一直众说不一。但东西方的辞书或百科中却有一个较为共同的的解释和理解：文化是人类所创造的物质财富与精神财富的总和。有文化（culture）是一个非常广泛和最具人文意味的概念，给文化下一个准确或精确的定义，的确是一件非常困难的事情。对文化这个概念的解读，人类也一直众说不一。但东西方的辞书或百科中却有一个较为共同的的解释和理解：文化是人类所创造的物质财富与精神财富的总和。有文化（culture）是一个非常广泛和最具人文意味的概念，给文化下一个准确或精确的定义，的确是一件非常困难的事情。对文化这个概念的解读，人类也一直众说不一。但东西方的辞书或百科中却有一个较为共同的的解释和理解：文化是人类所创造的物质财富与精神财富的总和。有文化（culture）是一个非常广泛和最具人文意味的概念，给文化下一个准确或精确的定义，的确是一件非常困难的事情。对文化这个概念的解读，人类也一直众说不一。但东西方的辞书或百科中却有一个较为共同的的解释和理解：文化是人类所创造的物质财富与精神财富的总和。有文化（culture）是一个非常广泛和最具人文意味的概念，给文化下一个准确或精确的定义，的确是一件非常困难的事情。对文化这个概念的解读，人类也一直众说不一。但东西方的辞书或百科中却有一个较为共同的的解释和理解：文化是人类所创造的物质财富与精神财富的总和。有有很多小东西搜";
+    _goodLabelV.detaiLb.text = @"文化（culture）是一个非常广泛和最具人文意味的概念，给文化下一个准确或精确的定义，的确是一件非常困难的事情。对文化这个概念的解读，人类也一直众说不一。但东西方的辞书或百科中却有一个较为共同的的解释和理解：文化是人类所创造的物质财富与精神财富的总和。文化（culture）是一个非常广泛和最具人文意味的概念，给文化下一个";
     [_goodLabelV refreshFrame];
     if (_goodLabelV.bounds.size.height>__kHeight-110) {
         _goodTwoV.contentSize = CGSizeMake(__kWidth, _goodLabelV.bounds.size.height);
@@ -227,5 +213,17 @@
     return _scrollerView;
 }
 
+-(ScrollerView *)detaiScroller{
+    if (!_detaiScroller) {
+        NSMutableArray *picArr = [@[] mutableCopy];
+        [self.detalModel.pic enumerateObjectsUsingBlock:^(DetailPic * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [picArr addObject:obj.PicFilepath];
+        }];
+        
+        _detaiScroller = [[ScrollerView alloc] initWithFrame:CGRectMake(__kWidth, 0, __kWidth, __kWidth*5/9) images:picArr];
+        
+    }
+    return _detaiScroller;
+}
 
 @end

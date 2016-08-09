@@ -13,6 +13,8 @@
  *  详情
  */
 @property (strong,nonatomic) UILabel *detaiLb;
+/**滚动图*/
+@property (nonatomic,strong) ScrollerView *scroView;
 
 - (void)refreshFrame;
 @end

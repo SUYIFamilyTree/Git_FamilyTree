@@ -22,6 +22,7 @@
 #import "WGoodsDetailModel.h"
 #import "MyOrdersViewController.h"
 #import "BookingBtn.h"
+#import "ShoppingFirestViewController.h"
 @interface WTools : NSObject
 
 UIKIT_EXTERN NSString * _Nonnull const kRequestCodecreategen;

@@ -47,7 +47,8 @@
 -(UIImageView *)cellImage{
     if (!_cellImage) {
         _cellImage = [[UIImageView alloc] initWithFrame:AdaptationFrame(0, 35, 170, 170)];
-        _cellImage.backgroundColor = [UIColor random];
+        _cellImage.contentMode = UIViewContentModeScaleAspectFit;
+        
     }
     return _cellImage;
 }

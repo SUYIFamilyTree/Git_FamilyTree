@@ -13,7 +13,6 @@
 //viewControllersAndViews
 #import "HomeViewController.h"
 #import "FamilyTreeViewController.h"
-#import "ShoppingViewController.h"
 #import "PersonalCenterViewController.h"
 #import "LoginViewController.h"
 #import "FamilServiceViewController.h"

@@ -60,6 +60,7 @@
 -(void)respondsToRightBtn:(UIButton *)sender{
     sender.selected = !sender.selected;
     MYLog(@"右按钮");
+    
     if (sender.selected) {
         [self.viewController.view addSubview:self.selecMyFamView];
     }else{
@@ -162,7 +163,7 @@
         _selecMyFamView.delegate = self;
     }
     [_selecMyFamView updateDataSourceAndUI];
-    _selecMyFamView.didSelectedItem = false;
+//    _selecMyFamView.didSelectedItem = false;
     return _selecMyFamView;
 }
 -(WMenuBtn *)rightMenuBtn{

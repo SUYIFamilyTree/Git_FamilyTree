@@ -21,7 +21,8 @@
 - (void)initView{
     UIImageView *lineIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, __kWidth, 6)];
     [self addSubview:lineIV];
-    lineIV.backgroundColor = LH_RandomColor;
+    lineIV.image = MImage(@"line");
+    lineIV.contentMode = UIViewContentModeScaleAspectFit;
 
     _nameLb = [[UILabel alloc]initWithFrame:CGRectMake(35, 20, 80, 15)];
     [self addSubview:_nameLb];
@@ -43,7 +44,7 @@
 
     UIImageView *locationIV = [[UIImageView alloc]initWithFrame:CGRectMake(15, 40, 15, 20)];
     [self addSubview:locationIV];
-    locationIV.backgroundColor =LH_RandomColor;//替换成图标
+    locationIV.image = MImage(@"place");
 
     _addressLb = [[UILabel alloc]initWithFrame:CGRectMake(35, CGRectYH(_nameLb)+10, __kWidth*13/18, 30)];
     [self addSubview:_addressLb];

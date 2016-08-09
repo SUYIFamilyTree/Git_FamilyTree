@@ -118,69 +118,72 @@ enum{
 }
 /** 通知实现方法 */
 -(void)respondsToNotification:(NSNotification *)info{
-    NSDictionary *dic = info.userInfo;
-    NSInteger itemIndex = [dic[@"itemName"] integerValue];
-    //获取所有VC
-    NSArray *vcArr = [self.navigationController viewControllers];
-
-    switch (itemIndex) {
-        case ItemSelectedSeaIndex:
-        {
-            if ([vcArr.lastObject isKindOfClass:[WholeWorldViewController class]]) {
-                return;
-            }
-            WholeWorldViewController *wholeVc = [[WholeWorldViewController alloc] initWithTitle:@"四海同宗"];
-            [self.navigationController pushViewController:wholeVc animated:YES];
-        
-        }
-            break;
-        case ItemSelectedGemImageIndex:
-        {
-            if ([vcArr.lastObject isKindOfClass:[LineageViewController class]]) {
-                return;
-            }
-            LineageViewController *lineVc = [[LineageViewController alloc] initWithTitle:@"世系图"];
-            [self.navigationController pushViewController:lineVc animated:YES];
-        }
-            break;
-        case ItemSelectedReadGemIndex:
-        {
-            
-            ImageAndTextViewController *readVc = [[ImageAndTextViewController alloc] initWithTitle:@"阅读家谱"];
-            NSLog(@"%@", readVc.comNavi.titleLabel.text);
-            BaseViewController *lastVc = vcArr.lastObject;
-            if ([lastVc isKindOfClass:[ImageAndTextViewController class]]&&[lastVc.comNavi.titleLabel.text isEqualToString:@"阅读家谱"]) {
-                return;
-            }
-            
-            [self.navigationController pushViewController:readVc animated:YES];
-            
-        }
-            break;
-        case ItemSelectedZBIndex:
-        {
-            if ([vcArr.lastObject isKindOfClass:[GennerationViewController class]]) {
-                return;
-            }
-            GennerationViewController *zbVc = [[GennerationViewController alloc] init];
-            [self.navigationController pushViewController:zbVc animated:YES];
-        }
-            break;
-        case ItemSelectedVideoIndex:
-        {
-            
-            ImageAndTextViewController *imageVc = [[ImageAndTextViewController alloc] initWithTitle:@"图文影音"];
-             BaseViewController *lastVc = vcArr.lastObject;
-            if ([lastVc isKindOfClass:[ImageAndTextViewController class]]&&[lastVc.comNavi.titleLabel.text isEqualToString:@"图文影音"]) {
-                return;
-            }
-            [self.navigationController pushViewController:imageVc animated:YES];
-        }
-            break;
-
-        default:
-            break;
-    }
+    //变化我的家谱按钮状态
+    
+    
+//    NSDictionary *dic = info.userInfo;
+//    NSInteger itemIndex = [dic[@"itemName"] integerValue];
+//    //获取所有VC
+//    NSArray *vcArr = [self.navigationController viewControllers];
+//
+//    switch (itemIndex) {
+//        case ItemSelectedSeaIndex:
+//        {
+//            if ([vcArr.lastObject isKindOfClass:[WholeWorldViewController class]]) {
+//                return;
+//            }
+//            WholeWorldViewController *wholeVc = [[WholeWorldViewController alloc] initWithTitle:@"四海同宗"];
+//            [self.navigationController pushViewController:wholeVc animated:YES];
+//        
+//        }
+//            break;
+//        case ItemSelectedGemImageIndex:
+//        {
+//            if ([vcArr.lastObject isKindOfClass:[LineageViewController class]]) {
+//                return;
+//            }
+//            LineageViewController *lineVc = [[LineageViewController alloc] initWithTitle:@"世系图"];
+//            [self.navigationController pushViewController:lineVc animated:YES];
+//        }
+//            break;
+//        case ItemSelectedReadGemIndex:
+//        {
+//            
+//            ImageAndTextViewController *readVc = [[ImageAndTextViewController alloc] initWithTitle:@"阅读家谱"];
+//            NSLog(@"%@", readVc.comNavi.titleLabel.text);
+//            BaseViewController *lastVc = vcArr.lastObject;
+//            if ([lastVc isKindOfClass:[ImageAndTextViewController class]]&&[lastVc.comNavi.titleLabel.text isEqualToString:@"阅读家谱"]) {
+//                return;
+//            }
+//            
+//            [self.navigationController pushViewController:readVc animated:YES];
+//            
+//        }
+//            break;
+//        case ItemSelectedZBIndex:
+//        {
+//            if ([vcArr.lastObject isKindOfClass:[GennerationViewController class]]) {
+//                return;
+//            }
+//            GennerationViewController *zbVc = [[GennerationViewController alloc] init];
+//            [self.navigationController pushViewController:zbVc animated:YES];
+//        }
+//            break;
+//        case ItemSelectedVideoIndex:
+//        {
+//            
+//            ImageAndTextViewController *imageVc = [[ImageAndTextViewController alloc] initWithTitle:@"图文影音"];
+//             BaseViewController *lastVc = vcArr.lastObject;
+//            if ([lastVc isKindOfClass:[ImageAndTextViewController class]]&&[lastVc.comNavi.titleLabel.text isEqualToString:@"图文影音"]) {
+//                return;
+//            }
+//            [self.navigationController pushViewController:imageVc animated:YES];
+//        }
+//            break;
+//
+//        default:
+//            break;
+//    }
 }
 #pragma mark - 视图搭建
 //设置导航栏
@@ -226,9 +229,6 @@ enum{
     self.allFamilGenNumber = rightLabel;
     [self.view addSubview:self.allFamilGenNumber];    
 }
-
-
-
 
 #pragma mark *** 网络请求 ***
 //我的所有家谱
@@ -414,6 +414,11 @@ enum{
         }
         if (sender.tag == 1) {
             
+            if (![USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]) {
+                [SXLoadingView showAlertHUD:@"请先选择一个家谱" duration:0.5];
+                return;
+            }
+            
             self.joinView.alpha = 0;
             [self.view addSubview:self.joinView];
             [UIView animateWithDuration:0.3f animations:^{
@@ -428,7 +433,7 @@ enum{
             if (![USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]) {
                 [SXLoadingView showAlertHUD:@"请先选择一个家谱" duration:0.5];
                 return;
-            }
+        }
             
         ManagerFamilyViewController *manager = [[ManagerFamilyViewController alloc] initWithTitle:@"管理家谱" image:nil];
         [manager.comNavi.rightBtn removeFromSuperview];
@@ -439,10 +444,9 @@ enum{
 }
 
 -(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectFamTitle:(NSString *)title SelectFamID:(NSString *)famId{
-    
     //更新界面
     [self getFamDetailInfo];
-
+    self.famTreeTopView.menuBtn.selected = false;
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -480,8 +484,8 @@ enum{
         _selecMyFamView = [[SelectMyFamilyView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
         _selecMyFamView.delegate = self;
     }
-    [_selecMyFamView.collectionView reloadData];
-    _selecMyFamView.didSelectedItem = false;
+    [_selecMyFamView.tableView reloadData];
+    
     return _selecMyFamView;
 }
 -(WFamilyTableView *)famTableView{
@@ -494,7 +498,6 @@ enum{
 -(WApplyJoinView *)joinView{
     if (!_joinView) {
         _joinView = [[WApplyJoinView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar) checkType:WApplyJoinViewNeedlessCheck];
-        
     }
     return _joinView;
 }

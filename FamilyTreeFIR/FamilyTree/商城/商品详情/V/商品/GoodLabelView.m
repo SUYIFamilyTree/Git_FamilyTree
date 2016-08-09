@@ -19,6 +19,8 @@
 }
 
 - (void)initView{
+    
+    
     UILabel *titleLb = [[UILabel alloc]initWithFrame:CGRectMake(0, 15, __kWidth, 20)];
     [self addSubview:titleLb];
     titleLb.font = MFont(20);

@@ -22,10 +22,13 @@
 
 @interface SelectMyFamilyView : UIView
 
-@property (nonatomic,strong) UICollectionView *collectionView; /*集合*/
+//@property (nonatomic,strong) UICollectionView *collectionView; /*集合*/
+/**下拉table*/
+@property (nonatomic,strong) UITableView *tableView;
+
 @property (nonatomic,copy) NSMutableArray <NSArray *>*dataSource; /*家谱数据*/
 
-@property (nonatomic,assign) BOOL didSelectedItem; /*选中状态*/
+//@property (nonatomic,assign) BOOL didSelectedItem; /*选中状态*/
 
 @property (nonatomic,weak) id<SelectMyFamilyViewDelegate> delegate; /*代理人*/
 -(void)updateDataSourceAndUI;

@@ -81,9 +81,25 @@
     
     [TCJPHTTPRequestManager POSTWithParameters:@{@"Sz":dicArr} requestID:GetUserId requestcode:kRequestCodegetconorder success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
-            NSLog(@"???????-%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
             
             wkSelf.sureModel = [WOrderSureModel modelWithJSON:jsonDic[@"data"]];
+            
+            NSLog(@"%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+
+            if (wkSelf.sureModel.address) {
+                WAddress *address = wkSelf.sureModel.address;
+                ReceiveAddressModel *reData = [[ReceiveAddressModel alloc] init];
+                reData.raID = [NSString stringWithFormat:@"%ld",(long)address.ReId];
+                reData.realname = address.ReName;
+                reData.mobile = address.ReMobile;
+                reData.Province = address.ReProvince;
+                reData.city = address.ReCity;
+                reData.area = address.ReAddrdetail;
+                reData.address = @"11";
+                reData.defaultCode = address.ReIsdefault;
+                reData.addressId = [NSString stringWithFormat:@"%ld",(long)address.ReAreaid];
+                wkSelf.receiveData = reData;
+            }
             
             
             back();
@@ -166,7 +182,7 @@
                                                  @"ShorInvoice":@"发票",
                                                  @"Sz":dicArr} requestID:GetUserId requestcode:kRequestCodecreateshoporder success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
                                                      if (succe) {
-                                                         NSLog(@"%@", jsonDic[@"data"]);
+                                                         NSLog(@"????----%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
                                                      }
         
     } failure:^(NSError *error) {
@@ -189,7 +205,9 @@
 
         [cell.contentView addSubview:_orderAddV];
         if (IsNilString(_receiveData.address)) {
+            
           _orderAddV.addressLb.text = @"无默认收货地址请添加地址";//无地址数据
+            
         }else{
         _orderAddV.nameLb.text = _receiveData.realname;
         _orderAddV.mobileLb.text = _receiveData.mobile;

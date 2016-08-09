@@ -61,6 +61,9 @@
  *  商品数量
  */
 @property (strong,nonatomic) NSString *goodcount;
+/**订单id*/
+@property (nonatomic,strong) NSString *goodId;
+
 
 @end
 
