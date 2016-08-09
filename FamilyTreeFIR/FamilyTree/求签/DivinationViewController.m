@@ -12,7 +12,7 @@
 #import "CliffordTributeModel.h"
 //#import <CoreMotion/CoreMotion.h>
 
-#define AnimationTime 1.5f
+#define AnimationTime 3.0f
 enum {
     //本身btntag
     XZBtnTag = 10,
@@ -233,6 +233,14 @@ enum {
     MYLog(@"点击求签");
     [self.diviAnimations startAnimating];
     
+    CABasicAnimation *moveXAnimation = [CABasicAnimation animation];
+    moveXAnimation.keyPath = @"position.x";
+    moveXAnimation.fromValue = @(self.diviAnimations.center.x -25);
+    moveXAnimation.toValue = @(self.diviAnimations.center.x+25);
+    moveXAnimation.duration = 1;
+    moveXAnimation.repeatCount = 2;
+    [self.diviAnimations.layer addAnimation:moveXAnimation forKey:nil];
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(AnimationTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         WAfterDivinationViewController *afterVc = [[WAfterDivinationViewController alloc] initWithTitle:@"灵签" image:nil];
         [self.navigationController pushViewController:afterVc animated:YES];
@@ -282,45 +290,41 @@ enum {
 
 -(UIImageView *)diviAnimations{
     if (!_diviAnimations) {
-        _diviAnimations = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 300*AdaptationWidth(), 350*AdaptationWidth())];
-        //_diviAnimations.backgroundColor = [UIColor redColor];
-        _diviAnimations.contentMode = UIViewContentModeScaleAspectFit;
-        //_diviAnimations.contentMode = UIViewContentModeScaleAspectFill;
-        _diviAnimations.image = MImage(@"qiuQian_zt_qian21");
-        //_diviAnimations.image = MImage(@"qj_right1");
-//        _diviAnimations.center = CGPointMake(self.view.center.x+20*AdaptationWidth()-120*AdaptationWidth(), self.view.center.y-130*AdaptationWidth()-120*AdaptationWidth());
-        _diviAnimations.center = CGPointMake(self.view.center.x+20*AdaptationWidth(), self.view.center.y-130*AdaptationWidth());
+        _diviAnimations = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 600*AdaptationWidth(), 700*AdaptationWidth())];
+        _diviAnimations.contentMode = UIViewContentModeScaleAspectFill;
+        _diviAnimations.image = MImage(@"qj_left1");
+        _diviAnimations.center = CGPointMake(self.view.center.x, self.view.center.y-250*AdaptationWidth());
         
         NSMutableArray *imageArrs = [@[] mutableCopy];
-        
-        for (int idx = 21; idx>0; idx--) {
-            NSString *imStr = [NSString stringWithFormat:@"qiuQian_zt_qian%d",idx];
+        for (int j = 0; j < 2; j++) {
+            for (int idx = 1; idx < 6; idx++) {
+                NSString *imStr = [NSString stringWithFormat:@"qj_left%d",idx];
+                [imageArrs addObject:MImage(imStr)];
+            }
+            for (int idx = 5; idx > 0; idx--) {
+                NSString *imStr = [NSString stringWithFormat:@"qj_left%d",idx];
+                [imageArrs addObject:MImage(imStr)];
+            }
+
+            for (int idx = 1; idx < 6; idx++) {
+                NSString *imStr = [NSString stringWithFormat:@"qj_right%d",idx];
+                [imageArrs addObject:MImage(imStr)];
+            }
+            for (int idx = 5; idx > 0; idx--) {
+                NSString *imStr = [NSString stringWithFormat:@"qj_right%d",idx];
+                [imageArrs addObject:MImage(imStr)];
+            }
+        }
+        [imageArrs removeObjectsInRange:NSMakeRange(16, 5)];
+        for (int i = 6; i < 11; i++) {
+            NSString *imStr = [NSString stringWithFormat:@"qj_right%d",i];
             [imageArrs addObject:MImage(imStr)];
         }
-//        for (int j = 0; j < 2; j++) {
-//            for (int idx = 1; idx < 6; idx++) {
-//                NSString *imStr = [NSString stringWithFormat:@"qj_right%d",idx];
-//                [imageArrs addObject:MImage(imStr)];
-//            }
-//            for (int idx = 5; idx > 0; idx--) {
-//                NSString *imStr = [NSString stringWithFormat:@"qj_right%d",idx];
-//                [imageArrs addObject:MImage(imStr)];
-//                
-//            }
-//            for (int idx = 1; idx < 6; idx++) {
-//                NSString *imStr = [NSString stringWithFormat:@"qj_left%d",idx];
-//                [imageArrs addObject:MImage(imStr)];
-//            }
-//            for (int idx = 5; idx > 0; idx--) {
-//                NSString *imStr = [NSString stringWithFormat:@"qj_left%d",idx];
-//                [imageArrs addObject:MImage(imStr)];
-//            }
-//        }
-//        
-//        for (int i = 1; i < 15; i++) {
-//            NSString *imStr = [NSString stringWithFormat:@"qj_chuqian%d",i];
-//            [imageArrs addObject:MImage(imStr)];
-//        }
+        
+        for (int i = 1; i < 18; i++) {
+            NSString *imStr = [NSString stringWithFormat:@"qj_chuqian%d",i];
+            [imageArrs addObject:MImage(imStr)];
+        }
         
         
         _diviAnimations.animationImages = imageArrs;

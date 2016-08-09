@@ -186,6 +186,7 @@ typedef enum : NSUInteger {
         _infoTB = [[UITableView alloc]init];
         _infoTB.delegate = self;
         _infoTB.dataSource = self;
+        _infoTB.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     }
     return _infoTB;
 }
@@ -196,8 +197,8 @@ typedef enum : NSUInteger {
         _addPostBtn.backgroundColor = [UIColor grayColor];
         [_addPostBtn setTitle:@"新增发布" forState:UIControlStateNormal];
         [_addPostBtn setImage:MImage(@"wdhz_jiahao") forState:UIControlStateNormal];
-        _addPostBtn.imageEdgeInsets = UIEdgeInsetsMake(-20, 12, 0, 0);
-        _addPostBtn.titleEdgeInsets = UIEdgeInsetsMake(15, -16, 0, 0);
+        _addPostBtn.imageEdgeInsets = UIEdgeInsetsMake(-20, 10, 0, 0);
+        _addPostBtn.titleEdgeInsets = UIEdgeInsetsMake(15, -20, 0, 0);
         _addPostBtn.titleLabel.font = MFont(10);
         [_addPostBtn addTarget:self action:@selector(clickAddPostBtn) forControlEvents:UIControlEventTouchUpInside];
         

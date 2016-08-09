@@ -17,6 +17,7 @@
 #import "TeachViewController.h"
 #import "GeomancyIdentificationViewController.h"
 #import "AppendServiceViewController.h"
+#import "ExpertRecommendViewController.h"
 
 #define ScrollerView_Height 210
 @interface FamilServiceViewController ()<TopSearchViewDelegate,TableViewDelegate,FamilyShopViewDelegate,CollectionFamilyDelegate>
@@ -107,7 +108,8 @@
             break;
         case 4:
         {
-            
+            ExpertRecommendViewController *expertVC = [[ExpertRecommendViewController alloc]initWithTitle:@"专家推荐" image:nil];
+            [self.navigationController pushViewController:expertVC animated:YES];
         }
             break;
         case 5:
