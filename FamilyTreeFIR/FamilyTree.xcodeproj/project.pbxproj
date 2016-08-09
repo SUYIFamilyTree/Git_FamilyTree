@@ -394,11 +394,9 @@
 		ADA8BF261D5899E500830D4E /* zqhz_guanzhu1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA8BF141D5899E500830D4E /* zqhz_guanzhu1@3x.png */; };
 		ADA8BF271D5899E500830D4E /* zqhz_guanzhu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA8BF151D5899E500830D4E /* zqhz_guanzhu@2x.png */; };
 		ADA8BF281D5899E500830D4E /* zqhz_guanzhu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA8BF161D5899E500830D4E /* zqhz_guanzhu@3x.png */; };
-		ADA8BF291D5899E500830D4E /* zqhz_shixian.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA8BF171D5899E500830D4E /* zqhz_shixian.png */; };
 		ADA8BF2A1D5899E500830D4E /* zqhz_shixian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA8BF181D5899E500830D4E /* zqhz_shixian@2x.png */; };
 		ADA8BF2B1D5899E500830D4E /* zqhz_shixian@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA8BF191D5899E500830D4E /* zqhz_shixian@3x.png */; };
 		ADA8BF2C1D5899E500830D4E /* zqhz_yixianglianxi.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA8BF1A1D5899E500830D4E /* zqhz_yixianglianxi.png */; };
-		ADA8BF2D1D5899E500830D4E /* zqhz_yixianglianxi1.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA8BF1B1D5899E500830D4E /* zqhz_yixianglianxi1.png */; };
 		ADA8BF2E1D5899E500830D4E /* zqhz_yixianglianxi1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA8BF1C1D5899E500830D4E /* zqhz_yixianglianxi1@2x.png */; };
 		ADA8BF2F1D5899E500830D4E /* zqhz_yixianglianxi1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA8BF1D1D5899E500830D4E /* zqhz_yixianglianxi1@3x.png */; };
 		ADA8BF301D5899E500830D4E /* zqhz_yixianglianxi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ADA8BF1E1D5899E500830D4E /* zqhz_yixianglianxi@2x.png */; };
@@ -1179,6 +1177,7 @@
 		BCE7E52C1D597ACB00906715 /* ExpertRecommendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE7E52B1D597ACB00906715 /* ExpertRecommendModel.m */; };
 		BCE7E52F1D597D7A00906715 /* zjtj_yxwxz.png in Resources */ = {isa = PBXBuildFile; fileRef = BCE7E52D1D597D7A00906715 /* zjtj_yxwxz.png */; };
 		BCE7E5301D597D7A00906715 /* zjtj_yxyxz.png in Resources */ = {isa = PBXBuildFile; fileRef = BCE7E52E1D597D7A00906715 /* zjtj_yxyxz.png */; };
+		BCE7E5361D59B36900906715 /* BannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE7E5351D59B36900906715 /* BannerView.m */; };
 		BCEB84001D3C7FA6002B44D3 /* LotteryPoetryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCEB83FF1D3C7FA6002B44D3 /* LotteryPoetryModel.m */; };
 		BCEB84031D3CB4BB002B44D3 /* InitialLotteryPoetryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCEB84021D3CB4BB002B44D3 /* InitialLotteryPoetryViewController.m */; };
 		BCEB84191D3CC7B6002B44D3 /* DetailLotteryPoetryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCEB84181D3CC7B6002B44D3 /* DetailLotteryPoetryViewController.m */; };
@@ -2690,6 +2689,8 @@
 		BCE7E52B1D597ACB00906715 /* ExpertRecommendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpertRecommendModel.m; sourceTree = "<group>"; };
 		BCE7E52D1D597D7A00906715 /* zjtj_yxwxz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zjtj_yxwxz.png; sourceTree = "<group>"; };
 		BCE7E52E1D597D7A00906715 /* zjtj_yxyxz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zjtj_yxyxz.png; sourceTree = "<group>"; };
+		BCE7E5341D59B36900906715 /* BannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BannerView.h; path = "FamilyTree/家谱服务/专家推荐/model/BannerView.h"; sourceTree = SOURCE_ROOT; };
+		BCE7E5351D59B36900906715 /* BannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BannerView.m; path = "FamilyTree/家谱服务/专家推荐/model/BannerView.m"; sourceTree = SOURCE_ROOT; };
 		BCEB83FE1D3C7FA6002B44D3 /* LotteryPoetryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LotteryPoetryModel.h; sourceTree = "<group>"; };
 		BCEB83FF1D3C7FA6002B44D3 /* LotteryPoetryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LotteryPoetryModel.m; sourceTree = "<group>"; };
 		BCEB84011D3CB4BB002B44D3 /* InitialLotteryPoetryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialLotteryPoetryViewController.h; sourceTree = "<group>"; };
@@ -5297,13 +5298,6 @@
 			path = "我的互助/view";
 			sourceTree = "<group>";
 		};
-		BC4CCCF51D542DBF00AD1043 /* 宗亲互助 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "宗亲互助";
-			sourceTree = "<group>";
-		};
 		BC4CCD1B1D54304000AD1043 /* 风水鉴定 */ = {
 			isa = PBXGroup;
 			children = (
@@ -6064,6 +6058,8 @@
 		BCE2AD7B1CF8415200EC98F5 /* 基类 */ = {
 			isa = PBXGroup;
 			children = (
+				BCE7E5341D59B36900906715 /* BannerView.h */,
+				BCE7E5351D59B36900906715 /* BannerView.m */,
 			);
 			path = "基类";
 			sourceTree = "<group>";
@@ -7444,7 +7440,6 @@
 				BC729A001D225C53008FEB71 /* HeadLuckView.m in Sources */,
 				BC59E1151D2F7BC1000A3AE3 /* FamilyDTModel.m in Sources */,
 				BC9C47BA1D585CE200A9F5C2 /* ExpertRecommendAddView.m in Sources */,
-				ADB6965E1D475957006E752F /* GoodsModel.m in Sources */,
 				ADC3E98B1D37340F00754F63 /* WSearchDetailViewController.m in Sources */,
 				ADA87DC31D48BBF500DE9BD0 /* WCartTableFooterView.m in Sources */,
 				ADD23D091D0D54C2008986F6 /* TeachViewController.m in Sources */,
@@ -7520,6 +7515,7 @@
 				ADBA18271D504A6F006C8B29 /* WCartMode.m in Sources */,
 				ADC472231D1A5A88000388AF /* WSwitchDetailFamView.m in Sources */,
 				ADC059E11D002CB0001F7C1B /* CreateFamView.m in Sources */,
+				BCE7E5361D59B36900906715 /* BannerView.m in Sources */,
 				BCE2AD5B1CF83FC700EC98F5 /* SearchFamilyTreeViewController.m in Sources */,
 				BC4790631D20BD6F00BA194D /* AreaModel.m in Sources */,
 				ADD23CFE1D0D4947008986F6 /* CreatFamilyTree.m in Sources */,
