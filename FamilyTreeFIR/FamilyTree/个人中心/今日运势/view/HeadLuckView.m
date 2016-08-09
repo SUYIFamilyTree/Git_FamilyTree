@@ -22,7 +22,7 @@
     
     if (self) {
         self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.7];
-         [self initDate];
+        [self initDate];
         [self initUI];
         [self initHeadProtriaits];
        

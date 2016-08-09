@@ -51,7 +51,8 @@
 @property (nonatomic, strong) NSArray *projectBudgetArr;
 /** 项目类型id*/
 @property (nonatomic, assign) NSInteger projectID;
-
+/** 项目预算id*/
+@property (nonatomic, assign) NSInteger projectBudgetID;
 @end
 
 @implementation AppendServiceViewController
@@ -59,11 +60,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.projectID = 0;
+    self.projectBudgetID = 0;
     [self initUI];
 }
 
 #pragma mark - 视图初始化
 -(void)initUI{
+    self.view.backgroundColor = LH_RGBCOLOR(235, 236, 237);
     [self.view addSubview:self.backSV];
     [self.backSV addSubview:self.firstBackV];
     //风水鉴定说明
@@ -150,7 +153,7 @@
     
     //项目预算按钮
     self.projectBudgetBtn = [self creatCustomBtnWithFrame:CGRectMake(CGRectXW(projectBudgetLB), CGRectY(projectBudgetLB), 90, CGRectH(projectBudgetLB))];
-    [self.projectBudgetBtn setTitle:@"40-50" forState:UIControlStateNormal];
+    [self.projectBudgetBtn setTitle:@"0-5" forState:UIControlStateNormal];
     self.projectBudgetBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 70, 0, 0);
     self.projectBudgetBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -40, 0, 0);
     self.projectBudgetBtn.tag = 111+4;
@@ -174,6 +177,7 @@
     self.linkManTF = [[UITextField alloc]initWithFrame:CGRectMake(CGRectXW(linkManLB), CGRectY(linkManLB), CGRectX(dayLB)-CGRectXW(projectTimeLB), 30)];
     self.linkManTF.layer.borderColor = LH_RGBCOLOR(215, 215, 215).CGColor;
     self.linkManTF.layer.borderWidth = 1;
+    self.linkManTF.delegate = self;
     [self.secondBackV addSubview:self.linkManTF];
     //电话
     UILabel *telLB = [[UILabel alloc]initWithFrame:CGRectMake(40, CGRectYH(linkManLB)+15, 45, 30)];
@@ -370,6 +374,9 @@
     if ([tableView isEqual:self.projectTypeTB]) {
         self.projectID = indexPath.row;
     }
+    if ([tableView isEqual:self.projectBudgetTB]) {
+        self.projectBudgetID = indexPath.row;
+    }
     GeoTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     UIButton *button = (UIButton *)[self.view viewWithTag:111+tableView.tag-222];
     button.selected = !button.selected;
@@ -380,8 +387,44 @@
 
 #pragma mark - UITextFieldDelegate
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    return [NSString validateNumber:string];
+    if ([textField isEqual:self.telTF]) {
+        return [NSString validateNumber:string];
+    }else{
+        return YES;
+    }
+    
 }
+
+-(void)closeKeyboard{
+    [self.view endEditing:YES];
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    MYLog(@"将要开始编辑");
+    if ([textField isEqual:self.linkManTF]||[textField isEqual:self.telTF]) {
+        if (self.backSV.frame.origin.y == 64) {
+            [UIView animateWithDuration:1 animations:^{
+                CGRect frame =  self.backSV.frame;
+                frame.origin.y = 64-216+20;
+                self.backSV.frame = frame;
+            }];
+        }
+    }
+}
+
+-(void)textFieldDidEndEditing:(UITextView *)textField{
+    MYLog(@"结束编辑");
+    if ([textField isEqual:self.linkManTF]||[textField isEqual:self.telTF]){
+        if (self.backSV.frame.origin.y !=64) {
+            [UIView animateWithDuration:1 animations:^{
+                CGRect frame =  self.backSV.frame;
+                frame.origin.y = 64;
+                self.backSV.frame = frame;
+            }];
+        }
+    }
+}
+
 
 #pragma mark - lazyLoad
 -(UIScrollView *)backSV{
@@ -389,6 +432,8 @@
         _backSV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
         _backSV.backgroundColor = LH_RGBCOLOR(235, 236, 237);
         _backSV.contentSize = CGSizeMake(Screen_width, 460);
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeKeyboard)];
+        [_backSV addGestureRecognizer:tap];
     }
     return _backSV;
 }

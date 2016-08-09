@@ -54,6 +54,7 @@
 
 #pragma mark - 视图初始化
 -(void)initUI{
+    self.view.backgroundColor = LH_RGBCOLOR(235, 236, 237);
     [self.view addSubview:self.backSV];
     [self.backSV addSubview:self.firstBackV];
     //风水鉴定说明
@@ -133,6 +134,7 @@
     self.linkManTF = [[UITextField alloc]initWithFrame:CGRectMake(CGRectXW(linkManLB), CGRectY(linkManLB), CGRectX(dayLB)-CGRectXW(identificationTimeLB), 30)];
     self.linkManTF.layer.borderColor = LH_RGBCOLOR(215, 215, 215).CGColor;
     self.linkManTF.layer.borderWidth = 1;
+    self.linkManTF.delegate = self;
     [self.secondBackV addSubview:self.linkManTF];
     //电话
     UILabel *telLB = [[UILabel alloc]initWithFrame:CGRectMake(40, CGRectYH(linkManLB)+15, 45, 30)];
@@ -330,8 +332,43 @@
 
 #pragma mark - UITextFieldDelegate
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    return [NSString validateNumber:string];
+    if ([textField isEqual:self.telTF]) {
+        return [NSString validateNumber:string];
+    }else{
+        return YES;
+    }
 }
+
+-(void)closeKeyboard{
+    [self.view endEditing:YES];
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    MYLog(@"将要开始编辑");
+    if ([textField isEqual:self.linkManTF]||[textField isEqual:self.telTF]) {
+        if (self.backSV.frame.origin.y == 64) {
+            [UIView animateWithDuration:1 animations:^{
+                CGRect frame =  self.backSV.frame;
+                frame.origin.y = 64-216+20;
+                self.backSV.frame = frame;
+            }];
+        }
+    }
+}
+
+-(void)textFieldDidEndEditing:(UITextView *)textField{
+    MYLog(@"结束编辑");
+    if ([textField isEqual:self.linkManTF]||[textField isEqual:self.telTF]){
+        if (self.backSV.frame.origin.y !=64) {
+            [UIView animateWithDuration:1 animations:^{
+                CGRect frame =  self.backSV.frame;
+                frame.origin.y = 64;
+                self.backSV.frame = frame;
+            }];
+        }
+    }
+}
+
 
 #pragma mark - lazyLoad
 -(UIScrollView *)backSV{
@@ -339,6 +376,8 @@
         _backSV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
         _backSV.backgroundColor = LH_RGBCOLOR(235, 236, 237);
         _backSV.contentSize = CGSizeMake(Screen_width, 460);
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeKeyboard)];
+        [_backSV addGestureRecognizer:tap];
     }
     return _backSV;
 }
