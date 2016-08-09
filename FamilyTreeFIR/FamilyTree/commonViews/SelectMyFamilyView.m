@@ -33,10 +33,8 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
         [self initData];
         [self initUI];
-        
     }
     return self;
 }
@@ -83,7 +81,7 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
     cell.textLabel.text = _dataSource[0][indexPath.row];
     cell.textLabel.font = WFont(25);
     cell.layer.borderColor = BorderColor;
-    cell.layer.borderWidth = 1;
+    cell.layer.borderWidth = 0.5;
     cell.backgroundColor = [UIColor whiteColor];
     
     return cell;
@@ -275,7 +273,7 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
         
         NSInteger count = [WSelectMyFamModel sharedWselectMyFamModel].myFamArray.count>3?4:[WSelectMyFamModel sharedWselectMyFamModel].myFamArray.count;
         
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(Screen_width-Screen_width/3, 5, Screen_width/3, 50*count*AdaptationWidth())];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(Screen_width-Screen_width/3, 0, Screen_width/3, 50*count*AdaptationWidth())];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = 50*AdaptationWidth();

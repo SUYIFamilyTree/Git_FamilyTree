@@ -126,21 +126,26 @@
 
 -(void)editBookingToStatus:(NSString *)status withBookingNumber:(NSString *)orderNumber{
     NSDictionary *dic = @{};
+    NSString *title = @"";
     if ([status isEqualToString:@"CANCEL"]) {
         dic = @{@"ShorId":orderNumber,
                 @"ShorState":status,
                 @"ShorIsdel":@""};
+        title = @"已取消订单";
     }else if ([status isEqualToString:@"1"]){
         dic = @{@"ShorId":orderNumber,
                 @"ShorIsdel":status,
                 @"ShorState":@""};
+        title = @"已删除订单";
     }
     __weak typeof(self)wkSelf = self;
     [TCJPHTTPRequestManager POSTWithParameters:dic requestID:GetUserId requestcode:kRequestCodechangeshoporder success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
+            
             NSLog(@"%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
             
             [wkSelf getAllbookingInfomation];
+            [SXLoadingView showAlertHUD:[NSString stringWithFormat:@"%@",title] duration:0.5];
         }
     } failure:^(NSError *error) {
         
