@@ -13,8 +13,6 @@
 /**我的家谱↓*/
 @property (nonatomic,strong) SelectMyFamilyView *selecMyFamView;
 
-
-
 @end
 @implementation CommonNavigationViews
 - (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title image:(UIImage *)image
@@ -102,6 +100,14 @@
     
 }
 
+#pragma mark *** SelecMyFamyDelegate ***
+-(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectFamID:(NSString *)famId{
+    
+    self.MyFamilyRightBtn.selected = false;
+    if (_delegate && [_delegate respondsToSelector:@selector(CommonNavigationViews:selectedFamilyId:)]) {
+        [_delegate CommonNavigationViews:self selectedFamilyId:famId];
+    };
+}
 
 #pragma mark *** getters ***
 -(UIView *)backView{

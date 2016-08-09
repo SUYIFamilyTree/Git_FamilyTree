@@ -13,6 +13,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        [self.contentView addSubview:self.cellSelectBtn];
         [self.contentView addSubview:self.cellImage];
         [self.contentView addSubview:self.cellName];
         [self.contentView addSubview:self.cellType];
@@ -44,9 +45,19 @@
     };
 }
 #pragma mark *** getters ***
+-(UIButton *)cellSelectBtn{
+    if (!_cellSelectBtn) {
+        _cellSelectBtn = [[UIButton alloc] initWithFrame:AdaptationFrame(20,125, 50, 50)];
+        [_cellSelectBtn setImage:MImage(@"quan") forState:UIControlStateNormal];
+        [_cellSelectBtn setImage:MImage(@"gou") forState:UIControlStateSelected];
+        _cellSelectBtn.userInteractionEnabled = false;
+        
+    }
+    return _cellSelectBtn;
+}
 -(UIImageView *)cellImage{
     if (!_cellImage) {
-        _cellImage = [[UIImageView alloc] initWithFrame:AdaptationFrame(0, 35, 170, 170)];
+        _cellImage = [[UIImageView alloc] initWithFrame:AdaptationFrame(80, 35, 170, 170)];
         _cellImage.contentMode = UIViewContentModeScaleAspectFit;
         
     }

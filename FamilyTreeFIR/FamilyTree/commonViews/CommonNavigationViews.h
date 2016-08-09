@@ -13,7 +13,8 @@
 @protocol CommandNavigationViewsDelegate <NSObject>
 @optional
 -(void)CommonNavigationViews:(CommonNavigationViews *)comView respondsToRightBtn:(UIButton *)sender;
-
+//点击我的家谱，选择了某个家谱后的协议方法
+-(void)CommonNavigationViews:(CommonNavigationViews *)comView selectedFamilyId:(NSString *)famId;
 @end
 @interface CommonNavigationViews : UIView
 

@@ -295,7 +295,7 @@ enum{
 #pragma mark - 事件
 //给5个button添加点击事件跳转
 -(void)clickBtn:(UIButton *)sender{
-    //NSLog(@"%ld",sender.tag);
+    
     switch (sender.tag) {
         case 1001:
             //跳转
