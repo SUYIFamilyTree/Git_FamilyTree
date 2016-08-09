@@ -15,7 +15,6 @@
 #import "GoodLabelView.h"
 #import "GoodCommentView.h"
 
-
 @interface GoodsDetailsViewController ()<GoodsDetailsNaviViewDelegate,GoodBottomViewDelegate,GoodsDetailViewDelegate,UIScrollViewDelegate>
 /**
  *  导航栏视图
@@ -96,7 +95,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self addNavi];
     self.view.backgroundColor = LH_RGBCOLOR(230, 230, 230);
     [self getData];
@@ -106,9 +104,13 @@
    _titleView = [[GoodsDetailsNaviView alloc]initWithFrame:CGRectMake(__kWidth/6, 20, __kWidth*2/3, 44)];
     [self.comNavi addSubview:_titleView];
     _titleView.delegate = self;
-    [self.comNavi.rightBtn removeFromSuperview];
+    [self.comNavi.rightBtn removeAllTargets];
+    [self.comNavi.rightBtn addTarget:self action:@selector(respondsDetailRightBtn) forControlEvents:UIControlEventTouchUpInside];
 }
-
+-(void)respondsDetailRightBtn{
+    MyOrdersViewController *myOdVc = [[MyOrdersViewController alloc] init];
+    [self.navigationController pushViewController:myOdVc animated:YES];
+}
 -(void)changeView:(UIButton *)sender{
     
     [_backV setContentOffset:CGPointMake(sender.tag*Screen_width, 0) animated:YES];

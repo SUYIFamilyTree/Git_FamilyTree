@@ -97,5 +97,7 @@
     }
     return _menuBtn;
 }
-
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self endEditing:true];
+}
 @end

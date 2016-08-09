@@ -137,7 +137,7 @@ static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     WCartMode *car = self.carModel[indexPath.row];
-//
+
     cell.cellName.text = car.CoName;
     cell.cellImage.imageURL = [NSURL URLWithString:car.Cover];
     cell.cellType.text = car.CoprData;
@@ -150,7 +150,6 @@ static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
     cell.cellTypeId = [NSString stringWithFormat:@"%ld",(long)car.CoprId];
     cell.cellDisPrice = [NSString stringWithFormat:@"%ld",(long)car.CoprMoney];
     cell.cellSelectBtn.selected = car.Selected;
-    
     
     return  cell;
     
@@ -225,7 +224,6 @@ static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
 //        //触发改变编辑样式
 //        _tableView.editing = !_tableView.editing;
 //        _tableView.editing = true;
-        
     }else{
         sender.selected = !sender.selected;
         if (sender.selected) {
@@ -238,7 +236,6 @@ static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
                 self.carModel[idx].Selected = true;
                 [_selectedCellArr addObject:cell];
                 allPrice+=  self.carModel[idx].CoprActpri*self.carModel[idx].CoprCount;
-
             }
             NSLog(@"全选");
             self.footView.priceLabel.text = [NSString stringWithFormat:@"¥%.1f",allPrice];
@@ -320,14 +317,13 @@ static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
         _tableView.sectionHeaderHeight = 66*AdaptationWidth();
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.allowsMultipleSelection = YES;
-//        _tableView.editing = false;
-
+//      _tableView.editing = false;
     }
     return _tableView;
 }
+
 -(WCartTableFooterView *)footView{
     if (!_footView) {
-
         _footView = [[WCartTableFooterView alloc] initWithFrame:CGRectMake(CGRectX(self.tableView), self.bounds.size.height-93*AdaptationWidth(), self.tableView.bounds.size.width, 93*AdaptationWidth())];
         _footView.delegate = self;
     }

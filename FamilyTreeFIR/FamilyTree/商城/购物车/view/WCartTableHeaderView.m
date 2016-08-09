@@ -40,7 +40,7 @@
 -(UIButton *)editBtn{
     if (!_editBtn) {
         _editBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.bounds.size.width-50, 0, 50, self.bounds.size.height)];
-        [_editBtn setTitle:@"编辑" forState:0];
+        [_editBtn setTitle:@"" forState:0];
         _editBtn.titleLabel.font = self.headSelectBtn.titleLabel.font;
         [_editBtn setTitleColor:[UIColor blackColor] forState:0];
         [_editBtn addTarget:self action:@selector(respondsToTheBtn:) forControlEvents:UIControlEventTouchUpInside];

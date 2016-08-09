@@ -110,6 +110,7 @@ enum{
     }
     
     [self.navigationController popToRootViewControllerAnimated:YES];
+    self.creatBtn.selected = false;
     
 }
 #pragma mark *** 注册通知 ***
@@ -439,7 +440,10 @@ enum{
         [manager.comNavi.rightBtn removeFromSuperview];
         [self.navigationController pushViewController:manager animated:YES];
     }
-    [self.crtFamTree removeFromSuperview];
+    if (sender.tag!=1) {
+        [self.crtFamTree removeFromSuperview];
+    }
+    
 
 }
 
