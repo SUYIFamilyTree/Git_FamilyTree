@@ -12,7 +12,8 @@
 #import "TCJPHTTPRequestManager.h"
 #import "GuideViewController.h"
 
-@interface AppDelegate ()
+#import "WXApi.h"
+@interface AppDelegate ()<WXApiDelegate>
 
 @end
 
@@ -43,15 +44,50 @@
         _window.rootViewController = loginVC;
 
     }
-    
 
-    
     [_window makeKeyAndVisible];
-      
+    
+    //微信
+    //1.微信测试APPID wxb4ba3c02aa476ea1
+    //2.设置微信APPID为URL Schemes
+    //3.导入微信支付依赖的类库。发起支付，调起微信支付
+    //4.处理支付结果
+    
+    [WXApi registerApp:@"wxb4ba3c02aa476ea1" withDescription:@"ios weixin pay demo"];
     return YES;
 }
 
-
+#pragma mark - WXApiDelegate
+- (void)onResp:(BaseResp *)resp {
+    
+    if([resp isKindOfClass:[PayResp class]]){
+        //支付返回结果，实际支付结果需要去微信服务器端查询
+        NSString *strMsg,*strTitle = [NSString stringWithFormat:@"支付结果"];
+        
+        switch (resp.errCode) {
+            case WXSuccess:
+                strMsg = @"支付结果：成功！";
+                NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
+                break;
+                
+            default:
+                strMsg = [NSString stringWithFormat:@"支付结果：失败！retcode = %d, retstr = %@", resp.errCode,resp.errStr];
+                NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
+                break;
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+    
+    
+}
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    return [WXApi handleOpenURL:url delegate:self];
+}
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    return [WXApi handleOpenURL:url delegate:self];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
