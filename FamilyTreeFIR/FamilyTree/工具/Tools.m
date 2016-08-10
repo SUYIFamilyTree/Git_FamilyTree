@@ -20,14 +20,14 @@ NSString * _Nonnull const kStringWithPersonalCenterVcTitle = @"我的";
 
 #pragma mark *** VC Images ***
 NSString * _Nonnull const kImageWithHomeVc = @"index_icon_a";
-NSString * _Nonnull const kImageWithFamilyTreeVc = @"jiapu_icon_a";
+NSString * _Nonnull const kImageWithFamilyTreeVc = @"jiapu_icon_a1";
 NSString * _Nonnull const kImageWithServiceVc = @"fuwu_icon_a";
 NSString * _Nonnull const kImageWithPersonalCenterVc = @"geren_icon_a";
 
 #pragma mark *** VC SelectedImages ***
 
 NSString * _Nonnull const kSelectedImageWithHomeVc = @"index_icon_b";
-NSString * _Nonnull const kSelectedImageWithFamilyTreeVc = @"jiapu_icon_b";
+NSString * _Nonnull const kSelectedImageWithFamilyTreeVc = @"jiapu_icon_b1";
 NSString * _Nonnull const kSelectedImageWithServiceVc = @"fuwu_icon_b";
 NSString * _Nonnull const kSelectedImageWithPersonalCenterVc = @"geren_icon_b";
 
