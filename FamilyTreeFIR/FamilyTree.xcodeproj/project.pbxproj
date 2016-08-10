@@ -203,6 +203,12 @@
 		AD8467B61D5AF9A4004A37BA /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = AD8467B11D5AF9A4004A37BA /* README.txt */; };
 		AD8467BA1D5B01B5004A37BA /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AD8467B81D5B01B5004A37BA /* AlipaySDK.bundle */; };
 		AD8467BB1D5B01B5004A37BA /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD8467B91D5B01B5004A37BA /* AlipaySDK.framework */; };
+		AD8467BD1D5B0265004A37BA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD8467BC1D5B0265004A37BA /* QuartzCore.framework */; };
+		AD8467BF1D5B0279004A37BA /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD8467BE1D5B0279004A37BA /* CoreText.framework */; };
+		AD8467C11D5B0286004A37BA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD8467C01D5B0286004A37BA /* CoreGraphics.framework */; };
+		AD8467C31D5B029A004A37BA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD8467C21D5B029A004A37BA /* CFNetwork.framework */; };
+		AD8467C51D5B02A8004A37BA /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD8467C41D5B02A8004A37BA /* CoreMotion.framework */; };
+		AD8467C81D5B0329004A37BA /* AliPayOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8467C71D5B0329004A37BA /* AliPayOrder.m */; };
 		AD8514351D41C1BC007FB495 /* gr_dis.png in Resources */ = {isa = PBXBuildFile; fileRef = AD8514341D41C1BC007FB495 /* gr_dis.png */; };
 		AD8514391D41C8CD007FB495 /* RankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD8514381D41C8CD007FB495 /* RankingViewController.m */; };
 		AD8514461D41C9FC007FB495 /* ChooseBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD85143D1D41C9FC007FB495 /* ChooseBtnView.m */; };
@@ -1492,6 +1498,13 @@
 		AD8467B41D5AF9A4004A37BA /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		AD8467B81D5B01B5004A37BA /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		AD8467B91D5B01B5004A37BA /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		AD8467BC1D5B0265004A37BA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		AD8467BE1D5B0279004A37BA /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		AD8467C01D5B0286004A37BA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		AD8467C21D5B029A004A37BA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		AD8467C41D5B02A8004A37BA /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		AD8467C61D5B0329004A37BA /* AliPayOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AliPayOrder.h; sourceTree = "<group>"; };
+		AD8467C71D5B0329004A37BA /* AliPayOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AliPayOrder.m; sourceTree = "<group>"; };
 		AD8514341D41C1BC007FB495 /* gr_dis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gr_dis.png; sourceTree = "<group>"; };
 		AD8514371D41C8CD007FB495 /* RankingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingViewController.h; sourceTree = "<group>"; };
 		AD8514381D41C8CD007FB495 /* RankingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingViewController.m; sourceTree = "<group>"; };
@@ -2773,6 +2786,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD8467C51D5B02A8004A37BA /* CoreMotion.framework in Frameworks */,
+				AD8467C31D5B029A004A37BA /* CFNetwork.framework in Frameworks */,
+				AD8467C11D5B0286004A37BA /* CoreGraphics.framework in Frameworks */,
+				AD8467BF1D5B0279004A37BA /* CoreText.framework in Frameworks */,
+				AD8467BD1D5B0265004A37BA /* QuartzCore.framework in Frameworks */,
 				AD8467AD1D5ADC3E004A37BA /* libc++.tbd in Frameworks */,
 				AD8467AB1D5ADC33004A37BA /* CoreTelephony.framework in Frameworks */,
 				AD8467A91D5ADC28004A37BA /* SystemConfiguration.framework in Frameworks */,
@@ -2807,6 +2825,11 @@
 		0D1FC0835EDAE979E0812404 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AD8467C41D5B02A8004A37BA /* CoreMotion.framework */,
+				AD8467C21D5B029A004A37BA /* CFNetwork.framework */,
+				AD8467C01D5B0286004A37BA /* CoreGraphics.framework */,
+				AD8467BE1D5B0279004A37BA /* CoreText.framework */,
+				AD8467BC1D5B0265004A37BA /* QuartzCore.framework */,
 				AD8467AC1D5ADC3E004A37BA /* libc++.tbd */,
 				AD8467AA1D5ADC33004A37BA /* CoreTelephony.framework */,
 				AD8467A81D5ADC28004A37BA /* SystemConfiguration.framework */,
@@ -3426,6 +3449,8 @@
 			children = (
 				AD8467B81D5B01B5004A37BA /* AlipaySDK.bundle */,
 				AD8467B91D5B01B5004A37BA /* AlipaySDK.framework */,
+				AD8467C61D5B0329004A37BA /* AliPayOrder.h */,
+				AD8467C71D5B0329004A37BA /* AliPayOrder.m */,
 			);
 			path = alipaySDK;
 			sourceTree = "<group>";
@@ -7548,6 +7573,7 @@
 				AD2ACD7F1CF3FC9C009D4A24 /* RootTabBarViewController.m in Sources */,
 				ADE2CA5F1D519625000EFD0A /* IncreaseReceiveAddressViewController.m in Sources */,
 				AD195B381CF5A8D5000E32C7 /* TCJPHTTPRequestManager.m in Sources */,
+				AD8467C81D5B0329004A37BA /* AliPayOrder.m in Sources */,
 				BC5192A71D23A3030020480F /* NSString+valiIdentityCard.m in Sources */,
 				BC2B1E1F1D1BD88E004E916D /* EditPasswordViewController.m in Sources */,
 				AD7388171CF6C2050076B2AD /* TopSearchView.m in Sources */,
