@@ -6,7 +6,7 @@
 //  Copyright © 2016年 王子豪. All rights reserved.
 //
 enum{
-    MenuBtnFamilyServiceTag,
+    MenuBtnShopTag,
     MenuBtnNewsTag,
     MenuBtnRankingTag
 };
@@ -26,7 +26,7 @@ enum{
 }
 
 -(void)initBtn{
-    NSArray *btnTitle = @[@"家谱服务",@"新闻中心",@"排行榜"];
+    NSArray *btnTitle = @[@"商城",@"新闻中心",@"排行榜"];
     for (int idx = 0; idx<btnTitle.count; idx++) {
         UIButton *button = [[UIButton alloc] initWithFrame:AdaptationFrame(0, idx*63, self.bounds.size.width/AdaptationWidth(), 60)];
         [button setTitle:btnTitle[idx] forState:0];
@@ -47,12 +47,12 @@ enum{
     NSArray *vcsArr = self.viewController.navigationController.viewControllers;
     //如果之前有push选中的某项控制器则pop到家谱服务 反之直接push
     switch (sender.tag) {
-        case MenuBtnFamilyServiceTag:
+        case MenuBtnShopTag:
         {
             
            __block BOOL hasfamVC = false;
             [vcsArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([obj isKindOfClass:[FamilServiceViewController class]]) {
+                if ([obj isKindOfClass:[ShoppingFirestViewController class]]) {
                     
                     [self.viewController.navigationController popToViewController:vcsArr[idx] animated:YES];
                     hasfamVC = true;

@@ -17,20 +17,20 @@
 
 UIKIT_EXTERN NSString * _Nonnull const kStringWithHomeVcTitle;
 UIKIT_EXTERN NSString * _Nonnull const kStringWithFamilyTreeVcTitle;
-UIKIT_EXTERN NSString * _Nonnull const kStringWithShoppingVcTitle;
+UIKIT_EXTERN NSString * _Nonnull const kStringWithServiceVcTitle;
 UIKIT_EXTERN NSString * _Nonnull const kStringWithPersonalCenterVcTitle;
 
 #pragma mark *** VC Images ***
 UIKIT_EXTERN NSString * _Nonnull const kImageWithHomeVc;
 UIKIT_EXTERN NSString * _Nonnull const kImageWithFamilyTreeVc;
-UIKIT_EXTERN NSString * _Nonnull const kImageWithShoppingVc;
+UIKIT_EXTERN NSString * _Nonnull const kImageWithServiceVc;
 UIKIT_EXTERN NSString * _Nonnull const kImageWithPersonalCenterVc;
 
 #pragma mark *** VC SelectedImages ***
 
 UIKIT_EXTERN NSString * _Nonnull const kSelectedImageWithHomeVc;
 UIKIT_EXTERN NSString * _Nonnull const kSelectedImageWithFamilyTreeVc;
-UIKIT_EXTERN NSString * _Nonnull const kSelectedImageWithShoppingVc;
+UIKIT_EXTERN NSString * _Nonnull const kSelectedImageWithServiceVc;
 UIKIT_EXTERN NSString * _Nonnull const kSelectedImageWithPersonalCenterVc;
 
 #pragma mark *** 网络请求requestCode ***

@@ -250,40 +250,40 @@
     }];
     
 }
-//游客按钮
--(void)loginView:(LoginView *)loginView didSelectedTourBtn:(UIButton *)sender{
-    
-    NSLog(@"游客请进！");
-    [USERDEFAULT setObject:@false forKey:LoginStates];
-    //游客进入id为1的测试账号
-    NSDictionary *logDic = @{@"user":@"test1234",@"pass":@"111111"};
-    
-    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:kRequestCodeLogin success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        if (succe) {
-            //登录成功
-            LoginModel *loginModel = [LoginModel modelWithJSON:jsonDic[@"data"]];
-            //存储用户信息
-            //id
-            [USERDEFAULT setObject:@(loginModel.userId) forKey:@"userid"];
-            //登录授权认证码
-            [USERDEFAULT setObject:loginModel.auth
-                            forKey:@"authcode"];
-            
-            //[self dismissViewControllerAnimated:NO completion:nil];
-            
-            
-        }
-        
-    } failure:^(NSError *error) {
-        MYLog(@"失败---%@",error.description);
-    }];
-
-    
-    
-    [USERDEFAULT setObject:@1 forKey:@"userid"];
-    [self.navigationController popViewControllerAnimated:YES];
-    [self dismissViewControllerAnimated:NO completion:nil];
-}
+////游客按钮
+//-(void)loginView:(LoginView *)loginView didSelectedTourBtn:(UIButton *)sender{
+//    
+//    NSLog(@"游客请进！");
+//    [USERDEFAULT setObject:@false forKey:LoginStates];
+//    //游客进入id为1的测试账号
+//    NSDictionary *logDic = @{@"user":@"test1234",@"pass":@"111111"};
+//    
+//    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:@0 requestcode:kRequestCodeLogin success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+//        if (succe) {
+//            //登录成功
+//            LoginModel *loginModel = [LoginModel modelWithJSON:jsonDic[@"data"]];
+//            //存储用户信息
+//            //id
+//            [USERDEFAULT setObject:@(loginModel.userId) forKey:@"userid"];
+//            //登录授权认证码
+//            [USERDEFAULT setObject:loginModel.auth
+//                            forKey:@"authcode"];
+//            
+//            //[self dismissViewControllerAnimated:NO completion:nil];
+//            
+//            
+//        }
+//        
+//    } failure:^(NSError *error) {
+//        MYLog(@"失败---%@",error.description);
+//    }];
+//
+//    
+//    
+//    [USERDEFAULT setObject:@1 forKey:@"userid"];
+//    [self.navigationController popViewControllerAnimated:YES];
+//    [self dismissViewControllerAnimated:NO completion:nil];
+//}
 
 #pragma mark *** touch ***
 //收起键盘
