@@ -81,8 +81,8 @@ static NSString *const kReusableSearchcellIdentifier = @"SearchcellIdentifier";
     GoodsDatalist *good = self.goodsList[indexPath.row];
     cell.cellImage.imageURL = [NSURL URLWithString:good.CoCover];
     cell.cellLabel.text = good.CoConame;
-    cell.cellPrice.text = [NSString stringWithFormat:@"%ld",good.CoprActpri];
-    cell.goodsId = [NSString stringWithFormat:@"%ld",good.CoId];
+    cell.cellPrice.text = [NSString stringWithFormat:@"%ld",(long)good.CoprActpri];
+    cell.goodsId = [NSString stringWithFormat:@"%ld",(long)good.CoId];
     
     return cell;
 }

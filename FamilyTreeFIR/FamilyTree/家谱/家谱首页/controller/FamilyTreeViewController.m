@@ -110,6 +110,7 @@ enum{
     }
     
     [self.navigationController popToRootViewControllerAnimated:YES];
+    self.creatBtn.selected = false;
     
 }
 #pragma mark *** 注册通知 ***
@@ -295,7 +296,7 @@ enum{
 #pragma mark - 事件
 //给5个button添加点击事件跳转
 -(void)clickBtn:(UIButton *)sender{
-    //NSLog(@"%ld",sender.tag);
+    
     switch (sender.tag) {
         case 1001:
             //跳转
@@ -439,7 +440,10 @@ enum{
         [manager.comNavi.rightBtn removeFromSuperview];
         [self.navigationController pushViewController:manager animated:YES];
     }
-    [self.crtFamTree removeFromSuperview];
+    if (sender.tag!=1) {
+        [self.crtFamTree removeFromSuperview];
+    }
+    
 
 }
 

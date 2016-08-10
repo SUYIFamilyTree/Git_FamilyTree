@@ -19,6 +19,7 @@ static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
     BOOL _isSelectedEditBtn;
     CGFloat _sumPrice;
     NSMutableArray *_selectedCellArr;//选中的商品arr
+    CGFloat _allPrice;
 }
 
 /**白色背景图*/
@@ -124,6 +125,7 @@ static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (self.carModel && self.carModel.count!=0) {
         _sumPrice = 0.0;
+        _allPrice = 0.0;
         return self.carModel.count;
     }
     return 0;
@@ -133,9 +135,9 @@ static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
     if (!cell) {
         cell = [[WCartTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kReusableCartCellIdentifier];
     }
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     WCartMode *car = self.carModel[indexPath.row];
-//
+
     cell.cellName.text = car.CoName;
     cell.cellImage.imageURL = [NSURL URLWithString:car.Cover];
     cell.cellType.text = car.CoprData;
@@ -147,8 +149,7 @@ static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
     cell.indexPath = indexPath;
     cell.cellTypeId = [NSString stringWithFormat:@"%ld",(long)car.CoprId];
     cell.cellDisPrice = [NSString stringWithFormat:@"%ld",(long)car.CoprMoney];
-    
-    
+    cell.cellSelectBtn.selected = car.Selected;
     
     return  cell;
     
@@ -165,31 +166,46 @@ static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
     return YES;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     WCartTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [_selectedCellArr addObject:cell];
+    if (cell.cellSelectBtn.selected) {
+        return;
+    }
+     [_selectedCellArr addObject:cell];
+    self.carModel[indexPath.row].Selected = true;
+    cell.cellSelectBtn.selected = true;
     NSString *price = [cell.cellPrice.text stringByReplacingOccurrencesOfString:@"¥" withString:@""];
     NSString *footPrice = [self.footView.priceLabel.text stringByReplacingOccurrencesOfString:@"¥" withString:@""];
     _sumPrice =[footPrice floatValue]+[cell.cellNumber.countLb.text floatValue]*[price floatValue];
     self.footView.priceLabel.text = [NSString stringWithFormat:@"¥%.1f",_sumPrice];
+//    [self.tableView reloadData];
+    
 
 }
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
-    WCartTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [_selectedCellArr removeObject:cell];
     
+    WCartTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (!cell.cellSelectBtn.selected) {
+        return;
+    }
+    [_selectedCellArr removeObject:cell];
+    self.carModel[indexPath.row].Selected = false;
+    cell.cellSelectBtn.selected = false;
     NSString *price = [cell.cellPrice.text stringByReplacingOccurrencesOfString:@"¥" withString:@""];
     NSString *footPrice = [self.footView.priceLabel.text stringByReplacingOccurrencesOfString:@"¥" withString:@""];
     _sumPrice =[footPrice floatValue]-[cell.cellNumber.countLb.text floatValue]*[price floatValue];
     self.footView.priceLabel.text = [NSString stringWithFormat:@"¥%.1f",_sumPrice];
+//    [self.tableView reloadData];
+
 }
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (_isSelectedEditBtn) {
-        return UITableViewCellEditingStyleDelete;
-    }
-    return UITableViewCellEditingStyleInsert | UITableViewCellEditingStyleDelete;
-    
-}
+//- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    if (_isSelectedEditBtn) {
+//        return UITableViewCellEditingStyleDelete;
+//    }
+//    return UITableViewCellEditingStyleInsert | UITableViewCellEditingStyleDelete;
+//    
+//}
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"删除了--%@", NSStringFromSelector(_cmd));
@@ -197,53 +213,73 @@ static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
     [self deleteCartDataWithCartId:cell.cellCarId];
     
 }
+
 #pragma mark *** WCartTableHeaderViewDelegate ***
 -(void)WcartTableHeaderView:(WCartTableHeaderView *)headerView didSeletedButtion:(UIButton *)sender{
     NSLog(@"%@", sender.titleLabel.text);
     if ([sender.titleLabel.text isEqualToString:@"编辑"]) {
-        _isSelectedEditBtn = !_isSelectedEditBtn;
-        //触发改变编辑样式
-        _tableView.editing = !_tableView.editing;
-        _tableView.editing = true;
+//        [_selectedCellArr removeAllObjects];
+//        self.footView.priceLabel.text = @"¥0.0";
+//        _isSelectedEditBtn = !_isSelectedEditBtn;
+//        //触发改变编辑样式
+//        _tableView.editing = !_tableView.editing;
+//        _tableView.editing = true;
     }else{
-//        sender.selected = !sender.selected;
-//        if (sender.selected) {
+        sender.selected = !sender.selected;
+        if (sender.selected) {
 //            self.footView.priceLabel.text = [NSString stringWithFormat:@"¥%.1lf",_sumPrice];
-//            for (int idx = 0; idx<self.carModel.count; idx++) {
-//                WCartTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
-//                cell.selected = true;
-//            }
-//            NSLog(@"全选");
-//        }else{
-//            self.footView.priceLabel.text = [NSString stringWithFormat:@"¥0.0"];
-//            for (int idx = 0; idx<self.carModel.count; idx++) {
-//                WCartTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
-//                cell.selected = false;
-//            }
-//            NSLog(@"反选");
-//        }
+            [_selectedCellArr removeAllObjects];
+            CGFloat allPrice = 0.0;
+            for (int idx = 0; idx<self.carModel.count; idx++) {
+                WCartTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
+                cell.cellSelectBtn.selected = true;
+                self.carModel[idx].Selected = true;
+                [_selectedCellArr addObject:cell];
+                allPrice+=  self.carModel[idx].CoprActpri*self.carModel[idx].CoprCount;
+            }
+            NSLog(@"全选");
+            self.footView.priceLabel.text = [NSString stringWithFormat:@"¥%.1f",allPrice];
+        }else{
+            [_selectedCellArr removeAllObjects];
+            for (int idx = 0; idx<self.carModel.count; idx++) {
+                WCartTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
+                cell.cellSelectBtn.selected = false;
+                self.carModel[idx].Selected = false;
+            }
+            NSLog(@"反选");
+            self.footView.priceLabel.text = [NSString stringWithFormat:@"¥0.0"];
+        }
 
     }
 }
 #pragma mark *** WCartTableFooterViewDelegate ***
 -(void)WCartTableFooterView:(WCartTableFooterView *)footView didSelectedButton:(UIButton *)sender{
     if ([sender.titleLabel.text isEqualToString:@"全选"]) {
-//        sender.selected = !sender.selected;
-//        if (sender.selected) {
-//            self.footView.priceLabel.text = [NSString stringWithFormat:@"¥%.1lf",_sumPrice];
-//            for (int idx = 0; idx<self.carModel.count; idx++) {
-//                WCartTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
-//                cell.selected = true;
-//            }
-//            NSLog(@"全选");
-//        }else{
-//            self.footView.priceLabel.text = [NSString stringWithFormat:@"¥0.0"];
-//            for (int idx = 0; idx<self.carModel.count; idx++) {
-//                WCartTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
-//                cell.selected = false;
-//            }
-//             NSLog(@"反选");
-//        }
+        sender.selected = !sender.selected;
+        if (sender.selected) {
+            [_selectedCellArr removeAllObjects];
+            CGFloat allPrice = 0.0;
+            for (int idx = 0; idx<self.carModel.count; idx++) {
+                WCartTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
+                cell.cellSelectBtn.selected = true;
+                self.carModel[idx].Selected = true;
+                [_selectedCellArr addObject:cell];
+                allPrice+=  self.carModel[idx].CoprActpri*self.carModel[idx].CoprCount;
+            }
+            NSLog(@"全选");
+            self.footView.priceLabel.text = [NSString stringWithFormat:@"¥%.1f",allPrice];
+
+        }else{
+            [_selectedCellArr removeAllObjects];
+            for (int idx = 0; idx<self.carModel.count; idx++) {
+                WCartTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
+                cell.cellSelectBtn.selected = false;
+                self.carModel[idx].Selected = false;
+            }
+            NSLog(@"反选");
+            self.footView.priceLabel.text = [NSString stringWithFormat:@"¥0.0"];
+
+        }
     }
     else{
         //去结算
@@ -279,14 +315,15 @@ static NSString *const kReusableCartCellIdentifier = @"WCartTableViewCell.h";
         [_tableView registerClass:[WCartTableViewCell class] forCellReuseIdentifier:kReusableCartCellIdentifier];
         _tableView.rowHeight = 300*AdaptationWidth();
         _tableView.sectionHeaderHeight = 66*AdaptationWidth();
-        _tableView.editing = true;
-
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.allowsMultipleSelection = YES;
+//      _tableView.editing = false;
     }
     return _tableView;
 }
+
 -(WCartTableFooterView *)footView{
     if (!_footView) {
-
         _footView = [[WCartTableFooterView alloc] initWithFrame:CGRectMake(CGRectX(self.tableView), self.bounds.size.height-93*AdaptationWidth(), self.tableView.bounds.size.width, 93*AdaptationWidth())];
         _footView.delegate = self;
     }

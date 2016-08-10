@@ -24,6 +24,7 @@
 @implementation LineageViewController
 -(void)viewDidLoad{
     [super viewDidLoad];
+    self.comNavi.delegate = self;
     //设置背景
     UIImageView *bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
     bgImageView.image = MImage(@"bg");
@@ -46,25 +47,16 @@
     }];
 
 }
-
+#pragma mark *** 选择右上角家谱后的更新UI ***
+-(void)CommonNavigationViews:(CommonNavigationViews *)comView selectedFamilyId:(NSString *)famId{
+    NSLog(@"选择了这个家谱id-%@", famId);
+}
 #pragma mark - 视图初始化
 -(void)initPerson{
     LineageCellView *ziji = [[LineageCellView alloc]initWithFrame:CGRectMake((Screen_width-cell_width)/2, 64+(Screen_height-49-64)/2, cell_width, cell_height)];
     [self.view addSubview:ziji];
 }
 
-#pragma mark - SelectMyFamilyViewDelegate
--(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectFamID:(NSString *)famId{
-    NSLog(@"famid--%@", famId);
-}
-
-
-
-#pragma mark *** SelectMyFamViewDelegate ***
-
--(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectItemTitle:(NSString *)title{
-    NSLog(@"%@", title);
-}
 
 
 

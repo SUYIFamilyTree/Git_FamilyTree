@@ -36,6 +36,7 @@ static NSString *const kReusableIdentifier = @"PinAnnotation";
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    self.comNavi.delegate = self;
     //默认为空
     self.queryString = @"";
     
@@ -47,7 +48,10 @@ static NSString *const kReusableIdentifier = @"PinAnnotation";
     
     
 }
-
+#pragma mark *** 选择右上角家谱后的更新UI ***
+-(void)CommonNavigationViews:(CommonNavigationViews *)comView selectedFamilyId:(NSString *)famId{
+    NSLog(@"选择了这个家谱id-%@", famId);
+}
 -(void)startLocation{
     // 1.设备是否开启了定位服务
     if (![CLLocationManager locationServicesEnabled])

@@ -31,6 +31,9 @@
 @property (nonatomic, assign) NSInteger CoId;
 
 @property (nonatomic, assign) NSInteger CoprId;
+
+@property (nonatomic,assign) BOOL Selected; /*是否选择了cell*/
+
 @end
 
 

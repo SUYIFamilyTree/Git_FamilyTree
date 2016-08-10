@@ -27,6 +27,9 @@
 @property (nonatomic,strong) UILabel *cellPrice;
 /**原单价*/
 @property (nonatomic,strong) NSString *cellDisPrice;
+/**选择按钮*/
+@property (nonatomic,strong) UIButton *cellSelectBtn;
+
 
 /**购物车id*/
 @property (nonatomic,strong) NSString *cellCarId;

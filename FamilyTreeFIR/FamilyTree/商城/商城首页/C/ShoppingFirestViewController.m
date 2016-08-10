@@ -95,7 +95,11 @@
             [wkSelf initView];
         }];
         
-        [wkSelf postGoodsListWithGoodsName:@"" type:@"" label:@"" WhileComplete:^(GoodsModel *goodmodel) {
+        NSString *likeStr = @"";
+        if ([USERDEFAULT objectForKey:@"like"]) {
+            likeStr = [USERDEFAULT objectForKey:@"like"];
+        }
+        [wkSelf postGoodsListWithGoodsName:likeStr type:@"" label:@"" WhileComplete:^(GoodsModel *goodmodel) {
             wkSelf.likeArr = goodmodel.datalist;
             [wkSelf initView];
         }];
@@ -197,9 +201,11 @@
 
 -(void)TopSearchViewDidTapView:(TopSearchView *)topSearchView{
     MYLog(@"商城搜索栏");
-    __weak typeof(self)wkSelf = self;
+    
+    [USERDEFAULT setObject:self.topSearchView.searchLabel.text forKey:@"like"];
+    
     WShopSearchViewController *searchVc = [[WShopSearchViewController alloc] initWithText:self.topSearchView.searchLabel.text];
-    [wkSelf.navigationController pushViewController:searchVc animated:YES];
+    [self.navigationController pushViewController:searchVc animated:YES];
 }
 
 #pragma mark -ShoppingTypeView Delegate
@@ -226,10 +232,10 @@
 }
 #pragma mark *** btnEvents ***
 -(void)respondsToCartBtn:(UIButton *)sender{
-    sender.selected = !sender.selected;
-    if (sender.selected) {
+//    sender.selected = !sender.selected;
+//    if (sender.selected) {
         [self.view addSubview:self.shopCartView];
-    }
+//    }
 }
 -(void)respondsTorightBookingBtn:(UIButton *)sender{
     MyOrdersViewController *myOdVc = [[MyOrdersViewController alloc] init];
@@ -275,7 +281,6 @@
                                                      if (succe) {
                                                          NSLog(@"--%@-goods--%@", label,[NSString jsonDicWithDic:jsonDic[@"data"]]);
                                                          GoodsModel *model = [GoodsModel modelWithJSON:jsonDic[@"data"]];
-                                                         
                                                          back(model);
                                                      }
                                                  } failure:^(NSError *error) {
@@ -335,6 +340,10 @@
     }
     [_shopCartView reloadallData];
     return _shopCartView;
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
 }
 
 @end

@@ -225,4 +225,8 @@
     return _maxPrice;
 }
 
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self endEditing:true];
+}
 @end

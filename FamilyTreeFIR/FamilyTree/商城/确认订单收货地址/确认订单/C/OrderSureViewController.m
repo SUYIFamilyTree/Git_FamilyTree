@@ -110,8 +110,16 @@
     }];
     
 }
-
-
+//结算完删除购物车数据
+//-(void)postCompleteOrderDataWith{
+//    [TCJPHTTPRequestManager POSTWithParameters:@{@"ShId":cartId} requestID:GetUserId requestcode:kRequestCodedelshopcar success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+//        if (succe) {
+//            [wkSelf getCartData];
+//        }
+//    } failure:^(NSError *error) {
+//        
+//    }];
+//}
 
 - (void)initView{
     _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, __kWidth, __kHeight-110-140)];
@@ -171,7 +179,7 @@
     }
     NSLog(@"这些商品--%@", dicArr);
     
-    
+    WK(wkself);
     [TCJPHTTPRequestManager POSTWithParameters:@{@"ShorOrdnum":@"",
                                                  @"ShorMeid":GetUserId,
                                                  @"ShorFreight":FreightPrice,
@@ -183,6 +191,8 @@
                                                  @"Sz":dicArr} requestID:GetUserId requestcode:kRequestCodecreateshoporder success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
                                                      if (succe) {
                                                          NSLog(@"????----%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+                                                         [SXLoadingView showAlertHUD:@"结算成功" duration:0.5];
+                                                         [wkself.navigationController popToRootViewControllerAnimated:YES];
                                                      }
         
     } failure:^(NSError *error) {
