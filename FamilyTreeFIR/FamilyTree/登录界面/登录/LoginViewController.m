@@ -186,7 +186,8 @@
                     
                 }];
                 return;
-            }else if(![WXApi isWXAppSupportApi]){
+            }
+            if(![WXApi isWXAppSupportApi]){
                 [Tools showAlertViewcontrollerWithTarGet:self Message:@"此版本不支持支付" complete:^(BOOL sure) {
                     
                 }];

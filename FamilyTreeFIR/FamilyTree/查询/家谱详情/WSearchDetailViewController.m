@@ -262,7 +262,8 @@
 /** 根据卷谱查询卷谱总人数以及各字辈人数 */
 
 -(void)getJPPersonNumWithJPId:(NSString *)jpId complete:(void (^)())callback{
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"gemeid":jpId,@"geid":[WFamilyModel shareWFamilModel].myFamilyId} requestID:GetUserId requestcode:kRequestCodequerygezblist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"gemeid":jpId,@"geid":[WSearchModel shardSearchModel].selectedFamilyID} requestID:GetUserId requestcode:kRequestCodequerygezblist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             
             NSLog(@"字辈人数详情--%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
