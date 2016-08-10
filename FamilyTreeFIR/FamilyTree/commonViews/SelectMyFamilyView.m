@@ -9,12 +9,10 @@
 #import "SelectMyFamilyView.h"
 #import "MyFamilyCollectionViewCell.h"
 
-
 static NSString *const kReusableMyFamCellIdentifier = @"MyFamcellIdentifier";
 static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
 
-
-@interface SelectMyFamilyView()<UITableViewDelegate,UITableViewDataSource>
+@interface SelectMyFamilyView()
 {
     NSInteger _itemBtnSelectedIndex;
 }
@@ -23,8 +21,7 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
 /**五个item*/
 @property (nonatomic,strong) UICollectionView *itemCollectionView;
 
-
-
+@property (nonatomic,strong) UIScrollView *backScroView; /*滚动家谱*/
 
 @end
 
@@ -42,18 +39,18 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
 #pragma mark *** 初始化数据 ***
 -(void)initData{
     
-    NSArray *arr = @[@""];
-    NSArray <NSString *>*arr2 = @[@"四海同宗",@"世系图",@"阅读家谱",@"字辈",@"图文影音"];
-    _dataSource = [@[arr,arr2] mutableCopy];
+    _dataSource = @[];
+    
 //    _didSelectedItem = false;
     _selectedItemNumber = 0;
 }
 
 -(void)updateDataSourceAndUI{
     //获取我的所有家谱
-    _dataSource[0] = [WSelectMyFamModel sharedWselectMyFamModel].myFamArray;
+    _dataSource = [WSelectMyFamModel sharedWselectMyFamModel].myFamArray;
 //    [self.collectionView reloadData];
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
+    [self initUI];
     
 }
 
@@ -62,55 +59,101 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
     
 //    [self addSubview:self.collectionView];
 //    [self addSubview:self.itemCollectionView];
-    [self addSubview:self.tableView];
+//    [self addSubview:self.tableView];
+    [self removeAllSubviews];
+    [self addSubview:self.backScroView];
+    NSInteger count = _dataSource.count>3?4:_dataSource.count;
+    _backScroView.frame = AdaptationFrame(_backScroView.frame.origin.x/AdaptationWidth(), _backScroView.frame.origin.y/AdaptationWidth(), 187, count*63);
+    _backScroView.contentSize = AdaptationSize(187, _dataSource.count*63);
     
-}
-
-#pragma mark *** UITableViewDelegate ***
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (_dataSource[0].count!=0) {
-       return _dataSource[0].count;
+    //卷谱
+    NSMutableArray *allBtnArrs = [[WSelectMyFamModel sharedWselectMyFamModel].myFamArray mutableCopy];
+    
+    for (int idx = 0; idx<allBtnArrs.count; idx++) {
+        
+        UIButton *btn = [[UIButton alloc] initWithFrame:AdaptationFrame(0, idx*63, 187, 61)];
+        btn.backgroundColor = [UIColor blackColor];
+        btn.layer.cornerRadius = 2;
+        btn.alpha = 0.8;
+        [btn setTitle:allBtnArrs[idx] forState:0];
+        btn.titleLabel.font = WFont(30);
+        btn.tag = idx;
+        [btn addTarget:self action:@selector(respondsToAllBtnArs:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.backScroView addSubview:btn];
+        
+        
+        
     }
-    return 0;
+
 }
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"famTable" forIndexPath:indexPath];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"famTable"];
+-(void)respondsToAllBtnArs:(UIButton *)sender{
+    NSInteger index = sender.tag;
+    NSString *famName = sender.titleLabel.text;
+    //点过后存起来
+    [WFamilyModel shareWFamilModel].myFamilyId = [WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[index];
+    [WFamilyModel shareWFamilModel].myFamilyName = famName;
+    
+    [USERDEFAULT setObject:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[index] forKey:kNSUserDefaultsMyFamilyID];
+    [USERDEFAULT setObject:famName forKey:kNSUserDefaultsMyFamilyName];
+    [USERDEFAULT synchronize];
+    
+    NSLog(@"%@", [USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]);
+    if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectFamID:)]) {
+        [_delegate SelectMyFamilyViewDelegate:self didSelectFamID:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[index]];
     }
-    cell.textLabel.text = _dataSource[0][indexPath.row];
-    cell.textLabel.font = WFont(25);
-    cell.layer.borderColor = BorderColor;
-    cell.layer.borderWidth = 0.5;
-    cell.backgroundColor = [UIColor whiteColor];
     
-    return cell;
-}
-
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
-        //点过后存起来
-        [WFamilyModel shareWFamilModel].myFamilyId = [WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row];
-        [WFamilyModel shareWFamilModel].myFamilyName = cell.textLabel.text;
-        
-        [USERDEFAULT setObject:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row] forKey:kNSUserDefaultsMyFamilyID];
-        [USERDEFAULT setObject:cell.textLabel.text forKey:kNSUserDefaultsMyFamilyName];
-        [USERDEFAULT synchronize];
-        
-        NSLog(@"%@", [USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]);
-        if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectFamID:)]) {
-            [_delegate SelectMyFamilyViewDelegate:self didSelectFamID:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row]];
-        }
-        
-        if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectFamTitle:SelectFamID:)]) {
-            [_delegate SelectMyFamilyViewDelegate:self didSelectFamTitle:cell.textLabel.text SelectFamID:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row]];
-        };
+    if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectFamTitle:SelectFamID:)]) {
+        [_delegate SelectMyFamilyViewDelegate:self didSelectFamTitle:famName SelectFamID:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[index]];
+    };
     
     [self removeFromSuperview];
-
 }
+#pragma mark *** UITableViewDelegate ***
+//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+//    if (_dataSource.count!=0) {
+//       return _dataSource.count;
+//    }
+//    return 0;
+//}
+//-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"famTable" forIndexPath:indexPath];
+//    if (!cell) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"famTable"];
+//    }
+//    cell.textLabel.text = _dataSource[0][indexPath.row];
+//    cell.textLabel.font = WFont(25);
+//    cell.layer.borderColor = BorderColor;
+//    cell.layer.borderWidth = 0.5;
+//    cell.backgroundColor = [UIColor whiteColor];
+//    
+//    return cell;
+//}
+
+
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//    
+//        //点过后存起来
+//        [WFamilyModel shareWFamilModel].myFamilyId = [WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row];
+//        [WFamilyModel shareWFamilModel].myFamilyName = cell.textLabel.text;
+//        
+//        [USERDEFAULT setObject:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row] forKey:kNSUserDefaultsMyFamilyID];
+//        [USERDEFAULT setObject:cell.textLabel.text forKey:kNSUserDefaultsMyFamilyName];
+//        [USERDEFAULT synchronize];
+//        
+//        NSLog(@"%@", [USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]);
+//        if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectFamID:)]) {
+//            [_delegate SelectMyFamilyViewDelegate:self didSelectFamID:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row]];
+//        }
+//        
+//        if (_delegate && [_delegate respondsToSelector:@selector(SelectMyFamilyViewDelegate:didSelectFamTitle:SelectFamID:)]) {
+//            [_delegate SelectMyFamilyViewDelegate:self didSelectFamTitle:cell.textLabel.text SelectFamID:[WSelectMyFamModel sharedWselectMyFamModel].myFamIdArray[indexPath.row]];
+//        };
+//    
+//    [self removeFromSuperview];
+//
+//}
 
 #pragma mark *** Collectiondelegate ***
 //
@@ -268,21 +311,30 @@ static NSString *const kReusableMyheaderIdentifier = @"Myheaderidentifier";
 //    return _itemCollectionView;
 //}
 
--(UITableView *)tableView{
-    if (!_tableView) {
-        
-        NSInteger count = [WSelectMyFamModel sharedWselectMyFamModel].myFamArray.count>3?4:[WSelectMyFamModel sharedWselectMyFamModel].myFamArray.count;
-        
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(Screen_width-Screen_width/3, 0, Screen_width/3, 50*count*AdaptationWidth())];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.rowHeight = 50*AdaptationWidth();
-        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"famTable"];
-        _tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
-        _tableView.backgroundColor = [UIColor clearColor];
-        _tableView.showsVerticalScrollIndicator = false;
-        
+//-(UITableView *)tableView{
+//    if (!_tableView) {
+//        
+//        NSInteger count = [WSelectMyFamModel sharedWselectMyFamModel].myFamArray.count>3?4:[WSelectMyFamModel sharedWselectMyFamModel].myFamArray.count;
+//        
+//        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(Screen_width-Screen_width/3, 0, Screen_width/3, 50*count*AdaptationWidth())];
+//        _tableView.delegate = self;
+//        _tableView.dataSource = self;
+//        _tableView.rowHeight = 50*AdaptationWidth();
+//        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"famTable"];
+//        _tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
+//        _tableView.backgroundColor = [UIColor clearColor];
+//        _tableView.showsVerticalScrollIndicator = false;
+//        
+//    }
+//    return _tableView;
+//}
+#pragma mark *** getters ***
+-(UIScrollView *)backScroView{
+    if (!_backScroView) {
+        _backScroView = [[UIScrollView alloc] initWithFrame:AdaptationFrame(Screen_width/AdaptationWidth()-187, 0, 187, 3*63)];
+        _backScroView.bounces = true;
+        _backScroView.contentSize = AdaptationSize(187, _dataSource.count*63);
     }
-    return _tableView;
+    return _backScroView;
 }
 @end

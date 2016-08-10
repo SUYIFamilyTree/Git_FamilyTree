@@ -4443,7 +4443,6 @@
 		ADC326F71CF3E3DF00CEAE53 /* FamilyTree */ = {
 			isa = PBXGroup;
 			children = (
-				AD8467AE1D5AF9A4004A37BA /* 支付sdk */,
 				ADC326FB1CF3E3DF00CEAE53 /* AppDelegate.h */,
 				ADC326FC1CF3E3DF00CEAE53 /* AppDelegate.m */,
 				AD2ACD7D1CF3FC9C009D4A24 /* RootTabBarViewController.h */,
@@ -4451,6 +4450,7 @@
 				BC7DFF951D509D3200492DC1 /* GuideViewController.h */,
 				BC7DFF961D509D3200492DC1 /* GuideViewController.m */,
 				BC7DFF981D50A4AA00492DC1 /* yindaoye.png */,
+				AD8467AE1D5AF9A4004A37BA /* 支付sdk */,
 				ADE3BBD01D13E70F006523C4 /* 求签 */,
 				BC6094EC1D3DECD90056DD9C /* 祈福 */,
 				AD6788991D06AA9D00D6CF52 /* 新闻中心 */,

@@ -26,7 +26,7 @@
 /**下拉table*/
 @property (nonatomic,strong) UITableView *tableView;
 
-@property (nonatomic,copy) NSMutableArray <NSArray *>*dataSource; /*家谱数据*/
+@property (nonatomic,copy) NSArray *dataSource; /*家谱数据*/
 
 //@property (nonatomic,assign) BOOL didSelectedItem; /*选中状态*/
 
