@@ -271,7 +271,6 @@
             self.zbModel = theModel;
             callback();
             
-            
         }
     } failure:^(NSError *error) {
         

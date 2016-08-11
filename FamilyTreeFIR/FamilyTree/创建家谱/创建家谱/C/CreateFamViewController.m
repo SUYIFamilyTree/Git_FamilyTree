@@ -143,6 +143,10 @@
             [SXLoadingView showProgressHUD:@"创建成功！" duration:0.5];
             //通知创建完成更新页面
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationCodeManagerFam object:nil];
+            if (![USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]) {
+                [USERDEFAULT setObject:JTdic[@"geid"] forKey:kNSUserDefaultsMyFamilyID];
+                [USERDEFAULT setObject:self.cFameView.famName.detailLabel.text forKey:kNSUserDefaultsMyFamilyName];
+            }
             
         }else{
             [SXLoadingView showProgressHUD:jsonDic[@"创建失败.."] duration:0.5];
