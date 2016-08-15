@@ -360,12 +360,12 @@ enum{
 //        
 //         _selectedCreateBtnType = 0;
 //    }
-    sender.selected = !sender.selected;
-    if (sender.selected) {
+//    sender.selected = !sender.selected;
+//    if (sender.selected) {
         [self.view addSubview:self.crtFamTree];
-    }else{
-        [self.crtFamTree removeFromSuperview];
-    }
+//    }else{
+//        [self.crtFamTree removeFromSuperview];
+//    }
 }
 
 #pragma mark - FamilyTreeTopViewDelegate
@@ -415,18 +415,7 @@ enum{
         }
         if (sender.tag == 1) {
             
-            if (![USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]) {
-                [SXLoadingView showAlertHUD:@"请先选择一个家谱" duration:0.5];
-                return;
-            }
-            
-            self.joinView.alpha = 0;
-            [self.view addSubview:self.joinView];
-            [UIView animateWithDuration:0.3f animations:^{
-                
-           self.joinView.alpha = 1;
-                
-            }];
+            [self TopSearchViewDidTapView:nil];
             
         }
         if (sender.tag == 2) {
@@ -443,7 +432,6 @@ enum{
     if (sender.tag!=1) {
         [self.crtFamTree removeFromSuperview];
     }
-    
 
 }
 
@@ -469,7 +457,7 @@ enum{
 }
 -(CreatFamilyTree *)crtFamTree{
     if (!_crtFamTree) {
-        _crtFamTree = [[CreatFamilyTree alloc] initWithFrame: AdaptationFrame(62, 495, 517, 373) withType:CreatefamilyTreeTypeThreeBtn];
+        _crtFamTree = [[CreatFamilyTree alloc] initWithFrame: CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar) withType:CreatefamilyTreeTypeThreeBtn];
         _crtFamTree.delegate = self;
         
     }

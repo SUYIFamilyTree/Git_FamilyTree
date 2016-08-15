@@ -186,12 +186,18 @@
                     
                 }];
                 return;
-            }else if(![WXApi isWXAppSupportApi]){
-                [Tools showAlertViewcontrollerWithTarGet:self Message:@"此版本不支持支付" complete:^(BOOL sure) {
+            }else{
+                [Tools showAlertViewcontrollerWithTarGet:self Message:@"安装了微信" complete:^(BOOL sure) {
                     
                 }];
                 return;
             }
+//            if(![WXApi isWXAppSupportApi]){
+//                [Tools showAlertViewcontrollerWithTarGet:self Message:@"此版本不支持支付" complete:^(BOOL sure) {
+//                    
+//                }];
+//                return;
+//            }
             
             NSString *urlString   = @"http://wxpay.weixin.qq.com/pub_v2/app/app_pay.php?plat=ios";
             //解析服务端返回json数据

@@ -46,6 +46,7 @@
     [self.view addSubview:self.searchTable];
     
 }
+
 //导航栏
 -(void)initNavi{
     UIView *topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 64)];
