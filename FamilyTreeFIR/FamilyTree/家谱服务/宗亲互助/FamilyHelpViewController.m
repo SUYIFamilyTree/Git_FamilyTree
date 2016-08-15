@@ -47,7 +47,7 @@ static NSString *const kReuserableUITableViewCell = @"UITableViewCell";
     
     _selectedBtnNum = 0;
     
-    NSArray *topTitles = @[@"产品众筹",@"赏金寻亲",@"捐款圆梦",@"我提供",@"我需要"];
+    NSArray *topTitles = @[@"产品众筹",@"赏金寻亲",@"募捐圆梦",@"我提供",@"我需要"];
     NSArray *imageNames = @[@"sj_icon_1",@"sj_icon_2",@"sj_icon_3",@"sj_icon_4",@"sj_icon_5"];
     for (int idx = 0; idx<topTitles.count; idx++) {
         

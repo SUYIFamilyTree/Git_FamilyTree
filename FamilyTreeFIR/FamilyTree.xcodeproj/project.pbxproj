@@ -702,6 +702,9 @@
 		BC0326DB1CFD99590089EE4C /* sss_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = BC0326D81CFD99590089EE4C /* sss_bg.png */; };
 		BC0326DC1CFD99590089EE4C /* sss_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC0326D91CFD99590089EE4C /* sss_bg@2x.png */; };
 		BC0326DD1CFD99590089EE4C /* sss_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC0326DA1CFD99590089EE4C /* sss_bg@3x.png */; };
+		BC0846E31D5DBC8000A267ED /* woman.png in Resources */ = {isa = PBXBuildFile; fileRef = BC0846E01D5DBC8000A267ED /* woman.png */; };
+		BC0846E41D5DBC8000A267ED /* woman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC0846E11D5DBC8000A267ED /* woman@2x.png */; };
+		BC0846E51D5DBC8000A267ED /* woman@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC0846E21D5DBC8000A267ED /* woman@3x.png */; };
 		BC0CA7E11CFFFB38007B0F90 /* DetailFamHeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC0CA7E01CFFFB38007B0F90 /* DetailFamHeViewController.m */; };
 		BC0CF0BD1D5AC403008DAB0B /* sy_tabbg.png in Resources */ = {isa = PBXBuildFile; fileRef = BC0CF0BC1D5AC403008DAB0B /* sy_tabbg.png */; };
 		BC0CF0BF1D5AC43B008DAB0B /* sy_statusbg.png in Resources */ = {isa = PBXBuildFile; fileRef = BC0CF0BE1D5AC43B008DAB0B /* sy_statusbg.png */; };
@@ -784,7 +787,6 @@
 		BC2943811CFE8165006671B9 /* shijitu_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC29436F1CFE8165006671B9 /* shijitu_bg@3x.png */; };
 		BC29438C1CFE81D9006671B9 /* HeaderSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2943891CFE81D9006671B9 /* HeaderSelectView.m */; };
 		BC29438D1CFE81D9006671B9 /* WholeWorldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC29438B1CFE81D9006671B9 /* WholeWorldViewController.m */; };
-		BC29439D1CFE8D87006671B9 /* PersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC29439C1CFE8D87006671B9 /* PersonModel.m */; };
 		BC2943A01CFE9F30006671B9 /* LineageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC29439F1CFE9F30006671B9 /* LineageViewController.m */; };
 		BC2943A31CFE9F7B006671B9 /* LineageCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2943A21CFE9F7B006671B9 /* LineageCellView.m */; };
 		BC2943A81CFEA506006671B9 /* WorshipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2943A71CFEA506006671B9 /* WorshipViewController.m */; };
@@ -1804,9 +1806,6 @@
 		ADB737E21D2F747500001011 /* WDetailJPInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDetailJPInfoModel.m; sourceTree = "<group>"; };
 		ADB737E51D2F749800001011 /* WJPPersonZBNumberModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJPPersonZBNumberModel.h; sourceTree = "<group>"; };
 		ADB737E61D2F749800001011 /* WJPPersonZBNumberModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJPPersonZBNumberModel.m; sourceTree = "<group>"; };
-		ADB7F0311D026E7A001F151D /* woman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = woman.png; path = ../../../woman.png; sourceTree = "<group>"; };
-		ADB7F0321D026E7A001F151D /* woman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "woman@2x.png"; path = "../../../woman@2x.png"; sourceTree = "<group>"; };
-		ADB7F0331D026E7A001F151D /* woman@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "woman@3x.png"; path = "../../../woman@3x.png"; sourceTree = "<group>"; };
 		ADB7F0411D0297EE001F151D /* todayYS_learn_blues.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = todayYS_learn_blues.png; sourceTree = "<group>"; };
 		ADB7F0421D0297EE001F151D /* todayYS_learn_blues@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "todayYS_learn_blues@2x.png"; sourceTree = "<group>"; };
 		ADB7F0431D0297EE001F151D /* todayYS_learn_blues@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "todayYS_learn_blues@3x.png"; sourceTree = "<group>"; };
@@ -2145,6 +2144,9 @@
 		BC0326D81CFD99590089EE4C /* sss_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sss_bg.png; sourceTree = "<group>"; };
 		BC0326D91CFD99590089EE4C /* sss_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sss_bg@2x.png"; sourceTree = "<group>"; };
 		BC0326DA1CFD99590089EE4C /* sss_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sss_bg@3x.png"; sourceTree = "<group>"; };
+		BC0846E01D5DBC8000A267ED /* woman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = woman.png; sourceTree = "<group>"; };
+		BC0846E11D5DBC8000A267ED /* woman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "woman@2x.png"; sourceTree = "<group>"; };
+		BC0846E21D5DBC8000A267ED /* woman@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "woman@3x.png"; sourceTree = "<group>"; };
 		BC0CA7E01CFFFB38007B0F90 /* DetailFamHeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailFamHeViewController.m; sourceTree = "<group>"; };
 		BC0CF0BC1D5AC403008DAB0B /* sy_tabbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sy_tabbg.png; sourceTree = "<group>"; };
 		BC0CF0BE1D5AC43B008DAB0B /* sy_statusbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sy_statusbg.png; sourceTree = "<group>"; };
@@ -2233,8 +2235,6 @@
 		BC2943891CFE81D9006671B9 /* HeaderSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderSelectView.m; sourceTree = "<group>"; };
 		BC29438A1CFE81D9006671B9 /* WholeWorldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WholeWorldViewController.h; sourceTree = "<group>"; };
 		BC29438B1CFE81D9006671B9 /* WholeWorldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WholeWorldViewController.m; sourceTree = "<group>"; };
-		BC29439B1CFE8D87006671B9 /* PersonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonModel.h; sourceTree = "<group>"; };
-		BC29439C1CFE8D87006671B9 /* PersonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonModel.m; sourceTree = "<group>"; };
 		BC29439E1CFE9F30006671B9 /* LineageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineageViewController.h; sourceTree = "<group>"; };
 		BC29439F1CFE9F30006671B9 /* LineageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineageViewController.m; sourceTree = "<group>"; };
 		BC2943A11CFE9F7B006671B9 /* LineageCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineageCellView.h; sourceTree = "<group>"; };
@@ -5163,9 +5163,9 @@
 		BC2943601CFE8165006671B9 /* 世纪图 */ = {
 			isa = PBXGroup;
 			children = (
-				ADB7F0311D026E7A001F151D /* woman.png */,
-				ADB7F0321D026E7A001F151D /* woman@2x.png */,
-				ADB7F0331D026E7A001F151D /* woman@3x.png */,
+				BC0846E01D5DBC8000A267ED /* woman.png */,
+				BC0846E11D5DBC8000A267ED /* woman@2x.png */,
+				BC0846E21D5DBC8000A267ED /* woman@3x.png */,
 				BC2943611CFE8165006671B9 /* lt.png */,
 				BC2943621CFE8165006671B9 /* lt@2x.png */,
 				BC2943631CFE8165006671B9 /* lt@3x.png */,
@@ -5219,8 +5219,6 @@
 		BC2943901CFE8247006671B9 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				BC29439B1CFE8D87006671B9 /* PersonModel.h */,
-				BC29439C1CFE8D87006671B9 /* PersonModel.m */,
 				BC0D47661D485A6700A8336D /* LineageModel.h */,
 				BC0D47671D485A6700A8336D /* LineageModel.m */,
 			);
@@ -6335,7 +6333,7 @@
 				TargetAttributes = {
 					ADC326F41CF3E3DF00CEAE53 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = N4YN23L5MC;
+						DevelopmentTeam = 27FQAQ29WK;
 					};
 					ADC3270D1CF3E3E000CEAE53 = {
 						CreatedOnToolsVersion = 7.2;
@@ -6404,6 +6402,7 @@
 				ADB7F0791D0297EE001F151D /* todayYS_LV_whites@3x.png in Resources */,
 				AD8DAAC91CFD6492009B7958 /* ci@2x.png in Resources */,
 				BC5F158C1D0FF1CA004F3622 /* gr_ct_photo.png in Resources */,
+				BC0846E51D5DBC8000A267ED /* woman@3x.png in Resources */,
 				ADB7F07B1D0297EE001F151D /* todayYS_touxiang@2x.png in Resources */,
 				AD8DAAFB1CFD76A5009B7958 /* sj_icon_2@2x.png in Resources */,
 				AD5F8C641D177B8600DA9A0C /* qiuQian_bg@3x.png in Resources */,
@@ -7067,6 +7066,7 @@
 				AD5F8C631D177B8600DA9A0C /* qiuQian_bg@2x.png in Resources */,
 				AD7388461CF6C5AF0076B2AD /* icon_2.png in Resources */,
 				AD4D31A71D055C4D0095F3F1 /* index_icon_jiaPu@3x.png in Resources */,
+				BC0846E41D5DBC8000A267ED /* woman@2x.png in Resources */,
 				BCF97C3D1D178658004D46AB /* sel1@3x.png in Resources */,
 				ADE2CA611D519625000EFD0A /* Address.plist in Resources */,
 				ADC3277D1CF3FB8B00CEAE53 /* QQ@2x.png in Resources */,
@@ -7186,6 +7186,7 @@
 				BCE7E5521D59CD5300906715 /* sy_banner3.png in Resources */,
 				BC0D478E1D4862A500A8336D /* jrys_star1@2x.png in Resources */,
 				AD9DACE91D1A8866003495A2 /* kuang1@3x.png in Resources */,
+				BC0846E31D5DBC8000A267ED /* woman.png in Resources */,
 				AD7388481CF6C5AF0076B2AD /* icon_2@3x.png in Resources */,
 				BC9C47EA1D58893700A9F5C2 /* qj_chuqian7.png in Resources */,
 				BC5F16001D0FF224004F3622 /* vip_jindu_red.png in Resources */,
@@ -7445,7 +7446,6 @@
 				BC65210F1D1279A6008FE3A4 /* EditPersonalInfoDetailViewController.m in Sources */,
 				ADC29A721D38D5E6004353F4 /* RollView.m in Sources */,
 				BC0326A01CFD22070089EE4C /* ImageAndTextViewController.m in Sources */,
-				BC29439D1CFE8D87006671B9 /* PersonModel.m in Sources */,
 				AD8E15CB1D5816A000A5E8B1 /* HotActiveView.m in Sources */,
 				BCEB84001D3C7FA6002B44D3 /* LotteryPoetryModel.m in Sources */,
 				ADE2D17E1CF7052C009D1ADF /* TableView.m in Sources */,
@@ -7816,7 +7816,12 @@
 				INFOPLIST_FILE = FamilyTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tongchengjiapu.FamilyTree;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FamilyTree/weixinSDK",
+					"$(PROJECT_DIR)/FamilyTree/支付sdk/weixinSDK",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tongchengjiapu1.FamilyTree;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -7839,7 +7844,12 @@
 				INFOPLIST_FILE = FamilyTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tongchengjiapu.FamilyTree;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FamilyTree/weixinSDK",
+					"$(PROJECT_DIR)/FamilyTree/支付sdk/weixinSDK",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tongchengjiapu1.FamilyTree;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

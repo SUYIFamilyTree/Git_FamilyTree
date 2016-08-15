@@ -102,7 +102,7 @@
             break;
         case 3:
         {
-            FamilyHelpViewController *helpVc = [[FamilyHelpViewController alloc] initWithTitle:@"赏金寻亲" image:nil];;
+            FamilyHelpViewController *helpVc = [[FamilyHelpViewController alloc] initWithTitle:@"宗亲互助" image:nil];;
             [self.navigationController pushViewController:helpVc animated:YES];
         }
             break;

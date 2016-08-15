@@ -62,7 +62,7 @@
     //一本书
     [self initBookImageView];
 //    //左边目录
-//    [self initLeftTableView];
+    [self initLeftTableView];
     //书正文视图
     [self initContentView];
     //self.timeLB.text = @"子次公和日";
@@ -99,7 +99,8 @@
             }
             weakSelf.rightViewLBD.text = [NSString addLineBreaks:weakSelf.genealogyInfoModel.data.GeDisbut];
             weakSelf.rightViewLBA.text = [NSString addLineBreaks:weakSelf.genealogyInfoModel.data.GeName];
-           [weakSelf initLeftTableView];
+           //[weakSelf initLeftTableView];
+            [weakSelf.leftTableView reloadData];
            [weakSelf initContentSV:weakSelf.infoArr.firstObject];
 //            MYLog(@"%@",weakSelf.menuArr);
 //            MYLog(@"%@",weakSelf.infoArr);
@@ -120,14 +121,14 @@
 }
 //左边目录
 -(void)initLeftTableView{
-    _leftTableView = [[UITableView alloc]initWithFrame:CGRectMake(CGRectX(_bookImageView)+10, CGRectY(_bookImageView)+35, 0.2*CGRectW(_bookImageView)+20, CGRectH(_bookImageView)-75) style:UITableViewStylePlain];
-    _leftTableView.backgroundColor = [UIColor clearColor];
-    _leftTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-     _leftTableView.showsVerticalScrollIndicator = NO;
-    _leftTableView.bounces = NO;
-    _leftTableView.delegate = self;
-    _leftTableView.dataSource = self;
-   [self.view addSubview:_leftTableView];
+//    _leftTableView = [[UITableView alloc]initWithFrame:CGRectMake(CGRectX(_bookImageView)+10, CGRectY(_bookImageView)+35, 0.2*CGRectW(_bookImageView)+20, CGRectH(_bookImageView)-75) style:UITableViewStylePlain];
+//    _leftTableView.backgroundColor = [UIColor clearColor];
+//    _leftTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//     _leftTableView.showsVerticalScrollIndicator = NO;
+//    _leftTableView.bounces = NO;
+//    _leftTableView.delegate = self;
+//    _leftTableView.dataSource = self;
+   [self.view addSubview:self.leftTableView];
 }
 //正文视图
 -(void)initContentView{
@@ -253,6 +254,21 @@
     return _rightView;
 }
 
+
+-(UITableView *)leftTableView{
+    if (!_leftTableView) {
+        _leftTableView = [[UITableView alloc]initWithFrame:CGRectMake(CGRectX(_bookImageView)+10, CGRectY(_bookImageView)+35, 0.2*CGRectW(_bookImageView)+20, CGRectH(_bookImageView)-75) style:UITableViewStylePlain];
+        _leftTableView.backgroundColor = [UIColor clearColor];
+        _leftTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _leftTableView.showsVerticalScrollIndicator = NO;
+        _leftTableView.bounces = NO;
+        _leftTableView.delegate = self;
+        _leftTableView.dataSource = self;
+    }
+    return _leftTableView;
+}
+
+
 //-(UIView *)selecMyFamView{
 //    if (!_selecMyFamView) {
 //        _selecMyFamView = [[SelectMyFamilyView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
@@ -260,6 +276,8 @@
 //    }
 //    return _selecMyFamView;
 //}
+
+
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -290,11 +308,11 @@
 
 
 #pragma mark - CommandNavigationViewsDelegate
--(void)SelectMyFamilyViewDelegate:(SelectMyFamilyView *)seleMyFam didSelectFamID:(NSString *)famId{
+-(void)CommonNavigationViews:(CommonNavigationViews *)comView selectedFamilyId:(NSString *)famId{
     MYLog(@"到这了%@",famId);
     [self getData:[famId integerValue]];
-}
 
+}
 
 
 #pragma mark *** SelectMyFamViewDelegate ***
