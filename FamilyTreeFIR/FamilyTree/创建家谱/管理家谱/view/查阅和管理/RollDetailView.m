@@ -39,30 +39,62 @@
     //左边信息
     for (int idx = 0; idx<_leftArr.count; idx++) {
         NSInteger length = ((NSString *)_leftArr[idx]).length;
-        UILabel *leftLB = [[UILabel alloc] initWithFrame:AdaptationFrame(16, 16, length*50, 50+idx*90)];
+        UILabel *leftLB = [[UILabel alloc] initWithFrame:AdaptationFrame(16, 16+40*idx, length*22, 40)];
         leftLB.font = MFont(22*AdaptationWidth());
         leftLB.text = _leftArr[idx];
-        
-        NSInteger length2 = 0;
-        UILabel *rightLb = [[UILabel alloc] init];
-//        if (idx==1&&![((NSString *)(_rightArr[idx][0])) isEqualToString:@"无数据"]) {
-//            length2 = ((NSString *)_rightArr[idx][0]).length;
-//            rightLb = [[UILabel alloc] initWithFrame:AdaptationFrame(CGRectXW(leftLB), 16, length2*50, leftLB.bounds.size.height/AdaptationWidth())];
-//            rightLb.text = _rightArr[idx][0];
-//        }else{
-        
-        length2 = ((NSString *)_rightArr[idx]).length;
-        rightLb = [[UILabel alloc] initWithFrame:AdaptationFrame(CGRectXW(leftLB), 16, length2*50, leftLB.bounds.size.height/AdaptationWidth())];
-        rightLb.text = _rightArr[idx];
-            
-     
-        
-        
-        rightLb.font = leftLB.font;
-        
         [self addSubview:leftLB];
-        [self addSubview:rightLb];
+    }
+    
+//    NSLog(@"---fuqin and child--%@", _rightArr); 获取右边视图数据，需要调试时打开
+
+    for (int idx = 0; idx<_rightArr.count; idx++) {
         
+        if (idx==0) {
+            NSInteger length2 = ((NSString *)_rightArr[0]).length*22;
+            UILabel *rightLb = [[UILabel alloc] initWithFrame:
+                       AdaptationFrame(80, 16+40*idx, length2, 40)];
+            rightLb.text = _rightArr[0];
+            if ([rightLb.text isEqualToString:@""]) {
+                rightLb.text = @"-";
+            }
+            rightLb.font = WFont(22);
+            [self addSubview:rightLb];
+        }
+        if (idx==1) {
+            //姓名
+            if (((NSArray *)_rightArr[1]).count==1) {
+                
+                UILabel *rightLb = [[UILabel alloc] initWithFrame:
+                                    AdaptationFrame(80, 16+40*idx, 100, 40)];
+                rightLb.text = _rightArr[1][0];
+                if ([rightLb.text isEqualToString:@""]) {
+                    rightLb.text = @"-";
+                }
+                rightLb.font = WFont(22);
+                [self addSubview:rightLb];
+            }else {
+                //养子
+                NSArray *chlArr = _rightArr[1];
+                    UIScrollView *chScro = [[UIScrollView alloc] initWithFrame:AdaptationFrame(80, 56, 100, 140)];
+                    chScro.contentSize = AdaptationSize(100, chlArr.count*40);
+                    chScro.showsVerticalScrollIndicator = false;
+                    chScro.showsHorizontalScrollIndicator = false;
+                    
+                    for (int num = 0; num<chlArr.count; num++) {
+                            UILabel *rightLb = [[UILabel alloc] initWithFrame:
+                                                AdaptationFrame(0, 40*num, 100, 40)];
+                            rightLb.text = chlArr[num];
+                            if ([rightLb.text isEqualToString:@""]) {
+                                rightLb.text = @"-";
+                            }
+                            rightLb.font = WFont(22);
+                            [chScro addSubview:rightLb];
+                    }
+                    [self addSubview:chScro];
+
+//                            }
+            
+        }
     }
     
     [self addSubview:self.headImageView];
@@ -71,6 +103,7 @@
     
     [self addSubview:self.genLabel];
     
+}
 }
 -(UIImageView *)headImageView{
     if (!_headImageView) {
