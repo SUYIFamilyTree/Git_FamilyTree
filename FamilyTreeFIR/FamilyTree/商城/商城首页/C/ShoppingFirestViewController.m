@@ -106,7 +106,11 @@
     }];
 
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.shopCartView reloadallData];
+}
+#pragma mark *** 初始化 ***
 - (void)initView{
     
     [self.view removeAllSubviews];

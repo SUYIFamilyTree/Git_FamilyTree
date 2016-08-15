@@ -58,7 +58,7 @@
     [self.backIV addSubview:self.cloudIV];
     NSArray *BtnImageArr = @[@"sy_jp",@"sy_fw",@"sy_ys",@"sy_xw",@"sy_qf",@"sy_qq"];
     for (int i = 0; i < 6; i++ ) {
-        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(10, CGRectYH(self.cloudIV)+13+72*i, Screen_width-20, 63)];
+        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(10, CGRectYH(self.cloudIV)+13+(0.21*(Screen_width-20)+9)*i, Screen_width-20, 0.21*(Screen_width-20))];
         view.layer.shadowColor = [UIColor grayColor].CGColor;
         view.layer.shadowOffset = CGSizeMake(1, 1);
         view.layer.shadowOpacity = 0.5;
@@ -146,7 +146,7 @@
         _backSV.showsVerticalScrollIndicator = NO;
         _backSV.showsHorizontalScrollIndicator = NO;
         _backSV.bounces = NO;
-        _backSV.contentSize = CGSizeMake(Screen_width, 545);
+        _backSV.contentSize = CGSizeMake(Screen_width, 620);
     }
     return _backSV;
 }

@@ -192,7 +192,7 @@
                                                      if (succe) {
                                                          NSLog(@"????----%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
                                                          [SXLoadingView showAlertHUD:@"结算成功" duration:0.5];
-                                                         [wkself.navigationController popToRootViewControllerAnimated:YES];
+                                                         [wkself.navigationController popViewControllerAnimated:YES];
                                                      }
         
     } failure:^(NSError *error) {
