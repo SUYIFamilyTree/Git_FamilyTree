@@ -71,7 +71,7 @@ enum {
     imagView.image = MImage(@"qiuQian_bg");
     imagView.userInteractionEnabled = YES;
     [self.view addSubview:imagView];
-    imagView.sd_layout.leftSpaceToView(self.view,0).topSpaceToView(self.view,64).rightSpaceToView(self.view,0).bottomSpaceToView(self.view,self.tabBarController.tabBar.frame.size.height);
+    imagView.sd_layout.leftSpaceToView(self.view,0).topSpaceToView(self.view,64).rightSpaceToView(self.view,0).bottomSpaceToView(self.view,0);
     self.imageView = imagView;
     self.imageView.userInteractionEnabled = YES;
     

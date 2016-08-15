@@ -21,8 +21,8 @@ typedef enum : NSUInteger {
 
 @property (nonatomic,strong) UIImageView *backImageView; /*背景图*/
 
-@property (nonatomic,strong) OtherLoginView *otherLoginView; /*三方登录*/
-@property (nonatomic,strong) UIButton *tourBtn; /*游客按钮*/
+//@property (nonatomic,strong) OtherLoginView *otherLoginView; /*三方登录*/
+//@property (nonatomic,strong) UIButton *tourBtn; /*游客按钮*/
 
 
 
@@ -37,8 +37,8 @@ typedef enum : NSUInteger {
         [self addSubview:self.topView];
         [self addSubview:self.accountView];
         [self addSubview:self.passwordView];
-        [self addSubview:self.otherLoginView];
-        [self addSubview:self.tourBtn];
+//        [self addSubview:self.otherLoginView];
+//        [self addSubview:self.tourBtn];
         
     }
     return self;
@@ -68,11 +68,11 @@ typedef enum : NSUInteger {
 }
 
 #pragma mark *** 游客按钮 ***
--(void)respondsToTourBtn:(UIButton *)sender{
-    if (_delegate && [_delegate respondsToSelector:@selector(loginView:didSelectedTourBtn:)]) {
-        [_delegate loginView:self didSelectedTourBtn:sender];
-    }
-}
+//-(void)respondsToTourBtn:(UIButton *)sender{
+//    if (_delegate && [_delegate respondsToSelector:@selector(loginView:didSelectedTourBtn:)]) {
+//        [_delegate loginView:self didSelectedTourBtn:sender];
+//    }
+//}
 
 #pragma mark *** getters ***
 -(UIImageView *)backImageView{
@@ -112,27 +112,27 @@ typedef enum : NSUInteger {
     }
     return _passwordView;
 }
--(OtherLoginView *)otherLoginView{
-    if (!_otherLoginView) {
-        _otherLoginView = [[OtherLoginView alloc] initWithFrame:CGRectMake(0, 0, 0.7*Screen_width, 100)];
-        
-        _otherLoginView.center = CGPointMake(self.center.x, 0.8*Screen_height);
-        _otherLoginView.delegate = self;
-    }
-    return _otherLoginView;
-}
+//-(OtherLoginView *)otherLoginView{
+//    if (!_otherLoginView) {
+//        _otherLoginView = [[OtherLoginView alloc] initWithFrame:CGRectMake(0, 0, 0.7*Screen_width, 100)];
+//        
+//        _otherLoginView.center = CGPointMake(self.center.x, 0.8*Screen_height);
+//        _otherLoginView.delegate = self;
+//    }
+//    return _otherLoginView;
+//}
 
--(UIButton *)tourBtn{
-    if (!_tourBtn) {
-        _tourBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.bounds.size.width/2-75, self.bounds.size.height-40, 150, 30)];
-        [_tourBtn setTitle:@"游 客 直 接 进 入" forState:UIControlStateNormal];
-        
-        _tourBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_tourBtn addTarget:self action:@selector(respondsToTourBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
-    }
-    return _tourBtn;
-}
+//-(UIButton *)tourBtn{
+//    if (!_tourBtn) {
+//        _tourBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.bounds.size.width/2-75, self.bounds.size.height-40, 150, 30)];
+//        [_tourBtn setTitle:@"游 客 直 接 进 入" forState:UIControlStateNormal];
+//        
+//        _tourBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+//        [_tourBtn addTarget:self action:@selector(respondsToTourBtn:) forControlEvents:UIControlEventTouchUpInside];
+//        
+//    }
+//    return _tourBtn;
+//}
 
 
 @end

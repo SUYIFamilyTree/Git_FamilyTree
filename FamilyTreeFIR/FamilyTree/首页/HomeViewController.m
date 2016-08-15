@@ -61,7 +61,7 @@ typedef enum : NSUInteger {
     [self initBtn];
     //获取首页数据
     dispatch_async(dispatch_queue_create("myQueue", NULL), ^{
-       //[self getData];
+       [self getData];
     });
     
 }
@@ -74,7 +74,7 @@ typedef enum : NSUInteger {
 
 -(void)getData{
     if (GetUserId) {
-        NSDictionary *logDic = @{};
+        NSDictionary *logDic = @{@"userid":GetUserId};
         WK(weakSelf)
         [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getapiindeximg" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
             MYLog(@"%@",jsonDic[@"data"]);

@@ -8,6 +8,8 @@
 
 #import "RootTabBarViewController.h"
 #import "Tools.h"
+#import "YHomeViewController.h"
+#import "FamilServiceViewController.h"
 
 #define TabBarBtn_tag 10
 
@@ -39,23 +41,26 @@
 #pragma mark *** 初始化数据 ***
 -(void)initData{
     //标题、图片和选择图片
-    _viewControllersTitles = @[kStringWithHomeVcTitle,kStringWithFamilyTreeVcTitle,kStringWithShoppingVcTitle,kStringWithPersonalCenterVcTitle];
-    _barImageArr = @[kImageWithHomeVc,kImageWithFamilyTreeVc,kImageWithShoppingVc,kImageWithPersonalCenterVc];
-    _barSelectedImageArr = @[kSelectedImageWithHomeVc,kSelectedImageWithFamilyTreeVc,kSelectedImageWithShoppingVc,kSelectedImageWithPersonalCenterVc];
+    _viewControllersTitles = @[kStringWithHomeVcTitle,kStringWithFamilyTreeVcTitle,kStringWithServiceVcTitle,kStringWithPersonalCenterVcTitle];
+    _barImageArr = @[kImageWithHomeVc,kImageWithFamilyTreeVc,kImageWithServiceVc,kImageWithPersonalCenterVc];
+    _barSelectedImageArr = @[kSelectedImageWithHomeVc,kSelectedImageWithFamilyTreeVc,kSelectedImageWithServiceVc,kSelectedImageWithPersonalCenterVc];
 }
 
 #pragma mark *** 配置标签控制器 ***
 
 -(void)configTabBarViewController{
     //初始化控制器
-    HomeViewController *homeVc = [[HomeViewController alloc] init];
+    //HomeViewController *homeVc = [[HomeViewController alloc] init];
+    YHomeViewController *homeVc = [[YHomeViewController alloc]init];
+    
     FamilyTreeViewController *familyVc = [[FamilyTreeViewController alloc] init];
-    ShoppingFirestViewController *shopVc = [[ShoppingFirestViewController alloc] init];
+//    ShoppingFirestViewController *shopVc = [[ShoppingFirestViewController alloc] init];
+    FamilServiceViewController *serviceVC = [[FamilServiceViewController alloc]init];
     
     PersonalCenterViewController *personCen = [[PersonalCenterViewController alloc] init];
     
     //控制器数组
-    NSArray *viewControllers = @[homeVc,familyVc,shopVc,personCen];
+    NSArray *viewControllers = @[homeVc,familyVc,serviceVC,personCen];
     
     //配置全部viewControllers的导航控制器
     NSMutableArray *navs = [@[] mutableCopy];
@@ -88,9 +93,12 @@
     //设置标签控制器的导航控制器
     self.viewControllers = navs;
     //配置标签栏颜色
-    self.tabBar.barTintColor = [UIColor whiteColor];
-    self.tabBar.tintColor = [UIColor blackColor];
+//    self.tabBar.barTintColor = [UIColor whiteColor];
+//    self.tabBar.tintColor = [UIColor blackColor];
+    self.tabBar.tintColor = LH_RGBCOLOR(183, 233, 149);
     self.selectedIndex = 0;
+    //设置标签栏背景图
+    [self.tabBar setBackgroundImage:MImage(@"sy_tabbg")];
 
     UISwipeGestureRecognizer *swipGes = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(respondsToSwipGes:)];
     swipGes.direction = UISwipeGestureRecognizerDirectionLeft;

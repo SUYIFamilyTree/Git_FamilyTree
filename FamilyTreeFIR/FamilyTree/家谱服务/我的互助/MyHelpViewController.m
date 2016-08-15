@@ -55,7 +55,7 @@ typedef enum : NSUInteger {
     [self.changeWhiteBackV addSubview:self.changeSC];
     self.changeSC.sd_layout.centerXEqualToView(self.changeWhiteBackV).centerYEqualToView(self.changeWhiteBackV).heightIs(25).widthIs(175);
     [self.view addSubview:self.infoTB];
-    self.infoTB.sd_layout.topSpaceToView(self.changeWhiteBackV,0).bottomSpaceToView(self.view,49).leftSpaceToView(self.view,0).rightSpaceToView(self.view,0);
+    self.infoTB.sd_layout.topSpaceToView(self.changeWhiteBackV,0).bottomSpaceToView(self.view,0).leftSpaceToView(self.view,0).rightSpaceToView(self.view,0);
     [self.view addSubview:self.addPostBtn];
     self.addPostBtn.sd_layout.rightSpaceToView(self.self.view,0).bottomSpaceToView(self.view,60).widthIs(50).heightIs(50);
     self.addPostBtn.sd_cornerRadius = @25;

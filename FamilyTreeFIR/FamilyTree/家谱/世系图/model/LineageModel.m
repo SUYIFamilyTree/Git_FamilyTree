@@ -23,6 +23,20 @@
 
 @end
 @implementation LineageDatalistModel
++ (NSDictionary *)modelCustomPropertyMapper{
+    return @{@"layers":@"layer"
+             };
+}
+
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+        self.username = @"姚珉";
+        self.sex = @"男";
+        self.relation = @"关系";
+    }
+    return self;
+}
 
 @end
 

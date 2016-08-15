@@ -54,7 +54,7 @@
     [self getData:1];
     self.view.backgroundColor = [UIColor whiteColor];
     //配置导航栏
-//    self.comNavi.delegate = self;
+   self.comNavi.delegate = self;
     //设置背景
     UIImageView *bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
     bgImageView.image = MImage(@"bg");
@@ -62,7 +62,7 @@
     //一本书
     [self initBookImageView];
 //    //左边目录
-//    [self initLeftTableView];
+    [self initLeftTableView];
     //书正文视图
     [self initContentView];
     //self.timeLB.text = @"子次公和日";
@@ -72,13 +72,13 @@
     //self.contentUnderImageLB.text = @"王氏32族谱";
     [self.view addSubview:self.contentUnderImageLB];
     //图下两条线
-    [self initLeftAndRightLineIV];
+    //[self initLeftAndRightLineIV];
     [self.view addSubview:self.rightView];
     //右侧四个标签
     [self initRightLBs];
     //self.rightViewLBA.text = @"曾\n氏\n族\n谱";
-    self.rightViewLBB.text = @"卷一";
-    self.rightViewLBC.text = @"一\n百\n一\n十\n二\n页";
+    self.rightViewLBB.text = @"卷\n一";
+//    self.rightViewLBC.text = @"一\n百\n一\n十\n二\n页";
     //self.rightViewLBD.text = @"白\n鹤\n堂";
 }
 
@@ -99,7 +99,8 @@
             }
             weakSelf.rightViewLBD.text = [NSString addLineBreaks:weakSelf.genealogyInfoModel.data.GeDisbut];
             weakSelf.rightViewLBA.text = [NSString addLineBreaks:weakSelf.genealogyInfoModel.data.GeName];
-           [weakSelf initLeftTableView];
+           //[weakSelf initLeftTableView];
+            [weakSelf.leftTableView reloadData];
            [weakSelf initContentSV:weakSelf.infoArr.firstObject];
 //            MYLog(@"%@",weakSelf.menuArr);
 //            MYLog(@"%@",weakSelf.infoArr);
@@ -120,14 +121,14 @@
 }
 //左边目录
 -(void)initLeftTableView{
-    _leftTableView = [[UITableView alloc]initWithFrame:CGRectMake(CGRectX(_bookImageView)+10, CGRectY(_bookImageView)+35, 0.2*CGRectW(_bookImageView)+20, CGRectH(_bookImageView)-75) style:UITableViewStylePlain];
-    _leftTableView.backgroundColor = [UIColor clearColor];
-    _leftTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-     _leftTableView.showsVerticalScrollIndicator = NO;
-    _leftTableView.bounces = NO;
-    _leftTableView.delegate = self;
-    _leftTableView.dataSource = self;
-   [self.view addSubview:_leftTableView];
+//    _leftTableView = [[UITableView alloc]initWithFrame:CGRectMake(CGRectX(_bookImageView)+10, CGRectY(_bookImageView)+35, 0.2*CGRectW(_bookImageView)+20, CGRectH(_bookImageView)-75) style:UITableViewStylePlain];
+//    _leftTableView.backgroundColor = [UIColor clearColor];
+//    _leftTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//     _leftTableView.showsVerticalScrollIndicator = NO;
+//    _leftTableView.bounces = NO;
+//    _leftTableView.delegate = self;
+//    _leftTableView.dataSource = self;
+   [self.view addSubview:self.leftTableView];
 }
 //正文视图
 -(void)initContentView{
@@ -253,6 +254,21 @@
     return _rightView;
 }
 
+
+-(UITableView *)leftTableView{
+    if (!_leftTableView) {
+        _leftTableView = [[UITableView alloc]initWithFrame:CGRectMake(CGRectX(_bookImageView)+10, CGRectY(_bookImageView)+35, 0.2*CGRectW(_bookImageView)+20, CGRectH(_bookImageView)-75) style:UITableViewStylePlain];
+        _leftTableView.backgroundColor = [UIColor clearColor];
+        _leftTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _leftTableView.showsVerticalScrollIndicator = NO;
+        _leftTableView.bounces = NO;
+        _leftTableView.delegate = self;
+        _leftTableView.dataSource = self;
+    }
+    return _leftTableView;
+}
+
+
 //-(UIView *)selecMyFamView{
 //    if (!_selecMyFamView) {
 //        _selecMyFamView = [[SelectMyFamilyView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, HeightExceptNaviAndTabbar)];
@@ -260,6 +276,8 @@
 //    }
 //    return _selecMyFamView;
 //}
+
+
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -289,18 +307,13 @@
 }
 
 
-//#pragma mark - CommandNavigationViewsDelegate
-//-(void)CommonNavigationViews:(CommonNavigationViews *)comView respondsToRightBtn:(UIButton *)sender{
-//    MYLog(@"点击我的家谱");
-//    sender.selected = !sender.selected;
-//    if (sender.selected) {
-//        [self.view addSubview:self.selecMyFamView];
-//    }else{
-//        
-//        [self.selecMyFamView removeFromSuperview];
-//    }
-//
-//}
+#pragma mark - CommandNavigationViewsDelegate
+-(void)CommonNavigationViews:(CommonNavigationViews *)comView selectedFamilyId:(NSString *)famId{
+    MYLog(@"到这了%@",famId);
+    [self getData:[famId integerValue]];
+
+}
+
 
 #pragma mark *** SelectMyFamViewDelegate ***
 

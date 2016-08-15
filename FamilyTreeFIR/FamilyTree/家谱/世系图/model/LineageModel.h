@@ -40,8 +40,9 @@
 /** 姓名*/
 @property (nonatomic, copy) NSString *username;
 /** 层级，表示此成员为家谱中的第几代*/
-@property (nonatomic, assign) NSInteger layer;
-
+@property (nonatomic, assign) NSInteger layers;
+/** 有几个儿子*/
+@property (nonatomic, assign) NSInteger haveSon;
 @end
 
 @interface LineageLevelInfoModel : NSObject
