@@ -200,6 +200,7 @@
     UIButton *personalInfoEditBtn = [[UIButton alloc]initWithFrame:CGRectMake(10, 20, 40, 50)];
     
     [personalInfoEditBtn setImage:MImage(@"gr_ct_tit_wt") forState:UIControlStateNormal];
+    [personalInfoEditBtn setImage:MImage(@"fanhui") forState:UIControlStateSelected];
     personalInfoEditBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
     [personalInfoEditBtn addTarget:self action:@selector(clickPersonalInfoBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.navi addSubview:personalInfoEditBtn];

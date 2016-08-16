@@ -25,7 +25,7 @@
         [self.searchView addSubview:self.searchLabel];
         [self.searchView addSubview:self.searchImage];
         [self addSubview:self.menuBtn];
-        self.menuBtn.sd_layout.leftSpaceToView(self.searchView,0).rightSpaceToView(self,0).heightIs(30).topSpaceToView(self,27);
+        self.menuBtn.sd_layout.leftSpaceToView(self.searchView,-30).rightSpaceToView(self,10).heightIs(30).topSpaceToView(self,27);
        
     }
     return self;
@@ -92,7 +92,7 @@
     if (!_menuBtn) {
         _menuBtn = [[UIButton alloc]init];
         [_menuBtn setTitle:@"我的互助" forState:UIControlStateNormal];
-        _menuBtn.titleLabel.font = MFont(12);
+        _menuBtn.titleLabel.font = MFont(15);
         [_menuBtn addTarget:self action:@selector(respondsToMenuBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _menuBtn;

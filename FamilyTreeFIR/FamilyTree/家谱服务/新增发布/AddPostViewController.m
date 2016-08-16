@@ -288,6 +288,8 @@
         }else{
             [self postData];
         }
+    }else{
+        [self postData];
     }
 }
 
@@ -319,7 +321,7 @@
                              };
     WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeCreateZqhz success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        MYLog(@"%@",jsonDic);
+        MYLog(@"11%@",jsonDic);
         if (succe) {
             [SXLoadingView showAlertHUD:jsonDic[@"message"] duration:0.5];
             [weakSelf uploadImage:[jsonDic[@"data"] integerValue]];

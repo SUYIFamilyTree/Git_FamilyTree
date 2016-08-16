@@ -25,7 +25,6 @@
 #import "HeaderSelectView.h"
 #import "FamilyHelpViewController.h"
 #import "ScrollerView.h"
-#import "DetailFamHeViewController.h"
 #import "CreateFamViewController.h"
 #import "AddMemberViewController.h"
 #import "InputView.h"

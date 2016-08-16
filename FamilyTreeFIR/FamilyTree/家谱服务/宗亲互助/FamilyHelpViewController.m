@@ -9,6 +9,8 @@
 
 #import "FamilyHelpViewController.h"
 #import "HelpTableTableViewCell.h"
+#import "AdgnatioHelpInfoViewController.h"
+
 #define BtnWidth 50
 #define GapToleft 15
 static NSString *const kReusableCellIdentifier = @"cellIdentifier";
@@ -22,7 +24,7 @@ static NSString *const kReuserableUITableViewCell = @"UITableViewCell";
 @interface FamilyHelpViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong) NSArray *dataSource; /*数据源*/
 
-@property (nonatomic,assign) NSInteger selectedBtnNum; /*选择的第几个btn*/
+//@property (nonatomic,assign) NSInteger selectedBtnNum; /*选择的第几个btn*/
 
 
 
@@ -38,22 +40,21 @@ static NSString *const kReuserableUITableViewCell = @"UITableViewCell";
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self initUI];
-
+    [self getDataWithType:self.type];
 }
 
 
 #pragma mark *** 初始化界面 ***
 -(void)initUI{
     
-    _selectedBtnNum = 0;
     
-    NSArray *topTitles = @[@"产品众筹",@"赏金寻亲",@"募捐圆梦",@"我提供",@"我需要"];
-    NSArray *imageNames = @[@"sj_icon_1",@"sj_icon_2",@"sj_icon_3",@"sj_icon_4",@"sj_icon_5"];
+    NSArray *topTitles = @[@"赏金寻亲",@"募捐圆梦",@"我提供",@"我需要"];
+    NSArray *imageNames = @[@"sj_icon_2",@"sj_icon_3",@"sj_icon_4",@"sj_icon_5"];
     for (int idx = 0; idx<topTitles.count; idx++) {
         
         //按钮
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.tag = idx;
+        btn.tag = idx+111;
         [btn addTarget:self action:@selector(respondsToAllBtn:) forControlEvents:UIControlEventTouchUpInside];
         [btn setImage:MImage(imageNames[idx]) forState:0];
 
@@ -74,7 +75,6 @@ static NSString *const kReuserableUITableViewCell = @"UITableViewCell";
         
     }
     //滚动图
-    
     NSMutableArray *arr = [@[@"sj_bg",@"sj_icon_1",@"sj_icon_2"] mutableCopy];
     
     ScrollerView *scroView = [[ScrollerView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.myLabel.frame), Screen_width, 0.3*Screen_height) images:arr];
@@ -89,26 +89,55 @@ static NSString *const kReuserableUITableViewCell = @"UITableViewCell";
     
 }
 
+#pragma mark - 请求数据
+-(void)getDataWithType:(NSString *)type{
+    NSDictionary *logDic = @{@"pagenum":@1,
+                             @"pagesize":@999,
+                             @"type":type,
+                             @"memberid":[NSString stringWithFormat:@"%@",GetUserId],
+                             @"geid":@0,
+                             @"gemeid":@0,
+                             @"istop":@"0"};
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"zqhzlist" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"%@",jsonDic);
+        if (succe) {
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+
 #pragma mark *** Events ***
 -(void)respondsToAllBtn:(UIButton *)sender{
-    MYLog(@"%ld",(long)sender.tag);
-    _selectedBtnNum = sender.tag;
-   
+    MYLog(@"%ld",(long)sender.tag-111);
+    switch (sender.tag-111) {
+        case 0:
+            [self getDataWithType:@"SJXQ"];
+            break;
+        case 1:
+            [self getDataWithType:@"MJYM"];
+            break;
+        case 2:
+            [self getDataWithType:@"WTG"];
+            break;
+        case 3:
+            [self getDataWithType:@"WXY"];
+            break;
+        default:
+            break;
+    }
     [self.tableView reloadData];
     
 }
 
 #pragma mark *** tableDataSource ***
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (_selectedBtnNum==0) {
-        return 5;
-    }
-    
     return self.dataSource.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //选中第产品众筹
-    if (_selectedBtnNum == 0) {
         HelpTableTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kReusableCellIdentifier forIndexPath:indexPath];
         if (!cell) {
             cell = [[HelpTableTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kReusableCellIdentifier];
@@ -117,30 +146,19 @@ static NSString *const kReuserableUITableViewCell = @"UITableViewCell";
         cell.leftImageView.image = MImage(@"sj_bg");
         
         return cell;
-    }
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kReuserableUITableViewCell forIndexPath:indexPath];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kReuserableUITableViewCell];
-    }
-    
-    cell.textLabel.text = self.dataSource[indexPath.row];
-    
-    
-    return cell;
 }
+    
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (_selectedBtnNum == 0) {
-        return 0.2*Screen_width+10;
-    }
-    return 40;
+    return 0.2*Screen_width+10;
+   
 }
 
 #pragma mark *** tableViewDelegate ***
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    DetailFamHeViewController *detailVc = [[DetailFamHeViewController alloc] initWithTitle:@"宗亲互助" image:nil];
+    AdgnatioHelpInfoViewController *detailVc = [[AdgnatioHelpInfoViewController alloc] initWithTitle:@"宗亲互助" image:nil];
     [self.navigationController pushViewController:detailVc animated:YES];
 }
 

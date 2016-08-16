@@ -21,11 +21,11 @@
     if (self) {
         [self.contentView addSubview:self.leftImageView];
         [self.contentView addSubview:self.oneLabel];
-        [self.contentView addSubview:self.twoLabel];
+        //[self.contentView addSubview:self.twoLabel];
         
         self.leftImageView.sd_layout.leftSpaceToView(self.contentView,5).topSpaceToView(self.contentView,0).heightIs(0.2*Screen_width).widthIs(0.4*Screen_width);
-        self.oneLabel.sd_layout.leftSpaceToView(self.leftImageView,5).rightSpaceToView(self.contentView,20).topEqualToView(self.leftImageView).heightIs(20);
-        self.twoLabel.sd_layout.leftEqualToView(self.oneLabel).topSpaceToView(self.oneLabel,5).rightEqualToView(self.oneLabel).bottomEqualToView(self.leftImageView);
+        self.oneLabel.sd_layout.leftSpaceToView(self.leftImageView,5).rightSpaceToView(self.contentView,20).topEqualToView(self.leftImageView).heightIs(40);
+        //self.twoLabel.sd_layout.leftEqualToView(self.oneLabel).topSpaceToView(self.oneLabel,5).rightEqualToView(self.oneLabel).bottomEqualToView(self.leftImageView);
         
     }
     return self;
@@ -51,17 +51,17 @@
         _oneLabel = [UILabel new];
         _oneLabel.font = MFont(15);
         _oneLabel.text = @"只能拐杖,让关爱如影随形";
-        
+        _oneLabel.numberOfLines = 0;
     }
     return _oneLabel;
 }
--(UILabel *)twoLabel{
-    if (!_twoLabel) {
-        _twoLabel = [UILabel new];
-        _twoLabel.font = MFont(12);
-        _twoLabel.text = @"跌倒报警,gprs定位,跌倒报警,gprs定位跌倒报警,gprs定位跌倒报警,gprs定位跌倒报警,gprs定位跌倒报";
-        _twoLabel.numberOfLines = 0;
-    }
-    return _twoLabel;
-}
+//-(UILabel *)twoLabel{
+//    if (!_twoLabel) {
+//        _twoLabel = [UILabel new];
+//        _twoLabel.font = MFont(12);
+//        _twoLabel.text = @"跌倒报警,gprs定位,跌倒报警,gprs定位跌倒报警,gprs定位跌倒报警,gprs定位跌倒报警,gprs定位跌倒报";
+//        _twoLabel.numberOfLines = 0;
+//    }
+//    return _twoLabel;
+//}
 @end

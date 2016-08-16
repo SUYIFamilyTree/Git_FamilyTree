@@ -11,5 +11,5 @@
 @interface HelpTableTableViewCell : UITableViewCell
 @property (nonatomic,strong) UIImageView *leftImageView; /*左边图*/
 @property (nonatomic,strong) UILabel *oneLabel; /*label1*/
-@property (nonatomic,strong) UILabel *twoLabel; /*label2*/
+//@property (nonatomic,strong) UILabel *twoLabel; /*label2*/
 @end

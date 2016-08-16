@@ -197,9 +197,9 @@
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
         [dic setValue:[NSString addLineBreaks:arr[i].jpname] forKey:@"jpname"];
         [dic setValue:[NSString addLineBreaks:arr[i].jphyname] forKey:@"jphyname"];
-        [dic setObject:[NSString addLineBreaks:[NSString stringWithFormat:@"第%@代",[NSString translation:(short)arr[i].jpdai]]] forKey:@"jpdai"];
+        [dic setObject:[NSString addLineBreaks:[NSString stringWithFormat:@"第%@代",[NSString translation:(long)arr[i].jpdai]]] forKey:@"jpdai"];
         [dic setObject:[NSString addLineBreaks:[NSString stringWithFormat:@"字辈 %@",arr[i].jpzb]] forKey:@"jpzb"];
-        [dic setObject:[NSString addLineBreaks:[NSString stringWithFormat:@"排行%@",[NSString translation:(short)arr[i].jpph]]] forKey:@"jpph"];
+        [dic setObject:[NSString addLineBreaks:[NSString stringWithFormat:@"排行%@",[NSString translation:(long)arr[i].jpph]]] forKey:@"jpph"];
         [mutableArr addObject:dic];
     }
     return [mutableArr copy];

@@ -20,7 +20,7 @@
 #import "ExpertRecommendViewController.h"
 
 #define ScrollerView_Height 210
-@interface FamilServiceViewController ()<TopSearchViewDelegate,TableViewDelegate,FamilyShopViewDelegate,CollectionFamilyDelegate>
+@interface FamilServiceViewController ()<TableViewDelegate,FamilyShopViewDelegate,CollectionFamilyDelegate>
 
 @property (nonatomic,strong) TopSearchView *topSearchView; /*顶部搜索*/
 @property (nonatomic,strong) ScrollerView *scrollerView; /*滚动图*/
@@ -86,12 +86,16 @@
     switch (indexPath.row) {
         case 0:
         {
-            
+            FamilyHelpViewController *helpVc = [[FamilyHelpViewController alloc] initWithTitle:@"宗亲互助" image:nil];
+            helpVc.type = @"MJYM";
+            [self.navigationController pushViewController:helpVc animated:YES];
         }
             break;
         case 1:
         {
-            
+            FamilyHelpViewController *helpVc = [[FamilyHelpViewController alloc] initWithTitle:@"宗亲互助" image:nil];
+            helpVc.type = @"SJXQ";
+            [self.navigationController pushViewController:helpVc animated:YES];
         }
             break;
         case 2:
@@ -102,7 +106,8 @@
             break;
         case 3:
         {
-            FamilyHelpViewController *helpVc = [[FamilyHelpViewController alloc] initWithTitle:@"宗亲互助" image:nil];;
+            FamilyHelpViewController *helpVc = [[FamilyHelpViewController alloc] initWithTitle:@"宗亲互助" image:nil];
+            helpVc.type = @"SJXQ";
             [self.navigationController pushViewController:helpVc animated:YES];
         }
             break;
@@ -155,14 +160,14 @@
 -(TopSearchView *)topSearchView{
     if (!_topSearchView) {
         _topSearchView = [[TopSearchView alloc] initWithFrame:CGRectMake(0, 0, Screen_width, StatusBar_Height+NavigationBar_Height)];
-        _topSearchView.delegate = self;
+        [_topSearchView.searchView removeFromSuperview];
         
     }
     return _topSearchView;
 }
 -(ScrollerView *)scrollerView{
     if (!_scrollerView) {
-        _scrollerView = [[ScrollerView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topSearchView.frame), Screen_width, ScrollerView_Height) images:nil];
+        _scrollerView = [[ScrollerView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, ScrollerView_Height) images:nil];
         
     }
     return _scrollerView;
