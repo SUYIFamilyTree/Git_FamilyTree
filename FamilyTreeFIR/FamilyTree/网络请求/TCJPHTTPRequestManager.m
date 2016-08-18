@@ -48,14 +48,14 @@
     
     //NSLog(@"md5afterStr--%@", md5check);
     
-    //NSMutableString  *autocode = [NSMutableString string];
-    NSString *authcode = @"";
-//        if ([requestcode isEqualToString:@"login"]||[requestcode isEqualToString:@"register"]||[requestcode isEqualToString:@"sendsms"]||[requestcode isEqualToString:@"getapiindeximg"]) {
-//            authcode = @"";
-//        }else{
-//            authcode = [USERDEFAULT valueForKey:@"authcode"];
-//        }
-    //MYLog(@"授权验证码%@",authcode);
+    NSString  *authcode;
+    //NSString *authcode = @"";
+        if ([requestcode isEqualToString:@"login"]||[requestcode isEqualToString:@"register"]||[requestcode isEqualToString:@"sendsms"]||[requestcode isEqualToString:@"getapiindeximg"]) {
+            authcode = @"";
+        }else{
+            authcode = [USERDEFAULT valueForKey:@"authcode"];
+        }
+    MYLog(@"授权验证码%@",authcode);
     
     NSDictionary *params = @{
                              @"requestuserid":requestID,
