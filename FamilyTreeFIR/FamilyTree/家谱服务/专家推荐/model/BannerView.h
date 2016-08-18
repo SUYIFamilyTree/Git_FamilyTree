@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BannerModel.h"
 
 @interface BannerView : UIView
 /** 图片数组*/
-@property (nonatomic, strong)NSArray<NSString *> *imageStrArr;
-
+@property (nonatomic, strong)NSArray<BannerModel *> *modelArr;
 @end

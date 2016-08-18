@@ -10,6 +10,7 @@
 #import "FamilyDTModel.h"
 #import "HundredsNamesModel.h"
 #import <MJRefresh.h>
+#import "BannerView.h"
 
 @interface NewsCenterViewController ()
 
@@ -17,7 +18,8 @@
 
 
 @property (nonatomic,strong) UISegmentedControl *segmentContl; /*分段控件*/
-@property (nonatomic,strong) ScrollerView *scroView; /*滚动新闻图*/
+/** banner图*/
+@property (nonatomic, strong) BannerView  *bannerView;
 
 @property (nonatomic,strong) NewsTableView *tableNesView; /*table*/
 
@@ -41,13 +43,15 @@
     [self.view addSubview:self.bacScrollView];
     [self.bacScrollView addSubview:self.whiteView];
     [self.bacScrollView addSubview:self.segmentContl];
-    [self.bacScrollView addSubview:self.scroView];
+    [self.bacScrollView addSubview:self.bannerView];
     [self.bacScrollView addSubview:self.tableNesView];
     self.tableNesView.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreJzdt)];
     [self.bacScrollView addSubview:self.proAndName];
     [self.bacScrollView addSubview:self.hundredVies];
     [self.bacScrollView addSubview:self.nameTableNews];
     
+    //获取banner
+    [self getBanner];
     //获取家族动态
     self.jzdtPage = 1;
     [self getFamilyDTData];
@@ -60,6 +64,23 @@
 }
 
 #pragma mark - 网络请求数据
+-(void)getBanner{
+    NSDictionary *logDic = @{@"type":@"XW"};
+    WK(weakSelf)
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getbanner" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"%@",jsonDic);
+        if (succe) {
+            NSArray *array = [NSArray modelArrayWithClass:[BannerModel class] json:jsonDic[@"data"]];
+            weakSelf.bannerView.modelArr = array;
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+
+}
+
+
+
 -(void)getFamilyDTData{
 //    NSDictionary *logDic = @{@"pagenum":@1,@"pagesize":@1999,@"type":@"JZDT",@"geid":@"",@"istop":@""};
     NSDictionary *logDic = @{@"pagenum":@(self.jzdtPage),@"pagesize":@5,@"type":@"JZDT",@"geid":@"",@"istop":@""};
@@ -171,16 +192,16 @@
     return _segmentContl;
 }
 
--(ScrollerView *)scroView{
-    if (!_scroView) {
-        _scroView = [[ScrollerView alloc] initWithFrame:AdaptationFrame(27, CGRectYH(self.segmentContl)/AdaptationWidth()+28, 667, 333) images:[@[@"news_lunbo.png",@"xuShi_bg"] mutableCopy]];
-        
+-(BannerView *)bannerView{
+    if (!_bannerView) {
+        _bannerView = [[BannerView alloc]initWithFrame:CGRectMake(0, CGRectYH(self.segmentContl)+5, Screen_width, 172)];
     }
-    return _scroView;
+    return _bannerView;
 }
+
 -(NewsTableView *)tableNesView{
     if (!_tableNesView) {
-        _tableNesView = [[NewsTableView alloc] initWithFrame:CGRectMake(0, CGRectYH(self.scroView)+20*AdaptationWidth(), Screen_width, 416*AdaptationWidth())];
+        _tableNesView = [[NewsTableView alloc] initWithFrame:CGRectMake(0, CGRectYH(self.bannerView), Screen_width, 416*AdaptationWidth())];
     }
     return _tableNesView;
 }

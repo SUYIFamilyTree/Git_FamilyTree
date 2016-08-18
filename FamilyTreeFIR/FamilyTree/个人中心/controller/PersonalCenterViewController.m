@@ -78,7 +78,7 @@
     [self initNavi];
     [self.view addSubview:self.scrollView];
     //添加背景图
-    UIImageView *bgIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 780)];
+    UIImageView *bgIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 620)];
     bgIV.image = MImage(@"gr_ct_bg");
     [self.scrollView addSubview:bgIV];
     //添加背景模糊视图
@@ -493,7 +493,7 @@
 -(UIScrollView *)scrollView{
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-49-64)];
-        _scrollView.contentSize = CGSizeMake(Screen_width, 780);
+        _scrollView.contentSize = CGSizeMake(Screen_width, 620);
         _scrollView.bounces = NO;
     }
     return _scrollView;
@@ -521,8 +521,12 @@
 }
 
 -(void)ToFortuneTodayView{
+    if ([[USERDEFAULT objectForKey:@"vipLevel"] intValue] == 0) {
+        [SXLoadingView showAlertHUD:@"您还不是会员" duration:0.5];
+    }else{
     FortuneTodayViewController *fortuneTodayVC = [[FortuneTodayViewController alloc]initWithTitle:@"今日运势" image:nil];
     [self.navigationController pushViewController:fortuneTodayVC animated:YES];
+    }
 }
 
 #pragma mark - PersonalCenterTodayFortuneViewDelegate

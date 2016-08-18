@@ -369,7 +369,8 @@
                                 forKey:@"authcode"];
                 //vip等级
                 [USERDEFAULT setObject:@(loginModel.lv) forKey:@"vipLevel"];
-                
+                //[USERDEFAULT setObject:@1 forKey:@"vipLevel"];
+
                 [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserAccount];
                 [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:UserPassword];
                 

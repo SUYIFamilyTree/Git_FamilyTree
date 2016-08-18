@@ -1202,6 +1202,7 @@
 		BCF97C4F1D17988B004D46AB /* close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BCF97C4C1D17988B004D46AB /* close@3x.png */; };
 		BCF97C591D17B46D004D46AB /* SXLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF97C531D17B46D004D46AB /* SXLoadingView.m */; };
 		BCF97C5A1D17B46D004D46AB /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF97C561D17B46D004D46AB /* MBProgressHUD+Add.m */; };
+		BCFF55531D657AB700A02918 /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFF55521D657AB700A02918 /* BannerModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2710,6 +2711,8 @@
 		BCF97C531D17B46D004D46AB /* SXLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXLoadingView.m; sourceTree = "<group>"; };
 		BCF97C551D17B46D004D46AB /* MBProgressHUD+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Add.h"; sourceTree = "<group>"; };
 		BCF97C561D17B46D004D46AB /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
+		BCFF55511D657AB700A02918 /* BannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
+		BCFF55521D657AB700A02918 /* BannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -5318,6 +5321,8 @@
 			children = (
 				BC59E1101D2F5595000A3AE3 /* HomeViewModel.h */,
 				BC59E1111D2F5595000A3AE3 /* HomeViewModel.m */,
+				BCFF55511D657AB700A02918 /* BannerModel.h */,
+				BCFF55521D657AB700A02918 /* BannerModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -7379,6 +7384,7 @@
 				AD5F5C121D1798DE0035710F /* UseItemView.m in Sources */,
 				BCE70E4E1D53269400A8A4F4 /* AdgnatioHelpInfoModel.m in Sources */,
 				BC32700B1D34B599007D6745 /* NewInfoModel.m in Sources */,
+				BCFF55531D657AB700A02918 /* BannerModel.m in Sources */,
 				BC5F15111D0FF1AD004F3622 /* PersonalCenterInfoView.m in Sources */,
 				AD8514481D41C9FC007FB495 /* RankingTableViewCell.m in Sources */,
 				AD3218961D2A604D00F9480A /* NSArray+WAllItemString.m in Sources */,

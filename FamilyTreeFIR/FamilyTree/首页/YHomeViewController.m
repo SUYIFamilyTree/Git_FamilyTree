@@ -12,8 +12,11 @@
 #import "NewsCenterViewController.h"
 #import "DivinationViewController.h"
 #import "CliffordViewController.h"
+#import "BannerModel.h"
 
 @interface YHomeViewController ()
+/** 顶部状态条*/
+@property (nonatomic, strong) UIImageView *topStatusIV;
 /** banner图*/
 @property (nonatomic, strong) BannerView *bannerView;
 /** 背景滚动图*/
@@ -42,12 +45,13 @@
     self.navigationController.navigationBar.hidden = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self initUI];
-    //[self getBanner];
+    [self getBanner];
     //[self getJieqi];
 }
 
 #pragma mark - 视图初始化
 -(void)initUI{
+    [self.view addSubview:self.topStatusIV];
     [self.view addSubview:self.bannerView];
     [self.view addSubview:self.backSV];
     [self.backSV addSubview:self.backIV];
@@ -77,10 +81,12 @@
 #pragma mark - getData
 -(void)getBanner{
     NSDictionary *logDic = @{@"type":@"SY"};
+    WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getbanner" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         MYLog(@"%@",jsonDic);
         if (succe) {
-            
+            NSArray *array = [NSArray modelArrayWithClass:[BannerModel class] json:jsonDic[@"data"]];
+            weakSelf.bannerView.modelArr = array;
         }
     } failure:^(NSError *error) {
         
@@ -161,9 +167,17 @@
 
 
 #pragma mark - lazyLoad
+-(UIImageView *)topStatusIV{
+    if (!_topStatusIV) {
+        _topStatusIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 22)];
+        _topStatusIV.image = MImage(@"sy_statusbg");
+    }
+    return _topStatusIV;
+}
+
 -(BannerView *)bannerView{
     if (!_bannerView) {
-        _bannerView = [[BannerView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 194)];
+        _bannerView = [[BannerView alloc]initWithFrame:CGRectMake(0, 22, Screen_width, 172)];
     }
     return _bannerView;
 }

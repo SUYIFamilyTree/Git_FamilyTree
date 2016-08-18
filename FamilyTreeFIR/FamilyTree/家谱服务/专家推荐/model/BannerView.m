@@ -9,8 +9,6 @@
 #import "BannerView.h"
 
 @interface BannerView ()<UIScrollViewDelegate>
-/** 顶部状态条*/
-@property (nonatomic, strong) UIImageView *topStatusIV;
 /** 滚动图*/
 @property (nonatomic, strong) UIScrollView *bannerSV;
 /** 黑色阴影条*/
@@ -19,6 +17,8 @@
 @property (nonatomic, strong) UIPageControl *pageControl;
 /** 定时器*/
 @property (nonatomic, strong) NSTimer *timer;
+/** 数组*/
+@property (nonatomic, strong) NSMutableArray<NSString *> *imageStrArr;
 @end
 
 @implementation BannerView
@@ -38,12 +38,28 @@
 }
 #pragma mark - 数据初始化
 -(void)initData{
-    self.imageStrArr = @[@"sy_banner1",@"sy_banner2",@"sy_banner3"];
+    [self.imageStrArr addObjectsFromArray:@[@"sy_banner1",@"sy_banner2",@"sy_banner3"]];
+}
+
+-(void)setModelArr:(NSArray<BannerModel *> *)modelArr{
+    _modelArr = modelArr;
+    [self.imageStrArr removeAllObjects];
+    for (BannerModel *model in modelArr) {
+        [self.imageStrArr addObject:model.imgpath];
+    }
+    [self.bannerSV removeAllSubviews];
+    for (int i = 0; i < self.imageStrArr.count; i++) {
+        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.frame.size.width*i, 0, self.frame.size.width, self.frame.size.height)];
+        [imageView setImageWithURL:[NSURL URLWithString:self.imageStrArr[i]] placeholder:MImage(@"sy_banner1")];
+        [self.bannerSV addSubview:imageView];
+    }
+    self.bannerSV.contentSize = CGSizeMake(self.frame.size.width*modelArr.count, self.frame.size.height-22);
+    self.pageControl.numberOfPages = modelArr.count;
+    
 }
 
 #pragma mark - 视图初始化
 -(void)initUI{
-    [self addSubview:self.topStatusIV];
     [self addSubview:self.bannerSV];
     for (int i = 0; i < self.imageStrArr.count; i++) {
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.frame.size.width*i, 0, self.frame.size.width, self.frame.size.height)];
@@ -52,6 +68,7 @@
     }
     [self addSubview:self.backShadowV];
     [self.backShadowV addSubview:self.pageControl];
+    self.pageControl.sd_layout.centerXEqualToView(self).widthIs(70).heightIs(19).topSpaceToView(self.backShadowV,0);
 }
 #pragma mark - 响应方法
 -(void)respondsToTimer{
@@ -90,18 +107,9 @@
 
 
 #pragma mark - lazyLoad
--(UIImageView *)topStatusIV{
-    if (!_topStatusIV) {
-        _topStatusIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, CGRectW(self), 22)];
-        _topStatusIV.image = MImage(@"sy_statusbg");
-    }
-    return _topStatusIV;
-}
-
-
 -(UIScrollView *)bannerSV{
     if (!_bannerSV) {
-        _bannerSV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 22, CGRectW(self), CGRectH(self)-22-2)];
+        _bannerSV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, CGRectW(self), CGRectH(self)-2)];
         _bannerSV.contentSize = CGSizeMake(self.frame.size.width*3, self.frame.size.height-22);
         _bannerSV.bounces = NO;
         _bannerSV.pagingEnabled = YES;
@@ -127,7 +135,8 @@
 
 -(UIPageControl *)pageControl{
     if (!_pageControl) {
-        _pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(CGRectW(self)-90, 0, 70, 19)];
+//        _pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(CGRectW(self)-90, 0, 70, 19)];
+        _pageControl = [[UIPageControl alloc]init];
         _pageControl.numberOfPages = 3;
         //_pageControl.backgroundColor = [UIColor random];
         _pageControl.currentPageIndicatorTintColor = LH_RGBCOLOR(200, 117, 21);
@@ -142,5 +151,12 @@
         
     }
     return _timer;
+}
+
+-(NSMutableArray<NSString *> *)imageStrArr{
+    if (!_imageStrArr) {
+        _imageStrArr = [@[] mutableCopy];
+    }
+    return _imageStrArr;
 }
 @end

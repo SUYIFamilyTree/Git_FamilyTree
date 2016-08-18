@@ -18,12 +18,14 @@
 #import "GeomancyIdentificationViewController.h"
 #import "AppendServiceViewController.h"
 #import "ExpertRecommendViewController.h"
+#import "BannerView.h"
 
 #define ScrollerView_Height 210
 @interface FamilServiceViewController ()<TableViewDelegate,FamilyShopViewDelegate,CollectionFamilyDelegate>
 
 @property (nonatomic,strong) TopSearchView *topSearchView; /*顶部搜索*/
-@property (nonatomic,strong) ScrollerView *scrollerView; /*滚动图*/
+/** banner*/
+@property (nonatomic, strong) BannerView *bannerView;
 
 @property (nonatomic,strong) CollectionFamilyView *collecFamView; /*八种家谱集合视图*/
 
@@ -49,12 +51,30 @@
     [self.view addSubview:self.backScrollerView];
     
     [self.view addSubview:self.topSearchView];
-    [self.view addSubview:self.scrollerView];
+    [self.view addSubview:self.bannerView];
+    [self getBanner];
     [self.backScrollerView addSubview:self.collecFamView];
     [self.backScrollerView addSubview:self.famShop];
     [self.backScrollerView addSubview:self.tableView];
     
 }
+
+#pragma mark - 获取数据
+-(void)getBanner{
+    NSDictionary *logDic = @{@"type":@"JPFW"};
+    WK(weakSelf)
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getbanner" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"%@",jsonDic);
+        if (succe) {
+            NSArray *array = [NSArray modelArrayWithClass:[BannerModel class] json:jsonDic[@"data"]];
+            weakSelf.bannerView.modelArr = array;
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -165,17 +185,18 @@
     }
     return _topSearchView;
 }
--(ScrollerView *)scrollerView{
-    if (!_scrollerView) {
-        _scrollerView = [[ScrollerView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, ScrollerView_Height) images:nil];
-        
+
+-(BannerView *)bannerView{
+    if (!_bannerView) {
+        _bannerView = [[BannerView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, 172)];
     }
-    return _scrollerView;
+    return _bannerView;
 }
+
 -(CollectionFamilyView *)collecFamView{
     if (!_collecFamView) {
         _collecFamView = [[CollectionFamilyView alloc] initWithFrame:CGRectMake(0, 15, Screen_width*0.85, 130)];
-        _collecFamView.center = CGPointMake(self.view.center.x,CGRectGetMaxY(self.scrollerView.frame)+15+_collecFamView.bounds.size.height/2);
+        _collecFamView.center = CGPointMake(self.view.center.x,CGRectGetMaxY(self.bannerView.frame)+15+_collecFamView.bounds.size.height/2);
         _collecFamView.delegate = self;
         
     }

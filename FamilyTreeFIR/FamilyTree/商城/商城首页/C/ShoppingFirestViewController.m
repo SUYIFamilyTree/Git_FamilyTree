@@ -13,6 +13,7 @@
 #import "GuessLikeView.h"
 #import "TypeView.h"
 #import "WShopSearchViewController.h"
+#import "BannerView.h"
 
 @interface ShoppingFirestViewController ()<ShoppingTypeViewDelegate,HotActiveViewDelegate,NeedRushViewDelegate,GuessLikeViewDelegate,TypeViewDelegate,TopSearchViewDelegate>
 /**
@@ -53,8 +54,9 @@
 @property (strong,nonatomic) NSArray *typeArr;
 
 @property (nonatomic,strong) TopSearchView *topSearchView; /*顶部搜索*/
-@property (nonatomic,strong) ScrollerView *scrollerView; /*滚动图*/
 
+/** banner图*/
+@property (nonatomic, strong) BannerView *bannerView;
 /**购物车*/
 @property (nonatomic,strong) UIButton *cartButton;
 /**购物车界面*/
@@ -118,9 +120,9 @@
     
 //广告视图
     [self.view addSubview:self.topSearchView];
-    [_backV addSubview:self.scrollerView];
+    [_backV addSubview:self.bannerView];
     
-    _shoppingTypeV = [[ShoppingTypeView alloc]initWithFrame:CGRectMake(0, CGRectYH(self.scrollerView), __kWidth, __kWidth/4)];
+    _shoppingTypeV = [[ShoppingTypeView alloc]initWithFrame:CGRectMake(0, CGRectYH(self.bannerView), __kWidth, __kWidth/4)];
     [_backV addSubview:_shoppingTypeV];
     _shoppingTypeV.delegate=self;
 
@@ -319,13 +321,14 @@
     }
     return _topSearchView;
 }
--(ScrollerView *)scrollerView{
-    if (!_scrollerView) {
-        _scrollerView = [[ScrollerView alloc] initWithFrame:CGRectMake(0, 0, Screen_width, 210) images:nil];
-        
+
+-(BannerView *)bannerView{
+    if (!_bannerView) {
+        _bannerView = [[BannerView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 172)];
     }
-    return _scrollerView;
+    return _bannerView;
 }
+
 -(UIButton *)cartButton{
     if (!_cartButton) {
         _cartButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.bounds)-45, 350, 45, 30)];

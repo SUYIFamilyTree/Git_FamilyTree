@@ -10,7 +10,8 @@
 #import "MyHelpViewController.h"
 
 @interface TopSearchView ()
-
+/** 同城家谱*/
+@property (nonatomic, strong) UILabel *tcjpLB;
 @end
 
 @implementation TopSearchView
@@ -21,7 +22,8 @@
     if (self) {
         [self addSubview:self.backView];
         [self addSubview:self.searchView];
-        
+        [self addSubview:self.tcjpLB];
+        self.tcjpLB.sd_layout.centerXEqualToView(self).heightIs(40).topSpaceToView(self,20).leftSpaceToView(self,20).rightSpaceToView(self,20);
         [self.searchView addSubview:self.searchLabel];
         [self.searchView addSubview:self.searchImage];
         [self addSubview:self.menuBtn];
@@ -100,4 +102,17 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self endEditing:true];
 }
+
+-(UILabel *)tcjpLB{
+    if (!_tcjpLB) {
+        _tcjpLB = [[UILabel alloc]init];
+        _tcjpLB.text = @"同城家谱";
+        _tcjpLB.font = MFont(18);
+        _tcjpLB.textAlignment = NSTextAlignmentCenter;
+        //_tcjpLB.backgroundColor = [UIColor random];
+        _tcjpLB.textColor = [UIColor whiteColor];
+    }
+    return _tcjpLB;
+}
+
 @end

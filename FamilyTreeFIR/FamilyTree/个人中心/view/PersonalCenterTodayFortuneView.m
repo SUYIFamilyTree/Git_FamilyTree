@@ -60,7 +60,8 @@
 //点击续时运势
 -(void)payForFortune:(UIButton *)sender{
     MYLog(@"点击续时运势");
-    [self.delegate clickPayForFortuneBtn];
+   [self.delegate clickPayForFortuneBtn];
+    
 }
 
 -(void)reloadData:(MemallInfoGrysModel *)grys{

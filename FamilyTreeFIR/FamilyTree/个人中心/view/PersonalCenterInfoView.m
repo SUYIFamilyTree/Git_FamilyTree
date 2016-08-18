@@ -24,7 +24,7 @@
 /** 当前族谱标签*/
 @property (nonatomic, strong) UILabel *currentFamilyTreeNameLB;
 /** 弹出切换家谱视图*/
-@property (nonatomic, strong) UIView *changeFamilyTreeView;
+@property (nonatomic, strong) UIScrollView *changeFamilyTreeSV;
 
 
 @end
@@ -44,7 +44,7 @@
         //当前家谱名标签和切换家谱按钮
         [self initFamilyTreeNameLBAndChangeFamilyTreeLB];
         //设置弹出切换家谱界面
-        [self addSubview:self.changeFamilyTreeView];
+        [self addSubview:self.changeFamilyTreeSV];
     }
     return self;
 }
@@ -75,6 +75,7 @@
     self.currentFamilyTreeNameLB = [[UILabel alloc]init];
     self.currentFamilyTreeNameLB.font = MFont(12);
     self.currentFamilyTreeNameLB.textColor = [UIColor whiteColor];
+    self.currentFamilyTreeNameLB.numberOfLines = 4;
     [self addSubview:self.currentFamilyTreeNameLB];
     
     //切换家谱
@@ -90,8 +91,9 @@
 }
 
 -(void)initFamilyTreeNameBtns{
+    self.changeFamilyTreeSV.contentSize = CGSizeMake(0.0938*Screen_width*self.hyjpArrC.count, CGRectH(self));
     for (int i = 0; i < self.hyjpArrC.count; i++) {
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0.7863*Screen_width-(0.0938*Screen_width+0.0063*Screen_width)*i, 0, 0.0938*Screen_width, CGRectH(self))];
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(self.changeFamilyTreeSV.contentSize.width-(0.0938*Screen_width+0.0063*Screen_width)*i, 0, 0.0938*Screen_width, CGRectH(self))];
         [btn setBackgroundImage:MImage(@"gr_ct_qieHuanJiaPu_bg_a") forState:UIControlStateNormal];
         if (i < self.hyjpArrC.count) {
             btn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 40, 0);
@@ -102,17 +104,17 @@
         btn.tag = 51+i;
         [btn addTarget:self action:@selector(clickFamilyTreeNameToChange:) forControlEvents:UIControlEventTouchUpInside];
         btn.userInteractionEnabled = YES;
-        [self.changeFamilyTreeView addSubview:btn];
+        [self.changeFamilyTreeSV addSubview:btn];
     }
 }
 
 #pragma mark - lazyLoad
--(UIView *)changeFamilyTreeView{
-    if (!_changeFamilyTreeView) {
-        _changeFamilyTreeView = [[UIView alloc]init];
-        _changeFamilyTreeView.backgroundColor = [UIColor clearColor];
+-(UIView *)changeFamilyTreeSV{
+    if (!_changeFamilyTreeSV) {
+        _changeFamilyTreeSV = [[UIScrollView alloc]init];
+        _changeFamilyTreeSV.backgroundColor = [UIColor clearColor];
     }
-    return _changeFamilyTreeView;
+    return _changeFamilyTreeSV;
 }
 
 #pragma mark - 加载数据
@@ -146,19 +148,19 @@
    
     //设置切换家谱弹出动画
     WK(weakSelf);
-    if (self.changeFamilyTreeView.frame.size.width == 0) {
-        self.changeFamilyTreeView.frame = CGRectMake(0.8781*Screen_width,0,0,CGRectH(self));
+    if (self.changeFamilyTreeSV.frame.size.width == 0) {
+        self.changeFamilyTreeSV.frame = CGRectMake(0.8781*Screen_width,0,0,CGRectH(self));
         [UIView animateWithDuration:1 animations:^{
-            [weakSelf addSubview:weakSelf.changeFamilyTreeView];
-            weakSelf.changeFamilyTreeView.frame = CGRectMake(0, 0, 0.8781*Screen_width, CGRectH(weakSelf));
+            [weakSelf addSubview:weakSelf.changeFamilyTreeSV];
+            weakSelf.changeFamilyTreeSV.frame = CGRectMake(0, 0, 0.8781*Screen_width, CGRectH(weakSelf));
             [weakSelf initFamilyTreeNameBtns];
         }];
     }else{
         [UIView animateWithDuration:1 animations:^{
-            weakSelf.changeFamilyTreeView.frame = CGRectMake(0.8781*Screen_width,0,0,CGRectH(weakSelf));
+            weakSelf.changeFamilyTreeSV.frame = CGRectMake(0.8781*Screen_width,0,0,CGRectH(weakSelf));
         }];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf.changeFamilyTreeView removeFromSuperview];
+            [weakSelf.changeFamilyTreeSV removeFromSuperview];
         });
     }
 }
@@ -173,7 +175,7 @@
     
     WK(weakSelf);
     [UIView animateWithDuration:1 animations:^{
-        weakSelf.changeFamilyTreeView.frame = CGRectMake(0.8781*Screen_width,0,0,CGRectH(self));
+        weakSelf.changeFamilyTreeSV.frame = CGRectMake(0.8781*Screen_width,0,0,CGRectH(self));
     }];
 }
 
