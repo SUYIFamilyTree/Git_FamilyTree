@@ -84,7 +84,7 @@
     CGFloat money = goods.CoprActpri;
     cell.payMoneyLb.text = [NSString stringWithFormat:@"¥%.1f",money];
     CGFloat moneyYJ = goods.CoprMoney;
-    cell.quoteLb.text = [NSString stringWithFormat:@"¥%.1f",moneyYJ];
+    cell.quoteLb.text = [NSString stringWithFormat:@"%.1f",moneyYJ];
     NSMutableAttributedString *quoteStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"¥%@",cell.quoteLb.text]];
     [quoteStr addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid|NSUnderlineStyleSingle) range:NSMakeRange(0, quoteStr.length)];
     cell.quoteLb.attributedText = quoteStr;//加横线
@@ -122,20 +122,8 @@
     GuessLikeCell *cell = (GuessLikeCell *)[self.collectionV cellForItemAtIndexPath:[NSIndexPath indexPathForItem:sender.tag inSection:0]];
     NSLog(@"商品%@,类型%@,加到购物车", cell.goodId,cell.goodTypeId);
     
-    [self requestPostAddtoCartWithGoodNumber:cell.goodId goodsTypeId:cell.goodTypeId];
+    [TCJPHTTPRequestManager requestPostAddtoCartWithGoodNumber:cell.goodId goodsTypeId:cell.goodTypeId];
 }
-#pragma mark *** 请求添加到购物车 ***
--(void)requestPostAddtoCartWithGoodNumber:(NSString *)goodsId goodsTypeId:(NSString *)typeID{
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"ShCoid":goodsId,
-                                                 @"ShMeid":GetUserId,
-                                                 @"ShCoprid":typeID,
-                                                 @"ShCount":@"1"} requestID:GetUserId requestcode:kRequestCodeaddshopcar success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-                                                     if (succe) {
-                                                         [SXLoadingView showAlertHUD:@"已添加到购物车" duration:0.5];
-                                                     }
-                                                 } failure:^(NSError *error) {
-                                                     
-                                                 }];
-}
+
 
 @end

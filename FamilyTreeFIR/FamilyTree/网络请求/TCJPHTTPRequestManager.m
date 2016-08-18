@@ -49,12 +49,12 @@
     //NSLog(@"md5afterStr--%@", md5check);
     
     //NSMutableString  *autocode = [NSMutableString string];
-    NSString *authcode;
-        if ([requestcode isEqualToString:@"login"]||[requestcode isEqualToString:@"register"]||[requestcode isEqualToString:@"sendsms"]||[requestcode isEqualToString:@"getapiindeximg"]) {
-            authcode = @"";
-        }else{
-            authcode = [USERDEFAULT valueForKey:@"authcode"];
-        }
+    NSString *authcode = @"";
+//        if ([requestcode isEqualToString:@"login"]||[requestcode isEqualToString:@"register"]||[requestcode isEqualToString:@"sendsms"]||[requestcode isEqualToString:@"getapiindeximg"]) {
+//            authcode = @"";
+//        }else{
+//            authcode = [USERDEFAULT valueForKey:@"authcode"];
+//        }
     //MYLog(@"授权验证码%@",authcode);
     
     NSDictionary *params = @{
@@ -109,7 +109,18 @@
 }
 
 
-
++(void)requestPostAddtoCartWithGoodNumber:(NSString *)goodsId goodsTypeId:(NSString *)typeID{
+    [self POSTWithParameters:@{@"ShCoid":goodsId,
+                                                 @"ShMeid":GetUserId,
+                                                 @"ShCoprid":typeID,
+                                                 @"ShCount":@"1"} requestID:GetUserId requestcode:kRequestCodeaddshopcar success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+                                                     if (succe) {
+                                                         [SXLoadingView showAlertHUD:@"已添加到购物车" duration:0.5];
+                                                     }
+                                                 } failure:^(NSError *error) {
+                                                     [SXLoadingView showAlertHUD:@"添加失败" duration:0.5];
+                                                 }];
+}
 
 
 @end

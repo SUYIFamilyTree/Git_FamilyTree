@@ -65,16 +65,16 @@
     _quoteLb.textAlignment = NSTextAlignmentLeft;
 
     _goodColorV = [[GoodColorView alloc]initWithFrame:CGRectMake(0, CGRectYH(_quoteLb)+5, __kWidth, 20)];
-    [self addSubview:_goodColorV];
-    _goodColorV.delegate = self;
+//    [self addSubview:_goodColorV];
+//    _goodColorV.delegate = self;
 
 
-    _goodStyleV = [[GoodStyleView alloc]initWithFrame:CGRectMake(0, CGRectYH(_quoteLb)+30, __kWidth, 25)];
+    _goodStyleV = [[GoodStyleView alloc]initWithFrame:CGRectMake(0, CGRectYH(_quoteLb)+5, __kWidth, 25)];
     [self addSubview:_goodStyleV];
     _goodStyleV.delegate = self;
 
 
-    _goodNumberV = [[GoodNumberView alloc]initWithFrame:CGRectMake(0, CGRectYH(_quoteLb)+60, __kWidth, 25)];
+    _goodNumberV = [[GoodNumberView alloc]initWithFrame:CGRectMake(0, CGRectYH(_quoteLb)+30, __kWidth, 25)];
     [self addSubview:_goodNumberV];
     _goodNumberV.delegate = self;
 
@@ -97,19 +97,32 @@
             count--;
         }
     }
-    _goodPayModel.goodCount = [NSString stringWithFormat:@"%ld",count];
-    text.text = [NSString stringWithFormat:@"%ld",count];
+    _goodPayModel.goodCount = [NSString stringWithFormat:@"%ld",(long)count];
+    text.text = [NSString stringWithFormat:@"%ld",(long)count];
 }
 
 #pragma mark -GoodColorViewDelegate
 -(void)goodColorChoose:(UIButton *)sender{
-    NSLog(@"颜色%ld",sender.tag);
     _goodPayModel.goodColor = _colorArr[sender.tag].goodColor;
 }
 #pragma mark -GoodStyleViewDelegate
 -(void)goodStyleChoose:(UIButton *)sender{
-    NSLog(@"款式%ld",sender.tag-11);
+    NSLog(@"%@",sender.titleLabel.text);
     _goodPayModel.goodStyle = _styleArr[sender.tag -11].goodStyle;
+    
+    
+    NSArray *detaiArr = [USERDEFAULT objectForKey:kNSUserDefaultsgoodsDetail][_goodPayModel.goodStyle];
+    _goodPayModel.goodStyleId = [NSString stringWithFormat:@"%@",detaiArr[0]];;
+    _quoteLb.text = [NSString stringWithFormat:@"%@",detaiArr[1]];
+    _payMoneyLb.text = [NSString stringWithFormat:@"¥%@",detaiArr[2]];
+    
+    NSMutableAttributedString *quoteStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"¥%@",_quoteLb.text]];
+    [quoteStr addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid|NSUnderlineStyleSingle) range:NSMakeRange(0, quoteStr.length)];
+    _quoteLb.attributedText = quoteStr;//加横线
+    
+
+    
+    
 }
 #pragma mark ==更新约束==
 - (void)updateFrame{
@@ -123,7 +136,7 @@
         height = 25*(_colorArr.count/4);
     }
     _goodColorV.frame = CGRectMake(0, CGRectYH(_quoteLb)+5, __kWidth, height);
-    _goodStyleV.frame = CGRectMake(0, CGRectYH(_goodColorV)+5, __kWidth, 25*(_styleArr.count/2+_styleArr.count%2));
+    _goodStyleV.frame = CGRectMake(0, CGRectYH(_quoteLb)+5, __kWidth, 25*(_styleArr.count/2+_styleArr.count%2));
     _goodNumberV.frame = CGRectMake(0, CGRectYH(_goodStyleV), __kWidth, 25);
 
     _height = CGRectYH(_goodStyleV)+30+5;

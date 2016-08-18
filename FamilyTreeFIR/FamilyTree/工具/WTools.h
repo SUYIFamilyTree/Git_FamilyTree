@@ -150,4 +150,7 @@ UIKIT_EXTERN NSString * _Nonnull const KNotificationCodeRankingPorChange;
 
 UIKIT_EXTERN NSString * _Nonnull const kNSUserDefaultsMyFamilyID;
 UIKIT_EXTERN NSString * _Nonnull const kNSUserDefaultsMyFamilyName;
+
+UIKIT_EXTERN NSString * _Nonnull const kNSUserDefaultsgoodsDetail;
+
 @end

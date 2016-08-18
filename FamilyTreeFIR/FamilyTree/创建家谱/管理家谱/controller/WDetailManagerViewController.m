@@ -89,9 +89,11 @@ enum{
                 //养子
                 NSArray *chArr = obj.datas[idx2].chl;
                 if (chArr&&chArr.count!=0) {
-                    [XArr addObject:obj.datas[idx2].chl[0]];
+//                    [XArr addObject:obj.datas[idx2].chl[0]];
+                    [XArr addObject:obj.datas[idx2].chl];
+
                 }else{
-                    [XArr addObject:@"无"];
+                    [XArr addObject:@[@""]];
                 }
                 
                 [subDetaiArr addObject:XArr];

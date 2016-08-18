@@ -67,7 +67,7 @@
     NSMutableAttributedString *quoteStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"¥%@",cell.quoteLb.text]];
     [quoteStr addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid|NSUnderlineStyleSingle) range:NSMakeRange(0, quoteStr.length)];
     cell.quoteLb.attributedText = quoteStr;//加横线
-    cell.shoppingBtn.tag = goods.CoId;
+    cell.shoppingBtn.tag = indexPath.row;
     [cell.shoppingBtn addTarget:self action:@selector(addInto:) forControlEvents:BtnTouchUpInside];
     cell.goodId = [NSString stringWithFormat:@"%ld",(long)goods.CoId];
     cell.goodTypeId = [NSString stringWithFormat:@"%ld",(long)goods.CoprId];
@@ -98,6 +98,8 @@
 #pragma mark ==加入购物车==
 - (void)addInto:(UIButton*)sender{
     NSLog(@"商品%ld加入购物车",(long)sender.tag);
+    GuessLikeCell *cell = (GuessLikeCell *)[self.collectionV cellForItemAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
+    [TCJPHTTPRequestManager requestPostAddtoCartWithGoodNumber:cell.goodId goodsTypeId:cell.goodTypeId];
 }
 
 @end

@@ -83,7 +83,6 @@
                              @"GemeName":self.AddFameView.name.detailLabel.text,
                              @"GemeSex":[self.AddFameView.sexInView.inputLabel.text isEqualToString:@"女"]?@"0":@"1",
                              @"GemeIsfamous":self.AddFameView.famousPerson.marked?@"1":@"0",
-                             
                              @"GemeYear":self.AddFameView.birthLabel.inputLabel.text,
                              @"GemeMonth":self.AddFameView.monthLabel.inputLabel.text,
                              @"GemeDay":self.AddFameView.dayLabel.inputLabel.text,
