@@ -9,5 +9,6 @@
 #import "BaseViewController.h"
 
 @interface FamilyHelpViewController : BaseViewController
-
+/** 类型*/
+@property (nonatomic, strong) NSString *type;
 @end

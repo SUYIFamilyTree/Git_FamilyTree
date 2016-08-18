@@ -42,7 +42,8 @@
     self.navigationController.navigationBar.hidden = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self initUI];
-    
+    //[self getBanner];
+    //[self getJieqi];
 }
 
 #pragma mark - 视图初始化
@@ -70,6 +71,33 @@
         [view addSubview:btn];
         [self.backIV addSubview:view];
     }
+}
+
+
+#pragma mark - getData
+-(void)getBanner{
+    NSDictionary *logDic = @{@"type":@"SY"};
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getbanner" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"%@",jsonDic);
+        if (succe) {
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+-(void)getJieqi{
+    NSDictionary *logDic = @{};
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getapiindeximg" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"%@",jsonDic);
+        if (succe) {
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+
 }
 
 #pragma mark - 点击方法
@@ -154,7 +182,9 @@
 -(UIImageView *)backIV{
     if (!_backIV) {
         _backIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, self.backSV.contentSize.height)];
-        _backIV.image = MImage(@"sy_bg");
+        UIImage *image = MImage(@"sy_bg");
+        UIImage *reImage = [image resizableImageWithCapInsets:UIEdgeInsetsMake(100, 0, 550, 0) resizingMode:UIImageResizingModeStretch];
+        _backIV.image = reImage;
         _backIV.userInteractionEnabled = YES;
     }
     return _backIV;
@@ -168,6 +198,8 @@
         _jieqiLB.textColor = [UIColor whiteColor];
         _jieqiLB.font = MFont(13);
         _jieqiLB.textAlignment = NSTextAlignmentCenter;
+        _jieqiLB.layer.cornerRadius = 3.0f;
+        _jieqiLB.layer.masksToBounds = YES;
 //        [_jieqiLB sizeToFit];
     }
     return _jieqiLB;
@@ -177,6 +209,7 @@
     if (!_chineseCalendarLB) {
         _chineseCalendarLB = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(self.jieqiLB), CGRectYH(self.jieqiLB)+5, Screen_width/2-30, 15)];
         _chineseCalendarLB.text = @"辛丑年农历二月廿二";
+        _chineseCalendarLB.textColor = LH_RGBCOLOR(93, 93, 93);
         _chineseCalendarLB.font = MFont(13);
         
     }
@@ -185,37 +218,41 @@
 
 -(UILabel *)monthLB{
     if (!_monthLB) {
-        _monthLB = [[UILabel alloc]initWithFrame:CGRectMake(Screen_width-60, 6, 25, 15)];
+        _monthLB = [[UILabel alloc]initWithFrame:CGRectMake(Screen_width-90, 13, 25, 15)];
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         NSDateComponents *dateComs = [[NSDateComponents alloc] init];
         dateComs = [calendar components:NSCalendarUnitMonth fromDate:[NSDate date]];
         _monthLB.text = [NSString stringWithFormat:@"%ld月",[dateComs month]];
         _monthLB.font = MFont(13);
+        _monthLB.textColor = LH_RGBCOLOR(93, 93, 93);
     }
     return _monthLB;
 }
 
 -(UILabel *)dayLB{
     if (!_dayLB) {
-        _dayLB = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(self.monthLB), CGRectY(self.monthLB), 30, 40)];
+        _dayLB = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(self.monthLB), CGRectY(self.monthLB)-8, 50, 45)];
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         NSDateComponents *dateComs = [[NSDateComponents alloc] init];
         dateComs = [calendar components:NSCalendarUnitDay fromDate:[NSDate date]];
+        //_dayLB.backgroundColor = [UIColor random];
         _dayLB.text = [NSString stringWithFormat:@"%ld",[dateComs day]];
-        _dayLB.font = MFont(27);
+        _dayLB.font = [UIFont fontWithName:@"HelveticaNeue" size:33];
         _dayLB.textAlignment = NSTextAlignmentLeft;
+        _dayLB.textColor = LH_RGBCOLOR(93, 93, 93);
     }
     return _dayLB;
 }
 
 -(UILabel *)weekLB{
     if (!_weekLB) {
-        _weekLB = [[UILabel alloc]initWithFrame:CGRectMake(Screen_width-75, CGRectYH(self.monthLB)+5, 45, 20)];
+        _weekLB = [[UILabel alloc]initWithFrame:CGRectMake(Screen_width-105, CGRectYH(self.monthLB), 45, 20)];
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         NSDateComponents *dateComs = [[NSDateComponents alloc] init];
         dateComs = [calendar components:NSCalendarUnitWeekday fromDate:[NSDate date]];
         _weekLB.text = [NSString stringWithFormat:@"星期%@",[self changeWithComsdateWeek:[dateComs weekday]]];
         _weekLB.font = MFont(13);
+        _weekLB.textColor = LH_RGBCOLOR(93, 93, 93);
     }
     return _weekLB;
 }

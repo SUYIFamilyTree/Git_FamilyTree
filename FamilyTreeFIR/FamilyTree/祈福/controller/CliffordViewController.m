@@ -168,7 +168,8 @@
     NSData *data1 = UIImagePNGRepresentation(self.jossIV.image);
     NSData *data2 = UIImagePNGRepresentation(MImage(@"qf_gy"));
     if ([data1 isEqual:data2]) {
-        [SXLoadingView showAlertHUD:@"请先请佛" duration:0.5];
+        //[SXLoadingView showAlertHUD:@"请先请佛" duration:0.5];
+        [self clickBtnToSelectJoss];
     }else{
         [self.worshipJossBtn removeFromSuperview];
         UIImageView *handIV = [[UIImageView alloc]initWithFrame:CGRectMake(0.3125*CGRectW(self.backIV), 0.7473*CGRectH(self.backIV), 0.375*CGRectW(self.backIV), 0.1648*CGRectH(self.backIV))];

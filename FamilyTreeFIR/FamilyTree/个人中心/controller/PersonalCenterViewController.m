@@ -200,6 +200,7 @@
     UIButton *personalInfoEditBtn = [[UIButton alloc]initWithFrame:CGRectMake(10, 20, 40, 50)];
     
     [personalInfoEditBtn setImage:MImage(@"gr_ct_tit_wt") forState:UIControlStateNormal];
+    [personalInfoEditBtn setImage:MImage(@"fanhui") forState:UIControlStateSelected];
     personalInfoEditBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
     [personalInfoEditBtn addTarget:self action:@selector(clickPersonalInfoBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.navi addSubview:personalInfoEditBtn];
@@ -241,9 +242,9 @@
     self.familyTreeNewsTB.delegate = self;
     [self.scrollView addSubview:self.familyTreeNewsTB];
     //我的相册
-    self.myPhotoAlbumsView = [[PersonalCenterMyPhotoAlbumsView alloc]initWithFrame:CGRectMake(0, CGRectYH(self.familyTreeNewsTB)+15, Screen_width, 150)];
-    self.myPhotoAlbumsView.delegate = self;
-    [self.scrollView addSubview:self.myPhotoAlbumsView];
+//    self.myPhotoAlbumsView = [[PersonalCenterMyPhotoAlbumsView alloc]initWithFrame:CGRectMake(0, CGRectYH(self.familyTreeNewsTB)+15, Screen_width, 150)];
+//    self.myPhotoAlbumsView.delegate = self;
+//    [self.scrollView addSubview:self.myPhotoAlbumsView];
 
     
 }

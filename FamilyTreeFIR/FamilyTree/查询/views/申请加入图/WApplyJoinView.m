@@ -249,6 +249,10 @@
         label.textAlignment = 0;
         [_backImageView addSubview:label];
         
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithActionBlock:^(id  _Nonnull sender) {
+            [self endEditing:YES];
+        }];
+        [_backImageView addGestureRecognizer:tap];
     }
     return _backImageView;
 }

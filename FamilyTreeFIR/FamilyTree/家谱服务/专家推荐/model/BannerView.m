@@ -32,6 +32,7 @@
     if (self) {
         [self initData];
         [self initUI];
+        self.timer.fireDate = [NSDate dateWithTimeIntervalSinceNow:2.0f];
     }
     return self;
 }
@@ -100,13 +101,18 @@
 
 -(UIScrollView *)bannerSV{
     if (!_bannerSV) {
-        _bannerSV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 22, CGRectW(self), CGRectH(self)-22)];
+        _bannerSV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 22, CGRectW(self), CGRectH(self)-22-2)];
         _bannerSV.contentSize = CGSizeMake(self.frame.size.width*3, self.frame.size.height-22);
         _bannerSV.bounces = NO;
         _bannerSV.pagingEnabled = YES;
         _bannerSV.showsVerticalScrollIndicator = NO;
         _bannerSV.showsHorizontalScrollIndicator = NO;
         _bannerSV.delegate = self;
+        
+        UIView *blackView = [[UIView alloc]init];
+        blackView.backgroundColor = [UIColor blackColor];
+        [_bannerSV addSubview:blackView];
+        blackView.sd_layout.leftSpaceToView(self,0).rightSpaceToView(self,0).bottomSpaceToView(self,0).heightIs(2);
     }
     return _bannerSV;
 }
