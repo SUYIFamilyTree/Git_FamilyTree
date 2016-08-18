@@ -242,9 +242,9 @@
     self.familyTreeNewsTB.delegate = self;
     [self.scrollView addSubview:self.familyTreeNewsTB];
     //我的相册
-    self.myPhotoAlbumsView = [[PersonalCenterMyPhotoAlbumsView alloc]initWithFrame:CGRectMake(0, CGRectYH(self.familyTreeNewsTB)+15, Screen_width, 150)];
-    self.myPhotoAlbumsView.delegate = self;
-    [self.scrollView addSubview:self.myPhotoAlbumsView];
+//    self.myPhotoAlbumsView = [[PersonalCenterMyPhotoAlbumsView alloc]initWithFrame:CGRectMake(0, CGRectYH(self.familyTreeNewsTB)+15, Screen_width, 150)];
+//    self.myPhotoAlbumsView.delegate = self;
+//    [self.scrollView addSubview:self.myPhotoAlbumsView];
 
     
 }

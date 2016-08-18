@@ -42,7 +42,8 @@
     self.navigationController.navigationBar.hidden = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self initUI];
-    
+    //[self getBanner];
+    //[self getJieqi];
 }
 
 #pragma mark - 视图初始化
@@ -70,6 +71,33 @@
         [view addSubview:btn];
         [self.backIV addSubview:view];
     }
+}
+
+
+#pragma mark - getData
+-(void)getBanner{
+    NSDictionary *logDic = @{@"type":@"SY"};
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getbanner" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"%@",jsonDic);
+        if (succe) {
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+-(void)getJieqi{
+    NSDictionary *logDic = @{};
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getapiindeximg" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"%@",jsonDic);
+        if (succe) {
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+
 }
 
 #pragma mark - 点击方法

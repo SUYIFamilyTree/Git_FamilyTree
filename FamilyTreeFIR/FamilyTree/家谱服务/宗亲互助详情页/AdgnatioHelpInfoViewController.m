@@ -85,7 +85,7 @@
     purposeContactPeopleNumLB.sd_layout.leftSpaceToView(purposeContactIV,10).rightSpaceToView(purposeContactV,9).heightIs(15).centerYEqualToView(purposeContactIV);
     
     UILabel *purposeContactLB = [[UILabel alloc]init];
-    purposeContactLB.text = @"剩余天数";
+    purposeContactLB.text = @"意向人数";
     purposeContactLB.textColor = [UIColor whiteColor];
     purposeContactLB.font = MFont(13);
     [purposeContactV addSubview:purposeContactLB];
@@ -110,7 +110,7 @@
     deadlineDayNumLB.sd_layout.leftSpaceToView(deadlineDayIV,10).rightSpaceToView(deadlineDayV,9).heightIs(15).centerYEqualToView(deadlineDayIV);
     
     UILabel *deadlineDayLB = [[UILabel alloc]init];
-    deadlineDayLB.text = @"意向人数";
+    deadlineDayLB.text = @"剩余天数";
     deadlineDayLB.textColor = [UIColor whiteColor];
     deadlineDayLB.font = MFont(13);
     [deadlineDayV addSubview:deadlineDayLB];

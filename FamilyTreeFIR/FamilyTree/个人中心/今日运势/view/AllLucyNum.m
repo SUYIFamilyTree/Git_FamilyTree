@@ -82,8 +82,12 @@
     CGSize expectSize = [textLabel sizeThatFits:maximumLabelSize];
     //别忘了把frame给回label
     textLabel.frame = CGRectMake(10, CGRectYH(self.titleImage)+0.03*Screen_height, expectSize.width, expectSize.height);
+   
     
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.bounds.size.width, expectSize.height+self.titleImage.bounds.size.height+0.045*Screen_height);
+        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.bounds.size.width, expectSize.height+self.titleImage.bounds.size.height+0.045*Screen_height);
+
+    
+    
     
     self.detailText = textLabel;
     [self addSubview:textLabel];

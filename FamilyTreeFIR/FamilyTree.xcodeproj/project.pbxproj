@@ -1145,6 +1145,7 @@
 		BC9C48071D58893700A9F5C2 /* qj_right9.png in Resources */ = {isa = PBXBuildFile; fileRef = BC9C47E21D58893700A9F5C2 /* qj_right9.png */; };
 		BC9C48081D58893700A9F5C2 /* qj_right10.png in Resources */ = {isa = PBXBuildFile; fileRef = BC9C47E31D58893700A9F5C2 /* qj_right10.png */; };
 		BC9C8E251D13F10B00C445D0 /* CustomPikcerDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9C8E241D13F10B00C445D0 /* CustomPikcerDateView.m */; };
+		BCA3B6401D62B30200B48CBD /* FamilyHelpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCA3B63F1D62B30200B48CBD /* FamilyHelpModel.m */; };
 		BCAEF3011D337B0F006DE1A5 /* ZSZPView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCAEF3001D337B0F006DE1A5 /* ZSZPView.m */; };
 		BCBFE22E1D26672C00C11C80 /* WorshipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBFE22D1D26672C00C11C80 /* WorshipModel.m */; };
 		BCCE8A981CFFF289005A5E21 /* PrivateWorshipTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BCCE8A921CFFF289005A5E21 /* PrivateWorshipTableViewCell.m */; };
@@ -2631,6 +2632,8 @@
 		BC9C47E31D58893700A9F5C2 /* qj_right10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qj_right10.png; sourceTree = "<group>"; };
 		BC9C8E231D13F10B00C445D0 /* CustomPikcerDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPikcerDateView.h; sourceTree = "<group>"; };
 		BC9C8E241D13F10B00C445D0 /* CustomPikcerDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPikcerDateView.m; sourceTree = "<group>"; };
+		BCA3B63E1D62B30200B48CBD /* FamilyHelpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyHelpModel.h; sourceTree = "<group>"; };
+		BCA3B63F1D62B30200B48CBD /* FamilyHelpModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyHelpModel.m; sourceTree = "<group>"; };
 		BCAEF2FF1D337B0F006DE1A5 /* ZSZPView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSZPView.h; sourceTree = "<group>"; };
 		BCAEF3001D337B0F006DE1A5 /* ZSZPView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZSZPView.m; sourceTree = "<group>"; };
 		BCBFE22C1D26672C00C11C80 /* WorshipModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorshipModel.h; sourceTree = "<group>"; };
@@ -3441,6 +3444,7 @@
 		AD8DAADD1CFD750C009B7958 /* 宗亲互助 */ = {
 			isa = PBXGroup;
 			children = (
+				BCA3B63D1D62B2E800B48CBD /* model */,
 				AD8DAADE1CFD7533009B7958 /* FamilyHelpViewController.h */,
 				AD8DAADF1CFD7533009B7958 /* FamilyHelpViewController.m */,
 				AD8DAB061CFD84A5009B7958 /* HelpTableTableViewCell.h */,
@@ -5995,6 +5999,15 @@
 			path = "求签动态图2";
 			sourceTree = "<group>";
 		};
+		BCA3B63D1D62B2E800B48CBD /* model */ = {
+			isa = PBXGroup;
+			children = (
+				BCA3B63E1D62B30200B48CBD /* FamilyHelpModel.h */,
+				BCA3B63F1D62B30200B48CBD /* FamilyHelpModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		BCCE8A8E1CFFD14D005A5E21 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -7330,6 +7343,7 @@
 				BC51929E1D236C2E0020480F /* VIPGrowUpModel.m in Sources */,
 				ADE2CA621D519625000EFD0A /* AreaChooseView.m in Sources */,
 				AD61DB541D4F211400BA3EB0 /* CommentCell.m in Sources */,
+				BCA3B6401D62B30200B48CBD /* FamilyHelpModel.m in Sources */,
 				ADBA01711D0132350016AB00 /* DiscAndNameView.m in Sources */,
 				ADC29A761D38E341004353F4 /* NSString+WJudgeStringlegal.m in Sources */,
 				AD716D631D06D041004F422E /* NewsTableView.m in Sources */,

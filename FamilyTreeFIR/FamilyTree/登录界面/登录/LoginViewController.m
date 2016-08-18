@@ -346,7 +346,7 @@
                 [SXLoadingView showAlertHUD:@"登录成功" duration:0.5];
                 LoginModel *loginModel = [LoginModel modelWithJSON:jsonDic[@"data"]];
                 
-                if ([USERDEFAULT objectForKey:@"userid"]&&[[USERDEFAULT objectForKey:@"userid"] integerValue]!=loginModel.userId) {
+                if ([USERDEFAULT objectForKey:@"userid"]&&[[USERDEFAULT objectForKey:@"userid"] integerValue]!=loginModel.info.userId) {
                     //登录成功移除userdefault的id
                     if ([USERDEFAULT objectForKey:kNSUserDefaultsMyFamilyID]) {
                         [USERDEFAULT removeObjectForKey:kNSUserDefaultsMyFamilyID];
@@ -363,10 +363,13 @@
                                 
                 //存储用户信息
                 //id
-                [USERDEFAULT setObject:@(loginModel.userId) forKey:@"userid"];
+                [USERDEFAULT setObject:@(loginModel.info.userId) forKey:@"userid"];
                 //登录授权认证码
-                [USERDEFAULT setObject:loginModel.auth
+                [USERDEFAULT setObject:loginModel.info.auth
                                 forKey:@"authcode"];
+                //vip等级
+                [USERDEFAULT setObject:@(loginModel.lv) forKey:@"vipLevel"];
+                
                 [USERDEFAULT setObject:self.loginView.accountView.inputTextView.text forKey:UserAccount];
                 [USERDEFAULT setObject:self.loginView.passwordView.inputTextView.text forKey:UserPassword];
                 

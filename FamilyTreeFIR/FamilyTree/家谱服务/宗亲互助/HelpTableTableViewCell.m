@@ -8,15 +8,15 @@
 
 #import "HelpTableTableViewCell.h"
 @interface HelpTableTableViewCell()
-
+@property (nonatomic,strong) UIImageView *leftImageView; /*左边图*/
+@property (nonatomic,strong) UILabel *oneLabel; /*label1*/
 
 
 @end
 @implementation HelpTableTableViewCell
 
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self.contentView addSubview:self.leftImageView];
@@ -30,6 +30,13 @@
     }
     return self;
 }
+
+-(void)setModel:(FamilyHelpDatalistModel *)model{
+    _model = model;
+    [_leftImageView setImageWithURL:[NSURL URLWithString:model.ZqCover] placeholder:MImage(@"sj_bg")];
+    _oneLabel.text = model.ZqTitle;
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -50,7 +57,7 @@
     if (!_oneLabel) {
         _oneLabel = [UILabel new];
         _oneLabel.font = MFont(15);
-        _oneLabel.text = @"只能拐杖,让关爱如影随形";
+        //_oneLabel.text = @"只能拐杖,让关爱如影随形";
         _oneLabel.numberOfLines = 0;
     }
     return _oneLabel;

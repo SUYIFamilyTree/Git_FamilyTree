@@ -35,9 +35,10 @@
     
     [self initOneTributeBtnWithFrame:CGRectMake(0.1453*CGRectW(self.backIV), 0.1193*CGRectH(self.backIV), 0.6325*CGRectW(self.backIV), 0.1042*CGRectH(self.backIV)) withStr1:@"香烛" withStr2:@"免费" withImage:MImage(@"qf_gp_xianglu") withTag:111+0];
     
-    [self initOneTributeBtnWithFrame:CGRectMake(0.1453*CGRectW(self.backIV), 0.1193*CGRectH(self.backIV)+0.1364*CGRectH(self.backIV), 0.6325*CGRectW(self.backIV), 0.1042*CGRectH(self.backIV)) withStr1:@"水果" withStr2:@"2积分/次" withImage:MImage(@"qf_gp_xiangjiao") withTag:111+1];
-    
-    [self initOneTributeBtnWithFrame:CGRectMake(0.1453*CGRectW(self.backIV), 0.1193*CGRectH(self.backIV)+0.1364*CGRectH(self.backIV)*2, 0.6325*CGRectW(self.backIV), 0.1042*CGRectH(self.backIV)) withStr1:@"牲礼" withStr2:@"10积分/次" withImage:MImage(@"qf_gp_shengli") withTag:111+2];
+    [self initOneTributeBtnWithFrame:CGRectMake(0.1453*CGRectW(self.backIV), 0.1193*CGRectH(self.backIV)+0.1364*CGRectH(self.backIV), 0.6325*CGRectW(self.backIV), 0.1042*CGRectH(self.backIV)) withStr1:@"水果" withStr2:([[USERDEFAULT objectForKey:@"vipLevel"] intValue] == 0)?@"2积分/次":@"免费" withImage:MImage(@"qf_gp_xiangjiao") withTag:111+1];
+//    MYLog(@"%@",([[USERDEFAULT valueForKey:@"vipLevel"] intValue] == 0)?@"10积分/次":@"免费");
+
+    [self initOneTributeBtnWithFrame:CGRectMake(0.1453*CGRectW(self.backIV), 0.1193*CGRectH(self.backIV)+0.1364*CGRectH(self.backIV)*2, 0.6325*CGRectW(self.backIV), 0.1042*CGRectH(self.backIV)) withStr1:@"牲礼" withStr2:([[USERDEFAULT objectForKey:@"vipLevel"] intValue] == 0)?@"10积分/次":@"免费" withImage:MImage(@"qf_gp_shengli") withTag:111+2];
     
     [self initOneTributeBtnWithFrame:CGRectMake(0.1453*CGRectW(self.backIV), 0.1193*CGRectH(self.backIV)+0.1364*CGRectH(self.backIV)*3, 0.6325*CGRectW(self.backIV), 0.1042*CGRectH(self.backIV)) withStr1:@"元宝" withStr2:@"10元/次" withImage:MImage(@"qf_gp_yuanbao") withTag:111+3];
     
