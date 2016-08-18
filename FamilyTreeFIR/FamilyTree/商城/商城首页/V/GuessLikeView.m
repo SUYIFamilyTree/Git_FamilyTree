@@ -84,7 +84,7 @@
     CGFloat money = goods.CoprActpri;
     cell.payMoneyLb.text = [NSString stringWithFormat:@"¥%.1f",money];
     CGFloat moneyYJ = goods.CoprMoney;
-    cell.quoteLb.text = [NSString stringWithFormat:@"¥%.1f",moneyYJ];
+    cell.quoteLb.text = [NSString stringWithFormat:@"%.1f",moneyYJ];
     NSMutableAttributedString *quoteStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"¥%@",cell.quoteLb.text]];
     [quoteStr addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid|NSUnderlineStyleSingle) range:NSMakeRange(0, quoteStr.length)];
     cell.quoteLb.attributedText = quoteStr;//加横线

@@ -34,6 +34,21 @@
 #pragma mark 获取数据
 - (void)getData{
     _dataArr = [NSMutableArray array];
+    
+    
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"pagenum":@"1",
+                                                 @"pagesize":@"20",
+                                                 @"ddh":@"10152",
+                                                 @"userid":GetUserId} requestID:GetUserId requestcode:kRequestCodegetevaluate success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+                                                     if (succe) {
+                                                         NSLog(@"0.13---%@", [NSString jsonDicWithDic:jsonDic[@"data"]]);
+                                                     }
+                                                 } failure:^(NSError *error) {
+                                                     
+                                                 }];
+    
+    
+    
     for (int i=0; i<3; i++) {
         CommentPersonModel *comModel =[[CommentPersonModel alloc]init];
         if (i==1) {
@@ -132,8 +147,10 @@
 #pragma mark ==获取商品数据==
 -(void)getGoodData:(GoodDetailModel *)sender{
     _goodShopV.goodNameLb.text = sender.goodName;
-    _goodShopV.payMoneyLb.text = sender.goodMoney;
+    
+    _goodShopV.payMoneyLb.text = [NSString stringWithFormat:@"¥%@",sender.goodMoney];;
     _goodShopV.quoteLb.text = sender.goodQuote;
+    
     NSMutableAttributedString *quoteStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"¥%@",_goodShopV.quoteLb.text]];
     [quoteStr addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid|NSUnderlineStyleSingle) range:NSMakeRange(0, quoteStr.length)];
     _goodShopV.quoteLb.attributedText = quoteStr;//加横线
@@ -142,6 +159,8 @@
     _goodShopV.frame = CGRectMake(0, 0, __kWidth, _goodShopV.height);
     _goodShopV.goodPayModel.goodName=sender.goodName;
     _goodShopV.goodPayModel.goodMoney= sender.goodMoney;
+    
+
     _chooseGood=_goodShopV.goodPayModel;
 
     _commentV.frame = CGRectMake(0, CGRectYH(_goodShopV)+10, __kWidth, 40);

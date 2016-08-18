@@ -73,11 +73,22 @@
 - (void)getData{
     _goodDetailModel = [[GoodDetailModel alloc]init];
     _goodDetailModel.goodName = self.detalModel.data.CoConame;
-    _goodDetailModel.goodMoney = @"189.00";
-    _goodDetailModel.goodQuote = @"189.00";
+    
     
     NSArray *colorArr = @[@"黑",@"绿",@"棕",@"白",@"紫"];
-    NSArray *styleArr =  @[@"大日如来",@"千手观音",@"不动明王",@"文殊菩萨",@"看看很多的"];
+    
+    NSMutableArray *mutableStyleArr = [@[] mutableCopy];
+    NSMutableDictionary *mutableStyleDicId = [NSMutableDictionary dictionary];
+    for (DetailPro *pro in self.detalModel.pro) {
+        [mutableStyleArr addObject:pro.CoprData];
+        //一个商品类型，对应商品类型id，原价和总价
+        [mutableStyleDicId setObject:@[@(pro.CoprId),@(pro.CoprMoney),@(pro.CoprActPri)] forKey:pro.CoprData];
+    }
+    [USERDEFAULT setObject:mutableStyleDicId forKey:kNSUserDefaultsgoodsDetail];
+    
+    _goodDetailModel.goodMoney = [NSString stringWithFormat:@"%ld",(long)self.detalModel.pro[0].CoprActPri];
+    _goodDetailModel.goodQuote = [NSString stringWithFormat:@"%ld",(long)self.detalModel.pro[0].CoprMoney];
+    NSArray *styleArr =  mutableStyleArr;
     _goodDetailModel.colorList = [NSMutableArray array];
     _goodDetailModel.styleList = [NSMutableArray array];
     for (int i=0 ; i<colorArr.count; i++) {
@@ -119,7 +130,7 @@
 
 #pragma mark -GoodBottomViewDelegate
 -(void)payOrShop:(UIButton *)sender{
-    NSLog(@"商品:%@\n颜色:%@\n款式:%@\n价格:%@\n数量:%@",_goodDetailV.chooseGood.goodName,_goodDetailV.chooseGood.goodColor,_goodDetailV.chooseGood.goodStyle,_goodDetailV.chooseGood.goodMoney,_goodDetailV.chooseGood.goodCount);
+    NSLog(@"商品:%@\n颜色:%@\n款式:%@\n价格:%@\n数量:%@\n类型id:%@",_goodDetailV.chooseGood.goodName,_goodDetailV.chooseGood.goodColor,_goodDetailV.chooseGood.goodStyle,_goodDetailV.chooseGood.goodMoney,_goodDetailV.chooseGood.goodCount,_goodDetailV.chooseGood.goodStyleId);
     if (sender.tag) {
         NSLog(@"立即支付");
     }else{
@@ -171,7 +182,7 @@
 
     _goodLabelV = [[GoodLabelView alloc]initWithFrame:CGRectMake(0, 0, __kWidth, 120)];
     [_goodTwoV addSubview:_goodLabelV];
-    _goodLabelV.detaiLb.text = @"文化（culture）是一个非常广泛和最具人文意味的概念，给文化下一个准确或精确的定义，的确是一件非常困难的事情。对文化这个概念的解读，人类也一直众说不一。但东西方的辞书或百科中却有一个较为共同的的解释和理解：文化是人类所创造的物质财富与精神财富的总和。文化（culture）是一个非常广泛和最具人文意味的概念，给文化下一个";
+    _goodLabelV.detaiLb.text = self.detalModel.data.CoBrief;
     [_goodLabelV refreshFrame];
     if (_goodLabelV.bounds.size.height>__kHeight-110) {
         _goodTwoV.contentSize = CGSizeMake(__kWidth, _goodLabelV.bounds.size.height);

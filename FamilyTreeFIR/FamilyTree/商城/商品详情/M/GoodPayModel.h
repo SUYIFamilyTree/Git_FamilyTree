@@ -26,6 +26,10 @@
  */
 @property (strong,nonatomic) NSString *goodStyle;
 /**
+ *  商品款式id
+ */
+@property (strong,nonatomic) NSString *goodStyleId;
+/**
  *  商品数量
  */
 @property (strong,nonatomic) NSString *goodCount;

@@ -156,6 +156,7 @@ NSString * _Nonnull const KNotificationCodeRankingPorChange = @"RankingPorChange
 //我的家谱名字和id，存储在本地
 NSString * _Nonnull const kNSUserDefaultsMyFamilyID = @"UserDefaultsMyFamilyID";
 NSString * _Nonnull const kNSUserDefaultsMyFamilyName = @"UserDefaultsMyFamilyName";
-
+//商品详情需要的数据
+NSString * _Nonnull const kNSUserDefaultsgoodsDetail = @"goodsDetail";
 
 @end
