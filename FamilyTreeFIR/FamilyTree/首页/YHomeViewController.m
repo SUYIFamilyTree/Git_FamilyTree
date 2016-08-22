@@ -13,6 +13,7 @@
 #import "DivinationViewController.h"
 #import "CliffordViewController.h"
 #import "BannerModel.h"
+#import "QiJieModel.h"
 
 @interface YHomeViewController ()
 /** 顶部状态条*/
@@ -46,7 +47,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self initUI];
     [self getBanner];
-    //[self getJieqi];
+    [self getJieqi];
 }
 
 #pragma mark - 视图初始化
@@ -94,11 +95,19 @@
 }
 
 -(void)getJieqi{
-    NSDictionary *logDic = @{};
+    NSDictionary *logDic = @{@"userid":@"15"};
+    WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getapiindeximg" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         MYLog(@"%@",jsonDic);
         if (succe) {
-            
+            QiJieModel *model = [QiJieModel modelWithJSON:jsonDic[@"data"]];
+            weakSelf.chineseCalendarLB.text = model.rq;
+            weakSelf.jieqiLB.text = model.qj;
+            if (IsNilString(model.qj)) {
+                weakSelf.jieqiLB.backgroundColor = [UIColor clearColor];
+            }else{
+                weakSelf.jieqiLB.backgroundColor = [UIColor colorWithHexString:@"ad1e23"];
+            }
         }
     } failure:^(NSError *error) {
         
@@ -188,7 +197,7 @@
         _backSV.showsVerticalScrollIndicator = NO;
         _backSV.showsHorizontalScrollIndicator = NO;
         _backSV.bounces = NO;
-        _backSV.contentSize = CGSizeMake(Screen_width, 620);
+        _backSV.contentSize = CGSizeMake(Screen_width, 550);
     }
     return _backSV;
 }

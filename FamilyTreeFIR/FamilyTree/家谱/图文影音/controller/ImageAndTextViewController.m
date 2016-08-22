@@ -139,21 +139,21 @@
     [self.view addSubview:_contentView];
 }
 //图下两条线
--(void)initLeftAndRightLineIV{
-    UIImageView *leftLineIV =[[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(_contentSV),CGRectY(_contentUnderImageLB)+7, 0.33*CGRectW(_contentSV), 5)];
-    leftLineIV.image = MImage(@"ht_bt");
-    [self.view addSubview:leftLineIV];
-    UIImageView *rightLineIV =[[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(_contentSV)+0.67*CGRectW(_contentSV), CGRectY(_contentUnderImageLB)+7, 0.33*CGRectW(_contentSV), 5)];
-    rightLineIV.image = MImage(@"ht_bt");
-    [self.view addSubview:rightLineIV];
-}
+//-(void)initLeftAndRightLineIV{
+//    UIImageView *leftLineIV =[[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(_contentSV),CGRectY(_contentUnderImageLB)+7, 0.33*CGRectW(_contentSV), 5)];
+//    leftLineIV.image = MImage(@"ht_bt");
+//    [self.view addSubview:leftLineIV];
+//    UIImageView *rightLineIV =[[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(_contentSV)+0.67*CGRectW(_contentSV), CGRectY(_contentUnderImageLB)+7, 0.33*CGRectW(_contentSV), 5)];
+//    rightLineIV.image = MImage(@"ht_bt");
+//    [self.view addSubview:rightLineIV];
+//}
 //四个标签
 -(void)initRightLBs{
-    _rightViewLBA = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_rightView), CGRectY(_rightView), CGRectW(_rightView), 0.18*CGRectH(_rightView))];
+    _rightViewLBA = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_rightView), CGRectY(_rightView), CGRectW(_rightView), 0.5*CGRectH(_rightView))];
     _rightViewLBA.font = MFont(12);
-    _rightViewLBA.numberOfLines = 0;
+    _rightViewLBA.numberOfLines = 10;
     _rightViewLBA.textAlignment = NSTextAlignmentCenter;
-    _rightViewLBA.lineBreakMode = NSLineBreakByWordWrapping;
+    _rightViewLBA.lineBreakMode = NSLineBreakByTruncatingMiddle;
     _rightViewLBA.layer.borderWidth = 1;
     [self.view addSubview:_rightViewLBA];
     UIImageView *angelIV = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectX(_rightView), CGRectYH(_rightViewLBA)+1, CGRectW(_rightView), 7)];
@@ -173,7 +173,7 @@
     _rightViewLBC.numberOfLines = 0;
     _rightViewLBC.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:_rightViewLBC];
-    _rightViewLBD = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_rightView), CGRectY(_rightView)+0.85*CGRectH(_rightView), CGRectW(_rightView), 0.15*CGRectH(_rightView))];
+    _rightViewLBD = [[UILabel alloc]initWithFrame:CGRectMake(CGRectX(_rightView), CGRectY(_rightView)+0.8*CGRectH(_rightView), CGRectW(_rightView), 0.2*CGRectH(_rightView))];
     _rightViewLBD.font = MFont(11);
     //_rightViewLBD.font = [UIFont fontWithName:@"Helvetica-Bold" size:11];
     _rightViewLBD.numberOfLines = 0;

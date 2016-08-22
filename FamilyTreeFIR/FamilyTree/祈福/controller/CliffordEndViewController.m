@@ -7,6 +7,7 @@
 //
 
 #import "CliffordEndViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface CliffordEndViewController()
 /** 背景图*/
@@ -17,11 +18,14 @@
 @property (nonatomic, strong) UITextView *cliffordStrTX;
 /** 祈福语接收后的弹框*/
 @property (nonatomic, strong) UIImageView *endCliffordIV;
+/** 音乐播放器*/
+@property (nonatomic, strong) AVAudioPlayer *player;
 @end
 
 @implementation CliffordEndViewController
 -(void)viewDidLoad{
     [super viewDidLoad];
+    [self startMusic];
     [self.view addSubview:self.backIV];
     [self.backIV addSubview:self.cliffordStrIV];
     [self.cliffordStrIV addSubview:self.cliffordStrTX];
@@ -33,6 +37,13 @@
         }
     });
 }
+
+-(void)startMusic{
+    NSURL *url = [[NSBundle mainBundle]URLForResource:@"endqf" withExtension:@"wav"];
+    self.player=[[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+    [self.player play];
+}
+
 
 #pragma mark - lazyLoad
 -(UIImageView *)backIV{

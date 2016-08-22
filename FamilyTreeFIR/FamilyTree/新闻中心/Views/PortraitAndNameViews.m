@@ -7,6 +7,7 @@
 //
 
 #import "PortraitAndNameViews.h"
+#import "NewInfoViewController.h"
 
 @interface PortraitAndNameViews()<UIScrollViewDelegate>
 {
@@ -89,14 +90,23 @@
     
     for (int i = 0; i<self.MRZJArr.count; i++) {
                 UIImageView *image = [[UIImageView alloc] initWithFrame:AdaptationFrame(i*171, 0, 158, 172)];
+        image.userInteractionEnabled = YES;
         [image setImageWithURL:[NSURL URLWithString:self.MRZJArr[i].ArCover] placeholder:MImage(@"news_touxiang")];
-                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(i*171*AdaptationWidth(), CGRectYH(image)+15*AdaptationWidth(), image.bounds.size.width, 23*AdaptationWidth())];
-                label.font = MFont(15);
-                label.textAlignment = 1;
-                label.text = self.MRZJArr[i].ArTitle;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithActionBlock:^(id  _Nonnull sender) {
+            NewInfoViewController *newInfoVC = [[NewInfoViewController alloc]initWithTitle:@"名人传记" image:nil];
+            newInfoVC.arId = self.MRZJArr[i].ArId;
+            [[self viewController].navigationController pushViewController:newInfoVC animated:YES];
+            
+        }];
+        [image addGestureRecognizer:tap];
         
-                [self.backNesScrollView addSubview:image];
-                [self.backNesScrollView addSubview:label];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(i*171*AdaptationWidth(), CGRectYH(image)+15*AdaptationWidth(), image.bounds.size.width, 23*AdaptationWidth())];
+        label.font = MFont(15);
+        label.textAlignment = 1;
+        label.text = self.MRZJArr[i].ArTitle;
+        
+        [self.backNesScrollView addSubview:image];
+        [self.backNesScrollView addSubview:label];
             }
 
     

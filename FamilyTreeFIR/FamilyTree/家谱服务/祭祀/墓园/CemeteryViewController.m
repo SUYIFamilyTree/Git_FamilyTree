@@ -24,6 +24,7 @@ enum {
 #import "AllGoodsView.h"
 #import "UIImageView+WebCache.h"
 #import "QuartzCore/QuartzCore.h"
+#import <AVFoundation/AVFoundation.h>
 
 #define bacheight (Screen_height-self.tabBarController.tabBar.bounds.size.height-64)
 @interface CemeteryViewController ()<InputCherishViewDelegate,UITextViewDelegate,CemGoodsShopViewDelegate>
@@ -57,13 +58,16 @@ enum {
 @property (nonatomic, strong) NSMutableArray *currentCemGoodsArr;
 /** 用来显示已经购买的祭祀贡品视图*/
 @property (nonatomic, strong) UIView *goodsBackView;
-
+/** 播放器*/
+@property (nonatomic, strong) AVAudioPlayer *player;
 @end
 
 @implementation CemeteryViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //音效
+    [self startMusic];
     [self initUI];
     [self getCemeteryData];
     [self getCemeteryBarrageList];
@@ -72,6 +76,15 @@ enum {
     [self.scrollView addSubview:self.goodsBackView];
     
     
+}
+
+#pragma mark - 添加音效
+-(void)startMusic{
+    NSURL *url = [[NSBundle mainBundle]URLForResource:@"jisi" withExtension:@"mp3"];
+    self.player=[[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+    self.player.numberOfLoops = -1;
+    [self.player play];
+
 }
 
 #pragma mark *** 初始化数据 ***
@@ -121,7 +134,9 @@ enum {
                              @"coname":@"",
                              @"qsj":@"",
                              @"jwj":@"",
-                             @"shoptype":@"JS"
+                             @"shoptype":@"JS",
+                             @"px":@"",
+                             @"issx":@""
                              };
     WK(weakSelf);
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getcomlist" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {

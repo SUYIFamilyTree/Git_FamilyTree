@@ -22,7 +22,8 @@ static NSString *const kNesCellIdentifier = @"newscellIdentifier";
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        //self.backgroundColor = [UIColor random];
+        self.userInteractionEnabled = YES;
         [self initData];
         [self initUI];
     }
@@ -40,6 +41,7 @@ static NSString *const kNesCellIdentifier = @"newscellIdentifier";
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
    return  self.dataSource.count;
+    //return 10;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NewsCell *cell = [tableView dequeueReusableCellWithIdentifier:kNesCellIdentifier forIndexPath:indexPath];
@@ -47,7 +49,7 @@ static NSString *const kNesCellIdentifier = @"newscellIdentifier";
     if (!cell) {
         cell = [[NewsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kNesCellIdentifier];
     }
-    cell.familyDTModel = self.dataSource[indexPath.row];
+        cell.familyDTModel = self.dataSource[indexPath.row];
     return cell;
 }
 
@@ -57,10 +59,14 @@ static NSString *const kNesCellIdentifier = @"newscellIdentifier";
     [[self viewController].navigationController pushViewController:newInfoVC animated:YES];
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 40;
+}
+
 #pragma mark *** getters ***
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height)];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height-10)];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [_tableView registerClass:[NewsCell class] forCellReuseIdentifier:kNesCellIdentifier];
@@ -70,4 +76,10 @@ static NSString *const kNesCellIdentifier = @"newscellIdentifier";
     return _tableView;
 }
 
+-(NSMutableArray<FamilyDTModel *> *)dataSource{
+    if (!_dataSource) {
+        _dataSource = [@[] mutableCopy];
+    }
+    return _dataSource;
+}
 @end

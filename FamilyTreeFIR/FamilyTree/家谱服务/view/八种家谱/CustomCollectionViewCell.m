@@ -28,9 +28,8 @@
 #pragma mark *** getters ***
 -(UIImageView *)cusImage{
     if (!_cusImage) {
-        _cusImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-        
-        
+        _cusImage = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 30, 30)];
+        _cusImage.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _cusImage;
 }

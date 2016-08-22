@@ -247,17 +247,20 @@
 
 #pragma mark - 请求
 -(void)postData{
-    
     NSString *dateTime = [NSString stringWithFormat:@"%@-%02ld-%02ldT00:00:00",self.yearBtn.currentTitle,[self.monthBtn.currentTitle integerValue],[self.dayBtn.currentTitle integerValue]];
+    
+    NSNumber *budgetID = @[@98,@99,@100,@101,@102,@103,@104,@105,@106,@107][self.projectBudgetID];
+    NSNumber *typeID = @[@95,@96,@112,@113,@114,@115][self.projectID];
+    
     NSDictionary *logDic = @{@"PsId":@0,
                              @"PsMemberid":GetUserId,
                              @"PsType":@"ZZFW",
-                             @"PsProjecttype":@(self.projectID),
+                             @"PsProjecttype":typeID,
                              @"PsProjecttime":dateTime,
                              @"PsAreaid":@0,
                              @"PsContacts":self.linkManTF.text,
                              @"PsTel":self.telTF.text,
-                             @"PsBudget":@20,
+                             @"PsBudget":budgetID,
                              @"PsAddress":self.projectAddressTF.text,
                              @"PsState":@"",
                              @"PsCreatetime":@"",

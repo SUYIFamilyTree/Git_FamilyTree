@@ -12,6 +12,7 @@
 #import "TributeSelectView.h"
 #import "CliffordTributeModel.h"
 #import "JossSelectViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface CliffordViewController()<TributeSelectViewDelegate,JossSelectViewControllerDelegate>
 /** 背景视图*/
@@ -38,11 +39,15 @@
 @property (nonatomic, strong) NSString *alreadyBuyTributeStr;
 /** 贡品盘上的贡品视图*/
 @property (nonatomic, strong) NSMutableArray<UIImageView *> *tributePlateIVArr;
+/** 播放器*/
+@property (nonatomic, strong) AVAudioPlayer *player;
 @end
 
 @implementation CliffordViewController
 -(void)viewDidLoad{
     [super viewDidLoad];
+    //播放音效
+    [self startMusicWithName:@"qifukaichang"];
     [self.view addSubview:self.backIV];
     [self.view addSubview:self.curtainIV];
     [self.curtainIV addSubview:self.beginBtn];
@@ -59,6 +64,14 @@
     [self.backIV addSubview:self.clickView];
     [self getQFShopData];
     
+}
+
+#pragma mark - 音效播放
+-(void)startMusicWithName:(NSString *)str{
+    NSURL *url = [[NSBundle mainBundle]URLForResource:str withExtension:@"mp3"];
+    self.player=[[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+    self.player.numberOfLoops = -1;
+    [self.player play];
 }
 
 #pragma mark - 视图初始化
@@ -89,7 +102,9 @@
                              @"coname":@"",
                              @"qsj":@"",
                              @"jwj":@"",
-                             @"shoptype":@"QF"
+                             @"shoptype":@"QF",
+                             @"px":@"",
+                             @"issx":@""
                              };
     WK(weakSelf);
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getcomlist" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
@@ -136,6 +151,11 @@
 #pragma mark - 点击事件
 -(void)clickToBegin{
     [self startCurtainAnimation];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.player stop];
+        [self startMusicWithName:@"qf"];
+    });
+    
 }
 
 -(void)clickToPushTributeView{
@@ -287,9 +307,9 @@
         _curtainIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49-10)];
         _curtainIV.image = MImage(@"qf_lian");
         _curtainIV.userInteractionEnabled = YES;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self startCurtainAnimation];
-        });
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [self startCurtainAnimation];
+//        });
     }
     return _curtainIV;
 }

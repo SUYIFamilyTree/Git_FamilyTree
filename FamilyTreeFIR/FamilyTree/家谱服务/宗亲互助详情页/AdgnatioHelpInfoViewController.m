@@ -9,10 +9,13 @@
 #import "AdgnatioHelpInfoViewController.h"
 #import "ScrollerView.h"
 #import "AdgnatioHelpInfoModel.h"
+#import "BannerView.h"
 
 @interface AdgnatioHelpInfoViewController ()
 /** 滚动图*/
-@property (nonatomic, strong) ScrollerView *bannerScrollView;
+//@property (nonatomic, strong) ScrollerView *bannerScrollView;
+@property (nonatomic, strong) BannerView *bannerView;
+
 /** 简介*/
 @property (nonatomic, strong) UITextView *infoTX;
 /** 关注按钮*/
@@ -38,11 +41,12 @@
 #pragma mark - 视图初始化
 -(void)initUI{
     self.view.backgroundColor = LH_RGBCOLOR(236, 236, 236);
-    [self.view addSubview:self.bannerScrollView];
+    //[self.view addSubview:self.bannerScrollView];
+    [self.view addSubview:self.bannerView];
     
     CGFloat viewWidth = (Screen_width-4*10)/3;
     //关注人数
-    UIView *attentionV =[[UIView alloc]initWithFrame:CGRectMake(10, CGRectYH(self.bannerScrollView)+10, viewWidth, 55)];
+    UIView *attentionV =[[UIView alloc]initWithFrame:CGRectMake(10, CGRectYH(self.bannerView)+10, viewWidth, 55)];
     attentionV.backgroundColor = LH_RGBCOLOR(139, 71, 31);
     [self.view addSubview:attentionV];
     
@@ -195,6 +199,8 @@
             weakSelf.adgnatioHelpInfoModel = [AdgnatioHelpInfoModel modelWithJSON:jsonDic[@"data"]];
             weakSelf.infoTX.text = weakSelf.adgnatioHelpInfoModel.data.ZqBrief;
             weakSelf.attentionBtn.selected = weakSelf.adgnatioHelpInfoModel.isgz;
+//            weakSelf.bannerScrollView.imageNames = [weakSelf.adgnatioHelpInfoModel.piclist mutableCopy];
+            weakSelf.bannerView.imageArr = weakSelf.adgnatioHelpInfoModel.piclist;
         }
     } failure:^(NSError *error) {
         
@@ -252,11 +258,18 @@
 }
 
 #pragma mark -lazyLoad
--(ScrollerView *)bannerScrollView{
-    if (!_bannerScrollView) {
-        _bannerScrollView = [[ScrollerView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, 175) images:nil];
+//-(ScrollerView *)bannerScrollView{
+//    if (!_bannerScrollView) {
+//        _bannerScrollView = [[ScrollerView alloc] initWithFrame:CGRectMake(0, 64, Screen_width, 175) images:nil];
+//    }
+//    return _bannerScrollView;
+//}
+
+-(BannerView *)bannerView{
+    if (!_bannerView) {
+        _bannerView = [[BannerView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, 172)];
     }
-    return _bannerScrollView;
+    return _bannerView;
 }
 
 @end

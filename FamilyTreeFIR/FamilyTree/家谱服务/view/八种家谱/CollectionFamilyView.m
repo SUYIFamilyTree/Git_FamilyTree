@@ -34,13 +34,14 @@ static NSString *const kReusableCellIdentifier = @"cellIdentifier";
     self = [super initWithFrame:frame];
     if (self) {
         [self initData];
+        self.backgroundColor = [UIColor whiteColor];
         [self initUI];
     }
     return self;
 }
 #pragma mark *** 初始化数据 ***
 -(void)initData{
-    _imageNames = @[@"icon_1",@"icon_2",@"icon_3",@"icon_4",@"icon_5",@"icon_6",@"icon_7",@"icon_8"];
+    _imageNames = @[@"fuwu_mjym",@"fuwu_sjxq",@"fuwu_jnxp",@"fuwu_zqhz",@"fuwu_zjtj",@"fuwu_zzfw",@"fuwu_fsjd",@"fuwu_zxjs"];
     _cellNames = @[@"募捐圆梦",@"赏金寻亲",@"教你修谱",@"宗亲互助",@"专家推荐",@"增值服务",@"风水鉴定",@"在线祭祀"];
     
 }
@@ -63,7 +64,6 @@ static NSString *const kReusableCellIdentifier = @"cellIdentifier";
 }
 #pragma mark *** collectionViewDelegate ***
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
     if (_delegate && [_delegate respondsToSelector:@selector(CollevtionFamily:didSelectedItemAtIndexPath:)]) {
         [_delegate CollevtionFamily:self didSelectedItemAtIndexPath:indexPath];
     }
@@ -74,7 +74,7 @@ static NSString *const kReusableCellIdentifier = @"cellIdentifier";
 
 -(UICollectionView *)collectionView{
     if (!_collectionView) {
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SelfView_width, self.bounds.size.height) collectionViewLayout:self.flowLayout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 5, SelfView_width, self.bounds.size.height) collectionViewLayout:self.flowLayout];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
         _collectionView.bounces = NO;

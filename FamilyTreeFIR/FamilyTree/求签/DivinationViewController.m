@@ -10,6 +10,7 @@
 #import "UseItemView.h"
 #import "WAfterDivinationViewController.h"
 #import "CliffordTributeModel.h"
+#import <AVFoundation/AVFoundation.h>
 //#import <CoreMotion/CoreMotion.h>
 
 #define AnimationTime 3.0f
@@ -38,13 +39,19 @@ enum {
 
 /**祈福商品modelArr*/
 @property (nonatomic,strong) NSArray *cliModelArr;
-
+/** 定时器*/
+@property (nonatomic, strong) NSTimer *timer;
 ///** 重力感应*/
 //@property (nonatomic, strong) CMMotionManager *cmMotionManager;
 
 @end
 
 @implementation DivinationViewController
+
+-(void)dealloc{
+    [self.timer invalidate];
+    self.timer = nil;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -232,6 +239,27 @@ enum {
 -(void)clickDivinationBtn{
     MYLog(@"点击求签");
     [self.diviAnimations startAnimating];
+    
+    //1.获得音效文件的全路径
+    
+    NSURL *url=[[NSBundle mainBundle]URLForResource:@"qiuqian.mp3" withExtension:nil];
+    
+    //2.加载音效文件，创建音效ID（SoundID,一个ID对应一个音效文件）
+    SystemSoundID soundID=0;
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &soundID);
+    
+    //把需要销毁的音效文件的ID传递给它既可销毁
+    //AudioServicesDisposeSystemSoundID(soundID);
+    
+    //3.播放音效文件
+    //下面的两个函数都可以用来播放音效文件，第一个函数伴随有震动效果
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 block:^(NSTimer * _Nonnull timer) {
+        AudioServicesPlaySystemSound(soundID);
+    } repeats:YES];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.timer.fireDate = [NSDate distantFuture];
+    });
+    
     
     CABasicAnimation *moveXAnimation = [CABasicAnimation animation];
     moveXAnimation.keyPath = @"position.x";

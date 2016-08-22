@@ -11,5 +11,7 @@
 
 @interface BannerView : UIView
 /** 图片数组*/
-@property (nonatomic, strong)NSArray<BannerModel *> *modelArr;
+@property (nonatomic, strong) NSArray<BannerModel *> *modelArr;
+/** 图片文字数组*/
+@property (nonatomic, strong) NSArray<NSString *> *imageArr;
 @end

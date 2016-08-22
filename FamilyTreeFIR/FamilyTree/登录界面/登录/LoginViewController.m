@@ -13,6 +13,7 @@
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "AliPayOrder.h"
+#import <AVFoundation/AVFoundation.h>
 #define ReGistView_height 180
 #define AnimationsTime 0.4f
 @interface LoginViewController ()<LoginViewDelegate,ToRegisViewDelegate>
@@ -24,7 +25,8 @@
 @property (nonatomic,strong) RootTabBarViewController *tabBarVc; /*标签控制器*/
 /** 验证码*/
 @property (nonatomic, assign) NSInteger verificationCode;
-
+/** 音乐播放器*/
+@property (nonatomic, strong) AVAudioPlayer *player;
 
 @end
 
@@ -332,6 +334,9 @@
 
 //登录按钮
 -(void)loginView:(LoginView *)loginView didSelectedLoginBtn:(UIButton *)sender{
+    NSURL *url = [[NSBundle mainBundle]URLForResource:@"login" withExtension:@"wav"];
+    self.player=[[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+    [self.player play];
     [SXLoadingView showProgressHUD:@"正在登录"];
     
     MYLog(@"登录");

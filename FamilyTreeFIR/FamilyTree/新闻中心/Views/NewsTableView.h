@@ -13,5 +13,5 @@
 /** 表*/
 @property (nonatomic,strong) UITableView *tableView;
 /** 数据数组*/
-@property (nonatomic, strong) NSArray<FamilyDTModel *> *dataSource;
+@property (nonatomic, strong) NSMutableArray<FamilyDTModel *> *dataSource;
 @end

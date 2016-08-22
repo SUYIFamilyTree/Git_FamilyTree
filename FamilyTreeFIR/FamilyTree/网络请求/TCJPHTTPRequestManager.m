@@ -50,7 +50,7 @@
     
     NSString  *authcode;
     //NSString *authcode = @"";
-        if ([requestcode isEqualToString:@"login"]||[requestcode isEqualToString:@"register"]||[requestcode isEqualToString:@"sendsms"]||[requestcode isEqualToString:@"getapiindeximg"]) {
+        if ([requestcode isEqualToString:@"login"]||[requestcode isEqualToString:@"register"]||[requestcode isEqualToString:@"sendsms"]) {
             authcode = @"";
         }else{
             authcode = [USERDEFAULT valueForKey:@"authcode"];

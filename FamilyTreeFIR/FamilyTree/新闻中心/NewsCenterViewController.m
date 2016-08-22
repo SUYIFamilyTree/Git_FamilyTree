@@ -22,15 +22,16 @@
 @property (nonatomic, strong) BannerView  *bannerView;
 
 @property (nonatomic,strong) NewsTableView *tableNesView; /*table*/
+/** 名人传记 */
+@property (nonatomic,strong) PortraitAndNameViews *proAndName;
 
-@property (nonatomic,strong) PortraitAndNameViews *proAndName; /*头像和名字*/
+/** 姓氏文化*/
+@property (nonatomic,strong) NewsTableView *nameTableNews;
 
-
-@property (nonatomic,strong) NewsTableView *nameTableNews; /*百家姓新闻*/
-
-/** 我请求的家族动态的页数*/
+/** 当前家族动态页数*/
 @property (nonatomic, assign) int jzdtPage;
-
+/** 当前姓氏文化页数*/
+@property (nonatomic, assign) int xswhPage;
 
 @end
 
@@ -45,7 +46,6 @@
     [self.bacScrollView addSubview:self.segmentContl];
     [self.bacScrollView addSubview:self.bannerView];
     [self.bacScrollView addSubview:self.tableNesView];
-    self.tableNesView.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreJzdt)];
     [self.bacScrollView addSubview:self.proAndName];
     [self.bacScrollView addSubview:self.hundredVies];
     [self.bacScrollView addSubview:self.nameTableNews];
@@ -59,7 +59,8 @@
     [self getMRZJData];
     //获取百家姓
     [self getBJXData];
-    //获取姓氏源流
+    //获取姓氏文化
+    self.xswhPage = 1;
     [self getXSWHData];
 }
 
@@ -79,30 +80,29 @@
 
 }
 
-
-
 -(void)getFamilyDTData{
-//    NSDictionary *logDic = @{@"pagenum":@1,@"pagesize":@1999,@"type":@"JZDT",@"geid":@"",@"istop":@""};
-    NSDictionary *logDic = @{@"pagenum":@(self.jzdtPage),@"pagesize":@5,@"type":@"JZDT",@"geid":@"",@"istop":@""};
+    NSDictionary *logDic = @{@"pagenum":@(self.jzdtPage),@"pagesize":@5,@"type":@"JZDT",@"geid":[WFamilyModel shareWFamilModel].myFamilyId,@"istop":@""};
     WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetNewsList success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         MYLog(@"%@",jsonDic[@"data"]);
         if (succe) {
             NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
             NSArray *JZDTArr = [NSArray modelArrayWithClass:[FamilyDTModel class] json:dic[@"datalist"]];
-            weakSelf.tableNesView.dataSource = JZDTArr;
+            if (JZDTArr.count != 0) {
+                [weakSelf.tableNesView.dataSource addObjectsFromArray:JZDTArr];
+            }
             [weakSelf.tableNesView.tableView reloadData];
-            
+            [weakSelf.tableNesView.tableView.mj_footer endRefreshing];
             //MYLog(@"%@",JZDTArr);
         }
     } failure:^(NSError *error) {
-        
+        [weakSelf.tableNesView.tableView.mj_footer endRefreshing];
     }];
     
 }
 
 -(void)getMRZJData{
-    NSDictionary *logDic = @{@"pagenum":@1,@"pagesize":@1999,@"type":@"MRZJ",@"geid":@"",@"istop":@""};
+    NSDictionary *logDic = @{@"pagenum":@1,@"pagesize":@1999,@"type":@"MRZJ",@"geid":[WFamilyModel shareWFamilModel].myFamilyId,@"istop":@""};
     WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetNewsList success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         //MYLog(@"%@",jsonDic[@"data"]);
@@ -138,21 +138,22 @@
 }
 
 -(void)getXSWHData{
-    NSDictionary *logDic = @{@"pagenum":@1,@"pagesize":@1999,@"type":@"XSWH",@"geid":@"",@"istop":@""};
+    NSDictionary *logDic = @{@"pagenum":@(self.xswhPage),@"pagesize":@5,@"type":@"XSWH",@"geid":[WFamilyModel shareWFamilModel].myFamilyId,@"istop":@""};
     WK(weakSelf)
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodeGetNewsList success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         MYLog(@"姓氏源流%@",jsonDic[@"data"]);
         if (succe) {
             NSDictionary *dic = [NSDictionary DicWithString:jsonDic[@"data"]];
             NSArray *XSWHArr = [NSArray modelArrayWithClass:[FamilyDTModel class] json:dic[@"datalist"]];
-            weakSelf.nameTableNews.dataSource = XSWHArr;
+            if (XSWHArr.count != 0) {
+                [weakSelf.nameTableNews.dataSource addObjectsFromArray:XSWHArr];
+            }
             [weakSelf.nameTableNews.tableView reloadData];
-
-            
+            [weakSelf.nameTableNews.tableView.mj_footer endRefreshing];
             MYLog(@"%@",XSWHArr);
         }
     } failure:^(NSError *error) {
-        
+        [weakSelf.nameTableNews.tableView.mj_footer endRefreshing];
     }];
 
 }
@@ -162,6 +163,10 @@
     [self getFamilyDTData];
 }
 
+-(void)loadMoreXswh{
+    self.xswhPage++;
+    [self getXSWHData];
+}
 
 #pragma mark - lazyLoad
 
@@ -202,12 +207,17 @@
 -(NewsTableView *)tableNesView{
     if (!_tableNesView) {
         _tableNesView = [[NewsTableView alloc] initWithFrame:CGRectMake(0, CGRectYH(self.bannerView), Screen_width, 416*AdaptationWidth())];
+        //_tableNesView.tableView.backgroundColor = [UIColor random];
+        _tableNesView.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreJzdt)];
+//        UIView *footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 10)];
+//        footView.backgroundColor = [UIColor random];
+//        _tableNesView.tableView.tableFooterView = footView;
     }
     return _tableNesView;
 }
 -(PortraitAndNameViews *)proAndName{
     if (!_proAndName) {
-        _proAndName = [[PortraitAndNameViews alloc] initWithFrame:AdaptationFrame(22, CGRectYH(self.tableNesView)/AdaptationWidth()+20, 670, 230)];
+        _proAndName = [[PortraitAndNameViews alloc] initWithFrame:AdaptationFrame(22, CGRectYH(self.tableNesView)/AdaptationWidth(), 670, 230)];
     }
     return _proAndName;
 }
@@ -226,6 +236,8 @@
 -(NewsTableView *)nameTableNews{
     if (!_nameTableNews) {
         _nameTableNews = [[NewsTableView alloc] initWithFrame:CGRectMake(0, CGRectYH(self.hundredVies)+80*AdaptationWidth(), Screen_width, 412*AdaptationWidth())];
+        _nameTableNews.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreXswh)];
+
     }
     return _nameTableNews;
 }

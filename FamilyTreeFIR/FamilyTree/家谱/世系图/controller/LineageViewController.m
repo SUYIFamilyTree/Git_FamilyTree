@@ -11,6 +11,7 @@
 #import "LineageCellView.h"
 #import "SelectMyFamilyView.h"
 #import "LineageModel.h"
+#import <AVFoundation/AVFoundation.h>
 
 #define cell_width 50
 #define cell_height 75
@@ -50,6 +51,8 @@
 
 /** 已经排到多少顺序了*/
 @property (nonatomic, assign) NSInteger showSeq;
+/** 音乐播放器*/
+@property (nonatomic, strong) AVAudioPlayer *player;
 @end
 
 @implementation LineageViewController
@@ -136,6 +139,7 @@
             cell.nameLB.textColor = [UIColor redColor];
         }
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithActionBlock:^(id  _Nonnull sender) {
+            [self startMusic];
             [self downloadRelative:cell.model.userid];
         }];
         [cell addGestureRecognizer:tap];
@@ -196,6 +200,7 @@
                 if (![self.lock tryLock]) {
                     return ;
                 }
+                [self startMusic];
                 [self downloadRelative:cell.model.userid];
             }];
             [cell addGestureRecognizer:tap];
@@ -205,6 +210,12 @@
     }
 }
 
+//播放音效
+-(void)startMusic{
+    NSURL *url = [[NSBundle mainBundle]URLForResource:@"clicksxt" withExtension:@"wav"];
+    self.player=[[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+    [self.player play];
+}
 
 //重新写个方法
 -(void)buildNewView{

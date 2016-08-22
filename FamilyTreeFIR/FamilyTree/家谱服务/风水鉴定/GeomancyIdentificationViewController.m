@@ -48,6 +48,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //[self getLoad];
     self.identificationID = 0;
     [self initUI];
 }
@@ -203,10 +204,13 @@
 -(void)postData{
     
     NSString *dateTime = [NSString stringWithFormat:@"%@-%02ld-%02ldT00:00:00",self.yearBtn.currentTitle,[self.monthBtn.currentTitle integerValue],[self.dayBtn.currentTitle integerValue]];
+    
+    NSNumber *typeId = @[@92,@93,@109,@110,@111][self.identificationID];
+
     NSDictionary *logDic = @{@"PsId":@0,
                              @"PsMemberid":GetUserId,
                              @"PsType":@"FSJD",
-                             @"PsProjecttype":@(self.identificationID),
+                             @"PsProjecttype":typeId,
                              @"PsProjecttime":dateTime,
                              @"PsAreaid":@0,
                              @"PsContacts":self.linkManTF.text,
@@ -233,6 +237,19 @@
     }];
     
 }
+
+////加载
+//-(void)getLoad{
+//    NSDictionary *logDic = @{@"UserId":GetUserId};
+//    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"zzfwload" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+//        MYLog(@"%@",jsonDic);
+//        if (succe) {
+//            
+//        }
+//    } failure:^(NSError *error) {
+//        
+//    }];
+//}
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

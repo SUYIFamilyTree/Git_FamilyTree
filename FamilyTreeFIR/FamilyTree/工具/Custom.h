@@ -77,6 +77,7 @@ __block __weak __typeof(&*self)weakSelf = self;
 //RootURL
 #define RootURL @"http://59.53.92.160:1085/Api/Mobile/TestPost"
 //#define RootURL @"http://192.168.1.176:8081/Api/Mobile/TestPost"
+//#define RootURL @"http://120.55.70.181:1080/Api/Mobile/TestPost"
 #define SecretKeySend @"abc123"
 #define SecretKeyReiceive @"123abc"
 

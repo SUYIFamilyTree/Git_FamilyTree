@@ -58,6 +58,20 @@
     
 }
 
+-(void)setImageArr:(NSArray<NSString *> *)imageArr{
+    _imageArr = imageArr;
+    [self.imageStrArr removeAllObjects];
+    [self.imageStrArr addObjectsFromArray:imageArr];
+    [self.bannerSV removeAllSubviews];
+    for (int i = 0; i < self.imageStrArr.count; i++) {
+        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.frame.size.width*i, 0, self.frame.size.width, self.frame.size.height)];
+        [imageView setImageWithURL:[NSURL URLWithString:self.imageStrArr[i]] placeholder:MImage(@"sy_banner1")];
+        [self.bannerSV addSubview:imageView];
+    }
+    self.bannerSV.contentSize = CGSizeMake(self.frame.size.width*self.imageStrArr.count, self.frame.size.height-22);
+    self.pageControl.numberOfPages = self.imageStrArr.count;
+}
+
 #pragma mark - 视图初始化
 -(void)initUI{
     [self addSubview:self.bannerSV];
