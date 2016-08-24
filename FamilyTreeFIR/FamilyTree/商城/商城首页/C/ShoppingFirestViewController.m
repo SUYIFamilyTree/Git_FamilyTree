@@ -328,7 +328,7 @@
 
 -(BannerView *)bannerView{
     if (!_bannerView) {
-        _bannerView = [[BannerView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 172)];
+        _bannerView = [[BannerView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 0.6*Screen_width)];
     }
     return _bannerView;
 }

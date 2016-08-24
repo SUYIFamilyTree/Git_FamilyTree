@@ -82,7 +82,9 @@
         //配置标签栏item
         UITabBarItem *tabBarItem = [[UITabBarItem alloc] init];
         tabBarItem.title = _viewControllersTitles[idx];
+        
         tabBarItem.image = [UIImage imageNamed:_barImageArr[idx]];
+        
         tabBarItem.selectedImage = [UIImage imageNamed:_barSelectedImageArr[idx]];
         
         vc.tabBarItem = tabBarItem;
@@ -93,16 +95,13 @@
     //设置标签控制器的导航控制器
     self.viewControllers = navs;
     //配置标签栏颜色
-//    self.tabBar.barTintColor = [UIColor whiteColor];
-//    self.tabBar.tintColor = [UIColor blackColor];
-    self.tabBar.tintColor = LH_RGBCOLOR(183, 233, 149);
     self.selectedIndex = 0;
     //设置标签栏背景图
     [self.tabBar setBackgroundImage:MImage(@"sy_tabbg")];
-
+    self.tabBar.contentMode = UIViewContentModeScaleAspectFill;
+    self.tabBar.translucent = NO;
     UISwipeGestureRecognizer *swipGes = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(respondsToSwipGes:)];
     swipGes.direction = UISwipeGestureRecognizerDirectionLeft;
-    
     [self.tabBar addGestureRecognizer:swipGes];
     
     
@@ -137,7 +136,8 @@
         btn.frame = CGRectMake(i*width, 0, width, height);
         [btn setTitle:_viewControllersTitles[i] forState:UIControlStateNormal];
         
-        btn.titleLabel.font = [UIFont systemFontOfSize:10];
+//        btn.titleLabel.font = [UIFont systemFontOfSize:10];
+        btn.titleLabel.font = BFont(10);
         
         [btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         

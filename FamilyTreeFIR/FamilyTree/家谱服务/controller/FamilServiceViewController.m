@@ -149,32 +149,31 @@
 
 -(void)CollevtionFamily:(CollectionFamilyView *)collecView didSelectedItemAtIndexPath:(NSIndexPath *)indexPath{
     MYLog(@"点击collection -- %ld",(long)indexPath.row);
+    //宗亲互助，在线祭祀，增值服务，教你修谱，专家推荐，风水鉴定，赏金寻亲，募捐圆梦
     switch (indexPath.row) {
         case 0:
         {
             FamilyHelpViewController *helpVc = [[FamilyHelpViewController alloc] initWithTitle:@"宗亲互助" image:nil];
-            helpVc.type = @"MJYM";
+            helpVc.type = @"SJXQ";
             [self.navigationController pushViewController:helpVc animated:YES];
         }
             break;
         case 1:
         {
-            FamilyHelpViewController *helpVc = [[FamilyHelpViewController alloc] initWithTitle:@"宗亲互助" image:nil];
-            helpVc.type = @"SJXQ";
-            [self.navigationController pushViewController:helpVc animated:YES];
+            WorshipViewController *worshipVC = [[WorshipViewController alloc]init];
+            [self.navigationController pushViewController:worshipVC animated:YES];
         }
             break;
         case 2:
         {
-            TeachViewController *teachVc = [[TeachViewController alloc] initWithTitle:@"教你修谱" image:nil];
-            [self.navigationController pushViewController:teachVc animated:YES];
+            AppendServiceViewController *appendServiceVC = [[AppendServiceViewController alloc]initWithTitle:@"增值服务" image:nil];
+            [self.navigationController pushViewController:appendServiceVC animated:YES];
         }
             break;
         case 3:
         {
-            FamilyHelpViewController *helpVc = [[FamilyHelpViewController alloc] initWithTitle:@"宗亲互助" image:nil];
-            helpVc.type = @"SJXQ";
-            [self.navigationController pushViewController:helpVc animated:YES];
+            TeachViewController *teachVc = [[TeachViewController alloc] initWithTitle:@"教你修谱" image:nil];
+            [self.navigationController pushViewController:teachVc animated:YES];
         }
             break;
         case 4:
@@ -185,22 +184,26 @@
             break;
         case 5:
         {
-            AppendServiceViewController *appendServiceVC = [[AppendServiceViewController alloc]initWithTitle:@"增值服务" image:nil];
-            [self.navigationController pushViewController:appendServiceVC animated:YES];
-        }
-            break;
-        case 6:
-        {
             MYLog(@"风水鉴定");
             GeomancyIdentificationViewController *geoVC = [[GeomancyIdentificationViewController alloc]initWithTitle:@"风水鉴定" image:nil];
             [self.navigationController pushViewController:geoVC animated:YES];
             
         }
             break;
+        case 6:
+        {
+            FamilyHelpViewController *helpVc = [[FamilyHelpViewController alloc] initWithTitle:@"宗亲互助" image:nil];
+            helpVc.type = @"SJXQ";
+            [self.navigationController pushViewController:helpVc animated:YES];
+            
+        }
+            break;
         case 7:
         {
-            WorshipViewController *worshipVC = [[WorshipViewController alloc]init];
-            [self.navigationController pushViewController:worshipVC animated:YES];
+            FamilyHelpViewController *helpVc = [[FamilyHelpViewController alloc] initWithTitle:@"宗亲互助" image:nil];
+            helpVc.type = @"MJYM";
+            [self.navigationController pushViewController:helpVc animated:YES];
+
         }
             break;
         default:
@@ -233,7 +236,7 @@
 
 -(BannerView *)bannerView{
     if (!_bannerView) {
-        _bannerView = [[BannerView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, 172)];
+        _bannerView = [[BannerView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, 0.6*Screen_width)];
     }
     return _bannerView;
 }

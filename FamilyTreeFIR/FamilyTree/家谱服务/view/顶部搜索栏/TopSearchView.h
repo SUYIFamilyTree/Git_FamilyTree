@@ -23,7 +23,7 @@
 
 @interface TopSearchView : UIView
 
-@property (nonatomic,strong) UIView *backView; /*黑色背景*/
+@property (nonatomic,strong) UIImageView *backView; /*黑色背景*/
 @property (nonatomic,strong) UIView *searchView; /*搜索框*/
 @property (nonatomic,strong) UITextField *searchLabel; /*输入关键词*/
 @property (nonatomic,strong) UIImageView *searchImage; /*搜索图片*/

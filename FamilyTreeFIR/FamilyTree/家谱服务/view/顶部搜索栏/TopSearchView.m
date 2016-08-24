@@ -50,11 +50,12 @@
 }
 
 #pragma mark *** getters ***
--(UIView *)backView{
+-(UIImageView *)backView{
     if (!_backView) {
-        _backView = [[UIView alloc] initWithFrame:self.bounds];
-        _backView.backgroundColor = LH_RGBCOLOR(75, 88, 91);
-        
+        _backView = [[UIImageView alloc] initWithFrame:self.bounds];
+        //_backView.backgroundColor = LH_RGBCOLOR(75, 88, 91);
+        _backView.image = MImage(@"navibg");
+        _backView.userInteractionEnabled = YES;
     }
     return _backView;
 }

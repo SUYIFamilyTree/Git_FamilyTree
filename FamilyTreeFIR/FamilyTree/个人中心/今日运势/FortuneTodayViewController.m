@@ -101,7 +101,7 @@
         self.heav.chatNum.text = self.fortuneTodayModel.jr.work;
         self.heav.luckyColor.text = self.fortuneTodayModel.jr.color;
         self.heav.luckyNum.text = [NSString stringWithFormat:@"%ld",(long)self.fortuneTodayModel.jr.number];
-        self.heav.coupleAite.text = self.fortuneTodayModel.jr.qfeiend;
+        self.heav.coupleAite.text = self.fortuneTodayModel.jr.qfriend;
        self.heav.headPortraits.image = MImage([NSString getStarImageName:self.fortuneTodayModel.jr.name]);
     }else{
         self.heav.headPorTime.text = @"";

@@ -22,7 +22,8 @@
 
 @property (nonatomic,strong) FindPassView *nSurePass; /*确认密码*/
 
-
+/** 验证码*/
+@property (nonatomic, assign) NSInteger verification;
 
 @end
 
@@ -125,10 +126,9 @@
 #pragma mark *** Events ***
 
 -(void)respondsToFindVerBtn{
-    
-    MYLog(@"验证码");
-    
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"mobile":self.phoneNum.inputTextView.text,@"content":@"123456"} requestID:@0 requestcode:@"sendsms" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+    self.verification =  arc4random() % 10000 + (arc4random()%9+1)*100000;
+    MYLog(@"验证码%ld",self.verification);
+    [TCJPHTTPRequestManager POSTWithParameters:@{@"mobile":self.phoneNum.inputTextView.text,@"content":[NSString stringWithFormat:@"%ld",(long)self.verification]} requestID:@0 requestcode:@"sendsms" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {
             NSLog(@"%@", responseObject);
         }
@@ -145,29 +145,34 @@
     NSString *phoneNum = self.phoneNum.inputTextView.text;
     NSString *password = self.nPass.inputTextView.text;
     NSString *surePs = self.nSurePass.inputTextView.text;
-    
-    if ([password isEqualToString:surePs]) {
-        [TCJPHTTPRequestManager POSTWithParameters:@{@"user":phoneNum,@"newpass":password} requestID:@0 requestcode:kRequestCodeBackPassword success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-            if (succe) {
-               [Tools showAlertViewControllerAutoDissmissWithTarGet:self Message:@"修改成功" delay:1 complete:^(BOOL complete) {
-                   if (complete) {
-                       [self.navigationController popViewControllerAnimated:YES];
-                   }
-               }];
-            }
-        } failure:^(NSError *error) {
-            
-        }];
+    if (![self.verificationCode.inputTextView.text isEqualToString:[NSString stringWithFormat:@"%ld",(long)self.verification]]) {
+        [SXLoadingView showAlertHUD:@"验证码不正确" duration:0.5];
     }else{
-        [Tools showAlertViewControllerAutoDissmissWithTarGet:self Message:@"两次输入密码不正确" delay:1 complete:nil];
+        if ([password isEqualToString:surePs]) {
+            [TCJPHTTPRequestManager POSTWithParameters:@{@"user":phoneNum,@"newpass":password} requestID:@0 requestcode:kRequestCodeBackPassword success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+                if (succe) {
+                    [Tools showAlertViewControllerAutoDissmissWithTarGet:self Message:@"修改成功" delay:1 complete:^(BOOL complete) {
+                        if (complete) {
+                            [self.navigationController popViewControllerAnimated:YES];
+                        }
+                    }];
+                }
+            } failure:^(NSError *error) {
+                
+            }];
+        }else{
+            [Tools showAlertViewControllerAutoDissmissWithTarGet:self Message:@"两次输入密码不正确" delay:1 complete:nil];
+        }
+
     }
+    
     
 }
 
 #pragma mark *** getters ***
 -(CommonNavigationViews *)naviView{
     if (!_naviView) {
-        _naviView = [[CommonNavigationViews alloc] initWithFrame:CGRectMake(0, 0, Screen_width, 44+StatusBar_Height) title:@"找回密码" image:MImage(@"chec")];
+        _naviView = [[CommonNavigationViews alloc] initWithFrame:CGRectMake(0, 0, Screen_width, 44+StatusBar_Height) title:@"找回密码" image:nil];
         
     }
     return _naviView;

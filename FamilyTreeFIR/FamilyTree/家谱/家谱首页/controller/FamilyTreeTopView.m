@@ -15,7 +15,7 @@
 
 @interface FamilyTreeTopView()
 
-@property (nonatomic,strong) UIView *backView; /*黑色背景*/
+@property (nonatomic,strong) UIImageView *backView; /*黑色背景*/
 @property (nonatomic,strong) UIView *searchView; /*搜索框*/
 
 @property (nonatomic,strong) UIImageView *searchImage; /*搜索图片*/
@@ -58,11 +58,11 @@
 #pragma mark *** tableViewDelegate ***
 
 #pragma mark *** getters ***
--(UIView *)backView{
+-(UIImageView *)backView{
     if (!_backView) {
-        _backView = [[UIView alloc] initWithFrame:self.bounds];
-        _backView.backgroundColor = LH_RGBCOLOR(75, 88, 91);
-        
+        _backView = [[UIImageView alloc] initWithFrame:self.bounds];
+        //_backView.backgroundColor = LH_RGBCOLOR(75, 88, 91);
+        _backView.image = MImage(@"navibg");
     }
     return _backView;
 }

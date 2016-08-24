@@ -25,7 +25,7 @@
 
 @property (nonatomic, copy) NSString *all;
 
-@property (nonatomic, copy)NSString  *color;
+@property (nonatomic, copy) NSString  *color;
 
 @property (nonatomic, copy) NSString *health;
 
@@ -33,9 +33,9 @@
 
 @property (nonatomic, copy) NSString *money;
 
-@property (nonatomic, assign) NSInteger *number;
+@property (nonatomic, assign) NSInteger number;
 
-@property (nonatomic, copy) NSString *qfeiend;
+@property (nonatomic, copy) NSString *qfriend;
 
 @property (nonatomic, copy) NSString *summary;
 

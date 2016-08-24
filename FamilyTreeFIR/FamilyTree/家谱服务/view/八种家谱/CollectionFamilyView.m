@@ -41,9 +41,8 @@ static NSString *const kReusableCellIdentifier = @"cellIdentifier";
 }
 #pragma mark *** 初始化数据 ***
 -(void)initData{
-    _imageNames = @[@"fuwu_mjym",@"fuwu_sjxq",@"fuwu_jnxp",@"fuwu_zqhz",@"fuwu_zjtj",@"fuwu_zzfw",@"fuwu_fsjd",@"fuwu_zxjs"];
-    _cellNames = @[@"募捐圆梦",@"赏金寻亲",@"教你修谱",@"宗亲互助",@"专家推荐",@"增值服务",@"风水鉴定",@"在线祭祀"];
-    
+    _imageNames = @[@"fuwu_zqhz",@"fuwu_zxjs",@"fuwu_zzfw",@"fuwu_jnxp",@"fuwu_zjtj",@"fuwu_fsjd",@"fuwu_sjxq",@"fuwu_mjym"];
+    _cellNames = @[@"宗亲互助",@"在线祭祀",@"增值服务",@"教你修谱",@"专家推荐",@"风水鉴定",@"赏金寻亲",@"募捐圆梦"];
 }
 #pragma mark *** 初始化界面 ***
 -(void)initUI{

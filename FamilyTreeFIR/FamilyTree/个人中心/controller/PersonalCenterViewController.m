@@ -78,7 +78,7 @@
     [self initNavi];
     [self.view addSubview:self.scrollView];
     //添加背景图
-    UIImageView *bgIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 620)];
+    UIImageView *bgIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 640)];
     bgIV.image = MImage(@"gr_ct_bg");
     [self.scrollView addSubview:bgIV];
     //添加背景模糊视图
@@ -493,7 +493,7 @@
 -(UIScrollView *)scrollView{
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-49-64)];
-        _scrollView.contentSize = CGSizeMake(Screen_width, 620);
+        _scrollView.contentSize = CGSizeMake(Screen_width, 640);
         _scrollView.bounces = NO;
     }
     return _scrollView;
@@ -502,8 +502,8 @@
 #pragma mark - PersonalCenterHeaderViewDelegate
 -(void)clickMoneyViewToPay{
     //跳转充值页面
-    RechargeViewController *rechargeVC = [[RechargeViewController alloc]init];
-    [self.navigationController pushViewController:rechargeVC animated:YES];
+//    RechargeViewController *rechargeVC = [[RechargeViewController alloc]init];
+//    [self.navigationController pushViewController:rechargeVC animated:YES];
 }
 
 -(void)clickSameCityMoneyViewToPay{

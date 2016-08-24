@@ -137,6 +137,7 @@
         //选定为红色
         if (cell.model.userid == self.selectedusr) {
             cell.nameLB.textColor = [UIColor redColor];
+            [self.scrollView setContentOffset:CGPointMake(self.scrollView.center.x-Screen_width/2, self.scrollView.center.y-Screen_height/2)];
         }
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithActionBlock:^(id  _Nonnull sender) {
             [self startMusic];
@@ -195,6 +196,7 @@
             //选定为红色
             if (cell.model.userid == self.selectedusr) {
                 cell.nameLB.textColor = [UIColor redColor];
+                [self.scrollView setContentOffset:CGPointMake(self.scrollView.center.x-Screen_width/2, self.scrollView.center.y-Screen_height/2)];
             }
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithActionBlock:^(id  _Nonnull sender) {
                 if (![self.lock tryLock]) {
@@ -357,7 +359,14 @@
 -(void)downloadRelative:(NSInteger )userid{
     self.selectedusr = userid;
     WK(weakSelf)
-    NSDictionary *logDic = @{@"genid":@10000,@"userid":@(userid),@"gentions":@1};
+//    NSDictionary *logDic = @{@"genid":[WFamilyModel shareWFamilModel].myFamilyId,
+//                             @"userid":@(userid),
+//                             @"gentions":@1,
+//                             @"loginid":GetUserId};
+    NSDictionary *logDic = @{@"genid":@10000,
+                            @"userid":@(userid),
+                            @"gentions":@1,
+                             @"loginid":@""};
     [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:kRequestCodequerytreebygenid success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         MYLog(@"%@",jsonDic);
         if (succe) {
@@ -383,6 +392,8 @@
 #pragma mark *** 选择右上角家谱后的更新UI ***
 -(void)CommonNavigationViews:(CommonNavigationViews *)comView selectedFamilyId:(NSString *)famId{
     NSLog(@"选择了这个家谱id-%@", famId);
+//    [WFamilyModel shareWFamilModel].myFamilyId = famId;
+//    [self downloadRelative:self.selectedusr];
 }
 
 

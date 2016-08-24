@@ -31,8 +31,8 @@
     [self.view addSubview:self.scrollView];
     self.scrollView.sd_layout.leftSpaceToView(self.view,0).topSpaceToView(self.view,0).bottomSpaceToView(self.view,0).rightSpaceToView(self.view,0);
     [self.view addSubview:self.pageControl];
-    self.pageControl.sd_layout.centerXEqualToView(self.view).heightIs(40).widthIs(100).bottomSpaceToView(self.view,30);
-    NSArray *imageArr = @[MImage(@"yindaoye"),MImage(@"yindaoye"),MImage(@"yindaoye")];
+    self.pageControl.sd_layout.centerXEqualToView(self.view).heightIs(30).widthIs(120).bottomSpaceToView(self.view,40);
+    NSArray *imageArr = @[MImage(@"xunqin"),MImage(@"wenzu"),MImage(@"xiupu")];
     for (int i = 0; i < imageArr.count; i++) {
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(Screen_width*i, 0, Screen_width, Screen_height)];
         imageView.image = imageArr[i];
@@ -40,7 +40,7 @@
         if (i == 2) {
             imageView.userInteractionEnabled = YES;
             [imageView addSubview:self.startBtn];
-            self.startBtn.sd_layout.centerXEqualToView(imageView).heightIs(40).widthIs(100).bottomSpaceToView(imageView,80);
+            self.startBtn.sd_layout.centerXEqualToView(imageView).heightIs(30).widthIs(120).bottomSpaceToView(imageView,100);
         }
     }
     
@@ -78,6 +78,8 @@
         _pageControl = [[UIPageControl alloc]init];
         _pageControl.numberOfPages = 3;
         _pageControl.currentPage = 0;
+        _pageControl.currentPageIndicatorTintColor = [UIColor colorWithHexString:@"de5b59"];
+        _pageControl.pageIndicatorTintColor  = [UIColor colorWithHexString:@"919192"];
     }
     return _pageControl;
 }
@@ -85,10 +87,11 @@
 -(UIButton *)startBtn{
     if (!_startBtn) {
         _startBtn = [[UIButton alloc]init];
-        [_startBtn setTitle:@"开始体验" forState:UIControlStateNormal];
-        _startBtn.backgroundColor = [UIColor clearColor];
-        _startBtn.layer.borderWidth = 1;
-        _startBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+//        [_startBtn setTitle:@"开始体验" forState:UIControlStateNormal];
+//        _startBtn.backgroundColor = [UIColor clearColor];
+//        _startBtn.layer.borderWidth = 1;
+//        _startBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+        [_startBtn setBackgroundImage:MImage(@"lijitiyan") forState:UIControlStateNormal];
         [_startBtn addTarget:self action:@selector(clickToStart) forControlEvents:UIControlEventTouchUpInside];
     }
     return _startBtn;

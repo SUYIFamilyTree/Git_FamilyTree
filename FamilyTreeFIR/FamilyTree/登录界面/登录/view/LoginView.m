@@ -21,7 +21,7 @@ typedef enum : NSUInteger {
 
 @property (nonatomic,strong) UIImageView *backImageView; /*背景图*/
 
-@property (nonatomic,strong) OtherLoginView *otherLoginView; /*三方登录*/
+//@property (nonatomic,strong) OtherLoginView *otherLoginView; /*三方登录*/
 //@property (nonatomic,strong) UIButton *tourBtn; /*游客按钮*/
 
 
@@ -37,7 +37,7 @@ typedef enum : NSUInteger {
         [self addSubview:self.topView];
         [self addSubview:self.accountView];
         [self addSubview:self.passwordView];
-        [self addSubview:self.otherLoginView];
+        //[self addSubview:self.otherLoginView];
 //        [self addSubview:self.tourBtn];
         
     }
@@ -46,7 +46,6 @@ typedef enum : NSUInteger {
 
 #pragma mark *** TopViewBtnEvents ***
 -(void)respondsToTopViewBtn:(UIButton *)sender{
-    
     if (_delegate && [_delegate respondsToSelector:@selector(loginView:didSelectedTopViewBtn:)]) {
         [_delegate loginView:self didSelectedTopViewBtn:sender];
     }
@@ -112,15 +111,15 @@ typedef enum : NSUInteger {
     }
     return _passwordView;
 }
--(OtherLoginView *)otherLoginView{
-    if (!_otherLoginView) {
-        _otherLoginView = [[OtherLoginView alloc] initWithFrame:CGRectMake(0, 0, 0.7*Screen_width, 100)];
-        
-        _otherLoginView.center = CGPointMake(self.center.x, 0.8*Screen_height);
-        _otherLoginView.delegate = self;
-    }
-    return _otherLoginView;
-}
+//-(OtherLoginView *)otherLoginView{
+//    if (!_otherLoginView) {
+//        _otherLoginView = [[OtherLoginView alloc] initWithFrame:CGRectMake(0, 0, 0.7*Screen_width, 100)];
+//        
+//        _otherLoginView.center = CGPointMake(self.center.x, 0.8*Screen_height);
+//        _otherLoginView.delegate = self;
+//    }
+//    return _otherLoginView;
+//}
 //
 //-(UIButton *)tourBtn{
 //    if (!_tourBtn) {

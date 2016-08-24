@@ -63,6 +63,8 @@
     [self.backIV addSubview:self.weekLB];
     [self.backIV addSubview:self.cloudIV];
     NSArray *BtnImageArr = @[@"sy_jp",@"sy_fw",@"sy_ys",@"sy_xw",@"sy_qf",@"sy_qq"];
+    self.backSV.contentSize = CGSizeMake(Screen_width, CGRectYH(self.cloudIV)+13+7*(0.21*(Screen_width-20)+9)-20);
+    self.backIV.frame = CGRectMake(0, 0, Screen_width, self.backSV.contentSize.height);
     for (int i = 0; i < 6; i++ ) {
         UIView *view = [[UIView alloc]initWithFrame:CGRectMake(10, CGRectYH(self.cloudIV)+13+(0.21*(Screen_width-20)+9)*i, Screen_width-20, 0.21*(Screen_width-20))];
         view.layer.shadowColor = [UIColor grayColor].CGColor;
@@ -76,6 +78,7 @@
         [view addSubview:btn];
         [self.backIV addSubview:view];
     }
+    
 }
 
 
@@ -105,9 +108,9 @@
             weakSelf.jieqiLB.text = model.qj;
             if (IsNilString(model.qj)) {
                 weakSelf.jieqiLB.backgroundColor = [UIColor clearColor];
-            }else{
-                weakSelf.jieqiLB.backgroundColor = [UIColor colorWithHexString:@"ad1e23"];
+                weakSelf.chineseCalendarLB.frame = CGRectMake(CGRectX(self.jieqiLB), CGRectYH(self.jieqiLB)-10, Screen_width/2-30, 15);
             }
+
         }
     } failure:^(NSError *error) {
         
@@ -186,14 +189,16 @@
 
 -(BannerView *)bannerView{
     if (!_bannerView) {
-        _bannerView = [[BannerView alloc]initWithFrame:CGRectMake(0, 22, Screen_width, 172)];
+        _bannerView = [[BannerView alloc]initWithFrame:CGRectMake(0, 22, Screen_width, Screen_width*0.6)];
+        //172
+        //Screen_width*0.6
     }
     return _bannerView;
 }
 
 -(UIScrollView *)backSV{
     if (!_backSV) {
-        _backSV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 194, Screen_width, Screen_height-194)];
+        _backSV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, CGRectYH(self.bannerView), Screen_width, Screen_height-CGRectYH(self.bannerView))];
         _backSV.showsVerticalScrollIndicator = NO;
         _backSV.showsHorizontalScrollIndicator = NO;
         _backSV.bounces = NO;
@@ -262,7 +267,8 @@
         _dayLB.text = [NSString stringWithFormat:@"%ld",[dateComs day]];
         _dayLB.font = [UIFont fontWithName:@"HelveticaNeue" size:33];
         _dayLB.textAlignment = NSTextAlignmentLeft;
-        _dayLB.textColor = LH_RGBCOLOR(93, 93, 93);
+        //_dayLB.textColor = LH_RGBCOLOR(93, 93, 93);
+        _dayLB.textColor = [UIColor grayColor];
     }
     return _dayLB;
 }

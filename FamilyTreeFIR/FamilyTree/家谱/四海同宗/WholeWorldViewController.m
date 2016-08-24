@@ -319,7 +319,7 @@ static NSString *const kReusableIdentifier = @"PinAnnotation";
         //与always进入后台后的区别，在于whenInUse模式会在
         //顶部出现蓝色提示条
         [_clLocationManager requestWhenInUseAuthorization];
-        _clLocationManager.allowsBackgroundLocationUpdates = YES;
+        //_clLocationManager.allowsBackgroundLocationUpdates = YES;
         
 //        //Always:默认支持前后台定位
     //[_clLocationManager requestAlwaysAuthorization];
@@ -329,11 +329,11 @@ static NSString *const kReusableIdentifier = @"PinAnnotation";
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [_clLocationManager stopUpdatingLocation];
     _mapView = nil;
     _mapView.delegate = nil;
     _mapView.showsUserLocation = NO;
     _clLocationManager.delegate = nil;
-    [_clLocationManager stopUpdatingLocation];
     _clLocationManager = nil;
 }
 

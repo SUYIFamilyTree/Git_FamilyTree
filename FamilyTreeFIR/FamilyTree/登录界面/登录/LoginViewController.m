@@ -38,7 +38,7 @@
 
     [self.view addSubview:self.loginView];
 
-    
+    self.navigationController.navigationBar.hidden = YES;
     
 }
 
@@ -161,8 +161,9 @@
             break;
         case 1:
         {
+            MYLog(@"找回密码");
             //找回密码
-            FindPassViewController *finPassVc = [FindPassViewController new];
+            FindPassViewController *finPassVc = [[FindPassViewController alloc]init];
             [self.navigationController pushViewController:finPassVc animated:YES];
             
         }

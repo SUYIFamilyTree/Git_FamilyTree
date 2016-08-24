@@ -42,8 +42,9 @@
 
         _window.backgroundColor = [UIColor grayColor];
         
-        _window.rootViewController = loginVC;
-
+        //_window.rootViewController = loginVC;
+        UINavigationController *navi = [[UINavigationController alloc]initWithRootViewController:loginVC];
+        _window.rootViewController = navi;
     }
 
     [_window makeKeyAndVisible];
