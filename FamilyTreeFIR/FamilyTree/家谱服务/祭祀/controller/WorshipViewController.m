@@ -183,7 +183,7 @@
     if (!_headerSegment) {
         _headerSegment = [[UISegmentedControl alloc]initWithItems:@[@"私人墓园",@"公共祭奠"]];
         _headerSegment.frame = CGRectMake((Screen_width-200)/2, 64+10, 200,30);
-        _headerSegment.tintColor = LH_RGBCOLOR(69, 80, 83);
+        _headerSegment.tintColor = [UIColor colorWithHexString:@"006173"];
         _headerSegment.selectedSegmentIndex = 0;
     }
     return _headerSegment;

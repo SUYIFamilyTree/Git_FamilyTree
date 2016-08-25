@@ -24,7 +24,7 @@
 @property (nonatomic,strong) UITextField *fatherTF;
 
 /**父亲生日*/
-@property (nonatomic,strong) UITextField *fatherBirthTF;
+@property (nonatomic,strong) UIButton *fatherBirthBtn;
 
 /**生日选择器*/
 @property (nonatomic,strong) UIDatePicker *birthDatePicker;
@@ -55,6 +55,7 @@
         label.text = obj;
         [self.backImageView addSubview:label];
         
+        
         UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectXW(label)+5, CGRectY(label), 351*AdaptationWidth(), 50*AdaptationWidth())];
         textField.font = WFont(35);
         textField.layer.borderColor = BorderColor;
@@ -74,14 +75,25 @@
         }else if(idx==3){
             self.fatherTF = textField;
         }else {
-            textField.userInteractionEnabled = false;
-            self.fatherBirthTF = textField;
-            [self.backImageView addSubview:self.fatherBirthTF];
-            UIControl *contro = [[UIControl alloc] initWithFrame:self.fatherBirthTF.frame];
-            [contro addTarget:self action:@selector(respondsFatherBirTFTapGues) forControlEvents:UIControlEventTouchUpInside];
+//            textField.userInteractionEnabled = NO;
+//            self.fatherBirthTF = textField;
+//            [self.backImageView addSubview:self.fatherBirthTF];
+//            UIControl *contro = [[UIControl alloc] initWithFrame:self.fatherBirthTF.frame];
+//            contro.userInteractionEnabled = YES;
+//            [contro addTarget:self action:@selector(respondsFatherBirTFTapGues) forControlEvents:UIControlEventTouchUpInside];
+//            [self.backImageView addSubview:contro];
             
-            [self.backImageView addSubview:contro];
-
+            [textField removeFromSuperview];
+            self.fatherBirthBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectXW(label)+5, CGRectY(label), 351*AdaptationWidth(), 50*AdaptationWidth())];
+            self.fatherBirthBtn.titleLabel.font = WFont(35);
+            self.fatherBirthBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+            self.fatherBirthBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -155*AdaptationWidth(), 0, 0);
+            self.fatherBirthBtn.layer.borderColor = BorderColor;
+            self.fatherBirthBtn.layer.borderWidth = 1.0f;
+            [self.fatherBirthBtn setTitle:@"必填" forState:UIControlStateNormal];
+            [self.fatherBirthBtn setTitleColor:LH_RGBCOLOR(215, 215, 215) forState:UIControlStateNormal];
+            [self.fatherBirthBtn addTarget:self action:@selector(respondsFatherBirTFTapGues) forControlEvents:UIControlEventTouchUpInside];
+            [self.backImageView addSubview:self.fatherBirthBtn];
         }
         
         
@@ -105,12 +117,12 @@
 /** 点击父亲生日 */
 -(void)respondsFatherBirTFTapGues{
    
-    
+    MYLog(@"点击了父亲生日");
     if (!_clickedFatherBirthView) {
         self.birthDatePicker.frame = AdaptationFrame(0, 1010, Screen_width/AdaptationWidth(), 350);
         [self addSubview:self.birthDatePicker];
-        if ([self.fatherBirthTF.text isEqualToString:@""]) {
-            self.fatherBirthTF.text = @"1990-01-01";
+        if ([self.fatherBirthBtn.currentTitle isEqualToString:@""]) {
+            [self.fatherBirthBtn setTitle:@"1990-01-01" forState:UIControlStateNormal];
         }
         [UIView animateWithDuration:0.3 animations:^{
             self.backImageView.frame = AdaptationFrame(30, 0, 660, 720);
@@ -145,7 +157,7 @@
                 [SXLoadingView showAlertHUD:@"父亲为空！" duration:0.5];
                 return;
             }
-            if ([self.fatherBirthTF.text isEqualToString:@""]) {
+            if ([self.fatherBirthBtn.currentTitle isEqualToString:@""]) {
                 [SXLoadingView showAlertHUD:@"父亲生日为空！" duration:0.5];
                 return;
             }
@@ -153,7 +165,7 @@
                              self.zbTF.text,
                              self.genNumTF.text,
                              self.fatherTF.text,
-                             self.fatherBirthTF.text];
+                             self.fatherBirthBtn.currentTitle];
             
             [self joinJPWithDataArr:arr whileComplete:^(BOOL apply) {
                 if (apply) {
@@ -186,7 +198,7 @@
 -(void)updateBirthDate{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
-    self.fatherBirthTF.text = [formatter stringFromDate:self.birthDatePicker.date];
+    [self.fatherBirthBtn setTitle:[formatter stringFromDate:self.birthDatePicker.date] forState:UIControlStateNormal];
 }
 #pragma mark *** 网络请求 ***
 

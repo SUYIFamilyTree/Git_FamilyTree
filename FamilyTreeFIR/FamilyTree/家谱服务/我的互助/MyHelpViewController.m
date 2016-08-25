@@ -40,9 +40,9 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.isMyPost = YES;
+    self.isMyPost = NO;
     [self initUI];
-    [self getMyPostData];
+    [self getMYAttentionData];
 }
 
 
@@ -95,13 +95,13 @@ typedef enum : NSUInteger {
     NSInteger index = seg.selectedSegmentIndex;
     switch (index) {
         case 0:
-            self.isMyPost = YES;
+            self.isMyPost = NO;
             [self.infoTB reloadData];
             break;
         case 1:
-            self.isMyPost = NO;
-            if (self.myAttentionArr.count == 0) {
-                [self getMYAttentionData];
+            self.isMyPost = YES;
+            if (self.myPostArr.count == 0) {
+                [self getMyPostData];
                 break;
             }
             [self.infoTB reloadData];
@@ -173,8 +173,8 @@ typedef enum : NSUInteger {
 
 -(UISegmentedControl *)changeSC{
     if (!_changeSC) {
-        _changeSC = [[UISegmentedControl alloc]initWithItems:@[@"我的发布",@"我的关注"]];
-        _changeSC.tintColor = LH_RGBCOLOR(75, 88, 91);
+        _changeSC = [[UISegmentedControl alloc]initWithItems:@[@"我的关注",@"我的发布"]];
+        _changeSC.tintColor = [UIColor colorWithHexString:@"006173"];
         [_changeSC addTarget:self action:@selector(changePostOrAttention:) forControlEvents:UIControlEventValueChanged];
         [_changeSC setSelectedSegmentIndex:0];
     }

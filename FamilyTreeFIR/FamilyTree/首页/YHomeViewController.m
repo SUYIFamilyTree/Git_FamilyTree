@@ -108,7 +108,7 @@
             weakSelf.jieqiLB.text = model.qj;
             if (IsNilString(model.qj)) {
                 weakSelf.jieqiLB.backgroundColor = [UIColor clearColor];
-                weakSelf.chineseCalendarLB.frame = CGRectMake(CGRectX(self.jieqiLB), CGRectYH(self.jieqiLB)-10, Screen_width/2-30, 15);
+                weakSelf.chineseCalendarLB.frame = CGRectMake(CGRectX(self.jieqiLB), CGRectYH(self.jieqiLB)-5, Screen_width/2-30, 15);
             }
 
         }

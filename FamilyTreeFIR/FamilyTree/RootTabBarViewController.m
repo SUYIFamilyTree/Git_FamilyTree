@@ -20,8 +20,8 @@
     NSArray *_barSelectedImageArr;
 }
 
--(void)configTabBarViewController;  /**< 配置标签控制器 */
--(void)initTabBarItem;/*自定义标签栏item*/
+//-(void)configTabBarViewController;  /**< 配置标签控制器 */
+//-(void)initTabBarItem;/*自定义标签栏item*/
 -(void)initData;/*初始化数据*/
 @end
 
@@ -32,10 +32,20 @@
     [super viewDidLoad];
     [self initData];
     [self configTabBarViewController];
+
+    
+
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+
+-(void)clickToTab:(UIButton *)sender{
+    self.selectedIndex = sender.tag;
+    sender.selected = !sender.selected;
 }
 
 #pragma mark *** 初始化数据 ***
@@ -46,19 +56,24 @@
     _barSelectedImageArr = @[kSelectedImageWithHomeVc,kSelectedImageWithFamilyTreeVc,kSelectedImageWithServiceVc,kSelectedImageWithPersonalCenterVc];
 }
 
+
+- (UIImage *)scaleToSize:(UIImage *)img size:(CGSize)size {
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    [img drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return scaledImage;
+}
+
+
 #pragma mark *** 配置标签控制器 ***
 
 -(void)configTabBarViewController{
     //初始化控制器
-    //HomeViewController *homeVc = [[HomeViewController alloc] init];
     YHomeViewController *homeVc = [[YHomeViewController alloc]init];
-    
     FamilyTreeViewController *familyVc = [[FamilyTreeViewController alloc] init];
-//    ShoppingFirestViewController *shopVc = [[ShoppingFirestViewController alloc] init];
     FamilServiceViewController *serviceVC = [[FamilServiceViewController alloc]init];
-    
     PersonalCenterViewController *personCen = [[PersonalCenterViewController alloc] init];
-    
     //控制器数组
     NSArray *viewControllers = @[homeVc,familyVc,serviceVC,personCen];
     
@@ -73,8 +88,8 @@
         
         //初始化导航控制器
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-        nav.navigationBar.barTintColor = [UIColor colorWithRed:75/255.0 green:88/255.0 blue:91/255.0 alpha:1];
-        nav.navigationBar.tintColor = [UIColor blackColor];
+        //nav.navigationBar.barTintColor = [UIColor colorWithRed:75/255.0 green:88/255.0 blue:91/255.0 alpha:1];
+        //nav.navigationBar.tintColor = [UIColor redColor];
         nav.navigationBar.translucent = YES;
         //隐藏导航栏
 //        nav.navigationController.toolbarHidden = YES;
@@ -83,9 +98,14 @@
         UITabBarItem *tabBarItem = [[UITabBarItem alloc] init];
         tabBarItem.title = _viewControllersTitles[idx];
         
-        tabBarItem.image = [UIImage imageNamed:_barImageArr[idx]];
+        UIImage *image = [self scaleToSize:MImage(_barImageArr[idx]) size:CGSizeMake(20, 20)];
         
-        tabBarItem.selectedImage = [UIImage imageNamed:_barSelectedImageArr[idx]];
+        tabBarItem.image = image;
+        
+        UIImage *selectedImage = [self scaleToSize:MImage(_barSelectedImageArr[idx]) size:CGSizeMake(20, 20)];
+        
+        tabBarItem.selectedImage = selectedImage;
+        
         
         vc.tabBarItem = tabBarItem;
         
@@ -96,14 +116,21 @@
     self.viewControllers = navs;
     //配置标签栏颜色
     self.selectedIndex = 0;
+    self.tabBar.tintColor = LH_RGBCOLOR(34, 163, 182);
     //设置标签栏背景图
     [self.tabBar setBackgroundImage:MImage(@"sy_tabbg")];
-    self.tabBar.contentMode = UIViewContentModeScaleAspectFill;
+    self.tabBar.contentMode = UIViewContentModeScaleAspectFit;
     self.tabBar.translucent = NO;
     UISwipeGestureRecognizer *swipGes = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(respondsToSwipGes:)];
     swipGes.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.tabBar addGestureRecognizer:swipGes];
     
+    for (UIBarItem *item in self.tabBar.items) {
+        [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                      [UIFont fontWithName:@"HelveticaNeue-Bold" size:11.0], NSFontAttributeName, nil]
+                            forState:UIControlStateNormal];
+        
+    }
     
 }
 -(void)respondsToSwipGes:(UISwipeGestureRecognizer *)gesture{
@@ -117,53 +144,13 @@
     
 
 }
-#pragma mark *** 自定义标签栏item ***
--(void)initTabBarItem{
-    //便利删除标签栏说有控件
-    for (UIView *subView in self.tabBar.subviews) {
-        [subView removeFromSuperview];
-    }
-    //自定义Item
-    NSInteger itemAmount = _viewControllersTitles.count;
-    
-    CGFloat width = [UIScreen mainScreen].bounds.size.width/itemAmount;
-    CGFloat height = CGRectGetHeight(self.tabBar.bounds);
-    
-    for (int i = 0; i<itemAmount; i++) {
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        //设置大小和位置
-//        btn.backgroundColor = [UIColor redColor];
-        btn.frame = CGRectMake(i*width, 0, width, height);
-        [btn setTitle:_viewControllersTitles[i] forState:UIControlStateNormal];
-        
-//        btn.titleLabel.font = [UIFont systemFontOfSize:10];
-        btn.titleLabel.font = BFont(10);
-        
-        [btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        
-        btn.tag=TabBarBtn_tag+i;
-        [btn addTarget:self action:@selector(respondsToItemBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
-        btn.adjustsImageWhenHighlighted = NO;
-        [btn setImage:[UIImage imageNamed:_barImageArr[i]] forState:UIControlStateNormal];
-        [btn setImage:[UIImage imageNamed:_barSelectedImageArr[i]] forState:UIControlStateFocused];
-        if (btn.tag == TabBarBtn_tag+3) {
-            btn.backgroundColor = [UIColor orangeColor];
-            NSLog(@"%f", CGRectGetMaxX(btn.bounds));
-            
-            btn.imageEdgeInsets = UIEdgeInsetsMake(-20, 0, 0, -45);
-            
-            btn.titleEdgeInsets = UIEdgeInsetsMake(19, 0, 0, 19);
-        }
-        //添加按钮
-        [self.tabBar addSubview:btn];
-    }
-}
+
 #pragma mark *** BtnEvents ***
 
 -(void)respondsToItemBtn:(UIButton *)sender{
     NSLog(@"%@", NSStringFromSelector(_cmd));
     self.selectedIndex = sender.tag-TabBarBtn_tag;
+    //sender.selected = !sender.selected;
 }
 
 @end

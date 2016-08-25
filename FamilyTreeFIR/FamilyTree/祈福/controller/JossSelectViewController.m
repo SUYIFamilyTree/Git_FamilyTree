@@ -153,7 +153,7 @@
     if (!_jossIV) {
         _jossIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 10, 0.4760*CGRectW(self.whiteBackIV), 0.8077*CGRectH(self.whiteBackIV))];
         _jossIV.contentMode = UIViewContentModeScaleAspectFit;
-        _jossIV.image = MImage(@"qf_f2");
+        _jossIV.image = MImage(@"qf_f7");
     }
     return _jossIV;
 }
@@ -162,7 +162,7 @@
     if (!_jossInfoTX) {
         _jossInfoTX = [[UITextView alloc]initWithFrame:CGRectMake(0.4966*CGRectW(self.whiteBackIV), 0.0385*CGRectH(self.whiteBackIV), 0.4897*CGRectW(self.whiteBackIV), 0.7077*CGRectH(self.whiteBackIV))];
         _jossInfoTX.editable = NO;
-        NSString *str = self.jossInfoArr[1];
+        NSString *str = self.jossInfoArr[6];
         _jossInfoTX.attributedText = [NSString getLineSpaceStr:str];
         _jossInfoTX.backgroundColor = [UIColor clearColor];
     }
@@ -213,7 +213,8 @@
         MYLog(@"%lf",Screen_width/3*10.0);
         _jossSelectSV.delegate = self;
         _jossSelectSV.bounces = NO;
-        _jossSelectSV.contentOffset = CGPointMake(Screen_width/3*2, 0);
+        //_jossSelectSV.contentOffset = CGPointMake(Screen_width/3*2, 0);
+        _jossSelectSV.contentOffset = CGPointMake(Screen_width/3*7, 0);
     }
     return _jossSelectSV;
 }

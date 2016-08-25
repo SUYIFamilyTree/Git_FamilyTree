@@ -72,60 +72,63 @@ static NSString *const kGennerCellIdentifier = @"GennercellIdentifier";
 
 -(void)PostGennerInfomationWhileComplete:(void (^)())back{
     WK(weakSelf)
-    [TCJPHTTPRequestManager POSTWithParameters:@{@"geid":[WFamilyModel shareWFamilModel].myFamilyId,@"query":_queryZbStr,
-                                                 @"pagenum":@"1",
-                                                 @"pagesize":@"20",
-                                                 @"ds":@""} requestID:GetUserId requestcode:kRequestCodequeryzbgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        if (succe) {
-            
-            weakSelf.gennerModel = [WGennerationModel modelWithJSON:jsonDic[@"data"]];
-            
-            [_genNameArr removeAllObjects];
-            [_allInfoArr removeAllObjects];
-            [_detailInfo removeAllObjects];
-            [_imageUrlArr removeAllObjects];
-            [_dsArr removeAllObjects];
-            [_genIdArr removeAllObjects];
-            //更新所有数据源取model里面的数据
-            for (int idx = 0; idx<self.gennerModel.datalist.count; idx++) {
-                NSString *ziBei = [self.gennerModel.datalist[idx].zb stringByReplacingOccurrencesOfString:@"," withString:@""];
-                [_genNameArr addObject:ziBei];
-                
-                NSString *genNum = [NSString stringWithFormat:@"第%ld代",(long)self.gennerModel.datalist[idx].ds];
-                [_dsArr addObject:genNum];
-                NSMutableArray *nameArr = [@[] mutableCopy];
-                NSMutableArray *urlArr = [@[] mutableCopy];
-                NSMutableArray *cyIDArr = [@[] mutableCopy];
-                for (int ij = 0; ij<self.gennerModel.datalist[idx].datas.count; ij++) {
-                    [nameArr addObject:self.gennerModel.datalist[idx].datas[ij].name];
-                    [urlArr addObject:self.gennerModel.datalist[idx].datas[ij].photo];
-                    [cyIDArr addObject:[NSString stringWithFormat:@"%ld",(long)self.gennerModel.datalist[idx].datas[ij].gemeid]];
-                }
-                [_allInfoArr addObject:nameArr];
-                [_imageUrlArr addObject:urlArr];
-                [_genIdArr addObject:cyIDArr];
-                
-                
-                NSMutableArray *detailArr = [@[] mutableCopy];
-                for (int index2 = 0; index2<self.gennerModel.datalist[idx].datas.count; index2++) {
-                    NSMutableArray *okuArr = [@[] mutableCopy];
-                    [okuArr addObject:@"无"];
-                    [okuArr addObject:self.gennerModel.datalist[idx].datas[index2].father];
+    if (![[NSString stringWithFormat:@"%@",[WFamilyModel shareWFamilModel].myFamilyId] isEqualToString:@""]) {
+        [TCJPHTTPRequestManager POSTWithParameters:@{@"geid":[WFamilyModel shareWFamilModel].myFamilyId,@"query":_queryZbStr,
+                                                     @"pagenum":@"1",
+                                                     @"pagesize":@"20",
+                                                     @"ds":@""} requestID:GetUserId requestcode:kRequestCodequeryzbgemelist success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+                                                         if (succe) {
+                                                             
+                                                             weakSelf.gennerModel = [WGennerationModel modelWithJSON:jsonDic[@"data"]];
+                                                             
+                                                             [_genNameArr removeAllObjects];
+                                                             [_allInfoArr removeAllObjects];
+                                                             [_detailInfo removeAllObjects];
+                                                             [_imageUrlArr removeAllObjects];
+                                                             [_dsArr removeAllObjects];
+                                                             [_genIdArr removeAllObjects];
+                                                             //更新所有数据源取model里面的数据
+                                                             for (int idx = 0; idx<self.gennerModel.datalist.count; idx++) {
+                                                                 NSString *ziBei = [self.gennerModel.datalist[idx].zb stringByReplacingOccurrencesOfString:@"," withString:@""];
+                                                                 [_genNameArr addObject:ziBei];
+                                                                 
+                                                                 NSString *genNum = [NSString stringWithFormat:@"第%ld代",(long)self.gennerModel.datalist[idx].ds];
+                                                                 [_dsArr addObject:genNum];
+                                                                 NSMutableArray *nameArr = [@[] mutableCopy];
+                                                                 NSMutableArray *urlArr = [@[] mutableCopy];
+                                                                 NSMutableArray *cyIDArr = [@[] mutableCopy];
+                                                                 for (int ij = 0; ij<self.gennerModel.datalist[idx].datas.count; ij++) {
+                                                                     [nameArr addObject:self.gennerModel.datalist[idx].datas[ij].name];
+                                                                     [urlArr addObject:self.gennerModel.datalist[idx].datas[ij].photo];
+                                                                     [cyIDArr addObject:[NSString stringWithFormat:@"%ld",(long)self.gennerModel.datalist[idx].datas[ij].gemeid]];
+                                                                 }
+                                                                 [_allInfoArr addObject:nameArr];
+                                                                 [_imageUrlArr addObject:urlArr];
+                                                                 [_genIdArr addObject:cyIDArr];
+                                                                 
+                                                                 
+                                                                 NSMutableArray *detailArr = [@[] mutableCopy];
+                                                                 for (int index2 = 0; index2<self.gennerModel.datalist[idx].datas.count; index2++) {
+                                                                     NSMutableArray *okuArr = [@[] mutableCopy];
+                                                                     [okuArr addObject:@"无"];
+                                                                     [okuArr addObject:self.gennerModel.datalist[idx].datas[index2].father];
+                                                                     
+                                                                     [okuArr addObject:self.gennerModel.datalist[idx].datas[index2].mother];
+                                                                     
+                                                                     [detailArr addObject:okuArr];
+                                                                 }
+                                                                 [_detailInfo addObject:detailArr];
+                                                                 
+                                                             }
+                                                             
+                                                             back();
+                                                             
+                                                         }
+                                                     } failure:^(NSError *error) {
+                                                         
+                                                     }];
 
-                    [okuArr addObject:self.gennerModel.datalist[idx].datas[index2].mother];
-                    
-                    [detailArr addObject:okuArr];
-                }
-                [_detailInfo addObject:detailArr];
-                
-            }
-            
-            back();
-           
-        }
-    } failure:^(NSError *error) {
-        
-    }];
+    }
 }
 //点击我的家谱的处理
 #pragma mark *** TopDelegate ***

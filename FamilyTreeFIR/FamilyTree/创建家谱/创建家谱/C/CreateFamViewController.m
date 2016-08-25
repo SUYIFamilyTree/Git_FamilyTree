@@ -22,19 +22,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
  
-    self.automaticallyAdjustsScrollViewInsets=false;
+    //self.automaticallyAdjustsScrollViewInsets=false;
     
     
     [self initUI];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = true;
+    //self.tabBarController.tabBar.hidden = true;
 
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    self.tabBarController.tabBar.hidden = false;
+    //self.tabBarController.tabBar.hidden = false;
 }
 
 

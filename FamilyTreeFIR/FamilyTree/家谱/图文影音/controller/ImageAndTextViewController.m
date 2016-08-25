@@ -50,8 +50,7 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     //获取数据
-#warning 默认先获取geid为1的家谱详情
-    [self getData:1];
+    [self getData:[[WFamilyModel shareWFamilModel].myFamilyId integerValue]];
     self.view.backgroundColor = [UIColor whiteColor];
     //配置导航栏
    self.comNavi.delegate = self;
@@ -84,30 +83,33 @@
 
 #pragma mark - 网络请求数据
 -(void)getData:(NSInteger)GeId{
-    NSDictionary *logDic = @{@"geid":@(GeId)};
-    WK(weakSelf)
-    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"querygendeta" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
-        MYLog(@"%@",jsonDic[@"data"]);
-        if (succe) {
-            weakSelf.genealogyInfoModel = [GenealogyInfoModel modelWithJSON:jsonDic[@"data"]];
-            if ([self.comNavi.titleLabel.text isEqualToString:@"阅读家谱"]) {
-                weakSelf.menuArr = [weakSelf.genealogyInfoModel getTextMenuArr];
-                weakSelf.infoArr = [weakSelf.genealogyInfoModel getTextInfoArr];
-            }else{
-                weakSelf.menuArr = [weakSelf.genealogyInfoModel getImageMenuArr];
-                weakSelf.infoArr = [weakSelf.genealogyInfoModel getImageInfoArr];
+    if (GeId != 0) {
+        NSDictionary *logDic = @{@"geid":@(GeId)};
+        WK(weakSelf)
+        [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"querygendeta" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+            MYLog(@"%@",jsonDic[@"data"]);
+            if (succe) {
+                weakSelf.genealogyInfoModel = [GenealogyInfoModel modelWithJSON:jsonDic[@"data"]];
+                if ([self.comNavi.titleLabel.text isEqualToString:@"阅读家谱"]) {
+                    weakSelf.menuArr = [weakSelf.genealogyInfoModel getTextMenuArr];
+                    weakSelf.infoArr = [weakSelf.genealogyInfoModel getTextInfoArr];
+                }else{
+                    weakSelf.menuArr = [weakSelf.genealogyInfoModel getImageMenuArr];
+                    weakSelf.infoArr = [weakSelf.genealogyInfoModel getImageInfoArr];
+                }
+                weakSelf.rightViewLBD.text = [NSString addLineBreaks:weakSelf.genealogyInfoModel.data.GeDisbut];
+                weakSelf.rightViewLBA.text = [NSString addLineBreaks:weakSelf.genealogyInfoModel.data.GeName];
+                //[weakSelf initLeftTableView];
+                [weakSelf.leftTableView reloadData];
+                [weakSelf initContentSV:weakSelf.infoArr.firstObject];
+                //            MYLog(@"%@",weakSelf.menuArr);
+                //            MYLog(@"%@",weakSelf.infoArr);
             }
-            weakSelf.rightViewLBD.text = [NSString addLineBreaks:weakSelf.genealogyInfoModel.data.GeDisbut];
-            weakSelf.rightViewLBA.text = [NSString addLineBreaks:weakSelf.genealogyInfoModel.data.GeName];
-           //[weakSelf initLeftTableView];
-            [weakSelf.leftTableView reloadData];
-           [weakSelf initContentSV:weakSelf.infoArr.firstObject];
-//            MYLog(@"%@",weakSelf.menuArr);
-//            MYLog(@"%@",weakSelf.infoArr);
-        }
-    } failure:^(NSError *error) {
-        
-    }];
+        } failure:^(NSError *error) {
+            
+        }];
+
+    }
     
 }
 

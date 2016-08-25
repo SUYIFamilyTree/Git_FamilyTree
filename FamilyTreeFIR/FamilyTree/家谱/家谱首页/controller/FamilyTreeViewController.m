@@ -411,7 +411,9 @@ enum{
     
         if (sender.tag == 0) {
             CreateFamViewController *creVc = [[CreateFamViewController alloc] initWithTitle:@"创建家谱" image:nil];
+            creVc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:creVc animated:YES];
+            
         }
         if (sender.tag == 1) {
             
