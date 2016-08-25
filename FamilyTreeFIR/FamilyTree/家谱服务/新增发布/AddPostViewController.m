@@ -65,85 +65,85 @@
 -(void)initUI{
     [self.view addSubview:self.backSV];
     [self.backSV addSubview:self.firstBackView];
-    self.firstBackView.sd_layout.leftSpaceToView(self.backSV,0).rightSpaceToView(self.backSV,0).topSpaceToView(self.backSV,0).heightIs(205);
+    self.firstBackView.sd_layout.leftSpaceToView(self.backSV,0).rightSpaceToView(self.backSV,0).topSpaceToView(self.backSV,0).heightIs(270);
     //项目类型
     UILabel *projectTypeLB = [[UILabel alloc]init];
     projectTypeLB.text = @"项目类型:";
-    projectTypeLB.font = MFont(12);
+    projectTypeLB.font = MFont(13);
     projectTypeLB.textAlignment = NSTextAlignmentLeft;
     [self.firstBackView addSubview:projectTypeLB];
-    projectTypeLB.sd_layout.topSpaceToView(self.firstBackView,18).leftSpaceToView(self.firstBackView,30).widthIs(65).heightIs(20);
+    projectTypeLB.sd_layout.topSpaceToView(self.firstBackView,18).leftSpaceToView(self.firstBackView,30).widthIs(65).heightIs(30);
     
     [self.firstBackView addSubview:self.projectTypeBtn];
-    self.projectTypeBtn.sd_layout.leftSpaceToView(projectTypeLB,0).topEqualToView(projectTypeLB).widthIs(85).heightIs(20);
+    self.projectTypeBtn.sd_layout.leftSpaceToView(projectTypeLB,0).topEqualToView(projectTypeLB).widthIs(85).heightIs(30);
     
     //项目名称
     UILabel *projectNameLB = [[UILabel alloc]init];
     projectNameLB.text = @"项目名称:";
-    projectNameLB.font = MFont(12);
+    projectNameLB.font = MFont(13);
     projectNameLB.textAlignment = NSTextAlignmentLeft;
     [self.firstBackView addSubview:projectNameLB];
-    projectNameLB.sd_layout.topSpaceToView(projectTypeLB,13).leftSpaceToView(self.firstBackView,30).widthIs(65).heightIs(20);
+    projectNameLB.sd_layout.topSpaceToView(projectTypeLB,13).leftSpaceToView(self.firstBackView,30).widthIs(65).heightIs(30);
     
     [self.firstBackView addSubview:self.projectNameTF];
-    self.projectNameTF.sd_layout.leftSpaceToView(projectNameLB,0).topEqualToView(projectNameLB).widthIs(175).heightIs(20);
+    self.projectNameTF.sd_layout.leftSpaceToView(projectNameLB,0).topEqualToView(projectNameLB).widthIs(175).heightIs(30);
     
     //项目金额
     UILabel *projectMoneyLB = [[UILabel alloc]init];
     projectMoneyLB.text = @"项目金额:";
-    projectMoneyLB.font = MFont(12);
+    projectMoneyLB.font = MFont(13);
     projectMoneyLB.textAlignment = NSTextAlignmentLeft;
     [self.firstBackView addSubview:projectMoneyLB];
-    projectMoneyLB.sd_layout.topSpaceToView(projectNameLB,13).leftSpaceToView(self.firstBackView,30).widthIs(65).heightIs(20);
+    projectMoneyLB.sd_layout.topSpaceToView(projectNameLB,13).leftSpaceToView(self.firstBackView,30).widthIs(65).heightIs(30);
     
     [self.firstBackView addSubview:self.projectMoneyTF];
-    self.projectMoneyTF.sd_layout.leftSpaceToView(projectMoneyLB,0).topEqualToView(projectMoneyLB).widthIs(85).heightIs(20);
+    self.projectMoneyTF.sd_layout.leftSpaceToView(projectMoneyLB,0).topEqualToView(projectMoneyLB).widthIs(85).heightIs(30);
     
     UILabel *yuanLB = [[UILabel alloc]init];
     yuanLB.text = @"元";
-    yuanLB.font = MFont(12);
+    yuanLB.font = MFont(13);
     [self.firstBackView addSubview:yuanLB];
-    yuanLB.sd_layout.leftSpaceToView(self.projectMoneyTF,0).topEqualToView(self.projectMoneyTF).widthIs(12).heightIs(20);
+    yuanLB.sd_layout.leftSpaceToView(self.projectMoneyTF,0).topEqualToView(self.projectMoneyTF).widthIs(20).heightIs(30);
     
     //项目期限
     UILabel *projectDeadlineLB = [[UILabel alloc]init];
     projectDeadlineLB.text = @"项目期限:";
-    projectDeadlineLB.font = MFont(12);
+    projectDeadlineLB.font = MFont(13);
     projectDeadlineLB.textAlignment = NSTextAlignmentLeft;
     [self.firstBackView addSubview:projectDeadlineLB];
-    projectDeadlineLB.sd_layout.topSpaceToView(projectMoneyLB,13).leftSpaceToView(self.firstBackView,30).widthIs(65).heightIs(20);
+    projectDeadlineLB.sd_layout.topSpaceToView(projectMoneyLB,13).leftSpaceToView(self.firstBackView,30).widthIs(65).heightIs(30);
     
     [self.firstBackView addSubview:self.projectDeadlineBtn];
-    self.projectDeadlineBtn.sd_layout.leftSpaceToView(projectDeadlineLB,0).topEqualToView(projectDeadlineLB).widthIs(50).heightIs(20);
+    self.projectDeadlineBtn.sd_layout.leftSpaceToView(projectDeadlineLB,0).topEqualToView(projectDeadlineLB).widthIs(50).heightIs(30);
     
     UILabel *dayLB = [[UILabel alloc]init];
     dayLB.text = @"周";
-    dayLB.font = MFont(12);
+    dayLB.font = MFont(13);
     [self.firstBackView addSubview:dayLB];
-    dayLB.sd_layout.leftSpaceToView(self.projectDeadlineBtn,0).topEqualToView(self.projectDeadlineBtn).widthIs(12).heightIs(20);
+    dayLB.sd_layout.leftSpaceToView(self.projectDeadlineBtn,0).topEqualToView(self.projectDeadlineBtn).widthIs(20).heightIs(30);
     
     //项目介绍
     UILabel *projectInfoLB = [[UILabel alloc]init];
     projectInfoLB.text = @"项目介绍:";
-    projectInfoLB.font = MFont(12);
+    projectInfoLB.font = MFont(13);
     projectInfoLB.textAlignment = NSTextAlignmentLeft;
     [self.firstBackView addSubview:projectInfoLB];
-    projectInfoLB.sd_layout.topSpaceToView(projectDeadlineLB,13).leftSpaceToView(self.firstBackView,30).widthIs(65).heightIs(20);
+    projectInfoLB.sd_layout.topSpaceToView(projectDeadlineLB,13).leftSpaceToView(self.firstBackView,30).widthIs(65).heightIs(30);
     
     [self.firstBackView addSubview:self.projectInfoTV];
-    self.projectInfoTV.sd_layout.leftSpaceToView(projectInfoLB,0).topEqualToView(projectInfoLB).widthIs(215).heightIs(40);
+    self.projectInfoTV.sd_layout.leftSpaceToView(projectInfoLB,0).topEqualToView(projectInfoLB).widthIs(215).heightIs(60);
     
     //第二块白
     [self.backSV addSubview:self.secondBackView];
-    self.secondBackView.sd_layout.leftSpaceToView(self.backSV,0).topSpaceToView(self.firstBackView,8).rightSpaceToView(self.backSV,0).heightIs(307);
+    self.secondBackView.sd_layout.leftSpaceToView(self.backSV,0).topSpaceToView(self.firstBackView,8).rightSpaceToView(self.backSV,0).heightIs(380);
     
     //项目图片
     UILabel *projectImageLB = [[UILabel alloc]init];
     projectImageLB.text = @"项目图片:";
-    projectImageLB.font = MFont(12);
+    projectImageLB.font = MFont(13);
     projectImageLB.textAlignment = NSTextAlignmentLeft;
     [self.secondBackView addSubview:projectImageLB];
-    projectImageLB.sd_layout.topSpaceToView(self.secondBackView,23).leftSpaceToView(self.secondBackView,30).widthIs(65).heightIs(20);
+    projectImageLB.sd_layout.topSpaceToView(self.secondBackView,23).leftSpaceToView(self.secondBackView,30).widthIs(65).heightIs(30);
     
     for (int i = 0; i < 6; i++) {
         UIButton *projectImageBtn = [[UIButton alloc]init];
@@ -158,49 +158,49 @@
         }
     for (int i = 0; i < 6; i++) {
         if (i == 0) {
-            self.projectImageBtnArr[i].sd_layout.leftSpaceToView(projectImageLB,0).topEqualToView(projectImageLB).widthIs(53).heightIs(53);
+            self.projectImageBtnArr[i].sd_layout.leftSpaceToView(projectImageLB,0).topEqualToView(projectImageLB).widthIs(60).heightIs(60);
         }else if (i == 3){
-            self.projectImageBtnArr[i].sd_layout.leftEqualToView(self.projectImageBtnArr[0]).topSpaceToView(self.projectImageBtnArr[0],8).widthIs(53).heightIs(53);
+            self.projectImageBtnArr[i].sd_layout.leftEqualToView(self.projectImageBtnArr[0]).topSpaceToView(self.projectImageBtnArr[0],8).widthIs(60).heightIs(60);
         }else{
-            self.projectImageBtnArr[i].sd_layout.leftSpaceToView(self.projectImageBtnArr[i-1],8).topEqualToView(self.projectImageBtnArr[i-1]).widthIs(53).heightIs(53);
+            self.projectImageBtnArr[i].sd_layout.leftSpaceToView(self.projectImageBtnArr[i-1],8).topEqualToView(self.projectImageBtnArr[i-1]).widthIs(60).heightIs(60);
         }
     }
     //长按删除的提示
     UILabel *tipLabel = [[UILabel alloc]init];
     tipLabel.text = @"(长按2秒删除图片)";
-    tipLabel.font = MFont(12);
+    tipLabel.font = MFont(13);
     [self.secondBackView addSubview:tipLabel];
-    tipLabel.sd_layout.leftEqualToView(self.projectImageBtnArr[0]).topSpaceToView(self.projectImageBtnArr.lastObject,0).heightIs(20).widthIs(165);
+    tipLabel.sd_layout.leftEqualToView(self.projectImageBtnArr[0]).topSpaceToView(self.projectImageBtnArr.lastObject,0).heightIs(30).widthIs(165);
     //封面图
     UILabel *coverImageLB = [[UILabel alloc]init];
     coverImageLB.text = @"封面图:";
-    coverImageLB.font = MFont(12);
+    coverImageLB.font = MFont(13);
     coverImageLB.textAlignment = NSTextAlignmentCenter;
     [self.secondBackView addSubview:coverImageLB];
-    coverImageLB.sd_layout.topSpaceToView(projectImageLB,115).leftSpaceToView(self.secondBackView,35).widthIs(40).heightIs(20);
+    coverImageLB.sd_layout.topSpaceToView(tipLabel,10).leftSpaceToView(self.secondBackView,35).widthIs(45).heightIs(30);
     
     [self.secondBackView addSubview:self.coverImageBtn];
-    self.coverImageBtn.sd_layout.leftEqualToView(self.projectImageBtnArr[0]).topEqualToView(coverImageLB).widthIs(53).heightIs(53);
+    self.coverImageBtn.sd_layout.leftEqualToView(self.projectImageBtnArr[0]).topEqualToView(coverImageLB).widthIs(60).heightIs(60);
     //联系人
     UILabel *linkmanLB = [[UILabel alloc]init];
     linkmanLB.text = @"联系人:";
-    linkmanLB.font = MFont(12);
+    linkmanLB.font = MFont(13);
     linkmanLB.textAlignment = NSTextAlignmentCenter;
     [self.secondBackView addSubview:linkmanLB];
-    linkmanLB.sd_layout.topSpaceToView(coverImageLB,50).leftSpaceToView(self.secondBackView,35).widthIs(40).heightIs(20);
+    linkmanLB.sd_layout.topSpaceToView(coverImageLB,50).leftSpaceToView(self.secondBackView,35).widthIs(45).heightIs(30);
     
     [self.secondBackView addSubview:self.linkmanTF];
-    self.linkmanTF.sd_layout.leftEqualToView(self.coverImageBtn).topEqualToView(linkmanLB).widthIs(175).heightIs(20);
+    self.linkmanTF.sd_layout.leftEqualToView(self.coverImageBtn).topEqualToView(linkmanLB).widthIs(175).heightIs(30);
     //电话
     UILabel *telephoneLB = [[UILabel alloc]init];
     telephoneLB.text = @"电话:";
-    telephoneLB.font = MFont(12);
+    telephoneLB.font = MFont(13);
     telephoneLB.textAlignment = NSTextAlignmentCenter;
     [self.secondBackView addSubview:telephoneLB];
-    telephoneLB.sd_layout.topSpaceToView(linkmanLB,13).leftSpaceToView(self.secondBackView,44).widthIs(30).heightIs(20);
+    telephoneLB.sd_layout.topSpaceToView(linkmanLB,13).leftSpaceToView(self.secondBackView,47).widthIs(30).heightIs(30);
     
     [self.secondBackView addSubview:self.telephoneTF];
-    self.telephoneTF.sd_layout.leftEqualToView(self.linkmanTF).topEqualToView(telephoneLB).widthIs(175).heightIs(20);
+    self.telephoneTF.sd_layout.leftEqualToView(self.linkmanTF).topEqualToView(telephoneLB).widthIs(175).heightIs(30);
     
     //提交审核
     [self.backSV addSubview:self.postBtn];
@@ -492,7 +492,7 @@
     if (!_backSV) {
         _backSV = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49)];
         _backSV.backgroundColor = LH_RGBCOLOR(236, 236, 236);
-        _backSV.contentSize = CGSizeMake(Screen_width, 605);
+        _backSV.contentSize = CGSizeMake(Screen_width, 750);
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithActionBlock:^(id  _Nonnull sender) {
             [self.view endEditing:YES];
         }];
