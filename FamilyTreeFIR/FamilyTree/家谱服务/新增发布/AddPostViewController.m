@@ -46,7 +46,7 @@
 @property (nonatomic, strong) UIButton *postBtn;
 /** picker控制器*/
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
-/** 用于识别哪个按钮的图*/
+/** 用于识别点击哪个按钮的图*/
 @property (nonatomic, assign) NSInteger imageTag;
 /** 项目图片数组*/
 @property (nonatomic, strong) NSMutableArray<NSData *> *projectImageDataArr;
@@ -131,7 +131,7 @@
     projectInfoLB.sd_layout.topSpaceToView(projectDeadlineLB,13).leftSpaceToView(self.firstBackView,30).widthIs(65).heightIs(30);
     
     [self.firstBackView addSubview:self.projectInfoTV];
-    self.projectInfoTV.sd_layout.leftSpaceToView(projectInfoLB,0).topEqualToView(projectInfoLB).widthIs(215).heightIs(60);
+    self.projectInfoTV.sd_layout.leftSpaceToView(projectInfoLB,0).topEqualToView(projectInfoLB).rightSpaceToView(self.firstBackView,10).heightIs(60);
     
     //第二块白
     [self.backSV addSubview:self.secondBackView];
@@ -165,12 +165,15 @@
             self.projectImageBtnArr[i].sd_layout.leftSpaceToView(self.projectImageBtnArr[i-1],8).topEqualToView(self.projectImageBtnArr[i-1]).widthIs(60).heightIs(60);
         }
     }
+    
+    
+    
     //长按删除的提示
     UILabel *tipLabel = [[UILabel alloc]init];
     tipLabel.text = @"(长按2秒删除图片)";
     tipLabel.font = MFont(13);
     [self.secondBackView addSubview:tipLabel];
-    tipLabel.sd_layout.leftEqualToView(self.projectImageBtnArr[0]).topSpaceToView(self.projectImageBtnArr.lastObject,0).heightIs(30).widthIs(165);
+    tipLabel.sd_layout.leftEqualToView(self.projectImageBtnArr.firstObject).topSpaceToView(self.projectImageBtnArr.firstObject,70).heightIs(30).widthIs(165);
     //封面图
     UILabel *coverImageLB = [[UILabel alloc]init];
     coverImageLB.text = @"封面图:";
@@ -251,7 +254,7 @@
 
 
 - (void)projectImageAction {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请选择" message:@"获取头像" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请选择" message:@"获取图片" preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *camera = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //打开 图片编辑器 用相机的形式打开
@@ -394,8 +397,6 @@
         [self.coverImageBtn setBackgroundImage:info[UIImagePickerControllerEditedImage] forState:0];
         self.coverImage = info[UIImagePickerControllerEditedImage];
     }
-    
-    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -677,4 +678,7 @@
     }
     return _projectImageDataArr;
 }
+
+
+
 @end

@@ -307,9 +307,8 @@
         _curtainIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 64, Screen_width, Screen_height-64-49-10)];
         _curtainIV.image = MImage(@"qf_lian");
         _curtainIV.userInteractionEnabled = YES;
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [self startCurtainAnimation];
-//        });
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickToBegin)];
+        [_curtainIV addGestureRecognizer:tap];
     }
     return _curtainIV;
 }
@@ -318,7 +317,8 @@
     if (!_beginBtn) {
         _beginBtn = [[UIButton alloc]initWithFrame:CGRectMake(0.2063*CGRectW(self.backIV), 0.3626*CGRectH(self.backIV)-10, 0.6*CGRectW(self.backIV), 0.2537*CGRectH(self.backIV))];
         [_beginBtn setBackgroundImage:MImage(@"qf_middle") forState:UIControlStateNormal];
-        [_beginBtn addTarget:self action:@selector(clickToBegin) forControlEvents:UIControlEventTouchUpInside];
+        _beginBtn.userInteractionEnabled = NO;
+//        [_beginBtn addTarget:self action:@selector(clickToBegin) forControlEvents:UIControlEventTouchUpInside];
     }
     return _beginBtn;
 }

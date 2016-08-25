@@ -91,9 +91,13 @@
 }
 
 -(void)initFamilyTreeNameBtns{
-    self.changeFamilyTreeSV.contentSize = CGSizeMake(0.0938*Screen_width*self.hyjpArrC.count, CGRectH(self));
+    //self.changeFamilyTreeSV.backgroundColor = [UIColor random];
+    if (self.hyjpArrC.count < 9 ) {
+        self.changeFamilyTreeSV.frame = CGRectMake(Screen_width - 0.1001*Screen_width*self.hyjpArrC.count-0.1219*CGRectW(self), 0, 0.1001*Screen_width*self.hyjpArrC.count, CGRectH(self));
+    }
+    self.changeFamilyTreeSV.contentSize = CGSizeMake(0.1001*Screen_width*self.hyjpArrC.count, CGRectH(self));
     for (int i = 0; i < self.hyjpArrC.count; i++) {
-        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(self.changeFamilyTreeSV.contentSize.width-(0.0938*Screen_width+0.0063*Screen_width)*i, 0, 0.0938*Screen_width, CGRectH(self))];
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(self.changeFamilyTreeSV.contentSize.width-(0.0938*Screen_width+0.0063*Screen_width)*(i+1), 0, 0.0938*Screen_width, CGRectH(self))];
         [btn setBackgroundImage:MImage(@"gr_ct_qieHuanJiaPu_bg_a") forState:UIControlStateNormal];
         if (i < self.hyjpArrC.count) {
             btn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 40, 0);
@@ -134,9 +138,9 @@
         self.currentFamilyTreeInfoLBsArr[1].text = @"";        self.currentFamilyTreeInfoLBsArr[0].text = @"";
         
     }
-    [self labelHeightToFit:self.currentFamilyTreeNameLB andFrame:CGRectMake(0.8113*Screen_width, 0.1674*CGRectH(self), 0.0469*Screen_width, 200)];
+    [self labelHeightToFit:self.currentFamilyTreeNameLB andFrame:CGRectMake(0.8113*Screen_width, 0.1674*CGRectH(self), 0.0469*Screen_width, 50)];
     for (int i = 0; i < 4; i++) {
-        [self labelHeightToFit:self.currentFamilyTreeInfoLBsArr[i] andFrame:CGRectMake(0.380*Screen_width+(0.0938*Screen_width+0.0063*Screen_width)*i, 0.1530*CGRectH(self), 0.0938*Screen_width, 200)];
+        [self labelHeightToFit:self.currentFamilyTreeInfoLBsArr[i] andFrame:CGRectMake(0.380*Screen_width+(0.0938*Screen_width+0.0063*Screen_width)*i, 0.1530*CGRectH(self), 0.0938*Screen_width, 50)];
     }
     
 //    [self.headIV.headInsideIV setImageWithURL:[USERDEFAULT valueForKey:@"MeExtension"] placeholder:[UIImage imageNamed:@"headImage.png"]];
@@ -209,10 +213,10 @@
 
 //高度自适应
 -(void)labelHeightToFit:(UILabel *)label andFrame:(CGRect)frame{
-    label.numberOfLines = 0;//根据最大行数需求来设置
+    label.numberOfLines = 7;//根据最大行数需求来设置
     label.textAlignment = NSTextAlignmentCenter;
     label.lineBreakMode = NSLineBreakByTruncatingTail;
-    CGSize maximumLabelSize = CGSizeMake(100, 9999);//labelsize的最大值
+    CGSize maximumLabelSize = CGSizeMake(100, 50);//labelsize的最大值
     //关键语句
     CGSize expectSize = [label sizeThatFits:maximumLabelSize];
     label.frame = CGRectMake(frame.origin.x,frame.origin.y,frame.size.width, expectSize.height);

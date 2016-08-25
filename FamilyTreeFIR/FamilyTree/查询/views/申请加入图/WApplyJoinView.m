@@ -7,7 +7,7 @@
 //
 
 #import "WApplyJoinView.h"
-@interface WApplyJoinView()
+@interface WApplyJoinView()<UITextFieldDelegate>
 {
     /** 是否点击了父亲生日 */
     BOOL _clickedFatherBirthView;
@@ -72,16 +72,10 @@
             self.zbTF = textField;
         }else if(idx==2){
             self.genNumTF = textField;
+            self.genNumTF.delegate = self;
         }else if(idx==3){
             self.fatherTF = textField;
         }else {
-//            textField.userInteractionEnabled = NO;
-//            self.fatherBirthTF = textField;
-//            [self.backImageView addSubview:self.fatherBirthTF];
-//            UIControl *contro = [[UIControl alloc] initWithFrame:self.fatherBirthTF.frame];
-//            contro.userInteractionEnabled = YES;
-//            [contro addTarget:self action:@selector(respondsFatherBirTFTapGues) forControlEvents:UIControlEventTouchUpInside];
-//            [self.backImageView addSubview:contro];
             
             [textField removeFromSuperview];
             self.fatherBirthBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectXW(label)+5, CGRectY(label), 351*AdaptationWidth(), 50*AdaptationWidth())];
@@ -95,8 +89,7 @@
             [self.fatherBirthBtn addTarget:self action:@selector(respondsFatherBirTFTapGues) forControlEvents:UIControlEventTouchUpInside];
             [self.backImageView addSubview:self.fatherBirthBtn];
         }
-        
-        
+  
     }];
     
 }
@@ -242,6 +235,17 @@
     
     
 }
+
+#pragma  mark - UITextFieldDelegate
+//金额跟电话限制为数字输入
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([textField isEqual:self.genNumTF]) {
+        return [NSString validateNumber:string];
+    }else{
+        return YES;
+    }
+}
+
 
 #pragma mark *** getters ***
 -(UIImageView *)backImageView{

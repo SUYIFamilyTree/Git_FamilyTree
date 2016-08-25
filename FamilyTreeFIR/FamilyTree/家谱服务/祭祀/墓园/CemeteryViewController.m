@@ -290,9 +290,9 @@ enum {
             [self.scrollView addSubview:self.inputView];
 
             if (_selectedMianhuaiBtn) {
-                self.inputView.hidden = false;
+                [self.scrollView addSubview:self.inputView];
             }else{
-                self.inputView.hidden = true;
+                [self.inputView removeFromSuperview];
             }
         }
             break;
@@ -347,7 +347,7 @@ enum {
 }
 -(InputCherishView *)inputView{
     if (!_inputView) {
-        _inputView = [[InputCherishView alloc] initWithFrame:AdaptationFrame(540, 800, 375, 162)];
+        _inputView = [[InputCherishView alloc] initWithFrame:AdaptationFrame(540, 780, 375, 220)];
         _inputView.textView.delegate = self;
         _inputView.delegate = self;
     }
@@ -378,6 +378,8 @@ enum {
 
 #pragma mark - InputCherishViewDelegate
 -(void)inputCherishView:(InputCherishView *)inputCherishView withString:(NSString *)str{
+    [self.inputView removeFromSuperview];
+    _selectedMianhuaiBtn = NO;
     //上传弹幕
     MYLog(@"%@",str);
     NSDictionary *logDic = @{

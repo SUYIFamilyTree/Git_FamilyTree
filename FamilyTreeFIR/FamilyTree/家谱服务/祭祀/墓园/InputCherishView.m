@@ -37,7 +37,7 @@
 }
 -(UIButton *)commitBtn{
     if (!_commitBtn) {
-        _commitBtn = [[UIButton alloc] initWithFrame:AdaptationFrame(CGRectXW(self.textView)/AdaptationWidth()-65, 102, 80, 40)];
+        _commitBtn = [[UIButton alloc] initWithFrame:AdaptationFrame(CGRectXW(self.textView)/AdaptationWidth()-120, 150, 130, 60)];
         [_commitBtn setTitle:@"提交" forState:0];
         _commitBtn.titleLabel.font = MFont(24*AdaptationWidth());
         _commitBtn.layer.borderWidth = 1.0f;

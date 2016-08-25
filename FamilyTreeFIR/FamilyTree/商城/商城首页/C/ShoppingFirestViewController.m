@@ -81,6 +81,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = LH_RGBCOLOR(236, 236, 236);
     self.navigationController.navigationBarHidden = YES;
+    [self getBannerData];
     [self getdata];
     
     WK(wkSelf)
@@ -248,6 +249,25 @@
     [self.navigationController pushViewController:myOdVc animated:YES];
 }
 #pragma mark *** 网络请求 ***
+-(void)getBannerData{
+    NSDictionary *logDic = @{@"type":@"SC"};
+    WK(weakSelf)
+    [TCJPHTTPRequestManager POSTWithParameters:logDic requestID:GetUserId requestcode:@"getbanner" success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
+        MYLog(@"%@",jsonDic);
+        if (succe) {
+            NSArray *array = [NSArray modelArrayWithClass:[BannerModel class] json:jsonDic[@"data"]];
+            if (array.count != 0) {
+               weakSelf.bannerView.modelArr = array;
+            }
+            
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+
+}
+
+
 -(void)postGetSyntypeWhileComplete:(void (^)())back{
     [TCJPHTTPRequestManager POSTWithParameters:@{@"typeval":@"SPFL"} requestID:GetUserId requestcode:kRequestCodeGetsyntype success:^(id responseObject, BOOL succe, NSDictionary *jsonDic) {
         if (succe) {

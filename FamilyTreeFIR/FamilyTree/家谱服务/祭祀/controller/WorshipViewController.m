@@ -46,7 +46,7 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     self.view.backgroundColor = LH_RGBCOLOR(236, 236, 236);
-    CommonNavigationViews *navi = [[CommonNavigationViews alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 64) title:@"在线祭祀" image:MImage(@"chec")];
+    CommonNavigationViews *navi = [[CommonNavigationViews alloc]initWithFrame:CGRectMake(0, 0, Screen_width, 64) title:@"在线祭祀" image:nil];
     [self.view addSubview:navi];
     //添加分段控件
     [self initSegment];

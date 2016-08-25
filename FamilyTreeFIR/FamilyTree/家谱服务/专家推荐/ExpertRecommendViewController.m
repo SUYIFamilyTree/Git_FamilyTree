@@ -126,7 +126,7 @@
 -(void)changeTime:(UIDatePicker *)datePicker{
     NSDate *pickerDate = [datePicker date];
     NSDateFormatter *pickerFormatter = [[NSDateFormatter alloc]init];
-    [pickerFormatter setDateFormat:@"yyyy/mm/dd"];
+    [pickerFormatter setDateFormat:@"yyyy/MM/dd"];
     UIButton *btn = [self.view viewWithTag:111+2];
     [btn setTitle:[pickerFormatter stringFromDate:pickerDate] forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
