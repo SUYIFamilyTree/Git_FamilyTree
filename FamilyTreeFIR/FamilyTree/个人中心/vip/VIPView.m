@@ -192,10 +192,10 @@
 
 -(void)reloadVIPGrowUpData:(VIPGrowUpModel *)vipGrowUpModel{
     [USERDEFAULT setObject:@(vipGrowUpModel.lv) forKey:VIPLevel];
-    self.VIPProgressLB.text = [NSString stringWithFormat:@"%ld/%ld",(long)vipGrowUpModel.val1,(long)vipGrowUpModel.val2];
+    self.VIPProgressLB.text = [NSString stringWithFormat:@"%ld/%ld",(long)vipGrowUpModel.czz,(long)vipGrowUpModel.val2];
     CGRect frame = self.VIPProgressRedIV.frame;
     if (vipGrowUpModel.val2 != 0) {
-      frame.size.width =vipGrowUpModel.val1/vipGrowUpModel.val2*0.3072*CGRectW(self.bgIV)-1;
+      frame.size.width =vipGrowUpModel.czz*1.0/vipGrowUpModel.val2*0.3072*CGRectW(self.bgIV)-1;
     }
     self.VIPProgressRedIV.frame = frame;
 }

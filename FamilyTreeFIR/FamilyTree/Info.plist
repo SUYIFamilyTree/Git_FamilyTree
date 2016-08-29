@@ -56,10 +56,6 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>YES</string>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>location</string>
-	</array>
 	<key>UIMainStoryboardFile</key>
 	<string></string>
 	<key>UIRequiredDeviceCapabilities</key>

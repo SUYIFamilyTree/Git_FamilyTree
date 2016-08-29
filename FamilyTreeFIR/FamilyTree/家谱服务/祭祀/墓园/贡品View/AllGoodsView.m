@@ -40,13 +40,39 @@ static NSString *const kReusableCemGoodsCellIdentifier = @"cemGoodsCell";
     CemSingleGoodsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kReusableCemGoodsCellIdentifier forIndexPath:indexPath];
     switch (indexPath.section) {
         case 0:
-            cell.cemGoodsShopModel = self.goodsArr[indexPath.row];
+        {
+            NSMutableArray *arr = [@[] mutableCopy];
+            for (CemGoodsShopModel *model in self.goodsArr) {
+                if ([model.CoLabel isEqualToString:@"89"]) {
+                    [arr addObject:model];
+                }
+            }
+            cell.cemGoodsShopModel = arr[indexPath.row];
             break;
+        }
         case 1:
-            cell.cemGoodsShopModel = self.goodsArr[indexPath.row+5];
+        {
+            NSMutableArray *arr = [@[] mutableCopy];
+            for (CemGoodsShopModel *model in self.goodsArr) {
+                if ([model.CoLabel isEqualToString:@"87"]) {
+                    [arr addObject:model];
+                }
+            }
+            cell.cemGoodsShopModel = arr[indexPath.row];
             break;
+        }
         case 2:
-            cell.cemGoodsShopModel = self.goodsArr[indexPath.row+10];
+        {
+            NSMutableArray *arr = [@[] mutableCopy];
+            for (CemGoodsShopModel *model in self.goodsArr) {
+                if ([model.CoLabel isEqualToString:@"86"]) {
+                    [arr addObject:model];
+                }
+            }
+            cell.cemGoodsShopModel = arr[indexPath.row];
+            break;
+        }
+
         default:
             break;
     }
@@ -55,7 +81,7 @@ static NSString *const kReusableCemGoodsCellIdentifier = @"cemGoodsCell";
 
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     
-    NSArray *nameArr = @[@"供花",@"供果",@"供香"];
+    NSArray *nameArr = @[@"供香",@"供果",@"供花"];
     
     UILabel *label = [[UILabel alloc] initWithFrame:AdaptationFrame(0, 10, 200, 42)];
     label.font = MFont(30*AdaptationWidth());

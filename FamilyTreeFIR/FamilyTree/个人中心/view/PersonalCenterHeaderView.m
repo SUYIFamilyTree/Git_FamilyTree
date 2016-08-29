@@ -11,9 +11,12 @@
 @interface PersonalCenterHeaderView()
 /** 金钱视图*/
 @property (nonatomic, strong) UIView *moneyView;
+/** 金钱标签*/
+@property (nonatomic, strong) UILabel *moneyLB;
 /** 同城币视图*/
 @property (nonatomic, strong) UIView *sameCityMoneyView;
-
+/** 积分标签*/
+@property (nonatomic, strong) UILabel *integralLB;
 @end
 
 
@@ -43,14 +46,14 @@
     [self.moneyView addSubview:addIV];
     
     //中间金钱
-    UILabel *moneyLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(addIV), 0, CGRectW(self.moneyView)-2*CGRectW(addIV)-8, CGRectH(self.moneyView))];
-    moneyLabel.text = [NSString stringWithFormat:@"¥%.1lf",self.money];
-    moneyLabel.font = MFont(13);
-    moneyLabel.textAlignment = NSTextAlignmentCenter;
-    [self.moneyView addSubview:moneyLabel];
+    self.moneyLB = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(addIV), 0, CGRectW(self.moneyView)-2*CGRectW(addIV)-8, CGRectH(self.moneyView))];
+    self.moneyLB.text = [NSString stringWithFormat:@"¥%.1lf",self.money];
+    self.moneyLB.font = MFont(13);
+    self.moneyLB.textAlignment = NSTextAlignmentCenter;
+    [self.moneyView addSubview:self.moneyLB];
     
     //右侧钱袋
-    UIImageView *moneyBagIV = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectXW(moneyLabel)+3, 4, CGRectW(addIV)-3, CGRectH(addIV))];
+    UIImageView *moneyBagIV = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectXW(self.moneyLB)+3, 4, CGRectW(addIV)-3, CGRectH(addIV))];
     moneyBagIV.image = MImage(@"human_redMoney");
     [self.moneyView addSubview:moneyBagIV];
     
@@ -72,14 +75,14 @@
     [self.sameCityMoneyView addSubview:addIV];
     
     //中间金钱
-    UILabel *moneyLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(addIV), 0, CGRectW(self.moneyView)-2*CGRectW(addIV)-8, CGRectH(self.moneyView))];
-    moneyLabel.text = [NSString stringWithFormat:@"%ld",(long)self.sameCityMoney];
-    moneyLabel.font = MFont(13);
-    moneyLabel.textAlignment = NSTextAlignmentCenter;
-    [self.sameCityMoneyView addSubview:moneyLabel];
+    self.integralLB = [[UILabel alloc]initWithFrame:CGRectMake(CGRectXW(addIV), 0, CGRectW(self.moneyView)-2*CGRectW(addIV)-8, CGRectH(self.moneyView))];
+    self.integralLB.text = [NSString stringWithFormat:@"%ld",(long)self.sameCityMoney];
+    self.integralLB.font = MFont(13);
+    self.integralLB.textAlignment = NSTextAlignmentCenter;
+    [self.sameCityMoneyView addSubview:self.integralLB];
     
     //右侧钱袋
-    UIImageView *moneyBagIV = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectXW(moneyLabel), 4, CGRectW(addIV), CGRectH(addIV))];
+    UIImageView *moneyBagIV = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectXW(self.integralLB), 4, CGRectW(addIV), CGRectH(addIV))];
     moneyBagIV.image = MImage(@"human_ss");
     [self.sameCityMoneyView addSubview:moneyBagIV];
  
@@ -92,6 +95,16 @@
     [self.vipBtn addTarget:self action:@selector(clickVipBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.vipBtn];
     self.vipBtn.sd_layout.leftSpaceToView(self,5).bottomSpaceToView(self,5).topSpaceToView(self, 5).widthIs(35);
+}
+
+-(void)setMoney:(double)money{
+    _money = money;
+    self.moneyLB.text = [NSString stringWithFormat:@"¥%.1lf",self.money];
+}
+
+-(void)setSameCityMoney:(NSInteger)sameCityMoney{
+    _sameCityMoney = sameCityMoney;
+    self.integralLB.text = [NSString stringWithFormat:@"%ld",(long)self.sameCityMoney];
 }
 
 

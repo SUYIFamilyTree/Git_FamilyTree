@@ -271,8 +271,8 @@
 //主界面数据刷新
 -(void)initMainData{
     //让金额为登录请求返回的值
-    self.headerView.money =  [[USERDEFAULT valueForKey:@"MeBalance"] doubleValue];
-    self.headerView.sameCityMoney = [[USERDEFAULT valueForKey:@"MeIntegral"] intValue];
+    //self.headerView.money =  [[USERDEFAULT valueForKey:@"MeBalance"] doubleValue];
+    //self.headerView.sameCityMoney = [[USERDEFAULT valueForKey:@"MeIntegral"] intValue];
     //会员家谱数据
     [self.infoView reloadData:self.memallInfo.hyjp];
 

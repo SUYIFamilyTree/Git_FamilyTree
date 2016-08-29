@@ -223,7 +223,6 @@
 }
 -(HundredNamesView *)hundredVies{
     if (!_hundredVies) {
-        
         UIView *whiteV = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectYH(self.proAndName)+8*AdaptationWidth(), Screen_width, 312*AdaptationWidth())];
         whiteV.backgroundColor = [UIColor whiteColor];
         whiteV.userInteractionEnabled = YES;
